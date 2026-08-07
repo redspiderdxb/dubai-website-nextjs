@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+  <title id="title">Blue Chevron Icon</title>
+  <desc id="desc">A transparent SVG containing a rounded blue double-chevron mark.</desc>
+
+  <path
+    d="M125 30 457 262c14 10 21 22 21 37 0 15-7 28-21 38L145 555c-7 5-12 10-14 15l-5-8v-54c0-12 5-21 15-29l268-181-267-190c-12-9-17-18-17-29V30Z"
+    fill="#0D4DFF"
+  />
+
+  <path
+    d="M123 232v-33c0-10 5-16 13-19 7-3 14-1 22 4l158 113-34 24c-11 7-23 5-35-2L123 232Z"
+    fill="#0D4DFF"
+  />
+</svg>

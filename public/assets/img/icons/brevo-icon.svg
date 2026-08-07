@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Green B Icon</title>
+  <desc id="desc">A transparent SVG containing a rounded green B-shaped mark.</desc>
+
+  <path
+    fill="#0B9E75"
+    fill-rule="evenodd"
+    d="
+      M248 144
+      H513
+      C638 144 713 211 713 317
+      C713 367 694 410 660 444
+      C729 485 769 554 769 634
+      C769 782 654 880 482 880
+      H248
+      Z
+
+      M348 240
+      H506
+      C568 240 607 267 607 318
+      C607 381 566 420 500 451
+      C476 462 451 470 429 478
+      C392 492 364 503 348 511
+      Z
+
+      M349 665
+      C349 610 389 574 452 551
+      C499 534 544 516 583 498
+      C635 533 662 578 662 628
+      C662 723 584 785 462 785
+      H349
+      Z
+    "
+  />
+</svg>

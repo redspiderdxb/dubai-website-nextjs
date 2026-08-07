@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Zoho Campaigns Icon</title>
+  <desc id="desc">Zoho Campaigns style icon with a red megaphone and blue check mark.</desc>
+
+  <rect width="128" height="128" rx="26" fill="none"/>
+
+  <path
+    d="M24 54h25l39-20v60L49 74H24a8 8 0 0 1-8-8v-4a8 8 0 0 1 8-8Z"
+    fill="none"
+    stroke="#E3423D"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <path
+    d="M49 54v20"
+    fill="none"
+    stroke="#E3423D"
+    stroke-width="8"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M33 75l8 25a7 7 0 0 0 7 5h10L49 75"
+    fill="none"
+    stroke="#E3423D"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <path
+    d="m73 65 10 10 24-27"
+    fill="none"
+    stroke="#168DE2"
+    stroke-width="9"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

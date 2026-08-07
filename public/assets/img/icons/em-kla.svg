@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-labelledby="title desc">
+  <title id="title">Klaviyo Gradient Signal Icon</title>
+  <desc id="desc">Three rounded signal bands with a green to yellow vertical gradient.</desc>
+
+  <defs>
+    <linearGradient id="klaviyoGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#06B76A"/>
+      <stop offset="48%" stop-color="#58C851"/>
+      <stop offset="100%" stop-color="#F3D016"/>
+    </linearGradient>
+  </defs>
+
+  <path
+    d="M155 177 379 27c13-9 29-9 42 0l224 150c19 13 21 35 6 49l-32 13C565 164 486 118 400 118s-165 46-219 121l-32-20c-16-10-13-31 6-42Z"
+    fill="url(#klaviyoGradient)"
+  />
+
+  <path
+    d="M235 273c39-58 99-92 165-92s126 34 165 92l-55 37c-25-40-65-64-110-64s-85 24-110 64l-55-37Z"
+    fill="url(#klaviyoGradient)"
+  />
+
+  <path
+    d="M343 344c14-22 34-35 57-35s43 13 57 35l-37 26c-12 8-28 8-40 0l-37-26Z"
+    fill="url(#klaviyoGradient)"
+  />
+</svg>
