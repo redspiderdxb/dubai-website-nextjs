@@ -789,7 +789,7 @@ body {
 
 .opposite-gallery-sticky {
 
-  height: 66vh;
+  height: 81vh;
 }
 
 ;
@@ -797,4 +797,686 @@ body {
 .opposite-gallery-sec {
 
   height: auto;
+}
+
+
+
+
+
+
+
+/* Custom CSS */
+.brochure-services-section {
+  background: #0a0a0a;
+  padding: 80px 0;
+  color: #fff;
+}
+
+.dark-bg {
+  background: #0a0a0a;
+}
+
+/* Left Column */
+.services-heading {
+  color: #fff;
+  margin-bottom: 31px;
+  font-size: 62px;
+  font-weight: 800;
+}
+
+.services-heading span {
+  color: white;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.services-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+.services-list li:last-child {
+  border-bottom: none;
+}
+
+.service-icon {
+  color: #e31e24;
+  font-size: 18px;
+  min-width: 24px;
+  margin-top: 2px;
+}
+
+.service-text {
+  flex: 1;
+}
+
+/* Right Column - Process Title */
+.process-title-wrapper {
+  margin-bottom: 30px;
+}
+
+.process-title-wrapper h6 {
+  font-size: 25px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* Process Accordion */
+.process-accordion {
+  border: none;
+}
+
+.accordion-item {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0;
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding: 18px 0;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  position: relative;
+}
+
+.accordion-trigger.active {
+  color: #fff;
+}
+
+.accordion-trigger.active .step-arrow {
+  transform: rotate(45deg);
+  color: white;
+}
+
+.step-number {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  min-width: 30px;
+}
+
+.step-title {
+  flex: 1;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.step-arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.accordion-content.show {
+  max-height: 200px;
+}
+
+.accordion-body-text {
+  padding: 0 0 20px 45px;
+  color: white;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+/* Let's Connect */
+.connect-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.connect-label {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.connect-divider {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.connect-btn {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 25px;
+  border: 2px solid white;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.connect-btn:hover {
+  background: white;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .brochure-services-section {
+    padding: 60px 0;
+  }
+
+  .services-heading {
+    font-size: 30px;
+  }
+
+  .process-title-wrapper h6 {
+    font-size: 32px;
+  }
+
+  .accordion-body-text {
+    padding-left: 30px;
+  }
+
+  .connect-section {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .connect-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .services-heading {
+    font-size: 24px;
+  }
+
+  .process-title-wrapper h6 {
+    font-size: 28px;
+  }
+
+  .accordion-trigger {
+    font-size: 14px;
+    padding: 14px 0;
+  }
+
+  .step-number {
+    font-size: 16px;
+    min-width: 25px;
+  }
+
+  .step-arrow {
+    font-size: 16px;
+  }
+
+  .accordion-body-text {
+    font-size: 14px;
+    padding-left: 25px;
+  }
+}
+
+
+.accordion-trigger {
+  color: #ffffff;
+}
+
+
+.brochure-services-section {
+
+  margin-bottom: 32px;
+}
+
+
+
+/* ============================================
+   COMPLETE CSS - EXACT SCREENSHOT
+   ============================================ */
+
+/* ----- RESET & BASE ----- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ----- SECTION ----- */
+.ecommerce-platforms-section {
+  padding: 80px 0 100px;
+  background: #f4f5f7;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.section-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 55px;
+}
+
+.section-header h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 18px;
+  letter-spacing: -0.5px;
+}
+
+.section-header h2 span {
+  color: #dc3545;
+}
+
+.section-header p {
+  font-size: 17px;
+  color: #666;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+
+
+/* ============================================
+   PLATFORMS LIST - WRAPPER
+   ============================================ */
+.platforms-list {
+  max-width: 950px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================
+   PLATFORM ITEM
+   ============================================ */
+.platform-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+}
+
+.platform-item:last-child {
+  border-bottom: none;
+}
+
+/* ----- DIFFERENT BACKGROUNDS ----- */
+.platform-item.platform-1 {
+  background: #fff5f5;
+}
+
+.platform-item.platform-2 {
+  background: #f0f7ff;
+}
+
+.platform-item.platform-3 {
+  background: #f5f0ff;
+}
+
+.platform-item.platform-4 {
+  background: #fff8f0;
+}
+
+.platform-item.platform-5 {
+  background: #f0fff4;
+}
+
+/* ----- HOVER EFFECTS ----- */
+.platform-item.platform-1:hover {
+  background: #ffebeb;
+}
+
+.platform-item.platform-2:hover {
+  background: #e3f0ff;
+}
+
+.platform-item.platform-3:hover {
+  background: #ede3ff;
+}
+
+.platform-item.platform-4:hover {
+  background: #ffefe3;
+}
+
+.platform-item.platform-5:hover {
+  background: #e3ffeb;
+}
+
+/* ============================================
+   PLATFORM ROW
+   ============================================ */
+.platform-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 26px 32px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.platform-item:hover .platform-row {
+  padding-left: 42px;
+}
+
+/* ============================================
+   NUMBER
+   ============================================ */
+.platform-number {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  min-width: 38px;
+  padding-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+.platform-1 .platform-number {
+  color: #dc3545;
+}
+
+.platform-2 .platform-number {
+  color: #0d6efd;
+}
+
+.platform-3 .platform-number {
+  color: #6f42c1;
+}
+
+.platform-4 .platform-number {
+  color: #fd7e14;
+}
+
+.platform-5 .platform-number {
+  color: #198754;
+}
+
+/* ============================================
+   INFO
+   ============================================ */
+.platform-info {
+  flex: 1;
+}
+
+.platform-info h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 5px 0;
+  letter-spacing: -0.2px;
+}
+
+.platform-info p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .section-header h2 {
+    font-size: 32px;
+  }
+
+  .platform-row {
+    padding: 22px 25px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .ecommerce-platforms-section {
+    padding: 50px 0 60px;
+  }
+
+  .section-header h2 {
+    font-size: 28px;
+  }
+
+  .section-header p {
+    font-size: 15px;
+  }
+
+  .platform-row {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .platform-number {
+    font-size: 14px;
+    min-width: 30px;
+  }
+
+  .platform-info h3 {
+    font-size: 16px;
+  }
+
+  .platform-info p {
+    font-size: 14px;
+  }
+
+  .platform-item:hover .platform-row {
+    padding-left: 25px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .section-header h2 {
+    font-size: 22px;
+  }
+
+  .section-header p {
+    font-size: 14px;
+  }
+
+  .platform-row {
+    padding: 16px 15px;
+    gap: 15px;
+  }
+
+  .platform-number {
+    font-size: 13px;
+    min-width: 26px;
+  }
+
+  .platform-info h3 {
+    font-size: 15px;
+  }
+
+  .platform-info p {
+    font-size: 13px;
+  }
+}
+
+
+
+
+
+
+/* ============================================
+   PLATFORMS LIST - GRID WRAPPER
+   ============================================ */
+.platforms-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+/* ============================================
+   PLATFORM ITEM (CARD)
+   ============================================ */
+.platform-item {
+  position: relative;
+  border-radius: 14px;
+  padding: 28px 22px;
+  min-height: 280px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.platform-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ----- DIFFERENT BACKGROUNDS ----- */
+.platform-item.platform-1 {
+  background: #f4f4f4;
+}
+
+.platform-item.platform-2 {
+  background: #f7f0fb;
+}
+
+.platform-item.platform-3 {
+  background: #fdf2ec;
+}
+
+.platform-item.platform-4 {
+  background: #fdf0ee;
+}
+
+.platform-item.platform-5 {
+  background: #eef4fc;
+}
+
+/* ============================================
+   NUMBER (top right corner)
+   ============================================ */
+.platform-number {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  color: rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   ICON
+   ============================================ */
+.platform-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.platform-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* ============================================
+   INFO
+   ============================================ */
+.platform-info h3 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+}
+
+.platform-info p {
+  font-size: 11px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+  .platforms-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ecommerce-platforms-section {
+    padding: 50px 0 60px;
+  }
+
+  .section-header h2 {
+    font-size: 28px;
+  }
+
+  .section-header p {
+    font-size: 15px;
+  }
+
+  .platforms-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .platform-item {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .platform-icon {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .platforms-list {
+    grid-template-columns: 1fr;
+  }
 }

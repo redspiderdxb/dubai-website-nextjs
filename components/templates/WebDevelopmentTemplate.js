@@ -1,8 +1,41 @@
+// frontend/components/templates/WebDevelopmentTemplate.js
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function WebDevelopmentTemplate({ data }) {
-  // 🔥 Static data - Baad mein backend se replace hoga
+  // ============================================
+  // ✅ DYNAMIC FIELDS - Backend se aayenge
+  // ============================================
+  const {
+    name,
+    description,
+    content,
+    image,
+    hero_title,
+    hero_subtitle,
+    hero_description,
+    hero_image,
+    hero_background,
+    intro_small_heading,
+    intro_main_heading,
+    intro_description,
+    intro_image,
+    cta_title,
+    cta_description,
+    cta_button_text,
+    cta_button_link,
+    cta_background,
+    // Repeater Data
+    features = [],
+    processes = [],
+    technologies = [],
+    faqs = [],
+    gallery = [],
+  } = data;
+
+  // ============================================
+  // ❌ STATIC FIELDS - Abhi hardcoded (Future Dynamic)
+  // ============================================
   const trustPoints = [
     {
       id: 1,
@@ -54,7 +87,7 @@ export default function WebDevelopmentTemplate({ data }) {
       <ServiceHero service={data} />
 
       {/* Features Grid - Dynamic */}
-      {data.features?.length > 0 && (
+      {features.length > 0 && (
         <section className="re-process py-5 pix-bg">
           <div className="container pt-lg-5" style={{ maxWidth: "1550px" }}>
             <div className="row justify-content-center text-center">
@@ -73,9 +106,9 @@ export default function WebDevelopmentTemplate({ data }) {
           </div>
           <div className="container py-lg-5" style={{ maxWidth: "1600px" }}>
             <div className="row g-4">
-              {data.features.map((feature, index) => (
+              {features.map((feature, index) => (
                 <div
-                  key={feature.id}
+                  key={feature.id || index}
                   className="col-lg-4 col-md-6"
                   data-aos="fade-up"
                   data-aos-delay={index * 100}
@@ -96,8 +129,9 @@ export default function WebDevelopmentTemplate({ data }) {
           </div>
         </section>
       )}
+
       {/* Process Accordion - Dynamic */}
-      {data.processes?.length > 0 && (
+      {processes.length > 0 && (
         <section className="archidex-accordion-sec dark-cs-bg dark-background dev-before pt-0">
           <div className="archidex-bg-shape"></div>
 
@@ -133,50 +167,22 @@ export default function WebDevelopmentTemplate({ data }) {
                   </h6>
                 </div>
 
-                <div className="accordion archidex-accordion">
-                  {data.processes.map((process, index) => {
+                <div
+                  className="accordion archidex-accordion"
+                  id="webProcessAccordion"
+                >
+                  {processes.map((process, index) => {
                     const isFirst = index === 0;
-                    const collapseId = `collapse-${process.id || index}`;
-                    const headingId = `heading-${process.id || index}`;
+                    const collapseId = `process-collapse-${process.id || index}`;
 
                     return (
                       <div className="accordion-item" key={process.id || index}>
-                        <h2 className="accordion-header" id={headingId}>
+                        <h2 className="accordion-header">
                           <button
                             className={`accordion-button ${isFirst ? "" : "collapsed"}`}
                             type="button"
-                            onClick={() => {
-                              document
-                                .querySelectorAll(
-                                  ".archidex-accordion .accordion-collapse",
-                                )
-                                .forEach((el) => el.classList.remove("show"));
-
-                              document
-                                .querySelectorAll(
-                                  ".archidex-accordion .accordion-button",
-                                )
-                                .forEach((el) => {
-                                  el.classList.add("collapsed");
-                                  el.setAttribute("aria-expanded", "false");
-                                });
-
-                              const target =
-                                document.getElementById(collapseId);
-
-                              if (target) {
-                                target.classList.add("show");
-
-                                const btn = document
-                                  .getElementById(headingId)
-                                  ?.querySelector(".accordion-button");
-
-                                if (btn) {
-                                  btn.classList.remove("collapsed");
-                                  btn.setAttribute("aria-expanded", "true");
-                                }
-                              }
-                            }}
+                            data-bs-toggle="collapse"
+                            data-bs-target={`#${collapseId}`}
                             aria-expanded={isFirst ? "true" : "false"}
                           >
                             <span className="arch-no">{index + 1}.</span>
@@ -190,6 +196,7 @@ export default function WebDevelopmentTemplate({ data }) {
                           className={`accordion-collapse collapse ${
                             isFirst ? "show" : ""
                           }`}
+                          data-bs-parent="#webProcessAccordion"
                         >
                           <div className="accordion-body">
                             {process.description}
@@ -206,7 +213,7 @@ export default function WebDevelopmentTemplate({ data }) {
       )}
 
       {/* Gallery - Dynamic */}
-      {data.gallery?.length > 0 && (
+      {gallery.length > 0 && (
         <section className="opposite-gallery-sec py-0">
           <div className="opposite-gallery-sticky">
             <div className="gallery-title-wrap">
@@ -214,25 +221,38 @@ export default function WebDevelopmentTemplate({ data }) {
             </div>
             <div className="gallery-inner">
               <div className="gallery-track top-track">
-                {data.gallery.slice(0, 6).map((item) => (
-                  <div key={item.id} className={`gallery-card large`}>
-                    <img
-                      src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${item.image}`}
-                      alt={item.title || "Gallery Image"}
-                    />
+                {gallery.slice(0, 6).map((item, index) => (
+                  <div
+                    key={item.id || index}
+                    className={`gallery-card ${
+                      index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""
+                    }`}
+                  >
+                    <img src={item.image} alt={item.title || "Gallery Image"} />
                   </div>
                 ))}
               </div>
-              <div className="gallery-track bottom-track">
-                {data.gallery.slice(6, 12).map((item) => (
-                  <div key={item.id} className={`gallery-card large`}>
-                    <img
-                      src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${item.image}`}
-                      alt={item.title || "Gallery Image"}
-                    />
-                  </div>
-                ))}
-              </div>
+              {gallery.length > 6 && (
+                <div className="gallery-track bottom-track">
+                  {gallery.slice(6, 12).map((item, index) => (
+                    <div
+                      key={item.id || index}
+                      className={`gallery-card ${
+                        index % 3 === 1
+                          ? "large"
+                          : index % 3 === 0
+                            ? "small"
+                            : ""
+                      }`}
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.title || "Gallery Image"}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -312,7 +332,7 @@ export default function WebDevelopmentTemplate({ data }) {
       </section>
 
       {/* FAQs - Dynamic */}
-      {data.faqs?.length > 0 && (
+      {faqs.length > 0 && (
         <section
           id="rs-faq-sec"
           className="home-faq rs-faq-sec section py-5 light-background"
@@ -333,54 +353,58 @@ export default function WebDevelopmentTemplate({ data }) {
             <div className="row g-4">
               <div className="col-lg-6">
                 <div className="accordion" id="homeFaqLeft">
-                  {data.faqs
-                    .slice(0, Math.ceil(data.faqs.length / 2))
-                    .map((faq) => (
-                      <div className="accordion-item" key={faq.id}>
-                        <h2 className="accordion-header">
-                          <button
-                            className="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target={`#faq${faq.id}`}
-                          >
-                            {faq.question}
-                          </button>
-                        </h2>
-                        <div
-                          id={`faq${faq.id}`}
-                          className="accordion-collapse collapse"
+                  {faqs.slice(0, Math.ceil(faqs.length / 2)).map((faq) => (
+                    <div
+                      className="accordion-item"
+                      key={faq.id || `left-${faq.question}`}
+                    >
+                      <h2 className="accordion-header">
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#faq-left-${faq.id || faq.question}`}
                         >
-                          <div className="accordion-body">{faq.answer}</div>
-                        </div>
+                          {faq.question}
+                        </button>
+                      </h2>
+                      <div
+                        id={`faq-left-${faq.id || faq.question}`}
+                        className="accordion-collapse collapse"
+                        data-bs-parent="#homeFaqLeft"
+                      >
+                        <div className="accordion-body">{faq.answer}</div>
                       </div>
-                    ))}
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="col-lg-6">
                 <div className="accordion" id="homeFaqRight">
-                  {data.faqs
-                    .slice(Math.ceil(data.faqs.length / 2))
-                    .map((faq) => (
-                      <div className="accordion-item" key={faq.id}>
-                        <h2 className="accordion-header">
-                          <button
-                            className="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target={`#faq${faq.id}`}
-                          >
-                            {faq.question}
-                          </button>
-                        </h2>
-                        <div
-                          id={`faq${faq.id}`}
-                          className="accordion-collapse collapse"
+                  {faqs.slice(Math.ceil(faqs.length / 2)).map((faq) => (
+                    <div
+                      className="accordion-item"
+                      key={faq.id || `right-${faq.question}`}
+                    >
+                      <h2 className="accordion-header">
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#faq-right-${faq.id || faq.question}`}
                         >
-                          <div className="accordion-body">{faq.answer}</div>
-                        </div>
+                          {faq.question}
+                        </button>
+                      </h2>
+                      <div
+                        id={`faq-right-${faq.id || faq.question}`}
+                        className="accordion-collapse collapse"
+                        data-bs-parent="#homeFaqRight"
+                      >
+                        <div className="accordion-body">{faq.answer}</div>
                       </div>
-                    ))}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

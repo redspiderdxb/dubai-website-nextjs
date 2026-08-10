@@ -2,12 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { fetchAllServices } from "../../lib/api";
+import { fetchAllProducts } from "../../lib/api";
 
 export default function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [services, setServices] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [isLoadingServices, setIsLoadingServices] = useState(true);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
   const headerRef = useRef(null);
 
   // 🔥 Fetch services from API
@@ -15,17 +18,32 @@ export default function Header() {
     const loadServices = async () => {
       try {
         const response = await fetchAllServices();
-        // 🔥 response ka structure: { current_page, data: [...], total }
         const servicesData = response?.data || [];
         setServices(servicesData);
       } catch (error) {
         console.error("Error fetching services:", error);
         setServices([]);
       } finally {
-        setIsLoading(false);
+        setIsLoadingServices(false);
       }
     };
     loadServices();
+  }, []);
+
+  // 🔥 Fetch products from API
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const productsData = await fetchAllProducts();
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setProducts([]);
+      } finally {
+        setIsLoadingProducts(false);
+      }
+    };
+    loadProducts();
   }, []);
 
   const toggleMobileMenu = () => {
@@ -62,31 +80,28 @@ export default function Header() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 🔥 Nav items - Services dynamic hoga
+  // 🔥 Nav items - Services & Products dynamic hain
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
     {
       name: "Services",
       type: "dropdown",
-      // 🔥 Dynamic services from API
       items: services.map((service) => ({
         name: service.name,
-        path: `/services/${service.slug}`, // 🔥 Service detail page
+        path: `/services/${service.slug}`,
       })),
-      // 🔥 Loading state ke liye placeholder
-      isLoading: isLoading,
+      isLoading: isLoadingServices,
     },
     { name: "Our Portfolio", path: "/portfolio" },
     {
       name: "Products",
       type: "dropdown",
-      items: [
-        { name: "Real Estate Web Design Company", path: "#" },
-        { name: "SMS Marketing UAE", path: "#" },
-        { name: "Daily Deal Website", path: "#" },
-        { name: "Dubizzle Clone", path: "#" },
-      ],
+      items: products.map((product) => ({
+        name: product.name,
+        path: `/products/${product.slug}`,
+      })),
+      isLoading: isLoadingProducts,
     },
     { name: "Contact", path: "/contact" },
   ];
@@ -116,7 +131,7 @@ export default function Header() {
               <ul>
                 {navItems.map((item, index) => {
                   if (item.type === "dropdown") {
-                    // 🔥 Loading state - Services dropdown loading
+                    // 🔥 Loading state - Dropdown loading
                     if (item.isLoading) {
                       return (
                         <li key={index} className="dropdown">
@@ -127,7 +142,7 @@ export default function Header() {
                           <ul className="rs-dropdown-menu">
                             <li>
                               <span className="px-4 py-2 text-gray-500">
-                                Loading services...
+                                Loading {item.name.toLowerCase()}...
                               </span>
                             </li>
                           </ul>
@@ -171,7 +186,7 @@ export default function Header() {
                           ) : (
                             <li>
                               <span className="px-4 py-2 text-gray-500">
-                                No services available
+                                No {item.name.toLowerCase()} available
                               </span>
                             </li>
                           )}

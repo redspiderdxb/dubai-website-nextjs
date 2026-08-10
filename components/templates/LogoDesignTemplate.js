@@ -1,12 +1,867 @@
+// frontend/components/templates/LogoDesignTemplate.js
+import Image from "next/image";
+import Link from "next/link";
 import ServiceHero from "../services/ServiceHero";
-import ServiceBody from "../services/ServiceBody";
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function LogoDesignTemplate({ data }) {
+  if (!data) return <div className="text-center py-5">Loading...</div>;
+
+  // ============================================
+  // ✅ DYNAMIC FIELDS - Backend se aayenge
+  // ============================================
+  const {
+    name,
+    description,
+    content,
+    image,
+    hero_title,
+    hero_subtitle,
+    hero_description,
+    hero_image,
+    hero_background,
+    intro_small_heading,
+    intro_main_heading,
+    intro_description,
+    intro_image,
+    cta_title,
+    cta_description,
+    cta_button_text,
+    cta_button_link,
+    cta_background,
+    // Repeater Data
+    logoTypes = [],
+    logoServices = [],
+    logoFormats = [],
+    industriesLogo = [],
+    logoPackages = [],
+    processes = [],
+    faqs = [],
+    gallery = [],
+  } = data;
+
+  // ============================================
+  // 📊 DYNAMIC DATA WITH STATIC FALLBACK
+  // ============================================
+
+  // 1. Logo Types - Dynamic from backend
+  const logoTypesData =
+    logoTypes.length > 0
+      ? logoTypes
+      : [
+          {
+            name: "Wordmark Logos",
+            description:
+              "Text-based logos that focus on typography and font styling to create a unique brand identity.",
+            style: "Modern",
+          },
+          {
+            name: "Lettermark Logos",
+            description:
+              "Logo designs using initials or abbreviated brand names for a clean and memorable identity.",
+            style: "Minimal",
+          },
+          {
+            name: "Symbol / Icon Logos",
+            description:
+              "Visual symbols or icons that represent your brand without text, creating instant recognition.",
+            style: "Abstract",
+          },
+          {
+            name: "Combination Logos",
+            description:
+              "A mix of text and symbols offering flexibility for various brand applications.",
+            style: "Versatile",
+          },
+          {
+            name: "Luxury & Corporate Logos",
+            description:
+              "Premium logo designs crafted for high-end brands and corporate identities with elegance.",
+            style: "Premium",
+          },
+          {
+            name: "Minimal & Modern Logos",
+            description:
+              "Clean, contemporary designs that focus on simplicity and visual impact.",
+            style: "Clean",
+          },
+        ];
+
+  // Icon mapping for logo types
+  const logoTypeIcons = {
+    "Wordmark Logos": "bi-type",
+    "Lettermark Logos": "bi-fonts",
+    "Symbol / Icon Logos": "bi-hexagon",
+    "Combination Logos": "bi-grid-3x3-gap",
+    "Luxury & Corporate Logos": "bi-gem",
+    "Minimal & Modern Logos": "bi-arrows-angle-expand",
+  };
+
+  // 2. Services - Dynamic from backend
+  const servicesData =
+    logoServices.length > 0
+      ? logoServices
+      : [
+          {
+            name: "Custom Logo Design",
+            description:
+              "Tailored logo designs created specifically for your brand, reflecting your unique identity and values.",
+          },
+          {
+            name: "Brand Identity Systems",
+            description:
+              "Complete brand identity solutions including logos, color schemes, typography, and visual guidelines.",
+          },
+          {
+            name: "Logo Redesign & Rebranding",
+            description:
+              "Modernize your existing logo or completely rebrand your business with a fresh new identity.",
+          },
+          {
+            name: "Corporate Identity Design",
+            description:
+              "Professional corporate identities including logos, business cards, letterheads, and brand assets.",
+          },
+          {
+            name: "Brand Guidelines & Visual Standards",
+            description:
+              "Comprehensive brand guidelines that ensure consistent brand application across all platforms.",
+          },
+        ];
+
+  // Service icons mapping
+  const serviceIcons = [
+    "bi-vector-pen",
+    "bi-grid-3x3-gap",
+    "bi-arrow-repeat",
+    "bi-building-check",
+    "bi-journal-check",
+  ];
+
+  // 3. Formats - Dynamic from backend
+  const formatsData =
+    logoFormats.length > 0
+      ? logoFormats
+      : [
+          {
+            name: "High-Resolution JPG",
+            description:
+              "High-quality JPEG format suitable for web, presentations, and general use.",
+          },
+          {
+            name: "PNG (Transparent Background)",
+            description:
+              "PNG format with transparent background for versatile use on any background color.",
+          },
+          {
+            name: "Editable AI / EPS Vector File",
+            description:
+              "Vector files that can be scaled to any size without losing quality, ideal for printing.",
+          },
+          {
+            name: "PDF Version",
+            description:
+              "PDF format for easy sharing, printing, and professional presentations.",
+          },
+          {
+            name: "Black & White Logo",
+            description:
+              "Monochrome version of your logo for special applications and print media.",
+          },
+          {
+            name: "Social Media Sizes",
+            description:
+              "Optimized logo sizes for all major social media platforms including Facebook, Instagram, and LinkedIn.",
+          },
+          {
+            name: "Brand Color Codes",
+            description:
+              "Complete color palette with HEX, CMYK, and RGB codes for consistent brand application.",
+          },
+        ];
+
+  // Format icons mapping
+  const formatIcons = [
+    "bi-file-earmark-image",
+    "bi-image",
+    "bi-file-earmark-text",
+    "bi-file-earmark",
+    "bi-circle-half",
+    "bi-share",
+    "bi-palette",
+  ];
+
+  // 4. Industries - Dynamic from backend
+  const allIndustries =
+    industriesLogo.length > 0
+      ? industriesLogo.map((item) => item.name)
+      : [
+          "Construction & Engineering Firms",
+          "Real Estate Companies",
+          "IT & Software Companies",
+          "Corporate Businesses",
+          "Startups",
+          "Ecommerce Brands",
+          "Healthcare Brands",
+          "Restaurants & Cafes",
+          "Fashion Brands",
+          "Education Institutes",
+          "Hospitality Companies",
+          "Consulting Firms",
+        ];
+
+  // Split industries for marquee
+  const midPoint = Math.ceil(allIndustries.length / 2);
+  const industriesRow1 = allIndustries.slice(0, midPoint);
+  const industriesRow2 = allIndustries.slice(midPoint);
+
+  // 5. Packages - Dynamic from backend
+  const packagesData =
+    logoPackages.length > 0
+      ? logoPackages
+      : [
+          {
+            name: "Logo Package",
+            features:
+              "5 Logo design with concept guidelines, Unlimited revisions until you are completely satisfied, Professional print & web ready logo artwork PDF files, Copyright ownership to the final logo",
+          },
+          {
+            name: "Logo + Stationary",
+            features:
+              "5 Logo design with concept guidelines, Unlimited revisions until you are completely satisfied, Professional print & web ready logo artwork PDF files, Copyright ownership to the final logo, Complete Stationery Design",
+          },
+          {
+            name: "Logo + Stationary + Website",
+            features:
+              "5 Logo design with concept guidelines, Professional print & web ready logo artwork PDF files, Copyright ownership to the final logo, Complete Stationery Design, Website Design & Development",
+          },
+          {
+            name: "Brand Book",
+            features:
+              "5 Logo design with concept, Copyright ownership to the final logo, Corporate Identity with brand guideline, Complete Stationery Design, 8 Pages Brochure Design Artwork, Newspaper AD Design, Flag Design, Hanging Banner Design, Gift Items Design, Website Design & Development",
+          },
+        ];
+
+  // 6. Process Steps - Dynamic from backend or static fallback
+  const processData =
+    processes.length > 0
+      ? processes
+      : [
+          {
+            title: "Brand Discovery & Consultation",
+            description:
+              "We conduct a thorough analysis of your brand, understanding your goals, target audience, and market positioning to create a solid foundation for the design process.",
+          },
+          {
+            title: "Market Research & Concept Planning",
+            description:
+              "We conduct market research to understand industry trends and competitor strategies, ensuring our design concepts are innovative and effective.",
+          },
+          {
+            title: "Initial Logo Concepts",
+            description:
+              "We create initial logo concepts based on the research and planning phase, presenting multiple options for your review and feedback.",
+          },
+          {
+            title: "Feedback & Refinement",
+            description:
+              "We refine the logo concepts based on your feedback, ensuring the final design aligns with your brand vision and objectives.",
+          },
+          {
+            title: "Final Delivery in Multiple Formats",
+            description:
+              "We deliver the final logo design in multiple formats, ensuring it is ready for both digital and print use, and meets all your branding needs.",
+          },
+        ];
+
+  // 7. FAQ Data - Dynamic from backend or static fallback
+  const faqData =
+    faqs.length > 0
+      ? faqs
+      : [
+          {
+            question:
+              "What makes a strong logo design for businesses in Dubai?",
+            answer:
+              "A strong logo design reflects brand identity, industry relevance, and long-term scalability. In competitive markets like Dubai, a logo should be distinctive, versatile, and adaptable across digital and print platforms.",
+          },
+          {
+            question:
+              "How do logo design companies in Dubai approach branding?",
+            answer:
+              "Established logo design companies begin with brand research, competitor analysis, and audience understanding before creating design concepts. This ensures the final logo aligns with business positioning and market expectations.",
+          },
+          {
+            question:
+              "Do businesses across the UAE require different logo styles?",
+            answer:
+              "Logo styles vary depending on industry, target audience, and brand values. Businesses across the UAE often require culturally relevant yet modern designs that maintain international appeal.",
+          },
+          {
+            question: "What is included in a complete logo design service?",
+            answer:
+              "A complete logo design service typically includes concept development, revisions, final artwork files, and brand usage guidelines to maintain visual consistency across platforms.",
+          },
+          {
+            question: "How long does the logo design process usually take?",
+            answer:
+              "The logo design process generally takes between 5–10 business days depending on concept complexity, revision cycles, and brand requirements.",
+          },
+          {
+            question: "What file formats are delivered after logo completion?",
+            answer:
+              "Final logo delivery includes multiple formats such as AI, EPS, PDF, PNG, and JPG to ensure compatibility for print, web, signage, and marketing materials.",
+          },
+          {
+            question: "Can an existing brand in Dubai request a logo redesign?",
+            answer:
+              "Yes. Many businesses in Dubai request logo redesign services to modernize brand identity while maintaining brand recognition and market continuity.",
+          },
+          {
+            question: "How is brand design different from logo design?",
+            answer:
+              "Logo design focuses on the visual symbol of a business, while brand design includes broader identity elements such as typography, color systems, visual guidelines, and communication style.",
+          },
+        ];
+
+  // 8. Gallery Images - Dynamic from backend
+  const galleryImages = gallery.length > 0 ? gallery : [];
+
+  // 9. How it Works Steps (Static)
+  const workSteps = [
+    {
+      icon: "bi-send",
+      title: "Submit Inquiry",
+      desc: "Submit your inquiry to get package details and logo guidelines document.",
+    },
+    {
+      icon: "bi-lightbulb",
+      title: "Receive Concepts",
+      desc: "Receive logo presentations with detailed concepts in 4 to 5 days as per your logo brief.",
+    },
+    {
+      icon: "bi-pencil-square",
+      title: "Review Revisions",
+      desc: "Share your feedback and get revisions until the final logo direction is approved.",
+    },
+    {
+      icon: "bi-check2-square",
+      title: "Final Handover",
+      desc: "After approval, final files are handed over in PDF, PNG, JPG, AI, and EPS formats.",
+    },
+  ];
+
   return (
     <>
+      {/* Hero Section */}
       <ServiceHero service={data} />
-      <ServiceBody service={data} />
+
+      {/* What We Offer + Design Process */}
+      <section className="archidex-accordion-sec">
+        <div className="archidex-bg-shape"></div>
+        <div className="container" style={{ maxWidth: "1550px" }}>
+          <div className="archidex-top-line"></div>
+          <div className="row g-5 align-items-start justify-content-between">
+            <div className="col-lg-4">
+              <h2 className="archidex-title">
+                <span>What We </span>
+                Offer
+              </h2>
+              <ul className="archidex-list">
+                {servicesData.map((item, index) => (
+                  <li key={index}>
+                    <span className="archidex-list-icon">
+                      <i
+                        className={serviceIcons[index % serviceIcons.length]}
+                      ></i>
+                    </span>
+                    <span>{item.name}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="letconnect mt-5">
+                <span> Let's Connect : </span>
+                <div className="line"></div>
+                <a href="#"> Book A Call </a>
+              </div>
+            </div>
+
+            <div className="col-lg-6 px-lg-5">
+              <div className="archidex-small-title">
+                <h6>
+                  Our Brochure
+                  <br />
+                  Design
+                  <br />
+                  Process
+                </h6>
+              </div>
+              <div
+                className="accordion archidex-accordion"
+                id="archidexAccordion"
+              >
+                {processData.map((item, index) => (
+                  <div className="accordion-item" key={index}>
+                    <h2 className="accordion-header">
+                      <button
+                        className={`accordion-button ${index === 0 ? "" : "collapsed"}`}
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#collapse${index}`}
+                        aria-expanded={index === 0 ? "true" : "false"}
+                      >
+                        <span className="arch-no">{String(index + 1)}.</span>
+                        <span className="arch-name">{item.title}</span>
+                        <span className="arch-arrow">↗</span>
+                      </button>
+                    </h2>
+                    <div
+                      id={`collapse${index}`}
+                      className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
+                      data-bs-parent="#archidexAccordion"
+                    >
+                      <div className="accordion-body">{item.description}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="col-md-2">
+              <div className="recieve-format">
+                <h6 className="mb-4 fw-bold text-center">
+                  What You Will Receive
+                </h6>
+                <div className="rs-receive-stack-wrap">
+                  {formatsData.map((item, index) => (
+                    <div className="rs-receive-stack-item" key={index}>
+                      <span className="rs-stack-line"></span>
+                      <div className="rs-stack-icon">
+                        <i
+                          className={formatIcons[index % formatIcons.length]}
+                        ></i>
+                      </div>
+                      <h5>{item.name}</h5>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works */}
+      <section className="work-process-sec">
+        <div className="container">
+          <div className="title-wrap text-center">
+            <span className="re-label">Logo Design Process</span>
+            <h3>How it Works</h3>
+          </div>
+          <div className="row g-4">
+            {workSteps.map((step, index) => (
+              <div className="col-lg-3 col-md-6" key={index}>
+                <div className="work-card">
+                  <div className="work-card-inner">
+                    <div className="work-icon">
+                      <i className={step.icon}></i>
+                    </div>
+                    <h4>{step.title}</h4>
+                    <p>{step.desc}</p>
+                    <a href="#" className="work-link">
+                      Step {String(index + 1).padStart(2, "0")}{" "}
+                      <i className="bi bi-arrow-up-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mission Section */}
+      <section className="rs-specialization-sec">
+        <div
+          className="container rs-specialization-wrap"
+          style={{ maxWidth: "1320px" }}
+        >
+          <div className="row align-items-center g-5">
+            <div className="col-lg-5">
+              <h2 className="rs-main-title">
+                Our Mission Is <span>Design & Develop</span> The Best Identity
+                Around
+              </h2>
+              <p>
+                <small>
+                  Your logo is the face of your business. In Dubai's competitive
+                  market, a professional logo builds trust, credibility, and
+                  brand recognition.
+                </small>
+              </p>
+              <div className="rs-subtitle mt-4">A well-designed logo:</div>
+              <div className="rs-special-list">
+                <button className="rs-special-item active" type="button">
+                  <span className="rs-num">01.</span>
+                  <span>Makes your business look established</span>
+                  <span className="rs-icon">
+                    <i className="bi bi-arrow-up-right"></i>
+                  </span>
+                </button>
+                <button className="rs-special-item" type="button">
+                  <span className="rs-num">02.</span>
+                  <span>Creates a strong first impression</span>
+                  <span className="rs-icon">
+                    <i className="bi bi-arrow-up-right"></i>
+                  </span>
+                </button>
+                <button className="rs-special-item" type="button">
+                  <span className="rs-num">03.</span>
+                  <span>Builds emotional connection</span>
+                  <span className="rs-icon">
+                    <i className="bi bi-arrow-up-right"></i>
+                  </span>
+                </button>
+                <button className="rs-special-item" type="button">
+                  <span className="rs-num">04.</span>
+                  <span>Helps customers remember your brand</span>
+                  <span className="rs-icon">
+                    <i className="bi bi-arrow-up-right"></i>
+                  </span>
+                </button>
+                <button className="rs-special-item" type="button">
+                  <span className="rs-num">05.</span>
+                  <span>Works across digital and print platforms</span>
+                  <span className="rs-icon">
+                    <i className="bi bi-arrow-up-right"></i>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div className="col-lg-7">
+              <div className="rs-image-area">
+                <div className="rs-dot-pattern"></div>
+                <div className="rs-main-image-box">
+                  {image ? (
+                    <img src={image} alt={name} />
+                  ) : (
+                    <img
+                      src="/assets/img/l3.jpg"
+                      alt="Specialization Preview"
+                    />
+                  )}
+                </div>
+              </div>
+              <div className="letconnect mt-5">
+                <span>Know More About :</span>
+                <div className="line"></div>
+                <a href="#">View Our Work</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Join With Us - CTA */}
+      <section
+        className="rs-packages-se dark-background section py-0"
+        style={{ background: "#fff" }}
+      >
+        <div className="container" style={{ maxWidth: "1450px" }}>
+          <div className="row">
+            <div className="col-12">
+              <div className="rs-left-card h-100 d-flex flex-column flex-lg-row align-items-center justify-content-between gap-4 text-center text-lg-start">
+                <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-4 gap-lg-5">
+                  <span className="rs-join">Join With Us</span>
+                  <h4 className="mb-0">
+                    Let's Create a Logo That
+                    <br className="d-none d-md-block" />
+                    Represents Your Brand
+                  </h4>
+                  <div className="rs-arrow-btn">
+                    <span>
+                      <img
+                        src="/assets/img/arrow-icon-40.svg"
+                        alt=""
+                        className="arrow-40deg-icon"
+                      />
+                    </span>
+                  </div>
+                </div>
+                <div className="quick-contect text-center text-lg-end mt-3 mt-lg-0">
+                  <small>Get A Consultation</small>
+                  <h5 className="mb-0">: 971555515475</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Types of Logo */}
+      <section className="rs-logo-types-sec pb-0">
+        <div className="container">
+          <div className="row align-items-start g-5">
+            <div className="col-lg-4">
+              <div className="title-wrap">
+                <span
+                  style={{
+                    color: "#d20000",
+                    fontWeight: "400",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  We design logos suitable for
+                </span>
+                <h3 className="fw-bold mt-3">Types of logo we work</h3>
+                <img
+                  src="/assets/img/products-heading-shape.png"
+                  alt=""
+                  className="img-fluid mt-3"
+                />
+              </div>
+            </div>
+            <div className="col-lg-8">
+              <div className="row g-4">
+                {logoTypesData.map((item, index) => (
+                  <div className="col-md-6" key={index}>
+                    <div className="rs-logo-type-card">
+                      <div className="rs-logo-icon">
+                        <i
+                          className={logoTypeIcons[item.name] || "bi-type"}
+                        ></i>
+                      </div>
+                      <h5>{item.name}</h5>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Industries Marquee */}
+      <section className="rs-text-marquee-sec">
+        <div className="rs-text-marquee-wrap">
+          <div className="rs-text-marquee-track">
+            <div className="rs-text-item">
+              {industriesRow1.map((item, index) => (
+                <span key={index}>
+                  {item}
+                  <i className="rs-dot"></i>
+                </span>
+              ))}
+            </div>
+            <div className="rs-text-item">
+              {industriesRow1.map((item, index) => (
+                <span key={index}>
+                  {item}
+                  <i className="rs-dot"></i>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="rs-text-marquee-wrap red-strip">
+          <div className="rs-text-marquee-track">
+            <div className="rs-text-item">
+              {industriesRow2.map((item, index) => (
+                <span key={index}>
+                  {item}
+                  <i className="rs-dot"></i>
+                </span>
+              ))}
+            </div>
+            <div className="rs-text-item">
+              {industriesRow2.map((item, index) => (
+                <span key={index}>
+                  {item}
+                  <i className="rs-dot"></i>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      {galleryImages.length > 0 && (
+        <section className="opposite-gallery-sec py-0">
+          <div className="opposite-gallery-sticky">
+            <div className="gallery-title-wrap">
+              <span>Our Work</span>
+              <h2>Our Gallery</h2>
+            </div>
+            <div className="gallery-inner">
+              <div className="gallery-track top-track">
+                {galleryImages.slice(0, 6).map((img, index) => (
+                  <div
+                    className={`gallery-card ${index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""}`}
+                    key={index}
+                  >
+                    <img src={img.image} alt={`Gallery ${index + 1}`} />
+                  </div>
+                ))}
+              </div>
+              {galleryImages.length > 6 && (
+                <div className="gallery-track bottom-track">
+                  {galleryImages.slice(6, 12).map((img, index) => (
+                    <div
+                      className={`gallery-card ${index % 3 === 1 ? "large" : index % 3 === 0 ? "small" : ""}`}
+                      key={index}
+                    >
+                      <img src={img.image} alt={`Gallery ${index + 7}`} />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Packages */}
+      <section className="rs-packages-sec light-background section line-bg-dar rs-price-light">
+        <div className="container" style={{ maxWidth: "1550px" }}>
+          <div className="section-title text-center text-white mb-4">
+            <h2 className="fw-bold">Professional Website for every budget</h2>
+            <p className="rs-subtitle">
+              Choose the best package for your needs.
+              <b>100% guaranteed satisfaction</b>
+            </p>
+          </div>
+          <div className="row g-4 align-items-stretch mb-5">
+            {packagesData.map((pkg, index) => (
+              <div className="col-md-3" key={index}>
+                <div className="rs-card">
+                  <p className="text-red">Package – {index + 1}</p>
+                  <h6>{pkg.name}</h6>
+                  <ul>
+                    {pkg.features.split(", ").map((feature, idx) => (
+                      <li key={idx}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ready to Build */}
+      <section
+        id="readytobuild"
+        className="readytobuild section light-background pt-0"
+      >
+        <div className="container" style={{ maxWidth: "1100px" }}>
+          <div className="section-title text-center text-white mb-3">
+            <h2 className="fw-bold">Ready to build a strong brand identity?</h2>
+            <p className="rs-subtitle">
+              Let RedSpider create a professional logo that represents your
+              business the right way.
+            </p>
+          </div>
+        </div>
+        <div className="container" style={{ maxWidth: "1100px" }}>
+          <div className="inlinebtns text-center d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center">
+            <a
+              href="#"
+              className="btn btn-animation btn-red d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
+            >
+              <span className="btn-title">Schedule Free Consultation</span>
+              <span className="btn-icon-wrap">
+                <img
+                  src="/assets/img/icons/cc-icon.svg"
+                  alt=""
+                  className="btn-icon"
+                />
+              </span>
+            </a>
+            <a
+              href="#"
+              className="btn btn-animation btn-black d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
+            >
+              <span className="btn-title">Call Now</span>
+              <span className="btn-icon-wrap">
+                <img
+                  src="/assets/img/icons/phone.svg"
+                  alt=""
+                  className="btn-icon"
+                />
+              </span>
+            </a>
+            <a
+              href="https://wa.me/971505698733"
+              target="_blank"
+              className="btn btn-animation btn-green d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
+            >
+              <span className="btn-title">Whatsapp Us</span>
+              <span className="btn-icon-wrap">
+                <img
+                  src="/assets/img/icons/whatsapp.svg"
+                  alt=""
+                  className="btn-icon"
+                />
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section
+        id="review-sec"
+        className="review-sec section light-background py-0"
+      >
+        <div className="container" style={{ maxWidth: "1100px" }}>
+          <div className="review-wrap">
+            <img
+              src="/assets/img/reviewimg.png"
+              alt="Reviews"
+              className="img-fluid"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs */}
+      <section
+        id="rs-faq-sec"
+        className="rs-faq-sec section py-5 light-background"
+      >
+        <div className="container" style={{ maxWidth: "1000px" }}>
+          <div className="text-center mb-5">
+            <h2 className="fw-bold">FAQ's</h2>
+          </div>
+          <div className="accordion rs-faq-custom" id="rsFaqOne">
+            {faqData.map((faq, index) => (
+              <div className="accordion-item" key={index}>
+                <h2 className="accordion-header">
+                  <button
+                    className={`accordion-button rs-faq-btn ${index === 0 ? "" : "collapsed"}`}
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#faq${index}`}
+                  >
+                    <span className="faq-icon">+</span>
+                    {faq.question}
+                  </button>
+                </h2>
+                <div
+                  id={`faq${index}`}
+                  className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
+                  data-bs-parent="#rsFaqOne"
+                >
+                  <div className="accordion-body">{faq.answer}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
       <ServiceCTA service={data} />
     </>
   );

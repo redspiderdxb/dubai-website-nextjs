@@ -1,12 +1,669 @@
+// frontend/components/templates/BrochureDesignTemplate.js
 import ServiceHero from "../services/ServiceHero";
-import ServiceBody from "../services/ServiceBody";
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function BrochureDesignTemplate({ data }) {
+  if (!data) return <div className="text-center py-5">Loading...</div>;
+
+  // ============================================
+  // ✅ DYNAMIC FIELDS - Backend se aayenge
+  // ============================================
+  const {
+    name,
+    description,
+    content,
+    image,
+    hero_title,
+    hero_subtitle,
+    hero_description,
+    hero_image,
+    hero_background,
+    intro_small_heading,
+    intro_main_heading,
+    intro_description,
+    intro_image,
+    cta_title,
+    cta_description,
+    cta_button_text,
+    cta_button_link,
+    cta_background,
+    // Repeater Data
+    features = [],
+    processes = [],
+    faqs = [],
+    gallery = [],
+  } = data;
+
+  // ============================================
+  // 📊 DYNAMIC DATA WITH STATIC FALLBACK
+  // ============================================
+
+  // 1. Brochure Types - Dynamic from backend or static fallback
+  const brochureTypes =
+    features.length > 0
+      ? features
+      : [
+          {
+            title: "Corporate Brochures",
+            description: "Professional corporate brochures for your business",
+          },
+          {
+            title: "Company Profile Design",
+            description: "Comprehensive company profile designs",
+          },
+          {
+            title: "Product Brochures",
+            description: "Product-focused brochure designs",
+          },
+          {
+            title: "B2B Brochures",
+            description: "Business to business brochure designs",
+          },
+          {
+            title: "Marketing Campaign Brochures",
+            description: "Campaign-specific brochure designs",
+          },
+          {
+            title: "Retail Brochures",
+            description: "Retail-focused brochure designs",
+          },
+          {
+            title: "Workshop & Training Brochures",
+            description: "Workshop and training brochure designs",
+          },
+          {
+            title: "Event, Exhibition & Trade Show Brochures",
+            description: "Event and exhibition brochure designs",
+          },
+          {
+            title: "Presentation folders and document folders",
+            description: "Folder and document designs",
+          },
+        ];
+
+  // Icons for brochure types
+  const brochureIcons = [
+    "bi-box-seam",
+    "bi-people",
+    "bi-megaphone",
+    "bi-bullseye",
+    "bi-shop",
+    "bi-mortarboard",
+    "bi-calendar-event",
+    "bi-journal-check",
+    "bi-folder2-open",
+  ];
+
+  // 2. Why Choose - Static (Future Dynamic)
+  const whyChoose = [
+    {
+      title: "Experienced Across Multiple Industries",
+      desc: "We have created brochures for many companies in the real estate, construction, healthcare, education, hospitality, retail, technology, finance and corporate industry in the UAE.",
+    },
+    {
+      title: "Strategic Content Organization",
+      desc: "A visually appealing brochure design goes beyond attractive visuals. We organize your content with clear headings that is easy to read and engages the customers.",
+    },
+    {
+      title: "Modern, Brand-Focused Designs",
+      desc: "Each brochure is designed with your logo and high quality graphics. Color pallets and typography are selected professionally to make it look visually appealing.",
+    },
+    {
+      title: "Ready for Print & Digital Distribution",
+      desc: "From commercial printing brochures to email campaigns, PDF downloads to online presentations, we can offer your files for the various platforms you need.",
+    },
+  ];
+
+  // 3. Process Steps - Dynamic from backend or static fallback
+  const processData =
+    processes.length > 0
+      ? processes
+      : [
+          {
+            title: "Requirement Analysis",
+            description:
+              "We analyze your business goals, target audience, and brochure requirements to create a clear project roadmap.",
+          },
+          {
+            title: "Content Structure & Layout Planning",
+            description:
+              "We plan the content hierarchy, layout, and visual flow of your brochure.",
+          },
+          {
+            title: "Design & Development",
+            description:
+              "We create visually appealing designs that align with your brand identity.",
+          },
+          {
+            title: "Review & Refinement",
+            description:
+              "We refine the design based on your feedback and brand guidelines.",
+          },
+          {
+            title: "Final Delivery",
+            description:
+              "We deliver the final design in multiple formats for both print and digital use.",
+          },
+        ];
+
+  // 4. FAQ Data - Dynamic from backend or static fallback
+  const faqData =
+    faqs.length > 0
+      ? faqs
+      : [
+          {
+            question: "What brochure design services do you offer in Dubai?",
+            answer:
+              "We offer a wide range of brochure design services including corporate brochures, company profiles, product brochures, B2B brochures, marketing campaign brochures, retail brochures, workshop brochures, event brochures, and presentation folders.",
+          },
+          {
+            question: "How long does it take to design a brochure?",
+            answer:
+              "Timelines depend on project complexity. Simple brochures typically take 3-5 days, while comprehensive catalogues may take 1-2 weeks.",
+          },
+          {
+            question: "Do you provide print-ready files?",
+            answer:
+              "Yes, all designs are delivered in print-ready formats including CMYK, high-resolution PDF, and vector files for commercial printing.",
+          },
+          {
+            question: "Can you redesign my existing brochure?",
+            answer:
+              "Yes, we offer redesign services to modernize your existing brochures while maintaining brand consistency.",
+          },
+        ];
+
+  // 5. Gallery Images - Dynamic from backend
+  const galleryImages = gallery.length > 0 ? gallery : [];
+
   return (
     <>
       <ServiceHero service={data} />
-      <ServiceBody service={data} />
+
+      {/* Info Section */}
+      <section className="broucher-info about-info-sec pix-bg">
+        <div className="container">
+          <div className="row align-items-start">
+            <div className="col-lg-3">
+              <span className="about-label">Brochure Design</span>
+            </div>
+            <div className="col-lg-9">
+              <h2 className="about-heading rs-main-title text-white">
+                {intro_description ||
+                  "At RedSpider Web & Art Design, we offer professional brochure design services in Dubai for various businesses in the industry."}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services List + Process */}
+      <section className="brochure-services-section dark-bg">
+        <div className="container">
+          <div className="row align-items-start justify-content-between">
+            {/* Left Column - Services List */}
+            <div className="col-lg-4">
+              <h2 className="services-heading">
+                <span>Our Brochure</span> Design Services
+              </h2>
+              <ul className="services-list">
+                {brochureTypes.map((item, index) => (
+                  <li key={item.id || index}>
+                    <span className="service-icon">
+                      <i
+                        className={brochureIcons[index % brochureIcons.length]}
+                      ></i>
+                    </span>
+                    <span className="service-text">{item.title}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Right Column - Process Accordion */}
+            <div className="col-lg-7 px-lg-5">
+              <div className="process-title-wrapper">
+                <h6>
+                  Our <br />
+                  Brochure <br />
+                  Design Process
+                </h6>
+              </div>
+
+              <div className="process-accordion" id="brochureProcessAccordion">
+                {processData.map((process, index) => {
+                  const isFirst = index === 0;
+                  const collapseId = `brochure-collapse-${index}`;
+                  return (
+                    <div className="accordion-item" key={process.id || index}>
+                      <div className="accordion-header">
+                        <button
+                          className={`accordion-trigger ${isFirst ? "active" : ""}`}
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#${collapseId}`}
+                          aria-expanded={isFirst ? "true" : "false"}
+                        >
+                          <span className="step-number">{index + 1}.</span>
+                          <span className="step-title">{process.title}</span>
+                          <span className="step-arrow">↗</span>
+                        </button>
+                      </div>
+                      <div
+                        id={collapseId}
+                        className={`accordion-collapse collapse ${isFirst ? "show" : ""}`}
+                        data-bs-parent="#brochureProcessAccordion"
+                      >
+                        <div className="accordion-body">
+                          <div className="accordion-body-text">
+                            {process.description}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Let's Connect Section */}
+              <div className="connect-section">
+                <span className="connect-label">Let's Connect :</span>
+                <div className="connect-divider"></div>
+                <a href={cta_button_link || "#"} className="connect-btn">
+                  {cta_button_text || "Book A Call"}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Join With Us Card */}
+      <section
+        className="rs-packages-se dark-background section pt-0"
+        style={{ background: "#fff" }}
+      >
+        <div className="container" style={{ maxWidth: "1450px" }}>
+          <div className="row">
+            <div className="col-12">
+              <div className="rs-left-card h-100 d-flex flex-column flex-lg-row align-items-center justify-content-between gap-4 text-center text-lg-start">
+                <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-4 gap-lg-5">
+                  <span className="rs-join">Join With Us</span>
+                  <h4 className="mb-0">
+                    Let's Create Brochure That
+                    <br className="d-none d-md-block" />
+                    Represents Your Brand
+                  </h4>
+                  <div className="rs-arrow-btn">
+                    <span>
+                      <img
+                        src="/assets/img/arrow-icon-40.svg"
+                        alt=""
+                        className="arrow-40deg-icon"
+                      />
+                    </span>
+                  </div>
+                </div>
+                <div className="quick-contect text-center text-lg-end mt-3 mt-lg-0">
+                  <small>Get A Consultation</small>
+                  <h5 className="mb-0">: 971555515475</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose */}
+      <section className="rs-why-brochure">
+        <div className="container">
+          <div className="row g-5 align-items-start">
+            <div className="col-lg-5">
+              <div className="rs-why-brochure__intro">
+                <span className="rs-why-brochure__label">Why RedSpider</span>
+                <h2 className="rsu-main-title">
+                  Why Choose RedSpider for <span>Brochure Design</span> in
+                  Dubai?
+                </h2>
+                <div
+                  className="rs-why-brochure__dubai"
+                  aria-label="Hand-drawn Dubai skyline outline"
+                  role="img"
+                >
+                  <svg
+                    viewBox="0 0 720 220"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      className="rs-why-brochure__dubai-line"
+                      d="M8 185
+                  C30 180 41 169 54 172
+                  C67 175 61 190 75 191
+                  C94 193 92 171 90 153
+                  C87 126 91 86 111 51
+                  C130 65 144 84 148 113
+                  C151 139 143 174 155 182
+                  C165 189 172 182 173 166
+                  L177 88 L188 79 L197 66
+                  C196 88 193 113 196 139
+                  C198 161 194 181 205 185
+                  C216 190 220 179 218 160
+                  L219 102 C238 111 249 127 250 151
+                  C251 170 242 182 251 188
+                  C261 194 266 180 267 164
+                  C269 137 278 109 292 95
+                  C309 113 317 138 315 161
+                  C313 178 316 188 329 188
+                  C345 188 350 170 342 165
+                  C332 159 325 170 332 180
+                  C347 201 376 186 383 164
+                  C393 172 405 170 412 158
+                  C422 143 432 137 447 139
+                  C466 142 471 158 466 177
+                  L459 139 C457 120 470 108 484 108
+                  C502 108 515 126 512 145
+                  L507 184 L501 143 C499 126 507 117 516 120
+                  C526 123 529 138 527 153
+                  C524 174 531 189 545 187
+                  C558 185 560 171 556 163
+                  C552 156 543 158 543 166
+                  C544 181 562 194 575 187
+                  C584 181 582 158 582 137
+                  L586 72 L591 62 L588 51 L593 42 L591 31 L597 22
+                  L600 8 L603 22 L609 31 L607 42 L612 51 L609 62 L614 72
+                  L619 137 C619 165 614 184 628 190
+                  C644 197 655 185 655 169
+                  L655 49 L660 28 L664 49
+                  C677 51 683 58 683 69
+                  L692 72 L692 92 L699 94 L699 174
+                  C699 188 707 190 716 190"
+                    ></path>
+                    <path
+                      className="rs-why-brochure__dubai-detail"
+                      d="M91 91 C108 80 132 91 143 110
+                  M91 119 C109 107 134 115 148 132
+                  M92 147 C110 137 134 142 147 154
+                  M448 139 C449 119 462 103 481 102 C501 101 517 117 519 139
+                  M457 151 C471 142 496 143 510 154"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-7">
+              <div className="rs-why-brochure__grid">
+                <div className="row g-4">
+                  {whyChoose.map((item, index) => (
+                    <div className="col-md-6" key={index}>
+                      <article className="rs-why-brochure__card">
+                        <div className="rs-why-brochure__card-inner">
+                          <div className="rs-why-brochure__card-face rs-why-brochure__card-front">
+                            <div className="rs-why-brochure__top">
+                              <span className="rs-why-brochure__icon">
+                                <i className="bi bi-buildings"></i>
+                              </span>
+                              <span className="rs-why-brochure__number">
+                                {String(index + 1).padStart(2, "0")}
+                              </span>
+                            </div>
+                            <h3 className="rs-why-brochure__card-title">
+                              {item.title}
+                            </h3>
+                          </div>
+                          <div className="rs-why-brochure__card-face rs-why-brochure__card-back">
+                            <h3 className="rs-why-brochure__card-title">
+                              {item.title}
+                            </h3>
+                            <p className="rs-why-brochure__text">{item.desc}</p>
+                            <span className="rs-why-brochure__back-number">
+                              {String(index + 1).padStart(2, "0")}
+                            </span>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Brochure Content Blocks */}
+      <section className="rs-pixora-title">
+        <div className="container-fluid px-3 px-xl-5">
+          <div className="rs-pixora-title__hero">
+            <h2 className="rs-pixora-title__headline">
+              <span className="rs-pixora-title__line rs-pixora-title__line--one">
+                <span className="rs-pixora-title__word rs-pixora-title__word--rtl">
+                  Why
+                </span>
+                <span className="rs-pixora-title__word rs-pixora-title__word--ltr">
+                  Professional
+                </span>
+                <span className="rs-pixora-title__image rs-pixora-title__image--pill">
+                  <img src="/assets/img/brochur-1.png" alt="Brochure" />
+                </span>
+                <span className="rs-pixora-title__word rs-pixora-title__word--red rs-pixora-title__word--rtl">
+                  Brochure
+                </span>
+              </span>
+              <span className="rs-pixora-title__line rs-pixora-title__line--two">
+                <span className="rs-pixora-title__image rs-pixora-title__image--square">
+                  <img src="/assets/img/bro-visual.png" alt="Brochure" />
+                </span>
+                <span className="rs-pixora-title__word rs-pixora-title__word--ltr">
+                  Design
+                </span>
+                <span className="rs-pixora-title__line rs-pixora-title__line--three">
+                  <span className="rs-pixora-title__word rs-pixora-title__word--rtl">
+                    Matters
+                  </span>
+                  <span className="rs-pixora-title__image rs-pixora-title__image--portrait">
+                    <img src="/assets/img/print-bro.png" alt="Brochure" />
+                  </span>
+                </span>
+              </span>
+            </h2>
+          </div>
+
+          <div className="container">
+            <div className="letconnect py-4">
+              <span className="text-white">View our Work :</span>
+              <div className="line"></div>
+              <a href="#">Our Portfolio</a>
+            </div>
+          </div>
+
+          <div
+            className="container rs-pixora-title__content"
+            style={{ maxWidth: "1600px" }}
+          >
+            <div className="row g-5">
+              <div className="col-lg-8">
+                <article className="rs-pixora-title__content-col">
+                  <span className="rs-pixora-title__number">01</span>
+                  <h3 className="rs-pixora-title__content-title">
+                    More Than Just a Brochure
+                  </h3>
+                  <p className="rs-pixora-title__text">
+                    A brochure is not just a piece of printed paper, it's one of
+                    the top marketing tools your business can use. It represents
+                    your brand's values and story to the target customers and
+                    attracts new ones.
+                  </p>
+                  <p className="rs-pixora-title__text">
+                    When customers connect with your story and understand your
+                    products and services easily, they will become more loyal.
+                    Your sales team will easily handle conferences,
+                    presentations and networking with well designed brochures.
+                  </p>
+                </article>
+              </div>
+              <div className="col-lg-4">
+                <article className="rs-pixora-title__content-col rs-pixora-title__content-col--right">
+                  <span className="rs-pixora-title__number">02</span>
+                  <h3 className="rs-pixora-title__content-title">
+                    Build Trust Through Professional Design
+                  </h3>
+                  <p className="rs-pixora-title__text">
+                    Businesses who invest in brochure design services get a
+                    perfect marketing tool to promote their brand. A
+                    well-designed brochure positions your brand strategically in
+                    this intense competition.
+                  </p>
+                </article>
+              </div>
+            </div>
+            <span className="rs-pixora-title__accent" aria-hidden="true"></span>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery - Dynamic */}
+      {galleryImages.length > 0 && (
+        <section className="opposite-gallery-sec">
+          <div className="opposite-gallery-sticky">
+            <div className="gallery-title-wrap">
+              <span>Our Work</span>
+              <h2>Our Gallery</h2>
+            </div>
+            <div className="gallery-inner">
+              <div className="gallery-track top-track">
+                {galleryImages.slice(0, 6).map((item, index) => (
+                  <div
+                    key={item.id || index}
+                    className={`gallery-card ${
+                      index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""
+                    }`}
+                  >
+                    <img src={item.image} alt={item.title || "Gallery"} />
+                  </div>
+                ))}
+              </div>
+              {galleryImages.length > 6 && (
+                <div className="gallery-track bottom-track">
+                  {galleryImages.slice(6, 12).map((item, index) => (
+                    <div
+                      key={item.id || index}
+                      className={`gallery-card ${
+                        index % 3 === 1
+                          ? "large"
+                          : index % 3 === 0
+                            ? "small"
+                            : ""
+                      }`}
+                    >
+                      <img src={item.image} alt={item.title || "Gallery"} />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Review */}
+      <section id="review-sec" className="review-sec section light-background">
+        <div className="container" style={{ maxWidth: "1100px" }}>
+          <div className="review-wrap">
+            <img
+              src="/assets/img/reviewimg.png"
+              alt="Reviews"
+              className="img-fluid"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs - Dynamic */}
+      {faqData.length > 0 && (
+        <section
+          id="rs-faq-sec"
+          className="home-faq rs-faq-sec section pb-5 pt-0 light-background"
+        >
+          <div
+            className="container"
+            style={{
+              maxWidth: "1600px",
+              background: "#f6f6f6",
+              padding: "40px",
+              borderRadius: "30px",
+            }}
+          >
+            <div className="text-start mb-5 border-bottom pb-3">
+              <h2 className="fw-bold">Frequently Asked Questions</h2>
+              <p>Find quick answers to common questions about our services.</p>
+            </div>
+            <div className="row g-4">
+              <div className="col-lg-6">
+                <div className="accordion" id="faqLeft-brochure">
+                  {faqData
+                    .slice(0, Math.ceil(faqData.length / 2))
+                    .map((faq, idx) => (
+                      <div
+                        className="accordion-item"
+                        key={faq.id || `left-${idx}`}
+                      >
+                        <h2 className="accordion-header">
+                          <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target={`#faq-brochure-left-${idx}`}
+                          >
+                            {faq.question}
+                          </button>
+                        </h2>
+                        <div
+                          id={`faq-brochure-left-${idx}`}
+                          className="accordion-collapse collapse"
+                          data-bs-parent="#faqLeft-brochure"
+                        >
+                          <div className="accordion-body">{faq.answer}</div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <div className="accordion" id="faqRight-brochure">
+                  {faqData
+                    .slice(Math.ceil(faqData.length / 2))
+                    .map((faq, idx) => (
+                      <div
+                        className="accordion-item"
+                        key={faq.id || `right-${idx}`}
+                      >
+                        <h2 className="accordion-header">
+                          <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target={`#faq-brochure-right-${idx}`}
+                          >
+                            {faq.question}
+                          </button>
+                        </h2>
+                        <div
+                          id={`faq-brochure-right-${idx}`}
+                          className="accordion-collapse collapse"
+                          data-bs-parent="#faqRight-brochure"
+                        >
+                          <div className="accordion-body">{faq.answer}</div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       <ServiceCTA service={data} />
     </>
   );
