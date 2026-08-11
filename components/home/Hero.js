@@ -1,4 +1,3 @@
-// components/home/Hero.js
 import { useState, useEffect } from "react";
 
 export default function Hero({ data }) {
@@ -66,28 +65,38 @@ export default function Hero({ data }) {
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
 
-    // If it's already a full URL (starts with http or https)
+    // Full URL
     if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+      // Convert localhost backend image URL to live backend URL
+      if (imagePath.includes("localhost")) {
+        return imagePath.replace(
+          "http://localhost/redspider/public",
+          "https://redspider.rsworkspace.net/admin/public",
+        );
+      }
+
+      // Keep external URLs unchanged
       return imagePath;
     }
 
-    // If it starts with /storage/, use the full URL
+    // /storage/filename.jpg
     if (imagePath.startsWith("/storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
+
       return `${baseUrl}${imagePath}`;
     }
 
-    // If it contains 'storage/', use the full URL
+    // storage/filename.jpg
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
+
       return `${baseUrl}/${imagePath}`;
     }
 
-    // Fallback: return as is
     return imagePath;
   };
 

@@ -51,12 +51,24 @@ export default function BlogStats({ data }) {
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
 
-    // If already a full URL
-    if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    // Full URL
+    if (
+      imagePath.startsWith("http://") ||
+      imagePath.startsWith("https://")
+    ) {
+      // Convert localhost backend image URL to live backend URL
+      if (imagePath.includes("localhost")) {
+        return imagePath.replace(
+          "http://localhost/redspider/public",
+          "https://redspider.rsworkspace.net/admin/public"
+        );
+      }
+
+      // Keep external URLs unchanged
       return imagePath;
     }
 
-    // If it's a storage path
+    // /storage/filename.jpg or storage/filename.jpg
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
