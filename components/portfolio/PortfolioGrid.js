@@ -15,20 +15,26 @@ export default function PortfolioGrid() {
       try {
         const data = await fetchAllGalleries();
 
-        // 🔥 API data ko projects format me map karo
-        const dynamicProjects = data.map((gallery) => ({
-          id: gallery.id,
-          title: gallery.name,
-          category: gallery.description
-            ? gallery.description.replace(/<[^>]*>/g, "")
-            : "Portfolio",
-          // ✅ IMAGE PATH FIX - /storage/ prefix add karo
-          image: gallery.image
-            ? `/storage/${gallery.image}`
-            : "/assets/img/placeholder.jpg",
-          link: `/galleries/${gallery.slug}`,
-          filter: "filter-websites",
-        }));
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
+        const ASSET_URL = API_URL.replace("/api/v1", "").replace(/\/$/, "");
+
+        const dynamicProjects = data.map((gallery) => {
+          const imageUrl = gallery.image
+            ? `${ASSET_URL}/storage/${gallery.image}`
+            : null;
+
+          return {
+            id: gallery.id,
+            title: gallery.name,
+            category: gallery.description
+              ? gallery.description.replace(/<[^>]*>/g, "")
+              : "Portfolio",
+            image: imageUrl,
+            // 🔥 YAHAN CHANGE KIYA - project_url use karo
+            link: gallery.project_url || `/galleries/${gallery.slug}`,
+            filter: "filter-websites",
+          };
+        });
 
         setGalleries(dynamicProjects);
       } catch (error) {
@@ -155,13 +161,13 @@ export default function PortfolioGrid() {
                     className="img-fluid"
                     alt={project.title}
                     style={{
-                      width: "100%",
-                      height: "250px",
+                      
                       objectFit: "cover",
                     }}
                     loading="lazy"
                     onError={(e) => {
-                      e.target.src = "/assets/img/placeholder.jpg";
+                      console.error("IMAGE LOAD FAILED:", e.currentTarget.src);
+                      e.currentTarget.onerror = null;
                     }}
                   />
                   <div className="portfolio-info">

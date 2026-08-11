@@ -2,15 +2,23 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { fetchFeaturedServices } from "../../lib/api";
 
-export default function Services() {
+export default function Services({ data }) {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Get title and description from API data or use defaults
+  const servicesTitle =
+    data?.services_title || "Professional Web Design Dubai Company";
+  const servicesDescription =
+    data?.services_description ||
+    "As a Best Web Design Company in Dubai, we focus on quality, innovation, and speed. RedSpider Web & Art Design is the best Dubai Web Design & Development Company. We specialize in creating websites Design, doing SEO, developing PHP Web Application, custom CMS & CRM solutions, mobile apps, and Ecommerce Web Design, Shopify Store Design & Development as well as Graphic Designing and branding services including PHP Developer Dubai. We are a trusted web design Dubai company that focuses on creating modern and user-friendly websites.";
+  const servicesLimit = data?.services_limit || 6;
 
   useEffect(() => {
     const loadServices = async () => {
       try {
-        const data = await fetchFeaturedServices(6);
-        setServices(data);
+        const fetchedServices = await fetchFeaturedServices(servicesLimit);
+        setServices(fetchedServices);
       } catch (error) {
         console.error("Error fetching services:", error);
         setServices([]);
@@ -19,7 +27,7 @@ export default function Services() {
       }
     };
     loadServices();
-  }, []);
+  }, [servicesLimit]);
 
   if (loading) {
     return (
@@ -41,6 +49,16 @@ export default function Services() {
     );
   }
 
+  // Fallback icons for services
+  const serviceIcons = [
+    "bi-code-slash",
+    "bi-laptop",
+    "bi-phone",
+    "bi-cart-check",
+    "bi-palette",
+    "bi-graph-up-arrow",
+  ];
+
   return (
     <section id="services" className="services section pt-3">
       {/* Section Title */}
@@ -49,19 +67,7 @@ export default function Services() {
         data-aos="fade-up"
       >
         <h1 className="rs-process-title mb-4 text-start text-center mt-4">
-          Professional{" "}
-          <span className="rs-process-highlight">
-            Web Design Dubai Company{" "}
-            <svg
-              className="rs-process-underline"
-              viewBox="0 0 320 22"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14"></path>
-            </svg>
-          </span>
+          {servicesTitle}
         </h1>
       </div>
 
@@ -69,39 +75,7 @@ export default function Services() {
       <div className="container section-title mb-4" data-aos="fade-up">
         <div className="row">
           <div className="col-12">
-            <p className="mb-4">
-              As a Best Web Design Company in Dubai, we focus on quality,
-              innovation, and speed. RedSpider Web &amp; Art Design is the best
-              Dubai Web Design &amp; Development Company. We specialize in
-              creating websites Design, doing{" "}
-              <a
-                href="https://www.redspider.ae/service/seo-agency-dubai/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                SEO
-              </a>
-              , developing PHP Web Application, custom CMS &amp; CRM solutions,{" "}
-              <a
-                href="https://www.redspider.ae/service/mobile-app-development/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                mobile apps
-              </a>
-              , and Ecommerce Web Design, Shopify Store Design &amp; Development
-              as well as{" "}
-              <a
-                href="https://www.redspider.ae/service/graphic-design-company-dubai/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Graphic Designing
-              </a>{" "}
-              and branding services including PHP Developer Dubai. We are a
-              trusted web design Dubai company that focuses on creating modern
-              and user-friendly websites.
-            </p>
+            <p className="mb-4">{servicesDescription}</p>
           </div>
         </div>
       </div>
@@ -119,7 +93,10 @@ export default function Services() {
               >
                 <div className="rs-service-card position-relative">
                   <div className="rs-service-icon">
-                    <i className="bi bi-code-slash" aria-hidden="true"></i>
+                    <i
+                      className={serviceIcons[index % serviceIcons.length]}
+                      aria-hidden="true"
+                    ></i>
                   </div>
                   <h3>{service.name}</h3>
                   <p>{service.description}</p>

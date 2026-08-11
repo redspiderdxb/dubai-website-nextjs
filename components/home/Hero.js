@@ -1,4 +1,108 @@
-export default function Hero() {
+// components/home/Hero.js
+import { useState, useEffect } from "react";
+
+export default function Hero({ data }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Get slides from API data or use fallback
+  const slides =
+    data?.hero_slides?.length > 0
+      ? data.hero_slides
+      : [
+          {
+            title: "Unique. Interactive. Creative",
+            subtitle: "We Create Experiences",
+            description:
+              "RedSpider is a top-rated Web Design Company in Dubai offering expert Web Design Dubai and Web Development Company services to grow your business.",
+            image:
+              "https://www.redspider.ae/wp-content/uploads/2026/07/Dubai-Web-Design.webp",
+            button_text: "View Portfolio",
+            button_link: "#portfolio",
+          },
+          {
+            title: "Ecommerce & Custom Solutions",
+            subtitle: "Web Design & Development Company Dubai",
+            description:
+              "Corporate identity, digital consultancy and custom websites designed to strengthen your business presence.",
+            image:
+              "https://www.redspider.ae/wp-content/uploads/2026/06/Dubai-Web-Development-Company.jpg",
+            button_text: "View Portfolio",
+            button_link: "#portfolio",
+          },
+          {
+            title: "Company Branding",
+            subtitle: "Improve Your",
+            description:
+              "With our artistic and skilled web design team, your brand receives a professional digital presence built to make an impact.",
+            image:
+              "https://www.redspider.ae/wp-content/uploads/2026/07/Web-Design-Dubai.webp",
+            button_text: "View Portfolio",
+            button_link: "#portfolio",
+          },
+          {
+            title: "Designed for Business Growth",
+            subtitle: "Creative Digital Solutions",
+            description:
+              "Responsive, user-focused websites that combine creative design, reliable development and measurable performance.",
+            image:
+              "https://www.redspider.ae/wp-content/uploads/2026/07/website-design-company.webp",
+            button_text: "View Portfolio",
+            button_link: "#portfolio",
+          },
+        ];
+
+  // Auto-play carousel
+  useEffect(() => {
+    if (slides.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % slides.length);
+    }, 6500);
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  // Helper function to get image URL
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return null;
+
+    // If it's already a full URL (starts with http or https)
+    if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+      return imagePath;
+    }
+
+    // If it starts with /storage/, use the full URL
+    if (imagePath.startsWith("/storage/")) {
+      const baseUrl =
+        process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
+        "http://localhost/redspider/public";
+      return `${baseUrl}${imagePath}`;
+    }
+
+    // If it contains 'storage/', use the full URL
+    if (imagePath.includes("storage/")) {
+      const baseUrl =
+        process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
+        "http://localhost/redspider/public";
+      return `${baseUrl}/${imagePath}`;
+    }
+
+    // Fallback: return as is
+    return imagePath;
+  };
+
+  const goToSlide = (index) => {
+    setActiveIndex(index);
+  };
+
+  const goToPrev = () => {
+    setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const goToNext = () => {
+    setActiveIndex((prev) => (prev + 1) % slides.length);
+  };
+
   return (
     <section className="rs-hero-slider">
       <div
@@ -11,246 +115,83 @@ export default function Hero() {
       >
         {/* Indicators */}
         <div className="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#rsHeroCarousel"
-            data-bs-slide-to="0"
-            className="active"
-            aria-current="true"
-            aria-label="Slide 1 - Unique Interactive Creative"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#rsHeroCarousel"
-            data-bs-slide-to="1"
-            aria-label="Slide 2 - Ecommerce Custom Solutions"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#rsHeroCarousel"
-            data-bs-slide-to="2"
-            aria-label="Slide 3 - Company Branding"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#rsHeroCarousel"
-            data-bs-slide-to="3"
-            aria-label="Slide 4 - Designed for Business Growth"
-          ></button>
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              data-bs-target="#rsHeroCarousel"
+              data-bs-slide-to={index}
+              className={index === activeIndex ? "active" : ""}
+              aria-current={index === activeIndex ? "true" : undefined}
+              aria-label={`Slide ${index + 1}`}
+              onClick={() => goToSlide(index)}
+            ></button>
+          ))}
         </div>
 
         <div className="carousel-inner">
-          {/* Slide 1 */}
-          <div className="carousel-item active">
+          {slides.map((slide, index) => (
             <div
-              className="rs-slide"
-              style={{
-                backgroundImage:
-                  "url('https://www.redspider.ae/wp-content/uploads/2026/07/Dubai-Web-Design.webp')",
-              }}
-              role="img"
-              aria-label="Dubai Web Design hero background"
+              key={index}
+              className={`carousel-item ${index === activeIndex ? "active" : ""}`}
             >
-              <div className="rs-slide-content">
-                <p className="rs-slide-kicker">We Create Experiences</p>
-                <h1 className="rs-slide-title">
-                  Unique. Interactive. Creative
-                </h1>
-                <p className="rs-slide-description">
-                  RedSpider is a top-rated Web Design Company in Dubai offering
-                  expert Web Design Dubai and Web Development Company services
-                  to grow your business.
-                </p>
-                <a className="rs-slide-button" href="#portfolio">
-                  View Portfolio
-                </a>
-                <div className="rs-review-box">
-                  <div className="rs-review-top">
-                    <span className="rs-google-word" aria-hidden="true">
-                      <span className="rs-blue">G</span>
-                      <span className="rs-red">o</span>
-                      <span className="rs-yellow">o</span>
-                      <span className="rs-blue">g</span>
-                      <span className="rs-green">l</span>
-                      <span className="rs-red">e</span>
-                    </span>
-                    <span className="rs-stars" aria-hidden="true">
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                    </span>
+              <div
+                className="rs-slide"
+                style={{
+                  backgroundImage: `url(${getImageUrl(slide.image)})`,
+                }}
+                role="img"
+                aria-label={`Hero slide ${index + 1}`}
+              >
+                <div className="rs-slide-content">
+                  {slide.subtitle && (
+                    <p className="rs-slide-kicker">{slide.subtitle}</p>
+                  )}
+                  {slide.title && (
+                    <h1 className="rs-slide-title">{slide.title}</h1>
+                  )}
+                  {slide.description && (
+                    <p className="rs-slide-description">{slide.description}</p>
+                  )}
+                  {slide.button_text && (
+                    <a
+                      className="rs-slide-button"
+                      href={slide.button_link || "#portfolio"}
+                    >
+                      {slide.button_text}
+                    </a>
+                  )}
+                  <div className="rs-review-box">
+                    <div className="rs-review-top">
+                      <span className="rs-google-word" aria-hidden="true">
+                        <span className="rs-blue">G</span>
+                        <span className="rs-red">o</span>
+                        <span className="rs-yellow">o</span>
+                        <span className="rs-blue">g</span>
+                        <span className="rs-green">l</span>
+                        <span className="rs-red">e</span>
+                      </span>
+                      <span className="rs-stars" aria-hidden="true">
+                        <i className="bi bi-star-fill" aria-hidden="true"></i>
+                        <i className="bi bi-star-fill" aria-hidden="true"></i>
+                        <i className="bi bi-star-fill" aria-hidden="true"></i>
+                        <i className="bi bi-star-fill" aria-hidden="true"></i>
+                        <i className="bi bi-star-fill" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <p className="rs-review-text">
+                      RedSpider is rated 4.9 stars - based on 100+ reviews in
+                      Google Business listing.
+                    </p>
                   </div>
-                  <p className="rs-review-text">
-                    RedSpider is rated 4.9 stars - based on 100+ reviews in
-                    Google Business listing.
-                  </p>
                 </div>
+                <span className="rs-slide-count" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")} /{" "}
+                  {String(slides.length).padStart(2, "0")}
+                </span>
               </div>
-              <span className="rs-slide-count" aria-hidden="true">
-                01 / 04
-              </span>
             </div>
-          </div>
-
-          {/* Slide 2 */}
-          <div className="carousel-item">
-            <div
-              className="rs-slide"
-              style={{
-                backgroundImage:
-                  "url('https://www.redspider.ae/wp-content/uploads/2026/06/Dubai-Web-Development-Company.jpg')",
-              }}
-              role="img"
-              aria-label="Dubai Web Development Company hero background"
-            >
-              <div className="rs-slide-content">
-                <p className="rs-slide-kicker">
-                  Web Design &amp; Development Company Dubai
-                </p>
-                <h2 className="rs-slide-title">
-                  Ecommerce &amp; Custom Solutions
-                </h2>
-                <p className="rs-slide-description">
-                  Corporate identity, digital consultancy and custom websites
-                  designed to strengthen your business presence.
-                </p>
-                <a className="rs-slide-button" href="#portfolio">
-                  View Portfolio
-                </a>
-                <div className="rs-review-box">
-                  <div className="rs-review-top">
-                    <span className="rs-google-word" aria-hidden="true">
-                      <span className="rs-blue">G</span>
-                      <span className="rs-red">o</span>
-                      <span className="rs-yellow">o</span>
-                      <span className="rs-blue">g</span>
-                      <span className="rs-green">l</span>
-                      <span className="rs-red">e</span>
-                    </span>
-                    <span className="rs-stars" aria-hidden="true">
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                    </span>
-                  </div>
-                  <p className="rs-review-text">
-                    RedSpider is rated 4.9 stars - based on 100+ reviews in
-                    Google Business listing.
-                  </p>
-                </div>
-              </div>
-              <span className="rs-slide-count" aria-hidden="true">
-                02 / 04
-              </span>
-            </div>
-          </div>
-
-          {/* Slide 3 */}
-          <div className="carousel-item">
-            <div
-              className="rs-slide"
-              style={{
-                backgroundImage:
-                  "url('https://www.redspider.ae/wp-content/uploads/2026/07/Web-Design-Dubai.webp')",
-              }}
-              role="img"
-              aria-label="Web Design Dubai hero background"
-            >
-              <div className="rs-slide-content">
-                <p className="rs-slide-kicker">Improve Your</p>
-                <h2 className="rs-slide-title">Company Branding</h2>
-                <p className="rs-slide-description">
-                  With our artistic and skilled web design team, your brand
-                  receives a professional digital presence built to make an
-                  impact.
-                </p>
-                <a className="rs-slide-button" href="#portfolio">
-                  View Portfolio
-                </a>
-                <div className="rs-review-box">
-                  <div className="rs-review-top">
-                    <span className="rs-google-word" aria-hidden="true">
-                      <span className="rs-blue">G</span>
-                      <span className="rs-red">o</span>
-                      <span className="rs-yellow">o</span>
-                      <span className="rs-blue">g</span>
-                      <span className="rs-green">l</span>
-                      <span className="rs-red">e</span>
-                    </span>
-                    <span className="rs-stars" aria-hidden="true">
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                    </span>
-                  </div>
-                  <p className="rs-review-text">
-                    RedSpider is rated 4.9 stars - based on 100+ reviews in
-                    Google Business listing.
-                  </p>
-                </div>
-              </div>
-              <span className="rs-slide-count" aria-hidden="true">
-                03 / 04
-              </span>
-            </div>
-          </div>
-
-          {/* Slide 4 */}
-          <div className="carousel-item">
-            <div
-              className="rs-slide"
-              style={{
-                backgroundImage:
-                  "url('https://www.redspider.ae/wp-content/uploads/2026/07/website-design-company.webp')",
-              }}
-              role="img"
-              aria-label="Website Design Company hero background"
-            >
-              <div className="rs-slide-content">
-                <p className="rs-slide-kicker">Creative Digital Solutions</p>
-                <h2 className="rs-slide-title">Designed for Business Growth</h2>
-                <p className="rs-slide-description">
-                  Responsive, user-focused websites that combine creative
-                  design, reliable development and measurable performance.
-                </p>
-                <a className="rs-slide-button" href="#portfolio">
-                  View Portfolio
-                </a>
-                <div className="rs-review-box">
-                  <div className="rs-review-top">
-                    <span className="rs-google-word" aria-hidden="true">
-                      <span className="rs-blue">G</span>
-                      <span className="rs-red">o</span>
-                      <span className="rs-yellow">o</span>
-                      <span className="rs-blue">g</span>
-                      <span className="rs-green">l</span>
-                      <span className="rs-red">e</span>
-                    </span>
-                    <span className="rs-stars" aria-hidden="true">
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      <i className="bi bi-star-fill" aria-hidden="true"></i>
-                    </span>
-                  </div>
-                  <p className="rs-review-text">
-                    RedSpider is rated 4.9 stars - based on 100+ reviews in
-                    Google Business listing.
-                  </p>
-                </div>
-              </div>
-              <span className="rs-slide-count" aria-hidden="true">
-                04 / 04
-              </span>
-            </div>
-          </div>
+          ))}
         </div>
 
         <button
@@ -259,6 +200,7 @@ export default function Hero() {
           data-bs-target="#rsHeroCarousel"
           data-bs-slide="prev"
           aria-label="Previous slide"
+          onClick={goToPrev}
         >
           <span
             className="carousel-control-prev-icon"
@@ -271,6 +213,7 @@ export default function Hero() {
           data-bs-target="#rsHeroCarousel"
           data-bs-slide="next"
           aria-label="Next slide"
+          onClick={goToNext}
         >
           <span
             className="carousel-control-next-icon"

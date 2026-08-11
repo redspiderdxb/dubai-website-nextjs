@@ -1,8 +1,24 @@
+"use client";
+
+import { useState } from "react";
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function HostingTemplate({ data }) {
   if (!data) return <div className="text-center py-5">Loading...</div>;
+
+  // States for accordions
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeProcess, setActiveProcess] = useState(0);
+
+  // Handlers
+  const handleAccordionClick = (index) => {
+    setActiveIndex(index === activeIndex ? -1 : index);
+  };
+
+  const handleProcessClick = (index) => {
+    setActiveProcess(index === activeProcess ? -1 : index);
+  };
 
   // Static - Will be replaced by backend
   const hostingBenefits = [
@@ -92,10 +108,22 @@ export default function HostingTemplate({ data }) {
   ];
 
   const cmsPlatforms = [
-    { icon: "wordpress", name: "WordPress" },
-    { icon: "magento", name: "Magento" },
-    { icon: "joomla", name: "Joomla" },
-    { icon: "drupal", name: "Drupal" },
+    {
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg",
+      name: "WordPress",
+    },
+    {
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/magento/magento-original.svg",
+      name: "Magento",
+    },
+    {
+      icon: "https://cdn.iconscout.com/icon/free/png-512/free-joomla-logo-icon-download-in-svg-png-gif-file-formats--cms-company-brand-vol-4-pack-logos-icons-2945022.png?f=webp&w=256",
+      name: "Joomla",
+    },
+    {
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/drupal/drupal-original.svg",
+      name: "Drupal",
+    },
   ];
 
   const migrationServices = [
@@ -166,7 +194,9 @@ export default function HostingTemplate({ data }) {
             <h2
               className="rs-title-effect rs-title-line-slide mb-4"
               data-lines="Domain Registration in Dubai, UAE"
-            ></h2>
+            >
+              Domain Registration in Dubai, UAE
+            </h2>
             <p className="rs-domain-registration__text">
               Your domain is your digital identity and this is how customers
               remember you. RedSpider is the perfect solution for registering
@@ -228,7 +258,9 @@ export default function HostingTemplate({ data }) {
               <h2
                 className="rs-title-effect rs-title-word-rise fs-2 mb-4"
                 data-title="Web Hosting Designed for UAE Businesses"
-              ></h2>
+              >
+                Web Hosting Designed for UAE Businesses
+              </h2>
               <p className="rs-domain-registration__services-text">
                 We are a company based in Dubai and know the needs of businesses
                 here better than anyone. We have a team of professionals that
@@ -343,7 +375,9 @@ export default function HostingTemplate({ data }) {
                 <h2
                   className="rs-title-effect rs-title-letter-flip fs-1 mb-3"
                   data-title="Our Web Hosting Solutions"
-                ></h2>
+                >
+                  Our Web Hosting Solutions
+                </h2>
                 <p>
                   Select the hosting environment that will suit your business.
                 </p>
@@ -386,22 +420,15 @@ export default function HostingTemplate({ data }) {
       </section>
 
       {/* Why Choose RedSpider */}
-      <section className="archidex-accordion-sec dark-cs-bg dark-background dev-before">
-        <div className="archidex-bg-shape"></div>
-        <div
-          className="container rs-container-reveal"
-          style={{ maxWidth: "1550px" }}
-        >
-          <div className="rs-container-reveal-inner">
-            <div className="row g-5 align-items-start justify-content-between">
-              <div className="col-lg-5">
-                <h2 className="rs-main-title text-white fw-bold">
-                  Why Choose RedSpider?
-                </h2>
-                <div
-                  className="accordion rs-studio-list"
-                  id={`studio-${data.id}`}
-                >
+      <section className="kk-why-section">
+        <div className="kk-why-container" style={{ maxWidth: "1550px" }}>
+          <div className="kk-why-inner">
+            <div className="kk-why-grid">
+              {/* LEFT COLUMN */}
+              <div className="kk-why-left">
+                <h2 className="kk-why-title">Why Choose RedSpider?</h2>
+
+                <div className="kk-accordion-list">
                   {[
                     {
                       title: "Local UAE Presence",
@@ -428,50 +455,50 @@ export default function HostingTemplate({ data }) {
                       desc: "Our hosting experts are available 24 hours a day to assist with technical problems, website migrations, account administration and general support.",
                     },
                   ].map((item, index) => (
-                    <div className="accordion-item rs-studio-item" key={index}>
-                      <h3 className="accordion-header">
-                        <button
-                          className={`rs-studio-btn ${index === 0 ? "" : "collapsed"}`}
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target={`#studio-${data.id}-${index}`}
-                          aria-expanded={index === 0 ? "true" : "false"}
-                        >
-                          <span className="rs-studio-symbol">
-                            {index === 0 ? "−" : "+"}
-                          </span>
-                          <span>{item.title}</span>
-                        </button>
-                      </h3>
-                      <div
-                        id={`studio-${data.id}-${index}`}
-                        className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
-                        data-bs-parent={`#studio-${data.id}`}
+                    <div className="kk-accordion-item" key={index}>
+                      <button
+                        className={`kk-accordion-btn ${activeIndex === index ? "kk-active" : ""}`}
+                        type="button"
+                        onClick={() => handleAccordionClick(index)}
+                        aria-expanded={activeIndex === index}
+                        aria-controls={`kk-content-${index}`}
                       >
-                        <div className="accordion-body rs-studio-body">
-                          {item.desc}
-                        </div>
+                        <span className="kk-accordion-symbol">
+                          {activeIndex === index ? "−" : "+"}
+                        </span>
+                        <span className="kk-accordion-label">{item.title}</span>
+                      </button>
+                      <div
+                        id={`kk-content-${index}`}
+                        className={`kk-accordion-content ${activeIndex === index ? "kk-open" : ""}`}
+                        role="region"
+                        aria-hidden={activeIndex !== index}
+                      >
+                        <div className="kk-accordion-body">{item.desc}</div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="letconnect mt-5">
-                  <span className="text-white">Know More About :</span>
-                  <div className="line"></div>
-                  <a href="#">Contact us</a>
+
+                <div className="kk-footer">
+                  <span className="kk-footer-text">Know More About :</span>
+                  <div className="kk-footer-line"></div>
+                  <a href="#" className="kk-footer-link">
+                    Contact us
+                  </a>
                 </div>
               </div>
-              <div className="col-lg-7 px-lg-5">
-                <div className="archidex-small-title mb-3 text-white mb-5 pb-5">
-                  <h6 className="text-white">
+
+              {/* RIGHT COLUMN */}
+              <div className="kk-why-right">
+                <div className="kk-right-header">
+                  <h6 className="kk-right-title">
                     Professional <br />
                     Website Design <br /> Services
                   </h6>
                 </div>
-                <div
-                  className="accordion archidex-accordion mt-4"
-                  id={`additional-${data.id}`}
-                >
+
+                <div className="kk-process-accordion">
                   {[
                     {
                       title: "Looking for a Website, Too?",
@@ -490,26 +517,29 @@ export default function HostingTemplate({ data }) {
                       desc: "Your image and visual identity create your first impression. RedSpider designs professional logos, brochures, company profiles, flyers and other marketing materials that help businesses stand out. We also offer high-quality printing services to companies across Dubai and the UAE.",
                     },
                   ].map((item, index) => (
-                    <div className="accordion-item" key={index}>
-                      <h2 className="accordion-header">
-                        <button
-                          className={`accordion-button ${index === 0 ? "" : "collapsed"}`}
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target={`#additional-${data.id}-${index}`}
-                          aria-expanded={index === 0 ? "true" : "false"}
-                        >
-                          <span className="arch-no">{index + 1}.</span>
-                          <span className="arch-name">{item.title}</span>
-                          <span className="arch-arrow">↗</span>
-                        </button>
-                      </h2>
-                      <div
-                        id={`additional-${data.id}-${index}`}
-                        className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
-                        data-bs-parent={`#additional-${data.id}`}
+                    <div className="kk-process-item" key={index}>
+                      <button
+                        className={`kk-process-btn ${activeProcess === index ? "kk-active" : ""}`}
+                        type="button"
+                        onClick={() => handleProcessClick(index)}
+                        aria-expanded={activeProcess === index}
+                        aria-controls={`kk-process-content-${index}`}
                       >
-                        <div className="accordion-body">{item.desc}</div>
+                        <span className="kk-process-number">{index + 1}.</span>
+                        <span className="kk-process-name">{item.title}</span>
+                        <span
+                          className={`kk-process-arrow ${activeProcess === index ? "kk-rotated" : ""}`}
+                        >
+                          ↗
+                        </span>
+                      </button>
+                      <div
+                        id={`kk-process-content-${index}`}
+                        className={`kk-process-content ${activeProcess === index ? "kk-open" : ""}`}
+                        role="region"
+                        aria-hidden={activeProcess !== index}
+                      >
+                        <div className="kk-process-body">{item.desc}</div>
                       </div>
                     </div>
                   ))}
@@ -531,7 +561,9 @@ export default function HostingTemplate({ data }) {
               <h2
                 className="rs-title-effect rs-title-word-rise fs-2 mb-4"
                 data-title="Free SSL Certificates & Advanced Security"
-              ></h2>
+              >
+                Free SSL Certificates & Advanced Security
+              </h2>
               <p className="rs-domain-registration__services-text">
                 Website security is crucial for protecting your business and
                 customer data. Most of our web hosting packages include a
@@ -657,47 +689,47 @@ export default function HostingTemplate({ data }) {
       </section>
 
       {/* Free Website Applications */}
-      <section
-        className="rs-ecommerce-platforms py-0 emailmark-camp"
-        id="ecommerce-platforms"
-      >
-        <div className="team-sticky">
-          <div className="title-wrap text-center">
-            <h2 className="title mb-4">
-              <span className="red">Free Website </span> Applications
+      <section className="ak-cms-section" id="ak-cms-platforms">
+        <div className="ak-cms-sticky">
+          <div className="ak-cms-title-wrap">
+            <h2 className="ak-cms-title">
+              <span className="ak-cms-red">Free Website </span>
+              Applications
             </h2>
-            <p className="rs-subtitl introline mb-5">
+
+            <p className="ak-cms-subtitle">
               Our one click application installer makes launching a Website very
               easy. Install popular content management system (CMS) platforms
               such as:
             </p>
           </div>
+
           <div
-            className="gallery"
+            className="ak-cms-gallery"
             aria-label="Content management system platforms"
           >
             {cmsPlatforms.map((platform, index) => (
-              <article className="card" key={index}>
-                <div className="card-content">
-                  <span className="card-number">
+              <article className="ak-cms-card" key={index}>
+                <div className="ak-cms-card-content">
+                  <span className="ak-cms-card-number">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <div className="platform-icon" aria-hidden="true">
+
+                  <div className="ak-cms-platform-icon" aria-hidden="true">
                     <img
-                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${platform.icon}/${platform.icon}-plain.svg`}
+                      src={platform.icon}
                       alt={platform.name}
-                      style={{ width: "60px" }}
+                      className="ak-cms-icon"
                     />
                   </div>
-                  <h3>{platform.name}</h3>
+
+                  <h3 className="ak-cms-platform-name">{platform.name}</h3>
                 </div>
               </article>
             ))}
           </div>
-          <p
-            className="fs-3 text-center py-5 fw-bold rs-main-title"
-            style={{ maxWidth: "960px", margin: "auto", lineHeight: "1.3" }}
-          >
+
+          <p className="ak-cms-bottom-text">
             Whether it is creating blogs, business websites, online stores, and
             custom web applications do it with no hassle. Just Install themes,
             plugins and edit content from a single dashboard.

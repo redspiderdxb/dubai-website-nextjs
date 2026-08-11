@@ -8,16 +8,19 @@ import About from "../components/home/About";
 import BlogStats from "../components/home/BlogStats";
 import FAQIndustries from "../components/home/FAQIndustries";
 import AgencyPackages from "../components/home/AgencyPackages";
+import { fetchHomepageData } from "../lib/api";
 
-export default function Home() {
-
+export default function Home({ homepageData }) {
+  // Fallback SEO if data is not available
   const seo = {
-    title: "Home | RedSpider",
+    title: homepageData?.seo_title || "Home | RedSpider",
     description:
+      homepageData?.seo_description ||
       "RedSpider is a leading Web Development & Digital Marketing Company.",
     keywords:
+      homepageData?.seo_keywords ||
       "Web Development, SEO, Digital Marketing, Software Development",
-    canonical: "https://www.redspider.com/",
+    canonical: homepageData?.canonical_url || "https://www.redspider.com/",
     image: "https://www.redspider.com/images/og-image.jpg",
   };
 
@@ -26,15 +29,31 @@ export default function Home() {
       <SEO {...seo} />
 
       <Layout>
-        <Hero />
-        <Services />
+        <Hero data={homepageData} />
+        <Services data={homepageData} />
         <QuoteForm />
         <Portfolio />
-        <About />
-        <BlogStats />
-        <FAQIndustries />
+        <About data={homepageData} />
+        <BlogStats data={homepageData} />
+        <FAQIndustries data={homepageData} />
         <AgencyPackages />
       </Layout>
     </>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const homepageData = await fetchHomepageData();
+    return {
+      props: { homepageData: homepageData || null },
+      revalidate: 60, // ISR - Regenerate every 60 seconds
+    };
+  } catch (error) {
+    console.error("Error fetching homepage data:", error);
+    return {
+      props: { homepageData: null },
+      revalidate: 60,
+    };
+  }
 }

@@ -1,6 +1,28 @@
 // components/contact/ContactInfoForm.js
 
-export default function ContactInfoForm() {
+export default function ContactInfoForm({ data }) {
+  // Get data from API or use fallback
+  const infoTitle = data?.info_title || "Contact Us";
+  const infoDescription =
+    data?.info_description ||
+    "RedSpider – Web & Art Design is looking forward to serving you soon. We hope to build a long term relationship with businesses. Feel free to contact us if you have any questions, and our customer care representatives will assist you right away.";
+  const address =
+    data?.address ||
+    "Sofitel, Burj Gate Tower- Office 1002-Sheikh Zayed Road, Downtown Dubai - Dubai. United Arab Emirates";
+  const businessHours = data?.business_hours || "Monday - Sunday, 8am - 8pm";
+  const phone1 = data?.phone_1 || "+971 55 5515 475";
+  const phone2 = data?.phone_2 || "+971 50 569 8733";
+  const email = data?.email || "info@redspider.ae";
+  const supportTitle = data?.support_title || "24/7 Support";
+  const satisfactionTitle = data?.satisfaction_title || "Customer Satisfaction";
+
+  const formTitle = data?.form_title || "Get In Touch";
+  const formButtonText = data?.form_button_text || "MAKE APPOINTMENT";
+  const formExtinfoText = data?.form_extinfo_text || "Or just Give us a call";
+  const formExtinfoPhone = data?.form_extinfo_phone || "+971 5555 15475";
+  const formExtinfoSmall =
+    data?.form_extinfo_small || "The Support Centre is available 24/7";
+
   return (
     <section
       id="hfaq-c"
@@ -19,15 +41,9 @@ export default function ContactInfoForm() {
             <div className="contact-info-left pe-lg-5">
               <div className="section-title text-start text-white mb-3">
                 <h2 className="text-red">
-                  <b>Contact Us</b>
+                  <b>{infoTitle}</b>
                 </h2>
-                <p>
-                  RedSpider – Web & Art Design is looking forward to serving you
-                  soon. We hope to build a long term relationship with
-                  businesses. Feel free to contact us if you have any questions,
-                  and our customer care representatives will assist you right
-                  away.
-                </p>
+                <p>{infoDescription}</p>
                 <hr />
 
                 <div className="d-flex align-items-start mt-4">
@@ -38,10 +54,7 @@ export default function ContactInfoForm() {
                     <h3 className="fs-6 text-body-emphasi text-white text-uppercase">
                       Location
                     </h3>
-                    <p>
-                      Sofitel, Burj Gate Tower- Office 1002-Sheikh Zayed Road,
-                      Downtown Dubai - Dubai. United Arab Emirates
-                    </p>
+                    <p>{address}</p>
                   </div>
                 </div>
 
@@ -53,7 +66,7 @@ export default function ContactInfoForm() {
                     <h3 className="fs-6 text-body-emphasi text-white text-uppercase">
                       BUSINESS HOURS
                     </h3>
-                    <p>Monday - Sunday, 8am - 8pm</p>
+                    <p>{businessHours}</p>
                   </div>
                 </div>
 
@@ -66,13 +79,19 @@ export default function ContactInfoForm() {
                       Call us
                     </h3>
                     <p>
-                      <a href="tel:+971555515475" className="text-white">
-                        +971 55 5515 475
+                      <a
+                        href={`tel:${phone1.replace(/\s/g, "")}`}
+                        className="text-white"
+                      >
+                        {phone1}
                       </a>
                     </p>
                     <p>
-                      <a href="tel:+971505698733" className="text-white">
-                        +971 50 569 8733
+                      <a
+                        href={`tel:${phone2.replace(/\s/g, "")}`}
+                        className="text-white"
+                      >
+                        {phone2}
                       </a>
                     </p>
                   </div>
@@ -87,8 +106,8 @@ export default function ContactInfoForm() {
                       Email
                     </h3>
                     <p>
-                      <a href="mailto:info@redspider.ae" className="text-white">
-                        info@redspider.ae
+                      <a href={`mailto:${email}`} className="text-white">
+                        {email}
                       </a>
                     </p>
                   </div>
@@ -103,9 +122,7 @@ export default function ContactInfoForm() {
                     <i className="bi bi-people fs-1" aria-hidden="true"></i>
                   </div>
                   <div>
-                    <h3 className="fs-5 text-body-emphasis">
-                      24/7 <br /> Support
-                    </h3>
+                    <h3 className="fs-5 text-body-emphasis">{supportTitle}</h3>
                   </div>
                 </div>
                 <div className="col d-flex align-items-center">
@@ -117,7 +134,7 @@ export default function ContactInfoForm() {
                   </div>
                   <div>
                     <h3 className="fs-5 text-body-emphasis">
-                      Customer Satisfaction
+                      {satisfactionTitle}
                     </h3>
                   </div>
                 </div>
@@ -135,13 +152,13 @@ export default function ContactInfoForm() {
           >
             <div className="form-touch">
               <div className="home-form container p-5">
-                <h3 className="text-center mb-5">Get In Touch</h3>
+                <h3 className="text-center mb-5">{formTitle}</h3>
                 <form>
                   <div className="row g-5">
                     <div className="col-md-6">
-                      <select 
-                        className="form-select" 
-                        required 
+                      <select
+                        className="form-select"
+                        required
                         defaultValue=""
                         aria-label="Select your country"
                       >
@@ -154,9 +171,9 @@ export default function ContactInfoForm() {
                       </select>
                     </div>
                     <div className="col-md-6">
-                      <select 
-                        className="form-select" 
-                        required 
+                      <select
+                        className="form-select"
+                        required
                         defaultValue=""
                         aria-label="Select the service you need"
                       >
@@ -209,18 +226,16 @@ export default function ContactInfoForm() {
                     </div>
                     <div className="col-12 text-center my-5">
                       <button type="submit" className="btn btn-light px-5">
-                        MAKE APPOINTMENT
+                        {formButtonText}
                       </button>
                     </div>
                   </div>
                 </form>
 
                 <div className="text-start mt-4 form-extinfo">
-                  <p className="mb-1">Or just Give us a call</p>
-                  <h4>+971 5555 15475</h4>
-                  <small className="fs-5 pt-3">
-                    The Support Centre is available 24/7
-                  </small>
+                  <p className="mb-1">{formExtinfoText}</p>
+                  <h4>{formExtinfoPhone}</h4>
+                  <small className="fs-5 pt-3">{formExtinfoSmall}</small>
                 </div>
               </div>
             </div>

@@ -15,14 +15,14 @@ import MobileAppTemplate from "../../components/templates/MobileAppTemplate";
 
 // 🔥 Template Component Map
 const TEMPLATE_COMPONENTS = {
-  'web-development': WebDevelopmentTemplate,
-  'logo-design': LogoDesignTemplate,
-  'brochure-design': BrochureDesignTemplate,
-  'graphic-design': GraphicDesignTemplate,
-  'ecommerce': EcommerceTemplate,
-  'email-marketing': EmailMarketingTemplate,
-  'web-hosting': HostingTemplate,
-  'mobile-app': MobileAppTemplate,
+  "web-development": WebDevelopmentTemplate,
+  "logo-design": LogoDesignTemplate,
+  "brochure-design": BrochureDesignTemplate,
+  "graphic-design": GraphicDesignTemplate,
+  ecommerce: EcommerceTemplate,
+  "email-marketing": EmailMarketingTemplate,
+  "web-hosting": HostingTemplate,
+  "mobile-app": MobileAppTemplate,
 };
 
 export default function ServiceDetail({ service }) {
@@ -64,16 +64,19 @@ export default function ServiceDetail({ service }) {
   }
 
   // 🔥 Get template component
-  const TemplateComponent = TEMPLATE_COMPONENTS[service.template] || WebDevelopmentTemplate;
+  const TemplateComponent =
+    TEMPLATE_COMPONENTS[service.template] || WebDevelopmentTemplate;
 
-  // 🔥 SEO Data
+  // 🔥 SEO Data - Now using service.seo_* fields from backend
   const seoData = {
-    title: service.name || "Services | RedSpider",
-    description: service.description || "",
-    keywords: service.keywords || "",
-    canonical: `https://www.redspider.ae/services/${service.slug}`,
+    title: service.seo_title || service.name || "Services | RedSpider",
+    description: service.seo_description || service.description || "",
+    keywords: service.seo_keywords || "",
+    canonical:
+      service.canonical_url ||
+      `https://www.redspider.ae/services/${service.slug}`,
     image: service.image
-      ? `https://www.redspider.ae/storage/${service.image}`
+      ? `${process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public"}/storage/${service.image}`
       : null,
     noIndex: false,
   };

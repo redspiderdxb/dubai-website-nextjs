@@ -186,7 +186,7 @@ export default function Portfolio() {
         {/* View Our Work Button */}
         <div className="container text-center mt-5">
           <a
-            href="about-us.html"
+            href="/portfolio"
             className="btn btn-animation btn-red d-inline-flex align-items-center mt-4"
           >
             <span className="btn-title">View Our Work</span>

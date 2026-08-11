@@ -1,32 +1,83 @@
-export default function BlogStats() {
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Understanding the Ongoing Costs of a Custom Real Estate Website",
-      image: "assets/img/blog/custom-real-estate-website.webp",
-      link: "https://www.redspider.ae/custom-real-estate-website-maintenance-costs/",
-    },
-    {
-      id: 2,
-      title: "Why Professional Website Design Matters for Businesses in Dubai",
-      image: "assets/img/blog/Professional-Website-Design.webp",
-      link: "https://www.redspider.ae/custom-real-estate-website-maintenance-costs/",
-    },
-  ];
+export default function BlogStats({ data }) {
+  // Get data from API or use fallback
+  const blogTitle = data?.blog_title || "From Our Blog";
+  const blogPosts =
+    data?.blog_posts?.length > 0
+      ? data.blog_posts
+      : [
+          {
+            id: 1,
+            title:
+              "Understanding the Ongoing Costs of a Custom Real Estate Website",
+            image: "assets/img/blog/custom-real-estate-website.webp",
+            link: "https://www.redspider.ae/custom-real-estate-website-maintenance-costs/",
+          },
+          {
+            id: 2,
+            title:
+              "Why Professional Website Design Matters for Businesses in Dubai",
+            image: "assets/img/blog/Professional-Website-Design.webp",
+            link: "https://www.redspider.ae/custom-real-estate-website-maintenance-costs/",
+          },
+        ];
 
-  const clientLogos = [
-    "1.png",
-    "2.png",
-    "3.png",
-    "4.png",
-    "5.png",
-    "6.png",
-    "7.png",
-    "8.png",
-    "9.png",
-    "10.png",
-    "11.png",
-  ];
+  const clientLogos =
+    data?.client_logos?.length > 0
+      ? data.client_logos
+      : [
+          "1.png",
+          "2.png",
+          "3.png",
+          "4.png",
+          "5.png",
+          "6.png",
+          "7.png",
+          "8.png",
+          "9.png",
+          "10.png",
+          "11.png",
+        ];
+
+  const stats =
+    data?.stats?.length > 0
+      ? data.stats
+      : [
+          { number: "500", label: "COMPLETED PROJECTS" },
+          { number: "100", label: "5 STAR REVIEWS" },
+          { number: "14", label: "YEARS OF EXCELLENCE" },
+        ];
+
+  // Helper function to get image URL
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return null;
+
+    // If already a full URL
+    if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+      return imagePath;
+    }
+
+    // If it's a storage path
+    if (imagePath.includes("storage/")) {
+      const baseUrl =
+        process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
+        "http://localhost/redspider/public";
+      const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+      return `${baseUrl}${cleanPath}`;
+    }
+
+    // If it's an asset path (assets/img/...)
+    if (imagePath.startsWith("assets/") || imagePath.startsWith("/assets/")) {
+      return imagePath;
+    }
+
+    // For client logos - check if it's just a filename
+    if (!imagePath.includes("/")) {
+      return `/assets/img/we-work/${imagePath}`;
+    }
+
+    // Fallback
+    return imagePath;
+  };
 
   return (
     <>
@@ -40,19 +91,19 @@ export default function BlogStats() {
             className="section-title text-center text-white mb-2 aos-init aos-animate"
             data-aos="fade-up"
           >
-            <div className="home-blog-title fw-normal">From Our Blog</div>
+            <div className="home-blog-title fw-normal">{blogTitle}</div>
           </div>
           <div className="row g-3">
             {blogPosts.map((post, index) => (
               <div
-                key={post.id}
+                key={post.id || index}
                 className="col-lg-6 aos-init aos-animate"
                 data-aos="fade-up"
               >
                 <div className="rs-blog-text-card">
                   <div className="blog-img">
                     <img
-                      src={post.image}
+                      src={getImageUrl(post.image)}
                       alt={post.title}
                       className="img-fluid"
                       loading="lazy"
@@ -78,57 +129,22 @@ export default function BlogStats() {
 
         <div className="container" style={{ maxWidth: "1320px" }}>
           <div className="rs-blog-stats row text-center">
-            <div className="col-4">
-              <div>
-                <span
-                  className="rs-blog-stat-number purecounter"
-                  data-purecounter-start="0"
-                  data-purecounter-end="500"
-                  data-purecounter-duration="0"
-                >
-                  500
-                </span>
-                <span className="rs-plus">+</span>
+            {stats.map((stat, index) => (
+              <div key={index} className="col-4">
+                <div>
+                  <span
+                    className="rs-blog-stat-number purecounter"
+                    data-purecounter-start="0"
+                    data-purecounter-end={parseInt(stat.number) || 0}
+                    data-purecounter-duration="0"
+                  >
+                    {stat.number}
+                  </span>
+                  <span className="rs-plus"></span>
+                </div>
+                <p>{stat.label}</p>
               </div>
-              <p>COMPLETED PROJECTS</p>
-            </div>
-            <div className="col-4">
-              <div>
-                <span
-                  className="rs-blog-stat-number purecounter"
-                  data-purecounter-start="0"
-                  data-purecounter-end="100"
-                  data-purecounter-duration="0"
-                >
-                  100
-                </span>
-                <span className="rs-plus">+</span>
-              </div>
-              <p>5 STAR REVIEWS</p>
-            </div>
-            <div className="col-4">
-              <div>
-                <span
-                  className="rs-blog-stat-number purecounter"
-                  data-purecounter-start="0"
-                  data-purecounter-end="14"
-                  data-purecounter-duration="0"
-                >
-                  14
-                </span>
-                <span className="rs-plus">+</span>
-              </div>
-              <p>YEARS OF EXCELLENCE</p>
-            </div>
-          </div>
-          <div className="rs-worked-with text-center d-none">
-            <div className="rs-worked-title">We've worked with</div>
-            <img
-              src="https://www.redspider.ae/wp-content/uploads/2024/05/Logo_White.png.webp"
-              alt="UAE Website designers"
-              className="img-fluid"
-              loading="lazy"
-            />
+            ))}
           </div>
         </div>
       </section>
@@ -154,7 +170,7 @@ export default function BlogStats() {
                 >
                   <div className="rs-logo-hover__item">
                     <img
-                      src={`assets/img/we-work/${logo}`}
+                      src={getImageUrl(logo)}
                       alt={`Client logo ${index + 1}`}
                       className="img-fluid"
                       loading="lazy"
@@ -176,7 +192,7 @@ export default function BlogStats() {
             <div className="col-12">
               <div className="g-review-wrap text-center" data-aos="fade-up">
                 <img
-                  src="assets/img/reviewimg.png"
+                  src={getImageUrl("assets/img/reviewimg.png")}
                   alt="Google reviews and client testimonials"
                   className="img-fluid"
                   loading="lazy"
