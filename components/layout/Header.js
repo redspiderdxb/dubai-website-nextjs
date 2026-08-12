@@ -13,16 +13,34 @@ export default function Header() {
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
   const headerRef = useRef(null);
 
+  // 🔥 Products to show in Services dropdown (with Products URL)
+  const extraServices = [
+    {
+      name: "Real Estate Web Design Company",
+      path: "/products/real-estate-web-design-company",
+    },
+    { name: "SMS Marketing UAE", path: "/products/sms-marketing-uae" },
+  ];
+
   // 🔥 Fetch services from API
   useEffect(() => {
     const loadServices = async () => {
       try {
         const response = await fetchAllServices();
         const servicesData = response?.data || [];
-        setServices(servicesData);
+
+        // 🔥 Convert services to nav items
+        const serviceItems = servicesData.map((service) => ({
+          name: service.name,
+          path: `/services/${service.slug}`,
+        }));
+
+        // 🔥 Add extra services with Products URL
+        const allServices = [...serviceItems, ...extraServices];
+        setServices(allServices);
       } catch (error) {
         console.error("Error fetching services:", error);
-        setServices([]);
+        setServices(extraServices);
       } finally {
         setIsLoadingServices(false);
       }
@@ -30,12 +48,22 @@ export default function Header() {
     loadServices();
   }, []);
 
-  // 🔥 Fetch products from API
+  // 🔥 Fetch products from API - Filter out the moved ones
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const productsData = await fetchAllProducts();
-        setProducts(productsData);
+
+        // 🔥 Filter: Remove products that are now in Services
+        const productNamesToRemove = [
+          "Real Estate Web Design Company",
+          "SMS Marketing UAE",
+        ];
+        const filteredProducts = productsData.filter(
+          (product) => !productNamesToRemove.includes(product.name),
+        );
+
+        setProducts(filteredProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
         setProducts([]);
@@ -58,7 +86,6 @@ export default function Header() {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (headerRef.current && !headerRef.current.contains(event.target)) {
@@ -69,7 +96,6 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 992) {
@@ -80,17 +106,13 @@ export default function Header() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 🔥 Nav items - Services & Products dynamic hain
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
     {
       name: "Services",
       type: "dropdown",
-      items: services.map((service) => ({
-        name: service.name,
-        path: `/services/${service.slug}`,
-      })),
+      items: services,
       isLoading: isLoadingServices,
     },
     { name: "Our Portfolio", path: "/portfolio" },
@@ -110,7 +132,6 @@ export default function Header() {
     <header id="header" className="rs-main-header" ref={headerRef}>
       <div className="rs-header-inner">
         <div className="rs-top-row">
-          {/* Logo */}
           <Link href="/" className="rs-logo" aria-label="RedSpider Home">
             <Image
               src="/assets/img/logo.png"
@@ -122,7 +143,6 @@ export default function Header() {
           </Link>
 
           <div className="rs-nav-wrap">
-            {/* Navigation */}
             <nav
               id="navmenu"
               className={`rs-navmenu ${isMobileOpen ? "rs-mobile-open" : ""}`}
@@ -131,7 +151,6 @@ export default function Header() {
               <ul>
                 {navItems.map((item, index) => {
                   if (item.type === "dropdown") {
-                    // 🔥 Loading state - Dropdown loading
                     if (item.isLoading) {
                       return (
                         <li key={index} className="dropdown">
@@ -205,7 +224,6 @@ export default function Header() {
               </ul>
             </nav>
 
-            {/* Mobile Toggle Button */}
             <button
               type="button"
               className={`rs-mobile-toggle ${isMobileOpen ? "rs-mobile-open" : ""}`}
@@ -218,7 +236,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Bottom Row — Call & Social */}
         <div className="rs-bottom-row">
           <div className="rs-call-now">
             <i className="bi bi-telephone-fill"></i>
