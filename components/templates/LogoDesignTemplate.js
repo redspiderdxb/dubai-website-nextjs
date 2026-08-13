@@ -20,31 +20,101 @@ export default function LogoDesignTemplate({ data }) {
     hero_description,
     hero_image,
     hero_background,
-    intro_small_heading,
-    intro_main_heading,
-    intro_description,
-    intro_image,
+    intro_small_heading = "Logo Design · Dubai",
+    intro_main_heading = "",
+    intro_description = "Your logo is the face of your business. In Dubai's competitive market, a professional logo builds trust, credibility, and brand recognition. We create logos that reflect your business values, communicate clearly with your audience, and create a lasting impression.",
+    intro_image = "",
     cta_title,
     cta_description,
     cta_button_text,
     cta_button_link,
     cta_background,
+
     // Repeater Data
+    features = [],
+    benefits = [],
     logoTypes = [],
     logoServices = [],
     logoFormats = [],
     industriesLogo = [],
     logoPackages = [],
     processes = [],
+    technologies = [],
     faqs = [],
     gallery = [],
+
+    // ============================================
+    // 🆕 NEW - FRONTEND DYNAMIC SETTINGS
+    // ============================================
+
+    // Design & Layout
+    layout_style = "grid",
+    columns_count = 3,
+    primary_color = "#FF6B35",
+    secondary_color = "#0047AB",
+    background_color = "#F8F9FA",
+    text_color = "#1A1A2E",
+    button_color = "#FF6B35",
+    button_text_color = "#FFFFFF",
+    section_padding = "large",
+
+    // Section Visibility
+    show_hero = true,
+    show_intro = true,
+    show_features = true,
+    show_benefits = true,
+    show_processes = true,
+    show_technologies = true,
+    show_faqs = true,
+    show_gallery = true,
+    show_cta = true,
+
+    // Content Customization
+    hero_button_text = "Get Started",
+    hero_button_url = "/contact",
+    features_title = "What We Offer",
+    features_subtitle = "",
+    benefits_title = "Our Mission Is Design & Develop The Best Identity Around",
+    benefits_subtitle = "Your logo is the face of your business. In Dubai's competitive market, a professional logo builds trust, credibility, and brand recognition.",
+    processes_title = "Our Logo Design Process",
+    processes_subtitle = "",
+    technologies_title = "Types of Logo We Work",
+    technologies_subtitle = "We design logos suitable for",
+    faqs_title = "FAQ's",
+    faqs_subtitle = "",
+    gallery_title = "Our Gallery",
+    gallery_subtitle = "",
+    cta_subtitle = "",
+    cta_button_url = "/contact",
+
+    // Animation
+    animation_enabled = false,
+    animation_type = "fade",
+    animation_duration = "medium",
+
+    // Section Order
+    section_order = [
+      "hero",
+      "intro",
+      "features",
+      "benefits",
+      "processes",
+      "technologies",
+      "gallery",
+      "faqs",
+      "cta",
+    ],
+
+    // Custom Code
+    custom_css = "",
+    custom_js = "",
   } = data;
 
   // ============================================
-  // 📊 DYNAMIC DATA WITH STATIC FALLBACK
+  // 📌 FALLBACK DATA
   // ============================================
 
-  // 1. Logo Types - Dynamic from backend
+  // 1. Logo Types - Dynamic from backend or static fallback
   const logoTypesData =
     logoTypes.length > 0
       ? logoTypes
@@ -87,7 +157,6 @@ export default function LogoDesignTemplate({ data }) {
           },
         ];
 
-  // Icon mapping for logo types
   const logoTypeIcons = {
     "Wordmark Logos": "bi-type",
     "Lettermark Logos": "bi-fonts",
@@ -97,10 +166,10 @@ export default function LogoDesignTemplate({ data }) {
     "Minimal & Modern Logos": "bi-arrows-angle-expand",
   };
 
-  // 2. Services - Dynamic from backend
+  // 2. Services - Dynamic from features or static fallback
   const servicesData =
-    logoServices.length > 0
-      ? logoServices
+    features.length > 0
+      ? features
       : [
           {
             name: "Custom Logo Design",
@@ -129,7 +198,6 @@ export default function LogoDesignTemplate({ data }) {
           },
         ];
 
-  // Service icons mapping
   const serviceIcons = [
     "bi-vector-pen",
     "bi-grid-3x3-gap",
@@ -138,7 +206,7 @@ export default function LogoDesignTemplate({ data }) {
     "bi-journal-check",
   ];
 
-  // 3. Formats - Dynamic from backend
+  // 3. Formats - Dynamic from logoFormats or static fallback
   const formatsData =
     logoFormats.length > 0
       ? logoFormats
@@ -180,7 +248,6 @@ export default function LogoDesignTemplate({ data }) {
           },
         ];
 
-  // Format icons mapping
   const formatIcons = [
     "bi-file-earmark-image",
     "bi-image",
@@ -191,10 +258,10 @@ export default function LogoDesignTemplate({ data }) {
     "bi-palette",
   ];
 
-  // 4. Industries - Dynamic from backend
+  // 4. Industries - Dynamic from industriesLogo or static fallback
   const allIndustries =
     industriesLogo.length > 0
-      ? industriesLogo.map((item) => item.name)
+      ? industriesLogo.map((item) => item.title || item.name)
       : [
           "Construction & Engineering Firms",
           "Real Estate Companies",
@@ -210,12 +277,11 @@ export default function LogoDesignTemplate({ data }) {
           "Consulting Firms",
         ];
 
-  // Split industries for marquee
   const midPoint = Math.ceil(allIndustries.length / 2);
   const industriesRow1 = allIndustries.slice(0, midPoint);
   const industriesRow2 = allIndustries.slice(midPoint);
 
-  // 5. Packages - Dynamic from backend
+  // 5. Packages - Dynamic from logoPackages or static fallback
   const packagesData =
     logoPackages.length > 0
       ? logoPackages
@@ -242,7 +308,7 @@ export default function LogoDesignTemplate({ data }) {
           },
         ];
 
-  // 6. Process Steps - Dynamic from backend or static fallback
+  // 6. Process Steps - Dynamic from processes or static fallback
   const processData =
     processes.length > 0
       ? processes
@@ -274,7 +340,7 @@ export default function LogoDesignTemplate({ data }) {
           },
         ];
 
-  // 7. FAQ Data - Dynamic from backend or static fallback
+  // 7. FAQ Data - Dynamic from faqs or static fallback
   const faqData =
     faqs.length > 0
       ? faqs
@@ -351,518 +417,571 @@ export default function LogoDesignTemplate({ data }) {
     },
   ];
 
-  return (
-    <>
-      {/* Hero Section */}
-      <ServiceHero service={data} />
+  // Mission Points (Static)
+  const missionPoints = [
+    "Makes your business look established",
+    "Creates a strong first impression",
+    "Builds emotional connection",
+    "Helps customers remember your brand",
+    "Works across digital and print platforms",
+  ];
 
-      {/* What We Offer + Design Process */}
-      <section className="archidex-accordion-sec">
-        <div className="archidex-bg-shape"></div>
-        <div className="container" style={{ maxWidth: "1550px" }}>
-          <div className="archidex-top-line"></div>
-          <div className="row g-5 align-items-start justify-content-between">
-            <div className="col-lg-4">
-              <h2 className="archidex-title">
-                <span>What We </span>
-                Offer
-              </h2>
-              <ul className="archidex-list">
-                {servicesData.map((item, index) => (
-                  <li key={index}>
-                    <span className="archidex-list-icon">
-                      <i
-                        className={serviceIcons[index % serviceIcons.length]}
-                      ></i>
-                    </span>
-                    <span>{item.name}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="letconnect mt-5">
-                <span> Let's Connect : </span>
-                <div className="line"></div>
-                <a href="#"> Book A Call </a>
+  // ============================================
+  // 🎨 Dynamic Styles
+  // ============================================
+  const styles = {
+    "--primary-color": primary_color,
+    "--secondary-color": secondary_color,
+    "--background-color": background_color,
+    "--text-color": text_color,
+    "--button-color": button_color,
+    "--button-text-color": button_text_color,
+  };
+
+  // ============================================
+  // 📐 Section Order Mapping
+  // ============================================
+  const sectionMap = {
+    hero: {
+      component: <ServiceHero service={data} key="hero" />,
+      show: show_hero,
+    },
+    intro: {
+      component: (
+        <section key="intro" className="archidex-accordion-sec">
+          <div className="archidex-bg-shape"></div>
+          <div className="container" style={{ maxWidth: "1550px" }}>
+            <div className="archidex-top-line"></div>
+            <div className="row g-5 align-items-start justify-content-between">
+              <div className="col-lg-4">
+                <h2 className="archidex-title">{features_title}</h2>
+                <ul className="archidex-list">
+                  {servicesData.map((item, index) => (
+                    <li key={index}>
+                      <span className="archidex-list-icon">
+                        <i
+                          className={serviceIcons[index % serviceIcons.length]}
+                        ></i>
+                      </span>
+                      <span>{item.title || item.name}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="letconnect mt-5">
+                  <span> Let's Connect : </span>
+                  <div className="line"></div>
+                  <a href={cta_button_link || "#"}> Book A Call </a>
+                </div>
+              </div>
+              <div className="col-lg-6 px-lg-5">
+                <div className="archidex-small-title">
+                  <h6>{processes_title}</h6>
+                </div>
+                <div
+                  className="accordion archidex-accordion"
+                  id="archidexAccordion"
+                >
+                  {processData.map((item, index) => (
+                    <div className="accordion-item" key={item.id || index}>
+                      <h2 className="accordion-header">
+                        <button
+                          className={`accordion-button ${index === 0 ? "" : "collapsed"}`}
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#collapse${index}`}
+                          aria-expanded={index === 0 ? "true" : "false"}
+                        >
+                          <span className="arch-no">{String(index + 1)}.</span>
+                          <span className="arch-name">{item.title}</span>
+                          <span className="arch-arrow">↗</span>
+                        </button>
+                      </h2>
+                      <div
+                        id={`collapse${index}`}
+                        className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
+                        data-bs-parent="#archidexAccordion"
+                      >
+                        <div className="accordion-body">{item.description}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="col-md-2">
+                <div className="recieve-format">
+                  <h6 className="mb-4 fw-bold text-center">
+                    What You Will Receive
+                  </h6>
+                  <div className="rs-receive-stack-wrap">
+                    {formatsData.map((item, index) => (
+                      <div className="rs-receive-stack-item" key={index}>
+                        <span className="rs-stack-line"></span>
+                        <div className="rs-stack-icon">
+                          <i
+                            className={formatIcons[index % formatIcons.length]}
+                          ></i>
+                        </div>
+                        <h5>{item.title || item.name}</h5>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div className="col-lg-6 px-lg-5">
-              <div className="archidex-small-title">
-                <h6>
-                  Our Brochure
-                  <br />
-                  Design
-                  <br />
-                  Process
-                </h6>
-              </div>
-              <div
-                className="accordion archidex-accordion"
-                id="archidexAccordion"
-              >
-                {processData.map((item, index) => (
-                  <div className="accordion-item" key={index}>
-                    <h2 className="accordion-header">
-                      <button
-                        className={`accordion-button ${index === 0 ? "" : "collapsed"}`}
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#collapse${index}`}
-                        aria-expanded={index === 0 ? "true" : "false"}
-                      >
-                        <span className="arch-no">{String(index + 1)}.</span>
-                        <span className="arch-name">{item.title}</span>
-                        <span className="arch-arrow">↗</span>
-                      </button>
-                    </h2>
-                    <div
-                      id={`collapse${index}`}
-                      className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
-                      data-bs-parent="#archidexAccordion"
+          </div>
+        </section>
+      ),
+      show: show_features,
+    },
+    benefits: {
+      component: (
+        <section key="benefits" className="rs-specialization-sec">
+          <div
+            className="container rs-specialization-wrap"
+            style={{ maxWidth: "1320px" }}
+          >
+            <div className="row align-items-center g-5">
+              <div className="col-lg-5">
+                <h2 className="rs-main-title">{benefits_title}</h2>
+                <p>
+                  <small>{benefits_subtitle}</small>
+                </p>
+                <div className="rs-subtitle mt-4">A well-designed logo:</div>
+                <div className="rs-special-list">
+                  {missionPoints.map((point, index) => (
+                    <button
+                      className="rs-special-item"
+                      key={index}
+                      type="button"
                     >
-                      <div className="accordion-body">{item.description}</div>
+                      <span className="rs-num">
+                        {String(index + 1).padStart(2, "0")}.
+                      </span>
+                      <span>{point}</span>
+                      <span className="rs-icon">
+                        <i className="bi bi-arrow-up-right"></i>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="col-lg-7">
+                <div className="rs-image-area">
+                  <div className="rs-dot-pattern"></div>
+                  <div className="rs-main-image-box">
+                    {image ? (
+                      <img src={image} alt={name} />
+                    ) : (
+                      <img
+                        src="/assets/img/l3.jpg"
+                        alt="Specialization Preview"
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="letconnect mt-5">
+                  <span>Know More About :</span>
+                  <div className="line"></div>
+                  <a href="#">View Our Work</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ),
+      show: show_benefits,
+    },
+    processes: {
+      component: (
+        <section key="processes" className="work-process-sec">
+          <div className="container">
+            <div className="title-wrap text-center">
+              <span className="re-label">Logo Design Process</span>
+              <h3>How it Works</h3>
+            </div>
+            <div className="row g-4">
+              {workSteps.map((step, index) => (
+                <div className="col-lg-3 col-md-6" key={index}>
+                  <div className="work-card">
+                    <div className="work-card-inner">
+                      <div className="work-icon">
+                        <i className={step.icon}></i>
+                      </div>
+                      <h4>{step.title}</h4>
+                      <p>{step.desc}</p>
+                      <a href="#" className="work-link">
+                        Step {String(index + 1).padStart(2, "0")}{" "}
+                        <i className="bi bi-arrow-up-right"></i>
+                      </a>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-
-            <div className="col-md-2">
-              <div className="recieve-format">
-                <h6 className="mb-4 fw-bold text-center">
-                  What You Will Receive
-                </h6>
-                <div className="rs-receive-stack-wrap">
-                  {formatsData.map((item, index) => (
-                    <div className="rs-receive-stack-item" key={index}>
-                      <span className="rs-stack-line"></span>
-                      <div className="rs-stack-icon">
-                        <i
-                          className={formatIcons[index % formatIcons.length]}
-                        ></i>
+          </div>
+        </section>
+      ),
+      show: show_processes,
+    },
+    technologies: {
+      component: (
+        <section key="technologies" className="rs-logo-types-sec pb-0">
+          <div className="container">
+            <div className="row align-items-start g-5">
+              <div className="col-lg-4">
+                <div className="title-wrap">
+                  <span
+                    style={{
+                      color: "#d20000",
+                      fontWeight: "400",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {technologies_subtitle || "We design logos suitable for"}
+                  </span>
+                  <h3 className="fw-bold mt-3">
+                    {technologies_title || "Types of logo we work"}
+                  </h3>
+                  <img
+                    src="/assets/img/products-heading-shape.png"
+                    alt=""
+                    className="img-fluid mt-3"
+                  />
+                </div>
+              </div>
+              <div className="col-lg-8">
+                <div className="row g-4">
+                  {logoTypesData.map((item, index) => (
+                    <div className="col-md-6" key={item.id || index}>
+                      <div className="rs-logo-type-card">
+                        <div className="rs-logo-icon">
+                          <i
+                            className={
+                              logoTypeIcons[item.title || item.name] ||
+                              "bi-type"
+                            }
+                          ></i>
+                        </div>
+                        <h5>{item.title || item.name}</h5>
                       </div>
-                      <h5>{item.name}</h5>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* How it Works */}
-      <section className="work-process-sec">
-        <div className="container">
-          <div className="title-wrap text-center">
-            <span className="re-label">Logo Design Process</span>
-            <h3>How it Works</h3>
-          </div>
-          <div className="row g-4">
-            {workSteps.map((step, index) => (
-              <div className="col-lg-3 col-md-6" key={index}>
-                <div className="work-card">
-                  <div className="work-card-inner">
-                    <div className="work-icon">
-                      <i className={step.icon}></i>
-                    </div>
-                    <h4>{step.title}</h4>
-                    <p>{step.desc}</p>
-                    <a href="#" className="work-link">
-                      Step {String(index + 1).padStart(2, "0")}{" "}
-                      <i className="bi bi-arrow-up-right"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Mission Section */}
-      <section className="rs-specialization-sec">
-        <div
-          className="container rs-specialization-wrap"
-          style={{ maxWidth: "1320px" }}
-        >
-          <div className="row align-items-center g-5">
-            <div className="col-lg-5">
-              <h2 className="rs-main-title">
-                Our Mission Is <span>Design & Develop</span> The Best Identity
-                Around
-              </h2>
-              <p>
-                <small>
-                  Your logo is the face of your business. In Dubai's competitive
-                  market, a professional logo builds trust, credibility, and
-                  brand recognition.
-                </small>
-              </p>
-              <div className="rs-subtitle mt-4">A well-designed logo:</div>
-              <div className="rs-special-list">
-                <button className="rs-special-item active" type="button">
-                  <span className="rs-num">01.</span>
-                  <span>Makes your business look established</span>
-                  <span className="rs-icon">
-                    <i className="bi bi-arrow-up-right"></i>
-                  </span>
-                </button>
-                <button className="rs-special-item" type="button">
-                  <span className="rs-num">02.</span>
-                  <span>Creates a strong first impression</span>
-                  <span className="rs-icon">
-                    <i className="bi bi-arrow-up-right"></i>
-                  </span>
-                </button>
-                <button className="rs-special-item" type="button">
-                  <span className="rs-num">03.</span>
-                  <span>Builds emotional connection</span>
-                  <span className="rs-icon">
-                    <i className="bi bi-arrow-up-right"></i>
-                  </span>
-                </button>
-                <button className="rs-special-item" type="button">
-                  <span className="rs-num">04.</span>
-                  <span>Helps customers remember your brand</span>
-                  <span className="rs-icon">
-                    <i className="bi bi-arrow-up-right"></i>
-                  </span>
-                </button>
-                <button className="rs-special-item" type="button">
-                  <span className="rs-num">05.</span>
-                  <span>Works across digital and print platforms</span>
-                  <span className="rs-icon">
-                    <i className="bi bi-arrow-up-right"></i>
-                  </span>
-                </button>
-              </div>
-            </div>
-            <div className="col-lg-7">
-              <div className="rs-image-area">
-                <div className="rs-dot-pattern"></div>
-                <div className="rs-main-image-box">
-                  {image ? (
-                    <img src={image} alt={name} />
-                  ) : (
-                    <img
-                      src="/assets/img/l3.jpg"
-                      alt="Specialization Preview"
-                    />
-                  )}
-                </div>
-              </div>
-              <div className="letconnect mt-5">
-                <span>Know More About :</span>
-                <div className="line"></div>
-                <a href="#">View Our Work</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Join With Us - CTA */}
-      <section
-        className="rs-packages-se dark-background section py-0"
-        style={{ background: "#fff" }}
-      >
-        <div className="container" style={{ maxWidth: "1450px" }}>
-          <div className="row">
-            <div className="col-12">
-              <div className="rs-left-card h-100 d-flex flex-column flex-lg-row align-items-center justify-content-between gap-4 text-center text-lg-start">
-                <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-4 gap-lg-5">
-                  <span className="rs-join">Join With Us</span>
-                  <h4 className="mb-0">
-                    Let's Create a Logo That
-                    <br className="d-none d-md-block" />
-                    Represents Your Brand
-                  </h4>
-                  <div className="rs-arrow-btn">
-                    <span>
-                      <img
-                        src="/assets/img/arrow-icon-40.svg"
-                        alt=""
-                        className="arrow-40deg-icon"
-                      />
-                    </span>
-                  </div>
-                </div>
-                <div className="quick-contect text-center text-lg-end mt-3 mt-lg-0">
-                  <small>Get A Consultation</small>
-                  <h5 className="mb-0">: 971555515475</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Types of Logo */}
-      <section className="rs-logo-types-sec pb-0">
-        <div className="container">
-          <div className="row align-items-start g-5">
-            <div className="col-lg-4">
-              <div className="title-wrap">
-                <span
-                  style={{
-                    color: "#d20000",
-                    fontWeight: "400",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  We design logos suitable for
-                </span>
-                <h3 className="fw-bold mt-3">Types of logo we work</h3>
-                <img
-                  src="/assets/img/products-heading-shape.png"
-                  alt=""
-                  className="img-fluid mt-3"
-                />
-              </div>
-            </div>
-            <div className="col-lg-8">
-              <div className="row g-4">
-                {logoTypesData.map((item, index) => (
-                  <div className="col-md-6" key={index}>
-                    <div className="rs-logo-type-card">
-                      <div className="rs-logo-icon">
-                        <i
-                          className={logoTypeIcons[item.name] || "bi-type"}
-                        ></i>
-                      </div>
-                      <h5>{item.name}</h5>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Industries Marquee */}
-      <section className="rs-text-marquee-sec">
-        <div className="rs-text-marquee-wrap">
-          <div className="rs-text-marquee-track">
-            <div className="rs-text-item">
-              {industriesRow1.map((item, index) => (
-                <span key={index}>
-                  {item}
-                  <i className="rs-dot"></i>
-                </span>
-              ))}
-            </div>
-            <div className="rs-text-item">
-              {industriesRow1.map((item, index) => (
-                <span key={index}>
-                  {item}
-                  <i className="rs-dot"></i>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="rs-text-marquee-wrap red-strip">
-          <div className="rs-text-marquee-track">
-            <div className="rs-text-item">
-              {industriesRow2.map((item, index) => (
-                <span key={index}>
-                  {item}
-                  <i className="rs-dot"></i>
-                </span>
-              ))}
-            </div>
-            <div className="rs-text-item">
-              {industriesRow2.map((item, index) => (
-                <span key={index}>
-                  {item}
-                  <i className="rs-dot"></i>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      {galleryImages.length > 0 && (
-        <section className="opposite-gallery-sec py-0">
+        </section>
+      ),
+      show: show_technologies,
+    },
+    gallery: {
+      component: (
+        <section key="gallery" className="opposite-gallery-sec py-0">
           <div className="opposite-gallery-sticky">
             <div className="gallery-title-wrap">
-              <span>Our Work</span>
-              <h2>Our Gallery</h2>
+              <span>{gallery_title || "Our Work"}</span>
+              <h2>{gallery_title || "Our Gallery"}</h2>
+              {gallery_subtitle && <p>{gallery_subtitle}</p>}
             </div>
             <div className="gallery-inner">
-              <div className="gallery-track top-track">
-                {galleryImages.slice(0, 6).map((img, index) => (
-                  <div
-                    className={`gallery-card ${index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""}`}
-                    key={index}
-                  >
-                    <img src={img.image} alt={`Gallery ${index + 1}`} />
+              {galleryImages.length > 0 ? (
+                <>
+                  <div className="gallery-track top-track">
+                    {galleryImages.slice(0, 6).map((img, index) => (
+                      <div
+                        className={`gallery-card ${index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""}`}
+                        key={img.id || index}
+                      >
+                        <img
+                          src={img.image}
+                          alt={img.title || `Gallery ${index + 1}`}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              {galleryImages.length > 6 && (
-                <div className="gallery-track bottom-track">
-                  {galleryImages.slice(6, 12).map((img, index) => (
-                    <div
-                      className={`gallery-card ${index % 3 === 1 ? "large" : index % 3 === 0 ? "small" : ""}`}
-                      key={index}
-                    >
-                      <img src={img.image} alt={`Gallery ${index + 7}`} />
+                  {galleryImages.length > 6 && (
+                    <div className="gallery-track bottom-track">
+                      {galleryImages.slice(6, 12).map((img, index) => (
+                        <div
+                          className={`gallery-card ${index % 3 === 1 ? "large" : index % 3 === 0 ? "small" : ""}`}
+                          key={img.id || index}
+                        >
+                          <img
+                            src={img.image}
+                            alt={img.title || `Gallery ${index + 7}`}
+                          />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  )}
+                </>
+              ) : (
+                <p className="text-center py-5">No gallery images available</p>
               )}
             </div>
           </div>
         </section>
-      )}
-
-      {/* Packages */}
-      <section className="rs-packages-sec light-background section line-bg-dar rs-price-light">
-        <div className="container" style={{ maxWidth: "1550px" }}>
-          <div className="section-title text-center text-white mb-4">
-            <h2 className="fw-bold">Professional Website for every budget</h2>
-            <p className="rs-subtitle">
-              Choose the best package for your needs.
-              <b>100% guaranteed satisfaction</b>
-            </p>
-          </div>
-          <div className="row g-4 align-items-stretch mb-5">
-            {packagesData.map((pkg, index) => (
-              <div className="col-md-3" key={index}>
-                <div className="rs-card">
-                  <p className="text-red">Package – {index + 1}</p>
-                  <h6>{pkg.name}</h6>
-                  <ul>
-                    {pkg.features.split(", ").map((feature, idx) => (
-                      <li key={idx}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Ready to Build */}
-      <section
-        id="readytobuild"
-        className="readytobuild section light-background pt-0"
-      >
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div className="section-title text-center text-white mb-3">
-            <h2 className="fw-bold">Ready to build a strong brand identity?</h2>
-            <p className="rs-subtitle">
-              Let RedSpider create a professional logo that represents your
-              business the right way.
-            </p>
-          </div>
-        </div>
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div className="inlinebtns text-center d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center">
-            <a
-              href="#"
-              className="btn btn-animation btn-red d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-            >
-              <span className="btn-title">Schedule Free Consultation</span>
-              <span className="btn-icon-wrap">
-                <img
-                  src="/assets/img/icons/cc-icon.svg"
-                  alt=""
-                  className="btn-icon"
-                />
-              </span>
-            </a>
-            <a
-              href="#"
-              className="btn btn-animation btn-black d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-            >
-              <span className="btn-title">Call Now</span>
-              <span className="btn-icon-wrap">
-                <img
-                  src="/assets/img/icons/phone.svg"
-                  alt=""
-                  className="btn-icon"
-                />
-              </span>
-            </a>
-            <a
-              href="https://wa.me/971505698733"
-              target="_blank"
-              className="btn btn-animation btn-green d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-            >
-              <span className="btn-title">Whatsapp Us</span>
-              <span className="btn-icon-wrap">
-                <img
-                  src="/assets/img/icons/whatsapp.svg"
-                  alt=""
-                  className="btn-icon"
-                />
-              </span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section
-        id="review-sec"
-        className="review-sec section light-background py-0"
-      >
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div className="review-wrap">
-            <img
-              src="/assets/img/reviewimg.png"
-              alt="Reviews"
-              className="img-fluid"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* FAQs */}
-      <section
-        id="rs-faq-sec"
-        className="rs-faq-sec section py-5 light-background"
-      >
-        <div className="container" style={{ maxWidth: "1000px" }}>
-          <div className="text-center mb-5">
-            <h2 className="fw-bold">FAQ's</h2>
-          </div>
-          <div className="accordion rs-faq-custom" id="rsFaqOne">
-            {faqData.map((faq, index) => (
-              <div className="accordion-item" key={index}>
-                <h2 className="accordion-header">
-                  <button
-                    className={`accordion-button rs-faq-btn ${index === 0 ? "" : "collapsed"}`}
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target={`#faq${index}`}
+      ),
+      show: show_gallery,
+    },
+    faqs: {
+      component: (
+        <section
+          key="faqs"
+          id="rs-faq-sec"
+          className="rs-faq-sec section py-5 light-background"
+        >
+          <div className="container" style={{ maxWidth: "1000px" }}>
+            <div className="text-center mb-5">
+              <h2 className="fw-bold">{faqs_title || "FAQ's"}</h2>
+              {faqs_subtitle && <p>{faqs_subtitle}</p>}
+            </div>
+            <div className="accordion rs-faq-custom" id="rsFaqOne">
+              {faqData.map((faq, index) => (
+                <div className="accordion-item" key={faq.id || index}>
+                  <h2 className="accordion-header">
+                    <button
+                      className={`accordion-button rs-faq-btn ${index === 0 ? "" : "collapsed"}`}
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={`#faq${index}`}
+                    >
+                      <span className="faq-icon">+</span>
+                      {faq.question}
+                    </button>
+                  </h2>
+                  <div
+                    id={`faq${index}`}
+                    className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
+                    data-bs-parent="#rsFaqOne"
                   >
-                    <span className="faq-icon">+</span>
-                    {faq.question}
-                  </button>
-                </h2>
-                <div
-                  id={`faq${index}`}
-                  className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
-                  data-bs-parent="#rsFaqOne"
-                >
-                  <div className="accordion-body">{faq.answer}</div>
+                    <div className="accordion-body">{faq.answer}</div>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ),
+      show: show_faqs,
+    },
+    cta: {
+      component: <ServiceCTA service={data} key="cta" />,
+      show: show_cta,
+    },
+  };
+
+  // ============================================
+  // 🏗️ Render Sections Based on Order
+  // ============================================
+  const renderSections = () => {
+    let order = section_order;
+    if (typeof order === "string") {
+      order = order.split(",").map((s) => s.trim());
+    }
+    if (!Array.isArray(order) || order.length === 0) {
+      order = [
+        "hero",
+        "intro",
+        "features",
+        "benefits",
+        "processes",
+        "technologies",
+        "gallery",
+        "faqs",
+        "cta",
+      ];
+    }
+    return order
+      .map((key) => {
+        const section = sectionMap[key];
+        if (!section) return null;
+        return section.show ? section.component : null;
+      })
+      .filter(Boolean);
+  };
+
+  // ============================================
+  // 📦 Packages Section (Outside Section Order)
+  // ============================================
+  const PackagesSection = () => (
+    <section
+      key="packages"
+      className="rs-packages-sec light-background section line-bg-dar rs-price-light"
+    >
+      <div className="container" style={{ maxWidth: "1550px" }}>
+        <div className="section-title text-center text-white mb-4">
+          <h2 className="fw-bold">Professional Logo Design for every budget</h2>
+          <p className="rs-subtitle">
+            Choose the best package for your needs.
+            <b>100% guaranteed satisfaction</b>
+          </p>
+        </div>
+        <div className="row g-4 align-items-stretch mb-5">
+          {packagesData.map((pkg, index) => (
+            <div className="col-md-3" key={pkg.id || index}>
+              <div className="rs-card">
+                <p className="text-red">Package – {index + 1}</p>
+                <h6>{pkg.title || pkg.name}</h6>
+                <ul>
+                  {(typeof pkg.features === "string"
+                    ? pkg.features.split(", ")
+                    : []
+                  ).map((feature, idx) => (
+                    <li key={idx}>{feature}</li>
+                  ))}
+                </ul>
               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  // ============================================
+  // 🌊 Industries Marquee (Outside Section Order)
+  // ============================================
+  const IndustriesMarquee = () => (
+    <section key="industries" className="rs-text-marquee-sec mb-4">
+      <div className="rs-text-marquee-wrap">
+        <div className="rs-text-marquee-track">
+          <div className="rs-text-item">
+            {industriesRow1.map((item, index) => (
+              <span key={index}>
+                {item}
+                <i className="rs-dot"></i>
+              </span>
+            ))}
+          </div>
+          <div className="rs-text-item">
+            {industriesRow1.map((item, index) => (
+              <span key={index}>
+                {item}
+                <i className="rs-dot"></i>
+              </span>
             ))}
           </div>
         </div>
-      </section>
+      </div>
+      <div className="rs-text-marquee-wrap red-strip">
+        <div className="rs-text-marquee-track">
+          <div className="rs-text-item">
+            {industriesRow2.map((item, index) => (
+              <span key={index}>
+                {item}
+                <i className="rs-dot"></i>
+              </span>
+            ))}
+          </div>
+          <div className="rs-text-item">
+            {industriesRow2.map((item, index) => (
+              <span key={index}>
+                {item}
+                <i className="rs-dot"></i>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 
-      {/* CTA Section */}
-      <ServiceCTA service={data} />
-    </>
+  // ============================================
+  // 💬 CTA Section (Outside Section Order)
+  // ============================================
+  const CTASection = () => (
+    <section
+      key="cta-section"
+      id="readytobuild"
+      className="readytobuild section light-background pt-0"
+    >
+      <div className="container" style={{ maxWidth: "1100px" }}>
+        <div className="section-title text-center text-white mb-3">
+          <h2 className="fw-bold">Ready to build a strong brand identity?</h2>
+          <p className="rs-subtitle">
+            Let RedSpider create a professional logo that represents your
+            business the right way.
+          </p>
+        </div>
+      </div>
+      <div className="container" style={{ maxWidth: "1100px" }}>
+        <div className="inlinebtns text-center d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center">
+          <a
+            href={cta_button_link || "#"}
+            className="btn btn-animation btn-red d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
+          >
+            <span className="btn-title">
+              {cta_button_text || "Schedule Free Consultation"}
+            </span>
+            <span className="btn-icon-wrap">
+              <img
+                src="/assets/img/icons/cc-icon.svg"
+                alt=""
+                className="btn-icon"
+              />
+            </span>
+          </a>
+          <a
+            href="#"
+            className="btn btn-animation btn-black d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
+          >
+            <span className="btn-title">Call Now</span>
+            <span className="btn-icon-wrap">
+              <img
+                src="/assets/img/icons/phone.svg"
+                alt=""
+                className="btn-icon"
+              />
+            </span>
+          </a>
+          <a
+            href="https://wa.me/971505698733"
+            target="_blank"
+            className="btn btn-animation btn-green d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
+          >
+            <span className="btn-title">Whatsapp Us</span>
+            <span className="btn-icon-wrap">
+              <img
+                src="/assets/img/icons/whatsapp.svg"
+                alt=""
+                className="btn-icon"
+              />
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+
+  // ============================================
+  // 🏗️ Render Main Template
+  // ============================================
+  return (
+    <div style={styles}>
+      {custom_css && <style dangerouslySetInnerHTML={{ __html: custom_css }} />}
+      <main className="service-template">
+        {renderSections()}
+        <PackagesSection />
+        <IndustriesMarquee />
+        <CTASection />
+        {/* Review Section */}
+        <section
+          id="review-sec"
+          className="review-sec section light-background py-0"
+        >
+          <div className="container" style={{ maxWidth: "1100px" }}>
+            <div className="review-wrap">
+              <img
+                src="/assets/img/reviewimg.png"
+                alt="Reviews"
+                className="img-fluid"
+              />
+            </div>
+          </div>
+        </section>
+      </main>
+      {custom_js && <script dangerouslySetInnerHTML={{ __html: custom_js }} />}
+    </div>
   );
 }

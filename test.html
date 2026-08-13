@@ -1,603 +1,296 @@
-<main class="main">
-  <section class="about-hero hero-marquee">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-12">
-          <div class="rs-process-title-sec">
-            <h1 class="rs-process-title mb-3">
-              <span class="rs-process-highlight">
-                Brochure Design
-                <svg
-                  class="rs-process-underline"
-                  viewBox="0 0 320 22"
-                  preserveAspectRatio="none"
-                >
-                  <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
-                </svg>
-              </span>
-              Company in Dubai
-            </h1>
-            <!-- <p class="rs-process-text mb-3">RedSpider Web &amp; Art Design is a professional <strong>web design company in Dubai</strong>, having been in the business for more than 14 years, providing creative and effective digital solutions.&nbsp;</p>
-<p  class="rs-process-text mb-2">We've been helping startups and businesses establish a solid online identity with our <strong>high-quality, responsive, and SEO-optimized websites</strong> since 2010. We have a strong belief in using creativity, technology and user experience to develop web solutions that will be stunning, as well as working seamlessly across all devices.</p>
-              <a href="https://www.redspider.ae/our-portfolio/" target="_blank" class="btn btn-animation btn-red d-inline-flex align-items-center mt-4 d-none">
-                <span class="btn-title">Get in Touch </span>
-              </a> -->
-          </div>
+import Image from "next/image";
+import Link from "next/link";
+
+export default function BlogDetailMain({ post }) {
+  // Agar post nahi hai toh fallback
+  if (!post) {
+    return (
+      <div className="col-lg-8">
+        <div className="text-center py-5">
+          <h4>No post data available</h4>
         </div>
       </div>
-    </div>
-  </section>
+    );
+  }
 
-  <section id="hero-banner" class="hero-banner section rs-full-section">
-    <div class="rs-hero-banner">
-      <div class="container" style="max-width: 1600px">
-        <!-- Row 1 : Title -->
-        <div
-          class="row align-items-center text-center text-lg-start mb-5 pt-5 d-none"
-        >
-          <div class="col-12 col-lg-10">
-            <h1 class="hero-titleinner text-center text-lg-start">
-              <strong>Classified Website, </strong> Dubizzle Clone, Olx Clone
-            </h1>
-          </div>
-          <div class="col-12">
-            <p class="rs-desc">
-              Powerful and Easy-to-Use Software for Creating Online Directories
-              & Classified Ad Websites like Dubizzle, Olx website.
-            </p>
-          </div>
+  // Format date
+  const formattedDate = post.created_at
+    ? new Date(post.created_at).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+    : "Recent";
+
+  return (
+    <div>
+      {/* Blog Details Section */}
+      <section id="blog-details" className="blog-details section">
+        <div className="container">
+          <article className="article">
+            {/* Post Image */}
+            <div className="post-img">
+              <Image
+                src={post.image || "/assets/img/blog/blog-1.jpg"}
+                alt={post.title || "Blog Post Image"}
+                width={800}
+                height={450}
+                className="img-fluid w-100"
+                style={{ objectFit: "cover", maxHeight: "450px" }}
+                loading="lazy"
+                unoptimized={post.image?.startsWith("http")}
+              />
+            </div>
+
+            {/* Title */}
+            <h2 className="title">
+              {post.title || post.name || "Untitled Post"}
+            </h2>
+
+            {/* Meta Top */}
+            <div className="meta-top">
+              <ul>
+                <li className="d-flex align-items-center">
+                  <i className="bi bi-person" aria-hidden="true"></i>
+                  <span>{post.author?.name || "RedSpider Team"}</span>
+                </li>
+                <li className="d-flex align-items-center">
+                  <i className="bi bi-clock" aria-hidden="true"></i>
+                  <time dateTime={post.created_at}>{formattedDate}</time>
+                </li>
+                <li className="d-flex align-items-center">
+                  <i className="bi bi-chat-dots" aria-hidden="true"></i>
+                  <span>{post.comments_count || 0} Comments</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Content */}
+            <div className="content">
+              {post.description && (
+                <p className="lead fw-medium">{post.description}</p>
+              )}
+
+              {post.content ? (
+                <div
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                  className="blog-content"
+                />
+              ) : (
+                <p className="text-muted">Full content not available.</p>
+              )}
+
+              {/* Categories & Tags */}
+              {(post.categories?.length > 0 || post.tags?.length > 0) && (
+                <div className="meta-bottom d-flex flex-wrap gap-3 mt-4 pt-3 border-top">
+                  {post.categories?.length > 0 && (
+                    <>
+                      <i className="bi bi-folder" aria-hidden="true"></i>
+                      <ul className="cats list-inline mb-0">
+                        {post.categories.map((cat, idx) => (
+                          <li key={idx} className="list-inline-item">
+                            <Link
+                              href={`/category/${cat.slug}`}
+                              className="text-decoration-none"
+                            >
+                              {cat.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+
+                  {post.tags?.length > 0 && (
+                    <>
+                      <i className="bi bi-tags" aria-hidden="true"></i>
+                      <ul className="tags list-inline mb-0">
+                        {post.tags.map((tag, idx) => (
+                          <li key={idx} className="list-inline-item">
+                            <Link
+                              href={`/tag/${tag.slug}`}
+                              className="text-decoration-none"
+                            >
+                              #{tag.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          </article>
         </div>
+      </section>
 
-        <!-- Row 2 -->
-        <div class="row align-items-center g-4 text-center text-lg-start mt-4">
-          <!-- Col 1 -->
-          <div class="col-12 col-md-12 col-lg-6 order-2 order-lg-1 pe-lg-5">
-            <h1
-              class="hero-titleinner text-center text-lg-start mb-4 ext-title"
-            >
-              <strong>Classified Website, </strong>
-              Dubizzle Clone, Olx Clone
-            </h1>
-            <p class="rs-desc">
-              Powerful and Easy-to-Use Software for Creating Online Directories
-              & Classified Ad Websites like Dubizzle, Olx website.
-            </p>
+      {/* Blog Comments Section */}
+      <section id="blog-comments" className="blog-comments section">
+        <div className="container">
+          <h4 className="comments-count">
+            {post.comments_count || 0} Comments
+          </h4>
 
-            <p>
-              RSClassify is the ideal product for building general-purpose
-              classified advertising websites. RSClassify can be used for any
-              item for sale including cars, electronics, furniture, sporting
-              goods, real estate, etc.
-            </p>
-            <p>
-              You can sell any combination of listings, with unlimited pricing
-              plans. Monetize your site with Google Adsense or similar programs.
-              You can take payments directly on your site with a payment gateway
-              or use PayPal standard as an inexpensive payment processor.
-            </p>
-            <p>
-              You have full control of your site via our easy-to-use web-based
-              back office admin area.
-            </p>
-
-            <div
-              class="rs-circle-wrap justify-content-md-start justify-content-center"
-            >
-              <a href="#" class="rs-circle-btn">
-                <span class="rs-arrow">↗</span>
-                <h3 class="rs-text">
-                  Get In <br />
-                  Touch
-                </h3>
-              </a>
+          {/* First Comment */}
+          <div id="comment-1" className="comment">
+            <div className="d-flex">
+              <div className="comment-img">
+                <Image
+                  src="/assets/img/blog/comments-1.jpg"
+                  alt="Georgia Reader avatar"
+                  width={50}
+                  height={50}
+                  className="rounded-circle"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <h5>
+                  <span>Georgia Reader</span>
+                  <a href="#" className="reply">
+                    <i className="bi bi-reply-fill" aria-hidden="true"></i>{" "}
+                    Reply
+                  </a>
+                </h5>
+                <time dateTime="2020-01-01">01 Jan, 2022</time>
+                <p>
+                  Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem
+                  et et. Est ad aut sapiente quis molestiae est qui cum soluta.
+                  Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint
+                  qui facilis et.
+                </p>
+              </div>
             </div>
           </div>
 
-          <!-- Col 2 (Video) -->
-          <div class="col-12 col-md-12 col-lg-6 order-1 order-lg-2">
-            <img
-              src="assets/img/Dubizzle-Olx-768x768.png"
-              class="img-fluid rs-hero-img"
-              alt="Hero Image"
-            />
-          </div>
-
-          <!-- Col 3 (CTA) -->
-          <div
-            class="col-12 col-md-12 col-lg-2 d-flex justify-content-center justify-content-lg-end order-3 d-none"
-          >
-            <div class="rs-circle-wrap">
-              <a href="#" class="rs-circle-btn">
-                <span class="rs-arrow">↗</span>
-                <h3 class="rs-text">
-                  Get In <br />
-                  Touch
-                </h3>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section
-    id="mobile-app-bs"
-    class="mobile-app-bs section light-background dot-bg py-5"
-  >
-    <div class="container" style="max-width: 950px">
-      <div class="section-title text-center text-white mb-3">
-        <h2 class="fw-bold mb-4">
-          Dubizzle Clone: Build Your Own Classified Ad Website with RSClassify
-        </h2>
-        <p class="rs-subtitle">
-          Looking to create a successful online directory or classified ad
-          website like Dubizzle Clone? RSClassify is the perfect software
-          solution for developing a fully functional platform similar to popular
-          websites like Dubizzle and OLX. It is designed to make building,
-          managing, and monetizing your classified ad website simple and
-          effective, catering to a wide range of listings.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="card-icon-types section dark-background line-bg-dark">
-    <div class="container" style="max-width: 1700px">
-      <div class="row g-4">
-        <!-- Card 3 -->
-        <div class="col-lg-4 col-md-6">
-          <div
-            class="ect-card h-100 d-flex flex-column justify-content-between"
-          >
-            <img
-              src="assets/img/icons/email-3.svg"
-              class="ect-icon mb-3"
-              alt=""
-            />
-            <div>
-              <h6 class="ect-heading">User-Friendly and Highly Customizable</h6>
-              <p class="ect-text">
-                RSClassify offers an intuitive, web-based admin interface that
-                makes site management seamless. Whether you want to list cars,
-                electronics, furniture, sporting goods, or real estate
-                properties, RSClassify has you covered. The platform is fully
-                customizable, allowing you to adapt it to your unique business
-                needs. With Dubizzle Clone, you can create a site that serves
-                various niche markets or a broad selection of
-                categories—whatever works best for your audience.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="col-lg-4 col-md-6">
-          <div
-            class="ect-card h-100 d-flex flex-column justify-content-between"
-          >
-            <img
-              src="assets/img/icons/email-4.svg"
-              class="ect-icon mb-3"
-              alt=""
-            />
-            <div>
-              <h6 class="ect-heading">Monetize Your Website Easily</h6>
-              <p class="ect-text">
-                Monetization options are abundant with RSClassify. You can make
-                money from your website using Google AdSense, affiliate
-                programs, or by implementing different pricing plans for
-                listings. The platform supports payment integration, enabling
-                users to pay directly on your site using multiple gateways like
-                PayPal or custom payment processors. This ensures that you can
-                generate revenue without much effort, whether through paid
-                listings or other revenue streams.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="col-lg-4 col-md-6">
-          <div
-            class="ect-card h-100 d-flex flex-column justify-content-between"
-          >
-            <img
-              src="assets/img/icons/email-5.svg"
-              class="ect-icon mb-3"
-              alt=""
-            />
-            <div>
-              <h6 class="ect-heading">Manage Listings Efficiently</h6>
-              <p class="ect-text">
-                RSClassify empowers you to take full control of your site. You
-                can manage listings, track users, and optimize content through
-                an easy-to-navigate admin panel. Plus, the software is mobile
-                responsive, so your site will look great and function smoothly
-                across all devices, enhancing the user experience and boosting
-                your platform's success.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div
-    class="dubizzle-clone-features section dark-background rs-service-grid-outline pt-0"
-  >
-    <div class="container" style="max-width: 1100px">
-      <div class="section-title text-center text-white mb-3">
-        <h2 class="fw-bold">Frontend Features</h2>
-      </div>
-    </div>
-
-    <div
-      class="container accordion"
-      id="featuresAccordion"
-      style="max-width: 1050px"
-    >
-      <!-- Listing Features -->
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#listingFeatures"
-          >
-            Listing Features
-          </button>
-        </h2>
-        <div
-          id="listingFeatures"
-          class="accordion-collapse collapse show"
-          data-bs-parent="#featuresAccordion"
-        >
-          <div class="accordion-body">
-            <ul>
-              <li>Advanced listing fields according to selected category</li>
-              <li>Featured Listings</li>
-              <li>Unlimited Categories and Sub-Categories</li>
-              <li>Upload Photos</li>
-              <li>Photos Automatically Resized</li>
-              <li>More Listings from This Advertiser</li>
-              <li>Ad View Counter</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Home Page Features -->
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#homeFeatures"
-          >
-            Home Page Features
-          </button>
-        </h2>
-        <div
-          id="homeFeatures"
-          class="accordion-collapse collapse"
-          data-bs-parent="#featuresAccordion"
-        >
-          <div class="accordion-body">
-            <ul>
-              <li>Quick browser by category list</li>
-              <li>Features ads display</li>
-              <li>Blogs/article section</li>
-              <li>Quick search</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Google Mapping -->
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mappingFeatures"
-          >
-            Advanced Google Mapping
-          </button>
-        </h2>
-        <div
-          id="mappingFeatures"
-          class="accordion-collapse collapse"
-          data-bs-parent="#featuresAccordion"
-        >
-          <div class="accordion-body">
-            <ul>
-              <li>Google map for all listings</li>
-              <li>Mark Google location during ad listing step</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Security Features -->
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#securityFeatures"
-          >
-            Security Features
-          </button>
-        </h2>
-        <div
-          id="securityFeatures"
-          class="accordion-collapse collapse"
-          data-bs-parent="#featuresAccordion"
-        >
-          <div class="accordion-body">
-            <ul>
-              <li>Security codes (Captcha) on forms</li>
-              <li>Registration validation via email</li>
-              <li>
-                Credit card data never stored on your server for PCI compliance
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Search Features -->
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#searchFeatures"
-          >
-            Advanced Search Features
-          </button>
-        </h2>
-        <div
-          id="searchFeatures"
-          class="accordion-collapse collapse"
-          data-bs-parent="#featuresAccordion"
-        >
-          <div class="accordion-body">
-            <ul>
-              <li>Search category, keywords, location</li>
-              <li>Saved searches</li>
-              <li>Featured listings display 1st in search results</li>
-              <li>Paged search results – previous, next, paging</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Membership -->
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#membership"
-          >
-            Membership Plan
-          </button>
-        </h2>
-        <div
-          id="membership"
-          class="accordion-collapse collapse"
-          data-bs-parent="#featuresAccordion"
-        >
-          <div class="accordion-body">
-            <ul>
-              <li>Unlimited pricing plans</li>
-              <li>
-                Pricing plan types – individual listing, subscription, category
-                based pricing supported
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Customer Features -->
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#customerFeatures"
-          >
-            Customer Self Service Features
-          </button>
-        </h2>
-        <div
-          id="customerFeatures"
-          class="accordion-collapse collapse"
-          data-bs-parent="#featuresAccordion"
-        >
-          <div class="accordion-body">
-            <ul>
-              <li>Online registration with email validation</li>
-              <li>Login/logout</li>
-              <li>Remember me</li>
-              <li>Forgotten password</li>
-              <li>Profile update</li>
-              <li>Privacy preferences</li>
-              <li>Refer friend</li>
-              <li>My account control panel</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="rs-packages-sec dark-background section">
-    <div class="container" style="max-width: 1550px">
-      <!-- Heading -->
-      <div class="section-title text-center text-white mb-4">
-        <h2 class="fw-bold">Admin Features</h2>
-        <p class="rs-subtitle">Administration Rich Features Detail</p>
-      </div>
-
-      <div class="row g-4 align-items-stretch mb-5">
-        <!-- Card 1 -->
-        <div class="col-md-3">
-          <div class="rs-card">
-            <ul>
-              <li>
-                Customers – view, edit, add, change, delete, send email, export,
-                purge
-              </li>
-              <li>Sections/category management</li>
-              <li>Pricing plan management</li>
-              <li>Contents pages management</li>
-              <li>Display ad management</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="col-md-3">
-          <div class="rs-card">
-            <ul>
-              <li>Settings wizard for site setup and preferences</li>
-              <li>Trash history</li>
-              <li>Banner management</li>
-              <li>Contact / spams / enquiry management</li>
-              <li>
-                Listings – view, edit, add, change, delete, approve, browse,
-                export, purge
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="col-md-3">
-          <div class="rs-card">
-            <ul>
-              <li>Master records management section / category wise</li>
-              <li>Site Text – home page, page titles</li>
-              <li>Country / Cities / Location management</li>
-              <li>Blogs/articles management</li>
-              <li>Email templates to control text sent in email messages</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="col-md-3">
-          <div class="rs-card">
-            <ul>
-              <li>Delivery server management</li>
-              <li>Common settings</li>
-              <li>Themes / extensions section</li>
-              <li>Ads listing images management (approve / delete)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom Row -->
-      <div class="row">
-        <div class="col-12">
-          <div
-            class="rs-left-card h-100 d-flex flex-column flex-lg-row justify-content-between align-items-center text-center text-lg-start"
-          >
-            <div
-              class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4 gap-md-5"
-            >
-              <span class="rs-join">Join With Us</span>
-
-              <h4 class="mb-0">Amazing Pricing For <br />Growth Business</h4>
-
-              <div class="rs-arrow-btn">
-                <span>
-                  <img
-                    src="assets/img/arrow-icon-40.svg"
-                    alt=""
-                    class="arrow-40deg-icon"
-                  />
-                </span>
+          {/* Second Comment with Replies */}
+          <div id="comment-2" className="comment">
+            <div className="d-flex">
+              <div className="comment-img">
+                <Image
+                  src="/assets/img/blog/comments-2.jpg"
+                  alt="Aron Alvarado avatar"
+                  width={50}
+                  height={50}
+                  className="rounded-circle"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <h5>
+                  <span>Aron Alvarado</span>
+                  <a href="#" className="reply">
+                    <i className="bi bi-reply-fill" aria-hidden="true"></i>{" "}
+                    Reply
+                  </a>
+                </h5>
+                <time dateTime="2020-01-01">01 Jan, 2022</time>
+                <p>
+                  Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque
+                  eveniet saepe. Officiis illo ut beatae.
+                </p>
               </div>
             </div>
 
-            <div class="mt-4 mt-lg-0 quick-contect text-center text-lg-end">
-              <small>Quick Contact</small>
-              <h5>: 971555515475</h5>
+            {/* Reply */}
+            <div id="comment-reply-1" className="comment comment-reply">
+              <div className="d-flex">
+                <div className="comment-img">
+                  <Image
+                    src="/assets/img/blog/comments-3.jpg"
+                    alt="Lynda Small avatar"
+                    width={50}
+                    height={50}
+                    className="rounded-circle"
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <h5>
+                    <span>Lynda Small</span>
+                    <a href="#" className="reply">
+                      <i className="bi bi-reply-fill" aria-hidden="true"></i>{" "}
+                      Reply
+                    </a>
+                  </h5>
+                  <time dateTime="2020-01-01">01 Jan, 2022</time>
+                  <p>
+                    Enim ipsa eum fugiat fuga repellat. Commodi quo quo dicta.
+                    Est ullam aspernatur ut vitae quia mollitia id non. Qui ad
+                    quas nostrum rerum sed necessitatibus aut est. Eum officiis
+                    sed repellat maxime vero nisi natus. Amet nesciunt nesciunt
+                    qui illum omnis est et dolor recusandae.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Comment Form Section */}
+      <section id="comment-form" className="comment-form section">
+        <div className="container">
+          <form action="" noValidate>
+            <h4>Post Comment</h4>
+            <p>
+              Your email address will not be published. Required fields are
+              marked *
+            </p>
+            <div className="row">
+              <div className="col-md-6 form-group">
+                <input
+                  name="name"
+                  type="text"
+                  className="form-control"
+                  placeholder="Your Name*"
+                  id="commentName"
+                  autoComplete="name"
+                />
+              </div>
+              <div className="col-md-6 form-group">
+                <input
+                  name="email"
+                  type="email"
+                  className="form-control"
+                  placeholder="Your Email*"
+                  id="commentEmail"
+                  autoComplete="email"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col form-group">
+                <input
+                  name="website"
+                  type="url"
+                  className="form-control"
+                  placeholder="Your Website"
+                  id="commentWebsite"
+                  autoComplete="url"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col form-group">
+                <textarea
+                  name="comment"
+                  className="form-control"
+                  placeholder="Your Comment*"
+                  id="commentText"
+                  rows={4}
+                ></textarea>
+              </div>
+            </div>
+            <div className="text-center">
+              <button type="submit" className="btn btn-primary">
+                Post Comment
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
     </div>
-  </section>
-
-  <section id="readytobuild" class="readytobuild section light-background">
-    <div class="container" style="max-width: 1100px">
-      <div class="section-title text-center text-white mb-3">
-        <h2 class="fw-bold">Ready to build a strong brand identity?</h2>
-        <p class="rs-subtitle">
-          Let RedSpider create a professional logo that represents your business
-          the right way.
-        </p>
-      </div>
-    </div>
-
-    <div class="container" style="max-width: 1100px">
-      <div
-        class="inlinebtns text-center d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center"
-      >
-        <a
-          href="#"
-          class="btn btn-animation btn-red d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-        >
-          <span class="btn-title">Schedule Free Consultation</span>
-          <span class="btn-icon-wrap">
-            <img src="assets/img/icons/cc-icon.svg" alt="" class="btn-icon" />
-          </span>
-        </a>
-
-        <a
-          href="#"
-          class="btn btn-animation btn-black d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-        >
-          <span class="btn-title">Call Now</span>
-          <span class="btn-icon-wrap">
-            <img src="assets/img/icons/phone.svg" alt="" class="btn-icon" />
-          </span>
-        </a>
-
-        <a
-          href="https://wa.me/971505698733"
-          target="_blank"
-          class="btn btn-animation btn-green d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-        >
-          <span class="btn-title">whatsapp Us</span>
-          <span class="btn-icon-wrap">
-            <img src="assets/img/icons/whatsapp.svg" alt="" class="btn-icon" />
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="review-sec" class="review-sec section light-background">
-    <div class="container" style="max-width: 1100px">
-      <div class="review-wrap">
-        <img src="assets/img/reviewimg.png" alt="" class="img-fluid" />
-      </div>
-    </div>
-  </section>
-</main>
+  );
+}

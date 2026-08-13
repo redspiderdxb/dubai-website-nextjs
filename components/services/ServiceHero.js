@@ -1,15 +1,33 @@
+// components/services/ServiceHero.js
+
 export default function ServiceHero({ service }) {
-  // 🔥 Default values agar service nahi hai toh
-  const title = service?.hero_title || service?.name || "Our Services";
-  const subtitle = service?.hero_subtitle || "";
-  const description = service?.hero_description || service?.description || "";
-  const backgroundImage = service?.hero_background || service?.image || "";
+  // 🔥 Backend se data le rahe hain
+  const {
+    hero_title,
+    hero_subtitle,
+    hero_description,
+    hero_image,
+    hero_background,
+    name,
+    description,
+  } = service || {};
+
+  // 🔥 Fallback values
+  const title = hero_title || name || "Our Services";
+  const subtitle = hero_subtitle || "";
+  const desc = hero_description || description || "";
+  const backgroundImage = hero_background || hero_image || "";
+
+  // 🔥 Image URL build
+  const imageUrl = backgroundImage 
+    ? `${process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public"}/storage/${backgroundImage}`
+    : "";
 
   return (
     <section 
       className="design-developemnt-hero hero-marquee"
       style={{
-        backgroundImage: backgroundImage ? `url(${process.env.NEXT_PUBLIC_IMAGE_URL}/${backgroundImage})` : 'none',
+        backgroundImage: imageUrl ? `url(${imageUrl})` : 'none',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -35,9 +53,9 @@ export default function ServiceHero({ service }) {
                   </span>
                 )}
               </h1>
-              {description && (
+              {desc && (
                 <p className="rs-process-text mb-3">
-                  {description}
+                  {desc}
                 </p>
               )}
             </div>

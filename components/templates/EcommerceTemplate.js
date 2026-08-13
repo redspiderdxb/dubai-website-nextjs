@@ -18,25 +18,93 @@ export default function EcommerceTemplate({ data }) {
     hero_description,
     hero_image,
     hero_background,
-    intro_small_heading,
-    intro_main_heading,
-    intro_description,
-    intro_image,
+    intro_small_heading = "Ecommerce · Dubai",
+    intro_main_heading = "",
+    intro_description = "At RedSpider we offer the best ecommerce web design and development services in Dubai. Each webstore is built with creativity, innovation and passion. Our team plans each step from product browsing to secure checkout keeping in mind your customer's convenience.",
+    intro_image = "",
     cta_title,
     cta_description,
     cta_button_text,
     cta_button_link,
     cta_background,
+
     // Repeater Data
     features = [],
+    benefits = [],
     processes = [],
     technologies = [],
     faqs = [],
     gallery = [],
+
+    // ============================================
+    // 🆕 NEW - FRONTEND DYNAMIC SETTINGS
+    // ============================================
+
+    // Design & Layout
+    layout_style = "grid",
+    columns_count = 3,
+    primary_color = "#FF6B35",
+    secondary_color = "#0047AB",
+    background_color = "#F8F9FA",
+    text_color = "#1A1A2E",
+    button_color = "#FF6B35",
+    button_text_color = "#FFFFFF",
+    section_padding = "large",
+
+    // Section Visibility
+    show_hero = true,
+    show_intro = true,
+    show_features = true,
+    show_benefits = true,
+    show_processes = true,
+    show_technologies = true,
+    show_faqs = true,
+    show_gallery = true,
+    show_cta = true,
+
+    // Content Customization
+    hero_button_text = "Get Started",
+    hero_button_url = "/contact",
+    features_title = "Ecommerce Website Solutions We Offer",
+    features_subtitle = "All solutions are built around your products, customers and business goals.",
+    benefits_title = "Why Choose RedSpider for Ecommerce Development Services.",
+    benefits_subtitle = "",
+    processes_title = "Our Ecommerce Development Process",
+    processes_subtitle = "The development process is well planned and delivered without compromising on quality, on time, for each and every ecommerce project.",
+    technologies_title = "Ecommerce Platforms We Work With",
+    technologies_subtitle = "We will help you decide the best ecommerce platform after discussing the product range, budget, customization needs and future plans for expansion.",
+    faqs_title = "Frequently Asked Questions",
+    faqs_subtitle = "Find quick answers about our ecommerce website development services.",
+    gallery_title = "Our Work",
+    gallery_subtitle = "",
+    cta_subtitle = "",
+    cta_button_url = "/contact",
+
+    // Animation
+    animation_enabled = false,
+    animation_type = "fade",
+    animation_duration = "medium",
+
+    // Section Order
+    section_order = [
+      "hero",
+      "intro",
+      "features",
+      "benefits",
+      "processes",
+      "technologies",
+      "gallery",
+      "faqs",
+      "cta",
+    ],
+
+    // Custom Code
+    custom_css = "",
+    custom_js = "",
   } = data;
 
   // ============================================
-  // 📊 DYNAMIC DATA WITH STATIC FALLBACK
+  // 📌 FALLBACK DATA
   // ============================================
 
   // 1. Solutions - Dynamic from backend or static fallback
@@ -57,7 +125,6 @@ export default function EcommerceTemplate({ data }) {
           { title: "Routine Maintenance & Technical Support" },
         ];
 
-  // Icons for solutions
   const solutionIcons = [
     "bi-cart-check",
     "bi-shop",
@@ -141,34 +208,35 @@ export default function EcommerceTemplate({ data }) {
           },
         ];
 
-  // 4. Key Features (Static - Future Dynamic)
-  const featuresList = [
-    "Responsive design for desktop, tablets and mobile devices",
-    "Secure payment gateway integration",
-    "Fast-loading pages for a better user experience",
-    "Easily manage products and categories",
-    "Enhanced inventory and stock management",
-    "Easy-to-use shopping cart and checkout",
-    "Customer accounts and order tracking",
-    "Product search and filtering",
-    "SEO-friendly website structure",
-    "Shipping and tax configurations",
-    "Easy-to-manage admin dashboard",
-  ];
-
-  const featureIcons = [
-    "phone",
-    "shield-check",
-    "speedometer2",
-    "box-seam",
-    "boxes",
-    "cart-check",
-    "person-check",
-    "search",
-    "graph-up-arrow",
-    "truck",
-    "grid-1x2",
-  ];
+  // 4. Key Features - Dynamic from benefits or static fallback
+  const featureItems =
+    benefits.length > 0
+      ? benefits
+      : [
+          {
+            title: "Responsive design for desktop, tablets and mobile devices",
+            icon: "phone",
+          },
+          { title: "Secure payment gateway integration", icon: "shield-check" },
+          {
+            title: "Fast-loading pages for a better user experience",
+            icon: "speedometer2",
+          },
+          { title: "Easily manage products and categories", icon: "box-seam" },
+          { title: "Enhanced inventory and stock management", icon: "boxes" },
+          {
+            title: "Easy-to-use shopping cart and checkout",
+            icon: "cart-check",
+          },
+          {
+            title: "Customer accounts and order tracking",
+            icon: "person-check",
+          },
+          { title: "Product search and filtering", icon: "search" },
+          { title: "SEO-friendly website structure", icon: "graph-up-arrow" },
+          { title: "Shipping and tax configurations", icon: "truck" },
+          { title: "Easy-to-manage admin dashboard", icon: "grid-1x2" },
+        ];
 
   // 5. Industry Items (Static - Future Dynamic)
   const industryItems = [
@@ -205,7 +273,6 @@ export default function EcommerceTemplate({ data }) {
     "phone",
     "shield-check",
   ];
-
   const whyChooseIcons2 = [
     "diagram-3",
     "lightning-charge",
@@ -245,480 +312,400 @@ export default function EcommerceTemplate({ data }) {
   // 8. Gallery Images - Dynamic from backend
   const galleryImages = gallery.length > 0 ? gallery : [];
 
-  return (
-    <>
-      <ServiceHero service={data} />
+  // ============================================
+  // 🎨 Dynamic Styles
+  // ============================================
+  const styles = {
+    "--primary-color": primary_color,
+    "--secondary-color": secondary_color,
+    "--background-color": background_color,
+    "--text-color": text_color,
+    "--button-color": button_color,
+    "--button-text-color": button_text_color,
+  };
 
-      {/* Intro */}
-      <section className="rs-gd-intro">
-        <span className="rs-gd-intro__shape" aria-hidden="true"></span>
-        <div className="container-fluid px-3 px-md-4 px-xl-5">
-          <div className="row gx-xl-5 align-items-start">
-            <div className="col-lg-3">
-              <div className="rs-gd-intro__rail">
-                <span className="rs-gd-intro__rail-icon">
-                  <i className="bi bi-bezier2"></i>
-                </span>
-                <span className="rs-gd-intro__rail-text">
-                  {intro_small_heading || "Ecommerce · Dubai"}
-                </span>
+  // ============================================
+  // 📐 Section Order Mapping
+  // ============================================
+  const sectionMap = {
+    hero: {
+      component: <ServiceHero service={data} key="hero" />,
+      show: show_hero,
+    },
+    intro: {
+      component: (
+        <section key="intro" className="rs-gd-intro">
+          <span className="rs-gd-intro__shape" aria-hidden="true"></span>
+          <div className="container-fluid px-3 px-md-4 px-xl-5">
+            <div className="row gx-xl-5 align-items-start">
+              <div className="col-lg-3">
+                <div className="rs-gd-intro__rail">
+                  <span className="rs-gd-intro__rail-icon">
+                    <i className="bi bi-bezier2"></i>
+                  </span>
+                  <span className="rs-gd-intro__rail-text">
+                    {intro_small_heading}
+                  </span>
+                </div>
+              </div>
+              <div className="col-lg-7">
+                <div className="rs-gd-intro__copy">
+                  <p className="rs-gd-intro__lead rs-gd-intro__reveal">
+                    {intro_description}
+                  </p>
+                  <p className="rs-gd-intro__support rs-gd-intro__reveal">
+                    We create ecommerce solutions that help various businesses
+                    in Dubai and UAE sell more and store management easier.
+                  </p>
+                  <div className="rs-gd-intro__footer">
+                    <a className="rs-gd-intro__link" href="#">
+                      <span>Explore our Work</span>
+                      <i className="bi bi-arrow-up-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-2">
+                <div className="rs-gd-intro__meta">Creative since 2010</div>
               </div>
             </div>
-            <div className="col-lg-7">
-              <div className="rs-gd-intro__copy">
-                <p className="rs-gd-intro__lead rs-gd-intro__reveal">
-                  {intro_description ||
-                    "At RedSpider we offer the best ecommerce web design and development services in Dubai. Each webstore is built with creativity, innovation and passion. Our team plans each step from product browsing to secure checkout keeping in mind your customer's convenience."}
-                </p>
-                <p className="rs-gd-intro__support rs-gd-intro__reveal">
-                  We create ecommerce solutions that help various businesses in
-                  Dubai and UAE sell more and store management easier.
-                </p>
-                <div className="rs-gd-intro__footer">
-                  <a className="rs-gd-intro__link" href="#">
-                    <span>Explore our Work</span>
-                    <i className="bi bi-arrow-up-right"></i>
+          </div>
+        </section>
+      ),
+      show: show_intro,
+    },
+    features: {
+      component: (
+        <section key="features" className="brochure-services-section dark-bg">
+          <div className="container">
+            <div className="row align-items-start justify-content-between">
+              <div className="col-lg-5">
+                <h2
+                  className="services-heading fs-1"
+                  style={{ letterSpacing: 0 }}
+                >
+                  {features_title}
+                </h2>
+                <p className="solutions-description">{features_subtitle}</p>
+                <ul className="services-list">
+                  {solutions.map((item, idx) => (
+                    <li key={item.id || idx}>
+                      <span className="service-icon">
+                        <i
+                          className={solutionIcons[idx % solutionIcons.length]}
+                        ></i>
+                      </span>
+                      <span className="service-text">{item.title}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="col-lg-7 px-lg-5">
+                <div className="process-title-wrapper mb-3">
+                  <h6 className="text-white">{processes_title}</h6>
+                </div>
+                <p className="process-description">{processes_subtitle}</p>
+                <div
+                  className="process-accordion mt-4"
+                  id="ecommerceProcessAccordion"
+                >
+                  {processData.map((process, index) => {
+                    const isFirst = index === 0;
+                    const collapseId = `ecommerce-collapse-${index}`;
+                    return (
+                      <div className="accordion-item" key={process.id || index}>
+                        <div className="accordion-header">
+                          <button
+                            className={`accordion-trigger ${isFirst ? "active" : ""}`}
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target={`#${collapseId}`}
+                            aria-expanded={isFirst ? "true" : "false"}
+                          >
+                            <span className="step-number">{index + 1}.</span>
+                            <span className="step-title">{process.title}</span>
+                            <span className="step-arrow">↗</span>
+                          </button>
+                        </div>
+                        <div
+                          id={collapseId}
+                          className={`accordion-collapse collapse ${isFirst ? "show" : ""}`}
+                          data-bs-parent="#ecommerceProcessAccordion"
+                        >
+                          <div className="accordion-body">
+                            <div className="accordion-body-text">
+                              {process.description}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="connect-section mt-5">
+                  <span className="connect-label">Let's Connect :</span>
+                  <div className="connect-divider"></div>
+                  <a href={cta_button_link || "#"} className="connect-btn">
+                    {cta_button_text || "Book A Call"}
                   </a>
                 </div>
               </div>
             </div>
-            <div className="col-lg-2">
-              <div className="rs-gd-intro__meta">Creative since 2010</div>
-            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Solutions + Process */}
-      <section className="brochure-services-section dark-bg">
-        <div className="container">
-          <div className="row align-items-start justify-content-between">
-            {/* Left Column - Solutions List */}
-            <div className="col-lg-5">
-              <h2
-                className="services-heading fs-1"
-                style={{ letterSpacing: 0 }}
-              >
-                <span>Ecommerce Website Solutions We Offer</span>
-              </h2>
-              <p className="solutions-description">
-                All solutions are built around your products, customers and
-                business goals.
-              </p>
-              <ul className="services-list">
-                {solutions.map((item, idx) => (
-                  <li key={item.id || idx}>
-                    <span className="service-icon">
-                      <i
-                        className={solutionIcons[idx % solutionIcons.length]}
-                      ></i>
-                    </span>
-                    <span className="service-text">{item.title}</span>
-                  </li>
-                ))}
-              </ul>
+        </section>
+      ),
+      show: show_features,
+    },
+    benefits: {
+      component: (
+        <section key="benefits" className="rs-agency-intro-sec py-5">
+          <div className="container">
+            <div className="rs-effect-section py-2">
+              <div className="container">
+                <h2
+                  className="rs-title-effect rs-title-rotate-up"
+                  data-title={benefits_title}
+                >
+                  {benefits_title}
+                </h2>
+              </div>
             </div>
-
-            {/* Right Column - Process Accordion */}
-            <div className="col-lg-7 px-lg-5">
-              <div className="process-title-wrapper mb-3">
-                <h6 className="text-white">
-                  Our Ecommerce <br />
-                  Development <br /> Process
-                </h6>
+            <div className="row rs-agency-bottom align-items-center">
+              <div className="col-lg-1"></div>
+              <div className="col-lg-4">
+                <p className="rs-agency-text">
+                  Selecting a proper development partner is as crucial as
+                  picking the correct platform. We have technical knowledge and
+                  hands-on ecommerce experience in creating websites that
+                  produce measurable results for businesses.
+                </p>
               </div>
-              <p className="process-description">
-                The development process is well planned and delivered without
-                compromising on quality, on time, for each and every ecommerce
-                project.
-              </p>
-
-              <div
-                className="process-accordion mt-4"
-                id="ecommerceProcessAccordion"
-              >
-                {processData.map((process, index) => {
-                  const isFirst = index === 0;
-                  const collapseId = `ecommerce-collapse-${index}`;
-                  return (
-                    <div className="accordion-item" key={process.id || index}>
-                      <div className="accordion-header">
-                        <button
-                          className={`accordion-trigger ${isFirst ? "active" : ""}`}
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target={`#${collapseId}`}
-                          aria-expanded={isFirst ? "true" : "false"}
-                        >
-                          <span className="step-number">{index + 1}.</span>
-                          <span className="step-title">{process.title}</span>
-                          <span className="step-arrow">↗</span>
-                        </button>
-                      </div>
-                      <div
-                        id={collapseId}
-                        className={`accordion-collapse collapse ${isFirst ? "show" : ""}`}
-                        data-bs-parent="#ecommerceProcessAccordion"
-                      >
-                        <div className="accordion-body">
-                          <div className="accordion-body-text">
-                            {process.description}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="col-lg-4">
+                <p className="rs-agency-text">
+                  We don't just develop online stores, we develop platforms that
+                  can help any business attract customers, improve conversions
+                  and grow their online presence.
+                </p>
               </div>
-
-              {/* Let's Connect Section */}
-              <div className="connect-section mt-5">
-                <span className="connect-label">Let's Connect :</span>
-                <div className="connect-divider"></div>
-                <a href="#" className="connect-btn">
-                  Book A Call
+              <div className="col-lg-1 d-none d-lg-block">
+                <div className="rs-agency-line"></div>
+              </div>
+              <div className="col-lg-1">
+                <div className="rs-agency-circle-wrap">
+                  <div
+                    className="rs-agency-scroll-text"
+                    id="rsAgencyCircleText"
+                  ></div>
+                  <div className="rs-agency-circle-center">14+</div>
+                </div>
+              </div>
+            </div>
+            <div className="row rs-agency-bottom align-items-center">
+              <div className="letconnect">
+                <span>Let's Connect :</span>
+                <div className="line"></div>
+                <a href={cta_button_link || "#"}>
+                  {cta_button_text || "Book A Call"}
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Ecommerce Platforms Section */}
-      <section className="ecommerce-platforms-section">
-        <div className="container">
-          {/* Header */}
-          <div className="section-header">
-            <h2>
-              Ecommerce <span>Platforms We Work With</span>
-            </h2>
-            <p>
-              We will help you decide the best ecommerce platform after
-              discussing the product range, budget, customization needs and
-              future plans for expansion.
-            </p>
-          </div>
-
-          {/* Platforms Grid */}
-          <div className="platforms-list">
-            {platforms.map((platform, idx) => (
-              <div
-                className={`platform-item platform-${idx + 1}`}
-                key={platform.id || idx}
-              >
-                {/* Number */}
-                <span className="platform-number">
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-
-                {/* Platform Icon */}
-                <div className="platform-icon">
-                  <img
-                    src={`/assets/img/icons/${platform.icon || "default"}.png`}
-                    alt={platform.title}
-                  />
-                </div>
-
-                {/* Platform Content */}
-                <div className="platform-info">
-                  <h3>{platform.title}</h3>
-                  <p>{platform.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Industries Marquee */}
-      <section className="rs-text-marquee-sec dark-background">
-        <div className="rs-light-pattern">
-          <span className="rs-pattern-dot dot1"></span>
-          <span className="rs-pattern-dot dot2"></span>
-          <span className="rs-pattern-dot dot3"></span>
-          <span className="rs-pattern-dot dot4"></span>
-          <span className="rs-pattern-dot dot5"></span>
-        </div>
-        <div className="container">
-          <div className="rs-marquee-heading text-center">
-            <span className="rs-small-title">
-              Industries Using Ecommerce in the UAE
-            </span>
-            <h2 className="rs-main-title fw-bold text-white">
-              Ecommerce is <span>Transforming Every</span> Industry <br />
-              Across the UAE
-            </h2>
-            <p className="rs-main-text">
-              The UAE is still in the process of revolutionizing business in the
-              region with the power of ecommerce. Businesses in nearly every
-              vertical are investing in digital commerce and seeking to serve
-              more customers while delivering an online shopping experience
-              that's convenient.
-            </p>
-          </div>
-        </div>
-        <div
-          className="rs-industry-marquee py-0"
-          aria-label="Industries we serve"
-        >
-          <div className="rs-marquee-line">
-            <div className="rs-marquee-track">
-              <div className="rs-marquee-group">
-                {industryItems.map((item, idx) => (
-                  <span
-                    key={idx}
-                    className={`rs-marquee-item ${idx % 2 === 0 ? "rs-red" : "rs-outline"}`}
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-              <div className="rs-marquee-group" aria-hidden="true">
-                {industryItems.map((item, idx) => (
-                  <span
-                    key={idx + industryItems.length}
-                    className={`rs-marquee-item ${idx % 2 === 0 ? "rs-red" : "rs-outline"}`}
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Key Features */}
-      <section className="rs-key-features pt-5">
-        <span className="rs-dot" aria-hidden="true"></span>
-        <div className="container-fluid px-4 px-lg-5">
-          <div className="row align-items-center g-4 g-xl-5">
-            <div className="col-lg-3">
-              <div className="rs-content">
-                <span className="rs-label">Ecommerce Development</span>
-                <h2 className="rs-title">
-                  Key Features of Our <span>Ecommerce Websites</span>
-                </h2>
-                <p className="rs-description">
-                  Your ecommerce website should be visually appealing, fast and
-                  user-friendly. We build practical features that make shopping
-                  easier and store management simpler.
-                </p>
-              </div>
-            </div>
-            <div className="col-lg-5">
-              <div className="rs-image-frame">
-                <img
-                  src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=85"
-                  alt="Customer using an ecommerce payment system"
-                  loading="lazy"
-                />
-                <span className="rs-image-tag">
-                  <i className="bi bi-bag-check"></i> Built to Sell Better
-                </span>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <ul className="rs-feature-list">
-                {featuresList.map((feature, idx) => (
-                  <li className="rs-feature-item" key={idx}>
-                    <i className={`bi bi-${featureIcons[idx]}`}></i>
-                    <span className="rs-feature-text">{feature}</span>
-                    <i className="bi bi-arrow-up-right rs-arrow"></i>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Join With Us */}
-      <section
-        className="rs-packages-se dark-background section pt-0"
-        style={{ background: "#fff" }}
-      >
-        <div className="container" style={{ maxWidth: "1450px" }}>
-          <div className="row">
-            <div className="col-12">
-              <div
-                className="rs-left-card h-100 d-flex flex-column flex-lg-row align-items-center justify-content-between gap-4 text-center text-lg-start"
-                style={{ background: "#111" }}
-              >
-                <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-4 gap-lg-5">
-                  <span className="rs-join">Join With Us</span>
-                  <h4 className="mb-0">
-                    Get an Estimate for Ecommerce
-                    <br className="d-none d-md-block" />
-                    Website Development in Dubai
-                  </h4>
-                  <div className="rs-arrow-btn">
-                    <span>
-                      <img
-                        src="/assets/img/arrow-icon-40.svg"
-                        alt=""
-                        className="arrow-40deg-icon"
-                      />
-                    </span>
+            <div className="row rs-agency-bottom align-items-center my-4">
+              <div className="rs-feature-marquee pb-0">
+                <div className="rs-feature-row">
+                  <div className="rs-feature-track">
+                    {whyChooseItems.slice(0, 5).map((item, idx) => (
+                      <div className="rs-feature-item" key={idx}>
+                        <i className={`bi bi-${whyChooseIcons1[idx]}`}></i>
+                        <span>{item}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="quick-contect text-center text-lg-end mt-3 mt-lg-0">
-                  <small>Get A Consultation</small>
-                  <h5 className="mb-0">: 971555515475</h5>
+                <div className="rs-feature-row reverse">
+                  <div className="rs-feature-track">
+                    {whyChooseItems.slice(5, 10).map((item, idx) => (
+                      <div className="rs-feature-item" key={idx + 5}>
+                        <i className={`bi bi-${whyChooseIcons2[idx]}`}></i>
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="col-12">
-              <p className="text-muted mt-3 mb-0">
-                <em>
-                  Planning to launch a new ecommerce website or upgrade an
-                  existing online store? Our team will understand your
-                  requirements and prepare a customized development plan that
-                  aligns with your business goals. Get your estimate today!
-                </em>
-              </p>
+          </div>
+        </section>
+      ),
+      show: show_benefits,
+    },
+    processes: {
+      component: (
+        <section key="processes" className="rs-key-features pt-5">
+          <span className="rs-dot" aria-hidden="true"></span>
+          <div className="container-fluid px-4 px-lg-5">
+            <div className="row align-items-center g-4 g-xl-5">
+              <div className="col-lg-3">
+                <div className="rs-content">
+                  <span className="rs-label">Ecommerce Development</span>
+                  <h2 className="rs-title">
+                    Key Features of Our <span>Ecommerce Websites</span>
+                  </h2>
+                  <p className="rs-description">
+                    Your ecommerce website should be visually appealing, fast
+                    and user-friendly. We build practical features that make
+                    shopping easier and store management simpler.
+                  </p>
+                </div>
+              </div>
+              <div className="col-lg-5">
+                <div className="rs-image-frame">
+                  <img
+                    src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=85"
+                    alt="Customer using an ecommerce payment system"
+                    loading="lazy"
+                  />
+                  <span className="rs-image-tag">
+                    <i className="bi bi-bag-check"></i> Built to Sell Better
+                  </span>
+                </div>
+              </div>
+              <div className="col-lg-4">
+                <ul className="rs-feature-list">
+                  {featureItems.map((feature, idx) => (
+                    <li className="rs-feature-item" key={idx}>
+                      <i className={`bi bi-${feature.icon || "star"}`}></i>
+                      <span className="rs-feature-text">{feature.title}</span>
+                      <i className="bi bi-arrow-up-right rs-arrow"></i>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ),
+      show: show_processes,
+    },
 
-      {/* Gallery - Dynamic */}
-      {galleryImages.length > 0 && (
-        <section className="opposite-gallery-sec py-0">
+    // ============================================
+    // 🔥 TECHNOLOGIES SECTION - FIXED
+    // ============================================
+    technologies: {
+      component: (
+        <section key="technologies" className="ecommerce-platforms-section">
+          <div className="container">
+            <div className="section-header">
+              <h2>{technologies_title}</h2>
+              <p>{technologies_subtitle}</p>
+            </div>
+            <div className="platforms-list">
+              {platforms.map((platform, idx) => {
+                // 🔥 Icon name se image path banayein
+                const iconMap = {
+                  shopify: "shopify",
+                  woocommerce: "woocommerce",
+                  magento: "magento",
+                  laravel: "laravel",
+                  php: "php",
+                  "bi-shopify": "shopify",
+                  "bi-wordpress": "woocommerce",
+                  "bi-magento": "magento",
+                  "bi-laravel": "laravel",
+                  "bi-code-slash": "php",
+                };
+
+                // 🔥 Agar icon bi- se start ho raha hai toh usko map karo
+                let iconName = platform.icon || "default";
+                if (iconName.startsWith("bi-")) {
+                  iconName = iconMap[iconName] || "default";
+                }
+
+                return (
+                  <div
+                    className={`platform-item platform-${idx + 1}`}
+                    key={platform.id || idx}
+                  >
+                    <span className="platform-number">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <div className="platform-icon">
+                      <img
+                        src={`/assets/img/icons/${iconName}.png`}
+                        alt={platform.title}
+                        onError={(e) => {
+                          // 🔥 Agar image load na ho toh fallback icon
+                          e.target.style.display = "none";
+                          const parent = e.target.parentElement;
+                          const fallback = document.createElement("i");
+                          fallback.className = `bi ${platform.icon || "bi-box"}`;
+                          fallback.style.fontSize = "2.5rem";
+                          fallback.style.color = "#FF6B35";
+                          parent.appendChild(fallback);
+                        }}
+                      />
+                    </div>
+                    <div className="platform-info">
+                      <h3>{platform.title}</h3>
+                      <p>{platform.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      ),
+      show: show_technologies,
+    },
+
+    gallery: {
+      component: (
+        <section key="gallery" className="opposite-gallery-sec py-0">
           <div className="opposite-gallery-sticky">
             <div className="gallery-title-wrap">
-              <span>Our Work</span>
-              <h2>Our Work</h2>
+              <span>{gallery_title || "Our Work"}</span>
+              <h2>{gallery_title || "Our Work"}</h2>
+              {gallery_subtitle && <p>{gallery_subtitle}</p>}
             </div>
             <div className="gallery-inner">
-              <div className="gallery-track top-track">
-                {galleryImages.slice(0, 6).map((item, index) => (
-                  <div
-                    key={item.id || index}
-                    className={`gallery-card ${
-                      index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""
-                    }`}
-                  >
-                    <img src={item.image} alt={item.title || "Gallery"} />
+              {galleryImages.length > 0 ? (
+                <>
+                  <div className="gallery-track top-track">
+                    {galleryImages.slice(0, 6).map((item, index) => (
+                      <div
+                        key={item.id || index}
+                        className={`gallery-card ${index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""}`}
+                      >
+                        <img src={item.image} alt={item.title || "Gallery"} />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              {galleryImages.length > 6 && (
-                <div className="gallery-track bottom-track">
-                  {galleryImages.slice(6, 12).map((item, index) => (
-                    <div
-                      key={item.id || index}
-                      className={`gallery-card ${
-                        index % 3 === 1
-                          ? "large"
-                          : index % 3 === 0
-                            ? "small"
-                            : ""
-                      }`}
-                    >
-                      <img src={item.image} alt={item.title || "Gallery"} />
+                  {galleryImages.length > 6 && (
+                    <div className="gallery-track bottom-track">
+                      {galleryImages.slice(6, 12).map((item, index) => (
+                        <div
+                          key={item.id || index}
+                          className={`gallery-card ${index % 3 === 1 ? "large" : index % 3 === 0 ? "small" : ""}`}
+                        >
+                          <img src={item.image} alt={item.title || "Gallery"} />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  )}
+                </>
+              ) : (
+                <p className="text-center py-5">No gallery images available</p>
               )}
             </div>
           </div>
         </section>
-      )}
-
-      {/* Why Choose - Ecommerce */}
-      <section className="rs-agency-intro-sec py-5">
-        <div className="container">
-          <div className="rs-effect-section py-2">
-            <div className="container">
-              <h2
-                className="rs-title-effect rs-title-rotate-up"
-                data-title="Why Choose RedSpider for Ecommerce Development Services."
-              >
-                Why Choose RedSpider for Ecommerce Development Services.
-              </h2>
-            </div>
-          </div>
-          <div className="row rs-agency-bottom align-items-center">
-            <div className="col-lg-1"></div>
-            <div className="col-lg-4">
-              <p className="rs-agency-text">
-                Selecting a proper development partner is as crucial as picking
-                the correct platform. We have technical knowledge and hands-on
-                ecommerce experience in creating websites that produce
-                measurable results for businesses.
-              </p>
-            </div>
-            <div className="col-lg-4">
-              <p className="rs-agency-text">
-                We don't just develop online stores, we develop platforms that
-                can help any business attract customers, improve conversions and
-                grow their online presence.
-              </p>
-            </div>
-            <div className="col-lg-1 d-none d-lg-block">
-              <div className="rs-agency-line"></div>
-            </div>
-            <div className="col-lg-1">
-              <div className="rs-agency-circle-wrap">
-                <div
-                  className="rs-agency-scroll-text"
-                  id="rsAgencyCircleText"
-                ></div>
-                <div className="rs-agency-circle-center">14+</div>
-              </div>
-            </div>
-          </div>
-          <div className="row rs-agency-bottom align-items-center">
-            <div className="letconnect">
-              <span>Let's Connect :</span>
-              <div className="line"></div>
-              <a href="#">Book A Call</a>
-            </div>
-          </div>
-          <div className="row rs-agency-bottom align-items-center my-4">
-            <div className="rs-feature-marquee pb-0">
-              <div className="rs-feature-row">
-                <div className="rs-feature-track">
-                  {whyChooseItems.slice(0, 5).map((item, idx) => (
-                    <div className="rs-feature-item" key={idx}>
-                      <i className={`bi bi-${whyChooseIcons1[idx]}`}></i>
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="rs-feature-row reverse">
-                <div className="rs-feature-track">
-                  {whyChooseItems.slice(5, 10).map((item, idx) => (
-                    <div className="rs-feature-item" key={idx + 5}>
-                      <i className={`bi bi-${whyChooseIcons2[idx]}`}></i>
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Review */}
-      <section id="review-sec" className="review-sec section light-background">
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div className="review-wrap">
-            <img
-              src="/assets/img/reviewimg.png"
-              alt="Reviews"
-              className="img-fluid"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* FAQs - Dynamic */}
-      {faqData.length > 0 && (
+      ),
+      show: show_gallery,
+    },
+    faqs: {
+      component: (
         <section
+          key="faqs"
           id="rs-faq-sec"
           className="home-faq rs-faq-sec section pb-5 pt-0 light-background"
         >
@@ -732,79 +719,121 @@ export default function EcommerceTemplate({ data }) {
             }}
           >
             <div className="text-start mb-5 border-bottom pb-3">
-              <h2 className="fw-bold">Frequently Asked Questions</h2>
-              <p className="mb-0">
-                Find quick answers about our ecommerce website development
-                services.
-              </p>
+              <h2 className="fw-bold">{faqs_title}</h2>
+              <p className="mb-0">{faqs_subtitle}</p>
             </div>
-            <div className="row g-4">
-              <div className="col-lg-6">
-                <div className="accordion" id="faqLeft-ecommerce">
-                  {faqData
-                    .slice(0, Math.ceil(faqData.length / 2))
-                    .map((faq, idx) => (
-                      <div
-                        className="accordion-item"
-                        key={faq.id || `left-${idx}`}
-                      >
-                        <h2 className="accordion-header">
-                          <button
-                            className="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target={`#faq-ecommerce-left-${idx}`}
-                          >
-                            {faq.question}
-                          </button>
-                        </h2>
+            {faqData.length > 0 ? (
+              <div className="row g-4">
+                <div className="col-lg-6">
+                  <div className="accordion" id="faqLeft-ecommerce">
+                    {faqData
+                      .slice(0, Math.ceil(faqData.length / 2))
+                      .map((faq, idx) => (
                         <div
-                          id={`faq-ecommerce-left-${idx}`}
-                          className="accordion-collapse collapse"
-                          data-bs-parent="#faqLeft-ecommerce"
+                          className="accordion-item"
+                          key={faq.id || `left-${idx}`}
                         >
-                          <div className="accordion-body">{faq.answer}</div>
+                          <h2 className="accordion-header">
+                            <button
+                              className="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target={`#faq-ecommerce-left-${idx}`}
+                            >
+                              {faq.question}
+                            </button>
+                          </h2>
+                          <div
+                            id={`faq-ecommerce-left-${idx}`}
+                            className="accordion-collapse collapse"
+                            data-bs-parent="#faqLeft-ecommerce"
+                          >
+                            <div className="accordion-body">{faq.answer}</div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                  </div>
+                </div>
+                <div className="col-lg-6">
+                  <div className="accordion" id="faqRight-ecommerce">
+                    {faqData
+                      .slice(Math.ceil(faqData.length / 2))
+                      .map((faq, idx) => (
+                        <div
+                          className="accordion-item"
+                          key={faq.id || `right-${idx}`}
+                        >
+                          <h2 className="accordion-header">
+                            <button
+                              className="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target={`#faq-ecommerce-right-${idx}`}
+                            >
+                              {faq.question}
+                            </button>
+                          </h2>
+                          <div
+                            id={`faq-ecommerce-right-${idx}`}
+                            className="accordion-collapse collapse"
+                            data-bs-parent="#faqRight-ecommerce"
+                          >
+                            <div className="accordion-body">{faq.answer}</div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
-              <div className="col-lg-6">
-                <div className="accordion" id="faqRight-ecommerce">
-                  {faqData
-                    .slice(Math.ceil(faqData.length / 2))
-                    .map((faq, idx) => (
-                      <div
-                        className="accordion-item"
-                        key={faq.id || `right-${idx}`}
-                      >
-                        <h2 className="accordion-header">
-                          <button
-                            className="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target={`#faq-ecommerce-right-${idx}`}
-                          >
-                            {faq.question}
-                          </button>
-                        </h2>
-                        <div
-                          id={`faq-ecommerce-right-${idx}`}
-                          className="accordion-collapse collapse"
-                          data-bs-parent="#faqRight-ecommerce"
-                        >
-                          <div className="accordion-body">{faq.answer}</div>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </div>
+            ) : (
+              <p className="text-center">No FAQs available</p>
+            )}
           </div>
         </section>
-      )}
+      ),
+      show: show_faqs,
+    },
+    cta: {
+      component: <ServiceCTA service={data} key="cta" />,
+      show: show_cta,
+    },
+  };
 
-      <ServiceCTA service={data} />
-    </>
+  // ============================================
+  // 🏗️ Render Sections Based on Order
+  // ============================================
+  const renderSections = () => {
+    let order = section_order;
+    if (typeof order === "string") {
+      order = order.split(",").map((s) => s.trim());
+    }
+    if (!Array.isArray(order) || order.length === 0) {
+      order = [
+        "hero",
+        "intro",
+        "features",
+        "benefits",
+        "processes",
+        "technologies",
+        "gallery",
+        "faqs",
+        "cta",
+      ];
+    }
+    return order
+      .map((key) => {
+        const section = sectionMap[key];
+        if (!section) return null;
+        return section.show ? section.component : null;
+      })
+      .filter(Boolean);
+  };
+
+  return (
+    <div style={styles}>
+      {custom_css && <style dangerouslySetInnerHTML={{ __html: custom_css }} />}
+      <main className="service-template">{renderSections()}</main>
+      {custom_js && <script dangerouslySetInnerHTML={{ __html: custom_js }} />}
+    </div>
   );
 }

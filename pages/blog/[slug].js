@@ -2,18 +2,22 @@
 
 import Layout from "../../components/layout/Layout";
 import SEO from "../../components/seo/SEO";
-import BlogHero from "../../components/blog/BlogHero";
 import BlogPageTitle from "../../components/blog/BlogPageTitle";
 import BlogDetailMain from "../../components/blog-details/BlogDetailMain";
 import BlogDetailSidebar from "../../components/blog-details/BlogDetailSidebar";
-import { fetchAllPosts, fetchPostBySlug } from "../../lib/api";
+
+import { fetchPosts, fetchPostBySlug } from "../../lib/api";
 
 export default function BlogDetail({ post, recentPosts, categories, tags }) {
-  // Agar post nahi mili toh fallback
+  // ============================================
+  // Post Not Found
+  // ============================================
+
   if (!post) {
     return (
       <Layout>
         <SEO title="Post Not Found" />
+
         <main className="main">
           <div className="container py-5 text-center">
             <h1>Post Not Found</h1>
@@ -23,29 +27,61 @@ export default function BlogDetail({ post, recentPosts, categories, tags }) {
     );
   }
 
+  // ============================================
+  // SEO Data
+  // ============================================
+
   const seoData = {
-    title: post.title || post.name || "Blog Details - RedSpider",
-    description: post.description || "Read the full article on the latest trends in web design and development.",
-    keywords: "blog details, web design article, redspider blog",
+    title:
+      post.seo?.seo_title ||
+      post.seo_title ||
+      post.title ||
+      post.name ||
+      "Blog Details - RedSpider",
+
+    description:
+      post.seo?.seo_description ||
+      post.seo_description ||
+      post.description ||
+      "Read the full article on the latest trends in web design and development.",
+
+    keywords:
+      post.seo?.seo_keywords ||
+      post.seo_keywords ||
+      "blog details, web design article, redspider blog",
+
     canonical: `https://www.redspider.ae/blog/${post.slug}`,
-    image: post.image || "https://www.redspider.ae/blog-og-image.jpg",
+
+    image:
+      post.seo?.seo_image ||
+      post.seo_image ||
+      post.image ||
+      "https://www.redspider.ae/blog-og-image.jpg",
+
     noIndex: false,
   };
+
+  // ============================================
+  // Page
+  // ============================================
 
   return (
     <Layout>
       <SEO {...seoData} />
+
       <main className="main">
-       
         <BlogPageTitle />
 
         <div className="container">
           <div className="row">
-            
+            {/* Main Blog Content */}
+            <div className="col-lg-8">
               <BlogDetailMain post={post} />
-            
+            </div>
+
+            {/* Sidebar */}
             <div className="col-lg-4">
-              <BlogDetailSidebar 
+              <BlogDetailSidebar
                 recentPosts={recentPosts}
                 categories={categories}
                 tags={tags}
@@ -54,50 +90,119 @@ export default function BlogDetail({ post, recentPosts, categories, tags }) {
             </div>
           </div>
         </div>
-
-        {/* <BlogCTA /> */}
       </main>
     </Layout>
   );
 }
 
-// ✅ Sabhi slugs ke liye paths generate karo
+// ============================================
+// Generate Static Paths
+// ============================================
+
 export async function getStaticPaths() {
-  const posts = await fetchAllPosts();
+  try {
+    /*
+     * fetchPosts() returns:
+     *
+     * {
+     *   posts: [],
+     *   pagination: {}
+     * }
+     */
 
-  const paths = posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
+    const result = await fetchPosts(1);
 
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
+    const posts = result?.posts || [];
 
-// ✅ Ek specific post + sidebar data fetch karo
-export async function getStaticProps({ params }) {
-  const post = await fetchPostBySlug(params.slug);
+    const paths = posts
+      .filter((post) => post?.slug)
+      .map((post) => ({
+        params: {
+          slug: post.slug,
+        },
+      }));
 
-  if (!post) {
     return {
-      notFound: true,
+      paths,
+      fallback: "blocking",
+    };
+  } catch (error) {
+    console.error("Error generating blog static paths:", error);
+
+    return {
+      paths: [],
+      fallback: "blocking",
     };
   }
+}
 
-  // ✅ Recent Posts (excluding current), Categories, Tags
-  const allPosts = await fetchAllPosts();
-  const recentPosts = allPosts.filter(p => p.id !== post.id).slice(0, 5);
-  const categories = post.categories || [];
-  const tags = post.tags || [];
+// ============================================
+// Fetch Single Blog
+// ============================================
 
-  return {
-    props: {
-      post,
-      recentPosts,
-      categories,
-      tags,
-    },
-    revalidate: 60,
-  };
+export async function getStaticProps({ params }) {
+  try {
+    // ==========================================
+    // Current Blog Post
+    // ==========================================
+
+    const post = await fetchPostBySlug(params.slug);
+
+    if (!post) {
+      return {
+        notFound: true,
+        revalidate: 60,
+      };
+    }
+
+    // ==========================================
+    // Fetch Blog Posts For Sidebar
+    // ==========================================
+
+    const result = await fetchPosts(1);
+
+    const allPosts = result?.posts || [];
+
+    // ==========================================
+    // Recent Posts
+    // ==========================================
+
+    const recentPosts = allPosts
+      .filter((item) => String(item.id) !== String(post.id))
+      .slice(0, 5);
+
+    // ==========================================
+    // Categories
+    // ==========================================
+
+    const categories = post.categories || [];
+
+    // ==========================================
+    // Tags
+    // ==========================================
+
+    const tags = post.tags || [];
+
+    // ==========================================
+    // Return Props
+    // ==========================================
+
+    return {
+      props: {
+        post,
+        recentPosts,
+        categories,
+        tags,
+      },
+
+      revalidate: 60,
+    };
+  } catch (error) {
+    console.error("Error loading blog detail:", error);
+
+    return {
+      notFound: true,
+      revalidate: 60,
+    };
+  }
 }

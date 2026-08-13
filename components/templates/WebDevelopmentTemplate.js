@@ -4,39 +4,75 @@ import ServiceCTA from "../services/ServiceCTA";
 
 export default function WebDevelopmentTemplate({ data }) {
   // ============================================
-  // ✅ DYNAMIC FIELDS - Backend se aayenge
+  // ✅ DYNAMIC FIELDS - Backend se aayenge, fallback hardcoded values
   // ============================================
   const {
-    name,
-    description,
-    content,
-    image,
-    hero_title,
-    hero_subtitle,
-    hero_description,
-    hero_image,
-    hero_background,
-    intro_small_heading,
-    intro_main_heading,
-    intro_description,
-    intro_image,
-    cta_title,
-    cta_description,
-    cta_button_text,
-    cta_button_link,
-    cta_background,
+    // Basic
+    name = "Web Development",
+    description = "",
+
+    // Hero - ServiceHero component handle karega
+    hero_title = "Why Website Development Matters for Business Growth",
+    hero_subtitle = "RedSpider Web Solutions",
+    hero_description = "A strong website is the foundation of digital presence. Structured layout, clear navigation, and responsive design ensure businesses communicate effectively across all devices.",
+    hero_image = "",
+    hero_background = "",
+
+    // Intro
+    intro_small_heading = "Web Development · Dubai, UAE",
+    intro_main_heading = "Professional Web Development Services in Dubai",
+    intro_description = "We build modern websites that reflect your brand. Our team creates responsive, SEO-friendly websites that help businesses grow online.",
+    intro_image = "",
+
+    // CTA
+    cta_title = "Ready to build a strong brand identity?",
+    cta_description = "Let RedSpider create a professional logo that represents your business the right way.",
+    cta_button_text = "Schedule Free Consultation",
+    cta_button_link = "#",
+    cta_background = "",
+
     // Repeater Data
     features = [],
+    benefits = [],
     processes = [],
     technologies = [],
     faqs = [],
     gallery = [],
-  } = data;
+
+    // ============================================
+    // 🆕 NEW - Frontend Settings (with hardcoded fallbacks)
+    // ============================================
+
+    // Section Visibility
+    show_hero = true,
+    show_intro = true,
+    show_features = true,
+    show_benefits = true,
+    show_processes = true,
+    show_technologies = true,
+    show_faqs = true,
+    show_gallery = true,
+    show_cta = true,
+
+    // Content Customization (Hardcoded fallbacks)
+    features_title = "Our Web Development Services",
+    features_subtitle = "At RedSpider, we offer a wide range of web development services to cater to your needs.",
+    benefits_title = "Why is RedSpider a Trustworthy choice for Businesses?",
+    benefits_subtitle = "RedSpider has earned trust by offering top notch services to various businesses in the industry. You can choose us for the following:",
+    processes_title = "Web Design & Development in Dubai",
+    processes_subtitle = "Dubai is a web design and development company with extensive experience and track record.",
+    faqs_title = "Frequently Asked Questions",
+    faqs_subtitle = "Find quick answers to common questions about our services.",
+    gallery_title = "Our Work",
+    gallery_subtitle = "",
+    cta_subtitle = "",
+    cta_button_url = "/contact",
+  } = data || {};
 
   // ============================================
-  // ❌ STATIC FIELDS - Abhi hardcoded (Future Dynamic)
+  // 📌 FALLBACK: Benefits - Agar backend se na aaye toh hardcoded
   // ============================================
-  const trustPoints = [
+  const fallbackBenefits = [
     {
       id: 1,
       title: "Industry Experience Across UAE",
@@ -81,25 +117,24 @@ export default function WebDevelopmentTemplate({ data }) {
     },
   ];
 
+  const finalBenefits = benefits?.length > 0 ? benefits : fallbackBenefits;
+
   return (
     <>
-      {/* Hero */}
-      <ServiceHero service={data} />
+      {/* Hero - Only show if enabled */}
+      {show_hero && <ServiceHero service={data} />}
 
-      {/* Features Grid - Dynamic */}
-      {features.length > 0 && (
+      {/* Features Grid */}
+      {show_features && features.length > 0 && (
         <section className="re-process py-5 pix-bg">
           <div className="container pt-lg-5" style={{ maxWidth: "1550px" }}>
             <div className="row justify-content-center text-center">
               <div className="col-lg-12" data-aos="fade-up">
                 <div className="title-wrap text-start cus-title-ani-1">
                   <h3 className="rs-main-title text-white fw-bold">
-                    Our <em>Web Development</em> Services
+                     {features_title}
                   </h3>
-                  <p className="cus-20 text-white mb-0">
-                    At RedSpider, we offer a wide range of web development
-                    services to cater to your needs.
-                  </p>
+                  <p className="cus-20 text-white mb-0">{features_subtitle}</p>
                 </div>
               </div>
             </div>
@@ -116,7 +151,7 @@ export default function WebDevelopmentTemplate({ data }) {
                   <div className="re-process-card">
                     <div className="re-process-icon">
                       {feature.icon && (
-                        <i className={`bi bi-${feature.icon}`}></i>
+                        <i className={`${feature.icon}`}></i>
                       )}
                     </div>
                     <span>{String(index + 1).padStart(2, "0")}</span>
@@ -130,24 +165,74 @@ export default function WebDevelopmentTemplate({ data }) {
         </section>
       )}
 
-      {/* Process Accordion - Dynamic */}
-      {processes.length > 0 && (
+      {/* Benefits - Why RedSpider Section */}
+      {show_benefits && finalBenefits.length > 0 && (
+        <section className="rsu-creative-sec">
+          <div className="container-fluid px-lg-5">
+            <div className="rsu-scene">
+              <span className="rsu-red-line"></span>
+              <div className="rsu-content">
+                <h2 className="rsu-main-title">{benefits_title}</h2>
+                <div className="rsu-bottom-left">
+                  <p className="rsu-intro">{benefits_subtitle}</p>
+                  <a href="#" className="rsu-btn">
+                    View Our Works <i className="bi bi-arrow-up-right"></i>
+                  </a>
+                </div>
+                <div className="rsu-accordion-wrap">
+                  <div className="rsu-mini-title">
+                    <span>What we do</span>
+                    <i className="bi bi-arrow-down-right"></i>
+                  </div>
+                  <div className="accordion" id="rsuBusinessAccordion">
+                    {finalBenefits.map((point, index) => (
+                      <div
+                        className="rsu-accordion-item"
+                        key={point.id || index}
+                      >
+                        <button
+                          className={`rsu-accordion-btn ${index === 0 ? "" : "collapsed"}`}
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#rsu${index + 1}`}
+                          aria-expanded={index === 0 ? "true" : "false"}
+                        >
+                          <span>{String(index + 1).padStart(2, "0")}</span>{" "}
+                          {point.title}
+                          <i className="bi bi-plus-lg"></i>
+                        </button>
+                        <div
+                          id={`rsu${index + 1}`}
+                          className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
+                          data-bs-parent="#rsuBusinessAccordion"
+                        >
+                          <div className="rsu-accordion-body">
+                            {point.description}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Process Accordion */}
+      {show_processes && processes.length > 0 && (
         <section className="archidex-accordion-sec dark-cs-bg dark-background dev-before pt-0">
           <div className="archidex-bg-shape"></div>
 
           <div className="container" style={{ maxWidth: "1550px" }}>
             <div className="row g-5 align-items-start justify-content-between">
               <div className="col-lg-4">
-                <h2 className="archidex-title">
-                  <span>Web Design &</span> Development in Dubai
-                </h2>
+                <h2 className="archidex-title">{processes_title}</h2>
 
                 <ul className="archidex-list">
                   <li className="text-white">
-                    <span className="fs-5">
-                      Dubai is a web design and development company with
-                      extensive experience and track record.
-                    </span>
+                    <span className="fs-5">{processes_subtitle}</span>
                   </li>
                 </ul>
 
@@ -161,8 +246,7 @@ export default function WebDevelopmentTemplate({ data }) {
               <div className="col-lg-7 px-lg-5">
                 <div className="archidex-small-title">
                   <h6>
-                    Our Web <br />
-                    Development <br />
+                    Our <br />
                     Process
                   </h6>
                 </div>
@@ -212,12 +296,29 @@ export default function WebDevelopmentTemplate({ data }) {
         </section>
       )}
 
-      {/* Gallery - Dynamic */}
-      {gallery.length > 0 && (
+      {/* Review Section - Hamesha show */}
+      <section
+        id="review-sec"
+        className="review-sec section light-background pb-0"
+      >
+        <div className="container" style={{ maxWidth: "1100px" }}>
+          <div className="review-wrap">
+            <img
+              src="/assets/img/reviewimg.png"
+              alt="Reviews"
+              className="img-fluid"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery */}
+      {show_gallery && gallery.length > 0 && (
         <section className="opposite-gallery-sec py-0">
           <div className="opposite-gallery-sticky">
             <div className="gallery-title-wrap">
-              <h2 className="rs-main-title">Our Work</h2>
+              <h2 className="rs-main-title">{gallery_title}</h2>
+              {gallery_subtitle && <p>{gallery_subtitle}</p>}
             </div>
             <div className="gallery-inner">
               <div className="gallery-track top-track">
@@ -258,81 +359,8 @@ export default function WebDevelopmentTemplate({ data }) {
         </section>
       )}
 
-      {/* Why RedSpider - 🔥 STATIC (Baad mein backend se replace hoga) */}
-      <section className="rsu-creative-sec">
-        <div className="container-fluid px-lg-5">
-          <div className="rsu-scene">
-            <span className="rsu-red-line"></span>
-            <div className="rsu-content">
-              <h2 className="rsu-main-title">
-                Why <span> is RedSpider</span> a <br />
-                Trustworthy choice for<span> Businesses?</span>
-              </h2>
-              <div className="rsu-bottom-left">
-                <p className="rsu-intro">
-                  RedSpider has earned trust by offering top notch services to
-                  various businesses in the industry. You can choose us for the
-                  following:
-                </p>
-                <a href="#" className="rsu-btn">
-                  View Our Works <i className="bi bi-arrow-up-right"></i>
-                </a>
-              </div>
-              <div className="rsu-accordion-wrap">
-                <div className="rsu-mini-title">
-                  <span>What we do</span>
-                  <i className="bi bi-arrow-down-right"></i>
-                </div>
-                <div className="accordion" id="rsuBusinessAccordion">
-                  {trustPoints.map((point, index) => (
-                    <div className="rsu-accordion-item" key={point.id}>
-                      <button
-                        className={`rsu-accordion-btn ${index === 0 ? "" : "collapsed"}`}
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#rsu${index + 1}`}
-                        aria-expanded={index === 0 ? "true" : "false"}
-                      >
-                        <span>{String(index + 1).padStart(2, "0")}</span>{" "}
-                        {point.title}
-                        <i className="bi bi-plus-lg"></i>
-                      </button>
-                      <div
-                        id={`rsu${index + 1}`}
-                        className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
-                        data-bs-parent="#rsuBusinessAccordion"
-                      >
-                        <div className="rsu-accordion-body">
-                          {point.description}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Review Section */}
-      <section
-        id="review-sec"
-        className="review-sec section light-background pb-0"
-      >
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div className="review-wrap">
-            <img
-              src="/assets/img/reviewimg.png"
-              alt="Reviews"
-              className="img-fluid"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* FAQs - Dynamic */}
-      {faqs.length > 0 && (
+      {/* FAQs */}
+      {show_faqs && faqs.length > 0 && (
         <section
           id="rs-faq-sec"
           className="home-faq rs-faq-sec section py-5 light-background"
@@ -347,8 +375,8 @@ export default function WebDevelopmentTemplate({ data }) {
             }}
           >
             <div className="text-start mb-5 border-bottom pb-3">
-              <h2 className="fw-bold">Frequently Asked Questions</h2>
-              <p>Find quick answers to common questions about our services.</p>
+              <h2 className="fw-bold">{faqs_title}</h2>
+              <p>{faqs_subtitle}</p>
             </div>
             <div className="row g-4">
               <div className="col-lg-6">
@@ -413,7 +441,7 @@ export default function WebDevelopmentTemplate({ data }) {
       )}
 
       {/* CTA */}
-      <ServiceCTA service={data} />
+      {show_cta && <ServiceCTA service={data} />}
     </>
   );
 }
