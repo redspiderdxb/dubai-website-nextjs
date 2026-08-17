@@ -1,11 +1,11 @@
 // components/contact/ContactHero.js
 
 export default function ContactHero({ data }) {
-  // Get data from API or use fallback
-  const heroTitle = data?.hero_title || "Have a Project in Mind? Let's Talk";
+  const heroTitle =
+    data?.hero_title || "Have a Project in Mind? Let's Talk";
 
   return (
-    <section className="about-hero hero-marquee">
+    <section className="rs-contact-hero">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-12" data-aos="fade-right">
@@ -13,9 +13,10 @@ export default function ContactHero({ data }) {
               <h1 className="rs-process-title mb-3">
                 <span className="rs-process-highlight">
                   {heroTitle}
-                  <svg 
-                    className="rs-process-underline" 
-                    viewBox="0 0 320 22" 
+
+                  <svg
+                    className="rs-process-underline"
+                    viewBox="0 0 320 22"
                     preserveAspectRatio="none"
                     aria-hidden="true"
                     focusable="false"

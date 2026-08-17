@@ -238,9 +238,11 @@ h6 {
   }
 }
 
+
 /*--------------------------------------------------------------
 # Global Header
 --------------------------------------------------------------*/
+
 .rs-main-header {
   position: absolute;
   top: 0;
@@ -259,12 +261,26 @@ h6 {
   padding: 0 15px;
 }
 
+/*--------------------------------------------------------------
+# TOP ROW
+--------------------------------------------------------------*/
+
 .rs-main-header .rs-top-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 22px;
-  border-bottom: 1px solid rgba(255, 255, 255, .75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+/*--------------------------------------------------------------
+# LOGO
+--------------------------------------------------------------*/
+
+.rs-main-header .rs-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .rs-main-header .rs-logo img {
@@ -273,125 +289,384 @@ h6 {
   object-fit: contain;
 }
 
+/*--------------------------------------------------------------
+# NAV WRAPPER
+--------------------------------------------------------------*/
+
 .rs-main-header .rs-nav-wrap {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
 }
 
-.rs-main-header .rs-navmenu ul {
+/* ==========================================================
+   DESKTOP NAVIGATION - TRUE EQUAL GAP BETWEEN MENU ITEMS
+========================================================== */
+
+.rs-main-header .rs-nav-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.rs-main-header .rs-navmenu>ul {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  /* SAME SPACE BETWEEN EVERY MENU ITEM */
   gap: 27px;
+  width: auto;
 }
 
-.rs-main-header .rs-navmenu li {
+.rs-main-header .rs-navmenu>ul>li {
   position: relative;
+
+  /* IMPORTANT - REMOVE EQUAL COLUMN WIDTH */
+  flex: 0 0 auto;
+
+  display: block;
+  width: auto;
 }
 
-.rs-main-header .rs-navmenu a {
+/* NORMAL LINK */
+
+.rs-main-header .rs-navmenu>ul>li>a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+
+  padding: 10px 0;
+
   color: #fff;
   text-decoration: none;
+
   font-size: 14px;
   font-weight: 400;
+
   text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: color .25s ease;
   white-space: nowrap;
-  padding: 10px 0;
+
+  transition: color 0.25s ease;
 }
 
-.rs-main-header .rs-navmenu a:hover,
-.rs-main-header .rs-navmenu a.active {
+/* DROPDOWN BUTTON */
+
+.rs-main-header .rs-navmenu>ul>li>.rs-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+
+  gap: 6px;
+
+  padding: 10px 0;
+
+  margin: 0;
+
+  border: 0;
+  outline: 0;
+  background: transparent;
+
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+/* HOVER */
+
+.rs-main-header .rs-navmenu>ul>li>a:hover,
+.rs-main-header .rs-navmenu>ul>li>a.active,
+.rs-main-header .rs-navmenu>ul>li>.rs-dropdown-trigger:hover {
   color: #d20000;
 }
 
+/* DROPDOWN ARROW */
+
 .rs-main-header .rs-navmenu .toggle-dropdown {
   font-size: 12px;
-  transition: transform .25s ease;
+  line-height: 1;
+  margin-left: 2px;
+  transition: transform 0.25s ease;
 }
 
-.rs-main-header .rs-navmenu .dropdown:hover>a .toggle-dropdown {
+.rs-main-header .rs-navmenu .dropdown.rs-dropdown-open>.rs-dropdown-trigger .toggle-dropdown {
   transform: rotate(180deg);
 }
 
-.rs-main-header .rs-navmenu .dropdown ul {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 255px;
-  background: rgba(0, 0, 0, .95);
-  border: 1px solid rgba(255, 255, 255, .12);
-  display: block;
-  padding: 12px 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(16px);
-  transition: all .28s ease;
-  box-shadow: 0 18px 35px rgba(0, 0, 0, .35);
+/*--------------------------------------------------------------
+# NORMAL MENU LINKS
+--------------------------------------------------------------*/
+
+.rs-main-header .rs-navmenu>ul>li>a {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  color: #fff;
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  padding: 10px 5px;
+
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
 }
 
-.rs-main-header .rs-navmenu .dropdown:hover>ul {
+/*--------------------------------------------------------------
+# DROPDOWN BUTTON
+--------------------------------------------------------------*/
+
+.rs-main-header .rs-navmenu>ul>li>.rs-dropdown-trigger {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 10px 5px;
+
+  border: 0;
+  outline: none;
+
+  background: transparent;
+
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/*--------------------------------------------------------------
+# NAV HOVER
+--------------------------------------------------------------*/
+
+.rs-main-header .rs-navmenu>ul>li>a:hover,
+.rs-main-header .rs-navmenu>ul>li>a.active,
+.rs-main-header .rs-navmenu>ul>li>.rs-dropdown-trigger:hover {
+  color: #d20000;
+}
+
+/*--------------------------------------------------------------
+# DROPDOWN ICON
+--------------------------------------------------------------*/
+
+.rs-main-header .rs-navmenu .toggle-dropdown {
+  font-size: 12px;
+  line-height: 1;
+
+  transition: transform 0.25s ease;
+}
+
+/* Dropdown open icon */
+.rs-main-header .rs-navmenu .dropdown.rs-dropdown-open>.rs-dropdown-trigger .toggle-dropdown {
+  transform: rotate(180deg);
+}
+
+/*--------------------------------------------------------------
+# DROPDOWN MENU
+--------------------------------------------------------------*/
+
+.rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu {
+  position: absolute;
+
+  top: 100%;
+  left: 0;
+
+  min-width: 255px;
+
+  margin: 0;
+
+  background: rgba(0, 0, 0, 0.95);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  display: block;
+
+  padding: 12px 0;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateY(16px);
+
+  transition:
+    opacity 0.28s ease,
+    visibility 0.28s ease,
+    transform 0.28s ease;
+
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
+
+  z-index: 1000;
+}
+
+/* Desktop hover dropdown */
+.rs-main-header .rs-navmenu .dropdown:hover>.rs-dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
-.rs-main-header .rs-navmenu .dropdown ul li a {
-  padding: 10px 18px;
-  font-size: 13px;
-  text-transform: capitalize;
-  border-left: 3px solid transparent;
+/* Also support click-open state */
+.rs-main-header .rs-navmenu .dropdown.rs-dropdown-open>.rs-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
-.rs-main-header .rs-navmenu .dropdown ul li a:hover {
-  background: rgba(210, 0, 0, .12);
-  border-left-color: #d20000;
+/*--------------------------------------------------------------
+# DROPDOWN ITEMS
+--------------------------------------------------------------*/
+
+.rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu>li {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu>li>a {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 10px 18px;
+
   color: #fff;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  text-transform: capitalize;
+
+  text-decoration: none;
+
+  border-left: 3px solid transparent;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    padding-left 0.25s ease,
+    color 0.25s ease;
+}
+
+/* Dropdown hover */
+.rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu>li>a:hover {
+  background: rgba(210, 0, 0, 0.12);
+
+  border-left-color: #d20000;
+
+  color: #fff;
+
   padding-left: 23px;
 }
+
+/*--------------------------------------------------------------
+# BOTTOM ROW
+--------------------------------------------------------------*/
 
 .rs-main-header .rs-bottom-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding-top: 16px;
 }
 
+/*--------------------------------------------------------------
+# CALL NOW
+--------------------------------------------------------------*/
+
 .rs-main-header .rs-call-now {
   color: #fff;
+
   font-size: 20px;
   font-weight: 400;
+
+  white-space: nowrap;
 }
+
+/*--------------------------------------------------------------
+# SOCIAL
+--------------------------------------------------------------*/
 
 .rs-main-header .rs-social-wrap {
   display: flex;
   align-items: center;
+
   gap: 18px;
 }
+
+/*--------------------------------------------------------------
+# WHATSAPP
+--------------------------------------------------------------*/
 
 .rs-main-header .rs-whatsapp {
   display: inline-flex;
   align-items: center;
+
   gap: 9px;
+
   padding: 10px 18px;
+
   border: 2px solid #00e65c;
   border-radius: 40px;
+
   color: #fff;
+
   text-decoration: none;
+
   font-size: 14px;
   font-weight: 700;
-  transition: all .25s ease;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .rs-main-header .rs-whatsapp i {
   color: #00e65c;
   font-size: 21px;
+
+  transition: color 0.25s ease;
 }
 
 .rs-main-header .rs-whatsapp:hover {
@@ -403,32 +678,64 @@ h6 {
   color: #000;
 }
 
+/*--------------------------------------------------------------
+# SOCIAL ICONS
+--------------------------------------------------------------*/
+
 .rs-main-header .rs-social {
   color: #fff;
+
   font-size: 20px;
-  transition: color .25s ease;
+
   text-decoration: none;
+
+  transition: color 0.25s ease;
 }
 
 .rs-main-header .rs-social:hover {
   color: #d20000;
 }
 
+/*--------------------------------------------------------------
+# MOBILE TOGGLE
+--------------------------------------------------------------*/
+
 .rs-main-header .rs-mobile-toggle {
   display: none;
+
   color: #fff;
+
   font-size: 32px;
+
   cursor: pointer;
+
   line-height: 1;
+
   z-index: 1001;
+
+  border: 0;
+  background: transparent;
 }
+
+/*--------------------------------------------------------------
+# DEMO BANNER
+--------------------------------------------------------------*/
 
 .rs-demo-banner {
   min-height: 620px;
-  background: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .8)), url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.8)),
+    url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1920&auto=format&fit=crop") center / cover no-repeat;
 }
 
+/*==============================================================
+# TABLET / MOBILE
+==============================================================*/
+
 @media (max-width: 1199px) {
+
   .rs-main-header {
     padding-top: 18px;
   }
@@ -441,88 +748,175 @@ h6 {
     width: 190px;
   }
 
+  /* Mobile button */
   .rs-main-header .rs-mobile-toggle {
     display: block;
   }
 
+  /* Mobile navigation */
   .rs-main-header .rs-navmenu {
     position: fixed;
+
     top: 0;
     right: -100%;
+
     width: 330px;
     max-width: 86%;
+
     height: 100vh;
+
     background: #050505;
+
     padding: 88px 24px 30px;
-    transition: right .35s ease;
+
+    transition: right 0.35s ease;
+
     overflow-y: auto;
-    box-shadow: -20px 0 50px rgba(0, 0, 0, .55);
+
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.55);
+
+    z-index: 1000;
   }
 
-  .rs-main-header.rs-mobile-open .rs-navmenu {
+  /* Open mobile menu */
+  .rs-main-header .rs-navmenu.rs-mobile-open {
     right: 0;
   }
 
-  .rs-main-header .rs-navmenu ul {
+  /* Reset desktop navigation */
+  .rs-main-header .rs-navmenu>ul {
     display: block;
+
+    width: 100%;
   }
 
-  .rs-main-header .rs-navmenu li {
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
+  .rs-main-header .rs-navmenu>ul>li {
+    display: block;
+
+    width: 100%;
+
+    flex: none;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .rs-main-header .rs-navmenu a {
+  /* Mobile normal links */
+  .rs-main-header .rs-navmenu>ul>li>a {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
     justify-content: space-between;
+
     padding: 15px 0;
+
+    font-size: 14px;
   }
 
-  .rs-main-header .rs-navmenu .dropdown ul {
+  /* Mobile dropdown button */
+  .rs-main-header .rs-navmenu>ul>li>.rs-dropdown-trigger {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 0;
+
+    font-size: 14px;
+  }
+
+  /*----------------------------------------------------------
+    MOBILE DROPDOWN
+  ----------------------------------------------------------*/
+
+  .rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu {
     position: static;
+
+    width: 100%;
     min-width: 100%;
-    background: rgba(255, 255, 255, .04);
+
+    background: rgba(255, 255, 255, 0.04);
+
     border: 0;
+
     box-shadow: none;
+
     padding: 0;
+
     max-height: 0;
+
     overflow: hidden;
+
     opacity: 1;
     visibility: visible;
+
     transform: none;
-    transition: max-height .32s ease;
+
+    transition: max-height 0.32s ease;
   }
 
-  .rs-main-header .rs-navmenu .dropdown.rs-dropdown-open>ul {
+  /* Open mobile dropdown */
+  .rs-main-header .rs-navmenu .dropdown.rs-dropdown-open>.rs-dropdown-menu {
     max-height: 600px;
+
+    opacity: 1;
+    visibility: visible;
   }
 
-  .rs-main-header .rs-navmenu .dropdown.rs-dropdown-open>a .toggle-dropdown {
-    transform: rotate(180deg);
-  }
-
-  .rs-main-header .rs-navmenu .dropdown ul li {
+  /* Mobile dropdown items */
+  .rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu>li {
     border-bottom: 0;
   }
 
-  .rs-main-header .rs-navmenu .dropdown ul li a {
+  .rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu>li>a {
     padding: 11px 14px;
+
     font-size: 13px;
+
+    border-left: 0;
   }
 
+  .rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu>li>a:hover {
+    padding-left: 18px;
+
+    background: rgba(210, 0, 0, 0.12);
+
+    border-left: 0;
+  }
+
+  /* Call */
   .rs-main-header .rs-call-now {
     font-size: 16px;
   }
-
 }
 
+/*==============================================================
+# SMALL TABLET
+==============================================================*/
+
 @media (max-width: 992px) {
+
   .rs-main-header .rs-social-wrap {
     display: none;
   }
+
 }
 
+/*==============================================================
+# MOBILE
+==============================================================*/
+
 @media (max-width: 767px) {
+
   .rs-main-header {
     padding-top: 14px;
+  }
+
+  .rs-main-header .rs-header-inner {
+    padding: 0 15px;
   }
 
   .rs-main-header .rs-logo img {
@@ -531,19 +925,51 @@ h6 {
 
   .rs-main-header .rs-bottom-row {
     align-items: flex-start;
+
     gap: 14px;
+
     flex-direction: column;
   }
 
   .rs-main-header .rs-call-now {
     font-size: 14px;
+
     line-height: 1.5;
+
+    white-space: normal;
   }
 
   .rs-main-header .rs-whatsapp {
     padding: 8px 14px;
+
     font-size: 13px;
   }
+
+}
+
+/*==============================================================
+# VERY SMALL MOBILE
+==============================================================*/
+
+@media (max-width: 480px) {
+
+  .rs-main-header .rs-logo img {
+    width: 145px;
+  }
+
+  .rs-main-header .rs-navmenu {
+    width: 300px;
+
+    max-width: 88%;
+
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .rs-main-header .rs-mobile-toggle {
+    font-size: 28px;
+  }
+
 }
 
 /*--------------------------------------------------------------

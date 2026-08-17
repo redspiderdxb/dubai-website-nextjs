@@ -1,130 +1,266 @@
 import Image from "next/image";
 import Link from "next/link";
+import BlogDetailSidebar from "./BlogDetailSidebar";
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+const stripHtml = (html = "") => {
+  return String(html)
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .trim();
+};
+
+const createSlug = (text = "") => {
+  return stripHtml(text)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+};
+
+/* =====================================================
+   ADD IDS TO H2 / H3
+===================================================== */
+
+const prepareBlogContent = (html = "") => {
+  if (!html) return "";
+
+  let index = 0;
+
+  return html.replace(
+    /<(h2|h3)([^>]*)>([\s\S]*?)<\/\1>/gi,
+    (match, tag, attrs, inner) => {
+      const cleanText = stripHtml(inner);
+
+      if (!cleanText) {
+        return match;
+      }
+
+      const id = `${createSlug(cleanText) || "section"}-${index}`;
+
+      index++;
+
+      // Remove existing ID to prevent duplicate IDs
+      const cleanedAttrs = attrs.replace(/\s+id=["'][^"']*["']/gi, "");
+
+      return `<${tag}${cleanedAttrs} id="${id}">${inner}</${tag}>`;
+    },
+  );
+};
+
+/* =====================================================
+   BLOG DETAIL MAIN
+===================================================== */
 
 export default function BlogDetailMain({ post }) {
-  // Agar post nahi hai toh fallback
+  /* ===================================================
+     EMPTY STATE
+  ================================================== */
+
   if (!post) {
     return (
-      <div className="col-lg-8">
-        <div className="text-center py-5">
-          <h4>No post data available</h4>
-        </div>
+      <div className="rs-blog-empty">
+        <h4>No post data available</h4>
       </div>
     );
   }
 
-  // Format date
+  /* ===================================================
+     DATE
+  ================================================== */
+
   const formattedDate = post.created_at
     ? new Date(post.created_at).toLocaleDateString("en-GB", {
         day: "2-digit",
-        month: "short",
+        month: "long",
         year: "numeric",
       })
     : "Recent";
 
+  /* ===================================================
+     AUTHOR
+  ================================================== */
+
+  const authorName =
+    post.author?.name || post.author_name || "RedSpider Editorial";
+
+  /* ===================================================
+     CATEGORY
+  ================================================== */
+
+  const category =
+    post.categories?.[0]?.name ||
+    post.category?.name ||
+    post.category ||
+    "Digital Marketing";
+
+  /* ===================================================
+     READING TIME
+  ================================================== */
+
+  const plainContent = stripHtml(post.content || "");
+
+  const wordCount = plainContent
+    ? plainContent.split(/\s+/).filter(Boolean).length
+    : 0;
+
+  const readingTime =
+    post.reading_time ||
+    post.readingTime ||
+    Math.max(1, Math.ceil(wordCount / 200));
+
+  /* ===================================================
+     PREPARE CONTENT
+  ================================================== */
+
+  const preparedContent = prepareBlogContent(post.content || "");
+
+  /* ===================================================
+     RENDER
+  ================================================== */
+
   return (
-    <div>
-      {/* Blog Details Section */}
-      <section id="blog-details" className="blog-details section">
-        <div className="container">
-          <article className="article">
-            {/* Post Image */}
-            <div className="post-img">
-              <Image
-                src={post.image || "/assets/img/blog/blog-1.jpg"}
-                alt={post.title || "Blog Post Image"}
-                width={800}
-                height={450}
-                className="img-fluid w-100"
-                style={{ objectFit: "cover", maxHeight: "450px" }}
-                loading="lazy"
-                unoptimized={post.image?.startsWith("http")}
-              />
+    <article className="rs-blog-detail">
+      {/* =================================================
+          BLOG HEADER
+      ================================================= */}
+
+      <header className="rs-blog-header">
+        {/* CATEGORY */}
+
+        <div className="rs-blog-category">{category}</div>
+
+        {/* TITLE */}
+
+        <h1 className="rs-blog-title">
+          {post.title || post.name || "Untitled Post"}
+        </h1>
+
+        {/* META */}
+
+        <div className="rs-blog-meta">
+          {/* AUTHOR */}
+
+          <div className="rs-blog-author">
+            <span className="rs-author-avatar">
+              {authorName.charAt(0).toUpperCase()}
+            </span>
+
+            <div>
+              <strong>{authorName}</strong>
+
+              <small>{category}</small>
             </div>
+          </div>
 
-            {/* Title */}
-            <h2 className="title">
-              {post.title || post.name || "Untitled Post"}
-            </h2>
+          {/* DATE / READING TIME */}
 
-            {/* Meta Top */}
-            <div className="meta-top">
-              <ul>
-                <li className="d-flex align-items-center">
-                  <i className="bi bi-person" aria-hidden="true"></i>
-                  <span>{post.author?.name || "RedSpider Team"}</span>
-                </li>
-                <li className="d-flex align-items-center">
-                  <i className="bi bi-clock" aria-hidden="true"></i>
-                  <time dateTime={post.created_at}>{formattedDate}</time>
-                </li>
-                <li className="d-flex align-items-center">
-                  <i className="bi bi-chat-dots" aria-hidden="true"></i>
-                  <span>{post.comments_count || 0} Comments</span>
-                </li>
-              </ul>
-            </div>
+          <div className="rs-blog-meta-right">
+            <span>
+              <i className="bi bi-calendar3"></i>
+              {formattedDate}
+            </span>
 
-            {/* Content */}
-            <div className="content">
-              {post.description && (
-                <p className="lead fw-medium">{post.description}</p>
-              )}
-
-              {post.content ? (
-                <div
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                  className="blog-content"
-                />
-              ) : (
-                <p className="text-muted">Full content not available.</p>
-              )}
-
-              {/* Categories & Tags */}
-              {(post.categories?.length > 0 || post.tags?.length > 0) && (
-                <div className="meta-bottom d-flex flex-wrap gap-3 mt-4 pt-3 border-top">
-                  {post.categories?.length > 0 && (
-                    <>
-                      <i className="bi bi-folder" aria-hidden="true"></i>
-                      <ul className="cats list-inline mb-0">
-                        {post.categories.map((cat, idx) => (
-                          <li key={idx} className="list-inline-item">
-                            <Link
-                              href={`/category/${cat.slug}`}
-                              className="text-decoration-none"
-                            >
-                              {cat.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-
-                  {post.tags?.length > 0 && (
-                    <>
-                      <i className="bi bi-tags" aria-hidden="true"></i>
-                      <ul className="tags list-inline mb-0">
-                        {post.tags.map((tag, idx) => (
-                          <li key={idx} className="list-inline-item">
-                            <Link
-                              href={`/tag/${tag.slug}`}
-                              className="text-decoration-none"
-                            >
-                              #{tag.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </div>
-              )}
-            </div>
-          </article>
+            <span>
+              <i className="bi bi-clock"></i>
+              {readingTime} min read
+            </span>
+          </div>
         </div>
-      </section>
+      </header>
 
-    </div>
+      {/* =================================================
+          FEATURE IMAGE
+      ================================================= */}
+
+      <div className="rs-blog-feature-image">
+        <Image
+          src={post.image || "/assets/img/blog/blog-1.jpg"}
+          alt={post.title || "Blog Post"}
+          width={1200}
+          height={650}
+          priority
+          className="rs-blog-feature-img"
+          unoptimized={post.image?.startsWith("http")}
+        />
+
+        <div className="rs-image-caption">{post.title || "Blog Post"}</div>
+      </div>
+
+      {/* =================================================
+          BLOG BODY
+      ================================================= */}
+
+      <div className="rs-blog-body-layout">
+        {/* =================================================
+            LEFT - STICKY SIDEBAR
+        ================================================= */}
+
+        <div className="rs-blog-sidebar-column">
+          <BlogDetailSidebar post={post} />
+        </div>
+
+        {/* =================================================
+            RIGHT - ARTICLE CONTENT
+        ================================================= */}
+
+        <div className="rs-blog-content">
+          {/* INTRO */}
+
+          {post.description && (
+            <div className="rs-blog-intro">{post.description}</div>
+          )}
+
+          {/* MAIN CONTENT */}
+
+          {preparedContent ? (
+            <div
+              className="rs-blog-html"
+              dangerouslySetInnerHTML={{
+                __html: preparedContent,
+              }}
+            />
+          ) : (
+            <p className="text-muted">Full content not available.</p>
+          )}
+
+          {/* =================================================
+              CATEGORIES / TAGS
+          ================================================= */}
+
+          {(post.categories?.length > 0 || post.tags?.length > 0) && (
+            <div className="rs-blog-bottom-tags">
+              {/* CATEGORIES */}
+
+              {post.categories?.map((cat, index) => (
+                <Link
+                  key={cat.id || index}
+                  href={cat.slug ? `/category/${cat.slug}` : "#"}
+                >
+                  {cat.name}
+                </Link>
+              ))}
+
+              {/* TAGS */}
+
+              {post.tags?.map((tag, index) => (
+                <Link
+                  key={tag.id || index}
+                  href={tag.slug ? `/tag/${tag.slug}` : "#"}
+                >
+                  #{tag.name}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </article>
   );
 }

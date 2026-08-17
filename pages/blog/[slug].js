@@ -1,17 +1,150 @@
-// pages/blog/[slug].js
-
 import Layout from "../../components/layout/Layout";
 import SEO from "../../components/seo/SEO";
 import BlogPageTitle from "../../components/blog/BlogPageTitle";
+
 import BlogDetailMain from "../../components/blog-details/BlogDetailMain";
-import BlogDetailSidebar from "../../components/blog-details/BlogDetailSidebar";
 
 import { fetchPosts, fetchPostBySlug } from "../../lib/api";
 
-export default function BlogDetail({ post, recentPosts, categories, tags }) {
-  // ============================================
-  // Post Not Found
-  // ============================================
+import Image from "next/image";
+import Link from "next/link";
+
+/* =====================================================
+   RELATED INSIGHTS
+===================================================== */
+
+function RelatedInsights({ posts = [] }) {
+  const relatedPosts = posts.filter(Boolean).slice(0, 4);
+
+  if (!relatedPosts.length) {
+    return null;
+  }
+
+  const featured = relatedPosts[0];
+  const sidePosts = relatedPosts.slice(1, 4);
+
+  return (
+    <section className="rs-related-section">
+      <div className="container">
+        {/* =================================================
+            HEADING
+        ================================================= */}
+
+        <div className="rs-related-heading">
+          <div>
+            <span>KEEP EXPLORING</span>
+
+            <h2>
+              Related
+              <strong>Insights</strong>
+            </h2>
+
+            <p>More ideas for websites, portals and growth.</p>
+          </div>
+        </div>
+
+        {/* =================================================
+            RELATED GRID
+        ================================================= */}
+
+        <div className="rs-related-grid">
+          {/* =================================================
+              FEATURED
+          ================================================= */}
+
+          {featured && (
+            <Link
+              href={`/blog/${featured.slug}`}
+              className="rs-related-featured"
+            >
+              <div className="rs-related-image">
+                <Image
+                  src={featured.image || "/assets/img/blog/blog-1.jpg"}
+                  alt={featured.title || "Related Blog"}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 55vw"
+                  className="rs-related-img"
+                  unoptimized={featured.image?.startsWith("http")}
+                />
+              </div>
+
+              <div className="rs-related-overlay">
+                <small>
+                  {featured.categories?.[0]?.name || "Digital Marketing"}
+                </small>
+
+                <h3>{featured.title || featured.name || "Related Article"}</h3>
+
+                <p>
+                  {featured.description ||
+                    "Discover useful insights, strategies and ideas."}
+                </p>
+
+                <span className="rs-related-read">
+                  Read article
+                  <i className="bi bi-arrow-up-right"></i>
+                </span>
+              </div>
+            </Link>
+          )}
+
+          {/* =================================================
+              SIDE POSTS
+          ================================================= */}
+
+          <div className="rs-related-side">
+            {sidePosts.map((item, index) => (
+              <Link
+                key={item.id || item.slug || index}
+                href={`/blog/${item.slug}`}
+                className="rs-related-small"
+              >
+                <div className="rs-related-small-image">
+                  <Image
+                    src={item.image || "/assets/img/blog/blog-1.jpg"}
+                    alt={item.title || "Related Blog"}
+                    fill
+                    sizes="90px"
+                    className="rs-related-small-img"
+                    unoptimized={item.image?.startsWith("http")}
+                  />
+                </div>
+
+                <div className="rs-related-small-content">
+                  <span>
+                    {item.categories?.[0]?.name || "Digital Marketing"}
+                  </span>
+
+                  <h4>{item.title || item.name || "Related Article"}</h4>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* =================================================
+            VIEW MORE
+        ================================================= */}
+
+        <div className="rs-related-more">
+          <Link href="/blog">
+            View More
+            <i className="bi bi-arrow-right"></i>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+export default function BlogDetail({ post, recentPosts }) {
+  /* ===================================================
+     NOT FOUND
+  ================================================== */
 
   if (!post) {
     return (
@@ -27,9 +160,9 @@ export default function BlogDetail({ post, recentPosts, categories, tags }) {
     );
   }
 
-  // ============================================
-  // SEO Data
-  // ============================================
+  /* ===================================================
+     SEO
+  ================================================== */
 
   const seoData = {
     title:
@@ -61,64 +194,54 @@ export default function BlogDetail({ post, recentPosts, categories, tags }) {
     noIndex: false,
   };
 
-  // ============================================
-  // Page
-  // ============================================
+  /* ===================================================
+     PAGE
+  ================================================== */
 
   return (
     <Layout>
       <SEO {...seoData} />
 
-      <main className="main">
+      <main className="main rs-blog-detail-page">
+        {/* =================================================
+            BREADCRUMB
+        ================================================= */}
+
         <BlogPageTitle />
 
-        <div className="container">
-          <div className="row">
-            {/* Main Blog Content */}
-            <div className="col-lg-8">
-              <BlogDetailMain post={post} />
-            </div>
+        {/* =================================================
+            BLOG DETAIL
+        ================================================= */}
 
-            {/* Sidebar */}
-            <div className="col-lg-4">
-              <BlogDetailSidebar
-                recentPosts={recentPosts}
-                categories={categories}
-                tags={tags}
-                author={post.author}
-              />
-            </div>
-          </div>
+        <div className="container rs-blog-wrapper">
+          <BlogDetailMain post={post} />
         </div>
+
+        {/* =================================================
+            RELATED INSIGHTS
+        ================================================= */}
+
+        <RelatedInsights posts={recentPosts} />
       </main>
     </Layout>
   );
 }
 
-// ============================================
-// Generate Static Paths
-// ============================================
+/* =====================================================
+   STATIC PATHS
+===================================================== */
 
 export async function getStaticPaths() {
   try {
-    /*
-     * fetchPosts() returns:
-     *
-     * {
-     *   posts: [],
-     *   pagination: {}
-     * }
-     */
-
     const result = await fetchPosts(1);
 
-    const posts = result?.posts || [];
+    const posts = Array.isArray(result?.posts) ? result.posts : [];
 
     const paths = posts
       .filter((post) => post?.slug)
       .map((post) => ({
         params: {
-          slug: post.slug,
+          slug: String(post.slug),
         },
       }));
 
@@ -127,7 +250,7 @@ export async function getStaticPaths() {
       fallback: "blocking",
     };
   } catch (error) {
-    console.error("Error generating blog static paths:", error);
+    console.error("BLOG PATH ERROR:", error);
 
     return {
       paths: [],
@@ -136,73 +259,59 @@ export async function getStaticPaths() {
   }
 }
 
-// ============================================
-// Fetch Single Blog
-// ============================================
+/* =====================================================
+   STATIC PROPS
+===================================================== */
 
 export async function getStaticProps({ params }) {
   try {
-    // ==========================================
-    // Current Blog Post
-    // ==========================================
+    if (!params?.slug) {
+      return {
+        notFound: true,
+      };
+    }
+
+    /* =================================================
+       CURRENT POST
+    ================================================= */
 
     const post = await fetchPostBySlug(params.slug);
 
     if (!post) {
       return {
         notFound: true,
-        revalidate: 60,
       };
     }
 
-    // ==========================================
-    // Fetch Blog Posts For Sidebar
-    // ==========================================
+    /* =================================================
+       RELATED POSTS
+    ================================================= */
 
     const result = await fetchPosts(1);
 
-    const allPosts = result?.posts || [];
-
-    // ==========================================
-    // Recent Posts
-    // ==========================================
+    const allPosts = Array.isArray(result?.posts) ? result.posts : [];
 
     const recentPosts = allPosts
       .filter((item) => String(item.id) !== String(post.id))
-      .slice(0, 5);
+      .slice(0, 4);
 
-    // ==========================================
-    // Categories
-    // ==========================================
-
-    const categories = post.categories || [];
-
-    // ==========================================
-    // Tags
-    // ==========================================
-
-    const tags = post.tags || [];
-
-    // ==========================================
-    // Return Props
-    // ==========================================
+    /* =================================================
+       RETURN
+    ================================================= */
 
     return {
       props: {
         post,
         recentPosts,
-        categories,
-        tags,
       },
 
       revalidate: 60,
     };
   } catch (error) {
-    console.error("Error loading blog detail:", error);
+    console.error("BLOG DETAIL ERROR:", error);
 
     return {
       notFound: true,
-      revalidate: 60,
     };
   }
 }

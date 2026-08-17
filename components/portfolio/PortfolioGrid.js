@@ -1,80 +1,183 @@
 import "glightbox/dist/css/glightbox.min.css";
 import { useState, useEffect, useRef } from "react";
-import { fetchAllGalleries } from "../../lib/api";
+import { fetchGalleries } from "../../lib/api";
 
-export default function PortfolioGrid() {
+export default function PortfolioGrid({
+  initialGalleries = [],
+  initialPagination = {},
+}) {
   const lightboxInstance = useRef(null);
-  const [galleries, setGalleries] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+  const PER_PAGE = 12;
+
+  // ============================================
+  // Format Gallery Data
+  // ============================================
+
+  const formatGalleries = (data = []) => {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+    const ASSET_URL = API_URL
+      ? API_URL.replace("/api/v1", "").replace(/\/$/, "")
+      : "";
+
+    return data.map((gallery) => ({
+      id: gallery.id,
+
+      title: gallery.name || "Untitled Project",
+
+      category: gallery.description
+        ? gallery.description.replace(/<[^>]*>/g, "")
+        : "Portfolio",
+
+      image: gallery.image
+        ? `${ASSET_URL}/storage/${gallery.image}`
+        : "/assets/img/portfolio/portfolio-1.jpg",
+
+      link: gallery.project_url || `/galleries/${gallery.slug || gallery.id}`,
+
+      filter: "filter-websites",
+    }));
+  };
+
+  // ============================================
+  // Initial Server-Side Data
+  // ============================================
+
+  const [galleries, setGalleries] = useState(formatGalleries(initialGalleries));
+
+  const [pagination, setPagination] = useState(initialPagination || {});
+
+  const [currentPage, setCurrentPage] = useState(
+    initialPagination?.current_page || 1,
+  );
+
+  const [loading, setLoading] = useState(false);
+
   const [filter, setFilter] = useState("*");
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // 🔥 Sirf API se dynamic galleries fetch karo
-  useEffect(() => {
-    const loadGalleries = async () => {
-      try {
-        const data = await fetchAllGalleries();
+  // ============================================
+  // Load Gallery Page
+  // ============================================
 
-        const API_URL = process.env.NEXT_PUBLIC_API_URL;
-        const ASSET_URL = API_URL.replace("/api/v1", "").replace(/\/$/, "");
+  const loadGalleries = async (page) => {
+    try {
+      setLoading(true);
 
-        const dynamicProjects = data.map((gallery) => {
-          const imageUrl = gallery.image
-            ? `${ASSET_URL}/storage/${gallery.image}`
-            : null;
+      const result = await fetchGalleries(page, PER_PAGE);
 
-          return {
-            id: gallery.id,
-            title: gallery.name,
-            category: gallery.description
-              ? gallery.description.replace(/<[^>]*>/g, "")
-              : "Portfolio",
-            image: imageUrl,
-            // 🔥 YAHAN CHANGE KIYA - project_url use karo
-            link: gallery.project_url || `/galleries/${gallery.slug}`,
-            filter: "filter-websites",
-          };
+      setGalleries(formatGalleries(result.galleries || []));
+
+      setPagination(result.pagination || {});
+
+      setCurrentPage(result.pagination?.current_page || page);
+    } catch (error) {
+      console.error("Error loading portfolio:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ============================================
+  // Pagination
+  // ============================================
+
+  const handlePageChange = async (page) => {
+    const lastPage = pagination?.last_page || 1;
+
+    if (page < 1 || page > lastPage || page === currentPage || loading) {
+      return;
+    }
+
+    await loadGalleries(page);
+
+    // Scroll to portfolio section
+    setTimeout(() => {
+      const portfolio = document.getElementById("portfolio");
+
+      if (portfolio) {
+        portfolio.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
         });
-
-        setGalleries(dynamicProjects);
-      } catch (error) {
-        console.error("Error fetching galleries:", error);
-        setGalleries([]);
-      } finally {
-        setLoading(false);
       }
-    };
-    loadGalleries();
-  }, []);
+    }, 100);
+  };
 
-  // 🔥 GLightbox Init
+  // ============================================
+  // GLightbox
+  // ============================================
+
   useEffect(() => {
+    let mounted = true;
+
+    if (lightboxInstance.current) {
+      lightboxInstance.current.destroy();
+      lightboxInstance.current = null;
+    }
+
     import("glightbox").then((module) => {
+      if (!mounted) return;
+
       const GLightbox = module.default;
-      if (typeof window !== "undefined" && GLightbox) {
-        lightboxInstance.current = GLightbox({
-          selector: ".glightbox",
-          touchNavigation: true,
-          loop: true,
-          autoplayVideos: true,
-        });
-      }
+
+      if (!GLightbox) return;
+
+      lightboxInstance.current = GLightbox({
+        selector: ".glightbox",
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: true,
+      });
     });
+
     return () => {
-      if (lightboxInstance.current) lightboxInstance.current.destroy();
+      mounted = false;
+
+      if (lightboxInstance.current) {
+        lightboxInstance.current.destroy();
+
+        lightboxInstance.current = null;
+      }
     };
   }, [galleries]);
 
+  // ============================================
+  // Filter Options
+  // ============================================
+
   const filterOptions = [
-    { value: "*", label: "All Projects" },
-    { value: "filter-websites", label: "Websites" },
-    { value: "filter-app", label: "Mobile App" },
-    { value: "filter-video", label: "Video Productions" },
-    { value: "filter-nl", label: "Newsletter Designing" },
-    { value: "filter-cwp", label: "Customized Web Application" },
+    {
+      value: "*",
+      label: "All Projects",
+    },
+    {
+      value: "filter-websites",
+      label: "Websites",
+    },
+    {
+      value: "filter-app",
+      label: "Mobile App",
+    },
+    {
+      value: "filter-video",
+      label: "Video Productions",
+    },
+    {
+      value: "filter-nl",
+      label: "Newsletter Designing",
+    },
+    {
+      value: "filter-cwp",
+      label: "Customized Web Application",
+    },
   ];
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  // ============================================
+  // Filter
+  // ============================================
 
   const handleFilterClick = (value) => {
     setFilter(value);
@@ -82,68 +185,172 @@ export default function PortfolioGrid() {
   };
 
   const filteredProjects =
-    filter === "*" ? galleries : galleries.filter((p) => p.filter === filter);
+    filter === "*"
+      ? galleries
+      : galleries.filter((project) => project.filter === filter);
 
-  if (loading) {
-    return (
-      <section className="portfolio section pt-2">
-        <div className="container text-center py-5">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // ============================================
+  // Pagination Numbers
+  // ============================================
+
+  const lastPage = pagination?.last_page || 1;
+
+  const getPageNumbers = () => {
+    const pages = [];
+
+    if (lastPage <= 7) {
+      for (let i = 1; i <= lastPage; i++) {
+        pages.push(i);
+      }
+
+      return pages;
+    }
+
+    pages.push(1);
+    pages.push(2);
+    pages.push(3);
+
+    if (currentPage > 4 && currentPage < lastPage - 3) {
+      pages.push("ellipsis-start");
+      pages.push(currentPage);
+      pages.push("ellipsis-end");
+    } else if (currentPage >= lastPage - 3) {
+      pages.push("ellipsis-start");
+    } else {
+      pages.push("ellipsis-middle");
+    }
+
+    pages.push(lastPage - 2);
+    pages.push(lastPage - 1);
+    pages.push(lastPage);
+
+    return pages.filter((item, index, array) => array.indexOf(item) === index);
+  };
+
+  const pageNumbers = getPageNumbers();
+
+  // ============================================
+  // Render
+  // ============================================
 
   return (
     <section id="portfolio" className="portfolio section pt-2">
       <div className="container">
-        {/* Portfolio Filter Wrapper */}
-        <div className="portfolio-filter-wrapper">
-          <div className="portfolio-actions">
-            <div className="filter-dropdown">
-              <button
-                className="filter-btn"
-                id="filterToggle"
-                onClick={toggleMenu}
-                aria-expanded={isMenuOpen}
-                aria-haspopup="true"
-              >
-                <i className="bi bi-funnel-fill" aria-hidden="true"></i>
-                Filter
-              </button>
+        {/* ========================================
+            FILTER
+        ======================================== */}
 
-              {isMenuOpen && (
-                <ul className="filter-menu" id="filterMenu" role="menu">
-                  {filterOptions.map((opt) => (
-                    <li
-                      key={opt.value}
-                      data-filter={opt.value}
-                      className={filter === opt.value ? "active" : ""}
-                      onClick={() => handleFilterClick(opt.value)}
-                      role="menuitem"
-                    >
-                      {opt.label}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+        {/* ========================================
+    PORTFOLIO FILTER / SEARCH UI
+======================================== */}
 
+        <div className="portfolio-top-filter">
+          {/* Portfolio Heading */}
+         
+          {/* Category Tabs */}
+          <div className="portfolio-category-tabs">
+            <button type="button" className="portfolio-category-tab active">
+              Websites
+            </button>
+
+            <button type="button" className="portfolio-category-tab">
+              Mobile App
+            </button>
+
+            <button type="button" className="portfolio-category-tab">
+              Videos Production
+            </button>
+
+            <button type="button" className="portfolio-category-tab">
+              Newsletter Designing
+            </button>
+
+            <button type="button" className="portfolio-category-tab">
+              Customized Web Application
+            </button>
+
+            {/* YouTube */}
             <a
               href="https://www.youtube.com/channel/UC_aZoH8d6c7fv6TdV49N59Q"
               target="_blank"
               rel="noopener noreferrer"
-              className="youtube-btn"
+              className="portfolio-youtube-btn"
             >
               <i className="bi bi-youtube" aria-hidden="true"></i>
-              YouTube
+
+              <span>YouTube</span>
             </a>
+          </div>
+
+          {/* Search Row */}
+          <div className="portfolio-search-row">
+            {/* Industry */}
+            <select
+              className="portfolio-industry-select"
+              defaultValue=""
+              aria-label="Industry Type"
+            >
+              <option value="">Industry Type</option>
+
+              <option value="real-estate">Real Estate Websites</option>
+
+              <option value="ecommerce">E-Commerce Websites</option>
+
+              <option value="corporate">Corporate Websites</option>
+
+              <option value="daily-deals">Daily Deals Websites</option>
+
+              <option value="web-portal">Web Portal</option>
+
+              <option value="engineering">Engineering & Construction</option>
+
+              <option value="travel">Travel & Tourism</option>
+
+              <option value="somalian">Somalian Clients</option>
+
+              <option value="international">International Projects</option>
+
+              <option value="luxury">Luxury & Stunning</option>
+
+              <option value="landing">Ad Landing Pages</option>
+
+              <option value="logistics">Logistics & Shipping</option>
+
+              <option value="bank">Bank</option>
+            </select>
+
+            {/* Search */}
+            <input
+              type="text"
+              className="portfolio-search-input"
+              placeholder="Search Portfolio..."
+              aria-label="Search Portfolio"
+            />
+
+            <button type="button" className="portfolio-search-btn">
+              Search
+            </button>
           </div>
         </div>
 
-        {/* Projects Grid - Sirf Dynamic */}
+        {/* ========================================
+            PAGINATION LOADING
+        ======================================== */}
+
+        {loading && (
+          <div className="portfolio-loading">
+            <div className="spinner-border spinner-border-sm" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+
+            <span>Loading portfolio...</span>
+          </div>
+        )}
+
+        {/* ========================================
+            PORTFOLIO GRID
+        ======================================== */}
+
         <div
           className="row gy-4 isotope-container"
           data-aos="fade-up"
@@ -155,32 +362,51 @@ export default function PortfolioGrid() {
                 key={project.id}
                 className="col-lg-4 col-md-6 portfolio-item isotope-item"
               >
-                <div className="portfolio-content h-100">
+                <div className="portfolio-content ">
+                  {/* Image */}
+
                   <img
                     src={project.image}
                     className="img-fluid"
                     alt={project.title}
+                    loading="lazy"
                     style={{
-                      
+                      width: "100%",
+                      height: "260px",
                       objectFit: "cover",
                     }}
-                    loading="lazy"
                     onError={(e) => {
                       console.error("IMAGE LOAD FAILED:", e.currentTarget.src);
+
                       e.currentTarget.onerror = null;
+
+                      e.currentTarget.src =
+                        "/assets/img/portfolio/portfolio-1.jpg";
                     }}
                   />
+
+                  {/* Portfolio Info */}
+
                   <div className="portfolio-info">
                     <h4>{project.title}</h4>
+
                     <p>{project.category}</p>
-                    <a
-                      href={project.image}
-                      title={project.title}
-                      data-gallery="portfolio-gallery-app"
-                      className="glightbox preview-link"
-                    >
-                      <i className="bi bi-zoom-in" aria-hidden="true"></i>
-                    </a>
+
+                    {/* Preview */}
+
+                    {project.image && (
+                      <a
+                        href={project.image}
+                        title={project.title}
+                        data-gallery="portfolio-gallery"
+                        className="glightbox preview-link"
+                      >
+                        <i className="bi bi-zoom-in" aria-hidden="true"></i>
+                      </a>
+                    )}
+
+                    {/* Details */}
+
                     <a
                       href={project.link}
                       target="_blank"
@@ -195,21 +421,102 @@ export default function PortfolioGrid() {
               </div>
             ))
           ) : (
-            <div className="col-12 text-center">
-              <p>No portfolio items found. Add galleries from admin panel.</p>
+            <div className="col-12 text-center py-5">
+              <p>No portfolio items found.</p>
             </div>
           )}
         </div>
+
+        {/* ========================================
+            PAGINATION
+        ======================================== */}
+
+        {lastPage > 1 && (
+          <div className="portfolio-pagination">
+            {/* Previous */}
+
+            <button
+              type="button"
+              className="portfolio-page-arrow"
+              disabled={currentPage <= 1 || loading}
+              onClick={() => handlePageChange(currentPage - 1)}
+              aria-label="Previous page"
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+
+            {/* Page Numbers */}
+
+            <div className="portfolio-page-numbers">
+              {pageNumbers.map((page, index) => {
+                if (typeof page !== "number") {
+                  return (
+                    <span
+                      key={`${page}-${index}`}
+                      className="portfolio-page-ellipsis"
+                    >
+                      ...
+                    </span>
+                  );
+                }
+
+                return (
+                  <button
+                    key={page}
+                    type="button"
+                    disabled={loading}
+                    className={`portfolio-page-number ${
+                      currentPage === page ? "active" : ""
+                    }`}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Next */}
+
+            <button
+              type="button"
+              className="portfolio-page-arrow"
+              disabled={currentPage >= lastPage || loading}
+              onClick={() => handlePageChange(currentPage + 1)}
+              aria-label="Next page"
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        )}
+
+        {/* ========================================
+            COUNT
+        ======================================== */}
+
+        {pagination?.total && (
+          <div className="portfolio-count text-center">
+            Showing {pagination.from || 1}
+            {"–"}
+            {pagination.to || galleries.length}
+            {" of "}
+            {pagination.total} projects
+          </div>
+        )}
       </div>
 
-      <div className="container text-center mt-5">
+      {/* ========================================
+          ABOUT BUTTON
+      ======================================== */}
+
+      {/* <div className="container text-center mt-5">
         <a
           href="/about"
           className="btn btn-animation btn-red d-inline-flex align-items-center mt-4"
         >
           <span className="btn-title">Load More..</span>
         </a>
-      </div>
+      </div> */}
     </section>
   );
 }

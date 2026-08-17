@@ -1,296 +1,475 @@
-import Image from "next/image";
-import Link from "next/link";
+import "glightbox/dist/css/glightbox.min.css";
+import { useState, useEffect, useRef } from "react";
+import { fetchGalleries } from "../../lib/api";
 
-export default function BlogDetailMain({ post }) {
-  // Agar post nahi hai toh fallback
-  if (!post) {
-    return (
-      <div className="col-lg-8">
-        <div className="text-center py-5">
-          <h4>No post data available</h4>
-        </div>
-      </div>
-    );
-  }
+export default function PortfolioGrid({
+  initialGalleries = [],
+  initialPagination = {},
+}) {
+  const lightboxInstance = useRef(null);
 
-  // Format date
-  const formattedDate = post.created_at
-    ? new Date(post.created_at).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
-    : "Recent";
+  const PER_PAGE = 12;
+
+  // ============================================
+  // Format Gallery Data
+  // ============================================
+
+  const formatGalleries = (data = []) => {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+    const ASSET_URL = API_URL
+      ? API_URL.replace("/api/v1", "").replace(/\/$/, "")
+      : "";
+
+    return data.map((gallery) => ({
+      id: gallery.id,
+
+      title: gallery.name || "Untitled Project",
+
+      category: gallery.description
+        ? gallery.description.replace(/<[^>]*>/g, "")
+        : "Portfolio",
+
+      image: gallery.image
+        ? `${ASSET_URL}/storage/${gallery.image}`
+        : "/assets/img/portfolio/portfolio-1.jpg",
+
+      link: gallery.project_url || `/galleries/${gallery.slug || gallery.id}`,
+
+      filter: "filter-websites",
+    }));
+  };
+
+  // ============================================
+  // Initial Server-Side Data
+  // ============================================
+
+  const [galleries, setGalleries] = useState(formatGalleries(initialGalleries));
+
+  const [pagination, setPagination] = useState(initialPagination || {});
+
+  const [currentPage, setCurrentPage] = useState(
+    initialPagination?.current_page || 1,
+  );
+
+  const [loading, setLoading] = useState(false);
+
+  const [filter, setFilter] = useState("*");
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // ============================================
+  // Load Gallery Page
+  // ============================================
+
+  const loadGalleries = async (page) => {
+    try {
+      setLoading(true);
+
+      const result = await fetchGalleries(page, PER_PAGE);
+
+      setGalleries(formatGalleries(result.galleries || []));
+
+      setPagination(result.pagination || {});
+
+      setCurrentPage(result.pagination?.current_page || page);
+    } catch (error) {
+      console.error("Error loading portfolio:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ============================================
+  // Pagination
+  // ============================================
+
+  const handlePageChange = async (page) => {
+    const lastPage = pagination?.last_page || 1;
+
+    if (page < 1 || page > lastPage || page === currentPage || loading) {
+      return;
+    }
+
+    await loadGalleries(page);
+
+    // Scroll to portfolio section
+    setTimeout(() => {
+      const portfolio = document.getElementById("portfolio");
+
+      if (portfolio) {
+        portfolio.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 100);
+  };
+
+  // ============================================
+  // GLightbox
+  // ============================================
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (lightboxInstance.current) {
+      lightboxInstance.current.destroy();
+      lightboxInstance.current = null;
+    }
+
+    import("glightbox").then((module) => {
+      if (!mounted) return;
+
+      const GLightbox = module.default;
+
+      if (!GLightbox) return;
+
+      lightboxInstance.current = GLightbox({
+        selector: ".glightbox",
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: true,
+      });
+    });
+
+    return () => {
+      mounted = false;
+
+      if (lightboxInstance.current) {
+        lightboxInstance.current.destroy();
+
+        lightboxInstance.current = null;
+      }
+    };
+  }, [galleries]);
+
+  // ============================================
+  // Filter Options
+  // ============================================
+
+  const filterOptions = [
+    {
+      value: "*",
+      label: "All Projects",
+    },
+    {
+      value: "filter-websites",
+      label: "Websites",
+    },
+    {
+      value: "filter-app",
+      label: "Mobile App",
+    },
+    {
+      value: "filter-video",
+      label: "Video Productions",
+    },
+    {
+      value: "filter-nl",
+      label: "Newsletter Designing",
+    },
+    {
+      value: "filter-cwp",
+      label: "Customized Web Application",
+    },
+  ];
+
+  // ============================================
+  // Filter
+  // ============================================
+
+  const handleFilterClick = (value) => {
+    setFilter(value);
+    setIsMenuOpen(false);
+  };
+
+  const filteredProjects =
+    filter === "*"
+      ? galleries
+      : galleries.filter((project) => project.filter === filter);
+
+  // ============================================
+  // Pagination Numbers
+  // ============================================
+
+  const lastPage = pagination?.last_page || 1;
+
+  const getPageNumbers = () => {
+    const pages = [];
+
+    if (lastPage <= 7) {
+      for (let i = 1; i <= lastPage; i++) {
+        pages.push(i);
+      }
+
+      return pages;
+    }
+
+    pages.push(1);
+    pages.push(2);
+    pages.push(3);
+
+    if (currentPage > 4 && currentPage < lastPage - 3) {
+      pages.push("ellipsis-start");
+      pages.push(currentPage);
+      pages.push("ellipsis-end");
+    } else if (currentPage >= lastPage - 3) {
+      pages.push("ellipsis-start");
+    } else {
+      pages.push("ellipsis-middle");
+    }
+
+    pages.push(lastPage - 2);
+    pages.push(lastPage - 1);
+    pages.push(lastPage);
+
+    return pages.filter((item, index, array) => array.indexOf(item) === index);
+  };
+
+  const pageNumbers = getPageNumbers();
+
+  // ============================================
+  // Render
+  // ============================================
 
   return (
-    <div>
-      {/* Blog Details Section */}
-      <section id="blog-details" className="blog-details section">
-        <div className="container">
-          <article className="article">
-            {/* Post Image */}
-            <div className="post-img">
-              <Image
-                src={post.image || "/assets/img/blog/blog-1.jpg"}
-                alt={post.title || "Blog Post Image"}
-                width={800}
-                height={450}
-                className="img-fluid w-100"
-                style={{ objectFit: "cover", maxHeight: "450px" }}
-                loading="lazy"
-                unoptimized={post.image?.startsWith("http")}
-              />
-            </div>
+    <section id="portfolio" className="portfolio section pt-2">
+      <div className="container">
+        {/* ========================================
+            FILTER
+        ======================================== */}
 
-            {/* Title */}
-            <h2 className="title">
-              {post.title || post.name || "Untitled Post"}
-            </h2>
+        <div className="portfolio-filter-wrapper">
+          <div className="portfolio-actions">
+            {/* Filter Dropdown */}
 
-            {/* Meta Top */}
-            <div className="meta-top">
-              <ul>
-                <li className="d-flex align-items-center">
-                  <i className="bi bi-person" aria-hidden="true"></i>
-                  <span>{post.author?.name || "RedSpider Team"}</span>
-                </li>
-                <li className="d-flex align-items-center">
-                  <i className="bi bi-clock" aria-hidden="true"></i>
-                  <time dateTime={post.created_at}>{formattedDate}</time>
-                </li>
-                <li className="d-flex align-items-center">
-                  <i className="bi bi-chat-dots" aria-hidden="true"></i>
-                  <span>{post.comments_count || 0} Comments</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Content */}
-            <div className="content">
-              {post.description && (
-                <p className="lead fw-medium">{post.description}</p>
-              )}
-
-              {post.content ? (
-                <div
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                  className="blog-content"
-                />
-              ) : (
-                <p className="text-muted">Full content not available.</p>
-              )}
-
-              {/* Categories & Tags */}
-              {(post.categories?.length > 0 || post.tags?.length > 0) && (
-                <div className="meta-bottom d-flex flex-wrap gap-3 mt-4 pt-3 border-top">
-                  {post.categories?.length > 0 && (
-                    <>
-                      <i className="bi bi-folder" aria-hidden="true"></i>
-                      <ul className="cats list-inline mb-0">
-                        {post.categories.map((cat, idx) => (
-                          <li key={idx} className="list-inline-item">
-                            <Link
-                              href={`/category/${cat.slug}`}
-                              className="text-decoration-none"
-                            >
-                              {cat.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-
-                  {post.tags?.length > 0 && (
-                    <>
-                      <i className="bi bi-tags" aria-hidden="true"></i>
-                      <ul className="tags list-inline mb-0">
-                        {post.tags.map((tag, idx) => (
-                          <li key={idx} className="list-inline-item">
-                            <Link
-                              href={`/tag/${tag.slug}`}
-                              className="text-decoration-none"
-                            >
-                              #{tag.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </div>
-              )}
-            </div>
-          </article>
-        </div>
-      </section>
-
-      {/* Blog Comments Section */}
-      <section id="blog-comments" className="blog-comments section">
-        <div className="container">
-          <h4 className="comments-count">
-            {post.comments_count || 0} Comments
-          </h4>
-
-          {/* First Comment */}
-          <div id="comment-1" className="comment">
-            <div className="d-flex">
-              <div className="comment-img">
-                <Image
-                  src="/assets/img/blog/comments-1.jpg"
-                  alt="Georgia Reader avatar"
-                  width={50}
-                  height={50}
-                  className="rounded-circle"
-                  loading="lazy"
-                />
-              </div>
-              <div>
-                <h5>
-                  <span>Georgia Reader</span>
-                  <a href="#" className="reply">
-                    <i className="bi bi-reply-fill" aria-hidden="true"></i>{" "}
-                    Reply
-                  </a>
-                </h5>
-                <time dateTime="2020-01-01">01 Jan, 2022</time>
-                <p>
-                  Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem
-                  et et. Est ad aut sapiente quis molestiae est qui cum soluta.
-                  Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint
-                  qui facilis et.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Second Comment with Replies */}
-          <div id="comment-2" className="comment">
-            <div className="d-flex">
-              <div className="comment-img">
-                <Image
-                  src="/assets/img/blog/comments-2.jpg"
-                  alt="Aron Alvarado avatar"
-                  width={50}
-                  height={50}
-                  className="rounded-circle"
-                  loading="lazy"
-                />
-              </div>
-              <div>
-                <h5>
-                  <span>Aron Alvarado</span>
-                  <a href="#" className="reply">
-                    <i className="bi bi-reply-fill" aria-hidden="true"></i>{" "}
-                    Reply
-                  </a>
-                </h5>
-                <time dateTime="2020-01-01">01 Jan, 2022</time>
-                <p>
-                  Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque
-                  eveniet saepe. Officiis illo ut beatae.
-                </p>
-              </div>
-            </div>
-
-            {/* Reply */}
-            <div id="comment-reply-1" className="comment comment-reply">
-              <div className="d-flex">
-                <div className="comment-img">
-                  <Image
-                    src="/assets/img/blog/comments-3.jpg"
-                    alt="Lynda Small avatar"
-                    width={50}
-                    height={50}
-                    className="rounded-circle"
-                    loading="lazy"
-                  />
-                </div>
-                <div>
-                  <h5>
-                    <span>Lynda Small</span>
-                    <a href="#" className="reply">
-                      <i className="bi bi-reply-fill" aria-hidden="true"></i>{" "}
-                      Reply
-                    </a>
-                  </h5>
-                  <time dateTime="2020-01-01">01 Jan, 2022</time>
-                  <p>
-                    Enim ipsa eum fugiat fuga repellat. Commodi quo quo dicta.
-                    Est ullam aspernatur ut vitae quia mollitia id non. Qui ad
-                    quas nostrum rerum sed necessitatibus aut est. Eum officiis
-                    sed repellat maxime vero nisi natus. Amet nesciunt nesciunt
-                    qui illum omnis est et dolor recusandae.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Comment Form Section */}
-      <section id="comment-form" className="comment-form section">
-        <div className="container">
-          <form action="" noValidate>
-            <h4>Post Comment</h4>
-            <p>
-              Your email address will not be published. Required fields are
-              marked *
-            </p>
-            <div className="row">
-              <div className="col-md-6 form-group">
-                <input
-                  name="name"
-                  type="text"
-                  className="form-control"
-                  placeholder="Your Name*"
-                  id="commentName"
-                  autoComplete="name"
-                />
-              </div>
-              <div className="col-md-6 form-group">
-                <input
-                  name="email"
-                  type="email"
-                  className="form-control"
-                  placeholder="Your Email*"
-                  id="commentEmail"
-                  autoComplete="email"
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col form-group">
-                <input
-                  name="website"
-                  type="url"
-                  className="form-control"
-                  placeholder="Your Website"
-                  id="commentWebsite"
-                  autoComplete="url"
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col form-group">
-                <textarea
-                  name="comment"
-                  className="form-control"
-                  placeholder="Your Comment*"
-                  id="commentText"
-                  rows={4}
-                ></textarea>
-              </div>
-            </div>
-            <div className="text-center">
-              <button type="submit" className="btn btn-primary">
-                Post Comment
+            <div className="filter-dropdown">
+              <button
+                type="button"
+                className="filter-btn"
+                onClick={() => setIsMenuOpen((prev) => !prev)}
+                aria-expanded={isMenuOpen}
+                aria-haspopup="true"
+              >
+                <i className="bi bi-funnel-fill" aria-hidden="true"></i>
+                Filter
               </button>
+
+              {isMenuOpen && (
+                <ul className="filter-menu" role="menu">
+                  {filterOptions.map((option) => (
+                    <li
+                      key={option.value}
+                      className={filter === option.value ? "active" : ""}
+                      onClick={() => handleFilterClick(option.value)}
+                      role="menuitem"
+                    >
+                      {option.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-          </form>
+
+            {/* YouTube */}
+
+            <a
+              href="https://www.youtube.com/channel/UC_aZoH8d6c7fv6TdV49N59Q"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="youtube-btn"
+            >
+              <i className="bi bi-youtube" aria-hidden="true"></i>
+              YouTube
+            </a>
+          </div>
         </div>
-      </section>
-    </div>
+
+        {/* ========================================
+            PAGINATION LOADING
+        ======================================== */}
+
+        {loading && (
+          <div className="portfolio-loading">
+            <div className="spinner-border spinner-border-sm" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+
+            <span>Loading portfolio...</span>
+          </div>
+        )}
+
+        {/* ========================================
+            PORTFOLIO GRID
+        ======================================== */}
+
+        <div
+          className="row gy-4 isotope-container"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project) => (
+              <div
+                key={project.id}
+                className="col-lg-4 col-md-6 portfolio-item isotope-item"
+              >
+                <div className="portfolio-content h-100">
+                  {/* Image */}
+
+                  <img
+                    src={project.image}
+                    className="img-fluid"
+                    alt={project.title}
+                    loading="lazy"
+                    style={{
+                      width: "100%",
+                      height: "260px",
+                      objectFit: "cover",
+                    }}
+                    onError={(e) => {
+                      console.error("IMAGE LOAD FAILED:", e.currentTarget.src);
+
+                      e.currentTarget.onerror = null;
+
+                      e.currentTarget.src =
+                        "/assets/img/portfolio/portfolio-1.jpg";
+                    }}
+                  />
+
+                  {/* Portfolio Info */}
+
+                  <div className="portfolio-info">
+                    <h4>{project.title}</h4>
+
+                    <p>{project.category}</p>
+
+                    {/* Preview */}
+
+                    {project.image && (
+                      <a
+                        href={project.image}
+                        title={project.title}
+                        data-gallery="portfolio-gallery"
+                        className="glightbox preview-link"
+                      >
+                        <i className="bi bi-zoom-in" aria-hidden="true"></i>
+                      </a>
+                    )}
+
+                    {/* Details */}
+
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="More Details"
+                      className="details-link"
+                    >
+                      <i className="bi bi-link-45deg" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="col-12 text-center py-5">
+              <p>No portfolio items found.</p>
+            </div>
+          )}
+        </div>
+
+        {/* ========================================
+            PAGINATION
+        ======================================== */}
+
+        {lastPage > 1 && (
+          <div className="portfolio-pagination">
+            {/* Previous */}
+
+            <button
+              type="button"
+              className="portfolio-page-arrow"
+              disabled={currentPage <= 1 || loading}
+              onClick={() => handlePageChange(currentPage - 1)}
+              aria-label="Previous page"
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+
+            {/* Page Numbers */}
+
+            <div className="portfolio-page-numbers">
+              {pageNumbers.map((page, index) => {
+                if (typeof page !== "number") {
+                  return (
+                    <span
+                      key={`${page}-${index}`}
+                      className="portfolio-page-ellipsis"
+                    >
+                      ...
+                    </span>
+                  );
+                }
+
+                return (
+                  <button
+                    key={page}
+                    type="button"
+                    disabled={loading}
+                    className={`portfolio-page-number ${
+                      currentPage === page ? "active" : ""
+                    }`}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Next */}
+
+            <button
+              type="button"
+              className="portfolio-page-arrow"
+              disabled={currentPage >= lastPage || loading}
+              onClick={() => handlePageChange(currentPage + 1)}
+              aria-label="Next page"
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        )}
+
+        {/* ========================================
+            COUNT
+        ======================================== */}
+
+        {pagination?.total && (
+          <div className="portfolio-count text-center">
+            Showing {pagination.from || 1}
+            {"–"}
+            {pagination.to || galleries.length}
+            {" of "}
+            {pagination.total} projects
+          </div>
+        )}
+      </div>
+
+      {/* ========================================
+          ABOUT BUTTON
+      ======================================== */}
+
+      {/* <div className="container text-center mt-5">
+        <a
+          href="/about"
+          className="btn btn-animation btn-red d-inline-flex align-items-center mt-4"
+        >
+          <span className="btn-title">Load More..</span>
+        </a>
+      </div> */}
+    </section>
   );
 }

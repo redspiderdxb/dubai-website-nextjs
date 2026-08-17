@@ -1,51 +1,30 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { fetchPosts } from "../../lib/api";
 
 export default function BlogList({ posts = [], pagination = {} }) {
-  // ============================================
-  // SETTINGS
-  // ============================================
-
   const POSTS_PER_PAGE = 10;
 
-  // ============================================
-  // STATES
-  // ============================================
-
-  const [allPosts, setAllPosts] = useState([]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const [totalPages, setTotalPages] = useState(1);
-
-  const [loading, setLoading] = useState(true);
-
-  // ============================================
-  // SORT LATEST FIRST
-  // ============================================
-  // Newest ID first
-  // If ID is same, newest created_at first
-  //
-  // Example:
-  // 786
-  // 785
-  // 784
-  // 783
-  // ...
-  // ============================================
+  const categories = [
+    "All",
+    "SMS Marketing",
+    "Digital Marketing",
+    "CRM Software",
+    "Social Media",
+    "Chatbots",
+    "Real Estate SEO",
+  ];
 
   const sortLatestFirst = (items = []) => {
     return [...items].sort((a, b) => {
       const idA = Number(a?.id || 0);
       const idB = Number(b?.id || 0);
 
-      // First priority: ID
       if (idA !== idB) {
         return idB - idA;
       }
 
-      // Second priority: created_at
       const dateA = new Date(a?.created_at || 0).getTime();
       const dateB = new Date(b?.created_at || 0).getTime();
 
@@ -53,400 +32,387 @@ export default function BlogList({ posts = [], pagination = {} }) {
     });
   };
 
-  // ============================================
-  // LOAD ALL BLOGS
-  // ============================================
-  // IMPORTANT:
-  // Only ONE API request.
-  //
-  // Previously:
-  // page=1
-  // page=2
-  // page=3
-  // ...
-  // page=52
-  //
-  // Now:
-  // per_page=1000
-  //
-  // So only ONE request is made.
-  // ============================================
+  const [blogPosts, setBlogPosts] = useState(() => sortLatestFirst(posts));
 
-  useEffect(() => {
-    let cancelled = false;
+  const [paginationData, setPaginationData] = useState(pagination || {});
 
-    const loadAllBlogs = async () => {
-      try {
-        setLoading(true);
+  const [currentPage, setCurrentPage] = useState(pagination?.current_page || 1);
 
-        const API_URL = process.env.NEXT_PUBLIC_API_URL;
-        const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+  const [loading, setLoading] = useState(false);
 
-        // ========================================
-        // ONE API REQUEST ONLY
-        // ========================================
+  // UI active category only
+  const [activeCategory, setActiveCategory] = useState("All");
 
-        const response = await fetch(`${API_URL}/posts?page=1&per_page=1000`, {
-          headers: {
-            Accept: "application/json",
-            "X-API-KEY": API_KEY,
-          },
-        });
+  const totalPages = Number(paginationData?.last_page) || 1;
 
-        if (!response.ok) {
-          throw new Error(`Blog API error: ${response.status}`);
-        }
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+  };
 
-        const json = await response.json();
-
-        if (cancelled) {
-          return;
-        }
-
-        // ========================================
-        // GET POSTS
-        // ========================================
-
-        const apiPosts = Array.isArray(json?.data) ? json.data : [];
-
-        // ========================================
-        // FALLBACK
-        // ========================================
-
-        const sourcePosts =
-          apiPosts.length > 0 ? apiPosts : Array.isArray(posts) ? posts : [];
-
-        // ========================================
-        // REMOVE DUPLICATES
-        // ========================================
-
-        const uniquePosts = Array.from(
-          new Map(sourcePosts.map((post) => [String(post?.id), post])).values(),
-        );
-
-        // ========================================
-        // SORT LATEST -> OLDEST
-        // ========================================
-
-        const sortedPosts = sortLatestFirst(uniquePosts);
-
-        // ========================================
-        // FRONTEND PAGINATION
-        // ========================================
-
-        const pages = Math.max(
-          1,
-          Math.ceil(sortedPosts.length / POSTS_PER_PAGE),
-        );
-
-        setAllPosts(sortedPosts);
-
-        setTotalPages(pages);
-
-        setCurrentPage(1);
-      } catch (error) {
-        console.error("Error loading blogs:", error);
-
-        // ========================================
-        // FALLBACK TO SERVER PROPS
-        // ========================================
-
-        if (!cancelled) {
-          const fallbackPosts = sortLatestFirst(posts || []);
-
-          const pages = Math.max(
-            1,
-            Math.ceil(fallbackPosts.length / POSTS_PER_PAGE),
-          );
-
-          setAllPosts(fallbackPosts);
-
-          setTotalPages(pages);
-
-          setCurrentPage(1);
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
-    };
-
-    loadAllBlogs();
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  // ============================================
-  // CURRENT PAGE POSTS
-  // ============================================
-
-  const visiblePosts = useMemo(() => {
-    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-
-    return allPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
-  }, [allPosts, currentPage]);
-
-  // ============================================
-  // PAGE CHANGE
-  // ============================================
-  // NO API REQUEST HERE.
-  // Because all blogs are already loaded.
-  // ============================================
-
-  const handlePageChange = (page) => {
-    if (page < 1 || page > totalPages || page === currentPage) {
+  const handlePageChange = async (page) => {
+    if (page < 1 || page > totalPages || page === currentPage || loading) {
       return;
     }
 
-    setCurrentPage(page);
+    try {
+      setLoading(true);
 
-    window.setTimeout(() => {
-      document.getElementById("blog-posts")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 50);
+      const result = await fetchPosts(page);
+
+      const newPosts = sortLatestFirst(result?.posts || []);
+
+      setBlogPosts(newPosts);
+      setPaginationData(result?.pagination || {});
+      setCurrentPage(result?.pagination?.current_page || page);
+
+      setTimeout(() => {
+        document.getElementById("blog-posts")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    } catch (error) {
+      console.error("Error changing blog page:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // ============================================
-  // PAGINATION NUMBERS
-  // ============================================
+  const pageNumbers = useMemo(() => {
+    const pages = [];
 
-  const pageNumbers = [];
+    if (totalPages <= 7) {
+      for (let page = 1; page <= totalPages; page++) {
+        pages.push(page);
+      }
 
-  if (totalPages <= 7) {
-    for (let page = 1; page <= totalPages; page++) {
-      pageNumbers.push(page);
+      return pages;
     }
-  } else {
-    // ========================================
-    // FIRST 3
-    // ========================================
 
-    pageNumbers.push(1);
-    pageNumbers.push(2);
-    pageNumbers.push(3);
-
-    // ========================================
-    // MIDDLE
-    // ========================================
+    pages.push(1);
+    pages.push(2);
+    pages.push(3);
 
     if (currentPage > 4 && currentPage < totalPages - 3) {
-      pageNumbers.push("ellipsis-start");
-
-      pageNumbers.push(currentPage);
-
-      pageNumbers.push("ellipsis-end");
+      pages.push("ellipsis-start");
+      pages.push(currentPage);
+      pages.push("ellipsis-end");
+    } else if (currentPage >= totalPages - 3) {
+      pages.push("ellipsis-start");
     } else {
-      pageNumbers.push("ellipsis-middle");
+      pages.push("ellipsis-middle");
     }
 
-    // ========================================
-    // LAST 3
-    // ========================================
+    pages.push(totalPages - 2);
+    pages.push(totalPages - 1);
+    pages.push(totalPages);
 
-    pageNumbers.push(totalPages - 2);
-    pageNumbers.push(totalPages - 1);
-    pageNumbers.push(totalPages);
+    return pages.filter((value, index, array) => {
+      if (typeof value !== "number") {
+        return true;
+      }
+
+      return array.indexOf(value) === index;
+    });
+  }, [totalPages, currentPage]);
+
+  if (!blogPosts || blogPosts.length === 0) {
+    return (
+      <section id="blog-posts" className="rs-blog-section">
+        <div className="container">
+          <div className="rs-blog-empty">
+            <h4>No blog posts found.</h4>
+            <p>Check back later for updates.</p>
+          </div>
+        </div>
+      </section>
+    );
   }
 
-  // ============================================
-  // REMOVE DUPLICATES
-  // ============================================
+  /*
+   * First post = Featured post
+   * Remaining posts = Normal cards
+   */
+  const featuredPost = blogPosts[0];
+  const normalPosts = blogPosts.slice(1);
 
-  const uniquePageNumbers = pageNumbers.filter((value, index, array) => {
-    if (typeof value !== "number") {
-      return true;
+  const getCategory = (post) => {
+    if (post?.category?.name) {
+      return post.category.name;
     }
 
-    return array.indexOf(value) === index;
-  });
+    if (typeof post?.category === "string") {
+      return post.category;
+    }
 
-  // ============================================
-  // RENDER
-  // ============================================
+    if (Array.isArray(post?.categories) && post.categories.length > 0) {
+      return (
+        post.categories[0]?.name ||
+        post.categories[0]?.title ||
+        "Digital Marketing"
+      );
+    }
+
+    return "Digital Marketing";
+  };
+
+  const getExcerpt = (post) => {
+    if (post?.excerpt) {
+      return post.excerpt;
+    }
+
+    if (post?.description) {
+      return post.description;
+    }
+
+    if (post?.content) {
+      const plainText = post.content
+        .replace(/<[^>]*>/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      return plainText.length > 150
+        ? `${plainText.substring(0, 150)}...`
+        : plainText;
+    }
+
+    return "Read the latest insights, strategies and digital marketing ideas from RedSpider.";
+  };
+
+  const formatDate = (date) => {
+    if (!date) {
+      return "Recent";
+    }
+
+    return new Date(date).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const getReadingTime = (post) => {
+    if (post?.reading_time) {
+      return `${post.reading_time} min read`;
+    }
+
+    if (post?.readingTime) {
+      return `${post.readingTime} min read`;
+    }
+
+    const text = post?.content ? post.content.replace(/<[^>]*>/g, "") : "";
+
+    const words = text.trim().split(/\s+/).filter(Boolean).length;
+
+    const minutes = Math.max(1, Math.ceil(words / 200));
+
+    return `${minutes} min read`;
+  };
+
+  const renderImage = (post, featured = false) => {
+    return (
+      <Image
+        src={post?.image || "/assets/img/blog-placeholder.jpg"}
+        alt={post?.title || post?.name || "Blog Post"}
+        fill
+        sizes={
+          featured
+            ? "(max-width: 991px) 100vw, 50vw"
+            : "(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
+        }
+        className="rs-blog-card-image"
+        unoptimized={post?.image?.startsWith("http")}
+      />
+    );
+  };
 
   return (
     <>
-      {/* ==========================================
-          BLOG POSTS
-      ========================================== */}
-
-      <section id="blog-posts" className="blog-posts section">
+      <section id="blog-posts" className="rs-blog-section">
         <div className="container">
-          {/* ======================================
-              ONLY ONE LOADING
+          {/* =====================================
+              CATEGORY FILTER UI
           ====================================== */}
 
-          {loading && (
-            <div className="blog-pagination-loading">
-              <div className="blog-loading-spinner">
-                <span></span>
+          <div className="rs-blog-categories" data-aos="fade-up">
+            {categories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                className={`rs-blog-category ${
+                  activeCategory === category ? "active" : ""
+                }`}
+                onClick={() => handleCategoryClick(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {/* =====================================
+              FEATURED BLOG
+          ====================================== */}
+
+          <article className="rs-blog-featured" data-aos="fade-up">
+            <Link
+              href={`/blog/${featuredPost.slug || featuredPost.id}`}
+              className="rs-blog-featured-image"
+            >
+              {renderImage(featuredPost, true)}
+
+              <span className="rs-blog-image-overlay"></span>
+
+              <span className="rs-blog-featured-badge">
+                {getCategory(featuredPost)}
+              </span>
+            </Link>
+
+            <div className="rs-blog-featured-content">
+              <div className="rs-blog-meta">
+                <span>
+                  <i className="bi bi-calendar3"></i>
+                  {formatDate(featuredPost.created_at)}
+                </span>
+
+                <span className="rs-meta-dot">•</span>
+
+                <span>
+                  <i className="bi bi-clock"></i>
+                  {getReadingTime(featuredPost)}
+                </span>
               </div>
 
-              <span>Loading blogs...</span>
-            </div>
-          )}
+              <h2>
+                <Link href={`/blog/${featuredPost.slug || featuredPost.id}`}>
+                  {featuredPost.title || featuredPost.name || "Untitled Post"}
+                </Link>
+              </h2>
 
-          {/* ======================================
-              BLOG GRID
+              <p>{getExcerpt(featuredPost)}</p>
+
+              <Link
+                href={`/blog/${featuredPost.slug || featuredPost.id}`}
+                className="rs-blog-read-more"
+              >
+                Read Article
+                <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
+          </article>
+
+          {/* =====================================
+              NORMAL BLOG GRID
           ====================================== */}
 
-          {!loading && (
-            <>
-              {visiblePosts.length > 0 ? (
-                <div className="row gy-4">
-                  {visiblePosts.map((post) => (
-                    <div key={post.id} className="col-lg-4 col-md-6">
-                      <article className="h-100 d-flex flex-column">
-                        {/* ==================================
-                            IMAGE
-                        ================================== */}
+          <div className="rs-blog-grid">
+            {normalPosts.map((post, index) => (
+              <article
+                key={post.id}
+                className="rs-blog-card"
+                data-aos="fade-up"
+                data-aos-delay={(index % 3) * 100}
+              >
+                <Link
+                  href={`/blog/${post.slug || post.id}`}
+                  className="rs-blog-card-image-wrap"
+                >
+                  {renderImage(post)}
 
-                        <div className="post-img position-relative overflow-hidden">
-                          <Image
-                            src={
-                              post.image || "/assets/img/blog-placeholder.jpg"
-                            }
-                            alt={post.title || post.name || "Blog Post"}
-                            width={600}
-                            height={400}
-                            className="img-fluid w-100"
-                            style={{
-                              objectFit: "cover",
-                              height: "240px",
-                            }}
-                            loading="lazy"
-                            unoptimized={post.image?.startsWith("http")}
-                          />
-                        </div>
+                  <span className="rs-blog-image-overlay"></span>
 
-                        {/* ==================================
-                            CATEGORY
-                        ================================== */}
+                  <span className="rs-blog-card-category">
+                    {getCategory(post)}
+                  </span>
 
-                        {post.category && (
-                          <p className="post-category mt-3 mb-1">
-                            {post.category}
-                          </p>
-                        )}
+                  <span className="rs-blog-hover-icon">
+                    <i className="bi bi-arrow-up-right"></i>
+                  </span>
+                </Link>
 
-                        {/* ==================================
-                            TITLE
-                        ================================== */}
+                <div className="rs-blog-card-content">
+                  <div className="rs-blog-meta">
+                    <span>
+                      <i className="bi bi-calendar3"></i>
+                      {formatDate(post.created_at)}
+                    </span>
 
-                        <h2 className="title fs-5 fw-bold">
-                          <Link
-                            href={`/blog/${post.slug || post.id}`}
-                            className="text-dark text-decoration-none stretched-link"
-                          >
-                            {post.title || post.name || "Untitled Post"}
-                          </Link>
-                        </h2>
+                    <span className="rs-meta-dot">•</span>
 
-                        {/* ==================================
-                            AUTHOR + DATE
-                        ================================== */}
+                    <span>
+                      <i className="bi bi-clock"></i>
+                      {getReadingTime(post)}
+                    </span>
+                  </div>
 
-                        <div className="d-flex align-items-center mt-auto pt-2">
-                          <div className="post-meta">
-                            <p className="post-author mb-0 small fw-medium">
-                              {post.author?.name || "RedSpider Team"}
-                            </p>
+                  <h3>
+                    <Link href={`/blog/${post.slug || post.id}`}>
+                      {post.title || post.name || "Untitled Post"}
+                    </Link>
+                  </h3>
 
-                            <p className="post-date mb-0 small text-muted">
-                              <time dateTime={post.created_at}>
-                                {post.created_at
-                                  ? new Date(
-                                      post.created_at,
-                                    ).toLocaleDateString("en-GB", {
-                                      day: "2-digit",
-                                      month: "short",
-                                      year: "numeric",
-                                    })
-                                  : "Recent"}
-                              </time>
-                            </p>
-                          </div>
-                        </div>
-                      </article>
-                    </div>
-                  ))}
+                  <p>{getExcerpt(post)}</p>
+
+                  <Link
+                    href={`/blog/${post.slug || post.id}`}
+                    className="rs-blog-read-more"
+                  >
+                    Read Article
+                    <i className="bi bi-arrow-right"></i>
+                  </Link>
                 </div>
-              ) : (
-                /* ==================================
-                    NO POSTS
-                ================================== */
-
-                <div className="text-center py-5">
-                  <h4>No blog posts found.</h4>
-
-                  <p className="text-muted">Check back later for updates.</p>
-                </div>
-              )}
-            </>
-          )}
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ==========================================
+      {/* =====================================
+          LOADING
+      ====================================== */}
+
+      {loading && (
+        <div className="rs-blog-loading">
+          <span className="rs-blog-spinner"></span>
+          <span>Loading blogs...</span>
+        </div>
+      )}
+
+      {/* =====================================
           PAGINATION
-          ALWAYS BELOW BLOGS
-      ========================================== */}
+      ====================================== */}
 
-      {!loading && totalPages > 1 && (
-        <section id="blog-pagination" className="blog-pagination section">
+      {totalPages > 1 && (
+        <section id="blog-pagination" className="rs-blog-pagination">
           <div className="container">
-            <div className="blog-pagination-wrapper">
-              {/* ==================================
-                  PREVIOUS
-              ================================== */}
-
+            <div className="rs-blog-pagination-wrapper">
               <button
                 type="button"
-                className={`blog-page-arrow ${
-                  currentPage <= 1 ? "disabled" : ""
-                }`}
-                disabled={currentPage <= 1}
-                aria-label="Previous page"
+                className="rs-blog-page-arrow"
+                disabled={currentPage <= 1 || loading}
                 onClick={() => handlePageChange(currentPage - 1)}
               >
                 <i className="bi bi-chevron-left"></i>
               </button>
 
-              {/* ==================================
-                  PAGE NUMBERS
-              ================================== */}
-
-              <div className="blog-page-numbers">
-                {uniquePageNumbers.map((page, index) => {
-                  // =================================
-                  // ELLIPSIS
-                  // =================================
-
+              <div className="rs-blog-page-numbers">
+                {pageNumbers.map((page, index) => {
                   if (typeof page !== "number") {
                     return (
                       <span
                         key={`${page}-${index}`}
-                        className="blog-page-ellipsis"
+                        className="rs-blog-page-ellipsis"
                       >
                         ...
                       </span>
                     );
                   }
 
-                  // =================================
-                  // PAGE BUTTON
-                  // =================================
-
                   return (
                     <button
                       key={page}
                       type="button"
-                      className={`blog-page-number ${
+                      disabled={loading}
+                      className={`rs-blog-page-number ${
                         currentPage === page ? "active" : ""
                       }`}
                       onClick={() => handlePageChange(page)}
@@ -457,17 +423,10 @@ export default function BlogList({ posts = [], pagination = {} }) {
                 })}
               </div>
 
-              {/* ==================================
-                  NEXT
-              ================================== */}
-
               <button
                 type="button"
-                className={`blog-page-arrow ${
-                  currentPage >= totalPages ? "disabled" : ""
-                }`}
-                disabled={currentPage >= totalPages}
-                aria-label="Next page"
+                className="rs-blog-page-arrow"
+                disabled={currentPage >= totalPages || loading}
                 onClick={() => handlePageChange(currentPage + 1)}
               >
                 <i className="bi bi-chevron-right"></i>

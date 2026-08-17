@@ -1,90 +1,134 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { fetchAllServices } from "../../lib/api";
-import { fetchAllProducts } from "../../lib/api";
+import { useRouter } from "next/router";
+
+import { useHeaderData } from "../../context/HeaderDataContext";
 
 export default function Header() {
+  const router = useRouter();
+
+  const { services: apiServices, products: apiProducts } = useHeaderData();
+
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [services, setServices] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [isLoadingServices, setIsLoadingServices] = useState(true);
-  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+  const [isBlogScrolled, setIsBlogScrolled] = useState(false);
+
   const headerRef = useRef(null);
 
-  // 🔥 Products to show in Services dropdown (with Products URL)
+  /* =====================================================
+     BLOG PAGE DETECTION
+  ===================================================== */
+
+  const isBlogPage =
+    router.pathname === "/blog" || router.pathname.startsWith("/blog/");
+
+  /* =====================================================
+     BLOG SCROLL
+  ===================================================== */
+
+  useEffect(() => {
+    if (!isBlogPage) {
+      setIsBlogScrolled(false);
+      return;
+    }
+
+    const handleScroll = () => {
+      setIsBlogScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isBlogPage]);
+
+  /* =====================================================
+     EXTRA SERVICES
+  ===================================================== */
+
   const extraServices = [
     {
       name: "Real Estate Web Design Company",
       path: "/products/real-estate-web-design-company",
     },
-    { name: "SMS Marketing UAE", path: "/products/sms-marketing-uae" },
+    {
+      name: "SMS Marketing UAE",
+      path: "/products/sms-marketing-uae",
+    },
   ];
 
-  // 🔥 Fetch services from API
-  useEffect(() => {
-    const loadServices = async () => {
-      try {
-        const response = await fetchAllServices();
-        const servicesData = response?.data || [];
+  /* =====================================================
+     DYNAMIC SERVICES
+  ===================================================== */
 
-        // 🔥 Convert services to nav items
-        const serviceItems = servicesData.map((service) => ({
+  const serviceItems = Array.isArray(apiServices)
+    ? apiServices
+        .filter((service) => service && service.name && service.slug)
+        .map((service) => ({
           name: service.name,
           path: `/services/${service.slug}`,
-        }));
+        }))
+    : [];
 
-        // 🔥 Add extra services with Products URL
-        const allServices = [...serviceItems, ...extraServices];
-        setServices(allServices);
-      } catch (error) {
-        console.error("Error fetching services:", error);
-        setServices(extraServices);
-      } finally {
-        setIsLoadingServices(false);
-      }
-    };
-    loadServices();
-  }, []);
+  const services = [...serviceItems, ...extraServices].filter(
+    (service, index, array) =>
+      array.findIndex((item) => item.name === service.name) === index,
+  );
 
-  // 🔥 Fetch products from API - Filter out the moved ones
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const productsData = await fetchAllProducts();
+  /* =====================================================
+     DYNAMIC PRODUCTS
+  ===================================================== */
 
-        // 🔥 Filter: Remove products that are now in Services
-        const productNamesToRemove = [
-          "Real Estate Web Design Company",
-          "SMS Marketing UAE",
-        ];
-        const filteredProducts = productsData.filter(
-          (product) => !productNamesToRemove.includes(product.name),
-        );
+  const movedProductNames = [
+    "Real Estate Web Design Company",
+    "SMS Marketing UAE",
+  ];
 
-        setProducts(filteredProducts);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-        setProducts([]);
-      } finally {
-        setIsLoadingProducts(false);
-      }
-    };
-    loadProducts();
-  }, []);
+  const products = Array.isArray(apiProducts)
+    ? apiProducts
+        .filter(
+          (product) =>
+            product &&
+            product.name &&
+            product.slug &&
+            !movedProductNames.includes(product.name),
+        )
+        .map((product) => ({
+          name: product.name,
+          path: `/products/${product.slug}`,
+        }))
+    : [];
+
+  /* =====================================================
+     MOBILE MENU
+  ===================================================== */
 
   const toggleMobileMenu = () => {
-    setIsMobileOpen(!isMobileOpen);
+    setIsMobileOpen((prev) => !prev);
   };
 
   const closeMobileMenu = () => {
     setIsMobileOpen(false);
+    setOpenDropdown(null);
   };
 
+  /* =====================================================
+     DROPDOWN
+  ===================================================== */
+
   const toggleDropdown = (index) => {
-    setOpenDropdown(openDropdown === index ? null : index);
+    setOpenDropdown((prev) => (prev === index ? null : index));
   };
+
+  /* =====================================================
+     CLICK OUTSIDE
+  ===================================================== */
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -92,9 +136,17 @@ export default function Header() {
         setOpenDropdown(null);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
+
+  /* =====================================================
+     RESIZE
+  ===================================================== */
 
   useEffect(() => {
     const handleResize = () => {
@@ -102,37 +154,83 @@ export default function Header() {
         setIsMobileOpen(false);
       }
     };
+
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
+  /* =====================================================
+     NAV ITEMS
+  ===================================================== */
+
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "About Us",
+      path: "/about",
+    },
     {
       name: "Services",
       type: "dropdown",
       items: services,
-      isLoading: isLoadingServices,
     },
-    { name: "Our Portfolio", path: "/portfolio" },
+    {
+      name: "Our Portfolio",
+      path: "/portfolio",
+    },
     {
       name: "Products",
       type: "dropdown",
-      items: products.map((product) => ({
-        name: product.name,
-        path: `/products/${product.slug}`,
-      })),
-      isLoading: isLoadingProducts,
+      items: products,
     },
-    { name: "Contact", path: "/contact" },
+    {
+      name: "Contact",
+      path: "/contact",
+    },
   ];
 
+  /* =====================================================
+     HEADER CLASS
+  ===================================================== */
+
+  const headerClass = [
+    "rs-main-header",
+
+    isBlogPage ? "rs-blog-fixed-header" : "",
+
+    isBlogPage && isBlogScrolled ? "rs-blog-header-scrolled" : "",
+
+    isMobileOpen ? "rs-header-mobile-open" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  /* =====================================================
+     RENDER
+  ===================================================== */
+
   return (
-    <header id="header" className="rs-main-header" ref={headerRef}>
+    <header id="header" ref={headerRef} className={headerClass}>
       <div className="rs-header-inner">
+        {/* =================================================
+            TOP ROW
+        ================================================= */}
+
         <div className="rs-top-row">
-          <Link href="/" className="rs-logo" aria-label="RedSpider Home">
+          {/* LOGO */}
+
+          <Link
+            href="/"
+            className="rs-logo"
+            aria-label="RedSpider Home"
+            onClick={closeMobileMenu}
+          >
             <Image
               src="/assets/img/logo.png"
               alt="RedSpider Web & Art Design"
@@ -142,7 +240,11 @@ export default function Header() {
             />
           </Link>
 
+          {/* NAV WRAPPER */}
+
           <div className="rs-nav-wrap">
+            {/* NAVIGATION */}
+
             <nav
               id="navmenu"
               className={`rs-navmenu ${isMobileOpen ? "rs-mobile-open" : ""}`}
@@ -150,29 +252,17 @@ export default function Header() {
             >
               <ul>
                 {navItems.map((item, index) => {
-                  if (item.type === "dropdown") {
-                    if (item.isLoading) {
-                      return (
-                        <li key={index} className="dropdown">
-                          <button type="button" className="rs-dropdown-trigger">
-                            <span>{item.name}</span>
-                            <i className="bi bi-chevron-down toggle-dropdown"></i>
-                          </button>
-                          <ul className="rs-dropdown-menu">
-                            <li>
-                              <span className="px-4 py-2 text-gray-500">
-                                Loading {item.name.toLowerCase()}...
-                              </span>
-                            </li>
-                          </ul>
-                        </li>
-                      );
-                    }
+                  /* =====================================
+                       DROPDOWN
+                    ===================================== */
 
+                  if (item.type === "dropdown") {
                     return (
                       <li
-                        key={index}
-                        className={`dropdown ${openDropdown === index ? "rs-dropdown-open" : ""}`}
+                        key={item.name}
+                        className={`dropdown ${
+                          openDropdown === index ? "rs-dropdown-open" : ""
+                        }`}
                       >
                         <button
                           type="button"
@@ -182,6 +272,7 @@ export default function Header() {
                           aria-haspopup="true"
                         >
                           <span>{item.name}</span>
+
                           <i
                             className={`bi ${
                               openDropdown === index
@@ -190,10 +281,13 @@ export default function Header() {
                             } toggle-dropdown`}
                           ></i>
                         </button>
+
+                        {/* DROPDOWN MENU */}
+
                         <ul className="rs-dropdown-menu">
                           {item.items.length > 0 ? (
                             item.items.map((subItem, subIndex) => (
-                              <li key={subIndex}>
+                              <li key={`${item.name}-${subIndex}`}>
                                 <Link
                                   href={subItem.path}
                                   onClick={closeMobileMenu}
@@ -204,7 +298,7 @@ export default function Header() {
                             ))
                           ) : (
                             <li>
-                              <span className="px-4 py-2 text-gray-500">
+                              <span className="rs-dropdown-empty">
                                 No {item.name.toLowerCase()} available
                               </span>
                             </li>
@@ -213,8 +307,13 @@ export default function Header() {
                       </li>
                     );
                   }
+
+                  /* =====================================
+                       NORMAL LINK
+                    ===================================== */
+
                   return (
-                    <li key={index}>
+                    <li key={item.name}>
                       <Link href={item.path} onClick={closeMobileMenu}>
                         {item.name}
                       </Link>
@@ -224,9 +323,15 @@ export default function Header() {
               </ul>
             </nav>
 
+            {/* =================================================
+                MOBILE BUTTON
+            ================================================= */}
+
             <button
               type="button"
-              className={`rs-mobile-toggle ${isMobileOpen ? "rs-mobile-open" : ""}`}
+              className={`rs-mobile-toggle ${
+                isMobileOpen ? "rs-mobile-toggle-open" : ""
+              }`}
               onClick={toggleMobileMenu}
               aria-label={isMobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileOpen}
@@ -236,11 +341,20 @@ export default function Header() {
           </div>
         </div>
 
+        {/* =================================================
+            BOTTOM ROW
+        ================================================= */}
+
         <div className="rs-bottom-row">
+          {/* CALL */}
+
           <div className="rs-call-now">
             <i className="bi bi-telephone-fill"></i>
-            Call Now : +971 50 5698733, +971 55 5515475
+
+            <span>Call Now : +971 50 5698733, +971 55 5515475</span>
           </div>
+
+          {/* SOCIAL */}
 
           <div className="rs-social-wrap">
             <a
@@ -250,11 +364,15 @@ export default function Header() {
               rel="noopener noreferrer"
               aria-label="WhatsApp"
             >
-              <i className="bi bi-whatsapp"></i> WhatsApp
+              <i className="bi bi-whatsapp"></i>
+
+              <span>WhatsApp</span>
             </a>
+
             <a href="#" className="rs-social" aria-label="Facebook">
               <i className="bi bi-facebook"></i>
             </a>
+
             <a href="#" className="rs-social" aria-label="LinkedIn">
               <i className="bi bi-linkedin"></i>
             </a>

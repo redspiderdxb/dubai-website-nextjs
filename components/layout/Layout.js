@@ -6,15 +6,16 @@ export default function Layout({ children }) {
   return (
     <>
       <Head>
-        {/* 🔥 Bootstrap Icons CDN - YAHAN DAALO (Head ke andar) */}
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         />
       </Head>
-      
+
       <Header />
+
       <main>{children}</main>
+
       <Footer />
     </>
   );

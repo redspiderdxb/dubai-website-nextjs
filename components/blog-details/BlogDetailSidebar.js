@@ -1,152 +1,377 @@
-import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-export default function BlogDetailSidebar({
-  recentPosts = [],
-  categories = [],
-  tags = [],
-  author = null,
-}) {
+/* =====================================================
+   HELPERS
+===================================================== */
+
+const stripHtml = (html = "") => {
+  return String(html)
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .trim();
+};
+
+const createSlug = (text = "") => {
+  return stripHtml(text)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+};
+
+/* =====================================================
+   EXTRACT H2 / H3
+===================================================== */
+
+const extractHeadings = (html = "") => {
+  if (!html) return [];
+
+  const headings = [];
+
+  const regex = /<(h2|h3)([^>]*)>([\s\S]*?)<\/\1>/gi;
+
+  let match;
+  let index = 0;
+
+  while ((match = regex.exec(html)) !== null) {
+    const level = match[1].toLowerCase();
+
+    const text = stripHtml(match[3]);
+
+    if (!text) continue;
+
+    const id = `${createSlug(text) || "section"}-${index}`;
+
+    headings.push({
+      id,
+      text,
+      level,
+    });
+
+    index++;
+  }
+
+  return headings;
+};
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+export default function BlogDetailSidebar({ post }) {
+  const [activeId, setActiveId] = useState("");
+
+  const sidebarRef = useRef(null);
+
+  /* ===================================================
+     HEADINGS
+  ================================================== */
+
+  const headings = useMemo(() => {
+    return extractHeadings(post?.content || "");
+  }, [post?.content]);
+
+  /* ===================================================
+     FORCE STICKY SYSTEM
+  ================================================== */
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const sidebar = sidebarRef.current;
+
+    if (!sidebar) return;
+
+    const layout = sidebar.closest(".rs-blog-body-layout");
+
+    if (!layout) return;
+
+    /* =================================================
+       CONFIG
+    ================================================= */
+
+    const TOP_OFFSET = 11;
+
+    let ticking = false;
+
+    /* =================================================
+       RESET
+    ================================================= */
+
+    const resetSidebar = () => {
+      sidebar.style.position = "";
+      sidebar.style.top = "";
+      sidebar.style.left = "";
+      sidebar.style.width = "";
+      sidebar.style.height = "";
+      sidebar.style.zIndex = "";
+      sidebar.style.margin = "";
+      sidebar.style.bottom = "";
+    };
+
+    /* =================================================
+       MOBILE CHECK
+    ================================================= */
+
+    const isMobile = () => {
+      return window.innerWidth <= 767;
+    };
+
+    /* =================================================
+       UPDATE SIDEBAR
+    ================================================= */
+
+    const updateSidebar = () => {
+      ticking = false;
+
+      if (isMobile()) {
+        resetSidebar();
+
+        return;
+      }
+
+      const layoutRect = layout.getBoundingClientRect();
+
+      const sidebarRect = sidebar.getBoundingClientRect();
+
+      const sidebarHeight = sidebar.offsetHeight;
+
+      const layoutTop = layoutRect.top + window.scrollY;
+
+      const layoutBottom = layoutTop + layout.offsetHeight;
+
+      const scrollTop = window.scrollY;
+
+      const fixedTop = TOP_OFFSET;
+
+      /* =================================================
+         CURRENT SIDEBAR HEIGHT
+      ================================================= */
+
+      const sidebarWidth = sidebarRect.width;
+
+      /* =================================================
+         START POINT
+      ================================================= */
+
+      const startPoint = layoutTop - fixedTop;
+
+      /* =================================================
+         END POINT
+      ================================================= */
+
+      const maxScroll = layoutBottom - sidebarHeight - fixedTop;
+
+      /* =================================================
+         BEFORE START
+      ================================================= */
+
+      if (scrollTop < startPoint) {
+        sidebar.style.position = "relative";
+
+        sidebar.style.top = "0";
+        sidebar.style.left = "0";
+        sidebar.style.width = "100%";
+        sidebar.style.zIndex = "5";
+
+        return;
+      }
+
+      /* =================================================
+         REACHED ARTICLE BOTTOM
+      ================================================= */
+
+      if (scrollTop >= maxScroll) {
+        sidebar.style.position = "absolute";
+
+        sidebar.style.top = `${layout.offsetHeight - sidebarHeight}px`;
+
+        sidebar.style.left = "0";
+
+        sidebar.style.width = "100%";
+
+        sidebar.style.zIndex = "5";
+
+        return;
+      }
+
+      /* =================================================
+         FIXED
+      ================================================= */
+
+      sidebar.style.position = "fixed";
+
+      sidebar.style.top = `${fixedTop}px`;
+
+      sidebar.style.left = `${sidebarRect.left}px`;
+
+      sidebar.style.width = `${sidebarWidth}px`;
+
+      sidebar.style.height = `${sidebarHeight}px`;
+
+      sidebar.style.zIndex = "9999";
+
+      sidebar.style.margin = "0";
+    };
+
+    /* =================================================
+       SCROLL
+    ================================================= */
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateSidebar);
+
+        ticking = true;
+      }
+    };
+
+    /* =================================================
+       RESIZE
+    ================================================= */
+
+    const handleResize = () => {
+      resetSidebar();
+
+      window.requestAnimationFrame(updateSidebar);
+    };
+
+    /* =================================================
+       INIT
+    ================================================= */
+
+    resetSidebar();
+
+    updateSidebar();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", handleResize);
+
+    /* =================================================
+       CLEANUP
+    ================================================= */
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+
+      window.removeEventListener("resize", handleResize);
+
+      resetSidebar();
+    };
+  }, []);
+
+  /* ===================================================
+     ACTIVE HEADING
+  ================================================== */
+
+  useEffect(() => {
+    if (!headings.length) return;
+
+    const handleScroll = () => {
+      let current = "";
+
+      headings.forEach((heading) => {
+        const element = document.getElementById(heading.id);
+
+        if (!element) return;
+
+        const rect = element.getBoundingClientRect();
+
+        if (rect.top <= 150) {
+          current = heading.id;
+        }
+      });
+
+      if (current) {
+        setActiveId(current);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [headings]);
+
+  /* ===================================================
+     CLICK
+  ================================================== */
+
+  const handleClick = (e, id) => {
+    e.preventDefault();
+
+    const element = document.getElementById(id);
+
+    if (!element) return;
+
+    const offset = 110;
+
+    const position =
+      element.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top: position,
+      behavior: "smooth",
+    });
+
+    window.history.replaceState(null, "", `#${id}`);
+
+    setActiveId(id);
+  };
+
+  /* ===================================================
+     RENDER
+  ================================================== */
+
   return (
-    <div className="sidebar">
-      <div className="widgets-container">
-        {/* Author Widget */}
-        {author && (
-          <div className="blog-author-widget widget-item">
-            <div className="d-flex flex-column align-items-center">
-              <div className="d-flex align-items-center w-100">
-                {author.avatar && (
-                  <Image
-                    src={author.avatar}
-                    className="rounded-circle flex-shrink-0"
-                    alt={author.name || "Author"}
-                    width={80}
-                    height={80}
-                    loading="lazy"
-                    unoptimized={author.avatar?.startsWith("http")}
-                  />
-                )}
-                <div className="ms-3">
-                  <h4>{author.name || "RedSpider Team"}</h4>
-                  <div className="social-links">
-                    {author.twitter && (
-                      <a href={author.twitter} aria-label="Twitter">
-                        <i className="bi bi-twitter-x" aria-hidden="true"></i>
-                      </a>
-                    )}
-                    {author.facebook && (
-                      <a href={author.facebook} aria-label="Facebook">
-                        <i className="bi bi-facebook" aria-hidden="true"></i>
-                      </a>
-                    )}
-                    {author.instagram && (
-                      <a href={author.instagram} aria-label="Instagram">
-                        <i className="bi bi-instagram" aria-hidden="true"></i>
-                      </a>
-                    )}
-                    {author.linkedin && (
-                      <a href={author.linkedin} aria-label="LinkedIn">
-                        <i className="bi bi-linkedin" aria-hidden="true"></i>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-              {author.bio && <p className="mt-2">{author.bio}</p>}
-            </div>
-          </div>
+    <aside ref={sidebarRef} className="rs-blog-sidebar">
+      <div className="rs-blog-toc">
+        {/* TITLE */}
+
+        <div className="rs-toc-title">
+          <span className="rs-toc-icon">
+            <i className="bi bi-list"></i>
+          </span>
+
+          <span>IN THIS ARTICLE</span>
+        </div>
+
+        {/* NAVIGATION */}
+
+        {headings.length > 0 ? (
+          <nav className="rs-toc-nav">
+            {headings.map((heading) => (
+              <a
+                key={heading.id}
+                href={`#${heading.id}`}
+                onClick={(e) => handleClick(e, heading.id)}
+                className={`
+                    rs-toc-item
+                    ${activeId === heading.id ? "active" : ""}
+                    ${heading.level === "h3" ? "sub-item" : ""}
+                  `}
+              >
+                {heading.text}
+              </a>
+            ))}
+          </nav>
+        ) : (
+          <div className="rs-toc-empty">Article sections</div>
         )}
-
-        {/* Search Widget */}
-        <div className="search-widget widget-item">
-          <h3 className="widget-title">Search</h3>
-          <form action="" role="search">
-            <input
-              type="text"
-              placeholder="Search..."
-              aria-label="Search"
-              autoComplete="off"
-            />
-            <button type="submit" aria-label="Search">
-              <i className="bi bi-search" aria-hidden="true"></i>
-            </button>
-          </form>
-        </div>
-
-        {/* Categories Widget — Sirf Text (No Links) */}
-        <div className="categories-widget widget-item">
-          <h3 className="widget-title">Categories</h3>
-          <ul className="mt-3">
-            {categories && categories.length > 0 ? (
-              categories.map((cat) => (
-                <li key={cat.id}>
-                  <span>{cat.name}</span> <span>({cat.count || 0})</span>
-                </li>
-              ))
-            ) : (
-              <li>No categories found</li>
-            )}
-          </ul>
-        </div>
-
-        {/* Recent Posts Widget — Dynamic */}
-        <div className="recent-posts-widget widget-item">
-          <h3 className="widget-title">Recent Posts</h3>
-          {recentPosts && recentPosts.length > 0 ? (
-            recentPosts.slice(0, 5).map((post) => (
-              <div key={post.id} className="post-item">
-                {post.image && (
-                  <Image
-                    src={post.image}
-                    alt={post.title || post.name || "Recent post"}
-                    className="flex-shrink-0"
-                    width={60}
-                    height={60}
-                    loading="lazy"
-                    unoptimized={post.image?.startsWith("http")}
-                  />
-                )}
-                <div>
-                  <h4>
-                    <Link href={`/blog/${post.slug || post.id}`}>
-                      {post.title || post.name || "Untitled Post"}
-                    </Link>
-                  </h4>
-                  <time dateTime={post.created_at}>
-                    {post.created_at
-                      ? new Date(post.created_at).toLocaleDateString("en-GB", {
-                          day: "2-digit",
-                          month: "short",
-                          year: "numeric",
-                        })
-                      : "Recent"}
-                  </time>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p className="text-muted">No recent posts</p>
-          )}
-        </div>
-
-        {/* Tags Widget — Sirf Text (Inline Display) */}
-        <div className="tags-widget widget-item">
-          <h3 className="widget-title">Tags</h3>
-          <ul className="d-flex flex-wrap gap-1">
-            {tags && tags.length > 0 ? (
-              tags.map((tag) => (
-                <li key={tag.id} className="d-inline-block">
-                  <span className="badge bg-light text-dark border px-3 py-2">
-                    {tag.name}
-                  </span>
-                </li>
-              ))
-            ) : (
-              <li>No tags found</li>
-            )}
-          </ul>
-        </div>
       </div>
-    </div>
+    </aside>
   );
 }
