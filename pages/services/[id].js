@@ -111,11 +111,7 @@ export default function ServiceDetail({ service }) {
       <SEO {...seoData} />
 
       <main className="main">
-        {/* IMPORTANT:
-            WhatsAppBusinessTemplate expects "service"
-            prop, not "data".
-        */}
-        <TemplateComponent service={service} />
+        <TemplateComponent data={service} service={service} />
       </main>
     </Layout>
   );
