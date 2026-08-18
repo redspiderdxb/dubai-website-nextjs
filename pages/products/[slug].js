@@ -7,12 +7,15 @@ import RealEstatePortalTemplate from "../../components/product-templates/RealEst
 import SmsMarketingTemplate from "../../components/product-templates/SmsMarketingTemplate";
 import DailyDealTemplate from "../../components/product-templates/DailyDealTemplate";
 import ClassifiedDirectoryTemplate from "../../components/product-templates/ClassifiedDirectoryTemplate";
+// 🔥 CRM Template Import
+import CrmTemplate from "../../components/product-templates/CrmTemplate";
 
 const TEMPLATE_COMPONENTS = {
   "real-estate-portal": RealEstatePortalTemplate,
   "sms-marketing": SmsMarketingTemplate,
   "daily-deal": DailyDealTemplate,
   "classified-directory": ClassifiedDirectoryTemplate,
+  "crm-software": CrmTemplate, // 🔥 ADD THIS
 };
 
 export default function ProductDetail({ product }) {

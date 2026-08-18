@@ -11,6 +11,11 @@ import EcommerceTemplate from "../../components/templates/EcommerceTemplate";
 import EmailMarketingTemplate from "../../components/templates/EmailMarketingTemplate";
 import HostingTemplate from "../../components/templates/HostingTemplate";
 import MobileAppTemplate from "../../components/templates/MobileAppTemplate";
+import WhatsAppBusinessTemplate from "../../components/templates/WhatsAppBusinessTemplate";
+
+// =====================================================
+// TEMPLATE COMPONENTS
+// =====================================================
 
 const TEMPLATE_COMPONENTS = {
   "web-development": WebDevelopmentTemplate,
@@ -21,10 +26,15 @@ const TEMPLATE_COMPONENTS = {
   "email-marketing": EmailMarketingTemplate,
   "web-hosting": HostingTemplate,
   "mobile-app": MobileAppTemplate,
+  "whatsapp-business": WhatsAppBusinessTemplate,
 };
 
 export default function ServiceDetail({ service }) {
   const router = useRouter();
+
+  // =====================================================
+  // FALLBACK
+  // =====================================================
 
   if (router.isFallback) {
     return (
@@ -35,6 +45,10 @@ export default function ServiceDetail({ service }) {
       </Layout>
     );
   }
+
+  // =====================================================
+  // SERVICE NOT FOUND
+  // =====================================================
 
   if (!service) {
     return (
@@ -49,8 +63,23 @@ export default function ServiceDetail({ service }) {
     );
   }
 
+  // =====================================================
+  // SELECT TEMPLATE
+  // =====================================================
+
   const TemplateComponent =
     TEMPLATE_COMPONENTS[service.template] || WebDevelopmentTemplate;
+
+  // =====================================================
+  // DEBUG
+  // =====================================================
+
+  console.log("SERVICE TEMPLATE:", service.template);
+  console.log("SERVICE DATA:", service);
+
+  // =====================================================
+  // SEO DATA
+  // =====================================================
 
   const seoData = {
     title: service.seo_title || service.name || "Services | RedSpider",
@@ -73,20 +102,28 @@ export default function ServiceDetail({ service }) {
     noIndex: false,
   };
 
+  // =====================================================
+  // RENDER
+  // =====================================================
+
   return (
     <Layout>
       <SEO {...seoData} />
 
       <main className="main">
-        <TemplateComponent data={service} />
+        {/* IMPORTANT:
+            WhatsAppBusinessTemplate expects "service"
+            prop, not "data".
+        */}
+        <TemplateComponent service={service} />
       </main>
     </Layout>
   );
 }
 
-/* =====================================================
-   STATIC PATHS
-===================================================== */
+// =====================================================
+// STATIC PATHS
+// =====================================================
 
 export async function getStaticPaths() {
   try {
@@ -118,9 +155,9 @@ export async function getStaticPaths() {
   }
 }
 
-/* =====================================================
-   STATIC PROPS
-===================================================== */
+// =====================================================
+// STATIC PROPS
+// =====================================================
 
 export async function getStaticProps({ params }) {
   try {
@@ -144,7 +181,6 @@ export async function getStaticProps({ params }) {
       props: {
         service,
       },
-
       revalidate: 60,
     };
   } catch (error) {

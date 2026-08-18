@@ -2,12 +2,11 @@ import "@/styles/globals.css";
 import Head from "next/head";
 import Script from "next/script";
 import App from "next/app";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 import { fetchAllServices, fetchAllProducts } from "../lib/api";
-
 import { HeaderDataProvider } from "../context/HeaderDataContext";
 
 function MyApp({
@@ -16,122 +15,374 @@ function MyApp({
   headerServices = [],
   headerProducts = [],
 }) {
+  const customJsLoaded = useRef(false);
+
+  // =====================================================
+  // AOS INITIALIZATION
+  // =====================================================
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
     });
+
+    // Refresh AOS after page/content changes
+    setTimeout(() => {
+      if (typeof AOS !== "undefined") {
+        AOS.refreshHard();
+      }
+    }, 500);
   }, []);
+
+  // =====================================================
+  // LOAD CUSTOM.JS ONLY AFTER ALL REQUIRED LIBRARIES
+  // ARE AVAILABLE
+  // =====================================================
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    if (customJsLoaded.current) return;
+
+    let cancelled = false;
+    let timer = null;
+
+    const requiredLibrariesReady = () => {
+      return (
+        typeof window.jQuery !== "undefined" &&
+        typeof window.gsap !== "undefined" &&
+        typeof window.ScrollTrigger !== "undefined" &&
+        typeof window.Swiper !== "undefined" &&
+        typeof window.AOS !== "undefined" &&
+        typeof window.Isotope !== "undefined"
+      );
+    };
+
+    const loadCustomJS = () => {
+      if (cancelled) return;
+
+      if (customJsLoaded.current) return;
+
+      // Already loaded
+      const existingScript = document.querySelector(
+        'script[data-redspider-custom-js="true"]',
+      );
+
+      if (existingScript) {
+        customJsLoaded.current = true;
+        return;
+      }
+
+      // Make sure ScrollTrigger is registered with GSAP
+      if (window.gsap && window.ScrollTrigger) {
+        try {
+          window.gsap.registerPlugin(window.ScrollTrigger);
+          console.log("✅ GSAP + ScrollTrigger registered");
+        } catch (error) {
+          console.warn("⚠️ ScrollTrigger registration warning:", error);
+        }
+      }
+
+      const script = document.createElement("script");
+
+      script.src = "/assets/js/custom.js";
+      script.async = false;
+      script.setAttribute("data-redspider-custom-js", "true");
+
+      script.onload = () => {
+        customJsLoaded.current = true;
+
+        console.log("✅ RedSpider custom.js loaded successfully");
+
+        // Refresh AOS after custom JS initialization
+        setTimeout(() => {
+          if (window.AOS) {
+            window.AOS.refreshHard();
+          }
+        }, 300);
+
+        // Refresh ScrollTrigger
+        setTimeout(() => {
+          if (window.ScrollTrigger) {
+            try {
+              window.ScrollTrigger.refresh();
+              console.log("✅ ScrollTrigger refreshed");
+            } catch (error) {
+              console.warn("⚠️ ScrollTrigger refresh warning:", error);
+            }
+          }
+        }, 500);
+      };
+
+      script.onerror = () => {
+        console.error("❌ Failed to load /assets/js/custom.js");
+      };
+
+      document.body.appendChild(script);
+    };
+
+    const checkLibraries = () => {
+      if (cancelled) return;
+
+      if (requiredLibrariesReady()) {
+        console.log("====================================");
+        console.log("✅ ALL CUSTOM JS DEPENDENCIES READY");
+        console.log("jQuery:", typeof window.jQuery);
+        console.log("GSAP:", typeof window.gsap);
+        console.log("ScrollTrigger:", typeof window.ScrollTrigger);
+        console.log("Swiper:", typeof window.Swiper);
+        console.log("AOS:", typeof window.AOS);
+        console.log("Isotope:", typeof window.Isotope);
+        console.log("====================================");
+
+        loadCustomJS();
+        return;
+      }
+
+      timer = setTimeout(checkLibraries, 100);
+    };
+
+    // Start checking after browser has started rendering
+    timer = setTimeout(checkLibraries, 300);
+
+    return () => {
+      cancelled = true;
+
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, []);
+
+  // =====================================================
+  // PAGE RENDER
+  // =====================================================
 
   return (
     <>
       <Head>
+        {/* ============================================
+            BOOTSTRAP
+            ============================================ */}
+
         <link
           rel="stylesheet"
           href="/assets/vendor/bootstrap/css/bootstrap.min.css"
         />
+
+        {/* ============================================
+            BOOTSTRAP ICONS
+            ============================================ */}
 
         <link
           rel="stylesheet"
           href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
         />
 
+        {/* ============================================
+            AOS
+            ============================================ */}
+
         <link rel="stylesheet" href="/assets/vendor/aos/aos.css" />
+
+        {/* ============================================
+            GLIGHTBOX
+            ============================================ */}
 
         <link
           rel="stylesheet"
           href="/assets/vendor/glightbox/css/glightbox.min.css"
         />
 
+        {/* ============================================
+            SWIPER
+            ============================================ */}
+
         <link
           rel="stylesheet"
           href="/assets/vendor/swiper/swiper-bundle.min.css"
         />
 
+        {/* ============================================
+            ANIMATE CSS
+            ============================================ */}
+
         <link rel="stylesheet" href="/assets/lib/animate/animate.min.css" />
+
+        {/* ============================================
+            OWL CAROUSEL
+            ============================================ */}
 
         <link
           rel="stylesheet"
           href="/assets/lib/owlcarousel/assets/owl.carousel.min.css"
         />
 
+        {/* ============================================
+            MAIN CSS
+            ============================================ */}
+
         <link rel="stylesheet" href="/assets/css/main.css" />
+
+        {/* ============================================
+            CUSTOM FONTS
+            ============================================ */}
 
         <link rel="stylesheet" href="/assets/fonts/stylesheet.css" />
 
+        {/* ============================================
+            CUSTOM CSS
+            ============================================ */}
+
         <link rel="stylesheet" href="/assets/css/custom.css" />
+
+        {/* ============================================
+            MATERIAL SYMBOLS
+            ============================================ */}
+
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
       </Head>
 
-      {/* ============================================
+      {/* =================================================
           DYNAMIC HEADER DATA
-          ============================================ */}
+          ================================================= */}
 
       <HeaderDataProvider services={headerServices} products={headerProducts}>
         <Component {...pageProps} />
       </HeaderDataProvider>
 
-      {/* ============================================
-          SCRIPTS
-          ============================================ */}
+      {/* =================================================
+          JAVASCRIPT DEPENDENCIES
+          ================================================= */}
+
+      {/* ================================================
+          JQUERY
+          ================================================ */}
 
       <Script
         src="https://code.jquery.com/jquery-3.7.1.min.js"
         strategy="beforeInteractive"
       />
 
+      {/* ================================================
+          BOOTSTRAP
+          ================================================ */}
+
       <Script
         src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"
         strategy="afterInteractive"
       />
+
+      {/* ================================================
+          SWIPER
+          ================================================ */}
 
       <Script
         src="/assets/vendor/swiper/swiper-bundle.min.js"
         strategy="afterInteractive"
       />
 
+      {/* ================================================
+          IMAGES LOADED
+          ================================================ */}
+
       <Script
         src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"
         strategy="afterInteractive"
       />
+
+      {/* ================================================
+          ISOTOPE
+          ================================================ */}
 
       <Script
         src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"
         strategy="afterInteractive"
       />
 
+      {/* ================================================
+          GSAP
+          ================================================ */}
+
       <Script
         src="https://unpkg.com/gsap@3/dist/gsap.min.js"
         strategy="afterInteractive"
       />
+
+      {/* ================================================
+          GSAP SCROLLTRIGGER
+          ================================================ */}
 
       <Script
         src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"
         strategy="afterInteractive"
       />
 
+      {/* ================================================
+          LENIS
+          ================================================ */}
+
       <Script
         src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.23/bundled/lenis.min.js"
         strategy="afterInteractive"
       />
 
+      {/* ================================================
+          SPLIT TYPE
+          ================================================ */}
+
       <Script src="https://unpkg.com/split-type" strategy="afterInteractive" />
 
+      {/* ================================================
+          AOS
+          ================================================ */}
+
       <Script src="/assets/vendor/aos/aos.js" strategy="afterInteractive" />
+
+      {/* ================================================
+          GLIGHTBOX
+          ================================================ */}
 
       <Script
         src="/assets/vendor/glightbox/js/glightbox.min.js"
         strategy="afterInteractive"
       />
 
+      {/* ================================================
+          PURECOUNTER
+          ================================================ */}
+
       <Script
         src="/assets/vendor/purecounter/purecounter_vanilla.js"
         strategy="afterInteractive"
       />
 
+      {/* ================================================
+          PHP EMAIL FORM VALIDATION
+          ================================================ */}
+
       <Script
         src="/assets/vendor/php-email-form/validate.js"
         strategy="afterInteractive"
       />
+
+      {/* =================================================
+          IMPORTANT
+
+          custom.js is NOT loaded with <Script> here.
+
+          It is loaded from useEffect AFTER checking:
+          jQuery
+          GSAP
+          ScrollTrigger
+          Swiper
+          AOS
+          Isotope
+          ================================================= */}
     </>
   );
 }
@@ -147,15 +398,18 @@ MyApp.getInitialProps = async (appContext) => {
   let headerProducts = [];
 
   try {
-    // Fetch Services + Products together
+    // ================================================
+    // FETCH SERVICES + PRODUCTS
+    // ================================================
+
     const [servicesResult, productsResult] = await Promise.all([
       fetchAllServices(),
       fetchAllProducts(),
     ]);
 
-    // =================================================
+    // ================================================
     // SERVICES
-    // =================================================
+    // ================================================
 
     if (Array.isArray(servicesResult)) {
       headerServices = servicesResult;
@@ -165,9 +419,9 @@ MyApp.getInitialProps = async (appContext) => {
       headerServices = [];
     }
 
-    // =================================================
+    // ================================================
     // PRODUCTS
-    // =================================================
+    // ================================================
 
     if (Array.isArray(productsResult)) {
       headerProducts = productsResult;
@@ -177,13 +431,17 @@ MyApp.getInitialProps = async (appContext) => {
       headerProducts = [];
     }
 
-    // =================================================
+    // ================================================
     // DEBUG
-    // =================================================
+    // ================================================
+
+    console.log("====================================");
 
     console.log("HEADER SERVICES:", headerServices.length);
 
     console.log("HEADER PRODUCTS:", headerProducts.length);
+
+    console.log("====================================");
   } catch (error) {
     console.error("Header data fetch error:", error);
 
@@ -193,7 +451,6 @@ MyApp.getInitialProps = async (appContext) => {
 
   return {
     ...appProps,
-
     headerServices,
     headerProducts,
   };

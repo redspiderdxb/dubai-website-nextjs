@@ -10,9 +10,17 @@ export default function Header() {
 
   const { services: apiServices, products: apiProducts } = useHeaderData();
 
+  useEffect(() => {
+    console.log("=================================");
+    console.log("HEADER API PRODUCTS:", apiProducts);
+    console.log("PRODUCT COUNT:", apiProducts?.length);
+    console.log("=================================");
+  }, [apiProducts]);
+
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [isBlogScrolled, setIsBlogScrolled] = useState(false);
+  const [isBlogScrolled, setIsBlogScrolled] = useState(false)
+  
 
   const headerRef = useRef(null);
 
@@ -92,14 +100,22 @@ export default function Header() {
 
   const products = Array.isArray(apiProducts)
     ? apiProducts
-        .filter(
-          (product) =>
-            product &&
-            product.name &&
-            product.slug &&
-            !movedProductNames.includes(product.name),
-        )
+        .filter((product) => {
+          if (!product) return false;
+
+          if (!product.name) return false;
+
+          if (!product.slug) return false;
+
+          // These two products are intentionally shown under Services
+          if (movedProductNames.includes(product.name)) {
+            return false;
+          }
+
+          return true;
+        })
         .map((product) => ({
+          id: product.id,
           name: product.name,
           path: `/products/${product.slug}`,
         }))
