@@ -1,6 +1,6 @@
 export default function AboutHero({ data }) {
   // Get data from API or use fallback
-  const heroTitle = data?.hero_title || "About RedSpider Web & Art Design";
+  const heroTitle = data?.hero_title || "About RedSpider";
   const heroSubtitle = data?.hero_subtitle || "We're a creative digital agency";
   const heroDescription =
     data?.hero_description ||
@@ -36,7 +36,8 @@ export default function AboutHero({ data }) {
               )}
               <h1 className="rs-process-title mb-3">
                 {heroTitle}
-                <span className="rs-process-highlight">
+
+                 <span className="rs-process-highlight">
                   Web & Art Design
                   <svg
                     className="rs-process-underline"

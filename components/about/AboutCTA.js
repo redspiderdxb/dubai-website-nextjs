@@ -1,9 +1,9 @@
 export default function AboutCTA({ data }) {
   // Get data from API or use fallback
-  const ctaTitle = data?.cta_title || "Ready to build a strong brand identity?";
+  const ctaTitle = data?.cta_title || "Ready to Start Your Next Project?";
   const ctaDescription =
     data?.cta_description ||
-    "Let RedSpider create a professional logo that represents your business the right way.";
+    "Tell us about your requirements and discover how the RedSpider team can help bring your next digital project to life.";
   const ctaButtonText = data?.cta_button_text || "View Portfolio";
   const ctaButtonLink = data?.cta_button_link || "/portfolio";
 

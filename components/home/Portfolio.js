@@ -79,33 +79,18 @@ export default function Portfolio() {
                 className="rs-gd-intro__copy"
                 style={{ maxWidth: "100%", margin: "auto" }}
               >
-                <p
+                <h2
                   className="rs-gd-intro__lead rs-gd-intro__reveal fade-title mb-3"
                   style={{ maxWidth: "1000px", margin: "auto" }}
                 >
-                  500+ Successful Projects Delivered Across Dubai & UAE
-                </p>
+                  500+ Successful Website Projects Across Dubai & UAE
+                </h2>
                 <p
                   className="rs-gd-intro__lead rs-gd-intro__reveal text-center fs-5"
-                  style={{ fontWeight: 400 }}
-                >
-                  We are passionate about{" "}
-                  <a
-                    href="https://www.redspider.ae/service/graphic-design-company-dubai/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Graphic Design
-                  </a>
-                  ,{" "}
-                  <a
-                    href="https://www.redspider.ae/service/logo-designing-company-dubai/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Original Logo Design
-                  </a>{" "}
-                  and creating Responsive Web Design Dubai Layouts.
+                 >
+                  Explore some of the websites we’ve designed and developed for
+                  businesses across Dubai and the UAE, <br></br> combining creative
+                  design, responsive functionality and user-focused experiences.
                 </p>
               </div>
             </div>
@@ -150,7 +135,7 @@ export default function Portfolio() {
                       loading="lazy"
                     />
                     <div className="portfolio-info">
-                      <h4>{project.title}</h4>
+                      <h3>{project.title}</h3>
                       <p>{project.category}</p>
 
                       <button

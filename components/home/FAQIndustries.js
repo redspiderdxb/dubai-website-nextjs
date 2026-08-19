@@ -84,7 +84,7 @@ export default function FAQIndustries({ data }) {
               <div className="accordion" id="homeFaqLeft">
                 {leftFaqs.map((faq, index) => (
                   <div className="accordion-item" key={`left-${index}`}>
-                    <h2 className="accordion-header">
+                    <h3 className="accordion-header">
                       <button
                         className="accordion-button collapsed"
                         type="button"
@@ -94,7 +94,7 @@ export default function FAQIndustries({ data }) {
                       >
                         {faq.question}
                       </button>
-                    </h2>
+                    </h3>
                     <div
                       id={`faq-left-${index}`}
                       className="accordion-collapse collapse"
@@ -188,7 +188,7 @@ export default function FAQIndustries({ data }) {
         >
           <div className="section-title text-center text-white mb-3">
             <h2 className="fw-normal" data-aos="fade-up" data-aos-delay="100">
-              A Trusted Web Design Agency in Dubai
+              Built on Experience and Quality 
             </h2>
             <p className="mb-4" data-aos="fade-up" data-aos-delay="250">
               RedSpider is a Dubai-based web design and development agency with

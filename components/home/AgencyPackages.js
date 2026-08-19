@@ -96,36 +96,9 @@ export default function AgencyPackages() {
 
   const accordionItems = [
     {
-      id: "rsAccOne",
-      show: true,
-      title: "Dubai Website Development Company",
-      content: (
-        <>
-          <p>
-            We, as a strong web development company, have a strong lineup of web
-            developers who can take on any web development project and get
-            success. They work hard and have the experience to work diligently
-            on every project they are given. They have developed the perfect
-            framework that reflects their hard work and experience. Our
-            developing team uses Laravel, WordPress, Code-Ignitor, Site-core,
-            Custom PHP, .NET platforms. Other platforms like Shopify and Magento
-            are also used.
-          </p>
-          <p>
-            Our website developers interact with the client and help plan their
-            project successfully. We give maximum client satisfaction by giving
-            them a chance to discuss what they want or how they want the project
-            to be done. We are experts in web design and web development. Ready
-            to grow with us?
-          </p>
-        </>
-      ),
-    },
-    {
       id: "rsAccTwo",
       show: false,
-      title:
-        "Web Designer Dubai - #1 Dubai Website Design Agency That Attracts Customers",
+      title: "Websites Designed to Attract and Engage Customers ",
       content: (
         <>
           <p>
@@ -146,8 +119,7 @@ export default function AgencyPackages() {
     {
       id: "rsAccThree",
       show: false,
-      title:
-        "Get a High-Conversion Website- Expert Web Designers and Developers",
+      title: "Ready to Build Your New Website?",
       content: (
         <>
           <p>
@@ -208,10 +180,7 @@ export default function AgencyPackages() {
                         <span>[ 001 ]</span>
                         <small>WEBSITE / DESIGN / DEVELOPMENT</small>
                       </div>
-                      <h2>
-                        Leading Website Design &amp; Development Agency in
-                        Dubai, UAE
-                      </h2>
+                      <h2>Websites Built Around Your Business</h2>
                       <p className="rs-lead">
                         Businesses or brands can trust Redspider Digital Agency
                         as their trusted partner. You can get professional
@@ -303,77 +272,90 @@ export default function AgencyPackages() {
                     <div className="rs-agency-content h-100">
                       <div className="rs-agency-top">
                         <span>[ 002 ]</span>
-                        <small>WEBSITE / DESIGN / DEVELOPMENT</small>
+                        <small>USER EXPERIENCE / PERFORMANCE / GROWTH</small>
                       </div>
+
                       <h2>
-                        Driving Digital Growth for Businesses Across Dubai
+                        Building Digital Experiences That Help Businesses Grow
                       </h2>
+
                       <p className="rs-lead">
-                        RedSpider offers top-notch services including website
-                        design, web development, branding, SEO and digital
-                        marketing. We help your brand stand out and give your
-                        customers an innovative digital experience.
+                        A successful website is more than just a digital
+                        presence. It should be easy to use, fast to load,
+                        mobile-friendly and built to turn visitors into
+                        potential customers.
                       </p>
+
                       <div className="row g-4 mt-4">
                         <div className="col-md-8">
                           <p>
-                            We have 14 years of experience in the industry and
-                            have partnered with SMEs, startups and established
-                            companies. With personalized solutions, we help
-                            businesses achieve their goals across many
-                            industries.
+                            We focus on creating smooth digital experiences that
+                            make it easy for customers to find information,
+                            explore your offerings and take the next step. Every
+                            element is planned with usability, clarity and
+                            performance in mind.
                           </p>
+
                           <p>
-                            Whether it is a responsive business website,
-                            ecommerce platform, mobile application or advanced
-                            web solution, our team creates quality digital
-                            products that improve visibility, engagement and
-                            business performance.
+                            From mobile-friendly layouts and optimized page
+                            performance to clear navigation and strong calls to
+                            action, our approach helps businesses create
+                            websites that are easier to use and more effective
+                            at generating enquiries.
                           </p>
                         </div>
+
                         <div className="col-md-4">
                           <div className="rs-agency-list">
-                            <span>SERVICES:</span>
+                            <span>FOCUS AREAS:</span>
+
                             <ul>
-                              {servicesList.map((service, idx) => (
-                                <li key={idx}>{service}</li>
-                              ))}
+                              <li>User Experience</li>
+                              <li>Mobile Usability</li>
+                              <li>Website Performance</li>
+                              <li>Lead Generation</li>
+                              <li>Scalability</li>
                             </ul>
                           </div>
                         </div>
                       </div>
+
                       <p>
-                        At RedSpider, we believe in long-term partnership. Our
-                        goal is to provide quality and transparency at every
-                        step. With our professional web design service in Dubai,
-                        we help brands build credibility, generate leads and
-                        achieve long-term growth.
+                        A strong digital presence also builds credibility. By
+                        combining a professional interface, reliable performance
+                        and a clear customer journey, we help businesses create
+                        a website that can support their current goals while
+                        remaining ready to scale as the business grows.
                       </p>
+
                       <div className="rs-agency-dots">
                         <span>
                           <img
                             src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=300&q=80"
-                            alt="Team member"
+                            alt="Website analytics and business growth"
                             loading="lazy"
                           />
                         </span>
+
                         <span>
                           <img
                             src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=300&q=80"
-                            alt="Team member"
+                            alt="Digital team collaboration"
                             loading="lazy"
                           />
                         </span>
+
                         <span>
                           <img
                             src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=300&q=80"
-                            alt="Team member"
+                            alt="Business technology and performance"
                             loading="lazy"
                           />
                         </span>
                       </div>
                     </div>
                   </div>
+
                   <div
                     className="col-lg-4"
                     data-aos="fade-right"
@@ -382,7 +364,7 @@ export default function AgencyPackages() {
                     <div className="rs-agency-image h-100">
                       <img
                         src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
-                        alt="Website Design Agency Dubai office"
+                        alt="Modern digital workspace"
                         loading="lazy"
                       />
                     </div>
@@ -414,7 +396,7 @@ export default function AgencyPackages() {
                         <span>[ 003 ]</span>
                         <small>LOCATIONS / DUBAI / UAE</small>
                       </div>
-                      <h2>Areas We Serve Across Dubai & UAE</h2>
+                      <h2>Working With Businesses Across Dubai & the UAE</h2>
                       <p className="mb-4">
                         RedSpider provides professional website design and web
                         development services across Dubai, Sharjah and the UAE.
@@ -426,58 +408,6 @@ export default function AgencyPackages() {
                         {locations.map((location, idx) => (
                           <span key={idx}>{location}</span>
                         ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 4 */}
-            <div
-              ref={(el) => (cardsRef.current[3] = el)}
-              className="rs-gsap-card rs-card-4"
-            >
-              <div className="h-100 d-flex flex-column">
-                <div>
-                  <div className="rs-agency-top mb-4">
-                    <span>[ 004 ]</span>
-                    <small>WEB DESIGN / DEVELOPMENT / DIGITAL SOLUTIONS</small>
-                  </div>
-                  <h2>
-                    Best Web Design Company Dubai <br />
-                    <span className="text-danger">Web Development Company</span>
-                  </h2>
-                </div>
-                <div className="mt-auto">
-                  <div className="row align-items-stretch g-5">
-                    <div className="col-lg-8 d-flex">
-                      <div className="d-flex flex-column justify-content-end">
-                        <p className="mb-4">
-                          RedSpider is trusted by many as the best website
-                          design company in Dubai. We believe in focusing on
-                          quality and innovation. If you are looking for the
-                          best web design and development company, RedSpider Web
-                          & Art Design is the perfect choice for your business.
-                        </p>
-                        <p className="mb-0">
-                          Our expertise includes SEO, PHP web applications,
-                          custom CMS & CRM development, Ecommerce websites,
-                          Shopify store design, mobile app development, graphic
-                          design, branding and professional web development
-                          services that help businesses grow across Dubai and
-                          the UAE.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="col-lg-4 d-flex">
-                      <div className="rs-card4-image w-100 h-100">
-                        <img
-                          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80"
-                          className="w-100 h-100"
-                          alt="Web Design Company Dubai"
-                          loading="lazy"
-                        />
                       </div>
                     </div>
                   </div>
@@ -542,7 +472,7 @@ export default function AgencyPackages() {
                   <div className="p-2">
                     <div className="section-title text-start mb-0">
                       <h2 data-aos="fade-up">
-                        Why RedSpider Is a Trusted Web Design Dubai Company?
+                        Why Businesses Choose RedSpider
                       </h2>
                       <p className="text-dark mt-4" data-aos="fade-up">
                         Redspider has become a trusted choice for website design
@@ -629,7 +559,8 @@ export default function AgencyPackages() {
                 <div className="rs-creative-inner">
                   <div className="rs-process-title-sec">
                     <h2 className="rs-process-title mb-4 text-start">
-                      Why Businesses
+                      <span className="rs-title-black">Why Businesses</span>
+
                       <span className="rs-process-highlight">
                         Choose Our Web Design Company
                         <svg

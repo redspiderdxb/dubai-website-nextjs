@@ -157,7 +157,7 @@ export default function Hero({ data }) {
                     <p className="rs-slide-kicker">{slide.subtitle}</p>
                   )}
                   {slide.title && (
-                    <h1 className="rs-slide-title">{slide.title}</h1>
+                    <div className="rs-slide-title">{slide.title}</div>
                   )}
                   {slide.description && (
                     <p className="rs-slide-description">{slide.description}</p>

@@ -2,11 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-import { useHeaderData } from "../../context/HeaderDataContext";
-
 export default function Footer() {
-  const { services: apiServices } = useHeaderData();
-
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   /* =====================================================
@@ -33,25 +29,46 @@ export default function Footer() {
   };
 
   /* =====================================================
-     DYNAMIC FOOTER SERVICES
-     
-     Services are coming from HeaderDataContext/API.
-     URL is automatically created from service slug.
+     FOOTER SERVICES
+
+     STATIC LIST
+     Matches live website footer
   ===================================================== */
 
-  const services = Array.isArray(apiServices)
-    ? apiServices
-        .filter((service) => service && service.name && service.slug)
-        .map((service) => ({
-          name: service.name,
-          path: `/services/${service.slug}`,
-          slug: service.slug,
-        }))
-        .filter(
-          (service, index, array) =>
-            array.findIndex((item) => item.slug === service.slug) === index,
-        )
-    : [];
+  const services = [
+    {
+      name: "Logo Design",
+      path: "/services/logo-designing-company-dubai-brand-identity",
+    },
+    {
+      name: "Web Development",
+      path: "/services/web-development",
+    },
+    {
+      name: "Brochure/Profile Design",
+      path: "/services/brochure-design-services",
+    },
+    {
+      name: "Graphic Design",
+      path: "/services/graphic-design-services",
+    },
+    {
+      name: "E-Commerce Solutions",
+      path: "/services/ecommerce-development-services",
+    },
+    {
+      name: "Email Marketing",
+      path: "/services/email-marketing-services",
+    },
+    {
+      name: "Web Hosting",
+      path: "/services/web-hosting",
+    },
+    {
+      name: "Mobile App Development",
+      path: "/services/mobile-app-development-company-dubai",
+    },
+  ];
 
   /* =====================================================
      FOOTER MENU
@@ -72,7 +89,7 @@ export default function Footer() {
     },
     {
       name: "Careers",
-      path: "#",
+      path: "/careers",
     },
     {
       name: "Contact",
@@ -82,28 +99,35 @@ export default function Footer() {
 
   /* =====================================================
      SOCIAL ICONS
+
+     X / Twitter uses Bootstrap Icon
+     instead of external image
   ===================================================== */
 
   const socialIcons = [
     {
       name: "Facebook",
+      type: "image",
       icon: "fb.svg",
-      link: "#",
+      link: "https://www.facebook.com/RedSpiderWebandArtDesign/",
     },
     {
       name: "Twitter",
-      icon: "x.svg",
-      link: "#",
+      type: "icon",
+      icon: "bi bi-twitter-x",
+      link: "https://x.com/redspider99",
     },
     {
       name: "LinkedIn",
+      type: "image",
       icon: "linke.svg",
-      link: "#",
+      link: "https://www.linkedin.com/company/red-spider-web-&-art-design",
     },
     {
       name: "Instagram",
+      type: "image",
       icon: "insta.svg",
-      link: "#",
+      link: "https://www.instagram.com/redspiderwebartdesign/",
     },
   ];
 
@@ -125,15 +149,22 @@ export default function Footer() {
 
           <div className="row align-items-start rs-footer-top">
             {/* =================================================
-                LEFT - HEADING
+                LEFT - CTA
             ================================================= */}
 
             <div className="col-lg-5 col-md-6 rs-footer-intro">
-              <h2 className="rs-heading">
+              {/*
+                IMPORTANT:
+                Footer is a global component.
+
+                Do NOT use H1/H2/H3/H4/H5/H6 here.
+              */}
+
+              <div className="rs-heading">
                 Power up your website
                 <br />
                 with <span>Our experts</span>
-              </h2>
+              </div>
 
               <Image
                 src="/assets/img/swim.png"
@@ -145,22 +176,16 @@ export default function Footer() {
             </div>
 
             {/* =================================================
-                MIDDLE - DYNAMIC SERVICES
+                MIDDLE - SERVICES
             ================================================= */}
 
             <div className="col-lg-4 col-md-6">
               <ul className="rs-services">
-                {services.length > 0 ? (
-                  services.map((service) => (
-                    <li key={service.slug}>
-                      <Link href={service.path}>{service.name}</Link>
-                    </li>
-                  ))
-                ) : (
-                  <li>
-                    <span>No services available</span>
+                {services.map((service) => (
+                  <li key={service.path}>
+                    <Link href={service.path}>{service.name}</Link>
                   </li>
-                )}
+                ))}
               </ul>
             </div>
 
@@ -174,9 +199,9 @@ export default function Footer() {
               <div className="rs-contact-card rs-contact-email">
                 <small>Get Questions?</small>
 
-                <h5>
+                <div className="rs-contact-value">
                   <a href="mailto:info@redspider.ae">info@redspider.ae</a>
-                </h5>
+                </div>
 
                 <span className="rs-icon">
                   <Image
@@ -193,9 +218,9 @@ export default function Footer() {
               <div className="rs-contact-card rs-contact-phone">
                 <small>Quick Answer?</small>
 
-                <h5>
+                <div className="rs-contact-value">
                   <a href="tel:+971555515475">+971 55 5515475</a>
-                </h5>
+                </div>
 
                 <span className="rs-icon">
                   <Image
@@ -260,12 +285,16 @@ export default function Footer() {
                         rel="noopener noreferrer"
                         aria-label={social.name}
                       >
-                        <Image
-                          src={`/assets/img/social/${social.icon}`}
-                          alt={social.name}
-                          width={16}
-                          height={16}
-                        />
+                        {social.type === "icon" ? (
+                          <i className={social.icon} aria-hidden="true"></i>
+                        ) : (
+                          <Image
+                            src={`/assets/img/social/${social.icon}`}
+                            alt={social.name}
+                            width={16}
+                            height={16}
+                          />
+                        )}
                       </a>
                     ))}
                   </div>

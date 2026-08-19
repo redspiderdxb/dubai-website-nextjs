@@ -28,7 +28,7 @@ export default function AboutValue({ data }) {
       <div className="container pt-lg-5">
         <div className="row justify-content-center gx-5">
           <div className="col-lg-4" data-aos="fade-up">
-            <h1 className="fs-h3 fw-bold">{valueTitle}</h1>
+            <h2 className="fs-h3 fw-bold">{valueTitle}</h2>
           </div>
           <div className="col-lg-8" data-aos="fade-up">
             {valueDescription && (

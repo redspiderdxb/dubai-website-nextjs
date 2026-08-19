@@ -1,25 +1,90 @@
+import { useEffect, useState } from "react";
+import { fetchPosts } from "../../lib/api";
+
 export default function BlogStats({ data }) {
-  // Get data from API or use fallback
+  // ============================================
+  // BLOG TITLE
+  // ============================================
+
   const blogTitle = data?.blog_title || "From Our Blog";
-  const blogPosts =
-    data?.blog_posts?.length > 0
-      ? data.blog_posts
-      : [
-          {
-            id: 1,
-            title:
-              "Understanding the Ongoing Costs of a Custom Real Estate Website",
-            image: "assets/img/blog/custom-real-estate-website.webp",
-            link: "https://www.redspider.ae/custom-real-estate-website-maintenance-costs/",
-          },
-          {
-            id: 2,
-            title:
-              "Why Professional Website Design Matters for Businesses in Dubai",
-            image: "assets/img/blog/Professional-Website-Design.webp",
-            link: "https://www.redspider.ae/custom-real-estate-website-maintenance-costs/",
-          },
-        ];
+
+  // ============================================
+  // BLOG POSTS
+  // ============================================
+
+  const [blogPosts, setBlogPosts] = useState([]);
+
+  const [blogsLoading, setBlogsLoading] = useState(true);
+
+  // ============================================
+  // FETCH LATEST BLOG POSTS
+  // ============================================
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadLatestBlogs = async () => {
+      try {
+        setBlogsLoading(true);
+
+        // Fetch first page from Posts API
+        const result = await fetchPosts(1);
+
+        let posts = Array.isArray(result?.posts) ? result.posts : [];
+
+        // ==========================================
+        // SORT LATEST FIRST
+        // ==========================================
+
+        posts = [...posts].sort((a, b) => {
+          const idA = Number(a?.id || 0);
+          const idB = Number(b?.id || 0);
+
+          // Higher ID = newer post
+          if (idA !== idB) {
+            return idB - idA;
+          }
+
+          // Fallback to created date
+          const dateA = new Date(a?.created_at || 0).getTime();
+
+          const dateB = new Date(b?.created_at || 0).getTime();
+
+          return dateB - dateA;
+        });
+
+        // ==========================================
+        // ONLY LATEST 3
+        // ==========================================
+
+        posts = posts.slice(0, 3);
+
+        if (mounted) {
+          setBlogPosts(posts);
+        }
+      } catch (error) {
+        console.error("Error loading latest blog posts:", error);
+
+        if (mounted) {
+          setBlogPosts([]);
+        }
+      } finally {
+        if (mounted) {
+          setBlogsLoading(false);
+        }
+      }
+    };
+
+    loadLatestBlogs();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // ============================================
+  // CLIENT LOGOS
+  // ============================================
 
   const clientLogos =
     data?.client_logos?.length > 0
@@ -38,130 +103,200 @@ export default function BlogStats({ data }) {
           "11.png",
         ];
 
+  // ============================================
+  // STATS
+  // ============================================
+
   const stats =
     data?.stats?.length > 0
       ? data.stats
       : [
-          { number: "500", label: "COMPLETED PROJECTS" },
-          { number: "100", label: "5 STAR REVIEWS" },
-          { number: "14", label: "YEARS OF EXCELLENCE" },
+          {
+            number: "500",
+            label: "COMPLETED PROJECTS",
+          },
+          {
+            number: "100",
+            label: "5 STAR REVIEWS",
+          },
+          {
+            number: "14",
+            label: "YEARS OF EXCELLENCE",
+          },
         ];
 
-  // Helper function to get image URL
+  // ============================================
+  // IMAGE URL HELPER
+  // ============================================
+
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
 
-    // Full URL
-    if (
-      imagePath.startsWith("http://") ||
-      imagePath.startsWith("https://")
-    ) {
-      // Convert localhost backend image URL to live backend URL
+    // ==========================================
+    // FULL URL
+    // ==========================================
+
+    if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+      // Convert localhost backend URL
+      // to live backend URL
       if (imagePath.includes("localhost")) {
         return imagePath.replace(
           "http://localhost/redspider/public",
-          "https://redspider.rsworkspace.net/admin/public"
+          "https://redspider.rsworkspace.net/admin/public",
         );
       }
 
-      // Keep external URLs unchanged
       return imagePath;
     }
 
-    // /storage/filename.jpg or storage/filename.jpg
+    // ==========================================
+    // STORAGE IMAGE
+    // ==========================================
+
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
+
       const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+
       return `${baseUrl}${cleanPath}`;
     }
 
-    // If it's an asset path (assets/img/...)
+    // ==========================================
+    // LOCAL ASSETS
+    // ==========================================
+
     if (imagePath.startsWith("assets/") || imagePath.startsWith("/assets/")) {
       return imagePath;
     }
 
-    // For client logos - check if it's just a filename
+    // ==========================================
+    // CLIENT LOGOS
+    // ==========================================
+
     if (!imagePath.includes("/")) {
       return `/assets/img/we-work/${imagePath}`;
     }
 
-    // Fallback
+    // ==========================================
+    // FALLBACK
+    // ==========================================
+
     return imagePath;
   };
 
+  // ============================================
+  // RENDER
+  // ============================================
+
   return (
     <>
-      {/* Blog Section */}
+      {/* ==================================================
+          BLOG SECTION
+      ================================================== */}
+
+      {/* ==================================================
+    BLOG SECTION
+================================================== */}
+
       <section
         id="home-blog"
         className="mobile-app-ser section dark-background rs-home-blog-new"
       >
         <div className="container" style={{ maxWidth: "980px" }}>
+          {/* BLOG TITLE */}
+
           <div
             className="section-title text-center text-white mb-2 aos-init aos-animate"
             data-aos="fade-up"
           >
             <div className="home-blog-title fw-normal">{blogTitle}</div>
           </div>
+
+          {/* BLOG POSTS */}
+
           <div className="row g-3">
-            {blogPosts.map((post, index) => (
-              <div
-                key={post.id || index}
-                className="col-lg-6 aos-init aos-animate"
-                data-aos="fade-up"
-              >
-                <div className="rs-blog-text-card">
-                  <div className="blog-img">
-                    <img
-                      src={getImageUrl(post.image)}
-                      alt={post.title}
-                      className="img-fluid"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="rs-blog-post-title">
-                    <h4>
-                      <a
-                        href={post.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rs-blog-link"
-                      >
-                        {post.title}
-                      </a>
-                    </h4>
+            {blogsLoading ? (
+              <div className="col-12 text-center text-white">
+                <p>Loading...</p>
+              </div>
+            ) : blogPosts.length > 0 ? (
+              blogPosts.map((post, index) => (
+                <div
+                  key={post.id || post.slug || index}
+                  className="col-lg-4 col-md-6 aos-init aos-animate"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
+                  <div className="rs-blog-text-card">
+                    {/* IMAGE */}
+
+                    <div className="blog-img">
+                      <img
+                        src={
+                          getImageUrl(post.image) ||
+                          "/assets/img/blog/blog-1.jpg"
+                        }
+                        alt={post.title || post.name || "RedSpider Blog"}
+                        className="img-fluid"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* TITLE */}
+
+                    <div className="rs-blog-post-title">
+                      <h4>
+                        <a href={`/blog/${post.slug}`} className="rs-blog-link">
+                          {post.title || post.name || "Read Article"}
+                        </a>
+                      </h4>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="col-12 text-center text-white">
+                <p>No blog posts available.</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
 
-        <div className="container" style={{ maxWidth: "1320px" }}>
-          <div className="rs-blog-stats row text-center">
-            {stats.map((stat, index) => (
-              <div key={index} className="col-4">
-                <div>
-                  <span
-                    className="rs-blog-stat-number purecounter"
-                    data-purecounter-start="0"
-                    data-purecounter-end={parseInt(stat.number) || 0}
-                    data-purecounter-duration="0"
-                  >
-                    {stat.number}
-                  </span>
-                  <span className="rs-plus"></span>
+        {/* ==================================================
+      STATS
+  ================================================== */}
+
+          <div className="container">
+            <div className="rs-blog-stats row text-center">
+              {stats.map((stat, index) => (
+                <div key={index} className="col-4">
+                  <div>
+                    <span
+                      className="rs-blog-stat-number purecounter"
+                      data-purecounter-start="0"
+                      data-purecounter-end={parseInt(stat.number) || 0}
+                      data-purecounter-duration="0"
+                    >
+                      {stat.number}
+                    </span>
+
+                    <span className="rs-plus"></span>
+                  </div>
+
+                  <p>{stat.label}</p>
                 </div>
-                <p>{stat.label}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+
       </section>
 
-      {/* Client Logos Section */}
+      {/* ==================================================
+          CLIENT LOGOS
+      ================================================== */}
+
       <section
         className="gr-section section pt-0"
         style={{ background: "#000" }}
@@ -169,7 +304,9 @@ export default function BlogStats({ data }) {
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
-              <h3 className="text-center text-white mb-5">We've worked with</h3>
+              <div className="text-center text-white mb-5">
+                We've worked with
+              </div>
             </div>
           </div>
 
@@ -197,7 +334,10 @@ export default function BlogStats({ data }) {
         </div>
       </section>
 
-      {/* Reviews Section */}
+      {/* ==================================================
+          REVIEWS
+      ================================================== */}
+
       <section className="gr-section light-background section pt-5 pb-0">
         <div className="container">
           <div className="row">
