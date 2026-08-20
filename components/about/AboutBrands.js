@@ -25,7 +25,7 @@ export default function AboutBrands({ data }) {
 
   return (
     <section className="rs-about-company">
-      <div className="container" style={{ maxWidth: '1400px' }}>
+      <div className="container" >
         <div className="row align-items-center g-5">
           <div className="col-lg-4">
             <div className="rs-company-left">

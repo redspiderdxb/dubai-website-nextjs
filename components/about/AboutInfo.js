@@ -35,7 +35,7 @@ export default function AboutInfo({ data }) {
 
   return (
     <section className="about-info-sec py-5">
-      <div className="container" style={{ maxWidth: "1320px" }}>
+      <div className="container">
         <div className="row mb-5 align-items-start">
           <div className="col-lg-3">
             <h2 className="about-label">{infoLabel}</h2>

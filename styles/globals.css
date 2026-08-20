@@ -821,9 +821,9 @@ body {
 
 .premium-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 50px;
+  grid-template-columns: 2fr 1fr 2fr;
   align-items: start;
+  gap: 27px;
 }
 
 /* Left Column */
@@ -974,8 +974,13 @@ body {
   border-radius: 16px;
   overflow: hidden;
   background: #1a1a1a;
-  aspect-ratio: 4/5;
+
   position: relative;
+  position: relative;
+  height: 680px;
+  overflow: hidden;
+  background: #f3f3f3;
+  border-radius: 240px;
 }
 
 .premium-main-image {
@@ -8251,8 +8256,6 @@ button.rs-dropdown-trigger {
 
   font-size: 12px;
   line-height: 1.5;
-
-  max-width: 220px;
 }
 
 
@@ -11675,3 +11678,157 @@ button.rs-dropdown-trigger {
 }
 
 /* common css for title, eyebrow, paragraph */
+
+
+
+
+
+
+
+
+
+/* ============================================
+   CARD 3 - FINAL RESPONSIVE LAYOUT
+   Only Card 3
+   ============================================ */
+
+/* Card 3 itself should not stretch internally */
+.rs-gsap-cards .rs-card-3 {
+  min-height: 0 !important;
+  height: auto !important;
+
+  /* Keep GSAP absolute positioning */
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+
+  width: 100% !important;
+}
+
+/* Card 3 inner card */
+.rs-card-3 .rs-agency-card {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* Row must follow actual content height */
+.rs-card-3 .row {
+  height: auto !important;
+  min-height: 0 !important;
+  align-items: stretch !important;
+}
+
+/* ============================================
+   IMAGE
+   ============================================ */
+
+.rs-card-3 .rs-agency-image {
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.rs-card-3 .rs-agency-image img {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-height: 0 !important;
+  max-height: none !important;
+
+  object-fit: cover;
+
+  border-radius: 24px;
+}
+
+/* ============================================
+   CONTENT
+   ============================================ */
+
+.rs-card-3 .col-lg-8 {
+  display: flex !important;
+  align-items: flex-start !important;
+}
+
+.rs-card-3 .rs-agency-content {
+  width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* ============================================
+   LOCATION LIST
+   ============================================ */
+
+.rs-card-3 .rs-location-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+/* ============================================
+   HEADING
+   ============================================ */
+
+.rs-card-3 h2 {
+  font-size: clamp(30px, 3.2vw, 42px);
+  line-height: 1.15;
+  font-weight: 700;
+  color: #0A2540;
+}
+
+/* ============================================
+   TABLET
+   ============================================ */
+
+@media (max-width: 991px) {
+
+  .rs-card-3 .rs-agency-image {
+    height: auto !important;
+  }
+
+  .rs-card-3 .rs-agency-image img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+  }
+
+}
+
+/* ============================================
+   MOBILE
+   ============================================ */
+
+@media (max-width: 575px) {
+
+  .rs-card-3 .rs-agency-image {
+    height: auto !important;
+    margin-bottom: 25px;
+  }
+
+  .rs-card-3 .rs-agency-image img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10;
+  }
+
+  .rs-card-3 .rs-location-list {
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .rs-card-3 .rs-location-list span {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+}

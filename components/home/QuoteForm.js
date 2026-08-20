@@ -13,9 +13,9 @@ export default function QuoteForm() {
               <div className="req_block_left">
                 <div className="h5 mb-3">Request a Quote</div>
                 <p className="mb-0">
-                  Simply complete the <em className="text-red">form</em> and we will
+                  Simply complete the form and we will
                   contact you to discuss your{' '}
-                  <em className="text-red">requirements further</em>.
+                 requirements further.
                 </p>
               </div>
             </div>

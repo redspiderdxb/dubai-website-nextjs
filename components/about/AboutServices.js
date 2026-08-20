@@ -58,7 +58,7 @@ export default function AboutServices({ data }) {
 
   return (
     <section className="process-section section-space">
-      <div className="container" style={{ maxWidth: "1600px" }}>
+      <div className="container">
         <div className="row g-5 align-items-start">
           <div className="col-lg-4 sticky-lg-top process-sticky">
             <h2 className="fs-1 fw-bold">{servicesTitle}</h2>

@@ -3532,10 +3532,7 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(210, 0, 0, 0.45), transparent 28%),
-    radial-gradient(circle at 80% 80%, rgba(255, 170, 0, 0.18), transparent 25%),
-    linear-gradient(135deg, rgba(0, 0, 0, 0.46), rgba(20, 0, 0, 0.38));
+  background: radial-gradient(circle at 20% 20%, rgb(210 0 0 / .45), transparent 28%), radial-gradient(circle at 80% 80%, rgb(255 170 0 / .18), transparent 25%), linear-gradient(135deg, rgb(0 0 0 / .86), rgb(20 0 0 / .78));
   z-index: 0;
 }
 
@@ -3554,8 +3551,7 @@ p {
 
 .form-sec .mid_sec {
   padding: 30px 20px;
-  background: rgba(255, 255, 255, 0.86);
-  max-width: 1320px;
+  background: rgb(255 255 255 / .26);
   border-radius: 20px;
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
@@ -3564,7 +3560,7 @@ p {
 .form-sec .req_block_left {
   padding: 25px;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgb(0 0 0 / .4);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -3572,7 +3568,7 @@ p {
 }
 
 .form-sec .req_block_left .h5 {
-  color: #111;
+  color: #ffffff;
   font-size: 30px;
   line-height: 1.2;
   font-weight: normal;
@@ -3581,7 +3577,7 @@ p {
 
 .form-sec .req_block_left p {
   line-height: 23px;
-  color: #111;
+  color: #ffffff;
 }
 
 .form-sec .req_block {
@@ -3606,7 +3602,7 @@ p {
 
 
 .form-sec label {
-  color: #111;
+  color: #ffffff;
   margin-bottom: 5px;
   font-size: 16px
 }
@@ -5872,12 +5868,8 @@ section.text-revel {
 
 
 
-/* =========================================================
-   REDSPIDER CREATIVE / ACCORDION SECTION
-   LIVE WEBSITE STYLE
-========================================================= */
-
-.rs-creative-sec {
+//* =========================================================
+REDSPIDER CREATIVE / ACCORDION SECTION RESPONSIVE CONTENT-BASED LAYOUT=========================================================*/ .rs-creative-sec {
   width: 100%;
   background: #fff;
   overflow: hidden;
@@ -5889,13 +5881,16 @@ section.text-revel {
 
 .rs-creative-row {
   width: 100%;
-  min-height: 100vh;
+  min-height: 0 !important;
+  height: auto !important;
   margin: 0;
+  align-items: stretch;
 }
 
 .rs-creative-row>div {
   display: flex;
   min-width: 0;
+  min-height: 0;
 }
 
 /* =========================================================
@@ -5903,10 +5898,10 @@ section.text-revel {
 ========================================================= */
 
 .rs-creative-img {
-  flex: 1 1 50%;
-  width: 50%;
-  height: 100vh;
-  min-height: 100vh;
+  width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
+
   overflow: hidden;
 }
 
@@ -5916,7 +5911,7 @@ section.text-revel {
   width: 100%;
   height: 100%;
 
-  min-height: 100vh;
+  min-height: 0 !important;
 
   object-fit: cover;
   object-position: center;
@@ -5927,11 +5922,11 @@ section.text-revel {
 ========================================================= */
 
 .rs-creative-content {
-  flex: 1 1 50%;
-  width: 50%;
+  width: 100%;
 
   min-width: 0;
-  min-height: 100vh;
+  min-height: 0 !important;
+  height: auto !important;
 
   background: #f9f9f9;
 
@@ -5941,20 +5936,11 @@ section.text-revel {
 
   padding: 70px 60px;
 
-  /*
-    IMPORTANT:
-    No internal scroll.
-  */
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* =========================================================
    CONTENT INNER
-
-   IMPORTANT:
-   No max-height
-   No overflow-y
-   No internal scrollbar
 ========================================================= */
 
 .rs-creative-inner {
@@ -5962,6 +5948,7 @@ section.text-revel {
   max-width: 520px;
 
   min-width: 0;
+  min-height: 0;
 
   max-height: none;
 
@@ -5972,7 +5959,7 @@ section.text-revel {
 }
 
 /* =========================================================
-   REMOVE SCROLLBAR COMPLETELY
+   REMOVE SCROLLBAR
 ========================================================= */
 
 .rs-creative-inner::-webkit-scrollbar {
@@ -6003,19 +5990,15 @@ section.text-revel {
   max-width: 520px;
 
   margin: 0 0 28px;
-
   padding: 0;
 
-  font-size: 37px !important;
+  font-size: clamp(30px, 3vw, 37px) !important;
   line-height: 1.08 !important;
 
   font-weight: 800;
 
   color: #101828;
 
-  /*
-    Allow natural wrapping.
-  */
   white-space: normal;
 
   overflow-wrap: normal;
@@ -6025,8 +6008,6 @@ section.text-revel {
 
 /* =========================================================
    RED HIGHLIGHT
-
-   Keeps the text inline so browser wraps naturally.
 ========================================================= */
 
 .rs-creative-sec .rs-process-highlight {
@@ -6042,7 +6023,7 @@ section.text-revel {
 }
 
 /* =========================================================
-   UNDERLINE SVG
+   UNDERLINE
 ========================================================= */
 
 .rs-creative-sec .rs-process-underline {
@@ -6065,7 +6046,6 @@ section.text-revel {
   max-width: 520px;
 
   margin: 0 0 35px;
-
   padding: 0;
 
   font-size: 16px;
@@ -6097,7 +6077,6 @@ section.text-revel {
   width: 100%;
 
   margin: 0;
-
   padding: 0;
 
   border: none;
@@ -6168,7 +6147,6 @@ section.text-revel {
 
 .rs-creative-accordion .accordion-button:focus {
   box-shadow: none;
-
   outline: none;
 }
 
@@ -6192,17 +6170,97 @@ section.text-revel {
   width: 100%;
 
   padding: 0 0 25px;
-
   margin: 0;
 
   font-size: 15px;
-
   line-height: 1.7;
 
   color: #555;
 
   overflow-wrap: break-word;
   word-wrap: break-word;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+  .rs-creative-content {
+    padding: 55px 40px;
+  }
+
+  .rs-creative-img {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .rs-creative-img img {
+    height: 100% !important;
+    min-height: 0 !important;
+    object-fit: cover;
+  }
+
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+  .rs-creative-row {
+    min-height: 0 !important;
+  }
+
+  .rs-creative-row>div {
+    display: block;
+  }
+
+  .rs-creative-img {
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .rs-creative-img img {
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .rs-creative-content {
+    width: 100%;
+    min-height: 0 !important;
+    height: auto !important;
+
+    padding: 50px 25px;
+  }
+
+  .rs-creative-inner {
+    max-width: 100%;
+  }
+
+  .rs-creative-sec .rs-process-title,
+  .rs-creative-sec .rs-creative-content h2 {
+    font-size: 30px !important;
+    line-height: 1.15 !important;
+  }
+
+  .rs-creative-content .rs-process-text {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+  }
+
+  .rs-creative-accordion .accordion-button {
+    font-size: 16px;
+    padding: 20px 35px 20px 0;
+  }
+
 }
 
 /* =========================================================
@@ -6336,7 +6394,7 @@ section.text-revel {
   }
 
   .rs-creative-inner {
-    max-width: 560px;
+    max-width: 617px;
   }
 
   .rs-creative-sec .rs-process-title,
@@ -6361,11 +6419,11 @@ section.text-revel {
 
 @media (min-width: 992px) and (max-width: 1399px) {
   .rs-creative-content {
-    padding: 60px 55px;
+    padding: 101px 55px;
   }
 
   .rs-creative-inner {
-    max-width: 500px;
+    max-width: 558px;
   }
 
   .rs-creative-sec .rs-process-title,
@@ -7273,7 +7331,7 @@ section.text-revel {
   background: #fff;
   border: 1px solid #edf1f5;
   border-radius: 26px;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, .04);
+  box-shadow: 0 3px 35px rgb(0 0 0 / 16%);
   transition: .4s ease;
 }
 
@@ -8219,7 +8277,7 @@ section.text-revel {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100%;
+  height: 570px;
   background-color: #1b557a !important;
   background-repeat: repeat;
   text-align: center;
@@ -8805,6 +8863,11 @@ section.text-revel {
   .why-sticky-content {
     position: relative;
     top: auto;
+  }
+
+  .hero-marquee {
+
+    height: 100%;
   }
 }
 
@@ -11831,115 +11894,256 @@ section.text-revel {
 
 /* exp circle section */
 
+
+
+
 /* Parent Class */
+
+
+
+
+/* =========================================================
+   RS AGENCY INTRO SECTION
+========================================================= */
+
 .rs-agency-intro-sec {
   position: relative;
-  padding: 70px 0 55px;
+  padding: 28px 0 25px;
   background: #ffffff url("../img/ch-bg.png") 0 0 no-repeat;
-  overflow: hidden;
   background-size: cover;
+  overflow: hidden;
 }
 
 .rs-agency-intro-sec .container {
   max-width: 1550px;
 }
 
+
+/* =========================================================
+   HEADING
+========================================================= */
+
 .rs-agency-big-title {
-  font-size: clamp(48px, 5.8vw, 30px);
-  line-height: .98;
-  font-weight: 800;
-  letter-spacing: -3px;
-  text-transform: uppercase;
-  color: #000000;
+  width: 100%;
+  max-width: 100%;
+
   margin: 0;
+
+  font-size: clamp(28px, 3vw, 46px);
+  line-height: 1.05;
+
+  font-weight: 800;
+  letter-spacing: -2px;
+
+  text-transform: none;
+
+  color: #000000;
+
+  white-space: nowrap;
 }
 
 .rs-agency-big-title span {
   color: #de1515;
 }
 
+
+/* =========================================================
+   BOTTOM ROW
+========================================================= */
+
 .rs-agency-bottom {
-  margin-top: 38px;
+  margin-top: 24px;
 }
+
+.rs-agency-bottom>[class*="col-"] {
+  display: flex;
+  align-items: center;
+}
+
+
+/* =========================================================
+   LEFT - LET'S CONNECT
+========================================================= */
+
+.rs-agency-bottom .letconnect {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  white-space: nowrap;
+
+  margin: 0 !important;
+}
+
+.rs-agency-bottom .letconnect .line {
+  width: 70px;
+  height: 1px;
+
+  flex: 0 0 70px;
+
+  margin: 0 18px;
+
+  background: #de1515;
+}
+
+.rs-agency-bottom .letconnect a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 105px;
+
+  padding: 10px 18px;
+
+  background: #de1515;
+  color: #ffffff;
+
+  border-radius: 4px;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.rs-agency-bottom .letconnect a:hover {
+  background: #b80000;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   CENTER - DESCRIPTION
+========================================================= */
 
 .rs-agency-text {
+  width: 100%;
   max-width: 580px;
-  margin-left: auto;
-  font-size: 18px;
-  line-height: 1.65;
+
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.5;
+
   font-weight: 400;
-  color: #111;
-  text-transform: capitalize;
+
+  color: #111111;
+
+  text-transform: none;
 }
 
-.rs-agency-line {
-  width: 170px;
-  height: 1px;
-  background: #111111;
-  margin: 0 auto;
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.rs-agency-right {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 20px;
 }
+
+
+/* Horizontal line before circle */
+
+.rs-agency-right .rs-agency-line {
+  width: 90px;
+  height: 1px;
+
+  flex: 0 0 90px;
+
+  margin: 0;
+
+  background: #111111;
+}
+
+
+/* =========================================================
+   CIRCLE
+========================================================= */
 
 .rs-agency-circle-wrap {
-  width: 132px;
-  height: 132px;
+  width: 92px;
+  height: 92px;
+
   position: relative;
-  margin-left: auto;
+
+  flex: 0 0 92px;
+
+  margin: 0;
 }
 
 .rs-agency-circle {
-  width: 132px;
-  height: 132px;
+  width: 92px;
+  height: 92px;
+
   border: 1px solid #111111;
   border-radius: 50%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: rsAgencySpin 16s linear infinite;
-}
 
-.rs-agency-circle::before {
-  content: "Years of Design ";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: #111111;
-  transform: rotate(0deg);
+
+  animation: rsAgencySpin 16s linear infinite;
 }
 
 .rs-agency-circle-center {
   position: absolute;
+
   left: 50%;
   top: 50%;
+
   transform: translate(-50%, -50%);
-  font-size: 28px;
-  line-height: 1.05;
+
+  font-size: 18px;
+  line-height: 1;
+
   font-weight: 700;
-  text-align: center;
+
   color: #000000;
+
   z-index: 2;
 }
+
+
+/* =========================================================
+   CIRCLE TEXT
+========================================================= */
 
 .rs-agency-scroll-text {
   position: absolute;
   inset: -3px;
+
   animation: rsAgencySpin 16s linear infinite;
 }
 
 .rs-agency-scroll-text span {
   position: absolute;
+
   left: 50%;
   top: 50%;
+
   transform-origin: 0 0;
-  font-size: 12px;
-  color: #111111;
+
+  font-size: 8px;
   letter-spacing: 1px;
+
+  color: #111111;
 }
+
+
+/* =========================================================
+   ROTATION
+========================================================= */
 
 @keyframes rsAgencySpin {
   from {
@@ -11951,56 +12155,816 @@ section.text-revel {
   }
 }
 
-@media(max-width:1199px) {
-  .rs-agency-big-title {
-    letter-spacing: -2px;
-  }
 
-  .rs-agency-text {
-    margin-left: 0;
-  }
-}
+/* =========================================================
+   LAPTOP
+========================================================= */
 
-@media(max-width:991px) {
+@media (min-width: 992px) and (max-width: 1199px) {
+
   .rs-agency-intro-sec {
-    padding: 60px 0;
+    padding: 30px 0 25px;
+  }
+
+  .rs-agency-big-title {
+    font-size: 32px;
+    letter-spacing: -1.5px;
   }
 
   .rs-agency-bottom {
-    margin-top: 34px;
-    gap: 30px;
+    margin-top: 25px;
+  }
+
+  .rs-agency-text {
+    font-size: 12px;
+  }
+
+  .rs-agency-right .rs-agency-line {
+    width: 65px;
+    flex-basis: 65px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 576px) and (max-width: 991px) {
+
+  .rs-agency-intro-sec {
+    padding: 45px 0;
+  }
+
+  .rs-agency-big-title {
+    font-size: 38px;
+    line-height: 1.08;
+
+    white-space: normal;
+  }
+
+  .rs-agency-bottom {
+    margin-top: 30px;
+  }
+
+  .rs-agency-bottom>[class*="col-"] {
+    margin-bottom: 25px;
   }
 
   .rs-agency-text {
     max-width: 100%;
-    font-size: 16px;
+    font-size: 15px;
   }
 
-  .rs-agency-line {
-    margin: 25px 0;
+  .rs-agency-right {
+    justify-content: flex-start;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 575px) {
+
+  .rs-agency-intro-sec {
+    padding: 40px 0;
+  }
+
+  .rs-agency-big-title {
+    font-size: 32px;
+    line-height: 1.08;
+
+    letter-spacing: -1px;
+
+    white-space: normal;
+  }
+
+  .rs-agency-bottom {
+    margin-top: 30px;
+  }
+
+  .rs-agency-bottom>[class*="col-"] {
+    width: 100%;
+
+    margin-bottom: 25px;
+  }
+
+  .rs-agency-bottom .letconnect {
+    flex-wrap: wrap;
+  }
+
+  .rs-agency-bottom .letconnect .line {
+    width: 50px;
+    flex-basis: 50px;
+
+    margin: 0 12px;
+  }
+
+  .rs-agency-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .rs-agency-right {
+    justify-content: flex-start;
+  }
+
+  .rs-agency-right .rs-agency-line {
+    width: 60px;
+    flex-basis: 60px;
   }
 
   .rs-agency-circle-wrap {
-    margin-left: 0;
+    width: 85px;
+    height: 85px;
+
+    flex-basis: 85px;
   }
+
+  .rs-agency-circle-center {
+    font-size: 17px;
+  }
+
 }
 
-@media(max-width:575px) {
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 375px) {
+
   .rs-agency-big-title {
-    font-size: 42px;
-    letter-spacing: -1px;
+    font-size: 29px;
   }
 
-  .rs-agency-circle-wrap,
-  .rs-agency-circle {
-    width: 110px;
-    height: 110px;
-  }
-
-  .rs-agency-scroll-text span {
-    font-size: 10px;
-  }
 }
+
+
+
+
+/* =========================================================
+   REDSPIDER BENEFITS V2
+   Completely isolated section
+   Does NOT depend on rs-agency classes
+========================================================= */
+
+.rs-benefits-v2 {
+  position: relative;
+
+  width: 100%;
+
+  padding: 70px 0 55px;
+
+  overflow: hidden;
+
+  background:
+    #ffffff url("../img/ch-bg.png") center center / cover no-repeat;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.rs-benefits-v2__container {
+  width: 100%;
+
+  max-width: 1550px;
+
+  margin: 0 auto;
+
+  padding-left: 30px;
+  padding-right: 30px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.rs-benefits-v2__title {
+  width: 100%;
+
+  max-width: 100%;
+
+  margin: 0;
+
+  padding: 0;
+
+  color: #000000;
+
+  font-size: 34px;
+
+  line-height: 1.05;
+
+  font-weight: 800;
+
+  letter-spacing: -1.5px;
+
+  text-transform: none;
+
+  white-space: nowrap;
+
+  overflow: visible;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BOTTOM GRID
+========================================================= */
+
+.rs-benefits-v2__grid {
+  width: 100%;
+
+  margin-top: 26px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 4fr) minmax(300px, 5fr) minmax(220px, 3fr);
+
+  align-items: center;
+
+  column-gap: 25px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONNECT AREA
+========================================================= */
+
+.rs-benefits-v2__connect {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  white-space: nowrap;
+
+  box-sizing: border-box;
+}
+
+
+.rs-benefits-v2__connect-text {
+  color: #ffffff;
+
+  font-size: 13px;
+
+  line-height: 1.2;
+
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+
+.rs-benefits-v2__connect-line {
+  display: block;
+
+  width: 70px;
+
+  height: 1px;
+
+  flex: 0 0 70px;
+
+  margin-left: 18px;
+  margin-right: 18px;
+
+  background: #de1515;
+}
+
+
+.rs-benefits-v2__button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 105px;
+
+  min-height: 34px;
+
+  padding: 8px 18px;
+
+  border: 0;
+
+  border-radius: 4px;
+
+  background: #de1515;
+
+  color: #ffffff;
+
+  font-size: 11px;
+
+  line-height: 1;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  box-sizing: border-box;
+
+  transition:
+    background-color .25s ease,
+    transform .25s ease;
+}
+
+
+.rs-benefits-v2__button:hover {
+  background: #b80000;
+
+  color: #ffffff;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.rs-benefits-v2__description {
+  min-width: 0;
+
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+
+.rs-benefits-v2__description p {
+  width: 100%;
+
+  max-width: 580px;
+
+  margin: 0;
+
+  padding: 0;
+
+  color: #111111;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  font-weight: 400;
+
+  text-transform: none;
+
+  overflow-wrap: normal;
+
+  word-break: normal;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.rs-benefits-v2__right {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 18px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HORIZONTAL LINE
+========================================================= */
+
+.rs-benefits-v2__horizontal-line {
+  display: block;
+
+  width: 85px;
+
+  height: 1px;
+
+  flex: 0 0 85px;
+
+  background: #111111;
+}
+
+
+/* =========================================================
+   CIRCLE
+========================================================= */
+
+.rs-benefits-v2__circle {
+  position: relative;
+
+  width: 92px;
+
+  height: 92px;
+
+  flex: 0 0 92px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ROTATING CIRCLE TEXT
+========================================================= */
+
+.rs-benefits-v2__circle-text {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  animation:
+    rsBenefitsV2Spin 16s linear infinite;
+}
+
+
+.rs-benefits-v2__circle-text span {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 1px;
+
+  height: 1px;
+
+  transform-origin: 0 0;
+
+  color: #111111;
+
+  font-size: 8px;
+
+  line-height: 1;
+
+  letter-spacing: .7px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   CIRCLE CENTER
+========================================================= */
+
+.rs-benefits-v2__circle-center {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  color: #000000;
+
+  font-size: 18px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes rsBenefitsV2Spin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1199px) and (min-width: 992px) {
+
+  .rs-benefits-v2 {
+    padding-top: 30px;
+
+    padding-bottom: 25px;
+  }
+
+
+  .rs-benefits-v2__container {
+    padding-left: 25px;
+
+    padding-right: 25px;
+  }
+
+
+  .rs-benefits-v2__title {
+    font-size: 31px;
+
+    letter-spacing: -1.2px;
+  }
+
+
+  .rs-benefits-v2__grid {
+    grid-template-columns:
+      minmax(230px, 4fr) minmax(280px, 5fr) minmax(210px, 3fr);
+
+    column-gap: 18px;
+  }
+
+
+  .rs-benefits-v2__description p {
+    font-size: 12px;
+  }
+
+
+  .rs-benefits-v2__horizontal-line {
+    width: 60px;
+
+    flex-basis: 60px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) and (min-width: 576px) {
+
+  .rs-benefits-v2 {
+    padding-top: 45px;
+
+    padding-bottom: 45px;
+  }
+
+
+  .rs-benefits-v2__container {
+    padding-left: 25px;
+
+    padding-right: 25px;
+  }
+
+
+  .rs-benefits-v2__title {
+    font-size: 40px;
+
+    line-height: 1.08;
+
+    letter-spacing: -1px;
+
+    white-space: normal;
+  }
+
+
+  .rs-benefits-v2__grid {
+    grid-template-columns: 1fr 1fr;
+
+    row-gap: 30px;
+
+    column-gap: 30px;
+
+    margin-top: 35px;
+  }
+
+
+  .rs-benefits-v2__description {
+    grid-column: 2;
+
+    grid-row: 1;
+  }
+
+
+  .rs-benefits-v2__connect {
+    grid-column: 1;
+
+    grid-row: 1;
+  }
+
+
+  .rs-benefits-v2__right {
+    grid-column: 1 / -1;
+
+    grid-row: 2;
+
+    justify-content: flex-start;
+  }
+
+
+  .rs-benefits-v2__description p {
+    max-width: 100%;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 575px) {
+
+  .rs-benefits-v2 {
+    padding-top: 40px;
+
+    padding-bottom: 40px;
+  }
+
+
+  .rs-benefits-v2__container {
+    padding-left: 20px;
+
+    padding-right: 20px;
+  }
+
+
+  .rs-benefits-v2__title {
+    font-size: 31px;
+
+    line-height: 1.08;
+
+    letter-spacing: -.8px;
+
+    white-space: normal;
+  }
+
+
+  .rs-benefits-v2__grid {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 25px;
+
+    margin-top: 30px;
+  }
+
+
+  .rs-benefits-v2__connect {
+    width: 100%;
+
+    flex-wrap: wrap;
+
+    white-space: normal;
+  }
+
+
+  .rs-benefits-v2__connect-text {
+    font-size: 13px;
+  }
+
+
+  .rs-benefits-v2__connect-line {
+    width: 45px;
+
+    flex-basis: 45px;
+
+    margin-left: 10px;
+
+    margin-right: 10px;
+  }
+
+
+  .rs-benefits-v2__button {
+    min-width: 105px;
+
+    min-height: 34px;
+
+    padding-left: 15px;
+
+    padding-right: 15px;
+  }
+
+
+  .rs-benefits-v2__description {
+    width: 100%;
+  }
+
+
+  .rs-benefits-v2__description p {
+    max-width: 100%;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+
+  .rs-benefits-v2__right {
+    width: 100%;
+
+    justify-content: flex-start;
+
+    gap: 18px;
+  }
+
+
+  .rs-benefits-v2__horizontal-line {
+    width: 60px;
+
+    flex-basis: 60px;
+  }
+
+
+  .rs-benefits-v2__circle {
+    width: 85px;
+
+    height: 85px;
+
+    flex-basis: 85px;
+  }
+
+
+  .rs-benefits-v2__circle-center {
+    font-size: 17px;
+  }
+
+
+  .rs-benefits-v2__circle-text span {
+    font-size: 7px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 375px) {
+
+  .rs-benefits-v2__title {
+    font-size: 28px;
+
+    letter-spacing: -.5px;
+  }
+
+
+  .rs-benefits-v2__connect {
+    gap: 6px;
+  }
+
+
+  .rs-benefits-v2__connect-line {
+    width: 35px;
+
+    flex-basis: 35px;
+
+    margin-left: 6px;
+
+    margin-right: 6px;
+  }
+
+}
+
+
+
+
 
 
 
@@ -12300,291 +13264,758 @@ section.text-revel {
 }
 
 
-
-/*  */
+/* =========================================================
+   WHY REDSPIDER / BENEFITS SECTION
+   Bootstrap Row + Columns Layout
+   Responsive / No Absolute Content Positioning
+========================================================= */
 
 .rsu-creative-sec {
   position: relative;
-  min-height: 100vh;
+  width: 100%;
+
   overflow: hidden;
-  padding: 48px 0;
+
+  padding: 28px 0;
+
   background:
-    radial-gradient(circle at 75% 18%, rgba(201, 0, 0, .08), transparent 28%),
-    radial-gradient(circle at 18% 88%, rgba(0, 0, 0, .06), transparent 25%),
-    linear-gradient(135deg, #f5f1e8, #ebe2d2);
+    radial-gradient(circle at 75% 18%,
+      rgba(201, 0, 0, .08),
+      transparent 28%),
+    radial-gradient(circle at 18% 88%,
+      rgba(0, 0, 0, .06),
+      transparent 25%),
+    linear-gradient(135deg,
+      #f5f1e8,
+      #ebe2d2);
+
   perspective: 1200px;
 }
 
-.rsu-creative-sec:before {
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+.rsu-creative-sec::before {
   content: "";
+
   position: absolute;
+
   inset: 0;
+
   background-image:
-    linear-gradient(120deg, rgba(255, 255, 255, .55), transparent 35%),
-    linear-gradient(rgba(20, 20, 20, .035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20, 20, 20, .035) 1px, transparent 1px);
-  background-size: auto, 48px 48px, 48px 48px;
+    linear-gradient(120deg,
+      rgba(255, 255, 255, .55),
+      transparent 35%),
+    linear-gradient(rgba(20, 20, 20, .035) 1px,
+      transparent 1px),
+    linear-gradient(90deg,
+      rgba(20, 20, 20, .035) 1px,
+      transparent 1px);
+
+  background-size:
+    auto,
+    48px 48px,
+    48px 48px;
+
   opacity: .8;
+
   pointer-events: none;
 }
 
-.rsu-creative-sec:after {
+
+/* =========================================================
+   DECORATIVE CIRCLE
+========================================================= */
+
+.rsu-creative-sec::after {
   content: "";
+
   position: absolute;
+
   width: 720px;
   height: 720px;
+
   right: -220px;
   top: -160px;
+
   border: 1px solid rgba(201, 0, 0, .14);
+
   border-radius: 50%;
-  box-shadow: inset 0 0 0 70px rgba(255, 255, 255, .08);
+
+  box-shadow:
+    inset 0 0 0 70px rgba(255, 255, 255, .08);
+
   pointer-events: none;
 }
+
+
+/* =========================================================
+   MAIN SCENE
+========================================================= */
 
 .rsu-scene {
   position: relative;
+
   z-index: 2;
-  min-height: calc(100vh - 96px);
+
+  width: 100%;
+
+  /*
+    Natural content height.
+    This is the important part.
+  */
+  min-height: 560px;
+
   border-radius: 34px;
+
   overflow: hidden;
+
   border: 1px solid rgba(20, 20, 20, .12);
+
   background:
-    linear-gradient(90deg, rgba(245, 241, 232, .95) 0%, rgba(245, 241, 232, .72) 45%, rgba(245, 241, 232, .93) 100%),
-    url("https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
-  box-shadow: 0 36px 90px rgba(0, 0, 0, .12);
+    linear-gradient(90deg,
+      rgba(245, 241, 232, .95) 0%,
+      rgba(245, 241, 232, .72) 45%,
+      rgba(245, 241, 232, .93) 100%),
+    url("https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1800&q=80") center / cover no-repeat;
+
+  box-shadow:
+    0 36px 90px rgba(0, 0, 0, .12);
+
   transform-style: preserve-3d;
 }
 
-.rsu-scene:before {
+
+/* =========================================================
+   SCENE OVERLAY
+========================================================= */
+
+.rsu-scene::before {
   content: "";
+
   position: absolute;
+
   inset: 0;
+
   background:
-    linear-gradient(180deg, rgba(245, 241, 232, .2), rgba(245, 241, 232, .86)),
-    radial-gradient(circle at 55% 45%, transparent 0, rgba(245, 241, 232, .68) 54%);
+    linear-gradient(180deg,
+      rgba(245, 241, 232, .2),
+      rgba(245, 241, 232, .86)),
+    radial-gradient(circle at 55% 45%,
+      transparent 0,
+      rgba(245, 241, 232, .68) 54%);
+
   pointer-events: none;
 }
 
+
+/* =========================================================
+   CONTENT WRAPPER
+========================================================= */
+
 .rsu-content {
   position: relative;
+
   z-index: 3;
-  min-height: calc(100vh - 96px);
-  padding: 60px;
+
+  width: 100%;
+
+  min-height: 560px;
+
+  padding: 48px 50px;
 }
 
-.rsu-main-title {
-  max-width: 720px;
-  margin: 0;
-  font-size: clamp(46px, 8vw, 32px);
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: -.02em;
-  text-transform: uppercase;
+
+/* =========================================================
+   ROW
+========================================================= */
+
+.rsu-content>.row {
+  min-height: 100%;
+
+  align-items: stretch;
 }
+
+
+/* =========================================================
+   LEFT COLUMN
+========================================================= */
+
+.rsu-left-col {
+  display: flex;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   LEFT INNER
+========================================================= */
+
+.rsu-left-inner {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.rsu-main-title {
+  width: 100%;
+
+  max-width: 500px;
+
+  margin: 0;
+
+  font-size: clamp(34px,
+      3.4vw,
+      52px);
+
+  line-height: 1.08;
+
+  font-weight: 500;
+
+  letter-spacing: -.02em;
+
+  text-transform: uppercase;
+
+  overflow-wrap: normal;
+
+  word-break: normal;
+}
+
+
+/* =========================================================
+   TITLE HIGHLIGHT
+========================================================= */
 
 .rsu-main-title span {
   color: #c90000;
 }
 
+
+/* =========================================================
+   LEFT BOTTOM CONTENT
+========================================================= */
+
 .rsu-bottom-left {
-  position: absolute;
-  left: 60px;
-  bottom: 56px;
-  max-width: 430px;
+  position: static;
+  width: 100%;
+  padding-top: 40px;
 }
+
+
+/* =========================================================
+   INTRO
+========================================================= */
 
 .rsu-intro {
   margin: 0 0 26px;
+
   font-size: 18px;
+
   line-height: 1.65;
+
   color: #151515;
 
   font-weight: 400;
+
+  overflow-wrap: break-word;
 }
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
 
 .rsu-btn {
   position: relative;
+
   display: inline-flex;
+
   align-items: center;
-  gap: 12px;
-  min-width: 210px;
+
   justify-content: center;
+
+  gap: 12px;
+
+  min-width: 210px;
+
   padding: 16px 28px;
+
   border-radius: 8px;
+
   background: #151515;
+
   color: #fff;
+
   text-decoration: none;
+
   font-size: 14px;
+
   font-weight: 500;
+
   overflow: hidden;
+
   transition: .35s ease;
 }
 
-.rsu-btn:before {
+
+.rsu-btn::before {
   content: "";
+
   position: absolute;
+
   width: 30px;
+
   height: 160px;
+
   background: rgba(255, 255, 255, .28);
+
   transform: rotate(25deg);
+
   left: -60px;
+
   top: -50px;
+
   transition: .5s ease;
 }
 
+
 .rsu-btn:hover {
   color: #fff;
+
   transform: translateY(-4px);
-  box-shadow: 0 18px 36px rgba(0, 0, 0, .2);
+
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, .2);
 }
 
-.rsu-btn:hover:before {
+
+.rsu-btn:hover::before {
   left: 120%;
 }
+
 
 .rsu-btn i {
   transition: .35s ease;
 }
 
+
 .rsu-btn:hover i {
-  transform: translate(4px, -4px);
+  transform:
+    translate(4px, -4px);
 }
 
-.rsu-accordion-wrap {
-  position: absolute;
-  right: 60px;
-  bottom: 54px;
-  width: min(460px, calc(100% - 120px));
+
+/* =========================================================
+   RIGHT COLUMN
+========================================================= */
+
+.rsu-right-col {
+  display: flex;
+
+  align-items: flex-end;
+
+  min-width: 0;
 }
+
+
+/* =========================================================
+   ACCORDION WRAPPER
+
+   NO absolute positioning
+========================================================= */
+
+.rsu-accordion-wrap {
+  position: static;
+
+  width: 100%;
+
+  max-width: 460px;
+
+  margin-left: auto;
+
+  margin-top: auto;
+}
+
+
+/* =========================================================
+   MINI TITLE
+========================================================= */
 
 .rsu-mini-title {
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   padding-bottom: 18px;
-  border-bottom: 1px solid rgba(20, 20, 20, .18);
+
+  border-bottom:
+    1px solid rgba(20,
+      20,
+      20,
+      .18);
+
   font-size: 18px;
+
   font-weight: 600;
 }
 
+
+/* =========================================================
+   ACCORDION ITEM
+========================================================= */
+
 .rsu-accordion-item {
-  border-bottom: 1px solid rgba(20, 20, 20, .18);
+  border-bottom:
+    1px solid rgba(20,
+      20,
+      20,
+      .18);
 }
+
+
+/* =========================================================
+   ACCORDION BUTTON
+========================================================= */
 
 .rsu-accordion-btn {
   width: 100%;
+
   border: 0;
+
   background: transparent;
+
   padding: 18px 0;
+
   display: grid;
-  grid-template-columns: 50px 1fr 24px;
+
+  grid-template-columns:
+    50px minmax(0, 1fr) 24px;
+
   align-items: center;
+
   gap: 18px;
+
   color: #151515;
+
   text-align: left;
+
   font-size: 16px;
+
+  line-height: 1.4;
+
   font-weight: 600;
+
   text-transform: uppercase;
 }
 
+
 .rsu-accordion-btn span {
   color: #c90000;
+
   font-weight: 600;
+
   font-size: 18px;
+
   margin: 0;
 }
 
-.rsu-accordion-btn {
-  text-align: left;
+
+.rsu-accordion-btn strong {
+  min-width: 0;
+
+  font-weight: 600;
 }
+
 
 .rsu-accordion-btn i {
   justify-self: end;
+
   color: #c90000;
+
   transition: .3s ease;
 }
+
 
 .rsu-accordion-btn:not(.collapsed) i {
   transform: rotate(45deg);
 }
 
+
+/* =========================================================
+   ACCORDION BODY
+========================================================= */
+
 .rsu-accordion-body {
   padding: 0 0 22px;
+
   color: #5d5b55;
+
   line-height: 1.65;
+
   font-size: 15px;
+
+  overflow-wrap: break-word;
 }
+
+
+/* =========================================================
+   RED LINE
+========================================================= */
 
 .rsu-red-line {
   position: absolute;
+
   right: 0;
+
   top: 0;
+
   width: 2px;
+
   height: 90px;
-  background: linear-gradient(#c90000, transparent);
+
+  background:
+    linear-gradient(#c90000,
+      transparent);
+
+  z-index: 5;
 }
 
-@media(max-width:1199px) {
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1199px) {
+
   .rsu-content {
     padding: 42px;
   }
 
-  .rsu-bottom-left {
-    left: 42px;
+  .rsu-main-title {
+    max-width: 450px;
+
+    font-size: clamp(32px,
+        4vw,
+        44px);
   }
 
   .rsu-accordion-wrap {
-    right: 42px;
-    width: min(430px, calc(100% - 84px));
+    max-width: 430px;
   }
+
+  .rsu-accordion-btn {
+    grid-template-columns:
+      45px minmax(0, 1fr) 24px;
+
+    gap: 14px;
+
+    font-size: 14px;
+  }
+
 }
 
-@media(max-width:991px) {
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
   .rsu-creative-sec {
     padding: 24px 0;
   }
 
-  .rsu-scene,
-  .rsu-content {
-    min-height: auto;
+  .rsu-scene {
+    min-height: 0;
+
+    height: auto;
+
+    border-radius: 26px;
   }
 
   .rsu-content {
-    padding: 40px 24px 34px;
+    min-height: 0;
+
+    height: auto;
+
+    padding: 40px 28px;
   }
 
-  .rsu-bottom-left,
-  .rsu-accordion-wrap {
-    position: relative;
-    left: auto;
-    right: auto;
-    bottom: auto;
+  /*
+    Bootstrap columns stack naturally.
+  */
+
+  .rsu-left-col,
+  .rsu-right-col {
+    display: block;
+
     width: 100%;
   }
 
+  .rsu-left-inner {
+    display: block;
+  }
+
+  .rsu-main-title {
+    max-width: 100%;
+
+    font-size: clamp(34px,
+        6vw,
+        46px);
+  }
+
   .rsu-bottom-left {
-    margin-top: 280px;
+    max-width: 500px;
+
+    margin-top: 70px;
+
+    padding-top: 0;
+  }
+
+  .rsu-accordion-wrap {
+    width: 100%;
+
+    max-width: 100%;
+
+    margin-top: 50px;
+
+    margin-left: 0;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 575px) {
+
+  .rsu-creative-sec {
+    padding: 18px 0;
+  }
+
+  .rsu-scene {
+    border-radius: 22px;
+  }
+
+  .rsu-content {
+    padding: 30px 20px;
+  }
+
+  .rsu-main-title {
+    max-width: 100%;
+
+    font-size: clamp(28px,
+        8vw,
+        38px);
+
+    line-height: 1.08;
+  }
+
+  .rsu-bottom-left {
+    margin-top: 55px;
+  }
+
+  .rsu-intro {
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin-bottom: 22px;
+  }
+
+  .rsu-btn {
+    min-width: 180px;
+
+    padding: 14px 22px;
   }
 
   .rsu-accordion-wrap {
     margin-top: 40px;
   }
+
+  .rsu-mini-title {
+    font-size: 15px;
+
+    padding-bottom: 14px;
+  }
+
+  .rsu-accordion-btn {
+    grid-template-columns:
+      34px minmax(0, 1fr) 20px;
+
+    gap: 8px;
+
+    padding: 15px 0;
+
+    font-size: 12px;
+  }
+
+  .rsu-accordion-btn span {
+    font-size: 14px;
+  }
+
+  .rsu-accordion-body {
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    padding-bottom: 18px;
+  }
+
 }
 
-@media(max-width:575px) {
-  .rsu-scene {
-    border-radius: 22px;
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 375px) {
+
+  .rsu-content {
+    padding: 26px 16px;
   }
 
   .rsu-main-title {
-    font-size: 52px;
+    font-size: 27px;
   }
 
   .rsu-bottom-left {
-    margin-top: 190px;
+    margin-top: 45px;
   }
+
+  .rsu-accordion-btn {
+    grid-template-columns:
+      30px minmax(0, 1fr) 18px;
+
+    gap: 6px;
+
+    font-size: 11px;
+  }
+
 }
 
+
+.desc {
+  width: 100%;
+  width: 100%;
+  max-width: 100%;
+}
 
 
 
@@ -13254,7 +14685,7 @@ border: 1px solid rgba(255, 255, 255, .14); */
 /* Reusable parent class */
 .rs-gd-intro {
   position: relative;
-  padding: 120px 0;
+  padding: 90px 0;
   overflow: hidden;
   background:
     linear-gradient(rgba(17, 17, 17, .045) 1px, transparent 1px),
@@ -13325,7 +14756,7 @@ border: 1px solid rgba(255, 255, 255, .14); */
 .rs-gd-intro__support {
   margin: 0;
   color: #171717;
-  font-size: clamp(25px, 2.35vw, 42px);
+  font-size: 21px;
   font-weight: 500;
   line-height: 1.28;
   letter-spacing: -.035em;
@@ -13334,7 +14765,7 @@ border: 1px solid rgba(255, 255, 255, .14); */
 .rs-gd-intro__support {
   margin-top: 28px;
   color: #4d4d4d;
-  font-size: clamp(18px, 1.42vw, 25px);
+  font-size: clamp(15px, 1.35vw, 18px);
   line-height: 1.55;
   letter-spacing: -.018em;
 }

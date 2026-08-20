@@ -1,27 +1,38 @@
 // frontend/components/templates/BrochureDesignTemplate.js
+
+import { useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function BrochureDesignTemplate({ data }) {
-  if (!data) return <div className="text-center py-5">Loading...</div>;
+  if (!data) {
+    return <div className="text-center py-5">Loading...</div>;
+  }
 
   // ============================================
-  // ✅ DYNAMIC FIELDS - Backend se aayenge
+  // DYNAMIC FIELDS
   // ============================================
+
   const {
     name,
     description,
     content,
     image,
+
     hero_title,
     hero_subtitle,
     hero_description,
     hero_image,
     hero_background,
+
     intro_small_heading = "Brochure Design",
     intro_main_heading = "",
     intro_description = "At RedSpider Web & Art Design, we offer professional brochure design services in Dubai for various businesses in the industry.",
     intro_image = "",
+
     cta_title,
     cta_description,
     cta_button_text,
@@ -36,12 +47,12 @@ export default function BrochureDesignTemplate({ data }) {
     gallery = [],
 
     // ============================================
-    // 🆕 NEW - FRONTEND DYNAMIC SETTINGS
+    // FRONTEND SETTINGS
     // ============================================
 
-    // Design & Layout
     layout_style = "grid",
     columns_count = 3,
+
     primary_color = "#FF6B35",
     secondary_color = "#0047AB",
     background_color = "#F8F9FA",
@@ -50,7 +61,10 @@ export default function BrochureDesignTemplate({ data }) {
     button_text_color = "#FFFFFF",
     section_padding = "large",
 
-    // Section Visibility
+    // ============================================
+    // SECTION VISIBILITY
+    // ============================================
+
     show_hero = true,
     show_intro = true,
     show_features = true,
@@ -61,28 +75,45 @@ export default function BrochureDesignTemplate({ data }) {
     show_gallery = true,
     show_cta = true,
 
-    // Content Customization
+    // ============================================
+    // CONTENT CUSTOMIZATION
+    // ============================================
+
     hero_button_text = "Get Started",
     hero_button_url = "/contact",
+
     features_title = "Our Brochure Design Services",
     features_subtitle = "",
+
     benefits_title = "Why Choose RedSpider for Brochure Design in Dubai?",
+
     benefits_subtitle = "",
+
     processes_title = "Our Brochure Design Process",
     processes_subtitle = "",
+
     faqs_title = "Frequently Asked Questions",
+
     faqs_subtitle = "Find quick answers to common questions about our services.",
+
     gallery_title = "Our Gallery",
     gallery_subtitle = "",
+
     cta_subtitle = "",
     cta_button_url = "/contact",
 
-    // Animation
+    // ============================================
+    // ANIMATION
+    // ============================================
+
     animation_enabled = false,
     animation_type = "fade",
     animation_duration = "medium",
 
-    // Section Order
+    // ============================================
+    // SECTION ORDER
+    // ============================================
+
     section_order = [
       "hero",
       "intro",
@@ -94,16 +125,18 @@ export default function BrochureDesignTemplate({ data }) {
       "cta",
     ],
 
-    // Custom Code
+    // ============================================
+    // CUSTOM CODE
+    // ============================================
+
     custom_css = "",
     custom_js = "",
   } = data;
 
   // ============================================
-  // 📌 FALLBACK DATA
+  // BROCHURE TYPES
   // ============================================
 
-  // 1. Brochure Types - Dynamic from backend or static fallback
   const brochureTypes =
     features.length > 0
       ? features
@@ -158,7 +191,10 @@ export default function BrochureDesignTemplate({ data }) {
     "bi-folder2-open",
   ];
 
-  // 2. Why Choose Cards - Dynamic from backend or static fallback
+  // ============================================
+  // WHY CHOOSE CARDS
+  // ============================================
+
   const whyChooseCards =
     benefits.length > 0
       ? benefits
@@ -185,7 +221,10 @@ export default function BrochureDesignTemplate({ data }) {
           },
         ];
 
-  // 3. Process Steps - Dynamic from backend or static fallback
+  // ============================================
+  // PROCESS STEPS
+  // ============================================
+
   const processData =
     processes.length > 0
       ? processes
@@ -217,7 +256,10 @@ export default function BrochureDesignTemplate({ data }) {
           },
         ];
 
-  // 4. FAQ Data - Dynamic from backend or static fallback
+  // ============================================
+  // FAQ DATA
+  // ============================================
+
   const faqData =
     faqs.length > 0
       ? faqs
@@ -244,12 +286,44 @@ export default function BrochureDesignTemplate({ data }) {
           },
         ];
 
-  // 5. Gallery Images - Dynamic from backend
-  const galleryImages = gallery.length > 0 ? gallery : [];
+  // ============================================
+  // GALLERY
+  // ============================================
+
+  const galleryImages =
+    Array.isArray(gallery) && gallery.length > 0 ? gallery : [];
 
   // ============================================
-  // 🎨 Dynamic Styles
+  // REMOVE DUPLICATE IMAGE PATHS
   // ============================================
+
+  const uniqueGalleryImages = Array.from(
+    new Map(
+      galleryImages
+        .filter(
+          (item) =>
+            item && typeof item.image === "string" && item.image.trim() !== "",
+        )
+        .map((item) => [item.image.trim(), item]),
+    ).values(),
+  );
+
+  // ============================================
+  // LIGHTBOX
+  // ============================================
+
+  const [galleryLightboxOpen, setGalleryLightboxOpen] = useState(false);
+
+  const [galleryLightboxIndex, setGalleryLightboxIndex] = useState(0);
+
+  const gallerySlides = uniqueGalleryImages.map((item) => ({
+    src: item.image,
+  }));
+
+  // ============================================
+  // DYNAMIC STYLES
+  // ============================================
+
   const styles = {
     "--primary-color": primary_color,
     "--secondary-color": secondary_color,
@@ -260,13 +334,23 @@ export default function BrochureDesignTemplate({ data }) {
   };
 
   // ============================================
-  // 📐 Section Order Mapping
+  // SECTION MAP
   // ============================================
+
   const sectionMap = {
+    // ============================================
+    // HERO
+    // ============================================
+
     hero: {
       component: <ServiceHero service={data} key="hero" />,
       show: show_hero,
     },
+
+    // ============================================
+    // INTRO
+    // ============================================
+
     intro: {
       component: (
         <section key="intro" className="broucher-info about-info-sec pix-bg">
@@ -277,6 +361,7 @@ export default function BrochureDesignTemplate({ data }) {
                   {intro_small_heading || "Brochure Design"}
                 </span>
               </div>
+
               <div className="col-lg-9">
                 <h2 className="about-heading rs-main-title text-white">
                   {intro_description ||
@@ -287,8 +372,14 @@ export default function BrochureDesignTemplate({ data }) {
           </div>
         </section>
       ),
+
       show: show_intro,
     },
+
+    // ============================================
+    // FEATURES
+    // ============================================
+
     features: {
       component: (
         <section key="features" className="brochure-services-section dark-bg">
@@ -298,6 +389,7 @@ export default function BrochureDesignTemplate({ data }) {
                 <h2 className="services-heading">
                   {features_title || "Our Brochure Design Services"}
                 </h2>
+
                 <ul className="services-list">
                   {brochureTypes.map((item, index) => (
                     <li key={item.id || index}>
@@ -308,42 +400,58 @@ export default function BrochureDesignTemplate({ data }) {
                           }
                         ></i>
                       </span>
+
                       <span className="service-text">{item.title}</span>
                     </li>
                   ))}
                 </ul>
               </div>
+
               <div className="col-lg-7 px-lg-5">
                 <div className="process-title-wrapper">
                   <h6>
-                    Our <br /> Brochure <br /> Design Process
+                    Our
+                    <br />
+                    Brochure
+                    <br />
+                    Design Process
                   </h6>
                 </div>
+
                 <div
                   className="process-accordion"
                   id="brochureProcessAccordion"
                 >
                   {processData.map((process, index) => {
                     const isFirst = index === 0;
+
                     const collapseId = `brochure-collapse-${index}`;
+
                     return (
                       <div className="accordion-item" key={process.id || index}>
                         <div className="accordion-header">
                           <button
-                            className={`accordion-trigger ${isFirst ? "active" : ""}`}
+                            className={`accordion-trigger ${
+                              isFirst ? "active" : ""
+                            }`}
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target={`#${collapseId}`}
-                            aria-expanded={isFirst ? "true" : "false"}
+                            aria-expanded={isFirst}
                           >
                             <span className="step-number">{index + 1}.</span>
+
                             <span className="step-title">{process.title}</span>
+
                             <span className="step-arrow">↗</span>
                           </button>
                         </div>
+
                         <div
                           id={collapseId}
-                          className={`accordion-collapse collapse ${isFirst ? "show" : ""}`}
+                          className={`accordion-collapse collapse ${
+                            isFirst ? "show" : ""
+                          }`}
                           data-bs-parent="#brochureProcessAccordion"
                         >
                           <div className="accordion-body">
@@ -356,9 +464,12 @@ export default function BrochureDesignTemplate({ data }) {
                     );
                   })}
                 </div>
+
                 <div className="connect-section">
                   <span className="connect-label">Let's Connect :</span>
+
                   <div className="connect-divider"></div>
+
                   <a href={cta_button_link || "#"} className="connect-btn">
                     {cta_button_text || "Book A Call"}
                   </a>
@@ -368,8 +479,14 @@ export default function BrochureDesignTemplate({ data }) {
           </div>
         </section>
       ),
+
       show: show_features,
     },
+
+    // ============================================
+    // BENEFITS
+    // ============================================
+
     benefits: {
       component: (
         <section key="benefits" className="rs-why-brochure">
@@ -378,10 +495,12 @@ export default function BrochureDesignTemplate({ data }) {
               <div className="col-lg-5">
                 <div className="rs-why-brochure__intro">
                   <span className="rs-why-brochure__label">Why RedSpider</span>
+
                   <h2 className="rsu-main-title">
                     {benefits_title ||
                       "Why Choose RedSpider for Brochure Design in Dubai?"}
                   </h2>
+
                   <div
                     className="rs-why-brochure__dubai"
                     aria-label="Hand-drawn Dubai skyline outline"
@@ -396,6 +515,7 @@ export default function BrochureDesignTemplate({ data }) {
                         className="rs-why-brochure__dubai-line"
                         d="M8 185 C30 180 41 169 54 172 C67 175 61 190 75 191 C94 193 92 171 90 153 C87 126 91 86 111 51 C130 65 144 84 148 113 C151 139 143 174 155 182 C165 189 172 182 173 166 L177 88 L188 79 L197 66 C196 88 193 113 196 139 C198 161 194 181 205 185 C216 190 220 179 218 160 L219 102 C238 111 249 127 250 151 C251 170 242 182 251 188 C261 194 266 180 267 164 C269 137 278 109 292 95 C309 113 317 138 315 161 C313 178 316 188 329 188 C345 188 350 170 342 165 C332 159 325 170 332 180 C347 201 376 186 383 164 C393 172 405 170 412 158 C422 143 432 137 447 139 C466 142 471 158 466 177 L459 139 C457 120 470 108 484 108 C502 108 515 126 512 145 L507 184 L501 143 C499 126 507 117 516 120 C526 123 529 138 527 153 C524 174 531 189 545 187 C558 185 560 171 556 163 C552 156 543 158 543 166 C544 181 562 194 575 187 C584 181 582 158 582 137 L586 72 L591 62 L588 51 L593 42 L591 31 L597 22 L600 8 L603 22 L609 31 L607 42 L612 51 L609 62 L614 72 L619 137 C619 165 614 184 628 190 C644 197 655 185 655 169 L655 49 L660 28 L664 49 C677 51 683 58 683 69 L692 72 L692 92 L699 94 L699 174 C699 188 707 190 716 190"
                       ></path>
+
                       <path
                         className="rs-why-brochure__dubai-detail"
                         d="M91 91 C108 80 132 91 143 110 M91 119 C109 107 134 115 148 132 M92 147 C110 137 134 142 147 154 M448 139 C449 119 462 103 481 102 C501 101 517 117 519 139 M457 151 C471 142 496 143 510 154"
@@ -404,6 +524,7 @@ export default function BrochureDesignTemplate({ data }) {
                   </div>
                 </div>
               </div>
+
               <div className="col-lg-7">
                 <div className="rs-why-brochure__grid">
                   <div className="row g-4">
@@ -416,21 +537,26 @@ export default function BrochureDesignTemplate({ data }) {
                                 <span className="rs-why-brochure__icon">
                                   <i className="bi bi-buildings"></i>
                                 </span>
+
                                 <span className="rs-why-brochure__number">
                                   {String(index + 1).padStart(2, "0")}
                                 </span>
                               </div>
+
                               <h3 className="rs-why-brochure__card-title">
                                 {item.title}
                               </h3>
                             </div>
+
                             <div className="rs-why-brochure__card-face rs-why-brochure__card-back">
                               <h3 className="rs-why-brochure__card-title">
                                 {item.title}
                               </h3>
+
                               <p className="rs-why-brochure__text">
                                 {item.description}
                               </p>
+
                               <span className="rs-why-brochure__back-number">
                                 {String(index + 1).padStart(2, "0")}
                               </span>
@@ -446,8 +572,14 @@ export default function BrochureDesignTemplate({ data }) {
           </div>
         </section>
       ),
+
       show: show_benefits,
     },
+
+    // ============================================
+    // PROCESSES
+    // ============================================
+
     processes: {
       component: (
         <section key="processes" className="rs-pixora-title">
@@ -458,27 +590,34 @@ export default function BrochureDesignTemplate({ data }) {
                   <span className="rs-pixora-title__word rs-pixora-title__word--rtl">
                     Why
                   </span>
+
                   <span className="rs-pixora-title__word rs-pixora-title__word--ltr">
                     Professional
                   </span>
+
                   <span className="rs-pixora-title__image rs-pixora-title__image--pill">
                     <img src="/assets/img/brochur-1.png" alt="Brochure" />
                   </span>
+
                   <span className="rs-pixora-title__word rs-pixora-title__word--red rs-pixora-title__word--rtl">
                     Brochure
                   </span>
                 </span>
+
                 <span className="rs-pixora-title__line rs-pixora-title__line--two">
                   <span className="rs-pixora-title__image rs-pixora-title__image--square">
                     <img src="/assets/img/bro-visual.png" alt="Brochure" />
                   </span>
+
                   <span className="rs-pixora-title__word rs-pixora-title__word--ltr">
                     Design
                   </span>
+
                   <span className="rs-pixora-title__line rs-pixora-title__line--three">
                     <span className="rs-pixora-title__word rs-pixora-title__word--rtl">
                       Matters
                     </span>
+
                     <span className="rs-pixora-title__image rs-pixora-title__image--portrait">
                       <img src="/assets/img/print-bro.png" alt="Brochure" />
                     </span>
@@ -486,30 +625,39 @@ export default function BrochureDesignTemplate({ data }) {
                 </span>
               </h2>
             </div>
+
             <div className="container">
               <div className="letconnect py-4">
                 <span className="text-white">View our Work :</span>
+
                 <div className="line"></div>
+
                 <a href="#">Our Portfolio</a>
               </div>
             </div>
+
             <div
               className="container rs-pixora-title__content"
-              style={{ maxWidth: "1600px" }}
+              style={{
+                maxWidth: "1600px",
+              }}
             >
               <div className="row g-5">
                 <div className="col-lg-8">
                   <article className="rs-pixora-title__content-col">
                     <span className="rs-pixora-title__number">01</span>
+
                     <h3 className="rs-pixora-title__content-title">
                       More Than Just a Brochure
                     </h3>
+
                     <p className="rs-pixora-title__text">
                       A brochure is not just a piece of printed paper, it's one
                       of the top marketing tools your business can use. It
                       represents your brand's values and story to the target
                       customers and attracts new ones.
                     </p>
+
                     <p className="rs-pixora-title__text">
                       When customers connect with your story and understand your
                       products and services easily, they will become more loyal.
@@ -518,12 +666,15 @@ export default function BrochureDesignTemplate({ data }) {
                     </p>
                   </article>
                 </div>
+
                 <div className="col-lg-4">
                   <article className="rs-pixora-title__content-col rs-pixora-title__content-col--right">
                     <span className="rs-pixora-title__number">02</span>
+
                     <h3 className="rs-pixora-title__content-title">
                       Build Trust Through Professional Design
                     </h3>
+
                     <p className="rs-pixora-title__text">
                       Businesses who invest in brochure design services get a
                       perfect marketing tool to promote their brand. A
@@ -533,6 +684,7 @@ export default function BrochureDesignTemplate({ data }) {
                   </article>
                 </div>
               </div>
+
               <span
                 className="rs-pixora-title__accent"
                 aria-hidden="true"
@@ -541,52 +693,200 @@ export default function BrochureDesignTemplate({ data }) {
           </div>
         </section>
       ),
+
       show: show_processes,
     },
+
+    // ============================================
+    // GALLERY
+    //
+    // HOMEPAGE PORTFOLIO UI
+    // DYNAMIC BACKEND IMAGES
+    // DUPLICATE PATHS REMOVED
+    // ONLY ZOOM
+    // NO URL
+    // ============================================
+
     gallery: {
       component: (
-        <section key="gallery" className="opposite-gallery-sec">
-          <div className="opposite-gallery-sticky">
-            <div className="gallery-title-wrap">
-              <span>{gallery_title || "Our Work"}</span>
-              <h2>{gallery_title || "Our Gallery"}</h2>
-              {gallery_subtitle && <p>{gallery_subtitle}</p>}
-            </div>
-            <div className="gallery-inner">
-              {galleryImages.length > 0 ? (
-                <>
-                  <div className="gallery-track top-track">
-                    {galleryImages.slice(0, 6).map((item, index) => (
-                      <div
-                        key={item.id || index}
-                        className={`gallery-card ${index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""}`}
+        <>
+          {/* ============================================
+              LIGHTBOX
+          ============================================ */}
+
+          <Lightbox
+            open={galleryLightboxOpen}
+            close={() => setGalleryLightboxOpen(false)}
+            index={galleryLightboxIndex}
+            slides={gallerySlides}
+          />
+
+          {/* ============================================
+              PORTFOLIO SECTION
+          ============================================ */}
+
+          <section
+            key="gallery"
+            id="portfolio"
+            className="portfolio section pt-0"
+          >
+            {/* ============================================
+                SAME HOMEPAGE INTRO STYLE
+            ============================================ */}
+
+            <div className="rs-gd-intro py-5">
+              <div className="container-fluid px-3 px-md-4 px-xl-5">
+                <div className="row align-items-center">
+                  <div className="col-12">
+                    <div
+                      className="rs-gd-intro__copy"
+                      style={{
+                        maxWidth: "100%",
+                        margin: "auto",
+                      }}
+                    >
+                      <h2
+                        className="rs-gd-intro__lead rs-gd-intro__reveal fade-title mb-3"
+                        style={{
+                          maxWidth: "1000px",
+                          margin: "auto",
+                        }}
                       >
-                        <img src={item.image} alt={item.title || "Gallery"} />
-                      </div>
-                    ))}
+                        {gallery_title || "Our Gallery"}
+                      </h2>
+
+                      {gallery_subtitle && (
+                        <p className="rs-gd-intro__lead rs-gd-intro__reveal text-center fs-5">
+                          {gallery_subtitle}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  {galleryImages.length > 6 && (
-                    <div className="gallery-track bottom-track">
-                      {galleryImages.slice(6, 12).map((item, index) => (
+                </div>
+              </div>
+            </div>
+
+            {/* ============================================
+                HOMEPAGE PORTFOLIO GRID
+            ============================================ */}
+
+            <div className="container">
+              <div
+                className="isotope-layout"
+                data-default-filter="*"
+                data-layout="masonry"
+                data-sort="original-order"
+              >
+                {/* Hidden filters */}
+                <ul
+                  className="portfolio-filters isotope-filters d-none"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  <li data-filter="*" className="filter-active">
+                    All
+                  </li>
+                </ul>
+
+                {/* ============================================
+                    CARDS
+                ============================================ */}
+
+                <div className="row gy-4 isotope-container">
+                  {uniqueGalleryImages.length > 0 ? (
+                    uniqueGalleryImages.map((item, index) => (
+                      <div
+                        key={`${item.image}-${index}`}
+                        className="col-lg-4 col-md-6 portfolio-item isotope-item filter-app"
+                      >
                         <div
-                          key={item.id || index}
-                          className={`gallery-card ${index % 3 === 1 ? "large" : index % 3 === 0 ? "small" : ""}`}
+                          className="portfolio-content h-100"
+                          role="button"
+                          tabIndex={0}
+                          style={{
+                            cursor: "zoom-in",
+                          }}
+                          onClick={() => {
+                            setGalleryLightboxIndex(index);
+
+                            setGalleryLightboxOpen(true);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+
+                              setGalleryLightboxIndex(index);
+
+                              setGalleryLightboxOpen(true);
+                            }
+                          }}
                         >
-                          <img src={item.image} alt={item.title || "Gallery"} />
+                          {/* IMAGE */}
+
+                          <img
+                            src={item.image}
+                            className="img-fluid"
+                            alt={item.title || "Gallery Image"}
+                            loading="lazy"
+                          />
+
+                          {/* HOMEPAGE OVERLAY */}
+
+                          <div className="portfolio-info">
+                            <h3>{item.title || "Gallery"}</h3>
+
+                            {item.description && <p>{item.description}</p>}
+
+                            {/* ONLY ZOOM */}
+
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+
+                                setGalleryLightboxIndex(index);
+
+                                setGalleryLightboxOpen(true);
+                              }}
+                              className="preview-link border-0 bg-transparent text-white"
+                              style={{
+                                fontSize: "1.2rem",
+                                cursor: "zoom-in",
+                              }}
+                              aria-label={`View ${
+                                item.title || "Gallery Image"
+                              }`}
+                            >
+                              <i
+                                className="bi bi-zoom-in"
+                                aria-hidden="true"
+                              ></i>
+                            </button>
+                          </div>
                         </div>
-                      ))}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="col-12">
+                      <p className="text-center py-5">
+                        No gallery images available
+                      </p>
                     </div>
                   )}
-                </>
-              ) : (
-                <p className="text-center py-5">No gallery images available</p>
-              )}
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </>
       ),
+
       show: show_gallery,
     },
+
+    // ============================================
+    // FAQ
+    // ============================================
+
     faqs: {
       component: (
         <section
@@ -607,13 +907,17 @@ export default function BrochureDesignTemplate({ data }) {
               <h2 className="fw-bold">
                 {faqs_title || "Frequently Asked Questions"}
               </h2>
+
               <p>
                 {faqs_subtitle ||
                   "Find quick answers to common questions about our services."}
               </p>
             </div>
+
             {faqData.length > 0 ? (
               <div className="row g-4">
+                {/* LEFT FAQ */}
+
                 <div className="col-lg-6">
                   <div className="accordion" id="faqLeft-brochure">
                     {faqData
@@ -633,6 +937,7 @@ export default function BrochureDesignTemplate({ data }) {
                               {faq.question}
                             </button>
                           </h2>
+
                           <div
                             id={`faq-brochure-left-${idx}`}
                             className="accordion-collapse collapse"
@@ -644,6 +949,9 @@ export default function BrochureDesignTemplate({ data }) {
                       ))}
                   </div>
                 </div>
+
+                {/* RIGHT FAQ */}
+
                 <div className="col-lg-6">
                   <div className="accordion" id="faqRight-brochure">
                     {faqData
@@ -663,6 +971,7 @@ export default function BrochureDesignTemplate({ data }) {
                               {faq.question}
                             </button>
                           </h2>
+
                           <div
                             id={`faq-brochure-right-${idx}`}
                             className="accordion-collapse collapse"
@@ -681,22 +990,32 @@ export default function BrochureDesignTemplate({ data }) {
           </div>
         </section>
       ),
+
       show: show_faqs,
     },
+
+    // ============================================
+    // CTA
+    // ============================================
+
     cta: {
       component: <ServiceCTA service={data} key="cta" />,
+
       show: show_cta,
     },
   };
 
   // ============================================
-  // 🏗️ Render Sections Based on Order
+  // RENDER SECTIONS
   // ============================================
+
   const renderSections = () => {
     let order = section_order;
+
     if (typeof order === "string") {
       order = order.split(",").map((s) => s.trim());
     }
+
     if (!Array.isArray(order) || order.length === 0) {
       order = [
         "hero",
@@ -709,20 +1028,43 @@ export default function BrochureDesignTemplate({ data }) {
         "cta",
       ];
     }
+
     return order
       .map((key) => {
         const section = sectionMap[key];
-        if (!section) return null;
+
+        if (!section) {
+          return null;
+        }
+
         return section.show ? section.component : null;
       })
       .filter(Boolean);
   };
 
+  // ============================================
+  // FINAL RENDER
+  // ============================================
+
   return (
     <div style={styles}>
-      {custom_css && <style dangerouslySetInnerHTML={{ __html: custom_css }} />}
+      {custom_css && (
+        <style
+          dangerouslySetInnerHTML={{
+            __html: custom_css,
+          }}
+        />
+      )}
+
       <main className="service-template">{renderSections()}</main>
-      {custom_js && <script dangerouslySetInnerHTML={{ __html: custom_js }} />}
+
+      {custom_js && (
+        <script
+          dangerouslySetInnerHTML={{
+            __html: custom_js,
+          }}
+        />
+      )}
     </div>
   );
 }

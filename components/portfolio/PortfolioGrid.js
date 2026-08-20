@@ -1009,7 +1009,7 @@ export default function PortfolioGrid({
 
                         width: "100%",
 
-                        height: "260px",
+                        height: "100%",
 
                         overflow: "hidden",
 
@@ -1063,7 +1063,7 @@ export default function PortfolioGrid({
                         style={{
                           width: "100%",
 
-                          height: "260px",
+                          height: "100%",
 
                           objectFit: "cover",
                         }}

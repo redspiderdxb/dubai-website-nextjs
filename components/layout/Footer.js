@@ -31,42 +31,70 @@ export default function Footer() {
   /* =====================================================
      FOOTER SERVICES
 
-     STATIC LIST
-     Matches live website footer
+     Same sequence as Header Services menu
+     
+     Backend available:
+     → Real URL
+
+     Backend page not available yet:
+     → #
   ===================================================== */
 
   const services = [
     {
-      name: "Logo Design",
-      path: "/services/logo-designing-company-dubai-brand-identity",
-    },
-    {
-      name: "Web Development",
+      name: "Web Design & Development",
       path: "/services/web-development",
     },
     {
-      name: "Brochure/Profile Design",
-      path: "/services/brochure-design-services",
+      name: "eCommerce Website Development",
+      path: "/services/ecommerce-development-services",
+    },
+    {
+      name: "Real Estate Website Development",
+      path: "/products/real-estate-web-design-company",
+    },
+    {
+      name: "Mobile App Development",
+      path: "/services/mobile-app-development-company-dubai",
+    },
+
+    {
+      name: "Branding & Logo Design",
+      path: "/services/logo-designing-company-dubai-brand-identity",
     },
     {
       name: "Graphic Design",
       path: "/services/graphic-design-services",
     },
     {
-      name: "E-Commerce Solutions",
-      path: "/services/ecommerce-development-services",
+      name: "Brochure & Company Profile Design",
+      path: "/services/brochure-design-services",
+    },
+
+    {
+      name: "SEO & Digital Marketing",
+      path: "#",
     },
     {
       name: "Email Marketing",
       path: "/services/email-marketing-services",
     },
     {
-      name: "Web Hosting",
+      name: "SMS Marketing",
+      path: "/products/sms-marketing-uae",
+    },
+
+    {
+      name: "Web Hosting & Server Solutions",
       path: "/services/web-hosting",
     },
     {
-      name: "Mobile App Development",
-      path: "/services/mobile-app-development-company-dubai",
+      name: "WhatsApp Business API Integration",
+      path: "/services/whatsapp-business-api-integration",
+    },
+    {
+      name: "Website Maintenance & Support",
+      path: "#",
     },
   ];
 
@@ -99,9 +127,6 @@ export default function Footer() {
 
   /* =====================================================
      SOCIAL ICONS
-
-     X / Twitter uses Bootstrap Icon
-     instead of external image
   ===================================================== */
 
   const socialIcons = [
@@ -153,13 +178,6 @@ export default function Footer() {
             ================================================= */}
 
             <div className="col-lg-5 col-md-6 rs-footer-intro">
-              {/*
-                IMPORTANT:
-                Footer is a global component.
-
-                Do NOT use H1/H2/H3/H4/H5/H6 here.
-              */}
-
               <div className="rs-heading">
                 Power up your website
                 <br />
@@ -182,8 +200,19 @@ export default function Footer() {
             <div className="col-lg-4 col-md-6">
               <ul className="rs-services">
                 {services.map((service) => (
-                  <li key={service.path}>
-                    <Link href={service.path}>{service.name}</Link>
+                  <li key={service.name}>
+                    {service.path === "#" ? (
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                        }}
+                      >
+                        {service.name}
+                      </a>
+                    ) : (
+                      <Link href={service.path}>{service.name}</Link>
+                    )}
                   </li>
                 ))}
               </ul>

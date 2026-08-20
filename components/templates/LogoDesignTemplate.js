@@ -1,6 +1,10 @@
 // frontend/components/templates/LogoDesignTemplate.js
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 
@@ -391,8 +395,38 @@ export default function LogoDesignTemplate({ data }) {
         ];
 
   // 8. Gallery Images - Dynamic from backend
+  // ============================================
+  // GALLERY IMAGES
+  // ============================================
+
   const galleryImages = gallery.length > 0 ? gallery : [];
 
+  // ============================================
+  // REMOVE DUPLICATE IMAGE PATHS
+  // ============================================
+
+  const uniqueGalleryImages = Array.from(
+    new Map(
+      galleryImages
+        .filter(
+          (item) =>
+            item && typeof item.image === "string" && item.image.trim() !== "",
+        )
+        .map((item) => [item.image.trim(), item]),
+    ).values(),
+  );
+
+  // ============================================
+  // GALLERY LIGHTBOX
+  // ============================================
+
+  const [galleryLightboxOpen, setGalleryLightboxOpen] = useState(false);
+
+  const [galleryLightboxIndex, setGalleryLightboxIndex] = useState(0);
+
+  const gallerySlides = uniqueGalleryImages.map((item) => ({
+    src: item.image,
+  }));
   // 9. How it Works Steps (Static)
   const workSteps = [
     {
@@ -676,52 +710,162 @@ export default function LogoDesignTemplate({ data }) {
     },
     gallery: {
       component: (
-        <section key="gallery" className="opposite-gallery-sec py-0">
-          <div className="opposite-gallery-sticky">
-            <div className="gallery-title-wrap">
-              <span>{gallery_title || "Our Work"}</span>
-              <h2>{gallery_title || "Our Gallery"}</h2>
-              {gallery_subtitle && <p>{gallery_subtitle}</p>}
-            </div>
-            <div className="gallery-inner">
-              {galleryImages.length > 0 ? (
-                <>
-                  <div className="gallery-track top-track">
-                    {galleryImages.slice(0, 6).map((img, index) => (
-                      <div
-                        className={`gallery-card ${index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""}`}
-                        key={img.id || index}
+        <>
+          {/* ============================================
+          GALLERY LIGHTBOX
+      ============================================ */}
+
+          <Lightbox
+            open={galleryLightboxOpen}
+            close={() => setGalleryLightboxOpen(false)}
+            index={galleryLightboxIndex}
+            slides={gallerySlides}
+          />
+
+          {/* ============================================
+          HOMEPAGE STYLE PORTFOLIO
+      ============================================ */}
+
+          <section
+            key="gallery"
+            id="portfolio"
+            className="portfolio section pt-0"
+          >
+            {/* ============================================
+            GALLERY TITLE
+        ============================================ */}
+
+            <div className="rs-gd-intro py-5">
+              <div className="container-fluid px-3 px-md-4 px-xl-5">
+                <div className="row align-items-center">
+                  <div className="col-12">
+                    <div
+                      className="rs-gd-intro__copy"
+                      style={{
+                        maxWidth: "100%",
+                        margin: "auto",
+                      }}
+                    >
+                      <h2
+                        className="rs-gd-intro__lead rs-gd-intro__reveal fade-title mb-3"
+                        style={{
+                          maxWidth: "1000px",
+                          margin: "auto",
+                        }}
                       >
-                        <img
-                          src={img.image}
-                          alt={img.title || `Gallery ${index + 1}`}
-                        />
-                      </div>
-                    ))}
+                        {gallery_title || "Our Gallery"}
+                      </h2>
+
+                      {gallery_subtitle && (
+                        <p className="rs-gd-intro__lead rs-gd-intro__reveal text-center fs-5">
+                          {gallery_subtitle}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  {galleryImages.length > 6 && (
-                    <div className="gallery-track bottom-track">
-                      {galleryImages.slice(6, 12).map((img, index) => (
+                </div>
+              </div>
+            </div>
+
+            {/* ============================================
+            PORTFOLIO GRID
+        ============================================ */}
+
+            <div className="container">
+              <div
+                className="isotope-layout"
+                data-default-filter="*"
+                data-layout="masonry"
+                data-sort="original-order"
+              >
+                <div className="row gy-4 isotope-container">
+                  {uniqueGalleryImages.length > 0 ? (
+                    uniqueGalleryImages.map((item, index) => (
+                      <div
+                        key={`${item.image}-${index}`}
+                        className="col-lg-4 col-md-6 portfolio-item isotope-item filter-app"
+                      >
                         <div
-                          className={`gallery-card ${index % 3 === 1 ? "large" : index % 3 === 0 ? "small" : ""}`}
-                          key={img.id || index}
+                          className="portfolio-content h-100"
+                          role="button"
+                          tabIndex={0}
+                          style={{
+                            cursor: "zoom-in",
+                          }}
+                          onClick={() => {
+                            setGalleryLightboxIndex(index);
+
+                            setGalleryLightboxOpen(true);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+
+                              setGalleryLightboxIndex(index);
+
+                              setGalleryLightboxOpen(true);
+                            }
+                          }}
                         >
+                          {/* IMAGE */}
+
                           <img
-                            src={img.image}
-                            alt={img.title || `Gallery ${index + 7}`}
+                            src={item.image}
+                            className="img-fluid"
+                            alt={item.title || `Gallery ${index + 1}`}
+                            loading="lazy"
                           />
+
+                          {/* HOVER CONTENT */}
+
+                          <div className="portfolio-info">
+                            <h3>{item.title || "Gallery"}</h3>
+
+                            {item.description && <p>{item.description}</p>}
+
+                            {/* ONLY ZOOM */}
+
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+
+                                setGalleryLightboxIndex(index);
+
+                                setGalleryLightboxOpen(true);
+                              }}
+                              className="preview-link border-0 bg-transparent text-white"
+                              style={{
+                                fontSize: "1.2rem",
+                                cursor: "zoom-in",
+                              }}
+                              aria-label={`View ${
+                                item.title || "Gallery Image"
+                              }`}
+                            >
+                              <i
+                                className="bi bi-zoom-in"
+                                aria-hidden="true"
+                              ></i>
+                            </button>
+                          </div>
                         </div>
-                      ))}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="col-12">
+                      <p className="text-center py-5">
+                        No gallery images available
+                      </p>
                     </div>
                   )}
-                </>
-              ) : (
-                <p className="text-center py-5">No gallery images available</p>
-              )}
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </>
       ),
+
       show: show_gallery,
     },
     faqs: {

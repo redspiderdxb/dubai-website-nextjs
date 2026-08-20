@@ -38,7 +38,7 @@ export default function AboutValue({ data }) {
         </div>
       </div>
       
-      <div className="container py-lg-5" style={{ maxWidth: '1600px' }}>
+      <div className="container py-lg-5">
         <div className="row g-4">
           {valueItems.map((item, index) => (
             <div key={index} className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay={index * 100}>

@@ -19,8 +19,7 @@ export default function Header() {
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [isBlogScrolled, setIsBlogScrolled] = useState(false)
-  
+  const [isBlogScrolled, setIsBlogScrolled] = useState(false);
 
   const headerRef = useRef(null);
 
@@ -57,40 +56,77 @@ export default function Header() {
   }, [isBlogPage]);
 
   /* =====================================================
-     EXTRA SERVICES
+     SERVICES MENU
+     
+     Fixed sequence as approved.
+     
+     Backend pages are linked.
+     Pages not available yet use "#".
   ===================================================== */
 
-  const extraServices = [
+  const services = [
     {
-      name: "Real Estate Web Design Company",
+      name: "Web Design & Development",
+      path: "/services/web-development",
+    },
+    {
+      name: "eCommerce Website Development",
+      path: "/services/ecommerce-development-services",
+    },
+    {
+      name: "Real Estate Website Development",
       path: "/products/real-estate-web-design-company",
     },
     {
-      name: "SMS Marketing UAE",
+      name: "Mobile App Development",
+      path: "/services/mobile-app-development-company-dubai",
+    },
+
+    {
+      name: "Branding & Logo Design",
+      path: "/services/logo-designing-company-dubai-brand-identity",
+    },
+    {
+      name: "Graphic Design",
+      path: "/services/graphic-design-services",
+    },
+    {
+      name: "Brochure & Company Profile Design",
+      path: "/services/brochure-design-services",
+    },
+
+    {
+      name: "SEO & Digital Marketing",
+      path: "#",
+    },
+    {
+      name: "Email Marketing",
+      path: "/services/email-marketing-services",
+    },
+    {
+      name: "SMS Marketing",
       path: "/products/sms-marketing-uae",
+    },
+
+    {
+      name: "Web Hosting & Server Solutions",
+      path: "/services/web-hosting",
+    },
+    {
+      name: "WhatsApp Business API Integration",
+      path: "/services/whatsapp-business-api-integration",
+    },
+    {
+      name: "Website Maintenance & Support",
+      path: "#",
     },
   ];
 
   /* =====================================================
-     DYNAMIC SERVICES
-  ===================================================== */
-
-  const serviceItems = Array.isArray(apiServices)
-    ? apiServices
-        .filter((service) => service && service.name && service.slug)
-        .map((service) => ({
-          name: service.name,
-          path: `/services/${service.slug}`,
-        }))
-    : [];
-
-  const services = [...serviceItems, ...extraServices].filter(
-    (service, index, array) =>
-      array.findIndex((item) => item.name === service.name) === index,
-  );
-
-  /* =====================================================
      DYNAMIC PRODUCTS
+     
+     Real Estate + SMS Marketing are intentionally
+     moved under Services, so they are removed here.
   ===================================================== */
 
   const movedProductNames = [
@@ -270,7 +306,7 @@ export default function Header() {
                 {navItems.map((item, index) => {
                   /* =====================================
                        DROPDOWN
-                    ===================================== */
+                  ===================================== */
 
                   if (item.type === "dropdown") {
                     return (
@@ -304,12 +340,23 @@ export default function Header() {
                           {item.items.length > 0 ? (
                             item.items.map((subItem, subIndex) => (
                               <li key={`${item.name}-${subIndex}`}>
-                                <Link
-                                  href={subItem.path}
-                                  onClick={closeMobileMenu}
-                                >
-                                  {subItem.name}
-                                </Link>
+                                {subItem.path === "#" ? (
+                                  <a
+                                    href="#"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                    }}
+                                  >
+                                    {subItem.name}
+                                  </a>
+                                ) : (
+                                  <Link
+                                    href={subItem.path}
+                                    onClick={closeMobileMenu}
+                                  >
+                                    {subItem.name}
+                                  </Link>
+                                )}
                               </li>
                             ))
                           ) : (
@@ -326,7 +373,7 @@ export default function Header() {
 
                   /* =====================================
                        NORMAL LINK
-                    ===================================== */
+                  ===================================== */
 
                   return (
                     <li key={item.name}>

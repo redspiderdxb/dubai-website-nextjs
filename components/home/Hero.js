@@ -172,21 +172,28 @@ export default function Hero({ data }) {
                   )}
                   <div className="rs-review-box">
                     <div className="rs-review-top">
-                      <span className="rs-google-word" aria-hidden="true">
-                        <span className="rs-blue">G</span>
-                        <span className="rs-red">o</span>
-                        <span className="rs-yellow">o</span>
-                        <span className="rs-blue">g</span>
-                        <span className="rs-green">l</span>
-                        <span className="rs-red">e</span>
-                      </span>
-                      <span className="rs-stars" aria-hidden="true">
-                        <i className="bi bi-star-fill" aria-hidden="true"></i>
-                        <i className="bi bi-star-fill" aria-hidden="true"></i>
-                        <i className="bi bi-star-fill" aria-hidden="true"></i>
-                        <i className="bi bi-star-fill" aria-hidden="true"></i>
-                        <i className="bi bi-star-fill" aria-hidden="true"></i>
-                      </span>
+                      <a
+                        href="https://share.google/Zmvt06D8A6xyIbCte"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span className="rs-google-word" aria-hidden="true">
+                          <span className="rs-blue">G</span>
+                          <span className="rs-red">o</span>
+                          <span className="rs-yellow">o</span>
+                          <span className="rs-blue">g</span>
+                          <span className="rs-green">l</span>
+                          <span className="rs-red">e</span>
+                        </span>
+
+                        <span className="rs-stars" aria-hidden="true">
+                          <i className="bi bi-star-fill" aria-hidden="true"></i>
+                          <i className="bi bi-star-fill" aria-hidden="true"></i>
+                          <i className="bi bi-star-fill" aria-hidden="true"></i>
+                          <i className="bi bi-star-fill" aria-hidden="true"></i>
+                          <i className="bi bi-star-fill" aria-hidden="true"></i>
+                        </span>
+                      </a>
                     </div>
                     <p className="rs-review-text">
                       RedSpider is rated 4.9 stars - based on 100+ reviews in

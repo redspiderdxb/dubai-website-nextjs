@@ -561,7 +561,7 @@ export default function AgencyPackages() {
                     <h2 className="rs-process-title mb-4 text-start">
                       <span className="rs-title-black">Why Businesses</span>
 
-                      <span className="rs-process-highlight">
+                      <span className="rs-process-highlight ms-0 ml-0">
                         Choose Our Web Design Company
                         <svg
                           className="rs-process-underline"
