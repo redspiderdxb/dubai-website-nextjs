@@ -1016,7 +1016,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(
 }
 
 /* Text */
-.rs-service-grid-outline .rs-grid-item h6 {
+.rs-service-grid-outline .rs-grid-item h3 {
   font-size: 14px;
   line-height: 1.6;
   color: #ddd;
@@ -4106,7 +4106,7 @@ p {
   background: #ffffff;
   border-radius: 22px;
   overflow: hidden;
-  min-height: 280px;
+  min-height: 355px;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
   transition: all 0.45s ease;
   z-index: 1;
@@ -5893,7 +5893,7 @@ section.text-revel {
   margin: 0;
 }
 
-.rs-creative-row > div {
+.rs-creative-row>div {
   display: flex;
   min-width: 0;
 }
@@ -6302,14 +6302,12 @@ section.text-revel {
   width: 60%;
   height: 100%;
 
-  background: linear-gradient(
-    110deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.08) 35%,
-    rgba(255, 255, 255, 0.65) 50%,
-    rgba(255, 255, 255, 0.08) 65%,
-    transparent 100%
-  );
+  background: linear-gradient(110deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 35%,
+      rgba(255, 255, 255, 0.65) 50%,
+      rgba(255, 255, 255, 0.08) 65%,
+      transparent 100%);
 
   transform: skewX(-25deg);
 }
@@ -6397,7 +6395,7 @@ section.text-revel {
     min-height: auto;
   }
 
-  .rs-creative-row > div {
+  .rs-creative-row>div {
     display: block;
 
     width: 100%;
@@ -6698,6 +6696,7 @@ section.text-revel {
     padding-bottom: 18px;
   }
 }
+
 /* =========================================================
    CREATIVE SECTION HEADING - FINAL FIX
 ========================================================= */
@@ -20842,6 +20841,7 @@ span.rs-process-highlight {
   color: #d42b2b;
   white-space: nowrap;
   padding-bottom: 12px;
+  margin-left: 11px;
 
 }
 

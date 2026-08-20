@@ -1,6 +1,6 @@
 import "glightbox/dist/css/glightbox.min.css";
-import { useState, useEffect, useRef } from "react";
-import { fetchGalleries } from "../../lib/api";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { fetchGalleries, fetchAllGalleries } from "../../lib/api";
 
 export default function PortfolioGrid({
   initialGalleries = [],
@@ -21,45 +21,156 @@ export default function PortfolioGrid({
       ? API_URL.replace("/api/v1", "").replace(/\/$/, "")
       : "";
 
-    return data.map((gallery) => ({
-      id: gallery.id,
+    return data.map((gallery) => {
+      const cleanDescription = gallery.description
+        ? String(gallery.description)
+            .replace(/<[^>]*>/g, " ")
+            .replace(/\s+/g, " ")
+            .trim()
+        : "Portfolio";
 
-      title: gallery.name || "Untitled Project",
+      // Existing Project URL from backend
+      const projectUrl =
+        gallery.project_url || `/galleries/${gallery.slug || gallery.id}`;
 
-      category: gallery.description
-        ? gallery.description.replace(/<[^>]*>/g, "")
-        : "Portfolio",
+      // ==========================================
+      // Search Text
+      // ==========================================
 
-      image: gallery.image
-        ? `${ASSET_URL}/storage/${gallery.image}`
-        : "/assets/img/portfolio/portfolio-1.jpg",
+      const searchText = `
+        ${gallery.name || ""}
+        ${cleanDescription || ""}
+        ${projectUrl || ""}
+      `
+        .toLowerCase()
+        .replace(/\s+/g, " ")
+        .trim();
 
-      link: gallery.project_url || `/galleries/${gallery.slug || gallery.id}`,
+      // ==========================================
+      // Detect YouTube URL
+      // ==========================================
 
-      filter: "filter-websites",
-    }));
+      const isYoutube =
+        typeof gallery.project_url === "string" &&
+        (gallery.project_url.includes("youtube.com/watch") ||
+          gallery.project_url.includes("youtu.be/") ||
+          gallery.project_url.includes("youtube.com/embed/") ||
+          gallery.project_url.includes("youtube.com/shorts/") ||
+          gallery.project_url.includes("youtube.com/live/"));
+
+      return {
+        id: gallery.id,
+
+        title: gallery.name || "Untitled Project",
+
+        category: cleanDescription || "Portfolio",
+
+        image: gallery.image
+          ? `${ASSET_URL}/storage/${gallery.image}`
+          : "/assets/img/portfolio/portfolio-1.jpg",
+
+        link: projectUrl,
+
+        searchText,
+
+        isYoutube,
+
+        filter: "filter-websites",
+      };
+    });
   };
 
   // ============================================
-  // Initial Server-Side Data
+  // Initial Data
   // ============================================
 
-  const [galleries, setGalleries] = useState(formatGalleries(initialGalleries));
-
-  const [pagination, setPagination] = useState(initialPagination || {});
-
-  const [currentPage, setCurrentPage] = useState(
-    initialPagination?.current_page || 1,
+  const initialFormattedGalleries = useMemo(
+    () => formatGalleries(initialGalleries || []),
+    [initialGalleries],
   );
 
+  const [galleries, setGalleries] = useState(initialFormattedGalleries);
+
+  const [allGalleries, setAllGalleries] = useState(initialFormattedGalleries);
+
+  /*
+   * IMPORTANT:
+   *
+   * This loading state is ONLY for actual
+   * pagination/manual loading.
+   *
+   * Background portfolio loading does NOT
+   * set this to true.
+   */
   const [loading, setLoading] = useState(false);
 
-  const [filter, setFilter] = useState("*");
+  // ============================================
+  // Filter State
+  // ============================================
+
+  const [filter, setFilter] = useState("filter-websites");
+
+  const [industryFilter, setIndustryFilter] = useState("");
+
+  const [searchInput, setSearchInput] = useState("");
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+
   // ============================================
-  // Load Gallery Page
+  // Load ALL Portfolio Projects
+  //
+  // IMPORTANT:
+  // This runs in the background.
+  //
+  // It does NOT:
+  // - set loading true
+  // - block initial 12 projects
+  // - block pagination UI
+  //
+  // Initial 12 projects are already supplied
+  // through getStaticProps().
+  // ============================================
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadAllPortfolio = async () => {
+      try {
+        const result = await fetchAllGalleries();
+
+        if (!mounted) {
+          return;
+        }
+
+        const formatted = formatGalleries(result || []);
+
+        if (formatted.length > 0) {
+          setAllGalleries(formatted);
+        }
+      } catch (error) {
+        console.error("Error loading all portfolio projects:", error);
+      }
+    };
+
+    /*
+     * Background loading.
+     *
+     * IMPORTANT:
+     * No setLoading(true) here.
+     */
+    loadAllPortfolio();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // ============================================
+  // Existing Gallery Loader
   // ============================================
 
   const loadGalleries = async (page) => {
@@ -68,42 +179,91 @@ export default function PortfolioGrid({
 
       const result = await fetchGalleries(page, PER_PAGE);
 
-      setGalleries(formatGalleries(result.galleries || []));
+      const formatted = formatGalleries(result.galleries || []);
 
-      setPagination(result.pagination || {});
+      setGalleries(formatted);
 
-      setCurrentPage(result.pagination?.current_page || page);
+      return formatted;
     } catch (error) {
       console.error("Error loading portfolio:", error);
+
+      return [];
     } finally {
       setLoading(false);
     }
   };
 
   // ============================================
-  // Pagination
+  // YouTube URL → Embed URL
   // ============================================
 
-  const handlePageChange = async (page) => {
-    const lastPage = pagination?.last_page || 1;
-
-    if (page < 1 || page > lastPage || page === currentPage || loading) {
-      return;
+  const getYoutubeEmbedUrl = (url) => {
+    if (!url) {
+      return "";
     }
 
-    await loadGalleries(page);
+    try {
+      const value = String(url).trim();
 
-    // Scroll to portfolio section
-    setTimeout(() => {
-      const portfolio = document.getElementById("portfolio");
+      // youtube.com/watch?v=VIDEO_ID
+      if (value.includes("youtube.com/watch")) {
+        const parsedUrl = new URL(value);
 
-      if (portfolio) {
-        portfolio.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        const videoId = parsedUrl.searchParams.get("v");
+
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
       }
-    }, 100);
+
+      // youtu.be/VIDEO_ID
+      if (value.includes("youtu.be/")) {
+        const parsedUrl = new URL(value);
+
+        const videoId = parsedUrl.pathname.replace("/", "").split("?")[0];
+
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
+      }
+
+      // youtube.com/embed/VIDEO_ID
+      if (value.includes("youtube.com/embed/")) {
+        return value;
+      }
+
+      // youtube.com/shorts/VIDEO_ID
+      if (value.includes("youtube.com/shorts/")) {
+        const parsedUrl = new URL(value);
+
+        const parts = parsedUrl.pathname.split("/");
+
+        const shortsIndex = parts.indexOf("shorts");
+
+        if (shortsIndex !== -1 && parts[shortsIndex + 1]) {
+          return `https://www.youtube.com/embed/${parts[shortsIndex + 1]}`;
+        }
+      }
+
+      // youtube.com/live/VIDEO_ID
+      if (value.includes("youtube.com/live/")) {
+        const parsedUrl = new URL(value);
+
+        const parts = parsedUrl.pathname.split("/");
+
+        const liveIndex = parts.indexOf("live");
+
+        if (liveIndex !== -1 && parts[liveIndex + 1]) {
+          return `https://www.youtube.com/embed/${parts[liveIndex + 1]}`;
+        }
+      }
+
+      return "";
+    } catch (error) {
+      console.error("Invalid YouTube URL:", url, error);
+
+      return "";
+    }
   };
 
   // ============================================
@@ -115,20 +275,28 @@ export default function PortfolioGrid({
 
     if (lightboxInstance.current) {
       lightboxInstance.current.destroy();
+
       lightboxInstance.current = null;
     }
 
     import("glightbox").then((module) => {
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
 
       const GLightbox = module.default;
 
-      if (!GLightbox) return;
+      if (!GLightbox) {
+        return;
+      }
 
       lightboxInstance.current = GLightbox({
         selector: ".glightbox",
+
         touchNavigation: true,
+
         loop: true,
+
         autoplayVideos: true,
       });
     });
@@ -145,61 +313,453 @@ export default function PortfolioGrid({
   }, [galleries]);
 
   // ============================================
-  // Filter Options
+  // Category Keyword Rules
   // ============================================
 
-  const filterOptions = [
-    {
-      value: "*",
-      label: "All Projects",
-    },
-    {
-      value: "filter-websites",
-      label: "Websites",
-    },
-    {
-      value: "filter-app",
-      label: "Mobile App",
-    },
-    {
-      value: "filter-video",
-      label: "Video Productions",
-    },
-    {
-      value: "filter-nl",
-      label: "Newsletter Designing",
-    },
-    {
-      value: "filter-cwp",
-      label: "Customized Web Application",
-    },
-  ];
+  const categoryKeywords = {
+    "filter-app": [
+      "mobile app",
+      "mobile application",
+      "android app",
+      "android application",
+      "ios app",
+      "ios application",
+      "iphone app",
+      "ipad app",
+      "app development",
+      "mobile development",
+      "mobile application development",
+      "patient app",
+      "doctor app",
+      "doctors app",
+      "patient & doctors app",
+      "ecommerce app",
+      "e-commerce app",
+      "shopping app",
+      "booking app",
+    ],
+
+    "filter-video": [
+      "video",
+      "videos",
+      "video production",
+      "video productions",
+      "video production company",
+      "corporate video",
+      "corporate videos",
+      "promotional video",
+      "promotional videos",
+      "promo video",
+      "promo videos",
+      "animation",
+      "animated video",
+      "animated videos",
+      "motion graphics",
+      "motion graphic",
+      "film production",
+      "film",
+      "youtube",
+      "youtu.be",
+    ],
+
+    "filter-nl": [
+      "newsletter",
+      "newsletter designing",
+      "email newsletter",
+      "email design",
+      "email campaign",
+      "mailchimp",
+    ],
+
+    "filter-cwp": [
+      "customized web application",
+      "customized web app",
+      "custom web application",
+      "custom web app",
+      "web application",
+      "web app",
+      "business application",
+      "online application",
+      "management system",
+      "crm",
+      "erp",
+      "portal application",
+    ],
+  };
 
   // ============================================
-  // Filter
+  // Industry Keyword Rules
+  // ============================================
+
+  const industryKeywords = {
+    "real-estate": [
+      "real estate",
+      "real-estate",
+      "property",
+      "properties",
+      "property developer",
+      "real estate developer",
+      "real estate developer website",
+      "real estate portal",
+      "real estate website",
+      "realty",
+      "real estate investments",
+      "property management",
+      "property portal",
+      "offplan",
+      "off-plan",
+      "estate",
+    ],
+
+    ecommerce: [
+      "ecommerce",
+      "e-commerce",
+      "online shopping",
+      "online store",
+      "online shop",
+      "shopping website",
+      "shopping cart",
+      "woocommerce",
+      "shopify",
+      "online marketplace",
+    ],
+
+    corporate: [
+      "corporate",
+      "corporate website",
+      "corporate group",
+      "business website",
+      "company website",
+      "business",
+    ],
+
+    "daily-deals": [
+      "daily deals",
+      "daily deal",
+      "deals website",
+      "deal website",
+      "discount website",
+      "offers website",
+      "offers",
+    ],
+
+    "web-portal": [
+      "web portal",
+      "website portal",
+      "online portal",
+      "portal website",
+      "portal",
+    ],
+
+    engineering: [
+      "engineering",
+      "construction",
+      "engineering & construction",
+      "engineering and construction",
+      "contracting",
+      "contractor",
+      "infrastructure",
+      "building construction",
+    ],
+
+    travel: [
+      "travel",
+      "tourism",
+      "travel & tourism",
+      "travel and tourism",
+      "tour operator",
+      "travel agency",
+      "tourism company",
+      "holiday",
+      "holidays",
+      "safari",
+      "aviation",
+    ],
+
+    somalian: ["somalia", "somalian", "somaliland", "mogadishu"],
+
+    international: [
+      "international",
+      "international project",
+      "international projects",
+      "global",
+      "overseas",
+    ],
+
+    luxury: ["luxury", "luxurious", "stunning", "luxury website", "premium"],
+
+    landing: [
+      "landing page",
+      "landing pages",
+      "ad landing",
+      "advertising landing",
+      "campaign landing",
+    ],
+
+    logistics: [
+      "logistics",
+      "shipping",
+      "cargo",
+      "freight",
+      "courier",
+      "delivery",
+      "transportation",
+      "supply chain",
+    ],
+
+    bank: ["bank", "banking", "financial institution", "finance", "fintech"],
+  };
+
+  // ============================================
+  // Keyword Match
+  // ============================================
+
+  const containsKeyword = (text, keywords = []) => {
+    const normalizedText = String(text || "").toLowerCase();
+
+    return keywords.some((keyword) =>
+      normalizedText.includes(keyword.toLowerCase()),
+    );
+  };
+
+  // ============================================
+  // Category Match
+  // ============================================
+
+  const matchesCategory = (project, selectedFilter) => {
+    if (selectedFilter === "*") {
+      return true;
+    }
+
+    const text = project.searchText || "";
+
+    // ------------------------------------------
+    // Mobile App
+    // ------------------------------------------
+
+    if (selectedFilter === "filter-app") {
+      return containsKeyword(text, categoryKeywords["filter-app"]);
+    }
+
+    // ------------------------------------------
+    // Video Production
+    // ------------------------------------------
+
+    if (selectedFilter === "filter-video") {
+      if (project.isYoutube) {
+        return true;
+      }
+
+      return containsKeyword(text, categoryKeywords["filter-video"]);
+    }
+
+    // ------------------------------------------
+    // Newsletter
+    // ------------------------------------------
+
+    if (selectedFilter === "filter-nl") {
+      return containsKeyword(text, categoryKeywords["filter-nl"]);
+    }
+
+    // ------------------------------------------
+    // Customized Web Application
+    // ------------------------------------------
+
+    if (selectedFilter === "filter-cwp") {
+      return containsKeyword(text, categoryKeywords["filter-cwp"]);
+    }
+
+    // ------------------------------------------
+    // Websites
+    // ------------------------------------------
+
+    if (selectedFilter === "filter-websites") {
+      const isApp = containsKeyword(text, categoryKeywords["filter-app"]);
+
+      const isVideo =
+        project.isYoutube ||
+        containsKeyword(text, categoryKeywords["filter-video"]);
+
+      const isNewsletter = containsKeyword(text, categoryKeywords["filter-nl"]);
+
+      const isCustomWebApp = containsKeyword(
+        text,
+        categoryKeywords["filter-cwp"],
+      );
+
+      return !isApp && !isVideo && !isNewsletter && !isCustomWebApp;
+    }
+
+    return true;
+  };
+
+  // ============================================
+  // Filter Projects
+  // ============================================
+
+  const filteredProjectsBeforePagination = useMemo(() => {
+    const normalizedSearch = searchTerm.trim().toLowerCase();
+
+    return allGalleries.filter((project) => {
+      // Category
+      const categoryMatch = matchesCategory(project, filter);
+
+      if (!categoryMatch) {
+        return false;
+      }
+
+      // Industry
+      if (industryFilter) {
+        const keywords = industryKeywords[industryFilter] || [];
+
+        const industryMatch = containsKeyword(project.searchText, keywords);
+
+        if (!industryMatch) {
+          return false;
+        }
+      }
+
+      // Search
+      if (normalizedSearch) {
+        const searchMatch = project.searchText.includes(normalizedSearch);
+
+        if (!searchMatch) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+  }, [allGalleries, filter, industryFilter, searchTerm]);
+
+  // ============================================
+  // Pagination
+  // ============================================
+
+  const totalFilteredProjects = filteredProjectsBeforePagination.length;
+
+  const totalPages = Math.max(1, Math.ceil(totalFilteredProjects / PER_PAGE));
+
+  const filteredProjects = useMemo(() => {
+    const startIndex = (currentPage - 1) * PER_PAGE;
+
+    const endIndex = startIndex + PER_PAGE;
+
+    return filteredProjectsBeforePagination.slice(startIndex, endIndex);
+  }, [filteredProjectsBeforePagination, currentPage]);
+
+  // ============================================
+  // Keep Page Valid
+  // ============================================
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
+
+  // ============================================
+  // Sync Visible Galleries
+  // ============================================
+
+  useEffect(() => {
+    setGalleries(filteredProjects);
+  }, [filteredProjects]);
+
+  // ============================================
+  // Category Click
   // ============================================
 
   const handleFilterClick = (value) => {
     setFilter(value);
+
+    setCurrentPage(1);
+
     setIsMenuOpen(false);
   };
 
-  const filteredProjects =
-    filter === "*"
-      ? galleries
-      : galleries.filter((project) => project.filter === filter);
+  // ============================================
+  // Industry Change
+  // ============================================
+
+  const handleIndustryChange = (event) => {
+    setIndustryFilter(event.target.value);
+
+    setCurrentPage(1);
+  };
+
+  // ============================================
+  // Search Input
+  // ============================================
+
+  const handleSearchInput = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  // ============================================
+  // Search
+  // ============================================
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput.trim());
+
+    setCurrentPage(1);
+  };
+
+  // ============================================
+  // Enter Search
+  // ============================================
+
+  const handleSearchKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  // ============================================
+  // Clear Search
+  // ============================================
+
+  const handleClearSearch = () => {
+    setSearchInput("");
+
+    setSearchTerm("");
+
+    setCurrentPage(1);
+  };
+
+  // ============================================
+  // Pagination Change
+  // ============================================
+
+  const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages || page === currentPage || loading) {
+      return;
+    }
+
+    setCurrentPage(page);
+
+    setTimeout(() => {
+      const portfolio = document.getElementById("portfolio");
+
+      if (portfolio) {
+        portfolio.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 100);
+  };
 
   // ============================================
   // Pagination Numbers
   // ============================================
 
-  const lastPage = pagination?.last_page || 1;
-
   const getPageNumbers = () => {
     const pages = [];
 
-    if (lastPage <= 7) {
-      for (let i = 1; i <= lastPage; i++) {
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
       }
 
@@ -210,24 +770,37 @@ export default function PortfolioGrid({
     pages.push(2);
     pages.push(3);
 
-    if (currentPage > 4 && currentPage < lastPage - 3) {
+    if (currentPage > 4 && currentPage < totalPages - 3) {
       pages.push("ellipsis-start");
+
       pages.push(currentPage);
+
       pages.push("ellipsis-end");
-    } else if (currentPage >= lastPage - 3) {
+    } else if (currentPage >= totalPages - 3) {
       pages.push("ellipsis-start");
     } else {
       pages.push("ellipsis-middle");
     }
 
-    pages.push(lastPage - 2);
-    pages.push(lastPage - 1);
-    pages.push(lastPage);
+    pages.push(totalPages - 2);
+
+    pages.push(totalPages - 1);
+
+    pages.push(totalPages);
 
     return pages.filter((item, index, array) => array.indexOf(item) === index);
   };
 
   const pageNumbers = getPageNumbers();
+
+  // ============================================
+  // Display Count
+  // ============================================
+
+  const displayFrom =
+    totalFilteredProjects === 0 ? 0 : (currentPage - 1) * PER_PAGE + 1;
+
+  const displayTo = Math.min(currentPage * PER_PAGE, totalFilteredProjects);
 
   // ============================================
   // Render
@@ -236,40 +809,66 @@ export default function PortfolioGrid({
   return (
     <section id="portfolio" className="portfolio section pt-2">
       <div className="container">
-        {/* ========================================
-            FILTER
-        ======================================== */}
-
-        {/* ========================================
-    PORTFOLIO FILTER / SEARCH UI
-======================================== */}
+        {/* ======================================
+            FILTER / SEARCH
+        ====================================== */}
 
         <div className="portfolio-top-filter">
-          {/* Portfolio Heading */}
-         
           {/* Category Tabs */}
+
           <div className="portfolio-category-tabs">
-            <button type="button" className="portfolio-category-tab active">
+            <button
+              type="button"
+              className={`portfolio-category-tab ${
+                filter === "filter-websites" ? "active" : ""
+              }`}
+              onClick={() => handleFilterClick("filter-websites")}
+            >
               Websites
             </button>
 
-            <button type="button" className="portfolio-category-tab">
+            <button
+              type="button"
+              className={`portfolio-category-tab ${
+                filter === "filter-app" ? "active" : ""
+              }`}
+              onClick={() => handleFilterClick("filter-app")}
+            >
               Mobile App
             </button>
 
-            <button type="button" className="portfolio-category-tab">
+            <button
+              type="button"
+              className={`portfolio-category-tab ${
+                filter === "filter-video" ? "active" : ""
+              }`}
+              onClick={() => handleFilterClick("filter-video")}
+            >
               Videos Production
             </button>
 
-            <button type="button" className="portfolio-category-tab">
+            <button
+              type="button"
+              className={`portfolio-category-tab ${
+                filter === "filter-nl" ? "active" : ""
+              }`}
+              onClick={() => handleFilterClick("filter-nl")}
+            >
               Newsletter Designing
             </button>
 
-            <button type="button" className="portfolio-category-tab">
+            <button
+              type="button"
+              className={`portfolio-category-tab ${
+                filter === "filter-cwp" ? "active" : ""
+              }`}
+              onClick={() => handleFilterClick("filter-cwp")}
+            >
               Customized Web Application
             </button>
 
-            {/* YouTube */}
+            {/* YouTube Channel */}
+
             <a
               href="https://www.youtube.com/channel/UC_aZoH8d6c7fv6TdV49N59Q"
               target="_blank"
@@ -283,11 +882,14 @@ export default function PortfolioGrid({
           </div>
 
           {/* Search Row */}
+
           <div className="portfolio-search-row">
             {/* Industry */}
+
             <select
               className="portfolio-industry-select"
-              defaultValue=""
+              value={industryFilter}
+              onChange={handleIndustryChange}
               aria-label="Industry Type"
             >
               <option value="">Industry Type</option>
@@ -302,40 +904,62 @@ export default function PortfolioGrid({
 
               <option value="web-portal">Web Portal</option>
 
-              <option value="engineering">Engineering & Construction</option>
+              <option value="engineering">
+                Engineering &amp; Construction
+              </option>
 
-              <option value="travel">Travel & Tourism</option>
+              <option value="travel">Travel &amp; Tourism</option>
 
               <option value="somalian">Somalian Clients</option>
 
               <option value="international">International Projects</option>
 
-              <option value="luxury">Luxury & Stunning</option>
+              <option value="luxury">Luxury &amp; Stunning</option>
 
               <option value="landing">Ad Landing Pages</option>
 
-              <option value="logistics">Logistics & Shipping</option>
+              <option value="logistics">Logistics &amp; Shipping</option>
 
               <option value="bank">Bank</option>
             </select>
 
             {/* Search */}
+
             <input
               type="text"
               className="portfolio-search-input"
               placeholder="Search Portfolio..."
               aria-label="Search Portfolio"
+              value={searchInput}
+              onChange={handleSearchInput}
+              onKeyDown={handleSearchKeyDown}
             />
 
-            <button type="button" className="portfolio-search-btn">
+            <button
+              type="button"
+              className="portfolio-search-btn"
+              onClick={handleSearch}
+            >
               Search
             </button>
+
+            {(searchInput || searchTerm) && (
+              <button
+                type="button"
+                className="portfolio-search-clear"
+                onClick={handleClearSearch}
+                aria-label="Clear search"
+                title="Clear search"
+              >
+                ×
+              </button>
+            )}
           </div>
         </div>
 
-        {/* ========================================
-            PAGINATION LOADING
-        ======================================== */}
+        {/* ======================================
+            LOADING
+        ====================================== */}
 
         {loading && (
           <div className="portfolio-loading">
@@ -347,9 +971,9 @@ export default function PortfolioGrid({
           </div>
         )}
 
-        {/* ========================================
+        {/* ======================================
             PORTFOLIO GRID
-        ======================================== */}
+        ====================================== */}
 
         <div
           className="row gy-4 isotope-container"
@@ -362,61 +986,139 @@ export default function PortfolioGrid({
                 key={project.id}
                 className="col-lg-4 col-md-6 portfolio-item isotope-item"
               >
-                <div className="portfolio-content ">
-                  {/* Image */}
+                <div
+                  className="portfolio-content"
+                  style={
+                    project.isYoutube
+                      ? {
+                          overflow: "hidden",
+                          background: "#000",
+                        }
+                      : undefined
+                  }
+                >
+                  {/* ==================================
+                        YOUTUBE VIDEO
+                    ================================== */}
 
-                  <img
-                    src={project.image}
-                    className="img-fluid"
-                    alt={project.title}
-                    loading="lazy"
-                    style={{
-                      width: "100%",
-                      height: "260px",
-                      objectFit: "cover",
-                    }}
-                    onError={(e) => {
-                      console.error("IMAGE LOAD FAILED:", e.currentTarget.src);
+                  {project.isYoutube ? (
+                    <div
+                      className="portfolio-video-wrapper"
+                      style={{
+                        position: "relative",
 
-                      e.currentTarget.onerror = null;
+                        width: "100%",
 
-                      e.currentTarget.src =
-                        "/assets/img/portfolio/portfolio-1.jpg";
-                    }}
-                  />
+                        height: "260px",
 
-                  {/* Portfolio Info */}
+                        overflow: "hidden",
 
-                  <div className="portfolio-info">
-                    <h4>{project.title}</h4>
+                        background: "#000",
 
-                    <p>{project.category}</p>
+                        margin: "0",
 
-                    {/* Preview */}
-
-                    {project.image && (
-                      <a
-                        href={project.image}
-                        title={project.title}
-                        data-gallery="portfolio-gallery"
-                        className="glightbox preview-link"
-                      >
-                        <i className="bi bi-zoom-in" aria-hidden="true"></i>
-                      </a>
-                    )}
-
-                    {/* Details */}
-
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="More Details"
-                      className="details-link"
+                        padding: "0",
+                      }}
                     >
-                      <i className="bi bi-link-45deg" aria-hidden="true"></i>
-                    </a>
-                  </div>
+                      <iframe
+                        src={`${getYoutubeEmbedUrl(
+                          project.link,
+                        )}?rel=0&modestbranding=1`}
+                        title={project.title}
+                        style={{
+                          position: "absolute",
+
+                          top: 0,
+
+                          left: 0,
+
+                          width: "100%",
+
+                          height: "100%",
+
+                          border: "0",
+
+                          display: "block",
+
+                          margin: "0",
+
+                          padding: "0",
+                        }}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    </div>
+                  ) : (
+                    <>
+                      {/* ==================================
+                            NORMAL IMAGE PROJECT
+                        ================================== */}
+
+                      <img
+                        src={project.image}
+                        className="img-fluid"
+                        alt={project.title}
+                        loading="lazy"
+                        style={{
+                          width: "100%",
+
+                          height: "260px",
+
+                          objectFit: "cover",
+                        }}
+                        onError={(e) => {
+                          console.error(
+                            "IMAGE LOAD FAILED:",
+                            e.currentTarget.src,
+                          );
+
+                          e.currentTarget.onerror = null;
+
+                          e.currentTarget.src =
+                            "/assets/img/portfolio/portfolio-1.jpg";
+                        }}
+                      />
+
+                      {/* ==================================
+                            NORMAL PROJECT INFO
+                        ================================== */}
+
+                      <div className="portfolio-info">
+                        <h4>{project.title}</h4>
+
+                        <p>{project.category}</p>
+
+                        {/* Image Preview */}
+
+                        {project.image && (
+                          <a
+                            href={project.image}
+                            title={project.title}
+                            data-gallery="portfolio-gallery"
+                            className="glightbox preview-link"
+                          >
+                            <i className="bi bi-zoom-in" aria-hidden="true"></i>
+                          </a>
+                        )}
+
+                        {/* Project URL */}
+
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="More Details"
+                          className="details-link"
+                        >
+                          <i
+                            className="bi bi-link-45deg"
+                            aria-hidden="true"
+                          ></i>
+                        </a>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             ))
@@ -427,11 +1129,11 @@ export default function PortfolioGrid({
           )}
         </div>
 
-        {/* ========================================
+        {/* ======================================
             PAGINATION
-        ======================================== */}
+        ====================================== */}
 
-        {lastPage > 1 && (
+        {totalPages > 1 && (
           <div className="portfolio-pagination">
             {/* Previous */}
 
@@ -481,7 +1183,7 @@ export default function PortfolioGrid({
             <button
               type="button"
               className="portfolio-page-arrow"
-              disabled={currentPage >= lastPage || loading}
+              disabled={currentPage >= totalPages || loading}
               onClick={() => handlePageChange(currentPage + 1)}
               aria-label="Next page"
             >
@@ -490,33 +1192,20 @@ export default function PortfolioGrid({
           </div>
         )}
 
-        {/* ========================================
-            COUNT
-        ======================================== */}
+        {/* ======================================
+            RESULT COUNT
+        ====================================== */}
 
-        {pagination?.total && (
+        {totalFilteredProjects > 0 && (
           <div className="portfolio-count text-center">
-            Showing {pagination.from || 1}
+            Showing {displayFrom}
             {"–"}
-            {pagination.to || galleries.length}
+            {displayTo}
             {" of "}
-            {pagination.total} projects
+            {totalFilteredProjects} projects
           </div>
         )}
       </div>
-
-      {/* ========================================
-          ABOUT BUTTON
-      ======================================== */}
-
-      {/* <div className="container text-center mt-5">
-        <a
-          href="/about"
-          className="btn btn-animation btn-red d-inline-flex align-items-center mt-4"
-        >
-          <span className="btn-title">Load More..</span>
-        </a>
-      </div> */}
     </section>
   );
 }

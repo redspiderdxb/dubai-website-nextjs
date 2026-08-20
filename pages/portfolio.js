@@ -11,10 +11,10 @@ import { fetchGalleries } from "../lib/api";
 
 export default function Portfolio({ initialGalleries, initialPagination }) {
   const seoData = {
-    title: "Our Portfolio - Best Web Design Projects in Dubai | RedSpider",
+    title: "Web Design Portfolio Dubai | RedSpider Projects",
 
     description:
-      "Explore RedSpider's portfolio of custom web design, eCommerce, and branding projects. 500+ successful websites delivered across Dubai and UAE.",
+      "Explore RedSpider’s web design portfolio featuring selected website projects created for businesses across Dubai, the UAE and different industries.",
 
     keywords:
       "web design portfolio dubai, redspider projects, website development examples uae",
@@ -62,3 +62,4 @@ export async function getStaticProps() {
     revalidate: 60,
   };
 }
+

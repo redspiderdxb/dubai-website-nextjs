@@ -204,7 +204,7 @@ export default function BlogStats({ data }) {
         id="home-blog"
         className="mobile-app-ser section dark-background rs-home-blog-new"
       >
-        <div className="container" style={{ maxWidth: "980px" }}>
+        <div className="container">
           {/* BLOG TITLE */}
 
           <div

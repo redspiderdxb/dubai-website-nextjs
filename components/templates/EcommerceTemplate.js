@@ -658,50 +658,7 @@ export default function EcommerceTemplate({ data }) {
       show: show_technologies,
     },
 
-    gallery: {
-      component: (
-        <section key="gallery" className="opposite-gallery-sec py-0">
-          <div className="opposite-gallery-sticky">
-            <div className="gallery-title-wrap">
-              <span>{gallery_title || "Our Work"}</span>
-              <h2>{gallery_title || "Our Work"}</h2>
-              {gallery_subtitle && <p>{gallery_subtitle}</p>}
-            </div>
-            <div className="gallery-inner">
-              {galleryImages.length > 0 ? (
-                <>
-                  <div className="gallery-track top-track">
-                    {galleryImages.slice(0, 6).map((item, index) => (
-                      <div
-                        key={item.id || index}
-                        className={`gallery-card ${index % 3 === 0 ? "large" : index % 3 === 2 ? "small" : ""}`}
-                      >
-                        <img src={item.image} alt={item.title || "Gallery"} />
-                      </div>
-                    ))}
-                  </div>
-                  {galleryImages.length > 6 && (
-                    <div className="gallery-track bottom-track">
-                      {galleryImages.slice(6, 12).map((item, index) => (
-                        <div
-                          key={item.id || index}
-                          className={`gallery-card ${index % 3 === 1 ? "large" : index % 3 === 0 ? "small" : ""}`}
-                        >
-                          <img src={item.image} alt={item.title || "Gallery"} />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <p className="text-center py-5">No gallery images available</p>
-              )}
-            </div>
-          </div>
-        </section>
-      ),
-      show: show_gallery,
-    },
+   
     faqs: {
       component: (
         <section
