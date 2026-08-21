@@ -1,154 +1,450 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================================================
+   REDSPIDER TITLE EFFECTS
+   ========================================================= */
+
+/* =========================================================
+   1. DYNAMIC TEXT EFFECT
+   ========================================================= */
+
+function initDynamicTextEffect() {
+  if (
+    typeof window === "undefined" ||
+    typeof window.gsap === "undefined" ||
+    typeof window.ScrollTrigger === "undefined"
+  ) {
+    return;
+  }
+
+  const gsap = window.gsap;
+  const ScrollTrigger = window.ScrollTrigger;
+
+  gsap.registerPlugin(ScrollTrigger);
+
   const clones = document.querySelectorAll(".dynamic-text-clone > div");
 
-  // Initialize GSAP with ScrollTrigger
-  gsap.registerPlugin(ScrollTrigger);
+  if (!clones.length) {
+    return;
+  }
 
-  // Animate blur and opacity with GSAP
   gsap.to(clones, {
-    filter: "blur(0px)", // Remove blur
-    opacity: 1, // Fully opaque
-    stagger: 0.1, // Slight delay between each word
+    filter: "blur(0px)",
+    opacity: 1,
+    stagger: 0.1,
+
     scrollTrigger: {
-      trigger: "#section-two", // Starts when section-two enters viewport
-      start: "top top", // Start when the top of the section hits the top of the viewport
-      end: "+=100%", // Animation lasts for the viewport height
-      scrub: true, // Smooth synchronization with scrolling
-      pin: true, // Keeps the section fixed during animation
+      trigger: "#section-two",
+      start: "top top",
+      end: "+=100%",
+      scrub: true,
+      pin: true,
     },
   });
-});
+}
 
+/* =========================================================
+   2. VIDEO ZOOM EFFECT
+   ========================================================= */
 
-// 
+function initVideoZoomEffect() {
+  if (
+    typeof window === "undefined" ||
+    typeof window.gsap === "undefined" ||
+    typeof window.ScrollTrigger === "undefined"
+  ) {
+    return;
+  }
 
-document.addEventListener("DOMContentLoaded", function () {
+  const gsap = window.gsap;
+  const ScrollTrigger = window.ScrollTrigger;
+
   gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.querySelector(".rs-video-zoom-sec");
+  const title = document.querySelector(".rs-video-zoom-sec .rs-video-title");
+  const video = document.querySelector(".rs-video-zoom-sec .rs-video-wrap");
+  const container = document.querySelector(".rs-video-zoom-sec .container");
+
+  if (!section || !title || !video || !container) {
+    return;
+  }
+
+  const oldTrigger = ScrollTrigger.getById("rs-video-zoom");
+
+  if (oldTrigger) {
+    if (oldTrigger.animation) {
+      oldTrigger.animation.kill();
+    }
+
+    oldTrigger.kill();
+  }
+
+  gsap.set(title, {
+    clearProps: "transform,opacity",
+  });
+
+  gsap.set(video, {
+    clearProps: "transform,width,height,borderRadius,left,x,xPercent",
+  });
+
+  gsap.set(video, {
+    left: "0%",
+    xPercent: 0,
+    width: "550px",
+  });
+
+  const getContainerSpacing = () => {
+    const rect = container.getBoundingClientRect();
+    return Math.max(rect.left, 0);
+  };
+
+  const getFinalVideoWidth = () => {
+    const spacing = getContainerSpacing();
+    return Math.max(window.innerWidth - spacing * 2, 0);
+  };
 
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".rs-video-zoom-sec",
+      id: "rs-video-zoom",
+      trigger: section,
       start: "top top",
       end: "+=700",
-      scrub: 3,
-      pin: true
-    }
+      scrub: 1.2,
+      pin: true,
+      pinSpacing: true,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      markers: false,
+    },
   });
 
-  tl.to(".rs-video-title", {
+  tl.to(title, {
     opacity: 0,
     y: -90,
     scale: 0.9,
     duration: 1,
-    ease: "power2.out"
+    ease: "power2.out",
   });
 
-  tl.to(".rs-video-wrap", {
-    width: "100vw",
-    height: "100vh",
-    borderRadius: 0,
-    duration: 5,
-    ease: "power3.inOut"
-  }, "-=0.35");
-});
+  tl.to(
+    video,
+    {
+      width: () => {
+        return `${getFinalVideoWidth()}px`;
+      },
+      height: "100vh",
+      left: "50%",
+      xPercent: -50,
+      borderRadius: 0,
+      duration: 5,
+      ease: "none",
+    },
+    "-=0.35",
+  );
 
+  ScrollTrigger.refresh();
 
+  console.log("✅ Video Zoom initialized");
 
+  return tl;
+}
 
-// home pin spacer 4 lsides
+/* =========================================================
+   3. HOME PAGE - CUSTOM 3 CARD STACK - FINAL FIXED
+   =========================================================
 
-gsap.registerPlugin(ScrollTrigger);
+   FIXED: 
+   - No huge pin-spacer
+   - No extra blank space after CARD 3
+   - Exactly 2 transitions: CARD 1→2, CARD 2→3
+   - Container height set to tallest card
+   - Clean unpin after CARD 3
+   - NO REPEAT OF CARD 3
+   - NO GAP after CARD 3
+   ========================================================= */
 
-window.addEventListener("load", () => {
-  const section = document.querySelector(".rs-gsap-cards");
-  const cards = gsap.utils.toArray(".rs-gsap-cards [class*='rs-card-']");
+function initHomeCardStack() {
+  if (
+    typeof window === "undefined" ||
+    typeof window.gsap === "undefined" ||
+    typeof window.ScrollTrigger === "undefined"
+  ) {
+    return;
+  }
 
-  if (!section || !cards.length) return;
+  const gsap = window.gsap;
+  const ScrollTrigger = window.ScrollTrigger;
 
-  const header = document.querySelector("header");
+  gsap.registerPlugin(ScrollTrigger);
 
-  const getHeaderHeight = () => {
-    return header ? header.offsetHeight : 0;
+  const section = document.querySelector(".rs-gsap-stack-sec");
+  const wrapper = section ? section.querySelector(".rs-gsap-cards") : null;
+
+  if (!section || !wrapper) {
+    console.warn("❌ RS Card Stack: section/wrapper not found");
+    return;
+  }
+
+  const cards = Array.from(wrapper.querySelectorAll(":scope > .rs-gsap-card"));
+
+  if (cards.length !== 3) {
+    console.warn(`❌ RS Card Stack: expected 3 cards, found ${cards.length}`);
+    return;
+  }
+
+  console.log("✅ RS Card Stack found 3 cards");
+
+  const oldTrigger = ScrollTrigger.getById("rs-card-stack");
+  if (oldTrigger) {
+    if (oldTrigger.animation) {
+      oldTrigger.animation.kill();
+    }
+    oldTrigger.kill();
+  }
+
+  cards.forEach((card) => {
+    gsap.killTweensOf(card);
+    gsap.set(card, {
+      clearProps: "transform,opacity,visibility,zIndex",
+    });
+  });
+
+  const getMaxCardHeight = () => {
+    let maxHeight = 0;
+    cards.forEach((card) => {
+      const height = card.scrollHeight;
+      if (height > maxHeight) {
+        maxHeight = height;
+      }
+    });
+    return maxHeight;
   };
 
-  gsap.set(cards, {
-    clearProps: "transform,opacity"
-  });
+  const setWrapperHeight = () => {
+    const height = getMaxCardHeight();
+    wrapper.style.height = `${height}px`;
+    return height;
+  };
+
+  setWrapperHeight();
 
   gsap.set(cards, {
-    yPercent: 15,
-    opacity: 0,
-    transformOrigin: "0px top"
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    width: "100%",
+    transformOrigin: "center top",
+    willChange: "transform, opacity",
   });
 
   gsap.set(cards[0], {
-    yPercent: 0,
-    opacity: 1
+    y: 0,
+    scale: 1,
+    opacity: 1,
+    visibility: "visible",
+    zIndex: 3,
+    pointerEvents: "auto",
   });
 
-  const rsStackTimeline = gsap.timeline({
+  gsap.set(cards[1], {
+    y: 70,
+    scale: 1,
+    opacity: 0,
+    visibility: "visible",
+    zIndex: 2,
+    pointerEvents: "none",
+  });
+
+  gsap.set(cards[2], {
+    y: 70,
+    scale: 1,
+    opacity: 0,
+    visibility: "visible",
+    zIndex: 1,
+    pointerEvents: "none",
+  });
+
+  const timeline = gsap.timeline({
     defaults: {
-      ease: "none"
+      ease: "power2.out",
     },
+
     scrollTrigger: {
       id: "rs-card-stack",
       trigger: section,
-      start: "top 15px",
-      end: () => `+=${window.innerHeight * (cards.length - 1)}`,
+      start: "top top",
+      end: "+=150%", // ⬅️ FIXED: 1.5 viewport scroll - NO GAP
       pin: true,
       pinSpacing: true,
       scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
-      markers: false
-    }
+      markers: false,
+    },
   });
 
-  cards.forEach((card, index) => {
-    if (index === 0) return;
+  // CARD 1 → CARD 2 (0% to 50% scroll)
+  timeline.to(
+    cards[0],
+    {
+      y: -50,
+      scale: 0.96,
+      opacity: 0,
+      duration: 0.5,
+      ease: "power2.inOut",
+    },
+    0,
+  );
 
-    const previousCard = cards[index - 1];
-
-    rsStackTimeline.to(card, {
-      yPercent: 0,
+  timeline.to(
+    cards[1],
+    {
+      y: 0,
+      scale: 1,
       opacity: 1,
-      duration: 1
+      duration: 0.5,
+      ease: "power2.inOut",
+      onStart: () => {
+        cards[1].style.pointerEvents = "auto";
+      },
+      onComplete: () => {
+        cards[0].style.pointerEvents = "none";
+      },
+    },
+    0,
+  );
+
+  // CARD 2 → CARD 3 (50% to 100% scroll)
+  timeline.to(
+    cards[1],
+    {
+      y: -50,
+      scale: 0.96,
+      opacity: 0,
+      duration: 0.5,
+      ease: "power2.inOut",
+    },
+    0.5,
+  );
+
+  timeline.to(
+    cards[2],
+    {
+      y: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      ease: "power2.inOut",
+      onStart: () => {
+        cards[2].style.pointerEvents = "auto";
+      },
+      onComplete: () => {
+        cards[1].style.pointerEvents = "none";
+      },
+    },
+    0.5,
+  );
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      setWrapperHeight();
+      ScrollTrigger.refresh();
+      console.log("✅ RS 3 Card Stack initialized - FINAL FIXED");
     });
-
-    rsStackTimeline.to(
-      previousCard,
-      {
-        scale: 1 - (cards.length - index) * 0.02,
-        yPercent: -(cards.length - index) * 0.35,
-        opacity: 1,
-        duration: 1
-      },
-      "<"
-    );
   });
 
-  cards.forEach((card, index) => {
-    rsStackTimeline.to(
-      card,
-      {
-        scale: 1 - (cards.length - 1 - index) * 0.02,
-        yPercent: -(cards.length - 1 - index) * 0.4,
-        opacity: index === cards.length - 1 ? 1 : 0.9,
-        duration: 0.5
-      },
-      "<"
-    );
+  return timeline;
+}
+
+/* =========================================================
+   4. INITIALIZE ALL EFFECTS
+   ========================================================= */
+
+function initRedSpiderEffects() {
+  if (
+    typeof window === "undefined" ||
+    typeof window.gsap === "undefined" ||
+    typeof window.ScrollTrigger === "undefined"
+  ) {
+    return;
+  }
+
+  initDynamicTextEffect();
+  initVideoZoomEffect();
+  initHomeCardStack();
+}
+
+/* =========================================================
+   5. PAGE LOAD
+   ========================================================= */
+
+function startRedSpiderEffects() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        initRedSpiderEffects();
+      });
+    });
   });
+}
 
-  ScrollTrigger.refresh();
-});
+/* =========================================================
+   DOM READY
+   ========================================================= */
 
-let rsResizeTimer;
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startRedSpiderEffects, {
+      once: true,
+    });
+  } else {
+    startRedSpiderEffects();
+  }
+}
 
-window.addEventListener("resize", () => {
-  clearTimeout(rsResizeTimer);
+/* =========================================================
+   6. RESIZE
+   ========================================================= */
 
-  rsResizeTimer = setTimeout(() => {
-    ScrollTrigger.refresh();
-  }, 200);
-});
+let rsResizeTimer = null;
+
+if (typeof window !== "undefined") {
+  window.addEventListener("resize", () => {
+    clearTimeout(rsResizeTimer);
+
+    rsResizeTimer = setTimeout(() => {
+      const section = document.querySelector(".rs-gsap-stack-sec");
+      const wrapper = section?.querySelector(".rs-gsap-cards");
+
+      if (wrapper) {
+        const cards = Array.from(
+          wrapper.querySelectorAll(":scope > .rs-gsap-card"),
+        );
+
+        if (cards.length === 3) {
+          const maxHeight = Math.max(...cards.map((card) => card.scrollHeight));
+          wrapper.style.height = `${maxHeight}px`;
+        }
+      }
+
+      if (typeof window.ScrollTrigger !== "undefined") {
+        window.ScrollTrigger.refresh();
+      }
+    }, 300);
+  });
+}
+
+/* =========================================================
+   7. EXPOSE FOR NEXT.JS
+   ========================================================= */
+
+if (typeof window !== "undefined") {
+  window.initRedSpiderEffects = initRedSpiderEffects;
+  window.initVideoZoomEffect = initVideoZoomEffect;
+  window.initDynamicTextEffect = initDynamicTextEffect;
+  window.initHomeCardStack = initHomeCardStack;
+}

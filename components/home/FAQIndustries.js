@@ -74,7 +74,7 @@ export default function FAQIndustries({ data }) {
             borderRadius: "30px",
           }}
         >
-          <div className="text-start mb-5 border-bottom pb-3">
+          <div className="text-center mb-5 border-bottom pb-3">
             <h2 className="fw-bold">{faqTitle}</h2>
             <p>{faqDescription}</p>
           </div>

@@ -29,15 +29,7 @@ export default function Footer() {
   };
 
   /* =====================================================
-     FOOTER SERVICES
-
-     Same sequence as Header Services menu
-     
-     Backend available:
-     → Real URL
-
-     Backend page not available yet:
-     → #
+     SERVICES
   ===================================================== */
 
   const services = [
@@ -57,7 +49,6 @@ export default function Footer() {
       name: "Mobile App Development",
       path: "/services/mobile-app-development-company-dubai",
     },
-
     {
       name: "Branding & Logo Design",
       path: "/services/logo-designing-company-dubai-brand-identity",
@@ -70,7 +61,6 @@ export default function Footer() {
       name: "Brochure & Company Profile Design",
       path: "/services/brochure-design-services",
     },
-
     {
       name: "SEO & Digital Marketing",
       path: "#",
@@ -83,7 +73,6 @@ export default function Footer() {
       name: "SMS Marketing",
       path: "/products/sms-marketing-uae",
     },
-
     {
       name: "Web Hosting & Server Solutions",
       path: "/services/web-hosting",
@@ -100,15 +89,13 @@ export default function Footer() {
 
   /* =====================================================
      FOOTER MENU
+
+     EXACT ORDER REQUIRED
   ===================================================== */
 
   const footerLinks = [
     {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "About us",
+      name: "About Us",
       path: "/about",
     },
     {
@@ -116,11 +103,23 @@ export default function Footer() {
       path: "/portfolio",
     },
     {
-      name: "Careers",
-      path: "/careers",
+      name: "Products",
+      path: "#",
     },
     {
-      name: "Contact",
+      name: "FAQs",
+      path: "#",
+    },
+    {
+      name: "Blog",
+      path: "/blog",
+    },
+    {
+      name: "Careers",
+      path: "#",
+    },
+    {
+      name: "Contact Us",
       path: "/contact",
     },
   ];
@@ -156,10 +155,6 @@ export default function Footer() {
     },
   ];
 
-  /* =====================================================
-     RENDER
-  ===================================================== */
-
   return (
     <>
       {/* =================================================
@@ -169,35 +164,81 @@ export default function Footer() {
       <footer className="rs-footer-sec dark-background">
         <div className="container rs-footer-container">
           {/* =================================================
-              TOP ROW
+              MAIN FOOTER GRID
           ================================================= */}
 
-          <div className="row align-items-start rs-footer-top">
+          <div className="row rs-footer-main g-5">
             {/* =================================================
-                LEFT - CTA
+                LEFT COLUMN
+
+                ORDER:
+                1. HEADING
+                2. IMAGE
+                3. MENU
             ================================================= */}
 
-            <div className="col-lg-5 col-md-6 rs-footer-intro">
-              <div className="rs-heading">
-                Power up your website
-                <br />
-                with <span>Our experts</span>
+            <div className="col-lg-4 col-md-6 rs-footer-left">
+              {/* =================================================
+                  HEADING + IMAGE
+              ================================================= */}
+
+              <div className="rs-footer-intro">
+                <div className="rs-heading">
+                  Power up your website
+                  <br />
+                  with <span>Our experts</span>
+                </div>
+
+                <Image
+                  src="/assets/img/swim.png"
+                  alt="RedSpider swimming towards success"
+                  className="swim-foot"
+                  width={100}
+                  height={80}
+                />
               </div>
 
-              <Image
-                src="/assets/img/swim.png"
-                alt="RedSpider swimming towards success"
-                className="swim-foot"
-                width={100}
-                height={80}
-              />
+              {/* =================================================
+                  MENU BELOW HEADING + IMAGE
+              ================================================= */}
+
+              <div className="rs-footer-menu-wrap">
+                <ul className="rs-menu">
+                  {footerLinks.map((link, index) => (
+                    <li key={link.name}>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+
+                      {link.path === "#" ? (
+                        <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                          }}
+                        >
+                          {link.name}
+                        </a>
+                      ) : (
+                        <Link href={link.path}>{link.name}</Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             {/* =================================================
-                MIDDLE - SERVICES
+                MIDDLE COLUMN
+
+                OUR SERVICES
             ================================================= */}
 
-            <div className="col-lg-4 col-md-6">
+            <div className="col-lg-4 col-md-6 rs-footer-services-col">
+              {/* SERVICES HEADING */}
+
+              <div className="rs-footer-services-heading">Our Services</div>
+
+              {/* SERVICES LIST */}
+
               <ul className="rs-services">
                 {services.map((service) => (
                   <li key={service.name}>
@@ -219,11 +260,18 @@ export default function Footer() {
             </div>
 
             {/* =================================================
-                RIGHT - CONTACT
+                RIGHT COLUMN
+
+                EMAIL
+                PHONE
+                SOCIAL
+                GET IN TOUCH
             ================================================= */}
 
-            <div className="col-lg-3 col-md-12 rs-footer-contact">
-              {/* EMAIL */}
+            <div className="col-lg-4 col-md-12 rs-footer-right">
+              {/* =================================================
+                  EMAIL
+              ================================================= */}
 
               <div className="rs-contact-card rs-contact-email">
                 <small>Get Questions?</small>
@@ -242,7 +290,9 @@ export default function Footer() {
                 </span>
               </div>
 
-              {/* PHONE */}
+              {/* =================================================
+                  PHONE
+              ================================================= */}
 
               <div className="rs-contact-card rs-contact-phone">
                 <small>Quick Answer?</small>
@@ -260,90 +310,54 @@ export default function Footer() {
                   />
                 </span>
               </div>
+
+              {/* =================================================
+                  SOCIAL ICONS
+              ================================================= */}
+
+              <div className="rs-social">
+                {socialIcons.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                  >
+                    {social.type === "icon" ? (
+                      <i className={social.icon} aria-hidden="true" />
+                    ) : (
+                      <Image
+                        src={`/assets/img/social/${social.icon}`}
+                        alt={social.name}
+                        width={16}
+                        height={16}
+                      />
+                    )}
+                  </a>
+                ))}
+              </div>
+
+              {/* =================================================
+                  ONLY GET IN TOUCH
+
+                  FAQ + BLOG REMOVED
+              ================================================= */}
+
+              <div className="rs-footer-links">
+                <Link href="/contact">Get In Touch</Link>
+              </div>
             </div>
           </div>
 
           {/* =================================================
-              BOTTOM ROW
+              COPYRIGHT
           ================================================= */}
 
-          <div className="row rs-footer-bottom align-items-end">
-            {/* =================================================
-                FOOTER MENU
-            ================================================= */}
-
-            <div className="col-lg-3 col-md-4">
-              <ul className="rs-menu">
-                {footerLinks.map((link, index) => (
-                  <li key={link.name}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-
-                    <Link href={link.path}>{link.name}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* =================================================
-                COPYRIGHT + SOCIAL + QUICK LINKS
-            ================================================= */}
-
-            <div className="col-lg-9 col-md-8">
-              <div className="row align-items-center rs-footer-bottom-content">
-                {/* =================================================
-                    COPYRIGHT
-                ================================================= */}
-
-                <div className="col-lg-4 col-md-12">
-                  <p className="rs-copyright">
-                    © Copyright 2026, RedSpider. All Rights Reserved.
-                  </p>
-                </div>
-
-                {/* =================================================
-                    SOCIAL
-                ================================================= */}
-
-                <div className="col-lg-4 col-md-12">
-                  <div className="rs-social">
-                    {socialIcons.map((social) => (
-                      <a
-                        key={social.name}
-                        href={social.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={social.name}
-                      >
-                        {social.type === "icon" ? (
-                          <i className={social.icon} aria-hidden="true"></i>
-                        ) : (
-                          <Image
-                            src={`/assets/img/social/${social.icon}`}
-                            alt={social.name}
-                            width={16}
-                            height={16}
-                          />
-                        )}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                {/* =================================================
-                    QUICK LINKS
-                ================================================= */}
-
-                <div className="col-lg-4 col-md-12">
-                  <div className="rs-footer-links">
-                    <Link href="/faq">FAQ'S</Link>
-
-                    <Link href="/blog">BLOGS</Link>
-
-                    <Link href="/contact">Get In Touch</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="rs-footer-copyright">
+            <p className="rs-copyright">
+              © Copyright 2026, RedSpider. All Rights Reserved.
+            </p>
           </div>
         </div>
       </footer>
@@ -359,7 +373,7 @@ export default function Footer() {
           onClick={scrollToTop}
           aria-label="Scroll to top"
         >
-          <i className="bi bi-arrow-up-short"></i>
+          <i className="bi bi-arrow-up-short" />
         </button>
       )}
 
@@ -367,8 +381,42 @@ export default function Footer() {
           FIXED CONTACT BUTTONS
       ================================================= */}
 
+      {/* =================================================
+    ANIMATED WHATSAPP BUTTON
+================================================= */}
+
       <div className="rs-fixed-contact">
-        {/* WHATSAPP */}
+        <a
+          className="rs-whatsapp-float"
+          href="https://wa.me/971555515475"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact us on WhatsApp"
+        >
+          <span className="rs-whatsapp-pulse"></span>
+
+          <span className="rs-whatsapp-icon">
+            <svg
+              viewBox="0 0 32 32"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                fill="#ffffff"
+                d="M19.11 17.47c-.27-.14-1.58-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.66 1.12 2.84c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.55.57.65.21 1.24.18 1.71.11.52-.08 1.58-.65 1.8-1.27.22-.62.22-1.15.16-1.27-.07-.11-.25-.18-.52-.32z"
+              />
+
+              <path
+                fill="#ffffff"
+                d="M16.01 3.2C8.93 3.2 3.17 8.96 3.17 16.04c0 2.26.59 4.46 1.71 6.4L3.05 28.8l6.51-1.71a12.8 12.8 0 0 0 6.45 1.74h.01c7.08 0 12.84-5.76 12.84-12.84S23.09 3.2 16.01 3.2zm0 23.51h-.01a10.65 10.65 0 0 1-5.43-1.49l-.39-.23-3.86 1.01 1.03-3.76-.25-.39a10.67 10.67 0 1 1 8.91 4.86z"
+              />
+            </svg>
+          </span>
+        </a>
+      </div>
+
+      {/* <div className="rs-fixed-contact">
+       
 
         <a
           className="rs-fixed-contact__button rs-fixed-contact__button--whatsapp"
@@ -382,7 +430,7 @@ export default function Footer() {
           </svg>
         </a>
 
-        {/* PHONE */}
+     
 
         <a
           className="rs-fixed-contact__button rs-fixed-contact__button--phone"
@@ -393,7 +441,9 @@ export default function Footer() {
             <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a1.01 1.01 0 0 0-1.03.24l-1.57 1.97a15.18 15.18 0 0 1-6.91-6.91l1.97-1.68c.3-.3.39-.72.24-1.1a11.3 11.3 0 0 1-.56-3.53c0-.54-.45-.99-.99-.99H4.18c-.54 0-1.18.24-1.18.99C3 13.11 10.69 20.8 19.99 20.8c.71 0 1.01-.63 1.01-1.18v-3.25c0-.54-.45-1.18-.99-1.18z" />
           </svg>
         </a>
-      </div>
+      </div> */}
+
+
     </>
   );
 }

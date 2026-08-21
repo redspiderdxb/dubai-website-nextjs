@@ -269,9 +269,9 @@ export default function BlogStats({ data }) {
   ================================================== */}
 
           <div className="container">
-            <div className="rs-blog-stats row text-center">
+            <div className="rs-blog-stats row text-center justify-content-center">
               {stats.map((stat, index) => (
-                <div key={index} className="col-4">
+                <div key={index} className="col-3">
                   <div>
                     <span
                       className="rs-blog-stat-number purecounter"
@@ -304,7 +304,7 @@ export default function BlogStats({ data }) {
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
-              <div className="text-center text-white mb-5">
+              <div className="rs-worked-title text-center text-white mb-5">
                 We've worked with
               </div>
             </div>

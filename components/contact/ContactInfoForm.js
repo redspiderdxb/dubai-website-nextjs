@@ -28,7 +28,7 @@ export default function ContactInfoForm({ data }) {
       id="hfaq-c"
       className="hfaq-c section darkblue-line py-5 dark-background"
     >
-      <div className="container pt-md-5" style={{ maxWidth: "1400px" }}>
+      <div className="container pt-md-5">
         <div className="row align-items-end g-5">
           {/* Left Column: Contact Info */}
           <div
@@ -155,12 +155,15 @@ export default function ContactInfoForm({ data }) {
                 <h3 className="text-center mb-5">{formTitle}</h3>
                 <form>
                   <div className="row g-5">
+                    {/* Select Country */}
                     <div className="col-md-6">
                       <select
                         className="form-select"
                         required
                         defaultValue=""
                         aria-label="Select your country"
+                        name="country"
+                        id="country"
                       >
                         <option value="" disabled>
                           Select Country
@@ -170,12 +173,16 @@ export default function ContactInfoForm({ data }) {
                         <option value="UK">UK</option>
                       </select>
                     </div>
+
+                    {/* Select Service */}
                     <div className="col-md-6">
                       <select
                         className="form-select"
                         required
                         defaultValue=""
                         aria-label="Select the service you need"
+                        name="service"
+                        id="service"
                       >
                         <option value="" disabled>
                           Select Service
@@ -184,6 +191,8 @@ export default function ContactInfoForm({ data }) {
                         <option value="Support">Support</option>
                       </select>
                     </div>
+
+                    {/* Full Name */}
                     <div className="col-md-6">
                       <input
                         type="text"
@@ -195,16 +204,41 @@ export default function ContactInfoForm({ data }) {
                         id="fullName"
                       />
                     </div>
+
+                    {/* Phone */}
                     <div className="col-md-6">
-                      <input
-                        type="tel"
-                        className="form-control"
-                        placeholder="Phone No"
-                        autoComplete="tel"
-                        name="phone"
-                        id="phone"
-                      />
+                      <div className="phone-field">
+                        <select
+                          name="country_code"
+                          className="country-code"
+                          required
+                          defaultValue="+971"
+                          aria-label="Country code"
+                        >
+                          <option value="+971">🇦🇪 +971</option>
+                          <option value="+966">🇸🇦 +966</option>
+                          <option value="+968">🇴🇲 +968</option>
+                          <option value="+973">🇧🇭 +973</option>
+                          <option value="+974">🇶🇦 +974</option>
+                          <option value="+965">🇰🇼 +965</option>
+                          <option value="+91">🇮🇳 +91</option>
+                          <option value="+92">🇵🇰 +92</option>
+                          <option value="+44">🇬🇧 +44</option>
+                          <option value="+1">🇺🇸 +1</option>
+                        </select>
+
+                        <input
+                          type="tel"
+                          className="form-control"
+                          placeholder="Phone No"
+                          autoComplete="tel"
+                          name="phone"
+                          id="phone"
+                        />
+                      </div>
                     </div>
+
+                    {/* Email */}
                     <div className="col-md-12">
                       <input
                         type="email"
@@ -215,6 +249,8 @@ export default function ContactInfoForm({ data }) {
                         id="email"
                       />
                     </div>
+
+                    {/* Comment */}
                     <div className="col-md-12">
                       <textarea
                         className="form-control"
@@ -224,6 +260,8 @@ export default function ContactInfoForm({ data }) {
                         rows={4}
                       ></textarea>
                     </div>
+
+                    {/* Button */}
                     <div className="col-12 text-center my-5">
                       <button type="submit" className="btn btn-light px-5">
                         {formButtonText}

@@ -2531,7 +2531,7 @@ p {
 
 
 .darkblue-line {
-  background: #001023 url("../img/diagonal-lines.png") 0 0;
+    background: #000000 url(../img/diagonal-lines.png) 0 0;
 }
 
 /* Home page */
@@ -2682,40 +2682,186 @@ p {
 
 
 
-/* video play button */
 
-/* Centered Play Button */
-.play-btn {
+
+
+
+/* =========================================================
+   VIDEO SECTION
+========================================================= */
+
+.rs-video-zoom-sec {
+  position: relative;
+  height: 100vh;
+
+  background: url(../img/bg-7.jpg) center bottom no-repeat;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   VIDEO CONTENT
+========================================================= */
+
+.rs-video-content {
+  position: relative;
+
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: start;
+
+  gap: 2px;
+}
+
+
+/* =========================================================
+   VIDEO TITLE
+========================================================= */
+
+.rs-video-title h4 {
+  position: relative;
+
+  z-index: 5;
+
+  color: #ddd;
+
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-align: center;
+
+  margin: 0 0 20px 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   VIDEO WRAPPER
+========================================================= */
+
+.rs-video-wrap {
+  position: relative;
+
+  width: 550px;
+  height: auto;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  transform-origin: center center;
+
+  /*
+   * Removed will-change: transform
+   * GSAP is controlling this element.
+   */
+}
+
+
+/* =========================================================
+   VIDEO LINK
+========================================================= */
+
+.rs-video-wrap .video-link {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   VIDEO / IMAGE
+========================================================= */
+
+.rs-video-wrap img,
+.rs-video-wrap video {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  /* object-fit: cover; */
+}
+
+
+/* =========================================================
+   PLAY BUTTON
+========================================================= */
+
+.rs-video-wrap .play-btn {
   position: absolute;
-  top: 42%;
+
+  top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
+
   width: 80px;
   height: 80px;
+
   background: rgba(255, 255, 255, 0.7);
+
   border-radius: 50%;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   cursor: pointer;
+
+  z-index: 10;
+
   animation: pulse 1.5s infinite;
-  transition: background 0.3s;
+
+  transition: background 0.3s ease;
 }
 
-.play-btn::before {
+
+/* =========================================================
+   PLAY TRIANGLE
+========================================================= */
+
+.rs-video-wrap .play-btn::before {
   content: "";
+
   border-style: solid;
+
   border-width: 15px 0 15px 25px;
-  border-color: transparent transparent transparent #DF1F26;
-  /* Red triangle */
+
+  border-color:
+    transparent
+    transparent
+    transparent
+    #DF1F26;
+
   margin-left: 5px;
 }
 
-.play-btn:hover {
+
+/* =========================================================
+   PLAY BUTTON HOVER
+========================================================= */
+
+.rs-video-wrap .play-btn:hover {
   background: rgba(255, 255, 255, 0.9);
 }
 
-/* Pulse animation */
+
+/* =========================================================
+   PLAY BUTTON PULSE
+========================================================= */
+
 @keyframes pulse {
   0% {
     transform: translate(-50%, -50%) scale(1);
@@ -2731,6 +2877,44 @@ p {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
   }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+  .rs-video-title {
+    font-size: 42px;
+  }
+
+  .rs-video-content {
+    gap: 30px;
+  }
+
+  .rs-video-wrap {
+    width: 90%;
+  }
+
+  .rs-video-wrap .play-btn {
+    width: 60px;
+    height: 60px;
+  }
+
+  .rs-video-wrap .play-btn::before {
+    border-width: 11px 0 11px 18px;
+  }
+}
+
+
+
+
+
+
+.mout-bg {
+    background: url("../img/bg-7.jpg") bottom center no-repeat;
+    background-size: cover;
 }
 
 
@@ -3440,7 +3624,7 @@ p {
 .home-faq h2 {
   font-size: 42px;
   font-weight: 700;
-  margin-bottom: 10px;
+
 }
 
 .home-faq p {
@@ -4289,66 +4473,6 @@ p {
 
 
 
-
-/*  */
-
-.rs-video-zoom-sec {
-  position: relative;
-  height: 100vh;
-  background: url(../img/bg-7.jpg) center bottom no-repeat;
-
-
-
-  overflow: hidden;
-}
-
-.rs-video-content {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  gap: 2px;
-}
-
-.rs-video-title h4 {
-  position: relative;
-  z-index: 5;
-  color: #ddd;
-  font-size: 48px;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-  margin: 0 0 20px 0;
-  pointer-events: none;
-}
-
-.rs-video-wrap {
-  width: 550px;
-  height: auto;
-  overflow: hidden;
-  border-radius: 20px;
-  transform-origin: center center;
-  will-change: transform;
-}
-
-.rs-video-wrap video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-@media (max-width: 767px) {
-  .rs-video-title {
-    font-size: 42px;
-  }
-
-  .rs-video-content {
-    gap: 30px;
-  }
-}
 
 
 
@@ -6390,11 +6514,11 @@ REDSPIDER CREATIVE / ACCORDION SECTION RESPONSIVE CONTENT-BASED LAYOUT==========
 
 @media (min-width: 1400px) {
   .rs-creative-content {
-    padding: 70px 80px;
+    padding: 70px 52px;
   }
 
   .rs-creative-inner {
-    max-width: 617px;
+    max-width: 849px;
   }
 
   .rs-creative-sec .rs-process-title,
@@ -6405,7 +6529,7 @@ REDSPIDER CREATIVE / ACCORDION SECTION RESPONSIVE CONTENT-BASED LAYOUT==========
   }
 
   .rs-creative-content .rs-process-text {
-    max-width: 560px;
+    max-width: 849px;
   }
 
   .rs-creative-accordion {
@@ -16505,8 +16629,9 @@ border: 1px solid rgba(255, 255, 255, .14); */
   font-size: 70px;
   font-weight: 700;
   line-height: 1;
-  color: #e51b24;
+    color: #C0C0C0;
 }
+
 
 .rs-blog-stats p {
   color: #fff;
@@ -22283,3 +22408,640 @@ span.rs-process-highlight {
   color: #111;
   margin-bottom: 5px;
 }
+
+
+
+
+
+
+
+
+/* =========================================================
+   ECOMMERCE FEATURES - FIX REVEAL CONFLICT
+   ========================================================= */
+
+.archidex-accordion-sec .rs-ecommerce-reveal {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* Keep the dark card visible */
+.archidex-accordion-sec .rs-container-reveal {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Do NOT hide the card itself */
+.archidex-accordion-sec .rs-container-reveal-inner {
+    visibility: visible;
+}
+
+/* AOS handles the actual child animations */
+.archidex-accordion-sec [data-aos] {
+    will-change: transform, opacity;
+}
+
+
+
+
+
+
+
+
+
+/* ONLY PHONE FIELD */
+.phone-field {
+  display: flex !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  height: 45px !important;
+  gap: 6px !important;
+}
+
+/* Country code dropdown */
+.phone-field .country-code {
+  flex: 0 0 78px !important;
+  width: 78px !important;
+  min-width: 78px !important;
+  height: 45px !important;
+
+  padding: 0 6px !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.9) !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  color: #fff !important;
+
+  font-size: 12px !important;
+  line-height: 45px !important;
+
+  outline: none !important;
+  box-shadow: none !important;
+
+  appearance: auto !important;
+  -webkit-appearance: auto !important;
+}
+
+/* Dropdown options */
+.phone-field .country-code option {
+  background: #fff !important;
+  color: #222 !important;
+}
+
+/* Phone number input */
+.phone-field input.form-control {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+
+  height: 45px !important;
+
+  padding: 0 8px !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.9) !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  color: #fff !important;
+
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Placeholder */
+.phone-field input.form-control::placeholder {
+  color: #fff !important;
+  opacity: 1 !important;
+}
+
+/* Focus */
+.phone-field input.form-control:focus,
+.phone-field .country-code:focus {
+  background: transparent !important;
+  color: #fff !important;
+  border-bottom-color: #fff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+
+/* =========================================================
+   ANIMATED WHATSAPP FLOATING BUTTON
+   RIGHT SIDE
+   ========================================================= */
+
+.rs-fixed-contact {
+  position: fixed;
+  right: 20px;
+  bottom: 25px;
+
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Main button */
+
+.rs-whatsapp-float {
+  position: relative;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #25d366;
+
+  border-radius: 50%;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  animation: rsWhatsappBounce 2.2s infinite;
+}
+
+
+/* WhatsApp icon */
+
+.rs-whatsapp-icon {
+  position: relative;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 3;
+}
+
+.rs-whatsapp-icon svg {
+  width: 34px;
+  height: 34px;
+
+  display: block;
+}
+
+
+/* Hover */
+
+.rs-whatsapp-float:hover {
+  transform: scale(1.1);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.3);
+
+  background: #20bd5a;
+}
+
+
+/* =========================================================
+   PULSE / RIPPLE
+   ========================================================= */
+
+.rs-whatsapp-pulse {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+
+  background: #25d366;
+
+  z-index: 1;
+
+  animation: rsWhatsappPulse 1.8s infinite;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes rsWhatsappPulse {
+
+  0% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+
+  70% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+
+}
+
+
+@keyframes rsWhatsappBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  10% {
+    transform: translateY(-3px);
+  }
+
+  20% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-2px);
+  }
+
+  40% {
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .rs-fixed-contact {
+    right: 15px;
+    bottom: 18px;
+  }
+
+  .rs-whatsapp-float {
+    width: 54px;
+    height: 54px;
+  }
+
+  .rs-whatsapp-icon,
+  .rs-whatsapp-icon svg {
+    width: 31px;
+    height: 31px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .rs-fixed-contact {
+    right: 12px;
+    bottom: 15px;
+  }
+
+  .rs-whatsapp-float {
+    width: 52px;
+    height: 52px;
+  }
+
+  .rs-whatsapp-icon,
+  .rs-whatsapp-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   REDSPIDER DIGITAL PRODUCTS & SOLUTIONS
+   NEW ABOUT SERVICES SECTION
+   ========================================================= */
+
+.service-container-red.services {
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+
+  padding: 70px 8%;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(144, 13, 9, 0.94) 0%,
+      rgba(144, 13, 9, 0.94) 60%,
+      rgba(144, 13, 9, 0.94) 100%
+    ),
+    url("/assets/img/Web-Design-Services-And-Web-Designer-Dubai-1.jpg.webp");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+/* =========================================================
+   CONTENT WRAPPER
+   ========================================================= */
+
+.service-container-red.services
+.service-section-inner {
+  position: relative;
+
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   DECORATIVE LIGHT
+   ========================================================= */
+
+.service-container-red.services::after {
+  content: "";
+
+  position: absolute;
+
+  top: -120px;
+  right: -120px;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.service-container-red.services h2 {
+  position: relative;
+
+  margin: 0 0 50px;
+
+  padding: 0;
+
+  color: #ffffff !important;
+
+  font-size: 34px !important;
+  line-height: 1.2;
+
+  font-weight: 700 !important;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   SERVICES GRID
+   ========================================================= */
+
+.service-container-red.services .grid {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  column-gap: 50px;
+  row-gap: 45px;
+
+  width: 100%;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   SERVICE ITEM
+   ========================================================= */
+
+.service-container-red.services .service {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 18px;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.service-container-red.services .service .icon {
+  flex: 0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  margin-top: 3px;
+
+  object-fit: contain;
+
+  display: block;
+
+  filter: brightness(0) invert(1);
+}
+
+
+/* =========================================================
+   SERVICE CONTENT
+   ========================================================= */
+
+.service-container-red.services .service > div {
+  flex: 1 1 auto;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   SERVICE TITLE
+   ========================================================= */
+
+.service-container-red.services .service h3 {
+  margin: 0 0 8px !important;
+  padding: 0;
+
+  font-size: 19px !important;
+  line-height: 1.3 !important;
+
+  font-weight: 700 !important;
+}
+
+
+/* =========================================================
+   SERVICE TITLE LINK
+   ========================================================= */
+
+.service-container-red.services .service h3 a {
+  color: #ffffff !important;
+
+  text-decoration: none !important;
+
+  transition: all 0.3s ease;
+}
+
+.service-container-red.services .service h3 a:hover {
+  color: #ffe1e1 !important;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.service-container-red.services .service p {
+  margin: 0 !important;
+  padding: 0;
+
+  color: rgba(255, 255, 255, 0.90) !important;
+
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .service-container-red.services {
+    padding: 65px 6%;
+  }
+
+  .service-container-red.services .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 40px;
+    row-gap: 40px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .service-container-red.services {
+    padding: 55px 6%;
+  }
+
+  .service-container-red.services h2 {
+    margin-bottom: 40px;
+
+    font-size: 28px !important;
+  }
+
+  .service-container-red.services .grid {
+    grid-template-columns: 1fr;
+
+    column-gap: 0;
+    row-gap: 32px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .service-container-red.services {
+    padding: 45px 20px;
+  }
+
+  .service-container-red.services h2 {
+    font-size: 25px !important;
+  }
+
+  .service-container-red.services .service {
+    gap: 14px;
+  }
+
+  .service-container-red.services .service .icon {
+    flex: 0 0 30px;
+
+    width: 30px;
+    height: 30px;
+  }
+
+  .service-container-red.services .service h3 {
+    font-size: 17px !important;
+  }
+
+  .service-container-red.services .service p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+}
+
+
+
+
+
