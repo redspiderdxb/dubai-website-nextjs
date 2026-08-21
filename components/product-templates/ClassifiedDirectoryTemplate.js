@@ -365,83 +365,8 @@ export default function ClassifiedDirectoryTemplate({ data }) {
         </div>
       </section>
 
-      {/* Ready to Build */}
-      <section
-        id="readytobuild"
-        className="readytobuild section light-background"
-      >
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div className="section-title text-center text-white mb-3">
-            <h2 className="fw-bold">
-              {cta_title || "Ready to build a strong brand identity?"}
-            </h2>
-            <p className="rs-subtitle">
-              {cta_description ||
-                "Let RedSpider create a professional logo that represents your business the right way."}
-            </p>
-          </div>
-        </div>
-
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div className="inlinebtns text-center d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center">
-            <a
-              href="#"
-              className="btn btn-animation btn-red d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-            >
-              <span className="btn-title">Schedule Free Consultation</span>
-              <span className="btn-icon-wrap">
-                <img
-                  src="/assets/img/icons/cc-icon.svg"
-                  alt=""
-                  className="btn-icon"
-                />
-              </span>
-            </a>
-
-            <a
-              href="#"
-              className="btn btn-animation btn-black d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-            >
-              <span className="btn-title">Call Now</span>
-              <span className="btn-icon-wrap">
-                <img
-                  src="/assets/img/icons/phone.svg"
-                  alt=""
-                  className="btn-icon"
-                />
-              </span>
-            </a>
-
-            <a
-              href="https://wa.me/971505698733"
-              target="_blank"
-              className="btn btn-animation btn-green d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-            >
-              <span className="btn-title">Whatsapp Us</span>
-              <span className="btn-icon-wrap">
-                <img
-                  src="/assets/img/icons/whatsapp.svg"
-                  alt=""
-                  className="btn-icon"
-                />
-              </span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section id="review-sec" className="review-sec section light-background">
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div className="review-wrap">
-            <img
-              src="/assets/img/reviewimg.png"
-              alt="Reviews"
-              className="img-fluid"
-            />
-          </div>
-        </div>
-      </section>
+      
+     
 
       {/* FAQs - Dynamic */}
       {faqs.length > 0 && (

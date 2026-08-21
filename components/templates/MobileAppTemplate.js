@@ -987,22 +987,8 @@ export default function MobileAppTemplate({ data }) {
         <ProfessionalSection />
         <KeyFeaturesSection />
         <IndustriesSection />
-        <CTASection />
-        {/* Review Section */}
-        <section
-          id="review-sec"
-          className="review-sec section light-background"
-        >
-          <div className="container" style={{ maxWidth: "1100px" }}>
-            <div className="review-wrap">
-              <img
-                src="/assets/img/reviewimg.png"
-                alt="Reviews"
-                className="img-fluid"
-              />
-            </div>
-          </div>
-        </section>
+        
+     
       </main>
       {custom_js && <script dangerouslySetInnerHTML={{ __html: custom_js }} />}
     </div>

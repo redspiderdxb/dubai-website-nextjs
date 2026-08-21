@@ -35,10 +35,10 @@ export default function AboutHero({ data }) {
                 <span className="rs-process-subtitle">{heroSubtitle}</span>
               )}
               <h1 className="rs-process-title mb-3">
-                {heroTitle}
+               RedSpider - 
 
                  <span className="rs-process-highlight">
-                  Web & Art Design
+                 Your Digital Partner in the UAE
                   <svg
                     className="rs-process-underline"
                     viewBox="0 0 320 22"

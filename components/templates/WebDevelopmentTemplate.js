@@ -65,23 +65,18 @@ export default function WebDevelopmentTemplate({ data }) {
     features_subtitle = "At RedSpider, we offer a wide range of web development services to cater to your needs.",
 
     benefits_title = "Why is RedSpider a Trustworthy choice for Businesses?",
-
     benefits_subtitle = "RedSpider has earned trust by offering top notch services to various businesses in the industry. You can choose us for the following:",
 
     processes_title = "Web Design & Development in Dubai",
-
     processes_subtitle = "Dubai is a web design and development company with extensive experience and track record.",
 
     faqs_title = "Frequently Asked Questions",
-
     faqs_subtitle = "Find quick answers to common questions about our services.",
 
     gallery_title = "Our Work",
-
     gallery_subtitle = "",
 
     cta_subtitle = "",
-
     cta_button_url = "/contact",
   } = data || {};
 
@@ -94,9 +89,7 @@ export default function WebDevelopmentTemplate({ data }) {
 
   // ============================================
   // REMOVE DUPLICATE IMAGE PATHS
-  //
-  // Same image path multiple times aaye to
-  // sirf first image display hogi.
+  // AND LIMIT TO ONLY 9 ITEMS
   // ============================================
 
   const uniqueGallery = Array.from(
@@ -107,11 +100,14 @@ export default function WebDevelopmentTemplate({ data }) {
     ).values(),
   );
 
+  // 🔥 ONLY 9 ITEMS - SIRF 9 DIKHENGE
+  const limitedGallery = uniqueGallery.slice(0, 9);
+
   // ============================================
   // LIGHTBOX SLIDES
   // ============================================
 
-  const lightboxSlides = uniqueGallery.map((item) => ({
+  const lightboxSlides = limitedGallery.map((item) => ({
     src: item.image,
   }));
 
@@ -201,7 +197,7 @@ export default function WebDevelopmentTemplate({ data }) {
 
       {show_features && features.length > 0 && (
         <section className="re-process py-5">
-          <div className="container pt-lg-5" style={{ maxWidth: "1550px" }}>
+          <div className="container pt-lg-5" >
             <div className="row justify-content-center text-center">
               <div className="col-lg-12" data-aos="fade-up">
                 <div className="title-wrap text-start cus-title-ani-1">
@@ -215,7 +211,7 @@ export default function WebDevelopmentTemplate({ data }) {
             </div>
           </div>
 
-          <div className="container py-lg-5" style={{ maxWidth: "1600px" }}>
+          <div className="container py-lg-5" >
             <div className="row g-4">
               {features.map((feature, index) => (
                 <div
@@ -248,7 +244,7 @@ export default function WebDevelopmentTemplate({ data }) {
 
       {show_benefits && finalBenefits.length > 0 && (
         <section className="rsu-creative-sec">
-          <div className="container-fluid px-lg-5">
+          <div className="container px-lg-5">
             <div className="rsu-scene">
               <span className="rsu-red-line"></span>
 
@@ -430,14 +426,15 @@ export default function WebDevelopmentTemplate({ data }) {
       </section>
 
       {/* ============================================
-          GALLERY / PORTFOLIO
+          GALLERY / PORTFOLIO - ONLY 9 ITEMS
           Homepage-style presentation
           Dynamic backend gallery
           ONLY ZOOM OPTION
           Duplicate image paths removed
+          🔥 MAX 9 ITEMS SHOWN
       ============================================ */}
 
-      {show_gallery && uniqueGallery.length > 0 && (
+      {show_gallery && limitedGallery.length > 0 && (
         <section id="portfolio" className="portfolio section pt-0">
           {/* Gallery Intro */}
           <section className="rs-gd-intro py-5" style={{ background: "none" }}>
@@ -472,7 +469,7 @@ export default function WebDevelopmentTemplate({ data }) {
             </div>
           </section>
 
-          {/* Portfolio Cards */}
+          {/* Portfolio Cards - ONLY 9 ITEMS */}
           <div className="container">
             <div
               className="isotope-layout"
@@ -491,9 +488,9 @@ export default function WebDevelopmentTemplate({ data }) {
                 </li>
               </ul>
 
-              {/* Dynamic Gallery */}
+              {/* 🔥 ONLY 9 ITEMS SHOWN - limitedGallery use kar rahe hain */}
               <div className="row gy-4 isotope-container">
-                {uniqueGallery.map((item, index) => (
+                {limitedGallery.map((item, index) => (
                   <div
                     key={item.id || index}
                     className="col-lg-4 col-md-6 portfolio-item isotope-item filter-app"
@@ -551,7 +548,6 @@ export default function WebDevelopmentTemplate({ data }) {
           <div
             className="container"
             style={{
-              maxWidth: "1600px",
               background: "#f6f6f6",
               padding: "40px",
               borderRadius: "30px",

@@ -644,7 +644,7 @@ export default function EcommerceTemplate({ data }) {
         <section key="intro" className="rs-gd-intro">
           <span className="rs-gd-intro__shape" aria-hidden="true"></span>
 
-          <div className="container-fluid px-3 px-md-4 px-xl-5">
+          <div className="container px-3 px-md-4 px-xl-5">
             <div className="row gx-xl-5 align-items-start">
               {/* LEFT RAIL */}
 
