@@ -27,7 +27,6 @@ function MyApp({
       once: true,
     });
 
-    // Refresh AOS after page/content changes
     setTimeout(() => {
       if (typeof AOS !== "undefined") {
         AOS.refreshHard();
@@ -64,7 +63,6 @@ function MyApp({
 
       if (customJsLoaded.current) return;
 
-      // Already loaded
       const existingScript = document.querySelector(
         'script[data-redspider-custom-js="true"]',
       );
@@ -74,13 +72,11 @@ function MyApp({
         return;
       }
 
-      // Make sure ScrollTrigger is registered with GSAP
       if (window.gsap && window.ScrollTrigger) {
         try {
           window.gsap.registerPlugin(window.ScrollTrigger);
-          console.log("✅ GSAP + ScrollTrigger registered");
-        } catch (error) {
-          console.warn("⚠️ ScrollTrigger registration warning:", error);
+        } catch (_) {
+          // Silent fail
         }
       }
 
@@ -93,30 +89,21 @@ function MyApp({
       script.onload = () => {
         customJsLoaded.current = true;
 
-        console.log("✅ RedSpider custom.js loaded successfully");
-
-        // Refresh AOS after custom JS initialization
         setTimeout(() => {
           if (window.AOS) {
             window.AOS.refreshHard();
           }
         }, 300);
 
-        // Refresh ScrollTrigger
         setTimeout(() => {
           if (window.ScrollTrigger) {
             try {
               window.ScrollTrigger.refresh();
-              console.log("✅ ScrollTrigger refreshed");
-            } catch (error) {
-              console.warn("⚠️ ScrollTrigger refresh warning:", error);
+            } catch (_) {
+              // Silent fail
             }
           }
         }, 500);
-      };
-
-      script.onerror = () => {
-        console.error("❌ Failed to load /assets/js/custom.js");
       };
 
       document.body.appendChild(script);
@@ -126,16 +113,6 @@ function MyApp({
       if (cancelled) return;
 
       if (requiredLibrariesReady()) {
-        console.log("====================================");
-        console.log("✅ ALL CUSTOM JS DEPENDENCIES READY");
-        console.log("jQuery:", typeof window.jQuery);
-        console.log("GSAP:", typeof window.gsap);
-        console.log("ScrollTrigger:", typeof window.ScrollTrigger);
-        console.log("Swiper:", typeof window.Swiper);
-        console.log("AOS:", typeof window.AOS);
-        console.log("Isotope:", typeof window.Isotope);
-        console.log("====================================");
-
         loadCustomJS();
         return;
       }
@@ -143,7 +120,6 @@ function MyApp({
       timer = setTimeout(checkLibraries, 100);
     };
 
-    // Start checking after browser has started rendering
     timer = setTimeout(checkLibraries, 300);
 
     return () => {
@@ -369,20 +345,6 @@ function MyApp({
         src="/assets/vendor/php-email-form/validate.js"
         strategy="afterInteractive"
       />
-
-      {/* =================================================
-          IMPORTANT
-
-          custom.js is NOT loaded with <Script> here.
-
-          It is loaded from useEffect AFTER checking:
-          jQuery
-          GSAP
-          ScrollTrigger
-          Swiper
-          AOS
-          Isotope
-          ================================================= */}
     </>
   );
 }
@@ -398,18 +360,10 @@ MyApp.getInitialProps = async (appContext) => {
   let headerProducts = [];
 
   try {
-    // ================================================
-    // FETCH SERVICES + PRODUCTS
-    // ================================================
-
     const [servicesResult, productsResult] = await Promise.all([
       fetchAllServices(),
       fetchAllProducts(),
     ]);
-
-    // ================================================
-    // SERVICES
-    // ================================================
 
     if (Array.isArray(servicesResult)) {
       headerServices = servicesResult;
@@ -419,10 +373,6 @@ MyApp.getInitialProps = async (appContext) => {
       headerServices = [];
     }
 
-    // ================================================
-    // PRODUCTS
-    // ================================================
-
     if (Array.isArray(productsResult)) {
       headerProducts = productsResult;
     } else if (Array.isArray(productsResult?.data)) {
@@ -430,21 +380,7 @@ MyApp.getInitialProps = async (appContext) => {
     } else {
       headerProducts = [];
     }
-
-    // ================================================
-    // DEBUG
-    // ================================================
-
-    console.log("====================================");
-
-    console.log("HEADER SERVICES:", headerServices.length);
-
-    console.log("HEADER PRODUCTS:", headerProducts.length);
-
-    console.log("====================================");
-  } catch (error) {
-    console.error("Header data fetch error:", error);
-
+  } catch (_) {
     headerServices = [];
     headerProducts = [];
   }

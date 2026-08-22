@@ -143,8 +143,6 @@ function initVideoZoomEffect() {
 
   ScrollTrigger.refresh();
 
-  console.log("✅ Video Zoom initialized");
-
   return tl;
 }
 
@@ -180,18 +178,14 @@ function initHomeCardStack() {
   const wrapper = section ? section.querySelector(".rs-gsap-cards") : null;
 
   if (!section || !wrapper) {
-    console.warn("❌ RS Card Stack: section/wrapper not found");
     return;
   }
 
   const cards = Array.from(wrapper.querySelectorAll(":scope > .rs-gsap-card"));
 
   if (cards.length !== 3) {
-    console.warn(`❌ RS Card Stack: expected 3 cards, found ${cards.length}`);
     return;
   }
-
-  console.log("✅ RS Card Stack found 3 cards");
 
   const oldTrigger = ScrollTrigger.getById("rs-card-stack");
   if (oldTrigger) {
@@ -273,7 +267,7 @@ function initHomeCardStack() {
       id: "rs-card-stack",
       trigger: section,
       start: "top top",
-      end: "+=150%", // ⬅️ FIXED: 1.5 viewport scroll - NO GAP
+      end: "+=150%",
       pin: true,
       pinSpacing: true,
       scrub: 1,
@@ -349,7 +343,6 @@ function initHomeCardStack() {
     requestAnimationFrame(() => {
       setWrapperHeight();
       ScrollTrigger.refresh();
-      console.log("✅ RS 3 Card Stack initialized - FINAL FIXED");
     });
   });
 

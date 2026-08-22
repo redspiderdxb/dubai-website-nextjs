@@ -256,7 +256,7 @@ export default function RealEstatePortalTemplate({ data }) {
               </div>
             </div>
           </div>
-          <div className="container py-lg-5" style={{ maxWidth: "1600px" }}>
+          <div className="container py-lg-5">
             <div className="row g-4">
               {processes.map((process, index) => (
                 <div
@@ -295,7 +295,7 @@ export default function RealEstatePortalTemplate({ data }) {
 
       {/* Features Section - Static */}
       <section className="re-features py-5">
-        <div className="container py-lg-5" style={{ maxWidth: "1500px" }}>
+        <div className="container py-lg-5" >
           <div className="row align-items-center g-5">
             <div className="col-lg-6" data-aos="fade-right">
               <div className="title-wrap">

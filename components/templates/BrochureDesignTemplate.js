@@ -86,14 +86,12 @@ export default function BrochureDesignTemplate({ data }) {
     features_subtitle = "",
 
     benefits_title = "Why Choose RedSpider for Brochure Design in Dubai?",
-
     benefits_subtitle = "",
 
     processes_title = "Our Brochure Design Process",
     processes_subtitle = "",
 
     faqs_title = "Frequently Asked Questions",
-
     faqs_subtitle = "Find quick answers to common questions about our services.",
 
     gallery_title = "Our Gallery",
@@ -293,10 +291,6 @@ export default function BrochureDesignTemplate({ data }) {
   const galleryImages =
     Array.isArray(gallery) && gallery.length > 0 ? gallery : [];
 
-  // ============================================
-  // REMOVE DUPLICATE IMAGE PATHS
-  // ============================================
-
   const uniqueGalleryImages = Array.from(
     new Map(
       galleryImages
@@ -313,7 +307,6 @@ export default function BrochureDesignTemplate({ data }) {
   // ============================================
 
   const [galleryLightboxOpen, setGalleryLightboxOpen] = useState(false);
-
   const [galleryLightboxIndex, setGalleryLightboxIndex] = useState(0);
 
   const gallerySlides = uniqueGalleryImages.map((item) => ({
@@ -356,13 +349,17 @@ export default function BrochureDesignTemplate({ data }) {
         <section key="intro" className="broucher-info about-info-sec pix-bg">
           <div className="container">
             <div className="row align-items-start">
-              <div className="col-lg-3">
+              <div className="col-lg-3" data-aos="fade-right">
                 <span className="about-label">
                   {intro_small_heading || "Brochure Design"}
                 </span>
               </div>
 
-              <div className="col-lg-9">
+              <div
+                className="col-lg-9"
+                data-aos="fade-left"
+                data-aos-delay="150"
+              >
                 <h2 className="about-heading rs-main-title text-white">
                   {intro_description ||
                     "At RedSpider Web & Art Design, we offer professional brochure design services in Dubai for various businesses in the industry."}
@@ -385,14 +382,26 @@ export default function BrochureDesignTemplate({ data }) {
         <section key="features" className="brochure-services-section dark-bg">
           <div className="container">
             <div className="row align-items-start justify-content-between">
-              <div className="col-lg-4">
-                <h2 className="services-heading">
+              <div
+                className="col-lg-4"
+                data-aos="fade-right"
+                data-aos-delay="100"
+              >
+                <h2
+                  className="services-heading"
+                  data-aos="fade-up"
+                  data-aos-delay="800"
+                >
                   {features_title || "Our Brochure Design Services"}
                 </h2>
 
                 <ul className="services-list">
                   {brochureTypes.map((item, index) => (
-                    <li key={item.id || index}>
+                    <li
+                      key={item.id || index}
+                      data-aos="fade-right"
+                      data-aos-delay={900 + index * 100}
+                    >
                       <span className="service-icon">
                         <i
                           className={
@@ -407,8 +416,16 @@ export default function BrochureDesignTemplate({ data }) {
                 </ul>
               </div>
 
-              <div className="col-lg-7 px-lg-5">
-                <div className="process-title-wrapper">
+              <div
+                className="col-lg-7 px-lg-5"
+                data-aos="fade-left"
+                data-aos-delay="200"
+              >
+                <div
+                  className="process-title-wrapper"
+                  data-aos="fade-up"
+                  data-aos-delay="700"
+                >
                   <h6>
                     Our
                     <br />
@@ -424,11 +441,15 @@ export default function BrochureDesignTemplate({ data }) {
                 >
                   {processData.map((process, index) => {
                     const isFirst = index === 0;
-
                     const collapseId = `brochure-collapse-${index}`;
 
                     return (
-                      <div className="accordion-item" key={process.id || index}>
+                      <div
+                        className="accordion-item"
+                        key={process.id || index}
+                        data-aos="fade-up"
+                        data-aos-delay={800 + index * 100}
+                      >
                         <div className="accordion-header">
                           <button
                             className={`accordion-trigger ${
@@ -465,12 +486,31 @@ export default function BrochureDesignTemplate({ data }) {
                   })}
                 </div>
 
-                <div className="connect-section">
-                  <span className="connect-label">Let's Connect :</span>
+                <div
+                  className="connect-section"
+                  data-aos="fade-up"
+                  data-aos-delay="900"
+                >
+                  <span
+                    className="connect-label"
+                    data-aos="fade-right"
+                    data-aos-delay="1000"
+                  >
+                    Let's Connect :
+                  </span>
 
-                  <div className="connect-divider"></div>
+                  <div
+                    className="connect-divider"
+                    data-aos="zoom-in"
+                    data-aos-delay="1100"
+                  ></div>
 
-                  <a href={cta_button_link || "#"} className="connect-btn">
+                  <a
+                    href={cta_button_link || "#"}
+                    className="connect-btn"
+                    data-aos="fade-left"
+                    data-aos-delay="1200"
+                  >
                     {cta_button_text || "Book A Call"}
                   </a>
                 </div>
@@ -492,11 +532,25 @@ export default function BrochureDesignTemplate({ data }) {
         <section key="benefits" className="rs-why-brochure">
           <div className="container">
             <div className="row g-5 align-items-start">
-              <div className="col-lg-5">
+              <div
+                className="col-lg-5"
+                data-aos="fade-right"
+                data-aos-delay="100"
+              >
                 <div className="rs-why-brochure__intro">
-                  <span className="rs-why-brochure__label">Why RedSpider</span>
+                  <span
+                    className="rs-why-brochure__label"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                  >
+                    Why RedSpider
+                  </span>
 
-                  <h2 className="rsu-main-title">
+                  <h2
+                    className="rsu-main-title"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                  >
                     {benefits_title ||
                       "Why Choose RedSpider for Brochure Design in Dubai?"}
                   </h2>
@@ -505,6 +559,8 @@ export default function BrochureDesignTemplate({ data }) {
                     className="rs-why-brochure__dubai"
                     aria-label="Hand-drawn Dubai skyline outline"
                     role="img"
+                    data-aos="zoom-in"
+                    data-aos-delay="500"
                   >
                     <svg
                       viewBox="0 0 720 220"
@@ -529,7 +585,12 @@ export default function BrochureDesignTemplate({ data }) {
                 <div className="rs-why-brochure__grid">
                   <div className="row g-4">
                     {whyChooseCards.map((item, index) => (
-                      <div className="col-md-6" key={item.id || index}>
+                      <div
+                        className="col-md-6"
+                        key={item.id || index}
+                        data-aos={index % 2 === 0 ? "fade-up" : "fade-down"}
+                        data-aos-delay={300 + index * 150}
+                      >
                         <article className="rs-why-brochure__card">
                           <div className="rs-why-brochure__card-inner">
                             <div className="rs-why-brochure__card-face rs-why-brochure__card-front">
@@ -627,12 +688,28 @@ export default function BrochureDesignTemplate({ data }) {
             </div>
 
             <div className="container">
-              <div className="letconnect py-4">
-                <span className="text-white">View our Work :</span>
+              <div
+                className="letconnect py-4"
+                data-aos="fade-up"
+                data-aos-delay="150"
+              >
+                <span
+                  className="text-white"
+                  data-aos="fade-right"
+                  data-aos-delay="250"
+                >
+                  View our Work :
+                </span>
 
-                <div className="line"></div>
+                <div
+                  className="line"
+                  data-aos="zoom-in"
+                  data-aos-delay="350"
+                ></div>
 
-                <a href="#">Our Portfolio</a>
+                <a href="#" data-aos="fade-left" data-aos-delay="450">
+                  Our Portfolio
+                </a>
               </div>
             </div>
 
@@ -643,7 +720,11 @@ export default function BrochureDesignTemplate({ data }) {
               }}
             >
               <div className="row g-5">
-                <div className="col-lg-8">
+                <div
+                  className="col-lg-8"
+                  data-aos="fade-right"
+                  data-aos-delay="200"
+                >
                   <article className="rs-pixora-title__content-col">
                     <span className="rs-pixora-title__number">01</span>
 
@@ -667,7 +748,11 @@ export default function BrochureDesignTemplate({ data }) {
                   </article>
                 </div>
 
-                <div className="col-lg-4">
+                <div
+                  className="col-lg-4"
+                  data-aos="fade-left"
+                  data-aos-delay="300"
+                >
                   <article className="rs-pixora-title__content-col rs-pixora-title__content-col--right">
                     <span className="rs-pixora-title__number">02</span>
 
@@ -699,21 +784,11 @@ export default function BrochureDesignTemplate({ data }) {
 
     // ============================================
     // GALLERY
-    //
-    // HOMEPAGE PORTFOLIO UI
-    // DYNAMIC BACKEND IMAGES
-    // DUPLICATE PATHS REMOVED
-    // ONLY ZOOM
-    // NO URL
     // ============================================
 
     gallery: {
       component: (
         <>
-          {/* ============================================
-              LIGHTBOX
-          ============================================ */}
-
           <Lightbox
             open={galleryLightboxOpen}
             close={() => setGalleryLightboxOpen(false)}
@@ -721,19 +796,11 @@ export default function BrochureDesignTemplate({ data }) {
             slides={gallerySlides}
           />
 
-          {/* ============================================
-              PORTFOLIO SECTION
-          ============================================ */}
-
           <section
             key="gallery"
             id="portfolio"
-            className="portfolio section pt-0"
+            className="portfolio section pt-0 rs-custom-gallery"
           >
-            {/* ============================================
-                SAME HOMEPAGE INTRO STYLE
-            ============================================ */}
-
             <div className="rs-gd-intro py-5">
               <div className="container-fluid px-3 px-md-4 px-xl-5">
                 <div className="row align-items-center">
@@ -766,10 +833,6 @@ export default function BrochureDesignTemplate({ data }) {
               </div>
             </div>
 
-            {/* ============================================
-                HOMEPAGE PORTFOLIO GRID
-            ============================================ */}
-
             <div className="container">
               <div
                 className="isotope-layout"
@@ -777,7 +840,6 @@ export default function BrochureDesignTemplate({ data }) {
                 data-layout="masonry"
                 data-sort="original-order"
               >
-                {/* Hidden filters */}
                 <ul
                   className="portfolio-filters isotope-filters d-none"
                   data-aos="fade-up"
@@ -788,19 +850,15 @@ export default function BrochureDesignTemplate({ data }) {
                   </li>
                 </ul>
 
-                {/* ============================================
-                    CARDS
-                ============================================ */}
-
-                <div className="row gy-4 isotope-container">
+                <div className="rs-custom-gallery-grid">
                   {uniqueGalleryImages.length > 0 ? (
                     uniqueGalleryImages.map((item, index) => (
                       <div
                         key={`${item.image}-${index}`}
-                        className="col-lg-4 col-md-6 portfolio-item isotope-item filter-app"
+                        className="rs-custom-gallery-item"
                       >
                         <div
-                          className="portfolio-content h-100"
+                          className="rs-custom-gallery-card portfolio-content h-100"
                           role="button"
                           tabIndex={0}
                           style={{
@@ -808,7 +866,6 @@ export default function BrochureDesignTemplate({ data }) {
                           }}
                           onClick={() => {
                             setGalleryLightboxIndex(index);
-
                             setGalleryLightboxOpen(true);
                           }}
                           onKeyDown={(e) => {
@@ -816,13 +873,10 @@ export default function BrochureDesignTemplate({ data }) {
                               e.preventDefault();
 
                               setGalleryLightboxIndex(index);
-
                               setGalleryLightboxOpen(true);
                             }
                           }}
                         >
-                          {/* IMAGE */}
-
                           <img
                             src={item.image}
                             className="img-fluid"
@@ -830,14 +884,10 @@ export default function BrochureDesignTemplate({ data }) {
                             loading="lazy"
                           />
 
-                          {/* HOMEPAGE OVERLAY */}
-
                           <div className="portfolio-info">
                             <h3>{item.title || "Gallery"}</h3>
 
                             {item.description && <p>{item.description}</p>}
-
-                            {/* ONLY ZOOM */}
 
                             <button
                               type="button"
@@ -845,7 +895,6 @@ export default function BrochureDesignTemplate({ data }) {
                                 e.stopPropagation();
 
                                 setGalleryLightboxIndex(index);
-
                                 setGalleryLightboxOpen(true);
                               }}
                               className="preview-link border-0 bg-transparent text-white"
@@ -867,10 +916,8 @@ export default function BrochureDesignTemplate({ data }) {
                       </div>
                     ))
                   ) : (
-                    <div className="col-12">
-                      <p className="text-center py-5">
-                        No gallery images available
-                      </p>
+                    <div className="rs-custom-gallery-empty">
+                      <p>No gallery images available</p>
                     </div>
                   )}
                 </div>
@@ -903,7 +950,10 @@ export default function BrochureDesignTemplate({ data }) {
               borderRadius: "30px",
             }}
           >
-            <div className="text-start mb-5 border-bottom pb-3">
+            <div
+              className="text-start mb-5 border-bottom pb-3"
+              data-aos="fade-up"
+            >
               <h2 className="fw-bold">
                 {faqs_title || "Frequently Asked Questions"}
               </h2>
@@ -916,9 +966,11 @@ export default function BrochureDesignTemplate({ data }) {
 
             {faqData.length > 0 ? (
               <div className="row g-4">
-                {/* LEFT FAQ */}
-
-                <div className="col-lg-6">
+                <div
+                  className="col-lg-6"
+                  data-aos="fade-right"
+                  data-aos-delay="150"
+                >
                   <div className="accordion" id="faqLeft-brochure">
                     {faqData
                       .slice(0, Math.ceil(faqData.length / 2))
@@ -950,9 +1002,11 @@ export default function BrochureDesignTemplate({ data }) {
                   </div>
                 </div>
 
-                {/* RIGHT FAQ */}
-
-                <div className="col-lg-6">
+                <div
+                  className="col-lg-6"
+                  data-aos="fade-left"
+                  data-aos-delay="250"
+                >
                   <div className="accordion" id="faqRight-brochure">
                     {faqData
                       .slice(Math.ceil(faqData.length / 2))
@@ -1000,7 +1054,6 @@ export default function BrochureDesignTemplate({ data }) {
 
     cta: {
       component: <ServiceCTA service={data} key="cta" />,
-
       show: show_cta,
     },
   };

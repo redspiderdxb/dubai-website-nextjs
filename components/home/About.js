@@ -41,30 +41,24 @@ export default function About({ data }) {
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
 
-    // Full URL
     if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
       return imagePath;
     }
 
-    // /storage/...
     if (imagePath.startsWith("/storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
-
       return `${baseUrl}${imagePath}`;
     }
 
-    // storage/...
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
-
       return `${baseUrl}/${imagePath}`;
     }
 
-    // Local frontend assets
     return imagePath;
   };
 
@@ -73,55 +67,34 @@ export default function About({ data }) {
   // =====================================================
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
+    if (typeof window === "undefined") return;
 
     let lightbox = null;
     let timer = null;
 
     const initVideoLightbox = () => {
-      if (typeof window.GLightbox !== "function") {
-        return false;
-      }
+      if (typeof window.GLightbox !== "function") return false;
 
       const videoElement = document.querySelector(
         ".rs-video-zoom-sec .glightbox",
       );
+      if (!videoElement) return false;
 
-      if (!videoElement) {
-        return false;
-      }
-
-      /*
-       * Prevent duplicate GLightbox initialization
-       */
-      if (videoElement.dataset.glightboxInitialized === "true") {
-        return true;
-      }
+      if (videoElement.dataset.glightboxInitialized === "true") return true;
 
       lightbox = window.GLightbox({
         selector: ".rs-video-zoom-sec .glightbox",
       });
 
       videoElement.dataset.glightboxInitialized = "true";
-
-      console.log("✅ Video GLightbox initialized");
-
       return true;
     };
 
-    // Try immediately
     const initialized = initVideoLightbox();
 
-    /*
-     * GLightbox may load after the
-     * React component has rendered.
-     */
     if (!initialized) {
       timer = setInterval(() => {
         const success = initVideoLightbox();
-
         if (success && timer) {
           clearInterval(timer);
           timer = null;
@@ -130,10 +103,7 @@ export default function About({ data }) {
     }
 
     return () => {
-      if (timer) {
-        clearInterval(timer);
-      }
-
+      if (timer) clearInterval(timer);
       if (lightbox && typeof lightbox.destroy === "function") {
         lightbox.destroy();
       }
@@ -145,45 +115,24 @@ export default function About({ data }) {
   // =====================================================
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
+    if (typeof window === "undefined") return;
 
-    /*
-     * title-effect.js exposes this function
-     * specifically for Next.js / SPA rendering.
-     */
     const initAnimation = () => {
-      if (typeof window.initVideoZoomEffect !== "function") {
-        return false;
-      }
+      if (typeof window.initVideoZoomEffect !== "function") return false;
 
       const videoSection = document.querySelector(".rs-video-zoom-sec");
-
-      if (!videoSection) {
-        return false;
-      }
+      if (!videoSection) return false;
 
       window.initVideoZoomEffect();
-
-      console.log("✅ Video GSAP animation initialized");
-
       return true;
     };
 
-    // Try immediately
     const initialized = initAnimation();
-
     let timer = null;
 
-    /*
-     * If title-effect.js has not exposed
-     * the function yet, wait for it.
-     */
     if (!initialized) {
       timer = setInterval(() => {
         const success = initAnimation();
-
         if (success && timer) {
           clearInterval(timer);
           timer = null;
@@ -192,20 +141,10 @@ export default function About({ data }) {
     }
 
     return () => {
-      if (timer) {
-        clearInterval(timer);
-      }
-
-      /*
-       * Kill this page's ScrollTrigger
-       * when leaving the route.
-       */
+      if (timer) clearInterval(timer);
       if (typeof window.ScrollTrigger !== "undefined") {
         const trigger = window.ScrollTrigger.getById("rs-video-zoom");
-
-        if (trigger) {
-          trigger.kill();
-        }
+        if (trigger) trigger.kill();
       }
     };
   }, []);
@@ -216,17 +155,9 @@ export default function About({ data }) {
 
   return (
     <>
-      {/* =================================================
-          ABOUT SECTION
-      ================================================= */}
-
       <section className="key-features py-5 about-features dark-background py-3">
         <div className="container" style={{ maxWidth: "1290px" }}>
           <div className="row align-items-center g-5">
-            {/* ==========================================
-                LEFT CONTENT
-            ========================================== */}
-
             <div
               className="col-lg-6"
               data-aos="fade-right"
@@ -234,7 +165,7 @@ export default function About({ data }) {
               data-aos-once="true"
             >
               <h2
-                className="kf-title text-white fs-1 text-uppercase aos-init aos-animate"
+                className="kf-title text-white fs-1 text-uppercase"
                 data-aos="fade-down"
                 data-aos-delay="100"
                 data-aos-duration="800"
@@ -244,7 +175,6 @@ export default function About({ data }) {
               </h2>
 
               <div className="lin_sec"></div>
-
               <div className="clearfix"></div>
 
               <p
@@ -281,10 +211,6 @@ export default function About({ data }) {
               </div>
             </div>
 
-            {/* ==========================================
-                RIGHT IMAGE
-            ========================================== */}
-
             <div
               className="col-lg-6"
               data-aos="fade-left"
@@ -307,34 +233,12 @@ export default function About({ data }) {
         </div>
       </section>
 
-      {/* =====================================================
-          VIDEO SECTION
-
-          SAME HTML STRUCTURE / CLASSES
-          DYNAMIC CONTENT
-      ===================================================== */}
-
-      {/* =====================================================
-    VIDEO SECTION
-
-    SAME HTML STRUCTURE / CLASSES
-    DYNAMIC CONTENT
-===================================================== */}
-
       <section className="py-5 ideo-grow-se rs-video-zoom-sec">
         <div className="container text-center">
           <div className="rs-video-content">
-            {/* ==========================================
-          VIDEO TITLE
-      ========================================== */}
-
             <div className="rs-video-title">
               <h4 className="fw-bold">{videoTitle}</h4>
             </div>
-
-            {/* ==========================================
-          VIDEO
-      ========================================== */}
 
             <div className="rs-video-wrap">
               <a
@@ -349,7 +253,6 @@ export default function About({ data }) {
                   className="img-fluid rounded shadow rounded-5 video-thumb"
                   loading="lazy"
                 />
-
                 <span className="play-btn" aria-hidden="true"></span>
               </a>
             </div>

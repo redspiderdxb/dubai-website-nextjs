@@ -1,6 +1,6 @@
 // frontend/components/templates/GraphicDesignTemplate.js
 
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -8,24 +8,12 @@ import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function GraphicDesignTemplate({ data }) {
-  // ============================================
-  // LIGHTBOX STATE
-  // ============================================
-
   const [galleryLightboxOpen, setGalleryLightboxOpen] = useState(false);
   const [galleryLightboxIndex, setGalleryLightboxIndex] = useState(0);
-
-  // ============================================
-  // LOADING
-  // ============================================
 
   if (!data) {
     return <div className="text-center py-5">Loading...</div>;
   }
-
-  // ============================================
-  // DYNAMIC FIELDS
-  // ============================================
 
   const {
     name,
@@ -50,19 +38,11 @@ export default function GraphicDesignTemplate({ data }) {
     cta_button_link,
     cta_background,
 
-    // ============================================
-    // REPEATER DATA
-    // ============================================
-
     features = [],
     benefits = [],
     processes = [],
     faqs = [],
     gallery = [],
-
-    // ============================================
-    // FRONTEND SETTINGS
-    // ============================================
 
     layout_style = "grid",
     columns_count = 3,
@@ -75,10 +55,6 @@ export default function GraphicDesignTemplate({ data }) {
     button_text_color = "#FFFFFF",
     section_padding = "large",
 
-    // ============================================
-    // SECTION VISIBILITY
-    // ============================================
-
     show_hero = true,
     show_intro = true,
     show_features = true,
@@ -88,10 +64,6 @@ export default function GraphicDesignTemplate({ data }) {
     show_faqs = true,
     show_gallery = true,
     show_cta = true,
-
-    // ============================================
-    // CONTENT CUSTOMIZATION
-    // ============================================
 
     hero_button_text = "Get Started",
     hero_button_url = "/contact",
@@ -117,17 +89,9 @@ export default function GraphicDesignTemplate({ data }) {
     cta_subtitle = "",
     cta_button_url = "/contact",
 
-    // ============================================
-    // ANIMATION
-    // ============================================
-
     animation_enabled = false,
     animation_type = "fade",
     animation_duration = "medium",
-
-    // ============================================
-    // SECTION ORDER
-    // ============================================
 
     section_order = [
       "hero",
@@ -140,27 +104,188 @@ export default function GraphicDesignTemplate({ data }) {
       "cta",
     ],
 
-    // ============================================
-    // CUSTOM CODE
-    // ============================================
-
     custom_css = "",
     custom_js = "",
   } = data;
 
-  // ============================================
+  // ============================================================
   // CIRCLE TEXT
-  // ============================================
+  // ============================================================
 
   const circleText = "Years of Design Experience";
 
-  // ============================================
-  // FALLBACK DATA
-  // ============================================
+  // ============================================================
+  // INTRO TEXT WORD SPLITTER
+  // ============================================================
 
-  // ============================================
+  const accentWords = [
+    "RedSpider",
+    "graphic",
+    "design",
+    "creativity",
+    "innovation",
+    "Dubai",
+    "UAE",
+  ];
+
+  const splitTextIntoWords = (text) => {
+    if (!text) return null;
+
+    const words = String(text).trim().split(/\s+/);
+
+    return words.map((word, index) => {
+      const cleanWord = word
+        .replace(/[.,!?;:]+$/g, "")
+        .replace(/^["']|["']$/g, "");
+
+      const isAccent = accentWords.includes(cleanWord);
+
+      return (
+        <Fragment key={`${cleanWord}-${index}`}>
+          <span
+            className={`rs-gd-intro__word ${
+              isAccent ? "rs-gd-intro__word--accent" : ""
+            }`}
+          >
+            {word}
+          </span>
+
+          {index < words.length - 1 ? " " : null}
+        </Fragment>
+      );
+    });
+  };
+
+  // ============================================================
+  // INTRO WORD SCROLL REVEAL
+  // ============================================================
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    let retryTimer = null;
+
+    const initIntroWordAnimation = () => {
+      if (!window.gsap || !window.ScrollTrigger) {
+        return false;
+      }
+
+      const gsap = window.gsap;
+      const ScrollTrigger = window.ScrollTrigger;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(".rs-gd-intro");
+
+      if (!section) {
+        return false;
+      }
+
+      const words = section.querySelectorAll(".rs-gd-intro__word");
+
+      if (!words.length) {
+        return false;
+      }
+
+      const existingTrigger = ScrollTrigger.getById("rs-intro-word-reveal");
+
+      if (existingTrigger) {
+        existingTrigger.kill();
+      }
+
+      gsap.killTweensOf(words);
+
+      // Initial state
+      gsap.set(words, {
+        opacity: 0,
+        y: 18,
+        filter: "blur(7px)",
+        willChange: "transform, opacity, filter",
+      });
+
+      // Word-by-word scroll reveal
+      gsap.to(words, {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 1,
+        ease: "none",
+
+        stagger: {
+          each: 0.025,
+        },
+
+        scrollTrigger: {
+          id: "rs-intro-word-reveal",
+
+          trigger: section,
+
+          start: "top 75%",
+          end: "top 20%",
+
+          scrub: 1,
+
+          invalidateOnRefresh: true,
+
+          pin: false,
+        },
+      });
+
+      ScrollTrigger.refresh();
+
+      return true;
+    };
+
+    const firstAttempt = initIntroWordAnimation();
+
+    if (!firstAttempt) {
+      let attempts = 0;
+
+      retryTimer = setInterval(() => {
+        attempts++;
+
+        const success = initIntroWordAnimation();
+
+        if (success || attempts >= 30) {
+          clearInterval(retryTimer);
+          retryTimer = null;
+        }
+      }, 100);
+    }
+
+    return () => {
+      if (retryTimer) {
+        clearInterval(retryTimer);
+        retryTimer = null;
+      }
+
+      if (window.ScrollTrigger) {
+        const trigger = window.ScrollTrigger.getById("rs-intro-word-reveal");
+
+        if (trigger) {
+          trigger.kill();
+        }
+      }
+
+      if (window.gsap) {
+        const words = document.querySelectorAll(".rs-gd-intro__word");
+
+        if (words.length) {
+          window.gsap.killTweensOf(words);
+
+          window.gsap.set(words, {
+            clearProps: "opacity,transform,filter,willChange",
+          });
+        }
+      }
+    };
+  }, []);
+
+  // ============================================================
   // GRAPHIC SERVICES
-  // ============================================
+  // ============================================================
 
   const graphicServices =
     features.length > 0
@@ -204,9 +329,9 @@ export default function GraphicDesignTemplate({ data }) {
           },
         ];
 
-  // ============================================
-  // BENEFIT CARDS
-  // ============================================
+  // ============================================================
+  // BENEFITS
+  // ============================================================
 
   const benefitCards =
     benefits.length > 0
@@ -242,9 +367,9 @@ export default function GraphicDesignTemplate({ data }) {
           },
         ];
 
-  // ============================================
-  // PROCESS DATA
-  // ============================================
+  // ============================================================
+  // PROCESS
+  // ============================================================
 
   const processData =
     processes.length > 0
@@ -272,9 +397,9 @@ export default function GraphicDesignTemplate({ data }) {
           },
         ];
 
-  // ============================================
-  // FAQ DATA
-  // ============================================
+  // ============================================================
+  // FAQ
+  // ============================================================
 
   const faqData =
     faqs.length > 0
@@ -303,18 +428,12 @@ export default function GraphicDesignTemplate({ data }) {
           },
         ];
 
-  // ============================================
-  // GALLERY DATA
-  // ============================================
+  // ============================================================
+  // GALLERY
+  // ============================================================
 
   const galleryImages =
     Array.isArray(gallery) && gallery.length > 0 ? gallery : [];
-
-  // ============================================
-  // REMOVE DUPLICATE IMAGE PATHS
-  //
-  // Same backend image path = only one card
-  // ============================================
 
   const uniqueGalleryImages = Array.from(
     new Map(
@@ -327,17 +446,13 @@ export default function GraphicDesignTemplate({ data }) {
     ).values(),
   );
 
-  // ============================================
-  // LIGHTBOX SLIDES
-  // ============================================
-
   const gallerySlides = uniqueGalleryImages.map((item) => ({
     src: item.image,
   }));
 
-  // ============================================
+  // ============================================================
   // DYNAMIC STYLES
-  // ============================================
+  // ============================================================
 
   const styles = {
     "--primary-color": primary_color,
@@ -348,32 +463,41 @@ export default function GraphicDesignTemplate({ data }) {
     "--button-text-color": button_text_color,
   };
 
-  // ============================================
+  // ============================================================
   // SECTION MAP
-  // ============================================
+  // ============================================================
 
   const sectionMap = {
-    // ============================================
+    // ==========================================================
     // HERO
-    // ============================================
+    // Original hero uses about-hero hero-marquee
+    // ==========================================================
 
     hero: {
       component: <ServiceHero service={data} key="hero" />,
       show: show_hero,
     },
 
-    // ============================================
+    // ==========================================================
     // INTRO
-    // ============================================
+    // Original classes + AOS restored
+    // ==========================================================
 
     intro: {
       component: (
         <section key="intro" className="rs-gd-intro">
           <span className="rs-gd-intro__shape" aria-hidden="true"></span>
 
-          <div className="container-fluid px-3 px-md-4 px-xl-5">
+          <div className="container px-3 px-md-4 px-xl-5">
             <div className="row gx-xl-5 align-items-start">
-              <div className="col-lg-3">
+              {/* =========================
+              LEFT RAIL
+          ========================= */}
+              <div
+                className="col-lg-3"
+                data-aos="fade-right"
+                data-aos-once="true"
+              >
                 <div className="rs-gd-intro__rail">
                   <span className="rs-gd-intro__rail-icon">
                     <i className="bi bi-bezier2"></i>
@@ -385,247 +509,281 @@ export default function GraphicDesignTemplate({ data }) {
                 </div>
               </div>
 
+              {/* =========================
+              CENTER CONTENT
+          ========================= */}
               <div className="col-lg-7">
                 <div className="rs-gd-intro__copy">
+                  {/* MAIN INTRO */}
                   <p className="rs-gd-intro__lead rs-gd-intro__reveal">
-                    {intro_description}
+                    {splitTextIntoWords(intro_description)}
                   </p>
 
+                  {/* SUPPORTING INTRO */}
                   <p className="rs-gd-intro__support rs-gd-intro__reveal">
-                    Whether you are a startup launching a new brand or an
-                    established company revamping your marketing strategies, we
-                    create designs that are tailored to meet your goals. Every
-                    project is carefully planned to ensure consistency whether
-                    for print or digital platforms.
+                    {splitTextIntoWords(
+                      "Whether you are a startup launching a new brand or an established company revamping your marketing strategies, we create designs that are tailored to meet your goals. Every project is carefully planned to ensure consistency whether for print or digital platforms.",
+                    )}
                   </p>
 
-                  <div className="rs-gd-intro__footer">
+                  {/* =========================
+                  EXPLORE LINK
+              ========================= */}
+                  <div
+                    className="rs-gd-intro__footer"
+                    data-aos="fade-up"
+                    data-aos-delay="150"
+                    data-aos-duration="800"
+                    data-aos-once="true"
+                  >
                     <a
                       className="rs-gd-intro__link"
                       href="#graphic-design-services"
                     >
                       <span>Explore our designs</span>
 
-                      <i className="bi bi-arrow-up-right"></i>
+                      <i
+                        className="bi bi-arrow-up-right"
+                        aria-hidden="true"
+                      ></i>
                     </a>
                   </div>
                 </div>
               </div>
 
-              <div className="col-lg-2">
+              {/* =========================
+              RIGHT META
+          ========================= */}
+              <div
+                className="col-lg-2"
+                data-aos="fade-left"
+                data-aos-once="true"
+              >
                 <div className="rs-gd-intro__meta">Creative since 2010</div>
               </div>
             </div>
           </div>
         </section>
       ),
+
       show: show_intro,
     },
 
-    // ============================================
+    // ==========================================================
     // FEATURES
-    // ============================================
+    // Original Archidex classes restored
+    // Dynamic data retained
+    // ==========================================================
 
     features: {
       component: (
-        <section key="features" className="premium-services-section">
-          <div className="premium-container">
-            <div className="premium-grid">
-              {/* LEFT */}
+        <section
+          key="features"
+          id="graphic-design-services"
+          className="archidex-accordion-sec dark-cs-bg dark-background dev-before"
+        >
+          <div className="archidex-bg-shape"></div>
 
-              <div className="premium-col premium-col-left">
-                <div className="premium-services">
-                  <span className="premium-badge">SERVICES</span>
+          <div
+            className="container rs-container-reveal"
+            style={{ maxWidth: "1550px" }}
+          >
+            <div className="rs-container-reveal-inner">
+              <div>
+                <div className="row g-5 align-items-start justify-content-between">
+                  {/* LEFT */}
 
-                  <h2 className="premium-title">{features_title}</h2>
+                  <div className="col-lg-5">
+                    <h2 className="rs-main-title">{features_title}</h2>
 
-                  <p className="premium-subtitle">{features_subtitle}</p>
+                    <p>{features_subtitle}</p>
 
-                  <div className="premium-accordion">
-                    {graphicServices.map((service, index) => (
-                      <div
-                        key={service.id || index}
-                        className="premium-accordion-item"
-                      >
-                        <button
-                          className={`premium-accordion-btn ${
-                            index === 0 ? "active" : ""
-                          }`}
-                          onClick={(e) => {
-                            const btn = e.currentTarget;
-
-                            const item = btn.parentElement;
-
-                            const body = item.querySelector(
-                              ".premium-accordion-body",
-                            );
-
-                            const isActive = btn.classList.contains("active");
-
-                            const allItems = document.querySelectorAll(
-                              ".premium-col-left .premium-accordion-item",
-                            );
-
-                            allItems.forEach((el) => {
-                              el.querySelector(
-                                ".premium-accordion-btn",
-                              ).classList.remove("active");
-
-                              el.querySelector(
-                                ".premium-accordion-body",
-                              ).classList.remove("active");
-                            });
-
-                            if (!isActive) {
-                              btn.classList.add("active");
-
-                              body.classList.add("active");
-
-                              const images = document.querySelectorAll(
-                                ".premium-main-image",
-                              );
-
-                              images.forEach((img) =>
-                                img.classList.remove("active"),
-                              );
-
-                              const targetImage = document.querySelector(
-                                `.premium-main-image-${index + 1}`,
-                              );
-
-                              if (targetImage) {
-                                targetImage.classList.add("active");
-                              }
-                            }
-                          }}
-                        >
-                          <span className="premium-accordion-icon">
-                            {index === 0 ? "−" : "+"}
-                          </span>
-
-                          <span className="premium-accordion-title">
-                            {service.title}
-                          </span>
-                        </button>
-
+                    <div
+                      className="accordion rs-studio-list"
+                      id="rsStudioAccordion"
+                    >
+                      {graphicServices.map((service, index) => (
                         <div
-                          className={`premium-accordion-body ${
+                          key={service.id || index}
+                          className="accordion-item rs-studio-item"
+                        >
+                          <h3 className="accordion-header">
+                            <button
+                              className={`rs-studio-btn ${
+                                index !== 0 ? "collapsed" : ""
+                              }`}
+                              type="button"
+                              data-img={index}
+                              onClick={(e) => {
+                                const btn = e.currentTarget;
+
+                                const allButtons =
+                                  document.querySelectorAll(".rs-studio-btn");
+
+                                const allBodies = document.querySelectorAll(
+                                  ".rs-studio-list .accordion-collapse",
+                                );
+
+                                allButtons.forEach((button) => {
+                                  button.classList.add("collapsed");
+
+                                  const symbol =
+                                    button.querySelector(".rs-studio-symbol");
+
+                                  if (symbol) {
+                                    symbol.textContent = "+";
+                                  }
+                                });
+
+                                allBodies.forEach((body) => {
+                                  body.classList.remove("show");
+                                });
+
+                                btn.classList.remove("collapsed");
+
+                                const symbol =
+                                  btn.querySelector(".rs-studio-symbol");
+
+                                if (symbol) {
+                                  symbol.textContent = "−";
+                                }
+
+                                const currentBody = btn
+                                  .closest(".rs-studio-item")
+                                  ?.querySelector(".accordion-collapse");
+
+                                if (currentBody) {
+                                  currentBody.classList.add("show");
+                                }
+
+                                document
+                                  .querySelectorAll(".rs-studio-img")
+                                  .forEach((img) =>
+                                    img.classList.remove("active"),
+                                  );
+
+                                const targetImage = document.querySelector(
+                                  `.rs-studio-img-${index}`,
+                                );
+
+                                if (targetImage) {
+                                  targetImage.classList.add("active");
+                                }
+                              }}
+                            >
+                              <span className="rs-studio-symbol">
+                                {index === 0 ? "−" : "+"}
+                              </span>
+
+                              <span>{service.title}</span>
+                            </button>
+                          </h3>
+
+                          <div
+                            className={`accordion-collapse collapse ${
+                              index === 0 ? "show" : ""
+                            }`}
+                            data-bs-parent="#rsStudioAccordion"
+                          >
+                            <div className="accordion-body rs-studio-body">
+                              {service.description}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="letconnect mt-5 d-none">
+                      <span>Know More About :</span>
+                      <div className="line"></div>
+                      <a href="#">Contact us</a>
+                    </div>
+                  </div>
+
+                  {/* CENTER IMAGE */}
+
+                  <div className="col-lg-2 rs-studio-image-col">
+                    <div className="rs-studio-image-wrap">
+                      {[
+                        "1497366754035-f200968a6e72",
+                        "1517048676732-d65bc937f952",
+                        "1556761175-b413da4baf72",
+                        "1497366811353-6870744d04b2",
+                        "1552664730-d307ca884978",
+                        "1556761175-4b46a572b786",
+                      ].map((photo, index) => (
+                        <img
+                          key={photo}
+                          className={`rs-studio-img rs-studio-img-${index} ${
                             index === 0 ? "active" : ""
                           }`}
+                          src={`https://images.unsplash.com/photo-${photo}?q=80&w=1400&auto=format&fit=crop`}
+                          alt="Design showcase"
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* RIGHT PROCESS */}
+
+                  <div className="col-lg-5 px-lg-5">
+                    <div className="archidex-small-title mb-3 text-white">
+                      <h6 className="text-white">
+                        Our <br />
+                        Graphic Design
+                        <br />
+                        Process
+                      </h6>
+                    </div>
+
+                    <p>{processes_subtitle}</p>
+
+                    <div
+                      className="accordion archidex-accordion mt-4"
+                      id="archidexAccordion"
+                    >
+                      {processData.map((process, index) => (
+                        <div
+                          className="accordion-item"
+                          key={process.id || index}
                         >
-                          <p className="premium-accordion-text">
-                            {service.description}
-                          </p>
+                          <h2
+                            className="accordion-header"
+                            id={`headingGraphic${index}`}
+                          >
+                            <button
+                              className={`accordion-button ${
+                                index !== 0 ? "collapsed" : ""
+                              }`}
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target={`#collapseGraphic${index}`}
+                              aria-expanded={index === 0}
+                              aria-controls={`collapseGraphic${index}`}
+                            >
+                              <span className="arch-no">{index + 1}.</span>
+
+                              <span className="arch-name">{process.title}</span>
+
+                              <span className="arch-arrow">↗</span>
+                            </button>
+                          </h2>
+
+                          <div
+                            id={`collapseGraphic${index}`}
+                            className={`accordion-collapse collapse ${
+                              index === 0 ? "show" : ""
+                            }`}
+                            aria-labelledby={`headingGraphic${index}`}
+                            data-bs-parent="#archidexAccordion"
+                          >
+                            <div className="accordion-body">
+                              {process.description}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="premium-connect">
-                    <span className="premium-connect-label">
-                      Know More About:
-                    </span>
-
-                    <div className="premium-connect-line"></div>
-
-                    <a href="#" className="premium-connect-link">
-                      Contact us
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* CENTER */}
-
-              <div className="premium-col premium-col-center">
-                <div className="premium-image-wrapper">
-                  {[1, 2, 3, 4, 5, 6].map((num) => (
-                    <img
-                      key={num}
-                      className={`premium-main-image premium-main-image-${num} ${
-                        num === 1 ? "active" : ""
-                      }`}
-                      src={`https://images.unsplash.com/photo-${
-                        num === 1
-                          ? "1497366754035-f200968a6e72"
-                          : num === 2
-                            ? "1517048676732-d65bc937f952"
-                            : num === 3
-                              ? "1556761175-b413da4baf72"
-                              : num === 4
-                                ? "1497366811353-6870744d04b2"
-                                : num === 5
-                                  ? "1552664730-d307ca884978"
-                                  : "1556761175-4b46a572b786"
-                      }?q=80&w=1400&auto=format&fit=crop`}
-                      alt="Design showcase"
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* RIGHT */}
-
-              <div className="premium-col premium-col-right">
-                <div className="premium-process">
-                  <div className="premium-process-header">
-                    <span className="premium-badge">PROCESS</span>
-
-                    <h6 className="premium-process-title">Our Process</h6>
-                  </div>
-
-                  <p className="premium-process-subtitle">
-                    {processes_subtitle}
-                  </p>
-
-                  <div className="premium-process-accordion">
-                    {processData.map((process, index) => (
-                      <div
-                        key={process.id || index}
-                        className={`premium-process-item ${
-                          index === 0 ? "active" : ""
-                        }`}
-                      >
-                        <button
-                          className="premium-process-btn"
-                          onClick={(e) => {
-                            const btn = e.currentTarget;
-
-                            const item = btn.parentElement;
-
-                            const isActive = item.classList.contains("active");
-
-                            const allItems = document.querySelectorAll(
-                              ".premium-col-right .premium-process-item",
-                            );
-
-                            allItems.forEach((el) =>
-                              el.classList.remove("active"),
-                            );
-
-                            if (!isActive) {
-                              item.classList.add("active");
-                            }
-                          }}
-                        >
-                          <span className="premium-process-number">
-                            {index + 1}.
-                          </span>
-
-                          <span className="premium-process-name">
-                            {process.title}
-                          </span>
-
-                          <span className="premium-process-arrow">↗</span>
-                        </button>
-
-                        <div className="premium-process-body">
-                          <p className="premium-process-text">
-                            {process.description}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -633,47 +791,67 @@ export default function GraphicDesignTemplate({ data }) {
           </div>
         </section>
       ),
-
       show: show_features,
     },
 
-    // ============================================
+    // ==========================================================
     // BENEFITS
-    // ============================================
+    // Original agency classes + AOS restored
+    // ==========================================================
 
     benefits: {
       component: (
-        <section key="benefits" className="rs-benefits-v2">
-          <div className="rs-benefits-v2__container">
-            <h2 className="rs-benefits-v2__title">{benefits_title}</h2>
+        <section key="benefits" className="rs-agency-intro-sec">
+          <div className="container">
+            <h2 className="rs-agency-big-title">{benefits_title}</h2>
 
-            <div className="rs-benefits-v2__grid">
-              <div className="rs-benefits-v2__connect">
-                <span className="rs-benefits-v2__connect-text">
-                  Let's Connect :
-                </span>
-
-                <span className="rs-benefits-v2__connect-line"></span>
-
-                <a
-                  href={cta_button_link || "#"}
-                  className="rs-benefits-v2__button"
+            <div className="row rs-agency-bottom align-items-center">
+              <div className="col-lg-5">
+                <div
+                  className="letconnect mt-5"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  data-aos-once="true"
                 >
-                  {cta_button_text || "Book A Call"}
-                </a>
-              </div>
+                  <span
+                    data-aos="fade-right"
+                    data-aos-delay="100"
+                    data-aos-duration="700"
+                  >
+                    Let's Connect :
+                  </span>
 
-              <div className="rs-benefits-v2__description">
-                <p>{benefits_subtitle}</p>
-              </div>
-
-              <div className="rs-benefits-v2__right">
-                <span className="rs-benefits-v2__horizontal-line"></span>
-
-                <div className="rs-benefits-v2__circle">
                   <div
-                    className="rs-benefits-v2__circle-text"
-                    aria-hidden="true"
+                    className="line"
+                    data-aos="zoom-in"
+                    data-aos-delay="200"
+                    data-aos-duration="700"
+                  ></div>
+
+                  <a
+                    href={cta_button_link || "#"}
+                    data-aos="fade-left"
+                    data-aos-delay="300"
+                    data-aos-duration="700"
+                  >
+                    {cta_button_text || "Book A Call"}
+                  </a>
+                </div>
+              </div>
+
+              <div className="col-lg-4">
+                <p className="rs-agency-text">{benefits_subtitle}</p>
+              </div>
+
+              <div className="col-lg-1 d-none d-lg-block">
+                <div className="rs-agency-line"></div>
+              </div>
+
+              <div className="col-lg-1">
+                <div className="rs-agency-circle-wrap">
+                  <div
+                    className="rs-agency-scroll-text"
+                    id="rsAgencyCircleText"
                   >
                     {circleText.split("").map((char, index) => (
                       <span
@@ -689,93 +867,98 @@ export default function GraphicDesignTemplate({ data }) {
                     ))}
                   </div>
 
-                  <span className="rs-benefits-v2__circle-center">14+</span>
+                  <div className="rs-agency-circle-center">14+</div>
                 </div>
               </div>
             </div>
           </div>
         </section>
       ),
-
       show: show_benefits,
     },
 
-    // ============================================
-    // PROCESSES
-    // ============================================
+    // ==========================================================
+    // PROCESSES / WHY US
+    // Original section already same — animations/data-scroll restored
+    // ==========================================================
 
     processes: {
       component: (
         <section key="processes" className="rs-vertical-cards">
           <div className="rs-vertical-cards__sticky">
-            <div className="rs-vertical-cards__label">Scroll to explore</div>
+            {/* =========================
+            TOP HEADING
+        ========================= */}
+            <div className="rs-vertical-cards__top">
+              <div className="rs-vertical-cards__label">Scroll to explore</div>
 
-            <h2 className="rs-vertical-cards__word fw-bold text-uppercase text-white">
-              Why US
-            </h2>
+              <h2 className="rs-vertical-cards__word">WHY US</h2>
+            </div>
 
-            {benefitCards.map((card, index) => (
-              <div
-                key={card.id || index}
-                className={`rs-vertical-cards__lane rs-vertical-cards__lane--${
-                  index + 1
-                }`}
-              >
-                <article className="rs-vertical-cards__card">
-                  <div className="rs-vertical-cards__card-inner">
-                    <div className="rs-vertical-cards__card-head">
-                      <i
-                        className={`bi ${
-                          card.icon || "bi-star"
-                        } rs-vertical-cards__icon`}
-                      ></i>
+            {/* =========================
+            CARDS
+        ========================= */}
+            <div className="rs-vertical-cards__cards">
+              {benefitCards.map((card, index) => {
+                const speeds = ["1.04", "1.18", ".94", "1.1"];
 
-                      <h3 className="rs-vertical-cards__title">{card.title}</h3>
-                    </div>
+                return (
+                  <div
+                    key={card.id || index}
+                    className={`rs-vertical-cards__lane rs-vertical-cards__lane--${
+                      index + 1
+                    }`}
+                  >
+                    <article
+                      className="rs-vertical-cards__card"
+                      data-scroll-speed={speeds[index] || "1"}
+                    >
+                      <div className="rs-vertical-cards__card-inner">
+                        <div className="rs-vertical-cards__card-head">
+                          <i
+                            className={`bi ${
+                              card.icon || "bi-star"
+                            } rs-vertical-cards__icon`}
+                          ></i>
 
-                    <p className="rs-vertical-cards__text">
-                      {card.description}
-                    </p>
+                          <h3 className="rs-vertical-cards__title">
+                            {card.title}
+                          </h3>
+                        </div>
+
+                        <p className="rs-vertical-cards__text">
+                          {card.description}
+                        </p>
+                      </div>
+                    </article>
                   </div>
-                </article>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
         </section>
       ),
 
       show: show_processes,
     },
-
-    // ============================================
+    // ==========================================================
     // GALLERY
-    //
-    // HOMEPAGE PORTFOLIO UI
-    // Dynamic backend images
-    // Duplicate paths removed
-    // Zoom only
-    // NO WEBSITE URL
-    // ============================================
+    // ⚠️ SAME CURRENT GALLERY — DO NOT CHANGE
+    // ==========================================================
 
     gallery: {
       component: (
         <>
-          {/* ============================================
-              LIGHTBOX
-          ============================================ */}
-
           <Lightbox
             open={galleryLightboxOpen}
             close={() => setGalleryLightboxOpen(false)}
             index={galleryLightboxIndex}
             slides={gallerySlides}
           />
-
-          {/* ============================================
-              HOMEPAGE PORTFOLIO LAYOUT
-          ============================================ */}
-
-          <section id="portfolio" className="portfolio section pt-0">
+          <section
+            id="portfolio"
+            className="portfolio section pt-0 rs-custom-gallery"
+          >
             <div className="container">
               <div
                 className="isotope-layout"
@@ -783,11 +966,6 @@ export default function GraphicDesignTemplate({ data }) {
                 data-layout="masonry"
                 data-sort="original-order"
               >
-                {/* ============================================
-                    PORTFOLIO INTRO
-                    Same presentation style
-                ============================================ */}
-
                 <div className="rs-gd-intro py-5">
                   <div className="container-fluid px-3 px-md-4 px-xl-5">
                     <div className="row align-items-center">
@@ -820,11 +998,6 @@ export default function GraphicDesignTemplate({ data }) {
                   </div>
                 </div>
 
-                {/* ============================================
-                    HIDDEN FILTERS
-                    Same homepage behavior
-                ============================================ */}
-
                 <ul
                   className="portfolio-filters isotope-filters d-none"
                   data-aos="fade-up"
@@ -835,43 +1008,33 @@ export default function GraphicDesignTemplate({ data }) {
                   </li>
                 </ul>
 
-                {/* ============================================
-                    HOMEPAGE PORTFOLIO GRID
-                ============================================ */}
+                {/* =========================================
+          CUSTOM GALLERY GRID
+      ========================================= */}
 
-                <div className="row gy-4 isotope-container">
+                <div className="rs-custom-gallery-grid">
                   {uniqueGalleryImages.length > 0 ? (
                     uniqueGalleryImages.map((item, index) => (
                       <div
                         key={`${item.image}-${index}`}
-                        className="col-lg-4 col-md-6 portfolio-item isotope-item filter-app"
+                        className="rs-custom-gallery-item"
                       >
                         <div
-                          className="portfolio-content h-100"
+                          className="rs-custom-gallery-card portfolio-content h-100"
                           onClick={() => {
                             setGalleryLightboxIndex(index);
-
                             setGalleryLightboxOpen(true);
                           }}
                           role="button"
                           tabIndex={0}
-                          style={{
-                            cursor: "zoom-in",
-                          }}
                           onKeyDown={(e) => {
                             if (e.key === "Enter" || e.key === " ") {
                               e.preventDefault();
-
                               setGalleryLightboxIndex(index);
-
                               setGalleryLightboxOpen(true);
                             }
                           }}
                         >
-                          {/* ============================================
-                                IMAGE
-                            ============================================ */}
-
                           <img
                             src={item.image}
                             className="img-fluid"
@@ -879,25 +1042,17 @@ export default function GraphicDesignTemplate({ data }) {
                             loading="lazy"
                           />
 
-                          {/* ============================================
-                                HOMEPAGE INFO OVERLAY
-                                NO URL ICON
-                            ============================================ */}
-
+                          {/* EXISTING HOVER INFO */}
                           <div className="portfolio-info">
                             <h3>{item.title || "Gallery Image"}</h3>
 
                             {item.description && <p>{item.description}</p>}
 
-                            {/* ONLY ZOOM */}
-
                             <button
                               type="button"
                               onClick={(e) => {
                                 e.stopPropagation();
-
                                 setGalleryLightboxIndex(index);
-
                                 setGalleryLightboxOpen(true);
                               }}
                               className="preview-link border-0 bg-transparent text-white"
@@ -919,10 +1074,8 @@ export default function GraphicDesignTemplate({ data }) {
                       </div>
                     ))
                   ) : (
-                    <div className="col-12">
-                      <p className="text-center py-5">
-                        No gallery images available
-                      </p>
+                    <div className="rs-custom-gallery-empty">
+                      <p>No gallery images available</p>
                     </div>
                   )}
                 </div>
@@ -931,13 +1084,13 @@ export default function GraphicDesignTemplate({ data }) {
           </section>
         </>
       ),
-
       show: show_gallery,
     },
 
-    // ============================================
+    // ==========================================================
     // FAQ
-    // ============================================
+    // Original FAQ classes retained
+    // ==========================================================
 
     faqs: {
       component: (
@@ -968,8 +1121,6 @@ export default function GraphicDesignTemplate({ data }) {
 
             {faqData.length > 0 ? (
               <div className="row g-4">
-                {/* LEFT FAQ */}
-
                 <div className="col-lg-6">
                   <div className="accordion" id="faqLeft-graphic">
                     {faqData
@@ -1001,8 +1152,6 @@ export default function GraphicDesignTemplate({ data }) {
                       ))}
                   </div>
                 </div>
-
-                {/* RIGHT FAQ */}
 
                 <div className="col-lg-6">
                   <div className="accordion" id="faqRight-graphic">
@@ -1042,24 +1191,22 @@ export default function GraphicDesignTemplate({ data }) {
           </div>
         </section>
       ),
-
       show: show_faqs,
     },
 
-    // ============================================
+    // ==========================================================
     // CTA
-    // ============================================
+    // ==========================================================
 
     cta: {
       component: <ServiceCTA service={data} key="cta" />,
-
       show: show_cta,
     },
   };
 
-  // ============================================
+  // ============================================================
   // RENDER SECTIONS
-  // ============================================
+  // ============================================================
 
   const renderSections = () => {
     let order = section_order;
@@ -1094,9 +1241,9 @@ export default function GraphicDesignTemplate({ data }) {
       .filter(Boolean);
   };
 
-  // ============================================
+  // ============================================================
   // FINAL RENDER
-  // ============================================
+  // ============================================================
 
   return (
     <div style={styles}>

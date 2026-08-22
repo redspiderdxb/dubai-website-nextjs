@@ -1046,8 +1046,8 @@ export default function EcommerceTemplate({ data }) {
                 <div className="rs-content">
                   <span className="rs-label">Ecommerce Development</span>
 
-                  <h2 className="rs-title">
-                    Key Features of Our <span>Ecommerce Websites</span>
+                  <h2 className="rs-title re">
+                    Key Features of Our <span>eCommerce Websites</span>
                   </h2>
 
                   <p className="rs-description">
@@ -1107,9 +1107,14 @@ export default function EcommerceTemplate({ data }) {
           <div className="team-sticky">
             <div className="container">
               <div className="title-wrap">
-                <h2>{technologies_title}</h2>
+                <h2 className="title mb-4">Ecommerce 
 
-                <p>{technologies_subtitle}</p>
+                  <span className="red sse">Platforms We Work
+                With</span>
+
+                </h2>
+
+                <p className="rs-subtitl introline mb-5">{technologies_subtitle}</p>
               </div>
 
               <div className="gallery">
@@ -1264,7 +1269,6 @@ export default function EcommerceTemplate({ data }) {
       show: true,
     },
 
-  
     // =======================================================
     // FAQ
     // =======================================================

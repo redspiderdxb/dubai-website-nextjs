@@ -484,12 +484,12 @@ export default function LogoDesignTemplate({ data }) {
       component: (
         <section key="intro" className="archidex-accordion-sec">
           <div className="archidex-bg-shape"></div>
-          <div className="container" style={{ maxWidth: "1550px" }}>
+          <div className="container">
             <div className="archidex-top-line"></div>
             <div className="row g-5 align-items-start justify-content-between">
               <div className="col-lg-4">
                 <h2 className="archidex-title">{features_title}</h2>
-                <ul className="archidex-list">
+                <ul className="archidex-list dw">
                   {servicesData.map((item, index) => (
                     <li key={index}>
                       <span className="archidex-list-icon">
@@ -507,9 +507,13 @@ export default function LogoDesignTemplate({ data }) {
                   <a href={cta_button_link || "#"}> Book A Call </a>
                 </div>
               </div>
-              <div className="col-lg-6 px-lg-5">
+              <div className="col-lg-5 px-lg-5">
                 <div className="archidex-small-title">
-                  <h6>{processes_title}</h6>
+                  <h6>
+                    Our <br />
+                    Logo Design <br />
+                    Process
+                  </h6>
                 </div>
                 <div
                   className="accordion archidex-accordion"
@@ -541,7 +545,7 @@ export default function LogoDesignTemplate({ data }) {
                   ))}
                 </div>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <div className="recieve-format">
                   <h6 className="mb-4 fw-bold text-center">
                     What You Will Receive
@@ -786,7 +790,7 @@ export default function LogoDesignTemplate({ data }) {
                         className="col-lg-4 col-md-6 portfolio-item isotope-item filter-app"
                       >
                         <div
-                          className="portfolio-content h-100"
+                          className="portfolio-content ffee"
                           role="button"
                           tabIndex={0}
                           style={{
@@ -1032,67 +1036,20 @@ export default function LogoDesignTemplate({ data }) {
   );
 
   // ============================================
-  // 💬 CTA Section (Outside Section Order)
+  // 💬 Review Section (Outside Section Order)
   // ============================================
-  const CTASection = () => (
+  const ReviewSection = () => (
     <section
-      key="cta-section"
-      id="readytobuild"
-      className="readytobuild section light-background pt-0"
+      id="review-sec"
+      className="review-sec section light-background py-0"
     >
       <div className="container" style={{ maxWidth: "1100px" }}>
-        <div className="section-title text-center text-white mb-3">
-          <h2 className="fw-bold">Ready to build a strong brand identity?</h2>
-          <p className="rs-subtitle">
-            Let RedSpider create a professional logo that represents your
-            business the right way.
-          </p>
-        </div>
-      </div>
-      <div className="container" style={{ maxWidth: "1100px" }}>
-        <div className="inlinebtns text-center d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center">
-          <a
-            href={cta_button_link || "#"}
-            className="btn btn-animation btn-red d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-          >
-            <span className="btn-title">
-              {cta_button_text || "Schedule Free Consultation"}
-            </span>
-            <span className="btn-icon-wrap">
-              <img
-                src="/assets/img/icons/cc-icon.svg"
-                alt=""
-                className="btn-icon"
-              />
-            </span>
-          </a>
-          <a
-            href="#"
-            className="btn btn-animation btn-black d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-          >
-            <span className="btn-title">Call Now</span>
-            <span className="btn-icon-wrap">
-              <img
-                src="/assets/img/icons/phone.svg"
-                alt=""
-                className="btn-icon"
-              />
-            </span>
-          </a>
-          <a
-            href="https://wa.me/971505698733"
-            target="_blank"
-            className="btn btn-animation btn-green d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
-          >
-            <span className="btn-title">Whatsapp Us</span>
-            <span className="btn-icon-wrap">
-              <img
-                src="/assets/img/icons/whatsapp.svg"
-                alt=""
-                className="btn-icon"
-              />
-            </span>
-          </a>
+        <div className="review-wrap">
+          <img
+            src="/assets/img/reviewimg.png"
+            alt="Reviews"
+            className="img-fluid"
+          />
         </div>
       </div>
     </section>
@@ -1108,22 +1065,11 @@ export default function LogoDesignTemplate({ data }) {
         {renderSections()}
         <PackagesSection />
         <IndustriesMarquee />
-        <CTASection />
-        {/* Review Section */}
-        <section
-          id="review-sec"
-          className="review-sec section light-background py-0"
-        >
-          <div className="container" style={{ maxWidth: "1100px" }}>
-            <div className="review-wrap">
-              <img
-                src="/assets/img/reviewimg.png"
-                alt="Reviews"
-                className="img-fluid"
-              />
-            </div>
-          </div>
-        </section>
+        <ReviewSection />
+        {/* ============================================
+            CTA SECTION - MOVED TO THE BOTTOM
+        ============================================ */}
+        <ServiceCTA service={data} key="cta-bottom" />
       </main>
       {custom_js && <script dangerouslySetInnerHTML={{ __html: custom_js }} />}
     </div>

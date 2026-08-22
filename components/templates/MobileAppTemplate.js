@@ -439,13 +439,13 @@ export default function MobileAppTemplate({ data }) {
           id="mobile-app-ser"
           className="mobile-app-ser section dark-background rs-service-grid-outline"
         >
-          <div className="container" style={{ maxWidth: "1100px" }}>
+          <div className="container" >
             <div className="section-title text-center text-white mb-3">
               <h2 className="fw-bold">{features_title}</h2>
               <p className="rs-subtitle">{features_subtitle}</p>
             </div>
           </div>
-          <div className="container" style={{ maxWidth: "1150px" }}>
+          <div className="container" >
             <div className="row rs-grid-row text-center">
               {servicesData.slice(0, 4).map((service, index) => (
                 <div
@@ -519,7 +519,7 @@ export default function MobileAppTemplate({ data }) {
           id="whychooseus"
           className="whychooseus section light-background"
         >
-          <div className="container" style={{ maxWidth: "1100px" }}>
+          <div className="container" >
             <div className="section-title text-center text-white mb-3">
               <h2 className="fw-bold">{benefits_title}</h2>
               <p className="rs-subtitle">{benefits_subtitle}</p>
@@ -553,7 +553,7 @@ export default function MobileAppTemplate({ data }) {
     processes: {
       component: (
         <section key="processes" id="process-sec" className="process-sec py-5">
-          <div className="container" style={{ maxWidth: "1100px" }}>
+          <div className="container" >
             <div className="section-title text-center text-white mb-3">
               <h2 className="fw-bold">{processes_title}</h2>
               <p className="rs-subtitle">{processes_subtitle}</p>
@@ -759,7 +759,7 @@ export default function MobileAppTemplate({ data }) {
       id="readytobuild"
       className="readytobuild section light-background"
     >
-      <div className="container" style={{ maxWidth: "1100px" }}>
+      <div className="container" >
         <div className="section-title text-center text-white mb-3">
           <h2 className="fw-bold">Ready to build a strong brand identity?</h2>
           <p className="rs-subtitle">
@@ -768,7 +768,7 @@ export default function MobileAppTemplate({ data }) {
           </p>
         </div>
       </div>
-      <div className="container" style={{ maxWidth: "1100px" }}>
+      <div className="container" >
         <div className="inlinebtns text-center d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center">
           <a
             href={cta_button_link || "#"}
@@ -825,7 +825,7 @@ export default function MobileAppTemplate({ data }) {
       key="industries"
       className="industry-devlopment section dark-background"
     >
-      <div className="container mb-4" style={{ maxWidth: "1100px" }}>
+      <div className="container mb-4" >
         <div className="section-title text-center text-white mb-3">
           <h2 className="fw-normal">
             Industries Using Mobile Applications in UAE
