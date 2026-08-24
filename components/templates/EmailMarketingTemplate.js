@@ -4,7 +4,6 @@ import { useState, useEffect, Fragment } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function EmailMarketingTemplate({ data }) {
@@ -611,7 +610,75 @@ export default function EmailMarketingTemplate({ data }) {
     // ============================================
 
     hero: {
-      component: <ServiceHero service={data} key="hero" />,
+      component: (
+        <section
+          key="hero"
+          className="design-developemnt-hero hero-marquee"
+          style={{
+            backgroundImage: hero_background
+              ? `url(${
+                  process.env.NEXT_PUBLIC_IMAGE_URL ||
+                  "http://localhost/redspider/public"
+                }/storage/${hero_background})`
+              : hero_image
+                ? `url(${
+                    process.env.NEXT_PUBLIC_IMAGE_URL ||
+                    "http://localhost/redspider/public"
+                  }/storage/${hero_image})`
+                : "none",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="container">
+            <div className="row align-items-center">
+              <div
+                className="col-lg-12"
+                data-aos="fade-right"
+                data-aos-duration="800"
+                data-aos-once="true"
+              >
+                <div className="rs-process-title-sec">
+                  <h1 className="rs-process-title mb-3">
+                    Email Marketing
+                    {hero_subtitle && (
+                      <span className="rs-process-highlight">
+                        Services in Dubai
+                        <svg
+                          className="rs-process-underline"
+                          viewBox="0 0 320 22"
+                          preserveAspectRatio="none"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
+                        </svg>
+                      </span>
+                    )}
+                  </h1>
+
+                  {hero_description && (
+                    <p
+                      className="rs-process-text mb-3"
+                      data-aos="fade-up"
+                      data-aos-delay="150"
+                      data-aos-duration="700"
+                      data-aos-once="true"
+                    >
+                      RedSpider provides professional email marketing in Dubai
+                      to help businesses communicate with customers, promote
+                      products and generate leads. We plan and manage targeted
+                      email campaigns, newsletters, automated sequences and
+                      customer retention campaigns based on your audience and
+                      business goals.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ),
       show: show_hero,
     },
 
@@ -655,11 +722,7 @@ export default function EmailMarketingTemplate({ data }) {
                     {splitTextIntoWords(intro_description)}
                   </p>
 
-                  <p className="rs-gd-intro__support rs-gd-intro__reveal">
-                    {splitTextIntoWords(
-                      "Whether you are launching a new product, promoting a seasonal offer, or building long-term customer relationships, we create email campaigns that are tailored to your goals and audience. Every campaign is carefully planned to deliver consistent brand communication across devices.",
-                    )}
-                  </p>
+                  
 
                   <div
                     className="rs-gd-intro__footer"
@@ -734,7 +797,8 @@ export default function EmailMarketingTemplate({ data }) {
                     data-aos-duration="700"
                     data-aos-once="true"
                   >
-                    {features_subtitle}
+                   We create targeted email campaigns based on your business goals, audience interests and customer journey to support engagement, lead nurturing and retention.
+
                   </p>
 
                   <div
@@ -834,11 +898,11 @@ export default function EmailMarketingTemplate({ data }) {
                 {/* RIGHT - Process Accordion */}
                 <div className="col-lg-5 px-lg-5">
                   <div className="archidex-small-title mb-3 text-white">
-                    <h6 className="text-white">
+                    <h2 className="text-white">
                       Our <br />
                       Email Marketing <br />
                       Process
-                    </h6>
+                    </h2>
                   </div>
                   <p
                     data-aos="fade-left"
@@ -855,7 +919,7 @@ export default function EmailMarketingTemplate({ data }) {
                   >
                     {processData.map((process, index) => (
                       <div className="accordion-item" key={process.id || index}>
-                        <h2 className="accordion-header">
+                        <h3 className="accordion-header">
                           <button
                             className={`accordion-button ${activeProcess === index ? "" : "collapsed"}`}
                             type="button"
@@ -872,7 +936,7 @@ export default function EmailMarketingTemplate({ data }) {
                             <span className="arch-name">{process.title}</span>
                             <span className="arch-arrow">↗</span>
                           </button>
-                        </h2>
+                        </h3>
                         <div
                           id={`collapseProcess${index}`}
                           className={`accordion-collapse collapse ${activeProcess === index ? "show" : ""}`}
@@ -1878,132 +1942,7 @@ export default function EmailMarketingTemplate({ data }) {
       show: true,
     },
 
-    // ============================================
-    // GALLERY - portfolio section
-    // ============================================
-
-    gallery: {
-      component: (
-        <>
-          <Lightbox
-            open={galleryLightboxOpen}
-            close={() => setGalleryLightboxOpen(false)}
-            index={galleryLightboxIndex}
-            slides={gallerySlides}
-          />
-
-          <section
-            key="gallery"
-            id="portfolio"
-            className="portfolio section pt-0 rs-custom-gallery"
-            data-aos="fade-up"
-            data-aos-duration="800"
-            data-aos-once="true"
-          >
-            <div className="rs-gd-intro py-5">
-              <div className="container-fluid px-3 px-md-4 px-xl-5">
-                <div className="row align-items-center">
-                  <div className="col-12">
-                    <div
-                      className="rs-gd-intro__copy"
-                      style={{ maxWidth: "100%", margin: "auto" }}
-                    >
-                      <h2
-                        className="rs-gd-intro__lead rs-gd-intro__reveal fade-title mb-3"
-                        style={{ maxWidth: "1000px", margin: "auto" }}
-                      >
-                        {gallery_title || "Our Gallery"}
-                      </h2>
-                      {gallery_subtitle && (
-                        <p className="rs-gd-intro__lead rs-gd-intro__reveal text-center fs-5">
-                          {gallery_subtitle}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="container">
-              <div
-                className="isotope-layout"
-                data-default-filter="*"
-                data-layout="masonry"
-                data-sort="original-order"
-              >
-                <div className="rs-custom-gallery-grid">
-                  {uniqueGalleryImages.length > 0 ? (
-                    uniqueGalleryImages.map((item, index) => (
-                      <div
-                        key={`${item.image}-${index}`}
-                        className="rs-custom-gallery-item"
-                      >
-                        <div
-                          className="rs-custom-gallery-card portfolio-content h-100"
-                          role="button"
-                          tabIndex={0}
-                          style={{ cursor: "zoom-in" }}
-                          onClick={() => {
-                            setGalleryLightboxIndex(index);
-                            setGalleryLightboxOpen(true);
-                          }}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.preventDefault();
-                              setGalleryLightboxIndex(index);
-                              setGalleryLightboxOpen(true);
-                            }
-                          }}
-                        >
-                          <img
-                            src={item.image}
-                            className="img-fluid"
-                            alt={item.title || "Gallery Image"}
-                            loading="lazy"
-                          />
-
-                          <div className="portfolio-info">
-                            <h3>{item.title || "Gallery"}</h3>
-                            {item.description && <p>{item.description}</p>}
-
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setGalleryLightboxIndex(index);
-                                setGalleryLightboxOpen(true);
-                              }}
-                              className="preview-link border-0 bg-transparent text-white"
-                              style={{
-                                fontSize: "1.2rem",
-                                cursor: "zoom-in",
-                              }}
-                              aria-label={`View ${item.title || "Gallery Image"}`}
-                            >
-                              <i
-                                className="bi bi-zoom-in"
-                                aria-hidden="true"
-                              ></i>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="rs-custom-gallery-empty">
-                      <p>No gallery images available</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      ),
-      show: show_gallery,
-    },
-
+  
     // ============================================
     // FAQS - home-faq rs-faq-sec
     // ============================================
@@ -2028,7 +1967,7 @@ export default function EmailMarketingTemplate({ data }) {
             }}
           >
             <div
-              className="text-start mb-5 border-bottom pb-3"
+              className="text-center mb-5 border-bottom pb-3"
               data-aos="fade-up"
               data-aos-delay="100"
               data-aos-duration="700"
@@ -2053,7 +1992,7 @@ export default function EmailMarketingTemplate({ data }) {
                           data-aos-duration="600"
                           data-aos-once="true"
                         >
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -2062,7 +2001,7 @@ export default function EmailMarketingTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
                           <div
                             id={`faq-email-left-${idx}`}
                             className="accordion-collapse collapse"
@@ -2088,7 +2027,7 @@ export default function EmailMarketingTemplate({ data }) {
                           data-aos-duration="600"
                           data-aos-once="true"
                         >
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -2097,7 +2036,7 @@ export default function EmailMarketingTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
                           <div
                             id={`faq-email-right-${idx}`}
                             className="accordion-collapse collapse"

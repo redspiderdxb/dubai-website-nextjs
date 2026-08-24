@@ -1,7 +1,7 @@
 // frontend/components/templates/EcommerceTemplate.js
 
 import { Fragment, useEffect } from "react";
-import ServiceHero from "../services/ServiceHero";
+
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function EcommerceTemplate({ data }) {
@@ -631,7 +631,74 @@ export default function EcommerceTemplate({ data }) {
     // =======================================================
 
     hero: {
-      component: <ServiceHero service={data} key="hero" />,
+      component: (
+        <section
+          key="hero"
+          className="design-developemnt-hero hero-marquee"
+          style={{
+            backgroundImage: hero_background
+              ? `url(${
+                  process.env.NEXT_PUBLIC_IMAGE_URL ||
+                  "http://localhost/redspider/public"
+                }/storage/${hero_background})`
+              : hero_image
+                ? `url(${
+                    process.env.NEXT_PUBLIC_IMAGE_URL ||
+                    "http://localhost/redspider/public"
+                  }/storage/${hero_image})`
+                : "none",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="container">
+            <div className="row align-items-center">
+              <div
+                className="col-lg-12"
+                data-aos="fade-right"
+                data-aos-duration="800"
+                data-aos-once="true"
+              >
+                <div className="rs-process-title-sec">
+                  <h1 className="rs-process-title mb-3">
+                    Ecommerce Development
+                    {hero_subtitle && (
+                      <span className="rs-process-highlight">
+                        Company in Dubai
+                        <svg
+                          className="rs-process-underline"
+                          viewBox="0 0 320 22"
+                          preserveAspectRatio="none"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
+                        </svg>
+                      </span>
+                    )}
+                  </h1>
+
+                  {hero_description && (
+                    <p
+                      className="rs-process-text mb-3"
+                      data-aos="fade-up"
+                      data-aos-delay="150"
+                      data-aos-duration="700"
+                      data-aos-once="true"
+                    >
+                      RedSpider provides professional ecommerce website
+                      development in Dubai for businesses that want to sell
+                      products and services online. We create secure, responsive
+                      and easy-to-manage online stores designed around your
+                      products, customers and business goals.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ),
       show: show_hero,
     },
 
@@ -674,7 +741,7 @@ export default function EcommerceTemplate({ data }) {
 
                   <p className="rs-gd-intro__support rs-gd-intro__reveal">
                     {splitTextIntoWords(
-                      "We create ecommerce solutions that help various businesses in Dubai and UAE sell more and store management easier.",
+                      "Our ecommerce development team works with businesses across Dubai and the UAE to create scalable online stores that support smooth shopping experiences and long-term business growth.",
                     )}
                   </p>
 
@@ -684,10 +751,7 @@ export default function EcommerceTemplate({ data }) {
                     data-aos-delay="150"
                     data-aos-once="true"
                   >
-                    <a
-                      className="rs-gd-intro__link"
-                      href="#graphic-design-services"
-                    >
+                    <a className="rs-gd-intro__link" href="/portfolio">
                       <span>Explore our Work</span>
 
                       <i className="bi bi-arrow-up-right"></i>
@@ -787,11 +851,11 @@ export default function EcommerceTemplate({ data }) {
                     data-aos-duration="800"
                     data-aos-once="true"
                   >
-                    <h6 className="text-white">
+                    <h2 className="text-white">
                       Our Ecommerce <br />
                       Development <br />
                       Process
-                    </h6>
+                    </h2>
                   </div>
 
                   <p
@@ -823,7 +887,7 @@ export default function EcommerceTemplate({ data }) {
                           data-aos-duration="700"
                           data-aos-once="true"
                         >
-                          <h2 className="accordion-header" id={headingId}>
+                          <h3 className="accordion-header" id={headingId}>
                             <button
                               className={`accordion-button ${
                                 isFirst ? "" : "collapsed"
@@ -842,7 +906,7 @@ export default function EcommerceTemplate({ data }) {
 
                               <span className="arch-arrow">↗</span>
                             </button>
-                          </h2>
+                          </h3>
 
                           <div
                             id={collapseId}
@@ -929,20 +993,13 @@ export default function EcommerceTemplate({ data }) {
             <div className="row rs-agency-bottom align-items-center">
               <div className="col-lg-1"></div>
 
-              <div className="col-lg-4">
+              <div className="col-lg-8">
                 <p className="rs-agency-text">
-                  Selecting a proper development partner is as crucial as
-                  picking the correct platform. We have technical knowledge and
-                  hands-on ecommerce experience in creating websites that
-                  produce measurable results for businesses.
-                </p>
-              </div>
-
-              <div className="col-lg-4">
-                <p className="rs-agency-text">
-                  We don't just develop online stores, we develop platforms that
-                  can help any business attract customers, improve conversions
-                  and grow their online presence.
+                  Building a successful online store requires more than
+                  selecting an ecommerce platform. Our team focuses on
+                  usability, performance, security and scalability to create
+                  ecommerce solutions that support both day-to-day operations
+                  and long-term business growth.
                 </p>
               </div>
 
@@ -1051,9 +1108,11 @@ export default function EcommerceTemplate({ data }) {
                   </h2>
 
                   <p className="rs-description">
-                    Your ecommerce website should be visually appealing, fast
-                    and user-friendly. We build practical features that make
-                    shopping easier and store management simpler.
+                    Your online store should make it easy for customers to
+                    discover products, complete purchases and manage their
+                    accounts. We build practical ecommerce features that also
+                    make products, inventory, orders and payments easier for
+                    businesses to manage.
                   </p>
                 </div>
               </div>
@@ -1107,14 +1166,14 @@ export default function EcommerceTemplate({ data }) {
           <div className="team-sticky">
             <div className="container">
               <div className="title-wrap">
-                <h2 className="title mb-4">Ecommerce 
-
-                  <span className="red sse">Platforms We Work
-                With</span>
-
+                <h2 className="title mb-4">
+                  Ecommerce
+                  <span className="red sse">Platforms We Work With</span>
                 </h2>
 
-                <p className="rs-subtitl introline mb-5">{technologies_subtitle}</p>
+                <p className="rs-subtitl introline mb-5">
+                  {technologies_subtitle}
+                </p>
               </div>
 
               <div className="gallery">
@@ -1308,7 +1367,7 @@ export default function EcommerceTemplate({ data }) {
                           className="accordion-item"
                           key={faq.id || `left-${idx}`}
                         >
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -1317,7 +1376,7 @@ export default function EcommerceTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
 
                           <div
                             id={`faq-ecommerce-left-${idx}`}
@@ -1342,7 +1401,7 @@ export default function EcommerceTemplate({ data }) {
                           className="accordion-item"
                           key={faq.id || `right-${idx}`}
                         >
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -1351,7 +1410,7 @@ export default function EcommerceTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
 
                           <div
                             id={`faq-ecommerce-right-${idx}`}

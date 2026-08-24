@@ -13814,32 +13814,18 @@ REDSPIDER CREATIVE / ACCORDION SECTION RESPONSIVE CONTENT-BASED LAYOUT==========
 
 .rsu-accordion-btn {
   width: 100%;
-
   border: 0;
-
   background: transparent;
-
   padding: 18px 0;
-
-  display: grid;
-
-  grid-template-columns:
-    50px minmax(0, 1fr) 24px;
-
+  /* display: grid; */
+  grid-template-columns: 50px minmax(0, 1fr) 24px;
   align-items: center;
-
-  gap: 18px;
-
-  color: #151515;
-
-  text-align: left;
-
-  font-size: 16px;
-
-  line-height: 1.4;
-
-  font-weight: 600;
-
+  /* gap: 18px; */
+  /* color: #151515; */
+  /* text-align: left; */
+  /* font-size: 16px; */
+  /* line-height: 1.4; */
+  /* font-weight: 600; */
   text-transform: uppercase;
 }
 
@@ -13854,6 +13840,15 @@ REDSPIDER CREATIVE / ACCORDION SECTION RESPONSIVE CONTENT-BASED LAYOUT==========
   margin: 0;
 }
 
+.hjs {
+  display: flex;
+  color: #151515;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 600;
+  justify-content: space-between;
+}
 
 .rsu-accordion-btn strong {
   min-width: 0;
@@ -24170,7 +24165,7 @@ span.red.sse {
 }
 
 /* Image */
-.rs-custom-gallery .rs-custom-gallery-card > img {
+.rs-custom-gallery .rs-custom-gallery-card>img {
   display: block;
   width: 100%;
   height: auto;
@@ -24184,7 +24179,7 @@ span.red.sse {
 }
 
 /* Keep existing hover feel but scoped */
-.rs-custom-gallery .rs-custom-gallery-card:hover > img {
+.rs-custom-gallery .rs-custom-gallery-card:hover>img {
   transform: scale(1.04);
 }
 
@@ -24262,7 +24257,7 @@ span.red.sse {
 ========================================================= */
 
 .rs-contact-hero-video {
-      height: 570px;
+  height: 570px;
   position: relative !important;
   overflow: hidden !important;
   isolation: isolate !important;
@@ -24345,9 +24340,10 @@ span.red.sse {
 
 @media (max-width: 767px) {
 
-  .rs-contact-hero-video{
+  .rs-contact-hero-video {
     height: 300px !important;
   }
+
   .rs-contact-hero-video .rs-contact-hero-video__bg {
     object-position: center center !important;
   }
@@ -24355,4 +24351,12 @@ span.red.sse {
   .rs-contact-hero-video .rs-contact-hero-video__overlay {
     background: rgba(0, 0, 0, 0.55) !important;
   }
+}
+
+.re-process .title-wrap h2 {
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 1.15;
+  font-weight: 400;
+  color: #071018;
+  margin-bottom: 20px;
 }

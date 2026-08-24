@@ -112,7 +112,7 @@ export default function FAQIndustries({ data }) {
               <div className="accordion" id="homeFaqRight">
                 {rightFaqs.map((faq, index) => (
                   <div className="accordion-item" key={`right-${index}`}>
-                    <h2 className="accordion-header">
+                    <h3 className="accordion-header">
                       <button
                         className="accordion-button collapsed"
                         type="button"
@@ -122,7 +122,7 @@ export default function FAQIndustries({ data }) {
                       >
                         {faq.question}
                       </button>
-                    </h2>
+                    </h3>
                     <div
                       id={`faq-right-${index}`}
                       className="accordion-collapse collapse"

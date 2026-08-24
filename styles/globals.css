@@ -870,7 +870,7 @@ body {
 }
 
 .accordion-trigger {
-  display: flex;
+
   align-items: center;
   gap: 15px;
   width: 100%;
@@ -2967,12 +2967,12 @@ button.rs-dropdown-trigger {
   width: 100%;
 }
 
-.kk-why-grid {
+/* .kk-why-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 50px;
   align-items: flex-start;
-}
+} */
 
 /* ===== LEFT COLUMN ===== */
 .kk-why-left {
@@ -11738,3 +11738,8 @@ button.rs-dropdown-trigger {
 
 }
 
+.rs-footer-menu-wrap {
+  position: relative;
+  z-index: 999999999999999999;
+  margin-top: -123px;
+}

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function BrochureDesignTemplate({ data }) {
@@ -336,7 +335,63 @@ export default function BrochureDesignTemplate({ data }) {
     // ============================================
 
     hero: {
-      component: <ServiceHero service={data} key="hero" />,
+      component: (
+        <section
+          key="hero"
+          className="design-developemnt-hero hero-marquee"
+          style={{
+            backgroundImage: hero_background
+              ? `url(${
+                  process.env.NEXT_PUBLIC_IMAGE_URL ||
+                  "http://localhost/redspider/public"
+                }/storage/${hero_background})`
+              : hero_image
+                ? `url(${
+                    process.env.NEXT_PUBLIC_IMAGE_URL ||
+                    "http://localhost/redspider/public"
+                  }/storage/${hero_image})`
+                : "none",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-lg-12" data-aos="fade-right">
+                <div className="rs-process-title-sec">
+                  <h1 className="rs-process-title mb-3">
+                    Brochure Design
+                    {hero_subtitle && (
+                      <span className="rs-process-highlight">
+                        Company in Dubai
+                        <svg
+                          className="rs-process-underline"
+                          viewBox="0 0 320 22"
+                          preserveAspectRatio="none"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
+                        </svg>
+                      </span>
+                    )}
+                  </h1>
+
+                  {hero_description && (
+                    <p className="rs-process-text mb-3">
+                      RedSpider creates professional brochures and company
+                      profiles for businesses across Dubai and the UAE. Our
+                      creative team combines clear content structure,
+                      professional layouts and brand-focused visuals to produce
+                      materials suitable for both print and digital use.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ),
       show: show_hero,
     },
 
@@ -360,10 +415,10 @@ export default function BrochureDesignTemplate({ data }) {
                 data-aos="fade-left"
                 data-aos-delay="150"
               >
-                <h2 className="about-heading rs-main-title text-white">
+                <h3 className="about-heading rs-main-title text-white">
                   {intro_description ||
                     "At RedSpider Web & Art Design, we offer professional brochure design services in Dubai for various businesses in the industry."}
-                </h2>
+                </h3>
               </div>
             </div>
           </div>
@@ -426,13 +481,13 @@ export default function BrochureDesignTemplate({ data }) {
                   data-aos="fade-up"
                   data-aos-delay="700"
                 >
-                  <h6>
+                  <h2 className="text-white">
                     Our
                     <br />
                     Brochure
                     <br />
                     Design Process
-                  </h6>
+                  </h2>
                 </div>
 
                 <div
@@ -460,11 +515,14 @@ export default function BrochureDesignTemplate({ data }) {
                             data-bs-target={`#${collapseId}`}
                             aria-expanded={isFirst}
                           >
+
+                            <h3 className="hjs text-white">
                             <span className="step-number">{index + 1}.</span>
 
                             <span className="step-title">{process.title}</span>
 
                             <span className="step-arrow">↗</span>
+                            </h3>
                           </button>
                         </div>
 
@@ -610,9 +668,7 @@ export default function BrochureDesignTemplate({ data }) {
                             </div>
 
                             <div className="rs-why-brochure__card-face rs-why-brochure__card-back">
-                              <h3 className="rs-why-brochure__card-title">
-                                {item.title}
-                              </h3>
+                              
 
                               <p className="rs-why-brochure__text">
                                 {item.description}
@@ -979,7 +1035,7 @@ export default function BrochureDesignTemplate({ data }) {
                           className="accordion-item"
                           key={faq.id || `left-${idx}`}
                         >
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -988,7 +1044,7 @@ export default function BrochureDesignTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
 
                           <div
                             id={`faq-brochure-left-${idx}`}
@@ -1015,7 +1071,7 @@ export default function BrochureDesignTemplate({ data }) {
                           className="accordion-item"
                           key={faq.id || `right-${idx}`}
                         >
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -1024,7 +1080,7 @@ export default function BrochureDesignTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
 
                           <div
                             id={`faq-brochure-right-${idx}`}

@@ -78,6 +78,22 @@ export default function ServiceDetail({ service }) {
   console.log("SERVICE DATA:", service);
 
   // =====================================================
+  // FINAL SERVICE URL
+  // =====================================================
+
+  const serviceUrl = `https://www.redspider.ae/service/${service.slug}/`;
+
+  // =====================================================
+  // IMAGE URL
+  // =====================================================
+
+  const serviceImage = service.image
+    ? `${
+        process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public"
+      }/storage/${service.image}`
+    : "https://www.redspider.ae/assets/img/og-image.webp";
+
+  // =====================================================
   // SEO DATA
   // =====================================================
 
@@ -88,18 +104,38 @@ export default function ServiceDetail({ service }) {
 
     keywords: service.seo_keywords || "",
 
-    canonical:
-      service.canonical_url ||
-      `https://www.redspider.ae/services/${service.slug}`,
+    canonical: service.canonical_url || serviceUrl,
 
-    image: service.image
-      ? `${
-          process.env.NEXT_PUBLIC_IMAGE_URL ||
-          "http://localhost/redspider/public"
-        }/storage/${service.image}`
-      : null,
+    image: serviceImage,
 
-    noIndex: false,
+    robots: "index,follow",
+  };
+
+  // =====================================================
+  // SERVICE SCHEMA
+  // =====================================================
+
+  const serviceSchema = {
+    "@type": "Service",
+
+    "@id": `${serviceUrl}#service`,
+
+    name: service.name || "Web Design & Development Services",
+
+    description: service.seo_description || service.description || "",
+
+    url: serviceUrl,
+
+    provider: {
+      "@id": "https://www.redspider.ae/#localbusiness",
+    },
+
+    areaServed: {
+      "@type": "Country",
+      name: "United Arab Emirates",
+    },
+
+    serviceType: service.name || "Web Design & Development",
   };
 
   // =====================================================
@@ -108,7 +144,7 @@ export default function ServiceDetail({ service }) {
 
   return (
     <Layout>
-      <SEO {...seoData} />
+      <SEO {...seoData} serviceSchema={serviceSchema} />
 
       <main className="main">
         <TemplateComponent data={service} service={service} />
@@ -177,6 +213,7 @@ export async function getStaticProps({ params }) {
       props: {
         service,
       },
+
       revalidate: 60,
     };
   } catch (error) {

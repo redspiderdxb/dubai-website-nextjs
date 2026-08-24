@@ -18,24 +18,67 @@ export default function Home({ homepageData, initialServices }) {
   // ============================================
 
   const seo = {
-    title: homepageData?.seo_title || "Home | RedSpider",
+    title:
+      homepageData?.seo_title ||
+      "Web Design Dubai | Web Design Company Dubai | RedSpider",
 
     description:
       homepageData?.seo_description ||
-      "RedSpider is a leading Web Development & Digital Marketing Company.",
+      "RedSpider is a web design company in Dubai creating professional, responsive and custom websites for businesses across the UAE. Explore our work and services.",
 
     keywords:
       homepageData?.seo_keywords ||
       "Web Development, SEO, Digital Marketing, Software Development",
 
-    canonical: homepageData?.canonical_url || "https://www.redspider.com/",
+    canonical: "https://www.redspider.ae/",
 
-    image: "https://www.redspider.com/images/og-image.jpg",
+    image: "https://www.redspider.ae/assets/img/og-image.webp",
+
+    // Demo / staging protection
+    robots: "noindex,nofollow",
   };
+
+  // ============================================
+  // FAQ SCHEMA
+  // Uses ONLY visible FAQ data
+  // ============================================
+
+  const faqs = Array.isArray(homepageData?.faqs)
+    ? homepageData.faqs
+    : [];
+
+  const validFaqs = faqs.filter(
+    (faq) =>
+      faq?.question &&
+      faq?.answer
+  );
+
+  const faqSchema =
+    validFaqs.length > 0
+      ? {
+          "@type": "FAQPage",
+          "@id": "https://www.redspider.ae/#faq",
+
+          mainEntity: validFaqs.map((faq) => ({
+            "@type": "Question",
+
+            name: faq.question,
+
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
 
   return (
     <>
-      <SEO {...seo} />
+      <SEO
+        {...seo}
+        includeBusinessSchema={true}
+        faqSchema={faqSchema}
+      />
 
       <Layout>
         <Hero data={homepageData} />
@@ -45,7 +88,10 @@ export default function Home({ homepageData, initialServices }) {
             Server-side initial data
         ========================================== */}
 
-        <Services data={homepageData} initialServices={initialServices} />
+        <Services
+          data={homepageData}
+          initialServices={initialServices}
+        />
 
         <QuoteForm />
 
@@ -73,33 +119,45 @@ export async function getStaticProps() {
     // Fetch Homepage CMS Data
     // ==========================================
 
-    const homepageData = await fetchHomepageData();
+    const homepageData =
+      await fetchHomepageData();
 
     // ==========================================
     // Services Limit
     // ==========================================
 
-    const servicesLimit = Number(homepageData?.services_limit) || 6;
+    const servicesLimit =
+      Number(homepageData?.services_limit) || 6;
 
     // ==========================================
     // Fetch Featured Services
     // SERVER SIDE
     // ==========================================
 
-    const initialServices = await fetchFeaturedServices(servicesLimit);
+    const initialServices =
+      await fetchFeaturedServices(
+        servicesLimit
+      );
 
     return {
       props: {
-        homepageData: homepageData || null,
+        homepageData:
+          homepageData || null,
 
-        initialServices: Array.isArray(initialServices) ? initialServices : [],
+        initialServices:
+          Array.isArray(initialServices)
+            ? initialServices
+            : [],
       },
 
       // Refresh data every 60 seconds
       revalidate: 60,
     };
   } catch (error) {
-    console.error("Error fetching homepage data:", error);
+    console.error(
+      "Error fetching homepage data:",
+      error
+    );
 
     return {
       props: {

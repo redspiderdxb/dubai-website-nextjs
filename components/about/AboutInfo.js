@@ -1,10 +1,13 @@
 export default function AboutInfo({ data }) {
   // Get data from API or use fallback
   const infoLabel = data?.info_label || "Who We are";
+
   const infoHeading =
     data?.info_heading ||
     "RedSpider is a professional web development company in Dubai that caters to the needs of every business. Our designers and developers have years of experience in web design, mobile application, ecommerce and digital marketing.";
-  const infoImage = data?.info_image || "assets/img/about-who.webp";
+
+  const infoImage = data?.info_image || "/assets/img/about-who.webp";
+
   const stats =
     data?.stats?.length > 0
       ? data.stats
@@ -18,19 +21,28 @@ export default function AboutInfo({ data }) {
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
 
+    // Full external URL
     if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
       return imagePath;
     }
 
+    // Laravel storage image
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
+
       const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+
       return `${baseUrl}${cleanPath}`;
     }
 
-    return imagePath;
+    // Local public assets
+    if (imagePath.startsWith("/")) {
+      return imagePath;
+    }
+
+    return `/${imagePath}`;
   };
 
   return (
@@ -40,6 +52,7 @@ export default function AboutInfo({ data }) {
           <div className="col-lg-3">
             <h2 className="about-label">{infoLabel}</h2>
           </div>
+
           <div className="col-lg-9">
             <p
               className="about-heading"
@@ -54,7 +67,9 @@ export default function AboutInfo({ data }) {
           <div className="col-12">
             <div className="letconnect">
               <span>Let's Connect :</span>
+
               <div className="line"></div>
+
               <a href="#">Book A Call</a>
             </div>
           </div>
@@ -75,14 +90,17 @@ export default function AboutInfo({ data }) {
                       aria-hidden="true"
                     ></i>
                   </div>
+
                   <div>
                     <span className="company_numbers">{stat.number}</span>
+
                     <p>{stat.label}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
           <div className="col-lg-9">
             <div className="about-image-card">
               <img

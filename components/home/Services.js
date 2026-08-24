@@ -51,7 +51,7 @@ export default function Services({ data }) {
       description:
         "Showcase your business with professional brochures and profiles. Clean designs that inform, impress, and build trust.",
       icon: "bi-images",
-      url: "/services/brochure-design-services",
+      url: "/services/brochure-design-company-in-dubai",
     },
 
     {
@@ -59,7 +59,7 @@ export default function Services({ data }) {
       description:
         "Connect with customers through effective email campaigns. Boost engagement, build loyalty, and grow your audience.",
       icon: "bi-envelope",
-      url: "/services/email-marketing-services",
+      url: "/services/email-marketing",
     },
   ];
 

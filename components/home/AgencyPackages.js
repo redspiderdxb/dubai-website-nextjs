@@ -510,7 +510,7 @@ export default function AgencyPackages() {
                       <p className="text-dark mt-4" data-aos="fade-up">
                         Redspider has become a trusted choice for website design
                         in Dubai as we have 14 years of experience in the
-                        industry. We have completed around 1500+ successful
+                        industry. We have completed  500+ successful
                         projects and the number continues to grow as we aim a
                         higher number. Our web designers are highly skilled who
                         are helping various businesses have a strong online

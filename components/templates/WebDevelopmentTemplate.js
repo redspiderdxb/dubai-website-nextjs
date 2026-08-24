@@ -189,7 +189,62 @@ export default function WebDevelopmentTemplate({ data }) {
           HERO
       ============================================ */}
 
-      {show_hero && <ServiceHero service={data} />}
+      {show_hero && (
+        <section
+          className="design-developemnt-hero hero-marquee"
+          style={{
+            backgroundImage: hero_background
+              ? `url(${
+                  process.env.NEXT_PUBLIC_IMAGE_URL ||
+                  "http://localhost/redspider/public"
+                }/storage/${hero_background})`
+              : hero_image
+                ? `url(${
+                    process.env.NEXT_PUBLIC_IMAGE_URL ||
+                    "http://localhost/redspider/public"
+                  }/storage/${hero_image})`
+                : "none",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-lg-12" data-aos="fade-right">
+                <div className="rs-process-title-sec">
+                  <h1 className="rs-process-title mb-3">
+                    Web Development
+                    {hero_subtitle && (
+                      <span className="rs-process-highlight">
+                        Company in Dubai
+                        <svg
+                          className="rs-process-underline"
+                          viewBox="0 0 320 22"
+                          preserveAspectRatio="none"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
+                        </svg>
+                      </span>
+                    )}
+                  </h1>
+
+                  {hero_description && (
+                    <p className="rs-process-text mb-3">
+                      RedSpider provides custom web development solutions for
+                      businesses that need reliable, scalable and easy-to-manage
+                      websites. From CMS development and WordPress solutions to
+                      custom functionality and integrations, we build websites
+                      around practical business and technical requirements.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ============================================
           FEATURES GRID
@@ -197,13 +252,13 @@ export default function WebDevelopmentTemplate({ data }) {
 
       {show_features && features.length > 0 && (
         <section className="re-process py-5">
-          <div className="container pt-lg-5" >
+          <div className="container pt-lg-5">
             <div className="row justify-content-center text-center">
               <div className="col-lg-12" data-aos="fade-up">
                 <div className="title-wrap text-start cus-title-ani-1">
-                  <h3 className="rs-main-title text-black fw-bold">
+                  <h2 className="rs-main-title text-black fw-bold">
                     {features_title}
-                  </h3>
+                  </h2>
 
                   <p className="cus-20 text-black mb-0">{features_subtitle}</p>
                 </div>
@@ -211,7 +266,7 @@ export default function WebDevelopmentTemplate({ data }) {
             </div>
           </div>
 
-          <div className="container py-lg-5" >
+          <div className="container py-lg-5">
             <div className="row g-4">
               {features.map((feature, index) => (
                 <div
@@ -253,7 +308,9 @@ export default function WebDevelopmentTemplate({ data }) {
                   {/* LEFT COLUMN */}
                   <div className="col-lg-6 rsu-left-col">
                     <div className="rsu-left-inner">
-                      <h2 className="rsu-main-title desc">{benefits_title}</h2>
+                      <h2 className="rsu-main-title desc">
+                        Why Businesses Choose RedSpider for Web Development
+                      </h2>
 
                       <div className="rsu-bottom-left">
                         <p className="rsu-intro">{benefits_subtitle}</p>
@@ -290,11 +347,14 @@ export default function WebDevelopmentTemplate({ data }) {
                               data-bs-target={`#rsu${index + 1}`}
                               aria-expanded={index === 0 ? "true" : "false"}
                             >
+                              <h3 className="hjs">
+                              
                               <span>{String(index + 1).padStart(2, "0")}</span>
 
                               <strong>{point.title}</strong>
 
                               <i className="bi bi-plus-lg"></i>
+                              </h3>
                             </button>
 
                             <div
@@ -331,11 +391,18 @@ export default function WebDevelopmentTemplate({ data }) {
           <div className="container" style={{ maxWidth: "1550px" }}>
             <div className="row g-5 align-items-start justify-content-between">
               <div className="col-lg-4">
-                <h2 className="archidex-title">{processes_title}</h2>
+                <h2 className="archidex-title">
+                  Custom Development for Business Requirements
+                </h2>
 
                 <ul className="archidex-list">
                   <li className="text-white">
-                    <span className="fs-5">{processes_subtitle}</span>
+                    <span className="fs-5">
+                      Every website has different technical requirements. We
+                      develop solutions around your content, functionality,
+                      integrations and future growth, giving your business a
+                      website that can evolve as your requirements change.
+                    </span>
                   </li>
                 </ul>
 
@@ -350,11 +417,11 @@ export default function WebDevelopmentTemplate({ data }) {
 
               <div className="col-lg-7 px-lg-5">
                 <div className="archidex-small-title">
-                  <h6>
-                    Our
-                    <br />
+                  <h2>
+                    Our Web Development  <br />
+                   
                     Process
-                  </h6>
+                  </h2>
                 </div>
 
                 <div
@@ -370,7 +437,7 @@ export default function WebDevelopmentTemplate({ data }) {
 
                     return (
                       <div className="accordion-item" key={process.id || index}>
-                        <h2 className="accordion-header">
+                        <h3 className="accordion-header">
                           <button
                             className={`accordion-button ${
                               isFirst ? "" : "collapsed"
@@ -386,7 +453,7 @@ export default function WebDevelopmentTemplate({ data }) {
 
                             <span className="arch-arrow">↗</span>
                           </button>
-                        </h2>
+                        </h3>
 
                         <div
                           id={collapseId}

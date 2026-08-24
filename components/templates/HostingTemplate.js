@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ServiceHero from "../services/ServiceHero";
+
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function HostingTemplate({ data }) {
@@ -96,6 +96,7 @@ export default function HostingTemplate({ data }) {
       "processes",
       "technologies",
       "gallery",
+      "hosting_tools",
       "faqs",
       "cta",
     ],
@@ -350,14 +351,82 @@ export default function HostingTemplate({ data }) {
   // ============================================
   const sectionMap = {
     hero: {
-      component: <ServiceHero service={data} key="hero" />,
+      component: (
+        <section
+          key="hero"
+          className="design-developemnt-hero hero-marquee"
+          style={{
+            backgroundImage: hero_background
+              ? `url(${
+                  process.env.NEXT_PUBLIC_IMAGE_URL ||
+                  "http://localhost/redspider/public"
+                }/storage/${hero_background})`
+              : hero_image
+                ? `url(${
+                    process.env.NEXT_PUBLIC_IMAGE_URL ||
+                    "http://localhost/redspider/public"
+                  }/storage/${hero_image})`
+                : "none",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="container">
+            <div className="row align-items-center">
+              <div
+                className="col-lg-12"
+                data-aos="fade-right"
+                data-aos-duration="800"
+                data-aos-once="true"
+              >
+                <div className="rs-process-title-sec">
+                  <h1 className="rs-process-title mb-3">
+                    Web Hosting
+                    {hero_subtitle && (
+                      <span className="rs-process-highlight">
+                        in Dubai
+                        <svg
+                          className="rs-process-underline"
+                          viewBox="0 0 320 22"
+                          preserveAspectRatio="none"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
+                        </svg>
+                      </span>
+                    )}
+                  </h1>
+
+                  {hero_description && (
+                    <p
+                      className="rs-process-text mb-3"
+                      data-aos="fade-up"
+                      data-aos-delay="150"
+                      data-aos-duration="700"
+                      data-aos-once="true"
+                    >
+                      RedSpider Web & Art Design provides reliable web hosting
+                      in Dubai for businesses that need secure, fast and
+                      professionally managed website hosting. Our hosting
+                      solutions offer flexible resources, security features and
+                      technical support for websites of different sizes and
+                      requirements.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ),
       show: show_hero,
     },
     intro: {
       component: (
         <section key="intro" className="rs-gd-intro">
           <span className="rs-gd-intro__shape" aria-hidden="true"></span>
-          <div className="container-fluid px-3 px-md-4 px-xl-5">
+          <div className="container px-3 px-md-4 px-xl-5">
             <div className="row gx-xl-5 align-items-start">
               <div className="col-lg-3">
                 <div className="rs-gd-intro__rail">
@@ -436,9 +505,6 @@ export default function HostingTemplate({ data }) {
                         </h3>
                       </div>
                       <div className="rs-why-brochure__card-face rs-why-brochure__card-back">
-                        <h3 className="rs-why-brochure__card-title">
-                          {solution.title}
-                        </h3>
                         <p className="rs-why-brochure__text">
                           {solution.description}
                         </p>
@@ -459,10 +525,7 @@ export default function HostingTemplate({ data }) {
     benefits: {
       component: (
         <section className="rs-mail-tech">
-          <div
-            className="container-fluid px-lg-5"
-            style={{ maxWidth: "1840px" }}
-          >
+          <div className="container px-lg-5">
             <div className="rs-mail-tech__frame">
               <span className="rs-mail-tech__scan" aria-hidden="true"></span>
               <div className="row align-items-center g-5 w-100">
@@ -483,7 +546,10 @@ export default function HostingTemplate({ data }) {
                 <div className="col-lg-5">
                   <div className="rs-mail-tech__content">
                     <p className="rs-mail-tech__description">
-                      {benefits_subtitle}
+                      RedSpider combines hosting infrastructure, security
+                      features, website management tools and technical
+                      assistance to help businesses maintain a reliable online
+                      presence.
                     </p>
                     <a
                       className="rs-mail-tech__button"
@@ -533,7 +599,7 @@ export default function HostingTemplate({ data }) {
     processes: {
       component: (
         <section className="kk-why-section">
-          <div className="kk-why-container" style={{ maxWidth: "1550px" }}>
+          <div className="container">
             <div className="kk-why-inner">
               <div className="kk-why-grid">
                 <div className="kk-why-left">
@@ -547,12 +613,14 @@ export default function HostingTemplate({ data }) {
                           onClick={() => handleAccordionClick(index)}
                           aria-expanded={activeIndex === index}
                         >
-                          <span className="kk-accordion-symbol">
-                            {activeIndex === index ? "−" : "+"}
-                          </span>
-                          <span className="kk-accordion-label">
-                            {item.title}
-                          </span>
+                          <h3 className="text-white">
+                            <span className="kk-accordion-symbol">
+                              {activeIndex === index ? "−" : "+"}
+                            </span>
+                            <span className="kk-accordion-label">
+                              {item.title}
+                            </span>
+                          </h3>
                         </button>
                         <div
                           className={`kk-accordion-content ${activeIndex === index ? "kk-open" : ""}`}
@@ -570,43 +638,6 @@ export default function HostingTemplate({ data }) {
                     <a href="#" className="kk-footer-link">
                       Contact us
                     </a>
-                  </div>
-                </div>
-                <div className="kk-why-right">
-                  <div className="kk-right-header">
-                    <h6 className="kk-right-title">
-                      Professional <br />
-                      Website Design <br /> Services
-                    </h6>
-                  </div>
-                  <div className="kk-process-accordion">
-                    {processData.map((item, index) => (
-                      <div className="kk-process-item" key={item.id || index}>
-                        <button
-                          className={`kk-process-btn ${activeProcess === index ? "kk-active" : ""}`}
-                          type="button"
-                          onClick={() => handleProcessClick(index)}
-                          aria-expanded={activeProcess === index}
-                        >
-                          <span className="kk-process-number">
-                            {index + 1}.
-                          </span>
-                          <span className="kk-process-name">{item.title}</span>
-                          <span
-                            className={`kk-process-arrow ${activeProcess === index ? "kk-rotated" : ""}`}
-                          >
-                            ↗
-                          </span>
-                        </button>
-                        <div
-                          className={`kk-process-content ${activeProcess === index ? "kk-open" : ""}`}
-                        >
-                          <div className="kk-process-body">
-                            {item.description}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
                   </div>
                 </div>
               </div>
@@ -680,7 +711,102 @@ export default function HostingTemplate({ data }) {
       ),
       show: show_technologies,
     },
-   
+
+    hosting_tools: {
+      component: (
+        <section className="rs-hosting-tools">
+          <span
+            className="rs-hosting-tools__floating-icon rs-hosting-tools__floating-icon--left"
+            aria-hidden="true"
+          >
+            <i className="bi bi-window-sidebar"></i>
+          </span>
+
+          <span
+            className="rs-hosting-tools__floating-icon rs-hosting-tools__floating-icon--right"
+            aria-hidden="true"
+          >
+            <i className="bi bi-envelope-paper"></i>
+          </span>
+
+          <div className="container">
+            <div className="row g-4 align-items-stretch">
+              {/* WEBSITE HOSTING MIGRATION */}
+
+              <div className="col-lg-6">
+                <article className="rs-hosting-tools__panel">
+                  <div className="rs-hosting-tools__panel-top">
+                    <span className="rs-hosting-tools__panel-icon">
+                      <i
+                        className="bi bi-window-sidebar"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+
+                    <div>
+                      <h2 className="rs-hosting-tools__title">
+                        Website Hosting Migration
+                      </h2>
+
+                      <p className="rs-hosting-tools__description">
+                        Already hosting your website with another provider?
+                        RedSpider can assist with moving eligible website files,
+                        databases and configurations to a suitable hosting
+                        environment. Migration requirements are reviewed
+                        according to the website platform, current server setup
+                        and selected hosting package.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* <div className="mt-4">
+                    <a
+                      href="/contact"
+                      className="btn btn-animation btn-red d-inline-flex align-items-center"
+                    >
+                      <span className="btn-title">
+                        Ask About Website Migration
+                      </span>
+                    </a>
+                  </div> */}
+                </article>
+              </div>
+
+              {/* SIMPLE WEBSITE AND HOSTING MANAGEMENT */}
+
+              <div className="col-lg-6">
+                <article className="rs-hosting-tools__panel rs-hosting-tools__panel--email">
+                  <div className="rs-hosting-tools__panel-top">
+                    <span className="rs-hosting-tools__panel-icon">
+                      <i
+                        className="bi bi-envelope-check"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+
+                    <div>
+                      <h2 className="rs-hosting-tools__title">
+                        Simple Website and Hosting Management
+                      </h2>
+
+                      <p className="rs-hosting-tools__description">
+                        Hosting customers can manage essential website functions
+                        through supported control-panel tools, including website
+                        files, databases, email accounts and applications. Our
+                        team can also provide assistance with hosting
+                        configuration and account-related requirements when
+                        needed.
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+      ),
+      show: true,
+    },
     faqs: {
       component: (
         <section
@@ -697,7 +823,7 @@ export default function HostingTemplate({ data }) {
               borderRadius: "30px",
             }}
           >
-            <div className="text-start mb-5 border-bottom pb-3">
+            <div className="text-center mb-5 border-bottom pb-3">
               <h2 className="fw-bold">{faqs_title}</h2>
               <p>{faqs_subtitle}</p>
             </div>
@@ -709,7 +835,7 @@ export default function HostingTemplate({ data }) {
                       .slice(0, Math.ceil(faqData.length / 2))
                       .map((faq, idx) => (
                         <div className="accordion-item" key={faq.id || idx}>
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -718,7 +844,7 @@ export default function HostingTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
                           <div
                             id={`faq-hosting-left-${idx}`}
                             className="accordion-collapse collapse"
@@ -736,7 +862,7 @@ export default function HostingTemplate({ data }) {
                       .slice(Math.ceil(faqData.length / 2))
                       .map((faq, idx) => (
                         <div className="accordion-item" key={faq.id || idx}>
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -745,7 +871,7 @@ export default function HostingTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
                           <div
                             id={`faq-hosting-right-${idx}`}
                             className="accordion-collapse collapse"
@@ -777,9 +903,16 @@ export default function HostingTemplate({ data }) {
   // ============================================
   const renderSections = () => {
     let order = section_order;
+
+    // Backend se string aa sakti hai
     if (typeof order === "string") {
-      order = order.split(",").map((s) => s.trim());
+      order = order
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
     }
+
+    // Agar backend se valid order nahi mila
     if (!Array.isArray(order) || order.length === 0) {
       order = [
         "hero",
@@ -793,11 +926,49 @@ export default function HostingTemplate({ data }) {
         "cta",
       ];
     }
+
+    // =====================================================
+    // FORCE HOSTING TOOLS BEFORE FAQ
+    // =====================================================
+
+    // Pehle agar backend ne hosting_tools bheja hai
+    // to usko remove kar do
+    order = order.filter((key) => key !== "hosting_tools");
+
+    // FAQ ki position find karo
+    const faqIndex = order.indexOf("faqs");
+
+    if (faqIndex !== -1) {
+      // FAQ se just pehle hosting_tools insert karo
+      order.splice(faqIndex, 0, "hosting_tools");
+    } else {
+      // FAQ nahi mila to CTA se pehle add karo
+      const ctaIndex = order.indexOf("cta");
+
+      if (ctaIndex !== -1) {
+        order.splice(ctaIndex, 0, "hosting_tools");
+      } else {
+        order.push("hosting_tools");
+      }
+    }
+
+    console.log("FINAL SECTION ORDER:", order);
+
     return order
       .map((key) => {
         const section = sectionMap[key];
-        if (!section) return null;
-        return section.show ? section.component : null;
+
+        if (!section) {
+          console.warn("Section not found:", key);
+          return null;
+        }
+
+        if (section.show === false) {
+          console.warn("Section hidden:", key);
+          return null;
+        }
+
+        return section.component;
       })
       .filter(Boolean);
   };

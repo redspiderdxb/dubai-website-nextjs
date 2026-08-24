@@ -35,11 +35,11 @@ export default function Footer() {
   const services = [
     {
       name: "Web Design & Development",
-      path: "/services/web-development",
+      path: "/service/web-development",
     },
     {
       name: "eCommerce Website Development",
-      path: "/services/ecommerce-development-services",
+      path: "/service/ecommerce-web-design-dubai",
     },
     {
       name: "Real Estate Website Development",
@@ -47,19 +47,19 @@ export default function Footer() {
     },
     {
       name: "Mobile App Development",
-      path: "/services/mobile-app-development-company-dubai",
+      path: "/service/mobile-app-development-company-dubai",
     },
     {
       name: "Branding & Logo Design",
-      path: "/services/logo-designing-company-dubai-brand-identity",
+      path: "/service/logo-designing-company-dubai-brand-identity",
     },
     {
       name: "Graphic Design",
-      path: "/services/graphic-design-services",
+      path: "/service/graphic-design-services",
     },
     {
       name: "Brochure & Company Profile Design",
-      path: "/services/brochure-design-services",
+      path: "/service/brochure-design-company-in-dubai",
     },
     {
       name: "SEO & Digital Marketing",
@@ -67,7 +67,7 @@ export default function Footer() {
     },
     {
       name: "Email Marketing",
-      path: "/services/email-marketing-services",
+      path: "/service/email-marketing",
     },
     {
       name: "SMS Marketing",
@@ -75,11 +75,11 @@ export default function Footer() {
     },
     {
       name: "Web Hosting & Server Solutions",
-      path: "/services/web-hosting",
+      path: "/service/web-hosting",
     },
     {
       name: "WhatsApp Business API Integration",
-      path: "/services/whatsapp-business-api-integration",
+      path: "/service/whatsapp-business-api-integration",
     },
     {
       name: "Website Maintenance & Support",
@@ -89,18 +89,16 @@ export default function Footer() {
 
   /* =====================================================
      FOOTER MENU
-
-     EXACT ORDER REQUIRED
   ===================================================== */
 
   const footerLinks = [
     {
       name: "About Us",
-      path: "/about",
+      path: "/about-us/",
     },
     {
       name: "Our Work",
-      path: "/portfolio",
+      path: "/our-portfolio/",
     },
     {
       name: "Products",
@@ -112,7 +110,7 @@ export default function Footer() {
     },
     {
       name: "Blog",
-      path: "/blog",
+      path: "/blog/",
     },
     {
       name: "Careers",
@@ -120,7 +118,7 @@ export default function Footer() {
     },
     {
       name: "Contact Us",
-      path: "/contact",
+      path: "/contact-us/",
     },
   ];
 
@@ -170,11 +168,6 @@ export default function Footer() {
           <div className="row rs-footer-main g-5">
             {/* =================================================
                 LEFT COLUMN
-
-                ORDER:
-                1. HEADING
-                2. IMAGE
-                3. MENU
             ================================================= */}
 
             <div className="col-lg-4 col-md-6 rs-footer-left">
@@ -199,7 +192,7 @@ export default function Footer() {
               </div>
 
               {/* =================================================
-                  MENU BELOW HEADING + IMAGE
+                  FOOTER MENU
               ================================================= */}
 
               <div className="rs-footer-menu-wrap">
@@ -228,16 +221,11 @@ export default function Footer() {
 
             {/* =================================================
                 MIDDLE COLUMN
-
                 OUR SERVICES
             ================================================= */}
 
             <div className="col-lg-4 col-md-6 rs-footer-services-col">
-              {/* SERVICES HEADING */}
-
               <div className="rs-footer-services-heading">Our Services</div>
-
-              {/* SERVICES LIST */}
 
               <ul className="rs-services">
                 {services.map((service) => (
@@ -261,17 +249,11 @@ export default function Footer() {
 
             {/* =================================================
                 RIGHT COLUMN
-
-                EMAIL
-                PHONE
-                SOCIAL
-                GET IN TOUCH
+                EMAIL / PHONE / SOCIAL / GET IN TOUCH
             ================================================= */}
 
             <div className="col-lg-4 col-md-12 rs-footer-right">
-              {/* =================================================
-                  EMAIL
-              ================================================= */}
+              {/* EMAIL */}
 
               <div className="rs-contact-card rs-contact-email">
                 <small>Get Questions?</small>
@@ -290,9 +272,7 @@ export default function Footer() {
                 </span>
               </div>
 
-              {/* =================================================
-                  PHONE
-              ================================================= */}
+              {/* PHONE */}
 
               <div className="rs-contact-card rs-contact-phone">
                 <small>Quick Answer?</small>
@@ -311,9 +291,7 @@ export default function Footer() {
                 </span>
               </div>
 
-              {/* =================================================
-                  SOCIAL ICONS
-              ================================================= */}
+              {/* SOCIAL ICONS */}
 
               <div className="rs-social">
                 {socialIcons.map((social) => (
@@ -338,15 +316,9 @@ export default function Footer() {
                 ))}
               </div>
 
-              {/* =================================================
-                  ONLY GET IN TOUCH
-
-                  FAQ + BLOG REMOVED
-              ================================================= */}
+              {/* GET IN TOUCH */}
 
               <div className="rs-footer-links bottom">
-                
-
                 <a
                   href="https://apps.apple.com/us/app/redspider-web-art-design/id6748980550?platform=vision"
                   target="_blank"
@@ -367,8 +339,7 @@ export default function Footer() {
                   <i className="bi bi-google-play"></i>
                 </a>
 
-                <Link href="/contact">Get In Touch</Link>
-
+                <Link href="/contact-us/">Get In Touch</Link>
               </div>
             </div>
           </div>
@@ -401,12 +372,8 @@ export default function Footer() {
       )}
 
       {/* =================================================
-          FIXED CONTACT BUTTONS
+          FIXED CONTACT BUTTON
       ================================================= */}
-
-      {/* =================================================
-    ANIMATED WHATSAPP BUTTON
-================================================= */}
 
       <div className="rs-fixed-contact">
         <a
@@ -437,34 +404,6 @@ export default function Footer() {
           </span>
         </a>
       </div>
-
-      {/* <div className="rs-fixed-contact">
-       
-
-        <a
-          className="rs-fixed-contact__button rs-fixed-contact__button--whatsapp"
-          href="https://wa.me/971555515475"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Contact us on WhatsApp"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a1.01 1.01 0 0 0-1.03.24l-1.57 1.97a15.18 15.18 0 0 1-6.91-6.91l1.97-1.68c.3-.3.39-.72.24-1.1a11.3 11.3 0 0 1-.56-3.53c0-.54-.45-.99-.99-.99H4.18c-.54 0-1.18.24-1.18.99C3 13.11 10.69 20.8 19.99 20.8c.71 0 1.01-.63 1.01-1.18v-3.25c0-.54-.45-.99-.99-.99z" />
-          </svg>
-        </a>
-
-     
-
-        <a
-          className="rs-fixed-contact__button rs-fixed-contact__button--phone"
-          href="tel:+971555515475"
-          aria-label="Call us"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a1.01 1.01 0 0 0-1.03.24l-1.57 1.97a15.18 15.18 0 0 1-6.91-6.91l1.97-1.68c.3-.3.39-.72.24-1.1a11.3 11.3 0 0 1-.56-3.53c0-.54-.45-.99-.99-.99H4.18c-.54 0-1.18.24-1.18.99C3 13.11 10.69 20.8 19.99 20.8c.71 0 1.01-.63 1.01-1.18v-3.25c0-.54-.45-1.18-.99-1.18z" />
-          </svg>
-        </a>
-      </div> */}
     </>
   );
 }

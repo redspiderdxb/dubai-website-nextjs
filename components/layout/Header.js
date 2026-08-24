@@ -57,21 +57,21 @@ export default function Header() {
 
   /* =====================================================
      SERVICES MENU
-     
-     Fixed sequence as approved.
-     
-     Backend pages are linked.
-     Pages not available yet use "#".
+
+     Base route changed:
+     /services/ → /service/
+
+     Dynamic service slugs are managed from admin.
   ===================================================== */
 
   const services = [
     {
       name: "Web Design & Development",
-      path: "/services/web-development",
+      path: "/service/web-development",
     },
     {
       name: "eCommerce Website Development",
-      path: "/services/ecommerce-development-services",
+      path: "/service/ecommerce-web-design-dubai",
     },
     {
       name: "Real Estate Website Development",
@@ -79,42 +79,39 @@ export default function Header() {
     },
     {
       name: "Mobile App Development",
-      path: "/services/mobile-app-development-company-dubai",
+      path: "/service/mobile-app-development-company-dubai",
     },
-
     {
       name: "Branding & Logo Design",
-      path: "/services/logo-designing-company-dubai-brand-identity",
+      path: "/service/logo-designing-company-dubai-brand-identity",
     },
     {
       name: "Graphic Design",
-      path: "/services/graphic-design-services",
+      path: "/service/graphic-design-services",
     },
     {
       name: "Brochure & Company Profile Design",
-      path: "/services/brochure-design-services",
+      path: "/service/brochure-design-company-in-dubai",
     },
-
     {
       name: "SEO & Digital Marketing",
       path: "#",
     },
     {
       name: "Email Marketing",
-      path: "/services/email-marketing-services",
+      path: "/service/email-marketing",
     },
     {
       name: "SMS Marketing",
       path: "/products/sms-marketing-uae",
     },
-
     {
       name: "Web Hosting & Server Solutions",
-      path: "/services/web-hosting",
+      path: "/service/web-hosting",
     },
     {
       name: "WhatsApp Business API Integration",
-      path: "/services/whatsapp-business-api-integration",
+      path: "/service/whatsapp-business-api-integration",
     },
     {
       name: "Website Maintenance & Support",
@@ -124,7 +121,7 @@ export default function Header() {
 
   /* =====================================================
      DYNAMIC PRODUCTS
-     
+
      Real Estate + SMS Marketing are intentionally
      moved under Services, so they are removed here.
   ===================================================== */
@@ -225,7 +222,7 @@ export default function Header() {
     },
     {
       name: "About Us",
-      path: "/about",
+      path: "/about-us/",
     },
     {
       name: "Services",
@@ -234,7 +231,7 @@ export default function Header() {
     },
     {
       name: "Our Portfolio",
-      path: "/portfolio",
+      path: "/our-portfolio/",
     },
     {
       name: "Products",
@@ -243,7 +240,7 @@ export default function Header() {
     },
     {
       name: "Contact",
-      path: "/contact",
+      path: "/contact-us/",
     },
   ];
 
