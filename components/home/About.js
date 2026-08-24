@@ -237,7 +237,7 @@ export default function About({ data }) {
         <div className="container text-center">
           <div className="rs-video-content">
             <div className="rs-video-title">
-              <h4 className="fw-bold">{videoTitle}</h4>
+              <h3 className="fw-bold">{videoTitle}</h3>
             </div>
 
             <div className="rs-video-wrap">

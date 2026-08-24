@@ -4,7 +4,6 @@ import Script from "next/script";
 import App from "next/app";
 import { useEffect, useRef } from "react";
 import AOS from "aos";
-import "aos/dist/aos.css";
 
 import { fetchAllServices, fetchAllProducts } from "../lib/api";
 import { HeaderDataProvider } from "../context/HeaderDataContext";
@@ -155,12 +154,6 @@ function MyApp({
           rel="stylesheet"
           href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
         />
-
-        {/* ============================================
-            AOS
-            ============================================ */}
-
-        <link rel="stylesheet" href="/assets/vendor/aos/aos.css" />
 
         {/* ============================================
             GLIGHTBOX

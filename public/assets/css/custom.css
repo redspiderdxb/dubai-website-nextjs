@@ -368,7 +368,7 @@
   border-color: rgba(255, 255, 255, 0.9);
 }
 
-.rs-left-card h4 {
+.rs-left-card span {
   font-weight: 700;
   font-size: 30px;
   color: #fff;
@@ -428,7 +428,7 @@
   font-size: 16px;
 }
 
-.quick-contect h5 {
+.quick-contect p {
   font-size: 30px;
   font-weight: 700;
   color: #fff;
@@ -2724,7 +2724,7 @@ p {
    VIDEO TITLE
 ========================================================= */
 
-.rs-video-title h4 {
+.rs-video-title h3 {
   position: relative;
 
   z-index: 5;
@@ -23678,7 +23678,7 @@ span.rs-process-highlight {
   animation: iconBreathe 2.8s ease-in-out infinite;
 }
 
-.cta-content h3 {
+.cta-content span {
   color: white;
   margin: 0 0 6px;
   font-size: clamp(20px, 1.6vw, 26px);
@@ -23700,7 +23700,7 @@ span.rs-process-highlight {
   transition: width 0.35s ease;
 }
 
-.cta-card:hover .cta-content h3::after {
+.cta-card:hover .cta-content span::after {
   width: 100%;
 }
 
@@ -23921,7 +23921,7 @@ span.rs-process-highlight {
     left: -18px;
   }
 
-  .cta-content h3 {
+  .cta-content span {
     margin-bottom: 6px;
   }
 }

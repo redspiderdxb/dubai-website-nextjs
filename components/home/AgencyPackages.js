@@ -454,9 +454,9 @@ export default function AgencyPackages() {
 
                   <hr />
 
-                  <h4 className="mt-4">
+                  <span className="mt-4">
                     We help Making your dream into Reality
-                  </h4>
+                  </span>
                 </div>
 
                 <div className="google-box my-2">
@@ -471,7 +471,7 @@ export default function AgencyPackages() {
                 <div className="quick-contect">
                   <small>RedSpider is rated</small>
 
-                  <h5>4.9 Stars</h5>
+                  <p>4.9 Stars</p>
 
                   <small>
                     based on 100+ reviews in Google Business listing.
@@ -504,7 +504,7 @@ export default function AgencyPackages() {
                   <div className="p-2">
                     <div className="section-title text-start mb-0">
                       <h2 data-aos="fade-up">
-                        Why Businesses Choose RedSpider
+                        Experience and Expertise Behind RedSpider
                       </h2>
 
                       <p className="text-dark mt-4" data-aos="fade-up">
@@ -599,11 +599,11 @@ export default function AgencyPackages() {
                   <div className="rs-process-title-sec">
                     <h2 className="rs-process-title mb-4 text-start">
                       <span className="rs-title-black">
-                        Why Businesses Choose
+                        Why Businesses 
                       </span>
 
                       <span className="rs-process-highlight ms-0 ml-0">
-                        Web Design Company
+                       Choose  RedSpider
                         <svg
                           className="rs-process-underline"
                           viewBox="0 0 320 22"
@@ -687,7 +687,7 @@ export default function AgencyPackages() {
               </span>
 
               <span className="cta-content">
-                <h3>Speak to an Expert</h3>
+                <span>Speak to an Expert</span>
                 <p>Call our team</p>
               </span>
 
@@ -708,7 +708,7 @@ export default function AgencyPackages() {
               </span>
 
               <span className="cta-content">
-                <h3>Send an Enquiry</h3>
+                <span>Send an Enquiry</span>
                 <p>info@redspider.ae</p>
               </span>
 
@@ -733,7 +733,7 @@ export default function AgencyPackages() {
               </span>
 
               <span className="cta-content">
-                <h3>WhatsApp Us</h3>
+                <span>WhatsApp Us</span>
                 <p>+971 55 551 5475</p>
               </span>
             </a>

@@ -41,7 +41,7 @@ export default function ServiceCTA({ service }) {
           </span>
 
           <span className="cta-content">
-            <h3>Speak to an Expert</h3>
+            <span>Speak to an Expert</span>
             <p>Call our team</p>
           </span>
 
@@ -62,7 +62,7 @@ export default function ServiceCTA({ service }) {
           </span>
 
           <span className="cta-content">
-            <h3>Send an Enquiry</h3>
+            <span>Send an Enquiry</span>
             <p>info@redspider.ae</p>
           </span>
 
@@ -87,7 +87,7 @@ export default function ServiceCTA({ service }) {
           </span>
 
           <span className="cta-content">
-            <h3>WhatsApp Us</h3>
+            <span>WhatsApp Us</span>
             <p>+971 55 551 5475</p>
           </span>
         </a>

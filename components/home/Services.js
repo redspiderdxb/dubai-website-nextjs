@@ -19,7 +19,7 @@ export default function Services({ data }) {
       description:
         "We build modern websites that reflect your brand and engage your audience. Fast, responsive, and designed to help your business grow online.",
       icon: "bi-code-slash",
-      url: "/services/web-development",
+      url: "/service/web-development",
     },
 
     {
@@ -27,7 +27,7 @@ export default function Services({ data }) {
       description:
         "Keep your website secure, fast, and online 24/7. Reliable hosting with expert support for smooth performance.",
       icon: "bi-server",
-      url: "/services/web-hosting",
+      url: "/service/web-hosting",
     },
 
     {
@@ -35,7 +35,7 @@ export default function Services({ data }) {
       description:
         "Connect with customers. automate conversations. and manage WhatsApp communication with powerful business solutions.",
       icon: "bi-whatsapp",
-      url: "/services/whatsapp-business-api-integration",
+      url: "/service/whatsapp-business-api-integration",
     },
 
     {
@@ -43,7 +43,7 @@ export default function Services({ data }) {
       description:
         "Create a logo that represents your brand. Professional designs that help your business stand out.",
       icon: "bi-brush",
-      url: "/services/logo-designing-company-dubai-brand-identity",
+      url: "/service/logo-designing-company-dubai-brand-identity",
     },
 
     {
@@ -51,7 +51,7 @@ export default function Services({ data }) {
       description:
         "Showcase your business with professional brochures and profiles. Clean designs that inform, impress, and build trust.",
       icon: "bi-images",
-      url: "/services/brochure-design-company-in-dubai",
+      url: "/service/brochure-design-company-in-dubai",
     },
 
     {
@@ -59,7 +59,7 @@ export default function Services({ data }) {
       description:
         "Connect with customers through effective email campaigns. Boost engagement, build loyalty, and grow your audience.",
       icon: "bi-envelope",
-      url: "/services/email-marketing",
+      url: "/service/email-marketing",
     },
   ];
 
