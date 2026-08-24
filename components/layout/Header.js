@@ -284,7 +284,7 @@ export default function Header() {
             onClick={closeMobileMenu}
           >
             <Image
-              src="/assets/img/logo.png"
+              src="/assets/img/logo.webp"
               alt="RedSpider Web & Art Design"
               width={200}
               height={50}

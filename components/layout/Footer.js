@@ -190,7 +190,7 @@ export default function Footer() {
                 </div>
 
                 <Image
-                  src="/assets/img/swim.png"
+                  src="/assets/img/swim.webp"
                   alt="RedSpider swimming towards success"
                   className="swim-foot"
                   width={100}

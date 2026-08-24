@@ -90,17 +90,17 @@ export default function BlogStats({ data }) {
     data?.client_logos?.length > 0
       ? data.client_logos
       : [
-          "1.png",
-          "2.png",
-          "3.png",
-          "4.png",
-          "5.png",
-          "6.png",
-          "7.png",
-          "8.png",
-          "9.png",
-          "10.png",
-          "11.png",
+          "1.webp",
+          "2.webp",
+          "3.webp",
+          "4.webp",
+          "5.webp",
+          "6.webp",
+          "7.webp",
+          "8.webp",
+          "9.webp",
+          "10.webp",
+          "11.webp",
         ];
 
   // ============================================
@@ -236,7 +236,7 @@ export default function BlogStats({ data }) {
                       <img
                         src={
                           getImageUrl(post.image) ||
-                          "/assets/img/blog/blog-1.jpg"
+                          "/assets/img/blog/blog-1.webp"
                         }
                         alt={post.title || post.name || "RedSpider Blog"}
                         className="img-fluid"
@@ -344,7 +344,7 @@ export default function BlogStats({ data }) {
             <div className="col-12">
               <div className="g-review-wrap text-center" data-aos="fade-up">
                 <img
-                  src={getImageUrl("assets/img/reviewimg.png")}
+                  src={getImageUrl("assets/img/reviewimg.webp")}
                   alt="Google reviews and client testimonials"
                   className="img-fluid"
                   loading="lazy"

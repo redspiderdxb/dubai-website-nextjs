@@ -657,7 +657,7 @@ export default function BrochureDesignTemplate({ data }) {
                   </span>
 
                   <span className="rs-pixora-title__image rs-pixora-title__image--pill">
-                    <img src="/assets/img/brochur-1.png" alt="Brochure" />
+                    <img src="/assets/img/brochur-1.webp" alt="Brochure" />
                   </span>
 
                   <span className="rs-pixora-title__word rs-pixora-title__word--red rs-pixora-title__word--rtl">
@@ -667,7 +667,7 @@ export default function BrochureDesignTemplate({ data }) {
 
                 <span className="rs-pixora-title__line rs-pixora-title__line--two">
                   <span className="rs-pixora-title__image rs-pixora-title__image--square">
-                    <img src="/assets/img/bro-visual.png" alt="Brochure" />
+                    <img src="/assets/img/bro-visual.webp" alt="Brochure" />
                   </span>
 
                   <span className="rs-pixora-title__word rs-pixora-title__word--ltr">
@@ -680,7 +680,7 @@ export default function BrochureDesignTemplate({ data }) {
                     </span>
 
                     <span className="rs-pixora-title__image rs-pixora-title__image--portrait">
-                      <img src="/assets/img/print-bro.png" alt="Brochure" />
+                      <img src="/assets/img/print-bro.webp" alt="Brochure" />
                     </span>
                   </span>
                 </span>

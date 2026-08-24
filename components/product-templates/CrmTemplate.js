@@ -700,17 +700,17 @@ export default function CrmTemplate({ data }) {
 
   const apiImage = valueOr(
     data.api_image,
-    "/assets/img/crm-img/API-system-integration.png",
+    "/assets/img/crm-img/API-system-integration.webp",
   );
 
   const readinessImage = valueOr(
     data.readiness_image,
-    "/assets/img/crm-img/pre-requests.png",
+    "/assets/img/crm-img/pre-requests.webp",
   );
 
   const systemsImage = valueOr(
     data.systems_image,
-    "/assets/img/crm-img/API-system-integration.png",
+    "/assets/img/crm-img/API-system-integration.webp",
   );
 
   // ==========================================================

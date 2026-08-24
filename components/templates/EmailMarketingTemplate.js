@@ -1870,7 +1870,7 @@ export default function EmailMarketingTemplate({ data }) {
         >
           <div className="container" style={{ maxWidth: "1100px" }}>
             <div className="review-wrap">
-              <img src="assets/img/reviewimg.png" alt className="img-fluid" />
+              <img src="assets/img/reviewimg.webp" alt className="img-fluid" />
             </div>
           </div>
         </section>

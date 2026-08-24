@@ -12,8 +12,8 @@ export default function Document() {
           rel="stylesheet"
         />
         {/* Favicon */}
-        <link rel="icon" href="/assets/img/favicon.png" />
-        <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+        <link rel="icon" href="/assets/img/favicon.webp" />
+        <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.webp" />
       </Head>
       <body>
         <Main />

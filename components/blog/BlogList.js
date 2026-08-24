@@ -212,7 +212,7 @@ export default function BlogList({ posts = [], pagination = {} }) {
   const renderImage = (post, featured = false) => {
     return (
       <Image
-        src={post?.image || "/assets/img/blog-placeholder.jpg"}
+        src={post?.image || "/assets/img/blog-placeholder.webp"}
         alt={post?.title || post?.name || "Blog Post"}
         fill
         sizes={

@@ -181,7 +181,7 @@ export default function BlogDetailMain({ post }) {
 
       <div className="rs-blog-feature-image">
         <Image
-          src={post.image || "/assets/img/blog/blog-1.jpg"}
+          src={post.image || "/assets/img/blog/blog-1.webp"}
           alt={post.title || "Blog Post"}
           width={1200}
           height={650}

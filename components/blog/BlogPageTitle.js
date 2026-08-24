@@ -8,7 +8,7 @@ export default function BlogPageTitle({ title, breadcrumb = true }) {
     <div
       className="page-title dark-background"
       data-aos="fade"
-      style={{ backgroundImage: 'url(/assets/img/plans-bg.png)' }}
+      style={{ backgroundImage: 'url(/assets/img/plans-bg.webp)' }}
     >
       <div className="container position-relative">
         <h1>{pageTitle}</h1>

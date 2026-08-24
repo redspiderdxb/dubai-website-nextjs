@@ -321,20 +321,20 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
 
   const heroImage = imageUrl(
     service.hero_image,
-    "/assets/img/whatsapp-img/wapi-dashboard.png",
+    "/assets/img/whatsapp-img/wapi-dashboard.webp",
   );
 
   const cloudApiImage = imageUrl(
     service.whatsapp_cloud_api_image,
-    "/assets/img/whatsapp-img/whatsapp-cloud-api-workflows.png",
+    "/assets/img/whatsapp-img/whatsapp-cloud-api-workflows.webp",
   );
 
   const crmImage = imageUrl(
     service.whatsapp_crm_image,
-    "/assets/img/whatsapp-img/whatsapp-crm.png",
+    "/assets/img/whatsapp-img/whatsapp-crm.webp",
   );
 
-  const integrationImage = "/assets/img/whatsapp-img/whatsapp-integrations.png";
+  const integrationImage = "/assets/img/whatsapp-img/whatsapp-integrations.webp";
 
   // ============================================================
   // CONTENT
@@ -457,8 +457,9 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
             <div className="col-lg-12" data-aos="fade-right">
               <div className="rs-process-title-sec">
                 <h1 className="rs-process-title mb-3">
+                  WhatsApp Business
                   <span className="rs-process-highlight">
-                    {heroTitle}
+                    API Integration
                     <svg
                       className="rs-process-underline"
                       viewBox="0 0 320 22"
@@ -467,11 +468,19 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
                       <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
                     </svg>
                   </span>
-
                   {heroSubtitle &&
                     heroSubtitle !== heroTitle &&
                     ` ${heroSubtitle}`}
                 </h1>
+
+                <a
+                  href="/portfolio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-animation btn-red d-inline-flex align-items-center mt-4"
+                >
+                  <span className="btn-title">Get in Touch</span>
+                </a>
               </div>
             </div>
           </div>
@@ -493,7 +502,10 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
               >
                 <span className="rs-eyebrow">{introSmallHeading}</span>
 
-                <h1 className="rs-title">{introMainHeading}</h1>
+                <h1 className="rs-title">
+                  WhatsApp Business API Integration and{" "}
+                  <span>Marketing in Dubai</span>
+                </h1>
 
                 <div className="rs-description">
                   <p>{introDescription}</p>
@@ -626,7 +638,10 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
           <div className="rs-heading-wrap" data-aos="fade-up">
             <span className="rs-eyebrow">Complete Integration Support</span>
 
-            <h2 className="rs-title">{servicesHeading}</h2>
+            <h2 className="rs-title">
+              Our WhatsApp Business API <span>Integration Services</span>
+            
+            </h2>
 
             <p className="rsdescription">{servicesDescription}</p>
           </div>
@@ -680,7 +695,11 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
               <div className="rs-intro-panel" data-aos="fade-up">
                 <span className="rs-eyebrow">Automated Customer Journeys</span>
 
-                <h2 className="rs-title">{chatbotHeading}</h2>
+                <h2 className="rs-title">
+                 WhatsApp Business API Integration <span>with Chatbot</span>
+                
+                  
+                 </h2>
 
                 <p className="rs-description">{chatbotDescription}</p>
 
@@ -770,7 +789,12 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
               <div className="rs-copy" data-aos="fade-up">
                 <span className="rs-eyebrow">Connected messaging</span>
 
-                <h2 className="rs-title">{cloudApiHeading}</h2>
+                <h2 className="rs-title">
+                  
+                 WhatsApp Cloud <span>API Integration</span>
+                
+                  
+                  </h2>
 
                 <p className="rs-description">{cloudApiDescription}</p>
 
@@ -799,10 +823,17 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
 
       <section className="rs-marketing-section">
         <div className="container">
-          <div className="rs-heading-wrap" data-aos="fade-up">
+          <div className="rs-heading-wrap text-center" data-aos="fade-up">
             <span className="rs-eyebrow">Campaign possibilities</span>
 
-            <h2 className="rs-title">{marketingHeading}</h2>
+            <h2 className="rs-title">
+              
+
+              WhatsApp Marketing <span>Services in Dubai</span>
+            
+
+
+            </h2>
 
             <p className="rs-description">{marketingDescription}</p>
           </div>
@@ -872,7 +903,10 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
               <div className="rs-copy" data-aos="fade-up">
                 <span className="rs-eyebrow">Team Inbox</span>
 
-                <h2 className="rs-title">{inboxHeading}</h2>
+                <h2 className="rs-title">
+                 Shared WhatsApp <span> Inbox for Your Team</span>
+                
+                </h2>
 
                 <p className="rs-description">{inboxDescription}</p>
 
@@ -905,7 +939,8 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
               <div className="rs-copy" data-aos="fade-up">
                 <span className="rs-eyebrow">CRM Integration</span>
 
-                <h2 className="rs-title">{crmHeading}</h2>
+                <h2 className="rs-title">Connect WhatsApp <span> with Your CRM</span>
+                </h2>
 
                 <p className="rs-description">{crmDescription}</p>
 
@@ -948,7 +983,8 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
       <section className="rs-api-pricing-section">
         <div className="container">
           <header className="rs-pricing-heading" data-aos="fade-up">
-            <h2 className="rs-common-title">{pricingHeading}</h2>
+            <h2 className="rs-common-title">WhatsApp Business <span>API Pricing</span>
+          </h2>
 
             <p className="rs-common-description">{pricingDescription}</p>
 
@@ -1001,7 +1037,8 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
       <section className="rs-why-hub-section">
         <div className="container">
           <header className="rs-heading" data-aos="fade-up">
-            <h2 className="rs-common-title">{whyChooseHeading}</h2>
+            <h2 className="rs-common-title">Why Choose <span>RedSpider?</span>
+            </h2>
 
             <p className="rs-common-description">{whyChooseDescription}</p>
 

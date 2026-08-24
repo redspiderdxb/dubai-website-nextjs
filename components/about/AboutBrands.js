@@ -2,7 +2,7 @@ export default function AboutBrands({ data }) {
   // Get data from API or use fallback
   const brandsTitle = data?.brands_title || "We've Worked With Amazing Brands";
   const brandsDescription = data?.brands_description || "We are proud to work with leading government organizations, global enterprises, hospitality brands and growing businesses across the UAE and beyond.";
-  const brandsImage = data?.brands_image || "assets/img/Logo_black.png";
+  const brandsImage = data?.brands_image || "assets/img/Logo_black.webp";
   const brandsButtonText = data?.brands_button_text || "View Portfolio";
   const brandsButtonLink = data?.brands_button_link || "/portfolio";
 

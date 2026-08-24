@@ -67,7 +67,7 @@ export default function PortfolioGrid({
 
         image: gallery.image
           ? `${ASSET_URL}/storage/${gallery.image}`
-          : "/assets/img/portfolio/portfolio-1.jpg",
+          : "/assets/img/portfolio/portfolio-1.webp",
 
         link: projectUrl,
 
@@ -1076,7 +1076,7 @@ export default function PortfolioGrid({
                           e.currentTarget.onerror = null;
 
                           e.currentTarget.src =
-                            "/assets/img/portfolio/portfolio-1.jpg";
+                            "/assets/img/portfolio/portfolio-1.webp";
                         }}
                       />
 

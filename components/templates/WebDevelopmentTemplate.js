@@ -417,7 +417,7 @@ export default function WebDevelopmentTemplate({ data }) {
         <div className="container">
           <div className="review-wrap">
             <img
-              src="/assets/img/reviewimg.png"
+              src="/assets/img/reviewimg.webp"
               alt="Reviews"
               className="img-fluid"
             />

@@ -73,11 +73,11 @@ export default function DailyDealTemplate({ data }) {
 
   // Platforms - Static (Future Dynamic)
   const platforms = [
-    { name: "SHOPIFY", icon: "shopify.png" },
-    { name: "WOOCOMMERCE", icon: "woocommerce.png" },
-    { name: "MAGENTO", icon: "magento.png" },
-    { name: "LARAVEL ECOMMERCE", icon: "laravel.png" },
-    { name: "CUSTOM DEVELOPMENT", icon: "php.png" },
+    { name: "SHOPIFY", icon: "shopify.webp" },
+    { name: "WOOCOMMERCE", icon: "woocommerce.webp" },
+    { name: "MAGENTO", icon: "magento.webp" },
+    { name: "LARAVEL ECOMMERCE", icon: "laravel.webp" },
+    { name: "CUSTOM DEVELOPMENT", icon: "php.webp" },
   ];
 
   return (

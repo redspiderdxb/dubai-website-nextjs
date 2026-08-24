@@ -24248,3 +24248,111 @@ span.red.sse {
   padding: 60px 20px;
   text-align: center;
 }
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   CONTACT HERO - VIDEO BACKGROUND
+========================================================= */
+
+.rs-contact-hero-video {
+      height: 570px;
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+
+  /* Existing background remove */
+  background: #000 !important;
+}
+
+/* Remove any existing pseudo background */
+.rs-contact-hero-video::before {
+  display: none !important;
+}
+
+.rs-contact-hero-video::after {
+  display: none !important;
+}
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.rs-contact-hero-video .rs-contact-hero-video__bg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover !important;
+  object-position: center center !important;
+
+  display: block !important;
+
+  z-index: 0 !important;
+}
+
+/* =========================================================
+   BLACK OVERLAY
+========================================================= */
+
+.rs-contact-hero-video .rs-contact-hero-video__overlay {
+  position: absolute !important;
+
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  background: rgba(0, 0, 0, 0.48) !important;
+
+  z-index: 1 !important;
+
+  pointer-events: none !important;
+}
+
+/* =========================================================
+   CONTENT ABOVE VIDEO
+========================================================= */
+
+.rs-contact-hero-video .rs-contact-hero-video__content {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Existing heading */
+.rs-contact-hero-video .rs-process-title-sec,
+.rs-contact-hero-video .rs-process-title,
+.rs-contact-hero-video .rs-process-highlight {
+  position: relative;
+  z-index: 3;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+  .rs-contact-hero-video{
+    height: 300px !important;
+  }
+  .rs-contact-hero-video .rs-contact-hero-video__bg {
+    object-position: center center !important;
+  }
+
+  .rs-contact-hero-video .rs-contact-hero-video__overlay {
+    background: rgba(0, 0, 0, 0.55) !important;
+  }
+}

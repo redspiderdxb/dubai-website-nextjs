@@ -461,7 +461,7 @@ export default function AgencyPackages() {
 
                 <div className="google-box my-2">
                   <img
-                    src="assets/img/google-h.png"
+                    src="assets/img/google-h.webp"
                     alt="Google rating"
                     className="img-fluid"
                     loading="lazy"
@@ -562,7 +562,7 @@ export default function AgencyPackages() {
                       data-aos-duration="1000"
                     >
                       <img
-                        src="assets/img/cpane-laptop.png"
+                        src="assets/img/cpane-laptop.webp"
                         className="img-fluid"
                         alt="Laptop with web design"
                         loading="lazy"
@@ -586,7 +586,7 @@ export default function AgencyPackages() {
             <div className="col-lg-6" data-aos="fade-right">
               <div className="rs-creative-img">
                 <img
-                  src="assets/img/rs-features.jpg"
+                  src="assets/img/rs-features.webp"
                   alt="Creative design studio"
                   loading="lazy"
                 />

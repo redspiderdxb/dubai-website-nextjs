@@ -15,7 +15,7 @@ export default function About({ data }) {
     data?.about_description ||
     "We are passionate about Graphic Design, Original Logo Design and creating Responsive Web Design Dubai Layouts. With over 14 years of experience, RedSpider has established itself as a trusted web design and development company in Dubai, delivering high-quality digital solutions that drive business growth.";
 
-  const aboutImage = data?.about_image || "assets/img/about_back.png";
+  const aboutImage = data?.about_image || "assets/img/about_back.webp";
 
   const readmoreText = data?.about_readmore_text || "Read More...";
 
@@ -28,7 +28,7 @@ export default function About({ data }) {
   const videoTitle =
     data?.video_title || "Why Businesses Trust Our Web Design Expertise";
 
-  const videoThumbnail = data?.video_thumbnail || "assets/img/videos/video.jpg";
+  const videoThumbnail = data?.video_thumbnail || "assets/img/videos/video.webp";
 
   const videoUrl =
     data?.video_url ||

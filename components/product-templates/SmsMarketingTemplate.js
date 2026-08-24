@@ -550,7 +550,7 @@ export default function SmsMarketingTemplate({ data }) {
             <div className="col-12 col-lg-4 text-center">
               <div className="imgbox my-4 my-lg-0 parent-div">
                 <img
-                  src="/assets/img/smsmar.jpg"
+                  src="/assets/img/smsmar.webp"
                   alt=""
                   className="img-fluid"
                 />
@@ -633,7 +633,7 @@ export default function SmsMarketingTemplate({ data }) {
             <div className="col-lg-4 text-center mb-4 mb-lg-0">
               <div className="kf-phone d-none d-md-block">
                 <img
-                  src="/assets/img/mobile-app.png"
+                  src="/assets/img/mobile-app.webp"
                   alt="App Preview"
                   className="img-fluid"
                 />
@@ -661,7 +661,7 @@ export default function SmsMarketingTemplate({ data }) {
             >
               <div className="kf-phone d-none d-md-block">
                 <img
-                  src="/assets/img/mansms.png"
+                  src="/assets/img/mansms.webp"
                   alt="App Preview"
                   className="img-fluid"
                 />

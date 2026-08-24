@@ -1153,7 +1153,7 @@ export default function EcommerceTemplate({ data }) {
 
                         <div className="platform-icon" aria-hidden="true">
                           <img
-                            src={`/assets/img/icons/${iconName}.png`}
+                            src={`/assets/img/icons/${iconName}.webp`}
                             alt=""
                             onError={(e) => {
                               e.currentTarget.style.display = "none";

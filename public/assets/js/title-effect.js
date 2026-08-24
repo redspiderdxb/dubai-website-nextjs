@@ -42,9 +42,8 @@ function initDynamicTextEffect() {
 }
 
 /* =========================================================
-   2. VIDEO ZOOM EFFECT
+   2. VIDEO ZOOM EFFECT - FIXED
    ========================================================= */
-
 function initVideoZoomEffect() {
   if (
     typeof window === "undefined" ||
@@ -74,7 +73,6 @@ function initVideoZoomEffect() {
     if (oldTrigger.animation) {
       oldTrigger.animation.kill();
     }
-
     oldTrigger.kill();
   }
 
@@ -107,10 +105,10 @@ function initVideoZoomEffect() {
       id: "rs-video-zoom",
       trigger: section,
       start: "top top",
-      end: "+=700",
-      scrub: 1.2,
+      end: "+=250", // ✅ FIXED: 250px scroll only
+      scrub: 0.8,
       pin: true,
-      pinSpacing: true,
+      pinSpacing: true, // ✅ FIXED: true (prevents overlap)
       anticipatePin: 1,
       invalidateOnRefresh: true,
       markers: false,
@@ -119,9 +117,9 @@ function initVideoZoomEffect() {
 
   tl.to(title, {
     opacity: 0,
-    y: -90,
-    scale: 0.9,
-    duration: 1,
+    y: -30,
+    scale: 0.97,
+    duration: 0.4,
     ease: "power2.out",
   });
 
@@ -131,14 +129,14 @@ function initVideoZoomEffect() {
       width: () => {
         return `${getFinalVideoWidth()}px`;
       },
-      height: "100vh",
+      height: "80vh",
       left: "50%",
       xPercent: -50,
       borderRadius: 0,
-      duration: 5,
+      duration: 1.8,
       ease: "none",
     },
-    "-=0.35",
+    "-=0.15",
   );
 
   ScrollTrigger.refresh();
@@ -147,17 +145,7 @@ function initVideoZoomEffect() {
 }
 
 /* =========================================================
-   3. HOME PAGE - CUSTOM 3 CARD STACK - FINAL FIXED
-   =========================================================
-
-   FIXED: 
-   - No huge pin-spacer
-   - No extra blank space after CARD 3
-   - Exactly 2 transitions: CARD 1→2, CARD 2→3
-   - Container height set to tallest card
-   - Clean unpin after CARD 3
-   - NO REPEAT OF CARD 3
-   - NO GAP after CARD 3
+   3. HOME PAGE - CUSTOM 3 CARD STACK
    ========================================================= */
 
 function initHomeCardStack() {
@@ -277,7 +265,7 @@ function initHomeCardStack() {
     },
   });
 
-  // CARD 1 → CARD 2 (0% to 50% scroll)
+  // CARD 1 → CARD 2
   timeline.to(
     cards[0],
     {
@@ -308,7 +296,7 @@ function initHomeCardStack() {
     0,
   );
 
-  // CARD 2 → CARD 3 (50% to 100% scroll)
+  // CARD 2 → CARD 3
   timeline.to(
     cards[1],
     {

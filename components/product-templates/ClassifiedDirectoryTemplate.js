@@ -219,7 +219,7 @@ export default function ClassifiedDirectoryTemplate({ data }) {
 
               <div className="col-12 col-md-12 col-lg-6 order-1 order-lg-2">
                 <img
-                  src="/assets/img/Dubizzle-Olx-768x768.png"
+                  src="/assets/img/Dubizzle-Olx-768x768.webp"
                   className="img-fluid rs-hero-img"
                   alt="Hero Image"
                 />

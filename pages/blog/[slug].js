@@ -59,7 +59,7 @@ function RelatedInsights({ posts = [] }) {
             >
               <div className="rs-related-image">
                 <Image
-                  src={featured.image || "/assets/img/blog/blog-1.jpg"}
+                  src={featured.image || "/assets/img/blog/blog-1.webp"}
                   alt={featured.title || "Related Blog"}
                   fill
                   sizes="(max-width: 768px) 100vw, 55vw"
@@ -101,7 +101,7 @@ function RelatedInsights({ posts = [] }) {
               >
                 <div className="rs-related-small-image">
                   <Image
-                    src={item.image || "/assets/img/blog/blog-1.jpg"}
+                    src={item.image || "/assets/img/blog/blog-1.webp"}
                     alt={item.title || "Related Blog"}
                     fill
                     sizes="90px"

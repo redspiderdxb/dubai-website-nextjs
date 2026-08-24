@@ -239,11 +239,11 @@ export default function MobileAppTemplate({ data }) {
         ];
 
   const processImages = [
-    "map-1.jpg",
-    "map-2.jpg",
-    "map-3.jpg",
-    "map-4.jpg",
-    "map-5.jpg",
+    "map-1.webp",
+    "map-2.webp",
+    "map-3.webp",
+    "map-4.webp",
+    "map-5.webp",
   ];
 
   // 5. Why Choose Us - Dynamic from benefits or static fallback
@@ -916,7 +916,7 @@ export default function MobileAppTemplate({ data }) {
           <div className="col-lg-4 text-center mb-4 mb-lg-0">
             <div className="kf-phone">
               <img
-                src="/assets/img/mobile-app.png"
+                src="/assets/img/mobile-app.webp"
                 alt="App Preview"
                 className="img-fluid"
               />

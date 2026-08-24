@@ -13,18 +13,18 @@ export default function ServiceBody({ service }) {
 
   // 🔥 Gallery Images - Static rahega ya API se aayega
   const galleryImages = [
-    "logo1.jpg",
-    "logo2.jpg",
-    "logo3.jpg",
-    "logo4.jpg",
-    "logo5.jpg",
-    "logo6.jpg",
-    "logo7.jpg",
-    "logo8.jpg",
-    "logo9.jpg",
-    "logo10.jpg",
-    "logo11.jpg",
-    "logo12.jpg",
+    "logo1.webp",
+    "logo2.webp",
+    "logo3.webp",
+    "logo4.webp",
+    "logo5.webp",
+    "logo6.webp",
+    "logo7.webp",
+    "logo8.webp",
+    "logo9.webp",
+    "logo10.webp",
+    "logo11.webp",
+    "logo12.webp",
   ];
 
   // 🔥 FAQs - API se aayega
@@ -403,7 +403,7 @@ export default function ServiceBody({ service }) {
         <div className="container" style={{ maxWidth: "1100px" }}>
           <div className="review-wrap">
             <img
-              src="/assets/img/reviewimg.png"
+              src="/assets/img/reviewimg.webp"
               alt="Google reviews and client testimonials"
               className="img-fluid"
               loading="lazy"

@@ -4,7 +4,7 @@ export default function AboutInfo({ data }) {
   const infoHeading =
     data?.info_heading ||
     "RedSpider is a professional web development company in Dubai that caters to the needs of every business. Our designers and developers have years of experience in web design, mobile application, ecommerce and digital marketing.";
-  const infoImage = data?.info_image || "assets/img/about-who.png";
+  const infoImage = data?.info_image || "assets/img/about-who.webp";
   const stats =
     data?.stats?.length > 0
       ? data.stats

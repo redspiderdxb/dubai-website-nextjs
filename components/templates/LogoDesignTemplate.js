@@ -611,7 +611,7 @@ export default function LogoDesignTemplate({ data }) {
                       <img src={image} alt={name} />
                     ) : (
                       <img
-                        src="/assets/img/l3.jpg"
+                        src="/assets/img/l3.webp"
                         alt="Specialization Preview"
                       />
                     )}
@@ -681,7 +681,7 @@ export default function LogoDesignTemplate({ data }) {
                     {technologies_title || "Types of logo we work"}
                   </h3>
                   <img
-                    src="/assets/img/products-heading-shape.png"
+                    src="/assets/img/products-heading-shape.webp"
                     alt=""
                     className="img-fluid mt-3"
                   />
@@ -1046,7 +1046,7 @@ export default function LogoDesignTemplate({ data }) {
       <div className="container" style={{ maxWidth: "1100px" }}>
         <div className="review-wrap">
           <img
-            src="/assets/img/reviewimg.png"
+            src="/assets/img/reviewimg.webp"
             alt="Reviews"
             className="img-fluid"
           />

@@ -112,37 +112,37 @@ export default function RealEstatePortalTemplate({ data }) {
     {
       title: "Abu Alnaga Development V2",
       category: "Real Estate Developer",
-      image: "portfolio/app-1.jpg",
+      image: "portfolio/app-1.webp",
       link: "https://aa.rsworkspace.com/",
     },
     {
       title: "Kasco Developments",
       category: "Real Estate Developer Website",
-      image: "portfolio/app-2.jpg",
+      image: "portfolio/app-2.webp",
       link: "https://www.kascodevelopments.com/",
     },
     {
       title: "Mansion Edition Real Estate",
       category: "Luxury Real Estate - Offplan Projects",
-      image: "portfolio/app-3.jpg",
+      image: "portfolio/app-3.webp",
       link: "https://www.mansionedition.ae/",
     },
     {
       title: "SPACE & PLACE REAL ESTATE LLC",
       category: "Real Estate Broker Website",
-      image: "portfolio/books-1.jpg",
+      image: "portfolio/books-1.webp",
       link: "https://www.spaceandplace.ae/",
     },
     {
       title: "DSQ Real Estate – V2",
       category: "Real Estate Broker Website",
-      image: "portfolio/books-2.jpg",
+      image: "portfolio/books-2.webp",
       link: "https://www.dsqrealestate.ae/",
     },
     {
       title: "Sankari Properties",
       category: "Real Estate Developer website",
-      image: "portfolio/books-3.jpg",
+      image: "portfolio/books-3.webp",
       link: "https://www.sankariproperties.com/",
     },
   ];
@@ -161,17 +161,17 @@ export default function RealEstatePortalTemplate({ data }) {
                 <div className="rs-gallery-shape shape-one"></div>
                 <div className="rs-gallery-shape shape-two"></div>
                 <div className="rs-project-img img-two">
-                  <img src="/assets/img/p4.jpg" alt="Property portal project" />
+                  <img src="/assets/img/p4.webp" alt="Property portal project" />
                 </div>
                 <div className="rs-project-img img-three">
                   <img
-                    src="/assets/img/p5.jpg"
+                    src="/assets/img/p5.webp"
                     alt="Real estate landing page"
                   />
                 </div>
                 <div className="rs-project-img img-four">
                   <img
-                    src="/assets/img/p6.jpg"
+                    src="/assets/img/p6.webp"
                     alt="Property listing website"
                   />
                 </div>
@@ -462,7 +462,7 @@ export default function RealEstatePortalTemplate({ data }) {
           <div className="row align-items-center g-5 service-row">
             <div className="col-lg-6" data-aos="fade-right">
               <div className="service-image">
-                <img src="/assets/img/rewd-ser.jpg" alt="" />
+                <img src="/assets/img/rewd-ser.webp" alt="" />
               </div>
             </div>
             <div className="col-lg-6" data-aos="fade-left">
@@ -490,7 +490,7 @@ export default function RealEstatePortalTemplate({ data }) {
           <div className="row align-items-center g-5 service-row flex-lg-row-reverse">
             <div className="col-lg-6" data-aos="fade-left">
               <div className="service-image dark-image">
-                <img src="/assets/img/rewd-ser-2.png" alt="" />
+                <img src="/assets/img/rewd-ser-2.webp" alt="" />
                 <div className="service-overlay">
                   CRM
                   <small>Integrated Property Platform</small>
@@ -521,7 +521,7 @@ export default function RealEstatePortalTemplate({ data }) {
           <div className="row align-items-center g-5 service-row">
             <div className="col-lg-6" data-aos="fade-right">
               <div className="service-image">
-                <img src="/assets/img/rewd-ser-3.png" alt="" />
+                <img src="/assets/img/rewd-ser-3.webp" alt="" />
               </div>
             </div>
             <div className="col-lg-6" data-aos="fade-left">
@@ -580,7 +580,7 @@ export default function RealEstatePortalTemplate({ data }) {
               <div className="col-lg-6" data-aos="fade-right">
                 <div className="re-launch-img">
                   <img
-                    src="/assets/img/rewd-ser-4.png"
+                    src="/assets/img/rewd-ser-4.webp"
                     alt="Launch real estate website"
                   />
                 </div>
@@ -597,7 +597,7 @@ export default function RealEstatePortalTemplate({ data }) {
           <div className="row align-items-center g-5 service-row">
             <div className="col-lg-6" data-aos="fade-right">
               <div className="service-image">
-                <img src="/assets/img/rewd-ser-5.png" alt="" />
+                <img src="/assets/img/rewd-ser-5.webp" alt="" />
               </div>
             </div>
             <div className="col-lg-6" data-aos="fade-left">
@@ -634,7 +634,7 @@ export default function RealEstatePortalTemplate({ data }) {
           <div className="row align-items-center g-5 service-row flex-lg-row-reverse">
             <div className="col-lg-6" data-aos="fade-left">
               <div className="service-image dark-image">
-                <img src="/assets/img/rewd-ser-6.png" alt="" />
+                <img src="/assets/img/rewd-ser-6.webp" alt="" />
               </div>
             </div>
             <div className="col-lg-6" data-aos="fade-right">
@@ -673,7 +673,7 @@ export default function RealEstatePortalTemplate({ data }) {
           <div className="row align-items-center g-5 service-row">
             <div className="col-lg-6" data-aos="fade-right">
               <div className="service-image">
-                <img src="/assets/img/rewd-ser-7.png" alt="" />
+                <img src="/assets/img/rewd-ser-7.webp" alt="" />
               </div>
             </div>
             <div className="col-lg-6" data-aos="fade-left">

@@ -4341,7 +4341,7 @@ button.rs-dropdown-trigger {
   display: flex;
   align-items: center;
 
-  background-image: url("/assets/img/about-bg5.jpg");
+  background-image: url("/assets/img/about-bg5.webp");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -7153,7 +7153,7 @@ button.rs-dropdown-trigger {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-image: url("/assets/img/about-bg5.jpg");
+  background-image: url("/assets/img/about-bg5.webp");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -7433,7 +7433,7 @@ button.rs-dropdown-trigger {
 
   overflow: hidden;
 
-  background-image: url("/assets/img/about-bg5.jpg");
+  background-image: url("/assets/img/about-bg5.webp");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -8178,7 +8178,7 @@ button.rs-dropdown-trigger {
 
 
 .crm-hero {
-  background: url("../public/assets/img/crm-hero.jpg") 0 0 no-repeat;
+  background: url("../public/assets/img/crm-hero.webp") 0 0 no-repeat;
   background-size: cover;
 }
 
@@ -10912,7 +10912,7 @@ button.rs-dropdown-trigger {
   height: 100%;
   min-height: 510px;
   overflow: hidden;
-  background: #e8eaec url("../public/assets/img/dubai-cta.jpg") center 55%/cover no-repeat;
+  background: #e8eaec url("../public/assets/img/dubai-cta.webp") center 55%/cover no-repeat;
 }
 
 .zivora-readiness-split .zrs-visual::before {

@@ -5,8 +5,27 @@ export default function ContactHero({ data }) {
     data?.hero_title || "Have a Project in Mind? Let's Talk";
 
   return (
-    <section className="rs-contact-hero">
-      <div className="container">
+    <section className="rs-contact-hero rs-contact-hero-video">
+      {/* VIDEO BACKGROUND */}
+      <video
+        className="rs-contact-hero-video__bg"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      >
+        <source
+          src="/assets/videos/contact-hero.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* BLACK OVERLAY */}
+      <div className="rs-contact-hero-video__overlay"></div>
+
+      {/* EXISTING CONTENT */}
+      <div className="container rs-contact-hero-video__content">
         <div className="row align-items-center">
           <div className="col-lg-12" data-aos="fade-right">
             <div className="rs-process-title-sec">
