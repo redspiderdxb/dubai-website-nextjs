@@ -60,21 +60,41 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
   // ============================================
   // IMAGE URL HELPER
   // ============================================
+  // ============================================
+  // IMAGE URL HELPER
+  // ============================================
 
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
+
+    const liveBase =
+      process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
+      "https://redspider.rsworkspace.net/admin/public";
 
     // ==========================================
     // FULL URL
     // ==========================================
 
     if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
-      // Convert localhost backend URL
-      // to live backend URL
-      if (imagePath.includes("localhost")) {
-        return imagePath.replace("http://localhost/RedSpider/public", "https://redspider.rsworkspace.net/admin/public");
+      /*
+       * Convert any localhost backend URL
+       * to the live backend URL.
+       *
+       * Handles:
+       * http://localhost/redspider/public
+       * http://localhost/RedSpider/public
+       * https://localhost/redspider/public
+       * https://localhost/REDSPIDER/public
+       */
+
+      if (/^https?:\/\/localhost\/redspider\/public/i.test(imagePath)) {
+        return imagePath.replace(
+          /^https?:\/\/localhost\/redspider\/public/i,
+          liveBase,
+        );
       }
 
+      // Already-live/external URL → keep unchanged
       return imagePath;
     }
 
@@ -83,13 +103,9 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
     // ==========================================
 
     if (imagePath.includes("storage/")) {
-      const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "https://redspider.rsworkspace.net/admin/public";
-
       const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
 
-      return `${baseUrl}${cleanPath}`;
+      return `${liveBase}${cleanPath}`;
     }
 
     // ==========================================
@@ -320,5 +336,3 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
     </>
   );
 }
-
-

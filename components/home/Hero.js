@@ -63,40 +63,47 @@ export default function Hero({ data }) {
 
   // Helper function to get image URL
   const getImageUrl = (imagePath) => {
-    if (!imagePath) return null;
+    if (!imagePath) return "";
+
+    const liveBase =
+      process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
+      "https://redspider.rsworkspace.net/admin/public";
 
     // Full URL
     if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
-      // Convert localhost backend image URL to live backend URL
-      if (imagePath.includes("localhost")) {
+      /*
+       * Convert any localhost backend URL to production backend URL.
+       *
+       * Handles:
+       * http://localhost/redspider/public
+       * http://localhost/RedSpider/public
+       * https://localhost/redspider/public
+       * https://localhost/REDSPIDER/public
+       */
+      if (/^https?:\/\/localhost\/redspider\/public/i.test(imagePath)) {
         return imagePath.replace(
-          "https://redspider.rsworkspace.net/admin/public",
-          "https://RedSpider.rsworkspace.net/admin/public",
+          /^https?:\/\/localhost\/redspider\/public/i,
+          liveBase,
         );
       }
 
-      // Keep external URLs unchanged
+      // Keep already-live/external URLs unchanged
       return imagePath;
     }
 
     // /storage/filename.jpg
     if (imagePath.startsWith("/storage/")) {
-      const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "https://redspider.rsworkspace.net/admin/public";
-
-      return `${baseUrl}${imagePath}`;
+      return `${liveBase}${imagePath}`;
     }
 
     // storage/filename.jpg
     if (imagePath.includes("storage/")) {
-      const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "https://redspider.rsworkspace.net/admin/public";
+      const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
 
-      return `${baseUrl}/${imagePath}`;
+      return `${liveBase}${cleanPath}`;
     }
 
+    // Other relative paths
     return imagePath;
   };
 
@@ -142,12 +149,14 @@ export default function Hero({ data }) {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`carousel-item ${index === activeIndex ? "active" : ""}`}
+              className={`carousel-item ${
+                index === activeIndex ? "active" : ""
+              }`}
             >
               <div
                 className="rs-slide"
                 style={{
-                  backgroundImage: `url(${getImageUrl(slide.image)})`,
+                  backgroundImage: `url("${getImageUrl(slide.image)}")`,
                 }}
                 role="img"
                 aria-label={`Hero slide ${index + 1}`}
@@ -156,12 +165,15 @@ export default function Hero({ data }) {
                   {slide.subtitle && (
                     <p className="rs-slide-kicker">{slide.subtitle}</p>
                   )}
+
                   {slide.title && (
                     <div className="rs-slide-title">{slide.title}</div>
                   )}
+
                   {slide.description && (
                     <p className="rs-slide-description">{slide.description}</p>
                   )}
+
                   {slide.button_text && (
                     <a
                       className="rs-slide-button"
@@ -170,6 +182,7 @@ export default function Hero({ data }) {
                       {slide.button_text}
                     </a>
                   )}
+
                   <div className="rs-review-box">
                     <div className="rs-review-top">
                       <a
@@ -195,12 +208,14 @@ export default function Hero({ data }) {
                         </span>
                       </a>
                     </div>
+
                     <p className="rs-review-text">
                       RedSpider is rated 4.9 stars - based on 100+ reviews in
                       Google Business listing.
                     </p>
                   </div>
                 </div>
+
                 <span className="rs-slide-count" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")} /{" "}
                   {String(slides.length).padStart(2, "0")}
@@ -223,6 +238,7 @@ export default function Hero({ data }) {
             aria-hidden="true"
           ></span>
         </button>
+
         <button
           className="carousel-control-next"
           type="button"
@@ -240,4 +256,3 @@ export default function Hero({ data }) {
     </section>
   );
 }
-
