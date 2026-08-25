@@ -43,7 +43,7 @@ export default function ContactInfoForm({ data }) {
                 <h2 className="text-red">
                   <b>{infoTitle}</b>
                 </h2>
-                <p>{infoDescription}</p>
+                <p className="text-dark">{infoDescription}</p>
                 <hr />
 
                 <div className="d-flex align-items-start mt-4">
@@ -51,7 +51,7 @@ export default function ContactInfoForm({ data }) {
                     <i className="bi bi-geo" aria-hidden="true"></i>
                   </div>
                   <div>
-                    <h3 className="fs-6 text-body-emphasi text-white text-uppercase">
+                    <h3 className="fs-6 text-body-emphasi text-dark text-uppercase">
                       Location
                     </h3>
                     <p>{address}</p>
@@ -63,7 +63,7 @@ export default function ContactInfoForm({ data }) {
                     <i className="bi bi-alarm" aria-hidden="true"></i>
                   </div>
                   <div>
-                    <h3 className="fs-6 text-body-emphasi text-white text-uppercase">
+                    <h3 className="fs-6 text-body-emphasi text-dark text-uppercase">
                       BUSINESS HOURS
                     </h3>
                     <p>{businessHours}</p>
@@ -75,13 +75,13 @@ export default function ContactInfoForm({ data }) {
                     <i className="bi bi-phone" aria-hidden="true"></i>
                   </div>
                   <div>
-                    <h3 className="fs-6 text-body-emphasi text-white text-uppercase">
+                    <h3 className="fs-6 text-body-emphasi text-dark text-uppercase">
                       Call us
                     </h3>
                     <p>
                       <a
                         href={`tel:${phone1.replace(/\s/g, "")}`}
-                        className="text-white"
+                        className="text-dark"
                       >
                         {phone1}
                       </a>
@@ -89,7 +89,7 @@ export default function ContactInfoForm({ data }) {
                     <p>
                       <a
                         href={`tel:${phone2.replace(/\s/g, "")}`}
-                        className="text-white"
+                        className="text-dark"
                       >
                         {phone2}
                       </a>
@@ -102,11 +102,11 @@ export default function ContactInfoForm({ data }) {
                     <i className="bi bi-send" aria-hidden="true"></i>
                   </div>
                   <div>
-                    <h3 className="fs-6 text-body-emphasi text-white text-uppercase">
+                    <h3 className="fs-6 text-body-emphasi text-dark text-uppercase">
                       Email
                     </h3>
                     <p>
-                      <a href={`mailto:${email}`} className="text-white">
+                      <a href={`mailto:${email}`} className="text-dark">
                         {email}
                       </a>
                     </p>

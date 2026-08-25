@@ -2531,7 +2531,7 @@ p {
 
 
 .darkblue-line {
-  background: #000000 url(../img/diagonal-lines.png) 0 0;
+  background: #ffffff url(../img/diagonal-lines.png) 0 0;
 }
 
 /* Home page */
@@ -24305,19 +24305,14 @@ span.red.sse {
 
 .rs-contact-hero-video .rs-contact-hero-video__overlay {
   position: absolute !important;
-
   top: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
   left: 0 !important;
-
   width: 100% !important;
   height: 100% !important;
-
-  background: rgba(0, 0, 0, 0.48) !important;
-
+  background: rgba(0, 0, 0, 0.78) !important;
   z-index: 1 !important;
-
   pointer-events: none !important;
 }
 
@@ -24363,4 +24358,9 @@ span.red.sse {
   font-weight: 400;
   color: #071018;
   margin-bottom: 20px;
+}
+
+
+.contact-info-left p{
+  color: #000;
 }
