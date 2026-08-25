@@ -23,7 +23,7 @@ export default function ServicesPage({ services }) {
           {services?.map((service) => (
             <Link 
               key={service.id} 
-              href={`/services/${service.slug}`}
+              href={`/service/${service.slug}`}
               className="group"
             >
               <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full">

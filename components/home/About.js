@@ -34,7 +34,7 @@ export default function About({ data }) {
 
   const videoUrl =
     data?.video_url ||
-    "https://lp.rsworkspace.com/Redspider-code/assets/img/videos/redspider.webm";
+    "https://lp.rsworkspace.com/RedSpider-code/assets/img/videos/RedSpider.webm";
 
   // =====================================================
   // IMAGE / VIDEO URL
@@ -50,7 +50,7 @@ export default function About({ data }) {
     if (imagePath.startsWith("/storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/redspider/public";
+        "http://localhost/RedSpider/public";
 
       return `${baseUrl}${imagePath}`;
     }
@@ -58,7 +58,7 @@ export default function About({ data }) {
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/redspider/public";
+        "http://localhost/RedSpider/public";
 
       return `${baseUrl}/${imagePath}`;
     }

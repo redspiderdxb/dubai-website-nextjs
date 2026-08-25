@@ -95,11 +95,11 @@ export default function AgencyPackages() {
             At RedSpider, we create websites that are not only simple to use,
             but are mobile-friendly and optimized for a positive user
             experience. We don't use pre-designed templates, we design them
-            according to your brand and business objectives. Call to action are
-            placed at strategic points where the audience is likely to take
+            according to your brand and business objectives. Calls to action are
+            placed at strategic points. where the audience is likely to take
             action, such as contacting a business, making a purchase, or taking
-            the next step. One the project is complete, you have the{" "}
-            <b>full ownership to your website</b>.
+            the next step. Once the project is complete, you receive{" "}
+            <b> full ownership of your website</b>.
           </p>
 
           <p>
@@ -190,7 +190,7 @@ export default function AgencyPackages() {
                       <h2>Websites Built Around Your Business</h2>
 
                       <p className="rs-lead">
-                        Businesses or brands can trust Redspider Digital Agency
+                        Businesses or brands can trust RedSpider Digital Agency
                         as their trusted partner. You can get professional
                         website design and web development services at
                         affordable rates. We also offer digital solutions in
@@ -201,18 +201,18 @@ export default function AgencyPackages() {
                         <div className="col-md-8">
                           <p>
                             We will strengthen your online presence and help
-                            attract new customers. To achieve sustainable growth
-                            having a modern and user focused website it highly
-                            important. It will promote your brand and help you
-                            achieve your business goals.
+                            attract new customers. To achieve sustainable
+                            growth, having a modern and user-focused website is
+                            highly important. It will promote your brand and
+                            help you achieve your business goals.
                           </p>
 
                           <p>
                             The competition among companies is intense, and if
                             you want to win, focusing on advanced technology and
-                            creativity matter. We can create visually appealing
-                            websites that are fast, visually appealing and give
-                            high quality performance.
+                            creativity matters.We create visually appealing
+                            websites that are fast, reliable and built to
+                            deliver high-quality performance.
                           </p>
 
                           <p>
@@ -238,7 +238,7 @@ export default function AgencyPackages() {
                       </div>
 
                       <p>
-                        At Redspider, we understand that a website should be
+                        At RedSpider, we understand that a website should be
                         much more than visually appealing. It should communicate
                         your message to the customers and build trust. If you
                         are launching a new business, it will also enhance your
@@ -264,7 +264,7 @@ export default function AgencyPackages() {
                         <strong>Our experienced website</strong> designers and
                         web developers will create customized solutions that
                         align with your business goals. Your search ends here,
-                        as Redspider is the trusted choice for any business
+                        as RedSpider is the trusted choice for any business
                         looking for a reliable website design and development
                         service in Dubai and UAE.
                       </p>
@@ -456,6 +456,9 @@ export default function AgencyPackages() {
           </div>
         </div>
       </section>
+
+
+      
       {/* =====================================================
           PACKAGES SECTION
           ===================================================== */}
@@ -504,7 +507,7 @@ export default function AgencyPackages() {
 
                 <div className="rs-arrow-btn mt-4">
                   <span>
-                    <a href="contactus.html">
+                    <a href="/contact-us">
                       <Image
                         src="/assets/img/arrow-icon-40.svg"
                         alt="Contact us"
@@ -534,15 +537,17 @@ export default function AgencyPackages() {
                       </h2>
 
                       <p className="text-dark mt-4" data-aos="fade-up">
-                        Redspider has become a trusted choice for website design
+                        RedSpider has become a trusted choice for website design
                         in Dubai as we have 14 years of experience in the
                         industry. We have completed 500+ successful projects and
-                        the number continues to grow as we aim a higher number.
-                        Our web designers are highly skilled who are helping
-                        various businesses have a strong online presence. We not
-                        only create new websites but also upgrade existing ones
-                        with full convition. Your website will look visually
-                        appealing and that helps grow your business over time.
+                        continue to help businesses strengthen their online
+                        presence. Our web designers are highly skilled who are
+                        helping various businesses have a strong online
+                        presence. Our experienced web designers create new
+                        websites and improve existing ones with a strong focus
+                        on design, usability and performance. Your website will
+                        look visually appealing and that helps grow your
+                        business over time.
                       </p>
 
                       <p className="text-dark mt-4" data-aos="fade-up">
@@ -550,7 +555,7 @@ export default function AgencyPackages() {
                       </p>
 
                       <a
-                        href="about-us.html"
+                        href="/about-us"
                         className="btn btn-animation btn-red d-inline-flex align-items-center mt-4"
                         data-aos="fade-up"
                         data-aos-delay="550"
@@ -731,7 +736,7 @@ export default function AgencyPackages() {
           {/* EMAIL */}
           <a
             className="cta-card dark"
-            href="mailto:info@redspider.ae"
+            href="mailto:info@RedSpider.ae"
             aria-label="Send Enquiry"
           >
             <span className="icon-box" aria-hidden="true">
@@ -743,7 +748,7 @@ export default function AgencyPackages() {
 
             <span className="cta-content">
               <span>Send an Enquiry</span>
-              <p>info@redspider.ae</p>
+              <p>info@RedSpider.ae</p>
             </span>
 
             <span className="dot"></span>

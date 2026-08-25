@@ -14,7 +14,7 @@ export default function AboutInfo({ data }) {
       : [
           { number: "500+", label: "Projects Delivered" },
           { number: "14+", label: "Years Experience" },
-          { number: "100+", label: "5 Star Reviews" },
+          { number: "100+", label: "5-Star Reviews " },
         ];
 
   // Helper function to get image URL
@@ -66,11 +66,11 @@ export default function AboutInfo({ data }) {
         <div className="row my-5">
           <div className="col-12">
             <div className="letconnect">
-              <span>Let's Connect :</span>
+              <span>Let's Connect:</span>
 
               <div className="line"></div>
 
-              <a href="#">Book A Call</a>
+              <a href="/contact">Book A Call</a>
             </div>
           </div>
         </div>

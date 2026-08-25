@@ -6,11 +6,11 @@ export default function AboutServices({ data }) {
   // =========================================================
 
   const servicesTitle =
-    data?.services_title || "Digital Products and Solutions";
+    data?.services_title || "Digital Services and Solutions ";
 
   const servicesDescription =
     data?.services_description ||
-    "We offer a wide range of digital products and solutions for every business. Here is what you can get:";
+    "We offer a wide range of Digital Services and Solutions  for every business. Here is what you can get:";
 
   const servicesList =
     data?.services?.length > 0
@@ -72,7 +72,7 @@ export default function AboutServices({ data }) {
       image: "/assets/img/services/devp.png.webp",
       title: "Web Design & Development",
       path: "/services/web-development",
-      desc: "We build modern, responsive websites that look great on every device. As a trusted Web Design Company Dubai, we create websites that help your business attract more customers online.",
+      desc: "We build modern, responsive websites that look great on every device. As a trusted web design company in Dubai, we create websites that help your business attract more customers online.",
     },
     {
       image: "/assets/img/services/host.png.webp",
@@ -84,13 +84,13 @@ export default function AboutServices({ data }) {
       image: "/assets/img/services/design.png.webp",
       title: "Graphic Design",
       path: "/services/graphic-design-services",
-      desc: "Creative Graphic Design Dubai services that help your brand stand out. We design marketing materials that leave a lasting impression on your audience.",
+      desc: "Creative graphic design services in Dubai  that help your brand stand out. We design marketing materials that leave a lasting impression on your audience.",
     },
     {
       image: "/assets/img/services/logo-1.png.webp",
       title: "Logo Design",
       path: "/services/logo-designing-company-dubai-brand-identity",
-      desc: "Get a unique Logo Design Dubai that reflects your business identity. We create memorable logos that build trust and strengthen your brand.",
+      desc: "Get a unique logo design in Dubai that reflects your business identity. We create memorable logos that build trust and strengthen your brand.",
     },
     {
       image: "/assets/img/services/profile.png.webp",
@@ -114,13 +114,13 @@ export default function AboutServices({ data }) {
       image: "/assets/img/services/app.png.webp",
       title: "Mobile App Development",
       path: "/services/mobile-app-development-company-dubai",
-      desc: "Our Mobile App Development Dubai team creates Android and iOS apps with smooth performance. Turn your business idea into a powerful mobile application.",
+      desc: "Our mobile app development team in Dubai creates Android and iOS apps with smooth performance. Turn your business idea into a powerful mobile application.",
     },
     {
       image: "/assets/img/services/Seo.png.webp",
       title: "Search Engine Optimization",
       path: "/services/seo",
-      desc: "As a leading SEO Agency Dubai, we help improve your Google rankings and online visibility. Our SEO Services Dubai generate quality traffic and valuable business leads.",
+      desc: "As an experienced SEO agency in Dubai, we help improve your Google rankings and online visibility. Our SEO Services Dubai generate quality traffic and valuable business leads.",
     },
   ];
 
@@ -133,7 +133,7 @@ export default function AboutServices({ data }) {
 
       <section className="service-container-red services">
         <div className="service-section-inner">
-          <h2>Digital Products and Solutions</h2>
+          <h2>Digital Services and Solutions </h2>
 
           <div className="grid">
             {redServices.map((service, index) => (

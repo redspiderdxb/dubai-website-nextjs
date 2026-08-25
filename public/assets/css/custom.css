@@ -1103,7 +1103,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(
 }
 
 .about-features .h2 {
-  font-size: 42px !important;
+  font-size: 32px !important;
   line-height: 1.15 !important;
   color: #fff !important;
   text-transform: uppercase !important;
@@ -5615,30 +5615,34 @@ section.text-revel {
 
 
 /* home page card gasp */
+/* Home page card stack */
 
 .rs-gsap-stack-sec {
   padding: 10px 0 0;
+  margin: 0 !important;
   background: #f8fafc;
-  overflow: hidden;
-}
-
-
-.rs-gsap-cards {
-  position: relative;
-  height: 95vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 80px;
-  margin-top: 10px !important;
+  overflow: visible;
 }
 
 .rs-gsap-cards {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - var(--header-height, 0px));
+  height: calc(100vh - 10px);
+  min-height: 0;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   z-index: 2;
+}
+
+.rs-gsap-cards [class*="rs-card-"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 100%;
+  will-change: transform, opacity;
 }
 
 .rs-gsap-cards [class*="rs-card-"] {

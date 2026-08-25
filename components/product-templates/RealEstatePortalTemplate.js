@@ -346,7 +346,7 @@ export default function RealEstatePortalTemplate({ data }) {
                   With over 14 years of experience, RedSpider has successfully
                   completed 500+ real estate website design and development
                   projects in Dubai, establishing a strong reputation in the
-                  market. Redspider is a trusted Dubai Real Estate Website
+                  market. RedSpider is a trusted Dubai Real Estate Website
                   Designing company that not only provides Web Design &
                   Development services but also offers additional solutions to
                   boost your website's market presence and meet client needs.
@@ -557,7 +557,7 @@ export default function RealEstatePortalTemplate({ data }) {
                 <div className="re-launch-content">
                   <div className="title-wrap">
                     <span className="re-label">Website Launch</span>
-                    <h3>Launch Your Real Estate Website with Redspider</h3>
+                    <h3>Launch Your Real Estate Website with RedSpider</h3>
                   </div>
                   <p>
                     Did you just start your business as a real estate agency in
@@ -606,7 +606,7 @@ export default function RealEstatePortalTemplate({ data }) {
                 <h3>Create a Real Estate Website That Drives More Leads</h3>
               </div>
               <p>
-                At Redspider, we specialize in designing and developing high
+                At RedSpider, we specialize in designing and developing high
                 quality real estate websites. As a full-service professional
                 real estate website design company in Dubai, we create websites
                 that are fast and easy to use for both buyers and sellers.
@@ -653,7 +653,7 @@ export default function RealEstatePortalTemplate({ data }) {
                 sales goal, look no further.
               </p>
               <p>
-                At Redspider, we design Custom Websites to Sell Properties that
+                At RedSpider, we design Custom Websites to Sell Properties that
                 will showcase your listing to potential buyers. Businesses who
                 dont have a good website often fail, and we understand it well.
                 With the immersive 360 tours and user friendly galleries,

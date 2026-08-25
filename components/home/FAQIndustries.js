@@ -46,7 +46,7 @@ export default function FAQIndustries({ data }) {
     if (imagePath.startsWith("/storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/redspider/public";
+        "http://localhost/RedSpider/public";
 
       return `${baseUrl}${imagePath}`;
     }
@@ -54,7 +54,7 @@ export default function FAQIndustries({ data }) {
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/redspider/public";
+        "http://localhost/RedSpider/public";
 
       return `${baseUrl}/${imagePath}`;
     }

@@ -14,7 +14,7 @@ export default function Hero({ data }) {
             description:
               "RedSpider is a top-rated Web Design Company in Dubai offering expert Web Design Dubai and Web Development Company services to grow your business.",
             image:
-              "https://www.redspider.ae/wp-content/uploads/2026/07/Dubai-Web-Design.webp",
+              "https://www.RedSpider.ae/wp-content/uploads/2026/07/Dubai-Web-Design.webp",
             button_text: "View Portfolio",
             button_link: "#portfolio",
           },
@@ -24,7 +24,7 @@ export default function Hero({ data }) {
             description:
               "Corporate identity, digital consultancy and custom websites designed to strengthen your business presence.",
             image:
-              "https://www.redspider.ae/wp-content/uploads/2026/06/Dubai-Web-Development-Company.jpg",
+              "https://www.RedSpider.ae/wp-content/uploads/2026/06/Dubai-Web-Development-Company.jpg",
             button_text: "View Portfolio",
             button_link: "#portfolio",
           },
@@ -34,7 +34,7 @@ export default function Hero({ data }) {
             description:
               "With our artistic and skilled web design team, your brand receives a professional digital presence built to make an impact.",
             image:
-              "https://www.redspider.ae/wp-content/uploads/2026/07/Web-Design-Dubai.webp",
+              "https://www.RedSpider.ae/wp-content/uploads/2026/07/Web-Design-Dubai.webp",
             button_text: "View Portfolio",
             button_link: "#portfolio",
           },
@@ -44,7 +44,7 @@ export default function Hero({ data }) {
             description:
               "Responsive, user-focused websites that combine creative design, reliable development and measurable performance.",
             image:
-              "https://www.redspider.ae/wp-content/uploads/2026/07/website-design-company.webp",
+              "https://www.RedSpider.ae/wp-content/uploads/2026/07/website-design-company.webp",
             button_text: "View Portfolio",
             button_link: "#portfolio",
           },
@@ -70,8 +70,8 @@ export default function Hero({ data }) {
       // Convert localhost backend image URL to live backend URL
       if (imagePath.includes("localhost")) {
         return imagePath.replace(
-          "http://localhost/redspider/public",
-          "https://redspider.rsworkspace.net/admin/public",
+          "http://localhost/RedSpider/public",
+          "https://RedSpider.rsworkspace.net/admin/public",
         );
       }
 
@@ -83,7 +83,7 @@ export default function Hero({ data }) {
     if (imagePath.startsWith("/storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/redspider/public";
+        "http://localhost/RedSpider/public";
 
       return `${baseUrl}${imagePath}`;
     }
@@ -92,7 +92,7 @@ export default function Hero({ data }) {
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/redspider/public";
+        "http://localhost/RedSpider/public";
 
       return `${baseUrl}/${imagePath}`;
     }

@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { fetchPosts } from "../../lib/api";
 
-export default function BlogStats({ data }) {
+export default function BlogStats({ data, initialBlogPosts = [] }) {
   // ============================================
   // BLOG TITLE
   // ============================================
@@ -11,77 +9,10 @@ export default function BlogStats({ data }) {
 
   // ============================================
   // BLOG POSTS
+  // Server-side / ISR data from pages/index.js
   // ============================================
 
-  const [blogPosts, setBlogPosts] = useState([]);
-
-  const [blogsLoading, setBlogsLoading] = useState(true);
-
-  // ============================================
-  // FETCH LATEST BLOG POSTS
-  // ============================================
-
-  useEffect(() => {
-    let mounted = true;
-
-    const loadLatestBlogs = async () => {
-      try {
-        setBlogsLoading(true);
-
-        // Fetch first page from Posts API
-        const result = await fetchPosts(1);
-
-        let posts = Array.isArray(result?.posts) ? result.posts : [];
-
-        // ==========================================
-        // SORT LATEST FIRST
-        // ==========================================
-
-        posts = [...posts].sort((a, b) => {
-          const idA = Number(a?.id || 0);
-          const idB = Number(b?.id || 0);
-
-          // Higher ID = newer post
-          if (idA !== idB) {
-            return idB - idA;
-          }
-
-          // Fallback to created date
-          const dateA = new Date(a?.created_at || 0).getTime();
-
-          const dateB = new Date(b?.created_at || 0).getTime();
-
-          return dateB - dateA;
-        });
-
-        // ==========================================
-        // ONLY LATEST 3
-        // ==========================================
-
-        posts = posts.slice(0, 3);
-
-        if (mounted) {
-          setBlogPosts(posts);
-        }
-      } catch (error) {
-        console.error("Error loading latest blog posts:", error);
-
-        if (mounted) {
-          setBlogPosts([]);
-        }
-      } finally {
-        if (mounted) {
-          setBlogsLoading(false);
-        }
-      }
-    };
-
-    loadLatestBlogs();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const blogPosts = Array.isArray(initialBlogPosts) ? initialBlogPosts : [];
 
   // ============================================
   // CLIENT LOGOS
@@ -142,8 +73,8 @@ export default function BlogStats({ data }) {
       // to live backend URL
       if (imagePath.includes("localhost")) {
         return imagePath.replace(
-          "http://localhost/redspider/public",
-          "https://redspider.rsworkspace.net/admin/public",
+          "http://localhost/RedSpider/public",
+          "https://RedSpider.rsworkspace.net/admin/public",
         );
       }
 
@@ -157,7 +88,7 @@ export default function BlogStats({ data }) {
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/redspider/public";
+        "http://localhost/RedSpider/public";
 
       const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
 
@@ -197,10 +128,6 @@ export default function BlogStats({ data }) {
           BLOG SECTION
       ================================================== */}
 
-      {/* ==================================================
-    BLOG SECTION
-================================================== */}
-
       <section
         id="home-blog"
         className="mobile-app-ser section dark-background rs-home-blog-new"
@@ -218,14 +145,11 @@ export default function BlogStats({ data }) {
           {/* BLOG POSTS */}
 
           <div className="row g-3">
-            {blogsLoading ? (
-              <div className="col-12 text-center text-white">
-                <p>Loading...</p>
-              </div>
-            ) : blogPosts.length > 0 ? (
+            {blogPosts.length > 0 ? (
               blogPosts.map((post, index) => {
                 const imageUrl =
                   getImageUrl(post.image) || "/assets/img/blog/blog-1.webp";
+
                 const isRemote =
                   imageUrl.startsWith("http://") ||
                   imageUrl.startsWith("https://");
@@ -286,8 +210,8 @@ export default function BlogStats({ data }) {
         </div>
 
         {/* ==================================================
-      STATS
-  ================================================== */}
+            STATS
+        ================================================== */}
 
         <div className="container">
           <div className="rs-blog-stats row text-center justify-content-center">
@@ -333,6 +257,7 @@ export default function BlogStats({ data }) {
           <div className="row justify-content-center">
             {clientLogos.map((logo, index) => {
               const logoUrl = getImageUrl(logo);
+
               const isRemote =
                 logoUrl.startsWith("http://") || logoUrl.startsWith("https://");
 

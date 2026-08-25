@@ -10,9 +10,17 @@ import BlogStats from "../components/home/BlogStats";
 import FAQIndustries from "../components/home/FAQIndustries";
 import AgencyPackages from "../components/home/AgencyPackages";
 
-import { fetchHomepageData, fetchFeaturedServices } from "../lib/api";
+import {
+  fetchHomepageData,
+  fetchFeaturedServices,
+  fetchPosts,
+} from "../lib/api";
 
-export default function Home({ homepageData, initialServices }) {
+export default function Home({
+  homepageData,
+  initialServices,
+  initialBlogPosts,
+}) {
   // ============================================
   // SEO
   // ============================================
@@ -43,15 +51,9 @@ export default function Home({ homepageData, initialServices }) {
   // Uses ONLY visible FAQ data
   // ============================================
 
-  const faqs = Array.isArray(homepageData?.faqs)
-    ? homepageData.faqs
-    : [];
+  const faqs = Array.isArray(homepageData?.faqs) ? homepageData.faqs : [];
 
-  const validFaqs = faqs.filter(
-    (faq) =>
-      faq?.question &&
-      faq?.answer
-  );
+  const validFaqs = faqs.filter((faq) => faq?.question && faq?.answer);
 
   const faqSchema =
     validFaqs.length > 0
@@ -74,11 +76,7 @@ export default function Home({ homepageData, initialServices }) {
 
   return (
     <>
-      <SEO
-        {...seo}
-        includeBusinessSchema={true}
-        faqSchema={faqSchema}
-      />
+      <SEO {...seo} includeBusinessSchema={true} faqSchema={faqSchema} />
 
       <Layout>
         <Hero data={homepageData} />
@@ -88,10 +86,7 @@ export default function Home({ homepageData, initialServices }) {
             Server-side initial data
         ========================================== */}
 
-        <Services
-          data={homepageData}
-          initialServices={initialServices}
-        />
+        <Services data={homepageData} initialServices={initialServices} />
 
         <QuoteForm />
 
@@ -99,7 +94,12 @@ export default function Home({ homepageData, initialServices }) {
 
         <About data={homepageData} />
 
-        <BlogStats data={homepageData} />
+        {/* ==========================================
+            BLOGS
+            Server-side initial data
+        ========================================== */}
+
+        <BlogStats data={homepageData} initialBlogPosts={initialBlogPosts} />
 
         <FAQIndustries data={homepageData} />
 
@@ -119,50 +119,77 @@ export async function getStaticProps() {
     // Fetch Homepage CMS Data
     // ==========================================
 
-    const homepageData =
-      await fetchHomepageData();
+    const homepageData = await fetchHomepageData();
 
     // ==========================================
     // Services Limit
     // ==========================================
 
-    const servicesLimit =
-      Number(homepageData?.services_limit) || 6;
+    const servicesLimit = Number(homepageData?.services_limit) || 6;
 
     // ==========================================
     // Fetch Featured Services
     // SERVER SIDE
     // ==========================================
 
-    const initialServices =
-      await fetchFeaturedServices(
-        servicesLimit
-      );
+    const initialServices = await fetchFeaturedServices(servicesLimit);
+
+    // ==========================================
+    // Fetch Latest Blog Posts
+    // SERVER SIDE / ISR
+    // ==========================================
+
+    const initialBlogResult = await fetchPosts(1);
+
+    let initialBlogPosts = Array.isArray(initialBlogResult?.posts)
+      ? [...initialBlogResult.posts]
+      : [];
+
+    // ==========================================
+    // SORT LATEST FIRST
+    // ==========================================
+
+    initialBlogPosts = initialBlogPosts
+      .sort((a, b) => {
+        const idA = Number(a?.id || 0);
+        const idB = Number(b?.id || 0);
+
+        // Higher ID = newer post
+        if (idA !== idB) {
+          return idB - idA;
+        }
+
+        // Fallback to created date
+        const dateA = new Date(a?.created_at || 0).getTime();
+
+        const dateB = new Date(b?.created_at || 0).getTime();
+
+        return dateB - dateA;
+      })
+      .slice(0, 3);
 
     return {
       props: {
-        homepageData:
-          homepageData || null,
+        homepageData: homepageData || null,
 
-        initialServices:
-          Array.isArray(initialServices)
-            ? initialServices
-            : [],
+        initialServices: Array.isArray(initialServices) ? initialServices : [],
+
+        initialBlogPosts: Array.isArray(initialBlogPosts)
+          ? initialBlogPosts
+          : [],
       },
 
       // Refresh data every 60 seconds
       revalidate: 60,
     };
   } catch (error) {
-    console.error(
-      "Error fetching homepage data:",
-      error
-    );
+    console.error("Error fetching homepage data:", error);
 
     return {
       props: {
         homepageData: null,
         initialServices: [],
+        initialBlogPosts: [],
       },
 
       revalidate: 60,

@@ -11237,11 +11237,11 @@ button.rs-dropdown-trigger {
    ============================================ */
 
 /* Card 3 itself should not stretch internally */
+/* Card 3 should fill the same stack area as Cards 1 and 2 */
 .rs-gsap-cards .rs-card-3 {
   min-height: 0 !important;
   height: auto !important;
 
-  /* Keep GSAP absolute positioning */
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
@@ -11250,10 +11250,14 @@ button.rs-dropdown-trigger {
   width: 100% !important;
 }
 
-/* Card 3 inner card */
 .rs-card-3 .rs-agency-card {
   height: auto !important;
   min-height: 0 !important;
+}
+
+.rs-card-3 .rs-agency-card {
+  height: 100% !important;
+  min-height: 100% !important;
 }
 
 /* Row must follow actual content height */
