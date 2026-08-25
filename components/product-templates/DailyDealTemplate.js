@@ -88,7 +88,7 @@ export default function DailyDealTemplate({ data }) {
       {/* Hero Banner Section */}
       <section id="hero-banner" className="hero-banner section rs-full-section">
         <div className="rs-hero-banner">
-          <div className="container" style={{ maxWidth: "1600px" }}>
+          <div className="container" >
             {/* Row 1 : Title */}
             <div className="row align-items-center text-center text-lg-start mb-5">
               <div className="col-12 col-lg-10">
