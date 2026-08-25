@@ -28,33 +28,23 @@ export default function PortfolioHero() {
                   RedSpider for businesses across Dubai, the UAE and
                   international markets.
                 </p>
+
+                <h2 className="text-center text-white porh">
+                500+ Website Projects Delivered Across Dubai & UAE
+              </h2>
+              <p className="text-center text-white">
+                Browse a selection of projects completed for clients across real
+                estate, corporate, ecommerce, construction, logistics and other
+                industries. Each project reflects different business
+                requirements, design styles and digital experiences.
+              </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section
-        id="hero-banner"
-        className="mb-4 hero-banner section rs-full-section"
-        style={{ minHeight: "50vh" }}
-      >
-        <div className="rs-hero-banner">
-          <div className="container" style={{ maxWidth: "1500px" }}>
-            <div className="container section-title" data-aos="fade-up">
-              <h2 className="text-center">
-                500+ Website Projects Delivered Across Dubai & UAE
-              </h2>
-              <p className="text-center">
-                Browse a selection of projects completed for clients across real
-                estate, corporate, ecommerce, construction, logistics and other
-                industries. Each project reflects different business
-                requirements, design styles and digital experiences.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+     
     </>
   );
 }

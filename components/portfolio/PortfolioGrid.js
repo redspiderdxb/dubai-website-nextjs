@@ -807,7 +807,7 @@ export default function PortfolioGrid({
   // ============================================
 
   return (
-    <section id="portfolio" className="portfolio section pt-2">
+    <section id="portfolio" className="portfolio section pt-5">
       <div className="container">
         {/* ======================================
             FILTER / SEARCH
