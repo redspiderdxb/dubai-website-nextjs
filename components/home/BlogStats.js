@@ -72,10 +72,7 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
       // Convert localhost backend URL
       // to live backend URL
       if (imagePath.includes("localhost")) {
-        return imagePath.replace(
-          "http://localhost/RedSpider/public",
-          "https://RedSpider.rsworkspace.net/admin/public",
-        );
+        return imagePath.replace("http://localhost/RedSpider/public", "https://redspider.rsworkspace.net/admin/public");
       }
 
       return imagePath;
@@ -88,7 +85,7 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/RedSpider/public";
+        "https://redspider.rsworkspace.net/admin/public";
 
       const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
 
@@ -323,3 +320,5 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
     </>
   );
 }
+
+

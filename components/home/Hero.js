@@ -70,7 +70,7 @@ export default function Hero({ data }) {
       // Convert localhost backend image URL to live backend URL
       if (imagePath.includes("localhost")) {
         return imagePath.replace(
-          "http://localhost/RedSpider/public",
+          "https://redspider.rsworkspace.net/admin/public",
           "https://RedSpider.rsworkspace.net/admin/public",
         );
       }
@@ -83,7 +83,7 @@ export default function Hero({ data }) {
     if (imagePath.startsWith("/storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/RedSpider/public";
+        "https://redspider.rsworkspace.net/admin/public";
 
       return `${baseUrl}${imagePath}`;
     }
@@ -92,7 +92,7 @@ export default function Hero({ data }) {
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "http://localhost/RedSpider/public";
+        "https://redspider.rsworkspace.net/admin/public";
 
       return `${baseUrl}/${imagePath}`;
     }
@@ -240,3 +240,4 @@ export default function Hero({ data }) {
     </section>
   );
 }
+
