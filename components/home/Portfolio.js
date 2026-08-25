@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -57,7 +58,24 @@ export default function Portfolio() {
   const [open, setOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const slides = projects.map((project) => ({ src: project.image }));
+  // Helper to ensure image paths have leading slash for Next.js Image
+  const getImageSrc = (imagePath) => {
+    if (!imagePath) return null;
+    // If it already starts with / or is a full URL, return as-is
+    if (
+      imagePath.startsWith("/") ||
+      imagePath.startsWith("http://") ||
+      imagePath.startsWith("https://")
+    ) {
+      return imagePath;
+    }
+    // Otherwise add leading slash
+    return `/${imagePath}`;
+  };
+
+  const slides = projects.map((project) => ({
+    src: getImageSrc(project.image),
+  }));
 
   return (
     <>
@@ -85,12 +103,11 @@ export default function Portfolio() {
                 >
                   500+ Successful Website Projects Across Dubai & UAE
                 </h2>
-                <p
-                  className="rs-gd-intro__lead rs-gd-intro__reveal text-center fs-5"
-                 >
+                <p className="rs-gd-intro__lead rs-gd-intro__reveal text-center fs-5">
                   Explore some of the websites we’ve designed and developed for
-                  businesses across Dubai and the UAE, <br></br> combining creative
-                  design, responsive functionality and user-focused experiences.
+                  businesses across Dubai and the UAE, <br></br> combining
+                  creative design, responsive functionality and user-focused
+                  experiences.
                 </p>
               </div>
             </div>
@@ -128,10 +145,13 @@ export default function Portfolio() {
                   className="col-lg-4 col-md-6 portfolio-item isotope-item filter-app"
                 >
                   <div className="portfolio-content h-100">
-                    <img
-                      src={project.image}
+                    <Image
+                      src={getImageSrc(project.image)}
                       className="img-fluid"
                       alt={project.title}
+                      width={600}
+                      height={400}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       loading="lazy"
                     />
                     <div className="portfolio-info">

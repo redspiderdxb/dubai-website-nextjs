@@ -209,6 +209,7 @@ export default function ContactInfoForm({ data }) {
                     <div className="col-md-6">
                       <div className="phone-field">
                         <select
+                          id="country_code"
                           name="country_code"
                           className="country-code"
                           required

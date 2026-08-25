@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import Image from "next/image";
 
 export default function AgencyPackages() {
   const sectionRef = useRef(null);
@@ -112,6 +113,26 @@ export default function AgencyPackages() {
       ),
     },
   ];
+
+  // Helper to ensure image paths have leading slash for Next.js Image
+  const getImageSrc = (imagePath) => {
+    if (!imagePath) return null;
+    // If it already starts with / or is a full URL, return as-is
+    if (
+      imagePath.startsWith("/") ||
+      imagePath.startsWith("http://") ||
+      imagePath.startsWith("https://")
+    ) {
+      return imagePath;
+    }
+    // Otherwise add leading slash
+    return `/${imagePath}`;
+  };
+
+  // Helper to check if image is remote
+  const isRemoteImage = (src) => {
+    return src && (src.startsWith("http://") || src.startsWith("https://"));
+  };
 
   return (
     <>
@@ -460,10 +481,13 @@ export default function AgencyPackages() {
                 </div>
 
                 <div className="google-box my-2">
-                  <img
-                    src="assets/img/google-h.webp"
+                  <Image
+                    src="/assets/img/google-h.webp"
                     alt="Google rating"
                     className="img-fluid"
+                    width={200}
+                    height={60}
+                    sizes="(max-width: 768px) 100vw, 200px"
                     loading="lazy"
                   />
                 </div>
@@ -481,10 +505,12 @@ export default function AgencyPackages() {
                 <div className="rs-arrow-btn mt-4">
                   <span>
                     <a href="contactus.html">
-                      <img
-                        src="assets/img/arrow-icon-40.svg"
+                      <Image
+                        src="/assets/img/arrow-icon-40.svg"
                         alt="Contact us"
                         className="arrow-40deg-icon"
+                        width={40}
+                        height={40}
                         loading="lazy"
                       />
                     </a>
@@ -510,14 +536,13 @@ export default function AgencyPackages() {
                       <p className="text-dark mt-4" data-aos="fade-up">
                         Redspider has become a trusted choice for website design
                         in Dubai as we have 14 years of experience in the
-                        industry. We have completed  500+ successful
-                        projects and the number continues to grow as we aim a
-                        higher number. Our web designers are highly skilled who
-                        are helping various businesses have a strong online
-                        presence. We not only create new websites but also
-                        upgrade existing ones with full convition. Your website
-                        will look visually appealing and that helps grow your
-                        business over time.
+                        industry. We have completed 500+ successful projects and
+                        the number continues to grow as we aim a higher number.
+                        Our web designers are highly skilled who are helping
+                        various businesses have a strong online presence. We not
+                        only create new websites but also upgrade existing ones
+                        with full convition. Your website will look visually
+                        appealing and that helps grow your business over time.
                       </p>
 
                       <p className="text-dark mt-4" data-aos="fade-up">
@@ -561,10 +586,13 @@ export default function AgencyPackages() {
                       data-aos-delay="700"
                       data-aos-duration="1000"
                     >
-                      <img
-                        src="assets/img/cpane-laptop.webp"
+                      <Image
+                        src="/assets/img/cpane-laptop.webp"
                         className="img-fluid"
                         alt="Laptop with web design"
+                        width={500}
+                        height={350}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         loading="lazy"
                       />
                     </div>
@@ -585,9 +613,12 @@ export default function AgencyPackages() {
           <div className="row g-0 rs-creative-row">
             <div className="col-lg-6" data-aos="fade-right">
               <div className="rs-creative-img">
-                <img
-                  src="assets/img/rs-features.webp"
+                <Image
+                  src="/assets/img/rs-features.webp"
                   alt="Creative design studio"
+                  width={800}
+                  height={600}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   loading="lazy"
                 />
               </div>
@@ -598,12 +629,10 @@ export default function AgencyPackages() {
                 <div className="rs-creative-inner">
                   <div className="rs-process-title-sec">
                     <h2 className="rs-process-title mb-4 text-start">
-                      <span className="rs-title-black">
-                        Why Businesses 
-                      </span>
+                      <span className="rs-title-black">Why Businesses</span>
 
                       <span className="rs-process-highlight ms-0 ml-0">
-                       Choose  RedSpider
+                        Choose RedSpider
                         <svg
                           className="rs-process-underline"
                           viewBox="0 0 320 22"
@@ -662,82 +691,86 @@ export default function AgencyPackages() {
       </section>
 
       {/* =====================================================
-          CTA SECTION
-          ===================================================== */}
+    CTA SECTION
+    ===================================================== */}
 
-      <section
-        id="readytobuild"
-        className="readytobuild section light-background pt-0"
-      >
-        <div className="container">
-          {/* =========================
-        CTA CARDS
-    ========================= */}
-          <div className="cta-wrap">
-            {/* CALL */}
-            <a
-              className="cta-card"
-              href="tel:+971555515475"
-              aria-label="Call Us"
-            >
-              <span className="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z" />
-                </svg>
-              </span>
+      <section className="contact-cta" id="readytobuild">
+        {/* =========================
+      HEADING
+  ========================= */}
+        <div className="cta-heading">
+          <h2>Ready to Start Your Next Project?</h2>
 
-              <span className="cta-content">
-                <span>Speak to an Expert</span>
-                <p>Call our team</p>
-              </span>
+          <p>
+            Tell us what you need, and our team will help you find the right
+            digital solution.
+          </p>
+        </div>
 
-              <span className="dot"></span>
-            </a>
+        {/* =========================
+      CTA CARDS
+  ========================= */}
 
-            {/* EMAIL */}
-            <a
-              className="cta-card dark"
-              href="mailto:info@redspider.ae"
-              aria-label="Send Enquiry"
-            >
-              <span className="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                  <path d="m22 6-10 7L2 6" />
-                </svg>
-              </span>
+        <div className="cta-wrap">
+          {/* CALL */}
+          <a className="cta-card" href="tel:+971555515475" aria-label="Call Us">
+            <span className="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </span>
 
-              <span className="cta-content">
-                <span>Send an Enquiry</span>
-                <p>info@redspider.ae</p>
-              </span>
+            <span className="cta-content">
+              <span>Speak to an Expert</span>
+              <p>Call our team</p>
+            </span>
 
-              <span className="dot"></span>
-            </a>
+            <span className="dot"></span>
+          </a>
 
-            {/* WHATSAPP */}
-            <a
-              className="cta-card green"
-              href="https://wa.me/971555515475"
-              target="_blank"
-              rel="noopener"
-              aria-label="WhatsApp Us"
-            >
-              <span className="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.2 9.2 0 0 1-3.8-.9L3 20.5l1.5-5a8.5 8.5 0 1 1 16.5-4z" />
-                  <path d="M8.2 8.1c.4 3 2.7 5.3 5.7 5.8" />
-                  <path d="M13.9 13.9l1.5-1.1" />
-                  <path d="M8.2 8.1l1.1-1.5" />
-                </svg>
-              </span>
+          {/* EMAIL */}
+          <a
+            className="cta-card dark"
+            href="mailto:info@redspider.ae"
+            aria-label="Send Enquiry"
+          >
+            <span className="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <path d="m22 6-10 7L2 6" />
+              </svg>
+            </span>
 
-              <span className="cta-content">
-                <span>WhatsApp Us</span>
-                <p>+971 55 551 5475</p>
-              </span>
-            </a>
-          </div>
+            <span className="cta-content">
+              <span>Send an Enquiry</span>
+              <p>info@redspider.ae</p>
+            </span>
+
+            <span className="dot"></span>
+          </a>
+
+          {/* WHATSAPP */}
+          <a
+            className="cta-card green"
+            href="https://wa.me/971555515475"
+            target="_blank"
+            rel="noopener"
+            aria-label="WhatsApp Us"
+          >
+            <span className="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.2 9.2 0 0 1-3.8-.9L3 20.5l1.5-5a8.5 8.5 0 1 1 16.5-4z" />
+                <path d="M8.2 8.1c.4 3 2.7 5.3 5.7 5.8" />
+                <path d="M13.9 13.9l1.5-1.1" />
+                <path d="M8.2 8.1l1.1-1.5" />
+              </svg>
+            </span>
+
+            <span className="cta-content">
+              <span>WhatsApp Us</span>
+              <p>+971 55 551 5475</p>
+            </span>
+          </a>
         </div>
       </section>
     </>

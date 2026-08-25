@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Image from "next/image";
 
 export default function About({ data }) {
   // =====================================================
@@ -28,7 +29,8 @@ export default function About({ data }) {
   const videoTitle =
     data?.video_title || "Why Businesses Trust Our Web Design Expertise";
 
-  const videoThumbnail = data?.video_thumbnail || "assets/img/videos/video.webp";
+  const videoThumbnail =
+    data?.video_thumbnail || "assets/img/videos/video.webp";
 
   const videoUrl =
     data?.video_url ||
@@ -49,6 +51,7 @@ export default function About({ data }) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
+
       return `${baseUrl}${imagePath}`;
     }
 
@@ -56,11 +59,19 @@ export default function About({ data }) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
+
       return `${baseUrl}/${imagePath}`;
     }
 
-    return imagePath;
+    return imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
   };
+
+  // =====================================================
+  // IMAGE URLS
+  // =====================================================
+
+  const aboutImageUrl = getImageUrl(aboutImage);
+  const videoThumbnailUrl = getImageUrl(videoThumbnail);
 
   // =====================================================
   // GLIGHTBOX INITIALIZATION
@@ -78,15 +89,19 @@ export default function About({ data }) {
       const videoElement = document.querySelector(
         ".rs-video-zoom-sec .glightbox",
       );
+
       if (!videoElement) return false;
 
-      if (videoElement.dataset.glightboxInitialized === "true") return true;
+      if (videoElement.dataset.glightboxInitialized === "true") {
+        return true;
+      }
 
       lightbox = window.GLightbox({
         selector: ".rs-video-zoom-sec .glightbox",
       });
 
       videoElement.dataset.glightboxInitialized = "true";
+
       return true;
     };
 
@@ -95,6 +110,7 @@ export default function About({ data }) {
     if (!initialized) {
       timer = setInterval(() => {
         const success = initVideoLightbox();
+
         if (success && timer) {
           clearInterval(timer);
           timer = null;
@@ -104,6 +120,7 @@ export default function About({ data }) {
 
     return () => {
       if (timer) clearInterval(timer);
+
       if (lightbox && typeof lightbox.destroy === "function") {
         lightbox.destroy();
       }
@@ -118,21 +135,27 @@ export default function About({ data }) {
     if (typeof window === "undefined") return;
 
     const initAnimation = () => {
-      if (typeof window.initVideoZoomEffect !== "function") return false;
+      if (typeof window.initVideoZoomEffect !== "function") {
+        return false;
+      }
 
       const videoSection = document.querySelector(".rs-video-zoom-sec");
+
       if (!videoSection) return false;
 
       window.initVideoZoomEffect();
+
       return true;
     };
 
     const initialized = initAnimation();
+
     let timer = null;
 
     if (!initialized) {
       timer = setInterval(() => {
         const success = initAnimation();
+
         if (success && timer) {
           clearInterval(timer);
           timer = null;
@@ -142,9 +165,13 @@ export default function About({ data }) {
 
     return () => {
       if (timer) clearInterval(timer);
+
       if (typeof window.ScrollTrigger !== "undefined") {
         const trigger = window.ScrollTrigger.getById("rs-video-zoom");
-        if (trigger) trigger.kill();
+
+        if (trigger) {
+          trigger.kill();
+        }
       }
     };
   }, []);
@@ -218,16 +245,21 @@ export default function About({ data }) {
               data-aos-duration="900"
               data-aos-once="true"
             >
-              <img
-                src={getImageUrl(aboutImage)}
-                alt={aboutHeading}
-                className="img-fluid"
-                data-aos="zoom-in"
-                data-aos-delay="350"
-                data-aos-duration="900"
-                data-aos-once="true"
-                loading="lazy"
-              />
+              {aboutImageUrl && (
+                <Image
+                  src={aboutImageUrl}
+                  alt={aboutHeading}
+                  className="img-fluid"
+                  width={900}
+                  height={700}
+                  sizes="(max-width: 991px) 100vw, 50vw"
+                  data-aos="zoom-in"
+                  data-aos-delay="350"
+                  data-aos-duration="900"
+                  data-aos-once="true"
+                  loading="lazy"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -247,12 +279,18 @@ export default function About({ data }) {
                 data-type="video"
                 aria-label={`Watch ${videoTitle}`}
               >
-                <img
-                  src={getImageUrl(videoThumbnail)}
-                  alt={videoTitle}
-                  className="img-fluid rounded shadow rounded-5 video-thumb"
-                  loading="lazy"
-                />
+                {videoThumbnailUrl && (
+                  <Image
+                    src={videoThumbnailUrl}
+                    alt={videoTitle}
+                    className="img-fluid rounded shadow rounded-5 video-thumb"
+                    width={1200}
+                    height={675}
+                    sizes="(max-width: 991px) 100vw, 1200px"
+                    loading="lazy"
+                  />
+                )}
+
                 <span className="play-btn" aria-hidden="true"></span>
               </a>
             </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { fetchPosts } from "../../lib/api";
 
 export default function BlogStats({ data }) {
@@ -222,40 +223,60 @@ export default function BlogStats({ data }) {
                 <p>Loading...</p>
               </div>
             ) : blogPosts.length > 0 ? (
-              blogPosts.map((post, index) => (
-                <div
-                  key={post.id || post.slug || index}
-                  className="col-lg-4 col-md-6 aos-init aos-animate"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
-                  <div className="rs-blog-text-card">
-                    {/* IMAGE */}
+              blogPosts.map((post, index) => {
+                const imageUrl =
+                  getImageUrl(post.image) || "/assets/img/blog/blog-1.webp";
+                const isRemote =
+                  imageUrl.startsWith("http://") ||
+                  imageUrl.startsWith("https://");
 
-                    <div className="blog-img">
-                      <img
-                        src={
-                          getImageUrl(post.image) ||
-                          "/assets/img/blog/blog-1.webp"
-                        }
-                        alt={post.title || post.name || "RedSpider Blog"}
-                        className="img-fluid"
-                        loading="lazy"
-                      />
-                    </div>
+                return (
+                  <div
+                    key={post.id || post.slug || index}
+                    className="col-lg-4 col-md-6 aos-init aos-animate"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                  >
+                    <div className="rs-blog-text-card">
+                      {/* IMAGE */}
 
-                    {/* TITLE */}
+                      <div className="blog-img">
+                        {isRemote ? (
+                          <img
+                            src={imageUrl}
+                            alt={post.title || post.name || "RedSpider Blog"}
+                            className="img-fluid"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <Image
+                            src={imageUrl}
+                            alt={post.title || post.name || "RedSpider Blog"}
+                            className="img-fluid"
+                            width={400}
+                            height={300}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            loading="lazy"
+                          />
+                        )}
+                      </div>
 
-                    <div className="rs-blog-post-title">
-                      <h4>
-                        <a href={`/blog/${post.slug}`} className="rs-blog-link">
-                          {post.title || post.name || "Read Article"}
-                        </a>
-                      </h4>
+                      {/* TITLE */}
+
+                      <div className="rs-blog-post-title">
+                        <h4>
+                          <a
+                            href={`/blog/${post.slug}`}
+                            className="rs-blog-link"
+                          >
+                            {post.title || post.name || "Read Article"}
+                          </a>
+                        </h4>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className="col-12 text-center text-white">
                 <p>No blog posts available.</p>
@@ -268,29 +289,28 @@ export default function BlogStats({ data }) {
       STATS
   ================================================== */}
 
-          <div className="container">
-            <div className="rs-blog-stats row text-center justify-content-center">
-              {stats.map((stat, index) => (
-                <div key={index} className="col-3">
-                  <div>
-                    <span
-                      className="rs-blog-stat-number purecounter"
-                      data-purecounter-start="0"
-                      data-purecounter-end={parseInt(stat.number) || 0}
-                      data-purecounter-duration="0"
-                    >
-                      {stat.number}
-                    </span>
+        <div className="container">
+          <div className="rs-blog-stats row text-center justify-content-center">
+            {stats.map((stat, index) => (
+              <div key={index} className="col-3">
+                <div>
+                  <span
+                    className="rs-blog-stat-number purecounter"
+                    data-purecounter-start="0"
+                    data-purecounter-end={parseInt(stat.number) || 0}
+                    data-purecounter-duration="0"
+                  >
+                    {stat.number}
+                  </span>
 
-                    <span className="rs-plus"></span>
-                  </div>
-
-                  <p>{stat.label}</p>
+                  <span className="rs-plus"></span>
                 </div>
-              ))}
-            </div>
-          </div>
 
+                <p>{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ==================================================
@@ -311,25 +331,43 @@ export default function BlogStats({ data }) {
           </div>
 
           <div className="row justify-content-center">
-            {clientLogos.map((logo, index) => (
-              <div key={index} className="col-lg-2">
-                <div
-                  className="g-review-wrap text-center rs-logo-hover"
-                  data-aos="fade-up"
-                >
-                  <div className="rs-logo-hover__item">
-                    <img
-                      src={getImageUrl(logo)}
-                      alt={`Client logo ${index + 1}`}
-                      className="img-fluid"
-                      loading="lazy"
-                      width="150"
-                      height="80"
-                    />
+            {clientLogos.map((logo, index) => {
+              const logoUrl = getImageUrl(logo);
+              const isRemote =
+                logoUrl.startsWith("http://") || logoUrl.startsWith("https://");
+
+              return (
+                <div key={index} className="col-lg-2">
+                  <div
+                    className="g-review-wrap text-center rs-logo-hover"
+                    data-aos="fade-up"
+                  >
+                    <div className="rs-logo-hover__item">
+                      {isRemote ? (
+                        <img
+                          src={logoUrl}
+                          alt={`RedSpider client logo ${index + 1}`}
+                          className="img-fluid"
+                          loading="lazy"
+                          width="150"
+                          height="80"
+                        />
+                      ) : (
+                        <Image
+                          src={logoUrl}
+                          alt={`RedSpider client logo ${index + 1}`}
+                          className="img-fluid"
+                          width={150}
+                          height={80}
+                          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 16vw"
+                          loading="lazy"
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -343,10 +381,13 @@ export default function BlogStats({ data }) {
           <div className="row">
             <div className="col-12">
               <div className="g-review-wrap text-center" data-aos="fade-up">
-                <img
-                  src={getImageUrl("assets/img/reviewimg.webp")}
+                <Image
+                  src="/assets/img/reviewimg.webp"
                   alt="Google reviews and client testimonials"
                   className="img-fluid"
+                  width={800}
+                  height={400}
+                  sizes="100vw"
                   loading="lazy"
                 />
               </div>

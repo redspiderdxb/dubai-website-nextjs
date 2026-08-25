@@ -1,9 +1,11 @@
 export default function FAQIndustries({ data }) {
   // Get data from API or use fallback
   const faqTitle = data?.faq_title || "Frequently Asked Questions";
+
   const faqDescription =
     data?.faq_description ||
     "Find quick answers to common questions about our services.";
+
   const faqs = data?.faqs?.length > 0 ? data.faqs : [];
 
   // Split FAQs into left and right columns
@@ -45,6 +47,7 @@ export default function FAQIndustries({ data }) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
+
       return `${baseUrl}${imagePath}`;
     }
 
@@ -52,6 +55,7 @@ export default function FAQIndustries({ data }) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
         "http://localhost/redspider/public";
+
       return `${baseUrl}/${imagePath}`;
     }
 
@@ -78,26 +82,33 @@ export default function FAQIndustries({ data }) {
             <h2 className="fw-bold">{faqTitle}</h2>
             <p>{faqDescription}</p>
           </div>
+
           <div className="row g-4">
             {/* Left Column */}
             <div className="col-lg-6">
               <div className="accordion" id="homeFaqLeft">
                 {leftFaqs.map((faq, index) => (
                   <div className="accordion-item" key={`left-${index}`}>
-                    <h3 className="accordion-header">
+                    <h3
+                      className="accordion-header"
+                      id={`faq-left-heading-${index}`}
+                    >
                       <button
                         className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target={`#faq-left-${index}`}
                         aria-expanded="false"
+                        aria-controls={`faq-left-${index}`}
                       >
                         {faq.question}
                       </button>
                     </h3>
+
                     <div
                       id={`faq-left-${index}`}
                       className="accordion-collapse collapse"
+                      aria-labelledby={`faq-left-heading-${index}`}
                       data-bs-parent="#homeFaqLeft"
                     >
                       <div className="accordion-body">{faq.answer}</div>
@@ -112,20 +123,26 @@ export default function FAQIndustries({ data }) {
               <div className="accordion" id="homeFaqRight">
                 {rightFaqs.map((faq, index) => (
                   <div className="accordion-item" key={`right-${index}`}>
-                    <h3 className="accordion-header">
+                    <h3
+                      className="accordion-header"
+                      id={`faq-right-heading-${index}`}
+                    >
                       <button
                         className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target={`#faq-right-${index}`}
                         aria-expanded="false"
+                        aria-controls={`faq-right-${index}`}
                       >
                         {faq.question}
                       </button>
                     </h3>
+
                     <div
                       id={`faq-right-${index}`}
                       className="accordion-collapse collapse"
+                      aria-labelledby={`faq-right-heading-${index}`}
                       data-bs-parent="#homeFaqRight"
                     >
                       <div className="accordion-body">{faq.answer}</div>
@@ -165,6 +182,7 @@ export default function FAQIndustries({ data }) {
               >
                 <div className="stak-wrap">
                   <div className="stack-no">{stat.number}</div>
+
                   <div className="stack-desc">
                     <h4>{stat.label}</h4>
                   </div>
@@ -188,8 +206,9 @@ export default function FAQIndustries({ data }) {
         >
           <div className="section-title text-center text-white mb-3">
             <h2 className="fw-normal" data-aos="fade-up" data-aos-delay="100">
-              Built on Experience and Quality 
+              Built on Experience and Quality
             </h2>
+
             <p className="mb-4" data-aos="fade-up" data-aos-delay="250">
               RedSpider is a Dubai-based web design and development agency with
               over 14 years of experience delivering high-performance digital
@@ -197,6 +216,7 @@ export default function FAQIndustries({ data }) {
               thinking to build websites that are visually compelling,
               user-friendly, and built for long-term growth.
             </p>
+
             <p data-aos="fade-up" data-aos-delay="400">
               With a strong foundation in UI/UX design and modern development
               frameworks, we create secure, scalable, and performance-driven
@@ -218,6 +238,7 @@ export default function FAQIndustries({ data }) {
             <h2 className="fw-normal" data-aos="fade-up" data-aos-delay="200">
               Industries We Serve
             </h2>
+
             <p className="pb-0" data-aos="fade-up" data-aos-delay="350">
               Customized web solutions for businesses across multiple industries
               in Dubai and the UAE.

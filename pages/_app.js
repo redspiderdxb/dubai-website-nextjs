@@ -173,20 +173,7 @@ function MyApp({
           href="/assets/vendor/swiper/swiper-bundle.min.css"
         />
 
-        {/* ============================================
-            ANIMATE CSS
-            ============================================ */}
-
-        <link rel="stylesheet" href="/assets/lib/animate/animate.min.css" />
-
-        {/* ============================================
-            OWL CAROUSEL
-            ============================================ */}
-
-        <link
-          rel="stylesheet"
-          href="/assets/lib/owlcarousel/assets/owl.carousel.min.css"
-        />
+        
 
         {/* ============================================
             MAIN CSS
@@ -292,15 +279,6 @@ function MyApp({
       />
 
       {/* ================================================
-          LENIS
-          ================================================ */}
-
-      <Script
-        src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.23/bundled/lenis.min.js"
-        strategy="afterInteractive"
-      />
-
-      {/* ================================================
           SPLIT TYPE
           ================================================ */}
 
@@ -330,14 +308,7 @@ function MyApp({
         strategy="afterInteractive"
       />
 
-      {/* ================================================
-          PHP EMAIL FORM VALIDATION
-          ================================================ */}
-
-      <Script
-        src="/assets/vendor/php-email-form/validate.js"
-        strategy="afterInteractive"
-      />
+      
     </>
   );
 }

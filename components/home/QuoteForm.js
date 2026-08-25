@@ -13,9 +13,8 @@ export default function QuoteForm() {
               <div className="req_block_left">
                 <div className="h5 mb-3">Request a Quote</div>
                 <p className="mb-0">
-                  Simply complete the form and we will
-                  contact you to discuss your{' '}
-                 requirements further.
+                  Simply complete the form and we will contact you to discuss
+                  your requirements further.
                 </p>
               </div>
             </div>
@@ -64,13 +63,16 @@ export default function QuoteForm() {
                           data-aos-delay="200"
                         >
                           <label htmlFor="mobile">Phone Number*</label>
+
                           <div className="field-wrap">
                             <div className="phone-field">
                               <select
                                 name="country_code"
+                                id="country_code"
                                 className="country-code"
                                 required
                                 defaultValue="+971"
+                                aria-label="Country code"
                               >
                                 <option value="+971">🇦🇪 +971</option>
                                 <option value="+966">🇸🇦 +966</option>
@@ -83,6 +85,7 @@ export default function QuoteForm() {
                                 <option value="+44">🇬🇧 +44</option>
                                 <option value="+1">🇺🇸 +1</option>
                               </select>
+
                               <input
                                 type="tel"
                                 name="mobile"
@@ -94,7 +97,6 @@ export default function QuoteForm() {
                             </div>
                           </div>
                         </div>
-
                         {/* Email */}
                         <div
                           className="home-input-cus col-12 col-md-6"
@@ -129,7 +131,9 @@ export default function QuoteForm() {
                               required
                               defaultValue=""
                             >
-                              <option value="" disabled>Select</option>
+                              <option value="" disabled>
+                                Select
+                              </option>
                               <option value="E-Commerce">E-Commerce</option>
                               <option value="Corporate Website">
                                 Corporate Website
