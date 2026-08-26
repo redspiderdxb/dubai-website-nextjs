@@ -80,8 +80,8 @@ export default function Footer() {
   ];
 
   /* =====================================================
-     FOOTER MENU
-  ===================================================== */
+   FOOTER MENU
+===================================================== */
 
   const footerLinks = [
     {
@@ -95,6 +95,10 @@ export default function Footer() {
     {
       name: "Blog",
       path: "/blog/",
+    },
+    {
+      name: "FAQs",
+      path: "/faqs/",
     },
     {
       name: "Contact Us",
