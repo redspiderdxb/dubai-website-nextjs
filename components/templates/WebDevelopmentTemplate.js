@@ -81,6 +81,97 @@ export default function WebDevelopmentTemplate({ data }) {
   } = data || {};
 
   // ============================================
+  // IMAGE URL HELPER
+  // ============================================
+
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "";
+
+    const image = String(imagePath).trim();
+
+    if (!image) return "";
+
+    // Already valid absolute HTTPS URL
+    if (image.startsWith("https://")) {
+      return image;
+    }
+
+    // HTTP URL except localhost
+    if (
+      image.startsWith("http://") &&
+      !image.includes("localhost") &&
+      !image.includes("127.0.0.1")
+    ) {
+      return image;
+    }
+
+    // --------------------------------------------
+    // Convert localhost URLs
+    // --------------------------------------------
+
+    if (
+      image.includes("localhost/redspider/public") ||
+      image.includes("127.0.0.1/redspider/public")
+    ) {
+      return image.replace(
+        /^https?:\/\/(localhost|127\.0\.0\.1)\/redspider\/public/,
+        process.env.NEXT_PUBLIC_IMAGE_URL ||
+          "https://redspider.rsworkspace.net/admin/public",
+      );
+    }
+
+    // --------------------------------------------
+    // Convert localhost with only storage path
+    // --------------------------------------------
+
+    if (image.includes("localhost") && image.includes("/storage/")) {
+      const storageIndex = image.indexOf("/storage/");
+
+      return `${
+        process.env.NEXT_PUBLIC_IMAGE_URL ||
+        "https://redspider.rsworkspace.net/admin/public"
+      }${image.substring(storageIndex)}`;
+    }
+
+    if (image.includes("127.0.0.1") && image.includes("/storage/")) {
+      const storageIndex = image.indexOf("/storage/");
+
+      return `${
+        process.env.NEXT_PUBLIC_IMAGE_URL ||
+        "https://redspider.rsworkspace.net/admin/public"
+      }${image.substring(storageIndex)}`;
+    }
+
+    // --------------------------------------------
+    // Relative /storage path
+    // --------------------------------------------
+
+    if (image.startsWith("/storage/")) {
+      return `${
+        process.env.NEXT_PUBLIC_IMAGE_URL ||
+        "https://redspider.rsworkspace.net/admin/public"
+      }${image}`;
+    }
+
+    // --------------------------------------------
+    // Relative storage path
+    // --------------------------------------------
+
+    if (image.startsWith("storage/")) {
+      return `${
+        process.env.NEXT_PUBLIC_IMAGE_URL ||
+        "https://redspider.rsworkspace.net/admin/public"
+      }/${image}`;
+    }
+
+    // --------------------------------------------
+    // Other relative paths
+    // --------------------------------------------
+
+    return image;
+  };
+
+  // ============================================
   // LIGHTBOX STATE
   // ============================================
 
@@ -100,15 +191,20 @@ export default function WebDevelopmentTemplate({ data }) {
     ).values(),
   );
 
-  // 🔥 ONLY 9 ITEMS - SIRF 9 DIKHENGE
+  // ============================================
+  // ONLY 9 ITEMS
+  // ============================================
+
   const limitedGallery = uniqueGallery.slice(0, 9);
 
   // ============================================
   // LIGHTBOX SLIDES
+  // IMPORTANT:
+  // Use converted image URL here too
   // ============================================
 
   const lightboxSlides = limitedGallery.map((item) => ({
-    src: item.image,
+    src: getImageUrl(item.image),
   }));
 
   // ============================================
@@ -194,15 +290,9 @@ export default function WebDevelopmentTemplate({ data }) {
           className="design-developemnt-hero hero-marquee"
           style={{
             backgroundImage: hero_background
-              ? `url(${
-                  process.env.NEXT_PUBLIC_IMAGE_URL ||
-                  "http://localhost/redspider/public"
-                }/storage/${hero_background})`
+              ? `url(${getImageUrl(hero_background)})`
               : hero_image
-                ? `url(${
-                    process.env.NEXT_PUBLIC_IMAGE_URL ||
-                    "http://localhost/redspider/public"
-                  }/storage/${hero_image})`
+                ? `url(${getImageUrl(hero_image)})`
                 : "none",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -306,6 +396,7 @@ export default function WebDevelopmentTemplate({ data }) {
               <div className="rsu-content">
                 <div className="row g-0 h-100">
                   {/* LEFT COLUMN */}
+
                   <div className="col-lg-6 rsu-left-col">
                     <div className="rsu-left-inner">
                       <h2 className="rsu-main-title desc">
@@ -324,11 +415,11 @@ export default function WebDevelopmentTemplate({ data }) {
                   </div>
 
                   {/* RIGHT COLUMN */}
+
                   <div className="col-lg-6 rsu-right-col">
                     <div className="rsu-accordion-wrap">
                       <div className="rsu-mini-title">
                         <span>What we do</span>
-
                         <i className="bi bi-arrow-down-right"></i>
                       </div>
 
@@ -348,12 +439,13 @@ export default function WebDevelopmentTemplate({ data }) {
                               aria-expanded={index === 0 ? "true" : "false"}
                             >
                               <h3 className="hjs">
-                              
-                              <span>{String(index + 1).padStart(2, "0")}</span>
+                                <span>
+                                  {String(index + 1).padStart(2, "0")}
+                                </span>
 
-                              <strong>{point.title}</strong>
+                                <strong>{point.title}</strong>
 
-                              <i className="bi bi-plus-lg"></i>
+                                <i className="bi bi-plus-lg"></i>
                               </h3>
                             </button>
 
@@ -418,8 +510,8 @@ export default function WebDevelopmentTemplate({ data }) {
               <div className="col-lg-7 px-lg-5">
                 <div className="archidex-small-title">
                   <h2>
-                    Our Web Development  <br />
-                   
+                    Our Web Development
+                    <br />
                     Process
                   </h2>
                 </div>
@@ -498,12 +590,13 @@ export default function WebDevelopmentTemplate({ data }) {
           Dynamic backend gallery
           ONLY ZOOM OPTION
           Duplicate image paths removed
-          🔥 MAX 9 ITEMS SHOWN
+          MAX 9 ITEMS SHOWN
       ============================================ */}
 
       {show_gallery && limitedGallery.length > 0 && (
         <section id="portfolio" className="portfolio section pt-0">
           {/* Gallery Intro */}
+
           <section className="rs-gd-intro py-5" style={{ background: "none" }}>
             <div className="container-fluid px-3 px-md-4 px-xl-5">
               <div className="row align-items-center">
@@ -536,7 +629,8 @@ export default function WebDevelopmentTemplate({ data }) {
             </div>
           </section>
 
-          {/* Portfolio Cards - ONLY 9 ITEMS */}
+          {/* Portfolio Cards */}
+
           <div className="container">
             <div
               className="isotope-layout"
@@ -545,6 +639,7 @@ export default function WebDevelopmentTemplate({ data }) {
               data-sort="original-order"
             >
               {/* Hidden Filters */}
+
               <ul
                 className="portfolio-filters isotope-filters d-none"
                 data-aos="fade-up"
@@ -555,7 +650,8 @@ export default function WebDevelopmentTemplate({ data }) {
                 </li>
               </ul>
 
-              {/* 🔥 ONLY 9 ITEMS SHOWN - limitedGallery use kar rahe hain */}
+              {/* Gallery */}
+
               <div className="row gy-4 isotope-container">
                 {limitedGallery.map((item, index) => (
                   <div
@@ -563,22 +659,24 @@ export default function WebDevelopmentTemplate({ data }) {
                     className="col-lg-4 col-md-6 portfolio-item isotope-item filter-app"
                   >
                     <div className="portfolio-content h-100">
-                      {/* Image */}
+                      {/* IMAGE */}
+
                       <img
-                        src={item.image}
+                        src={getImageUrl(item.image)}
                         className="img-fluid"
                         alt={item.title || "Gallery Image"}
                         loading="lazy"
                       />
 
                       {/* Overlay */}
+
                       <div className="portfolio-info">
                         <h3>{item.title || "Portfolio Project"}</h3>
 
-                        {/* Description */}
                         {item.description && <p>{item.description}</p>}
 
                         {/* ONLY ZOOM BUTTON */}
+
                         <button
                           type="button"
                           className="preview-link border-0 bg-transparent text-white"
@@ -628,6 +726,7 @@ export default function WebDevelopmentTemplate({ data }) {
 
             <div className="row g-4">
               {/* LEFT FAQ */}
+
               <div className="col-lg-6">
                 <div className="accordion" id="homeFaqLeft">
                   {faqs.slice(0, Math.ceil(faqs.length / 2)).map((faq) => (
@@ -659,6 +758,7 @@ export default function WebDevelopmentTemplate({ data }) {
               </div>
 
               {/* RIGHT FAQ */}
+
               <div className="col-lg-6">
                 <div className="accordion" id="homeFaqRight">
                   {faqs.slice(Math.ceil(faqs.length / 2)).map((faq) => (
