@@ -87,7 +87,7 @@ export default function EcommerceTemplate({ data }) {
 
     processes_title = "Our Ecommerce Development Process",
 
-    processes_subtitle = "The development process is well planned and delivered without compromising on quality, on time, for each and every ecommerce project.",
+    processes_subtitle = "Our ecommerce development process is carefully planned to maintain quality, meet project requirements and support timely delivery.",
 
     technologies_title = "Ecommerce Platforms We Work With",
 

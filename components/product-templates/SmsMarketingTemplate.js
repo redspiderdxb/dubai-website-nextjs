@@ -430,7 +430,7 @@ export default function SmsMarketingTemplate({ data }) {
             </div>
             <div className="col-12 text-center">
               <a
-                href="#"
+                href="/contact"
                 className="btn btn-animation btn-red d-inline-flex align-items-center gap-3 mt-4"
               >
                 <span className="btn-title">Schedule Free Consultation</span>
@@ -484,7 +484,7 @@ export default function SmsMarketingTemplate({ data }) {
           <div className="row">
             <div className="col-12 text-center">
               <a
-                href="#"
+                href="/contact"
                 className="btn btn-animation btn-red d-inline-flex align-items-center gap-3 mt-4"
               >
                 <span className="btn-title">Schedule Free Consultation</span>
@@ -617,7 +617,7 @@ export default function SmsMarketingTemplate({ data }) {
                 Our Bulk SMS Application Features
               </h2>
               <a
-                href="#"
+                href="tel:+971555515475"
                 className="btn btn-animation btn-black d-inline-flex align-items-center gap-3 mt-4"
               >
                 <span className="btn-title">Call Now</span>

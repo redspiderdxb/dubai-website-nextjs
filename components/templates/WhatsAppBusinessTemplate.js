@@ -493,7 +493,7 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
       ===================================================== */}
 
       <section className="rs-whatsapp-intro-section">
-        <div className="container" style={{ maxWidth: "1500px" }}>
+        <div className="container" >
           <div className="row align-items-center g-4 g-xl-5">
             <div className="col-lg-6">
               <div
@@ -557,7 +557,7 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
       ===================================================== */}
 
       <section className="rs-business-channel-section">
-        <div className="container" style={{ maxWidth: "1500px" }}>
+        <div className="container" >
           <div className="row align-items-center g-4 g-xl-5">
             <div className="col-lg-6 order-2 order-lg-1">
               <div
