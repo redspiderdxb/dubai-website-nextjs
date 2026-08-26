@@ -43,7 +43,7 @@ export default function Footer() {
     },
     {
       name: "Real Estate Website Development",
-      path: "/products/real-estate-web-design-company",
+      path: "/products/real-estate-portal",
     },
     {
       name: "Mobile App Development",
@@ -62,10 +62,6 @@ export default function Footer() {
       path: "/service/brochure-design-company-in-dubai",
     },
     {
-      name: "SEO & Digital Marketing",
-      path: "#",
-    },
-    {
       name: "Email Marketing",
       path: "/service/email-marketing",
     },
@@ -80,10 +76,6 @@ export default function Footer() {
     {
       name: "WhatsApp Business API Integration",
       path: "/service/whatsapp-business-api-integration",
-    },
-    {
-      name: "Website Maintenance & Support",
-      path: "#",
     },
   ];
 
@@ -101,20 +93,8 @@ export default function Footer() {
       path: "/our-portfolio/",
     },
     {
-      name: "Products",
-      path: "#",
-    },
-    {
-      name: "FAQs",
-      path: "#",
-    },
-    {
       name: "Blog",
       path: "/blog/",
-    },
-    {
-      name: "Careers",
-      path: "#",
     },
     {
       name: "Contact Us",
@@ -201,18 +181,7 @@ export default function Footer() {
                     <li key={link.name}>
                       <span>{String(index + 1).padStart(2, "0")}</span>
 
-                      {link.path === "#" ? (
-                        <a
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                          }}
-                        >
-                          {link.name}
-                        </a>
-                      ) : (
-                        <Link href={link.path}>{link.name}</Link>
-                      )}
+                      <Link href={link.path}>{link.name}</Link>
                     </li>
                   ))}
                 </ul>
@@ -230,18 +199,7 @@ export default function Footer() {
               <ul className="rs-services">
                 {services.map((service) => (
                   <li key={service.name}>
-                    {service.path === "#" ? (
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                        }}
-                      >
-                        {service.name}
-                      </a>
-                    ) : (
-                      <Link href={service.path}>{service.name}</Link>
-                    )}
+                    <Link href={service.path}>{service.name}</Link>
                   </li>
                 ))}
               </ul>

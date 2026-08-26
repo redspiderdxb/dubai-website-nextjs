@@ -14,12 +14,14 @@ import {
   fetchHomepageData,
   fetchFeaturedServices,
   fetchPosts,
+  fetchAllGalleries,
 } from "../lib/api";
 
 export default function Home({
   homepageData,
   initialServices,
   initialBlogPosts,
+  initialGalleries,
 }) {
   // ============================================
   // SEO
@@ -42,13 +44,11 @@ export default function Home({
 
     image: "https://www.redspider.ae/assets/img/og-image.webp",
 
-    // Demo / staging protection
     robots: "noindex,nofollow",
   };
 
   // ============================================
   // FAQ SCHEMA
-  // Uses ONLY visible FAQ data
   // ============================================
 
   const faqs = Array.isArray(homepageData?.faqs) ? homepageData.faqs : [];
@@ -74,6 +74,7 @@ export default function Home({
         }
       : null;
 
+      
   return (
     <>
       <SEO {...seo} includeBusinessSchema={true} faqSchema={faqSchema} />
@@ -83,23 +84,29 @@ export default function Home({
 
         {/* ==========================================
             SERVICES
-            Server-side initial data
         ========================================== */}
 
         <Services data={homepageData} initialServices={initialServices} />
 
         <QuoteForm />
 
-        <Portfolio />
+        {/* ==========================================
+            HOMEPAGE PORTFOLIO
+
+            Projects are already fetched server-side.
+            No blank/loading state.
+        ========================================== */}
+
+        <Portfolio initialGalleries={initialGalleries} />
 
         <About data={homepageData} />
 
         {/* ==========================================
             BLOGS
-            Server-side initial data
         ========================================== */}
 
         <BlogStats data={homepageData} initialBlogPosts={initialBlogPosts} />
+
 
         <FAQIndustries data={homepageData} />
 
@@ -116,27 +123,21 @@ export default function Home({
 export async function getStaticProps() {
   try {
     // ==========================================
-    // Fetch Homepage CMS Data
+    // Homepage CMS
     // ==========================================
 
     const homepageData = await fetchHomepageData();
 
     // ==========================================
-    // Services Limit
+    // Services
     // ==========================================
 
     const servicesLimit = Number(homepageData?.services_limit) || 6;
 
-    // ==========================================
-    // Fetch Featured Services
-    // SERVER SIDE
-    // ==========================================
-
     const initialServices = await fetchFeaturedServices(servicesLimit);
 
     // ==========================================
-    // Fetch Latest Blog Posts
-    // SERVER SIDE / ISR
+    // Latest Blog Posts
     // ==========================================
 
     const initialBlogResult = await fetchPosts(1);
@@ -154,12 +155,10 @@ export async function getStaticProps() {
         const idA = Number(a?.id || 0);
         const idB = Number(b?.id || 0);
 
-        // Higher ID = newer post
         if (idA !== idB) {
           return idB - idA;
         }
 
-        // Fallback to created date
         const dateA = new Date(a?.created_at || 0).getTime();
 
         const dateB = new Date(b?.created_at || 0).getTime();
@@ -167,6 +166,20 @@ export async function getStaticProps() {
         return dateB - dateA;
       })
       .slice(0, 3);
+
+    // ==========================================
+    // HOMEPAGE PORTFOLIO
+    //
+    // IMPORTANT:
+    // Fetch on SERVER, not browser.
+    //
+    // This prevents:
+    // - blank portfolio
+    // - 2 sec loading gap
+    // - real-estate fallback flash
+    // ==========================================
+
+    const initialGalleries = await fetchAllGalleries();
 
     return {
       props: {
@@ -177,9 +190,13 @@ export async function getStaticProps() {
         initialBlogPosts: Array.isArray(initialBlogPosts)
           ? initialBlogPosts
           : [],
+
+        initialGalleries: Array.isArray(initialGalleries)
+          ? initialGalleries
+          : [],
       },
 
-      // Refresh data every 60 seconds
+      // ISR
       revalidate: 60,
     };
   } catch (error) {
@@ -190,6 +207,7 @@ export async function getStaticProps() {
         homepageData: null,
         initialServices: [],
         initialBlogPosts: [],
+        initialGalleries: [],
       },
 
       revalidate: 60,

@@ -57,11 +57,6 @@ export default function Header() {
 
   /* =====================================================
      SERVICES MENU
-
-     Base route changed:
-     /services/ → /service/
-
-     Dynamic service slugs are managed from admin.
   ===================================================== */
 
   const services = [
@@ -75,7 +70,7 @@ export default function Header() {
     },
     {
       name: "Real Estate Website Development",
-      path: "/products/real-estate-web-design-company",
+      path: "/products/real-estate-portal",
     },
     {
       name: "Mobile App Development",
@@ -94,10 +89,6 @@ export default function Header() {
       path: "/service/brochure-design-company-in-dubai",
     },
     {
-      name: "SEO & Digital Marketing",
-      path: "#",
-    },
-    {
       name: "Email Marketing",
       path: "/service/email-marketing",
     },
@@ -113,17 +104,10 @@ export default function Header() {
       name: "WhatsApp Business API Integration",
       path: "/service/whatsapp-business-api-integration",
     },
-    {
-      name: "Website Maintenance & Support",
-      path: "#",
-    },
   ];
 
   /* =====================================================
      DYNAMIC PRODUCTS
-
-     Real Estate + SMS Marketing are intentionally
-     moved under Services, so they are removed here.
   ===================================================== */
 
   const movedProductNames = [
@@ -250,11 +234,8 @@ export default function Header() {
 
   const headerClass = [
     "rs-main-header",
-
     isBlogPage ? "rs-blog-fixed-header" : "",
-
     isBlogPage && isBlogScrolled ? "rs-blog-header-scrolled" : "",
-
     isMobileOpen ? "rs-header-mobile-open" : "",
   ]
     .filter(Boolean)
@@ -337,23 +318,12 @@ export default function Header() {
                           {item.items.length > 0 ? (
                             item.items.map((subItem, subIndex) => (
                               <li key={`${item.name}-${subIndex}`}>
-                                {subItem.path === "#" ? (
-                                  <a
-                                    href="#"
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                    }}
-                                  >
-                                    {subItem.name}
-                                  </a>
-                                ) : (
-                                  <Link
-                                    href={subItem.path}
-                                    onClick={closeMobileMenu}
-                                  >
-                                    {subItem.name}
-                                  </Link>
-                                )}
+                                <Link
+                                  href={subItem.path}
+                                  onClick={closeMobileMenu}
+                                >
+                                  {subItem.name}
+                                </Link>
                               </li>
                             ))
                           ) : (
@@ -427,14 +397,6 @@ export default function Header() {
               <i className="bi bi-whatsapp"></i>
 
               <span>WhatsApp</span>
-            </a>
-
-            <a href="#" className="rs-social" aria-label="Facebook">
-              <i className="bi bi-facebook"></i>
-            </a>
-
-            <a href="#" className="rs-social" aria-label="LinkedIn">
-              <i className="bi bi-linkedin"></i>
             </a>
           </div>
         </div>

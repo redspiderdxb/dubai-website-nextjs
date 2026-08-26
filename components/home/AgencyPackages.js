@@ -27,31 +27,7 @@ export default function AgencyPackages() {
     "Responsive Web Design",
   ];
 
-  const locations = [
-    "Business Bay",
-    "Downtown Dubai",
-    "Dubai Marina",
-    "DIFC",
-    "Palm Jumeirah",
-    "JVC",
-    "Dubai Hills",
-    "Arabian Ranches",
-    "Dubai Creek Harbour",
-    "Bluewaters Island",
-    "Al Barsha",
-    "Dubai Silicon Oasis",
-    "Deira",
-    "Al Quoz",
-    "Jumeirah",
-    "Media City",
-    "Internet City",
-    "Dubai Harbour",
-    "Al Barari",
-    "Al Furjan",
-    "MBR City",
-    "Dubai Land",
-    "Sharjah",
-  ];
+
 
   const features = [
     "Custom website designs that reflect the story and values of your brand",
@@ -247,8 +223,7 @@ export default function AgencyPackages() {
 
                       <p>
                         Whether it is the corporate website, an ecommerce
-                        platform, or a custom web application, we offer the best
-                        web design services in Dubai, UAE. Customers' digital
+                        platform, or a custom web application, we offer the custom website solutions for businesses across Dubai and the UAE. Customers' digital
                         experience will improve when you have a website with an
                         outstanding design and reliable functionality.
                       </p>
@@ -443,11 +418,7 @@ export default function AgencyPackages() {
                         websites that help businesses grow online.
                       </p>
 
-                      <div className="rs-location-list">
-                        {locations.map((location, idx) => (
-                          <span key={idx}>{location}</span>
-                        ))}
-                      </div>
+                      
                     </div>
                   </div>
                 </div>

@@ -399,6 +399,15 @@ export default function LogoDesignTemplate({ data }) {
   // GALLERY IMAGES
   // ============================================
 
+  const getFrontendImageUrl = (image) => {
+    if (!image) return "";
+
+    return image.replace(
+      "http://localhost/redspider/public/",
+      "https://redspider.rsworkspace.net/admin/public/",
+    );
+  };
+
   const galleryImages = gallery.length > 0 ? gallery : [];
 
   // ============================================
@@ -425,8 +434,9 @@ export default function LogoDesignTemplate({ data }) {
   const [galleryLightboxIndex, setGalleryLightboxIndex] = useState(0);
 
   const gallerySlides = uniqueGalleryImages.map((item) => ({
-    src: item.image,
+    src: getFrontendImageUrl(item.image),
   }));
+
   // 9. How it Works Steps (Static)
   const workSteps = [
     {
@@ -509,11 +519,11 @@ export default function LogoDesignTemplate({ data }) {
               </div>
               <div className="col-lg-5 px-lg-5">
                 <div className="archidex-small-title">
-                  <h6>
+                  <h2>
                     Our <br />
                     Logo Design <br />
                     Process
-                  </h6>
+                  </h2>
                 </div>
                 <div
                   className="accordion archidex-accordion"
@@ -521,7 +531,7 @@ export default function LogoDesignTemplate({ data }) {
                 >
                   {processData.map((item, index) => (
                     <div className="accordion-item" key={item.id || index}>
-                      <h2 className="accordion-header">
+                      <h3 className="accordion-header">
                         <button
                           className={`accordion-button ${index === 0 ? "" : "collapsed"}`}
                           type="button"
@@ -533,7 +543,7 @@ export default function LogoDesignTemplate({ data }) {
                           <span className="arch-name">{item.title}</span>
                           <span className="arch-arrow">↗</span>
                         </button>
-                      </h2>
+                      </h3>
                       <div
                         id={`collapse${index}`}
                         className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
@@ -814,7 +824,7 @@ export default function LogoDesignTemplate({ data }) {
                           {/* IMAGE */}
 
                           <img
-                            src={item.image}
+                            src={getFrontendImageUrl(item.image)}
                             className="img-fluid"
                             alt={item.title || `Gallery ${index + 1}`}
                             loading="lazy"
@@ -887,7 +897,7 @@ export default function LogoDesignTemplate({ data }) {
             <div className="accordion rs-faq-custom" id="rsFaqOne">
               {faqData.map((faq, index) => (
                 <div className="accordion-item" key={faq.id || index}>
-                  <h2 className="accordion-header">
+                  <h3 className="accordion-header">
                     <button
                       className={`accordion-button rs-faq-btn ${index === 0 ? "" : "collapsed"}`}
                       type="button"
@@ -897,7 +907,7 @@ export default function LogoDesignTemplate({ data }) {
                       <span className="faq-icon">+</span>
                       {faq.question}
                     </button>
-                  </h2>
+                  </h3>
                   <div
                     id={`faq${index}`}
                     className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
@@ -987,9 +997,6 @@ export default function LogoDesignTemplate({ data }) {
     </section>
   );
 
-  // ============================================
-  // 🌊 Industries Marquee (Outside Section Order)
-  // ============================================
   const IndustriesMarquee = () => (
     <section key="industries" className="rs-text-marquee-sec mb-4">
       <div className="rs-text-marquee-wrap">
@@ -1002,26 +1009,11 @@ export default function LogoDesignTemplate({ data }) {
               </span>
             ))}
           </div>
-          <div className="rs-text-item">
-            {industriesRow1.map((item, index) => (
-              <span key={index}>
-                {item}
-                <i className="rs-dot"></i>
-              </span>
-            ))}
-          </div>
         </div>
       </div>
+
       <div className="rs-text-marquee-wrap red-strip">
         <div className="rs-text-marquee-track">
-          <div className="rs-text-item">
-            {industriesRow2.map((item, index) => (
-              <span key={index}>
-                {item}
-                <i className="rs-dot"></i>
-              </span>
-            ))}
-          </div>
           <div className="rs-text-item">
             {industriesRow2.map((item, index) => (
               <span key={index}>
@@ -1034,7 +1026,6 @@ export default function LogoDesignTemplate({ data }) {
       </div>
     </section>
   );
-
   // ============================================
   // 💬 Review Section (Outside Section Order)
   // ============================================

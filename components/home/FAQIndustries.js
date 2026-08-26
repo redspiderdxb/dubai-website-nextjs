@@ -1,25 +1,68 @@
 export default function FAQIndustries({ data }) {
-  // Get data from API or use fallback
+  // ============================================
+  // FAQ SECTION
+  // ============================================
+
   const faqTitle = data?.faq_title || "Frequently Asked Questions";
 
   const faqDescription =
     data?.faq_description ||
     "Find quick answers to common questions about our services.";
 
-  const faqs = data?.faqs?.length > 0 ? data.faqs : [];
+  // API is returning FAQs as an object:
+  // {
+  //   0: {...},
+  //   1: {...},
+  //   2: {...},
+  //   ...
+  // }
+  //
+  // Convert object to array safely.
+  const faqSource = data?.faqs;
 
-  // Split FAQs into left and right columns
+  const faqArray = Array.isArray(faqSource)
+    ? faqSource
+    : faqSource && typeof faqSource === "object"
+      ? Object.values(faqSource)
+      : [];
+
+  // Only valid FAQs + maximum 10 for homepage
+  const faqs = faqArray
+    .filter((faq) => faq?.question && faq?.answer)
+    .slice(0, 10);
+
+  // Split 10 FAQs into two columns
   const midPoint = Math.ceil(faqs.length / 2);
+
   const leftFaqs = faqs.slice(0, midPoint);
   const rightFaqs = faqs.slice(midPoint);
 
-  // Fallback stats if not available from API
+  // ============================================
+  // STATS
+  // ============================================
+
   const stats = [
-    { number: "20+", label: "Web Development Experts" },
-    { number: "10+", label: "UI/UX Specialists" },
-    { number: "10+", label: "Front-End Developers" },
-    { number: "14+", label: "Years of Experience" },
+    {
+      number: "20+",
+      label: "Web Development Experts",
+    },
+    {
+      number: "10+",
+      label: "UI/UX Specialists",
+    },
+    {
+      number: "10+",
+      label: "Front-End Developers",
+    },
+    {
+      number: "14+",
+      label: "Years of Experience",
+    },
   ];
+
+  // ============================================
+  // INDUSTRIES
+  // ============================================
 
   const industries = [
     "Small & Large Business",
@@ -35,36 +78,12 @@ export default function FAQIndustries({ data }) {
     "Hotel & Tourism",
   ];
 
-  // Helper function to get image URL
-  const getImageUrl = (imagePath) => {
-    if (!imagePath) return null;
-
-    if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
-      return imagePath;
-    }
-
-    if (imagePath.startsWith("/storage/")) {
-      const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "https://redspider.rsworkspace.net/admin/public";
-
-      return `${baseUrl}${imagePath}`;
-    }
-
-    if (imagePath.includes("storage/")) {
-      const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
-        "https://redspider.rsworkspace.net/admin/public";
-
-      return `${baseUrl}/${imagePath}`;
-    }
-
-    return imagePath;
-  };
-
   return (
     <>
-      {/* FAQ Section */}
+      {/* ==========================================
+          FAQ SECTION
+      ========================================== */}
+
       <section
         id="rs-faq-sec"
         className="home-faq rs-faq-sec section py-5 light-background"
@@ -78,84 +97,110 @@ export default function FAQIndustries({ data }) {
             borderRadius: "30px",
           }}
         >
+          {/* FAQ HEADER */}
+
           <div className="text-center mb-5 border-bottom pb-3">
             <h2 className="fw-bold">{faqTitle}</h2>
+
             <p>{faqDescription}</p>
           </div>
 
-          <div className="row g-4">
-            {/* Left Column */}
-            <div className="col-lg-6">
-              <div className="accordion" id="homeFaqLeft">
-                {leftFaqs.map((faq, index) => (
-                  <div className="accordion-item" key={`left-${index}`}>
-                    <h3
-                      className="accordion-header"
-                      id={`faq-left-heading-${index}`}
-                    >
-                      <button
-                        className="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#faq-left-${index}`}
-                        aria-expanded="false"
-                        aria-controls={`faq-left-${index}`}
-                      >
-                        {faq.question}
-                      </button>
-                    </h3>
+          {/* FAQ GRID */}
 
+          {faqs.length > 0 ? (
+            <div className="row g-4">
+              {/* ======================================
+                  LEFT COLUMN
+              ====================================== */}
+
+              <div className="col-lg-6">
+                <div className="accordion" id="homeFaqLeft">
+                  {leftFaqs.map((faq, index) => (
                     <div
-                      id={`faq-left-${index}`}
-                      className="accordion-collapse collapse"
-                      aria-labelledby={`faq-left-heading-${index}`}
-                      data-bs-parent="#homeFaqLeft"
+                      className="accordion-item"
+                      key={`left-${faq.id || index}`}
                     >
-                      <div className="accordion-body">{faq.answer}</div>
+                      <h3
+                        className="accordion-header"
+                        id={`faq-left-heading-${index}`}
+                      >
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#faq-left-${index}`}
+                          aria-expanded="false"
+                          aria-controls={`faq-left-${index}`}
+                        >
+                          {faq.question}
+                        </button>
+                      </h3>
+
+                      <div
+                        id={`faq-left-${index}`}
+                        className="accordion-collapse collapse"
+                        aria-labelledby={`faq-left-heading-${index}`}
+                        data-bs-parent="#homeFaqLeft"
+                      >
+                        <div className="accordion-body">{faq.answer}</div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              </div>
+
+              {/* ======================================
+                  RIGHT COLUMN
+              ====================================== */}
+
+              <div className="col-lg-6">
+                <div className="accordion" id="homeFaqRight">
+                  {rightFaqs.map((faq, index) => (
+                    <div
+                      className="accordion-item"
+                      key={`right-${faq.id || index}`}
+                    >
+                      <h3
+                        className="accordion-header"
+                        id={`faq-right-heading-${index}`}
+                      >
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#faq-right-${index}`}
+                          aria-expanded="false"
+                          aria-controls={`faq-right-${index}`}
+                        >
+                          {faq.question}
+                        </button>
+                      </h3>
+
+                      <div
+                        id={`faq-right-${index}`}
+                        className="accordion-collapse collapse"
+                        aria-labelledby={`faq-right-heading-${index}`}
+                        data-bs-parent="#homeFaqRight"
+                      >
+                        <div className="accordion-body">{faq.answer}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Right Column */}
-            <div className="col-lg-6">
-              <div className="accordion" id="homeFaqRight">
-                {rightFaqs.map((faq, index) => (
-                  <div className="accordion-item" key={`right-${index}`}>
-                    <h3
-                      className="accordion-header"
-                      id={`faq-right-heading-${index}`}
-                    >
-                      <button
-                        className="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#faq-right-${index}`}
-                        aria-expanded="false"
-                        aria-controls={`faq-right-${index}`}
-                      >
-                        {faq.question}
-                      </button>
-                    </h3>
-
-                    <div
-                      id={`faq-right-${index}`}
-                      className="accordion-collapse collapse"
-                      aria-labelledby={`faq-right-heading-${index}`}
-                      data-bs-parent="#homeFaqRight"
-                    >
-                      <div className="accordion-body">{faq.answer}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          ) : (
+            <div className="text-center py-4">
+              <p className="mb-0">No frequently asked questions available.</p>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* ==========================================
+          STATS SECTION
+      ========================================== */}
+
       <section
         id="stak-sec"
         className="stak-sec section darkblue-line pt-0 pb-5"
@@ -193,11 +238,16 @@ export default function FAQIndustries({ data }) {
         </div>
       </section>
 
-      {/* Industries Section */}
+      {/* ==========================================
+          INDUSTRIES SECTION
+      ========================================== */}
+
       <section
         id="mobile-app-ser"
         className="mobile-app-ser section dark-background rs-service-grid-outline py-0"
       >
+        {/* EXPERIENCE CONTENT */}
+
         <div
           className="container mb-3"
           style={{ maxWidth: "1200px" }}
@@ -227,6 +277,8 @@ export default function FAQIndustries({ data }) {
           </div>
         </div>
 
+        {/* INDUSTRIES TITLE */}
+
         <div
           className="container"
           style={{ maxWidth: "1100px" }}
@@ -246,11 +298,13 @@ export default function FAQIndustries({ data }) {
           </div>
         </div>
 
+        {/* INDUSTRIES MARQUEE */}
+
         <div className="container bg-red" style={{ maxWidth: "100%" }}>
           <div className="rs-marquee">
             <div className="rs-marquee-track">
               {industries.map((industry, index) => (
-                <span key={index}>{industry}</span>
+                <span key={`${industry}-${index}`}>{industry}</span>
               ))}
             </div>
           </div>
@@ -259,4 +313,3 @@ export default function FAQIndustries({ data }) {
     </>
   );
 }
-

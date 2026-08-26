@@ -1047,14 +1047,6 @@ export default function EcommerceTemplate({ data }) {
                         <span>{item}</span>
                       </div>
                     ))}
-
-                    {whyChooseItems.slice(0, 5).map((item, idx) => (
-                      <div className="rs-feature-item" key={`dup-${idx}`}>
-                        <i className={`bi bi-${whyChooseIcons1[idx]}`}></i>
-
-                        <span>{item}</span>
-                      </div>
-                    ))}
                   </div>
                 </div>
 
@@ -1064,14 +1056,6 @@ export default function EcommerceTemplate({ data }) {
                   <div className="rs-feature-track">
                     {whyChooseItems.slice(5, 10).map((item, idx) => (
                       <div className="rs-feature-item" key={idx + 5}>
-                        <i className={`bi bi-${whyChooseIcons2[idx]}`}></i>
-
-                        <span>{item}</span>
-                      </div>
-                    ))}
-
-                    {whyChooseItems.slice(5, 10).map((item, idx) => (
-                      <div className="rs-feature-item" key={`dup-${idx + 5}`}>
                         <i className={`bi bi-${whyChooseIcons2[idx]}`}></i>
 
                         <span>{item}</span>
@@ -1282,31 +1266,12 @@ export default function EcommerceTemplate({ data }) {
           >
             <div className="rs-marquee-line">
               <div className="rs-marquee-track">
-                {/* GROUP 1 */}
+                {/* INDUSTRIES */}
 
                 <div className="rs-marquee-group">
                   {industryItems.map((item, index) => (
                     <span
                       key={index}
-                      className={`rs-marquee-item ${
-                        index % 3 === 0
-                          ? "rs-red"
-                          : index % 2 === 1
-                            ? "rs-outline"
-                            : ""
-                      }`}
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-                {/* GROUP 2 */}
-
-                <div className="rs-marquee-group">
-                  {industryItems.map((item, index) => (
-                    <span
-                      key={`dup-${index}`}
                       className={`rs-marquee-item ${
                         index % 3 === 0
                           ? "rs-red"

@@ -11751,3 +11751,10 @@ button.rs-dropdown-trigger {
 .porh{
   font-family: sans-serif;
 }
+
+.archidex-small-title h2 {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.08;
+    font-weight: 600;
+}

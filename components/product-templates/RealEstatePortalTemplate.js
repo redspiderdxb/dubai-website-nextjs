@@ -1,13 +1,14 @@
 // frontend/components/product-templates/RealEstatePortalTemplate.js
-import ServiceHero from "../services/ServiceHero";
+
 import ServiceCTA from "../services/ServiceCTA";
 
 export default function RealEstatePortalTemplate({ data }) {
   if (!data) return <div className="text-center py-5">Loading...</div>;
 
   // ============================================
-  // ✅ DYNAMIC FIELDS - Backend se aayenge
+  // DYNAMIC FIELDS - Backend se aayenge
   // ============================================
+
   const {
     name,
     description,
@@ -27,6 +28,7 @@ export default function RealEstatePortalTemplate({ data }) {
     cta_button_text,
     cta_button_link,
     cta_background,
+
     // Repeater Data
     features = [],
     processes = [],
@@ -35,10 +37,10 @@ export default function RealEstatePortalTemplate({ data }) {
   } = data;
 
   // ============================================
-  // ❌ STATIC FIELDS - Abhi hardcoded (Future Dynamic)
+  // STATIC FIELDS
   // ============================================
 
-  // Real Estate Features - Static (Future Dynamic)
+  // Real Estate Features - Static
   const realEstateFeatures = [
     "Sales & Rental Listing Management",
     "Advanced Uploading Gallery",
@@ -50,18 +52,21 @@ export default function RealEstatePortalTemplate({ data }) {
     "Trash Log History",
     "Powerful Blog",
     "News & Events",
-    "Powerful jQuery Approach",
+    "Property Feed Integration",
     "Advanced Contents Management System",
     "Advertisement Management",
   ];
 
-  // Why Choose - Static (Future Dynamic)
+  // ============================================
+  // WHY CHOOSE - STATIC
+  // ============================================
+
   const whyChooseItems = [
     {
       icon: "bi-building-check",
       title: "Industry-Specific Expertise",
       description:
-        "Every member of our Real Estate Web Design team has 14+ years of experience and deep expertise in the real estate industry to deliver the best solutions.",
+        "Our team has 14+ years of experience and understands the specific needs of real estate businesses, helping us create practical digital solutions.",
     },
     {
       icon: "bi-window-sidebar",
@@ -73,7 +78,7 @@ export default function RealEstatePortalTemplate({ data }) {
       icon: "bi-phone",
       title: "SEO & Mobile Optimization",
       description:
-        "To ensure better visibility in search engines and adapt to the growing number of mobile users, we build SEO-Optimized Real Estate Websites.",
+        "We build responsive websites with search-friendly structures and mobile-first experiences to help businesses reach more customers.",
     },
     {
       icon: "bi-sliders2",
@@ -91,13 +96,13 @@ export default function RealEstatePortalTemplate({ data }) {
       icon: "bi-palette",
       title: "Custom Design & Branding",
       description:
-        "We craft unique and visually appealing designs that strengthen your brand identity and make your real estate website stand out.",
+        "We craft unique and visually appealing designs that strengthen your brand identity and help your business stand out.",
     },
     {
       icon: "bi-clock-history",
       title: "On-Time Delivery",
       description:
-        "Typically, our team completes Real Estate Web Design & Development projects within 10 to 15 days.",
+        "Simple real estate websites can be completed within approximately 2–4 weeks, while custom property portals with CRM, feeds and advanced integrations may require 6–12 weeks.",
     },
     {
       icon: "bi-headset",
@@ -107,7 +112,10 @@ export default function RealEstatePortalTemplate({ data }) {
     },
   ];
 
-  // Portfolio Items - Static (Future Dynamic)
+  // ============================================
+  // PORTFOLIO ITEMS - STATIC
+  // ============================================
+
   const portfolioItems = [
     {
       title: "Abu Alnaga Development V2",
@@ -141,18 +149,90 @@ export default function RealEstatePortalTemplate({ data }) {
     },
     {
       title: "Sankari Properties",
-      category: "Real Estate Developer website",
+      category: "Real Estate Developer Website",
       image: "portfolio/books-3.webp",
       link: "https://www.sankariproperties.com/",
     },
   ];
 
+  // ============================================
+  // HERO DATA
+  // ============================================
+
+  const heroTitle = hero_title || name || "Our Services";
+  const heroSubtitle = hero_subtitle || "";
+  const heroDesc = hero_description || description || "";
+  const backgroundImage = hero_background || hero_image || "";
+
+  // ============================================
+  // IMAGE URL
+  // ============================================
+
+  const imageUrl = backgroundImage
+    ? `${
+        process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public"
+      }/storage/${backgroundImage}`
+    : "";
+
+  // ============================================
+  // FAQ DATA
+  // ============================================
+
+  const faqSource = Array.isArray(faqs)
+    ? faqs
+    : faqs && typeof faqs === "object"
+      ? Object.values(faqs)
+      : [];
+
+  const validFaqs = faqSource.filter((faq) => faq?.question && faq?.answer);
+
   return (
     <>
-      {/* Hero */}
-      <ServiceHero service={data} />
+      {/* ============================================
+          HERO SECTION
+      ============================================ */}
 
-      {/* Best Real Estate Section - Intro */}
+      <section
+        className="design-developemnt-hero hero-marquee"
+        style={{
+          backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-12" data-aos="fade-right">
+              <div className="rs-process-title-sec">
+                <h1 className="rs-process-title mb-3">
+                  Real Estate Website Design
+                  {heroSubtitle && (
+                    <span className="rs-process-highlight">
+                      Company in Dubai
+                      <svg
+                        className="rs-process-underline"
+                        viewBox="0 0 320 22"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
+                      </svg>
+                    </span>
+                  )}
+                </h1>
+
+                {heroDesc && <p className="rs-process-text mb-3">{heroDesc}</p>}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          INTRO SECTION
+      ============================================ */}
+
       <section className="rs-best-realestate py-5">
         <div className="container py-lg-5" style={{ maxWidth: "1450px" }}>
           <div className="row align-items-center g-5">
@@ -160,25 +240,33 @@ export default function RealEstatePortalTemplate({ data }) {
               <div className="rs-project-gallery">
                 <div className="rs-gallery-shape shape-one"></div>
                 <div className="rs-gallery-shape shape-two"></div>
+
                 <div className="rs-project-img img-two">
-                  <img src="/assets/img/p4.webp" alt="Property portal project" />
+                  <img
+                    src="/assets/img/p4.webp"
+                    alt="Property portal project"
+                  />
                 </div>
+
                 <div className="rs-project-img img-three">
                   <img
                     src="/assets/img/p5.webp"
                     alt="Real estate landing page"
                   />
                 </div>
+
                 <div className="rs-project-img img-four">
                   <img
                     src="/assets/img/p6.webp"
                     alt="Property listing website"
                   />
                 </div>
+
                 <div className="rs-gallery-badge">
                   <span>CRM</span>
                   <small>Lead Ready Website</small>
                 </div>
+
                 <div className="rs-dashed-line">
                   <svg viewBox="0 0 620 520" fill="none">
                     <path
@@ -197,29 +285,30 @@ export default function RealEstatePortalTemplate({ data }) {
               <div className="rs-best-content">
                 <div className="title-wrap">
                   <span className="re-label">
-                    {intro_small_heading || "Real Estate Web Design Dubai"}
+                    {intro_small_heading || "Real Estate Web Solutions"}
                   </span>
+
                   <h3>
                     {intro_main_heading ||
-                      "Best Real Estate Web Design Company in Dubai UAE"}
+                      "Real Estate Website Solutions in Dubai"}
                   </h3>
                 </div>
+
                 <p>
                   {intro_description ||
-                    "Looking for a powerful real estate website? We create websites that help you sell faster and manage more easily. We specialize in custom real estate web design solutions that connect property developers, agents, and buyers through clean layouts, quick search tools, and mobile-friendly pages."}
+                    "Looking for a powerful real estate website? We create websites that help you sell faster and manage more easily. We specialize in custom solutions that connect property developers, agents, and buyers through clean layouts, quick search tools, and mobile-friendly pages."}
                 </p>
+
                 <p>
-                  Our CRM-based real estate websites make it simple to manage
-                  listings, capture leads, and grow your business online.
-                  Designed to fit every real estate business in the UAE.
-                  Choosing the right real estate website design company Dubai
-                  can make a significant difference in your online success.
+                  Our CRM-based websites make it simple to manage listings,
+                  capture leads, and grow your business online. Designed to fit
+                  different property businesses across the UAE.
                 </p>
+
                 <p>
-                  As a trusted real estate website design company in Dubai, we
-                  focus on websites that look great and perform even better.
-                  Let's build your dream real estate website - simple, smart,
-                  and built to convert.
+                  We focus on websites that look great and perform even better.
+                  Let's build your property website - simple, smart, and built
+                  to convert.
                 </p>
               </div>
             </div>
@@ -227,35 +316,42 @@ export default function RealEstatePortalTemplate({ data }) {
         </div>
       </section>
 
-      {/* Process Section - Dynamic */}
+      {/* ============================================
+          PROCESS SECTION - DYNAMIC
+      ============================================ */}
+
       {processes.length > 0 && (
         <section className="re-process py-5">
           <div className="container py-lg-5">
             <div className="row justify-content-center text-center">
               <div className="col-lg-10" data-aos="fade-up">
                 <div className="title-wrap">
-                  <h3 className="fs-h4 fw-bold">
+                  {/* POINT #24: H3 -> H2 */}
+                  <h2 className="fs-h4 fw-bold">
                     Real Estate Website Design & Development Process
-                  </h3>
+                  </h2>
                 </div>
+
                 <p>
                   RedSpider has extensive experience working with real estate
                   businesses and understands the requirements of the Dubai
-                  property market. Our real estate web design Dubai team creates
-                  custom websites that help agencies, brokers, and developers
-                  showcase properties, manage inquiries, and deliver a better
-                  user experience.
+                  property market. Our experienced team creates custom websites
+                  that help agencies, brokers, and developers showcase
+                  properties, manage inquiries, and deliver a better user
+                  experience.
                 </p>
+
                 <p>
                   To ensure every project meets business goals and technical
-                  requirements, our real estate web design company Dubai follows
-                  a structured 8-stage website design and development process.
-                  Our team works closely with clients at every stage, from
-                  planning and design to launch and ongoing support.
+                  requirements, our team follows a structured 8-stage website
+                  design and development process. We work closely with clients
+                  at every stage, from planning and design to launch and ongoing
+                  support.
                 </p>
               </div>
             </div>
           </div>
+
           <div className="container py-lg-5">
             <div className="row g-4">
               {processes.map((process, index) => (
@@ -282,8 +378,11 @@ export default function RealEstatePortalTemplate({ data }) {
                         }`}
                       ></i>
                     </div>
+
                     <span>{String(index + 1).padStart(2, "0")}</span>
+
                     <h3>{process.title}</h3>
+
                     <p>{process.description}</p>
                   </div>
                 </div>
@@ -293,32 +392,41 @@ export default function RealEstatePortalTemplate({ data }) {
         </section>
       )}
 
-      {/* Features Section - Static */}
+      {/* ============================================
+          FEATURES SECTION
+      ============================================ */}
+
       <section className="re-features py-5">
-        <div className="container py-lg-5" >
+        <div className="container py-lg-5">
           <div className="row align-items-center g-5">
             <div className="col-lg-6" data-aos="fade-right">
               <div className="title-wrap">
                 <span className="re-label">Main Features</span>
-                <h3>Main Features of Real Estate Web Design Agency Dubai</h3>
+
+                {/* POINT #24: H3 -> H2 */}
+                <h2>Main Features of Real Estate Web Design Agency Dubai</h2>
               </div>
+
               <p>
-                As the best real estate website design company in Dubai, our
-                team of designers and developers provides a wide range of Real
-                Estate Website features for our clients' websites. Some of these
-                key features are listed:
+                Our team provides a wide range of features for real estate
+                websites. These tools are designed to make property management,
+                lead generation, and customer interactions easier.
               </p>
+
               <p>
                 Along with these core functions, we also offer smart property
                 tools such as AI-based property recommendations, Google Map
                 integration, and WhatsApp inquiry features to make communication
-                faster and more personal. These features help property buyers
-                explore listings interactively while allowing agents and
-                developers to track performance in real time. Designed for
-                Dubai's competitive market, our Real estate web design company
-                improves engagement and increases qualified inquiries.
+                faster and more personal.
+              </p>
+
+              <p>
+                These features help property buyers explore listings
+                interactively while allowing agents and developers to track
+                performance in real time.
               </p>
             </div>
+
             <div className="col-lg-6" data-aos="fade-left">
               <div className="re-feature-box">
                 <div className="row g-3">
@@ -334,45 +442,47 @@ export default function RealEstatePortalTemplate({ data }) {
         </div>
       </section>
 
-      {/* Why Choose - Static */}
+      {/* ============================================
+          WHY CHOOSE SECTION
+      ============================================ */}
+
       <section className="why-sticky-sec py-5">
-        <div className="container py-lg-5" style={{ maxWidth: "1450px" }}>
+        <div className="container py-lg-5">
           <div className="row g-5">
             <div className="col-lg-5">
               <div className="why-sticky-content" data-aos="fade-right">
                 <span className="why-label">Why Choose RedSpider</span>
-                <h2>Trusted Real Estate Website Design Dubai Company</h2>
+
+                <h2>Why Businesses Choose RedSpider</h2>
+
                 <p>
-                  With over 14 years of experience, RedSpider has successfully
-                  completed 500+ real estate website design and development
-                  projects in Dubai, establishing a strong reputation in the
-                  market. RedSpider is a trusted Dubai Real Estate Website
-                  Designing company that not only provides Web Design &
-                  Development services but also offers additional solutions to
-                  boost your website's market presence and meet client needs.
-                  The following are our core features:
+                  With over 14 years of experience, RedSpider has extensive
+                  experience delivering digital solutions for developers,
+                  brokers, and property businesses across Dubai and the UAE.
                 </p>
+
+                <p>
+                  We help property businesses build professional digital
+                  platforms that support their marketing goals, improve customer
+                  engagement, and generate meaningful enquiries.
+                </p>
+
                 <p>
                   Over the past decade, RedSpider has delivered successful
                   websites for several Dubai-based property companies, helping
                   them generate consistent buyer inquiries and build strong
-                  online reputations. With our expertise in the UAE market, fast
-                  delivery timelines, and secure hosting infrastructure, we
-                  continue to be a trusted partner for real estate professionals
-                  who want measurable online growth.
+                  online reputations.
                 </p>
+
                 <div className="why-mini-stats">
                   <div>
                     <span>14+</span>
                     <small>Years Experience</small>
                   </div>
-                  <div>
-                    <span>500+</span>
-                    <small>Projects Completed</small>
-                  </div>
                 </div>
               </div>
             </div>
+
             <div className="col-lg-7">
               <div className="why-card-list">
                 {whyChooseItems.map((item, index) => (
@@ -380,6 +490,7 @@ export default function RealEstatePortalTemplate({ data }) {
                     <div className={`why-icon shape-${index + 1}`}>
                       <i className={item.icon}></i>
                     </div>
+
                     <div>
                       <h3>{item.title}</h3>
                       <p>{item.description}</p>
@@ -392,7 +503,10 @@ export default function RealEstatePortalTemplate({ data }) {
         </div>
       </section>
 
-      {/* Portfolio Section */}
+      {/* ============================================
+          PORTFOLIO INTRO
+      ============================================ */}
+
       <section
         id="section-two"
         className="section dynamic-text effect-title pb-0"
@@ -406,6 +520,10 @@ export default function RealEstatePortalTemplate({ data }) {
           </h2>
         </div>
       </section>
+
+      {/* ============================================
+          PORTFOLIO
+      ============================================ */}
 
       <section id="portfolio" className="portfolio section">
         <div className="container">
@@ -427,9 +545,12 @@ export default function RealEstatePortalTemplate({ data }) {
                       className="img-fluid"
                       alt={item.title}
                     />
+
                     <div className="portfolio-info">
                       <h4>{item.title}</h4>
+
                       <p>{item.category}</p>
+
                       <a
                         href={`/assets/img/${item.image}`}
                         title=""
@@ -438,9 +559,11 @@ export default function RealEstatePortalTemplate({ data }) {
                       >
                         <i className="bi bi-zoom-in"></i>
                       </a>
+
                       <a
                         href={item.link}
                         target="_blank"
+                        rel="noopener noreferrer"
                         title="More Details"
                         className="details-link"
                       >
@@ -455,7 +578,10 @@ export default function RealEstatePortalTemplate({ data }) {
         </div>
       </section>
 
-      {/* Services Showcase - Static */}
+      {/* ============================================
+          SERVICES SHOWCASE
+      ============================================ */}
+
       <section className="re-services-showcase py-5">
         <div className="container">
           {/* Row 1 */}
@@ -465,21 +591,27 @@ export default function RealEstatePortalTemplate({ data }) {
                 <img src="/assets/img/rewd-ser.webp" alt="" />
               </div>
             </div>
+
             <div className="col-lg-6" data-aos="fade-left">
               <div className="title-wrap">
                 <span className="re-label">Commercial Solutions</span>
+
                 <h3>Commercial Real Estate Web Design Services in Dubai</h3>
               </div>
+
               <p>
-                Nowadays, having just a beautiful website is not enough. If you
-                want to stand out in the real estate market, it is important to
-                have a good real estate website design company in Dubai.
+                Nowadays, having just a beautiful website is not enough. To
+                stand out in the property market, businesses need a website that
+                supports lead generation, property discovery, and customer
+                engagement.
               </p>
+
               <p>
-                We provide high-quality commercial real estate web design
-                services for agencies and developers that help generate
-                qualified leads and improve customer engagement.
+                We provide high-quality commercial website solutions for
+                agencies and developers that help generate qualified leads and
+                improve customer engagement.
               </p>
+
               <a href="#" className="service-btn">
                 Learn More
               </a>
@@ -491,26 +623,32 @@ export default function RealEstatePortalTemplate({ data }) {
             <div className="col-lg-6" data-aos="fade-left">
               <div className="service-image dark-image">
                 <img src="/assets/img/rewd-ser-2.webp" alt="" />
+
                 <div className="service-overlay">
                   CRM
                   <small>Integrated Property Platform</small>
                 </div>
               </div>
             </div>
+
             <div className="col-lg-6" data-aos="fade-right">
               <div className="title-wrap">
                 <span className="re-label">Development</span>
-                <h3>Real Estate Website Development Company Dubai</h3>
+
+                <h3>Real Estate Website Development</h3>
               </div>
+
               <p>
                 We create custom digital solutions for agencies, brokers and
                 developers using advanced property search, CRM integration and
                 lead generation tools.
               </p>
+
               <p>
                 Every website is designed to simplify property management while
                 delivering a seamless experience for visitors.
               </p>
+
               <a href="#" className="service-btn">
                 View Portfolio
               </a>
@@ -524,22 +662,27 @@ export default function RealEstatePortalTemplate({ data }) {
                 <img src="/assets/img/rewd-ser-3.webp" alt="" />
               </div>
             </div>
+
             <div className="col-lg-6" data-aos="fade-left">
               <div className="title-wrap">
                 <span className="re-label">Business Growth</span>
+
                 <h3>
                   Custom Real Estate Websites Designed for Business Growth
                 </h3>
               </div>
+
               <p>
                 We build elegant and user-friendly websites that help property
                 businesses manage listings, track inquiries and streamline
                 communication.
               </p>
+
               <p>
                 Our responsive websites include CRM integration, SEO
                 optimization and modern UI that turns visitors into buyers.
               </p>
+
               <a href="#" className="service-btn">
                 Start Project
               </a>
@@ -548,7 +691,10 @@ export default function RealEstatePortalTemplate({ data }) {
         </div>
       </section>
 
-      {/* Launch Section */}
+      {/* ============================================
+          LAUNCH SECTION
+      ============================================ */}
+
       <section className="re-launch py-5">
         <div className="container py-lg-5">
           <div className="re-launch-wrap">
@@ -557,26 +703,30 @@ export default function RealEstatePortalTemplate({ data }) {
                 <div className="re-launch-content">
                   <div className="title-wrap">
                     <span className="re-label">Website Launch</span>
+
                     <h3>Launch Your Real Estate Website with RedSpider</h3>
                   </div>
+
                   <p>
                     Did you just start your business as a real estate agency in
                     Dubai or a property dealer in Dubai? You will need a new
                     website to promote it properly.
                   </p>
+
                   <p>
                     Are you having trouble upgrading your existing website?
-                    Having a professional real estate website design and build
-                    has never been this easy.
+                    Having a professional website designed and built has never
+                    been this easy.
                   </p>
+
                   <p>
                     Similarly, we can update your existing website with quality
-                    features and enhance its functionality. At RedSpider, we can
-                    make the real estate website development process easy and
-                    hassle-free.
+                    features and enhance its functionality. At RedSpider, we
+                    make the development process easy and hassle-free.
                   </p>
                 </div>
               </div>
+
               <div className="col-lg-6" data-aos="fade-right">
                 <div className="re-launch-img">
                   <img
@@ -590,7 +740,10 @@ export default function RealEstatePortalTemplate({ data }) {
         </div>
       </section>
 
-      {/* More Services Showcase */}
+      {/* ============================================
+          MORE SERVICES SHOWCASE
+      ============================================ */}
+
       <section className="re-services-showcase py-5">
         <div className="container">
           {/* Row 1 */}
@@ -600,32 +753,32 @@ export default function RealEstatePortalTemplate({ data }) {
                 <img src="/assets/img/rewd-ser-5.webp" alt="" />
               </div>
             </div>
+
             <div className="col-lg-6" data-aos="fade-left">
               <div className="title-wrap">
                 <span className="re-label">Drives More Leads</span>
+
                 <h3>Create a Real Estate Website That Drives More Leads</h3>
               </div>
+
               <p>
-                At RedSpider, we specialize in designing and developing high
-                quality real estate websites. As a full-service professional
-                real estate website design company in Dubai, we create websites
-                that are fast and easy to use for both buyers and sellers.
+                At RedSpider, we specialize in designing and developing
+                high-quality websites for property businesses. We create
+                websites that are fast and easy to use for both buyers and
+                sellers.
               </p>
+
               <p>
-                Our team is full of talented professionals who understand the
-                unique needs of the real estate industry. We will build a web
-                design for real estate agents that will help you manage your
-                listings easily, while the users will have the perfect browsing
-                experience. We make use of the latest programs and web design
-                techniques that can cater to the needs of your buyers.
+                Our team understands the unique needs of the property industry.
+                We build websites that help agents manage listings easily while
+                providing visitors with a smooth browsing experience.
               </p>
+
               <p>
                 Your website will not only look impressive but will function
-                properly, too. If you want to generate more leads, showcase your
-                portfolio, or improve your online presence, don't hesitate to
-                contact Real Estate Website Design Company in UAE. We can
-                develop solutions that will support the growth of your real
-                estate business at every step.
+                properly, too. Whether you want to generate more leads, showcase
+                your portfolio, or improve your online presence, we can develop
+                solutions that support your business growth.
               </p>
             </div>
           </div>
@@ -637,34 +790,32 @@ export default function RealEstatePortalTemplate({ data }) {
                 <img src="/assets/img/rewd-ser-6.webp" alt="" />
               </div>
             </div>
+
             <div className="col-lg-6" data-aos="fade-right">
               <div className="title-wrap">
                 <span className="re-label">Built to Sell Properties</span>
-                <h3>
-                  Real Estate Web Design Dubai - Custom Websites Built to Sell
-                  Properties
-                </h3>
+
+                <h3>Custom Websites Built to Sell Properties</h3>
               </div>
+
               <p>
                 Every real estate business is unique and may have different
-                requirements than others. Nowadays, having a good website is
-                very important as it becomes a good promotional tool. Whether it
-                is the branding, gaining an audience, or reaching a specific
-                sales goal, look no further.
+                requirements. A professional website can become an effective
+                promotional tool for branding, audience engagement, and sales.
               </p>
+
               <p>
-                At RedSpider, we design Custom Websites to Sell Properties that
-                will showcase your listing to potential buyers. Businesses who
-                dont have a good website often fail, and we understand it well.
-                With the immersive 360 tours and user friendly galleries,
-                visitors can know what you are offering. Are you looking for a
-                sleek website that showcases luxury developments?
+                At RedSpider, we design custom websites that showcase property
+                listings to potential buyers. With immersive 360 tours and
+                user-friendly galleries, visitors can explore properties and
+                understand what you offer.
               </p>
+
               <p>
-                Or are you looking for a powerful platform that features large
-                property inventories? We can create a fully functional website
-                for the real estate industry that attracts the visitor and
-                builds trust from the very first click!
+                Whether you need a sleek website for luxury developments or a
+                powerful platform for large property inventories, we can create
+                a fully functional digital experience that builds trust from the
+                first click.
               </p>
             </div>
           </div>
@@ -676,43 +827,45 @@ export default function RealEstatePortalTemplate({ data }) {
                 <img src="/assets/img/rewd-ser-7.webp" alt="" />
               </div>
             </div>
+
             <div className="col-lg-6" data-aos="fade-left">
               <div className="title-wrap">
                 <span className="re-label">Social Media Design</span>
+
                 <h3>
                   Professional Social Media Design for Real Estate Businesses
                 </h3>
               </div>
+
               <p>
-                Our team manages real estate social media design for every real
-                estate company wanting to reach the top. We specialize in real
-                estate marketing that promises long term growth. You don't have
-                to worry about creating posts for your social media. Our team
-                will manage the social media campaigns for real estate offices
-                and agents that bring high engagement from users.
+                Our team manages social media design for property businesses
+                looking to increase engagement and build long-term visibility.
+                We create campaigns and content that help real estate offices
+                and agents connect with potential customers.
               </p>
+
               <p>
-                As every business is different, we make use of a customized
-                approach for real estate social media post design in Dubai. It
-                ensures that each property dealer or office gets personalized
-                attention. As a result, you will successfully attract and engage
-                clients.
+                As every business is different, we use a customized approach for
+                social media content and campaign design in Dubai. This ensures
+                that each property dealer or office receives personalized
+                attention.
               </p>
+
               <p>
-                Every real estate website we build follows a careful approach.
-                We ensure every stage, starting from design, development, and
-                launch, is completed properly. Our team always focuses on
-                delivering exceptional results.
+                Every website project we build follows a careful approach. We
+                ensure every stage, starting from design, development, and
+                launch, is completed properly.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-     
+      {/* ============================================
+          FAQs - DYNAMIC
+      ============================================ */}
 
-      {/* FAQs - Dynamic */}
-      {faqs.length > 0 && (
+      {validFaqs.length > 0 && (
         <section
           id="rs-faq-sec"
           className="rs-faq-sec section py-5 light-background"
@@ -721,23 +874,31 @@ export default function RealEstatePortalTemplate({ data }) {
             <div className="text-center mb-5">
               <h2 className="fw-bold">FAQ's</h2>
             </div>
+
             <div className="accordion rs-faq-custom" id="rsFaqOne">
-              {faqs.map((faq, index) => (
+              {validFaqs.map((faq, index) => (
                 <div className="accordion-item" key={faq.id || index}>
-                  <h2 className="accordion-header">
+                  <h3 className="accordion-header">
                     <button
-                      className={`accordion-button rs-faq-btn ${index === 0 ? "" : "collapsed"}`}
+                      className={`accordion-button rs-faq-btn ${
+                        index === 0 ? "" : "collapsed"
+                      }`}
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target={`#faq${index}`}
+                      aria-expanded={index === 0}
+                      aria-controls={`faq${index}`}
                     >
                       <span className="faq-icon">+</span>
                       {faq.question}
                     </button>
-                  </h2>
+                  </h3>
+
                   <div
                     id={`faq${index}`}
-                    className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
+                    className={`accordion-collapse collapse ${
+                      index === 0 ? "show" : ""
+                    }`}
                     data-bs-parent="#rsFaqOne"
                   >
                     <div className="accordion-body">{faq.answer}</div>
@@ -749,7 +910,10 @@ export default function RealEstatePortalTemplate({ data }) {
         </section>
       )}
 
-      {/* CTA */}
+      {/* ============================================
+          CTA
+      ============================================ */}
+
       <ServiceCTA service={data} />
     </>
   );

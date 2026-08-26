@@ -620,7 +620,7 @@ export default function WebDevelopmentTemplate({ data }) {
               borderRadius: "30px",
             }}
           >
-            <div className="text-start mb-5 border-bottom pb-3">
+            <div className="text-center mb-5 border-bottom pb-3">
               <h2 className="fw-bold">{faqs_title}</h2>
 
               <p>{faqs_subtitle}</p>
@@ -635,7 +635,7 @@ export default function WebDevelopmentTemplate({ data }) {
                       className="accordion-item"
                       key={faq.id || `left-${faq.question}`}
                     >
-                      <h2 className="accordion-header">
+                      <h3 className="accordion-header">
                         <button
                           className="accordion-button collapsed"
                           type="button"
@@ -644,7 +644,7 @@ export default function WebDevelopmentTemplate({ data }) {
                         >
                           {faq.question}
                         </button>
-                      </h2>
+                      </h3>
 
                       <div
                         id={`faq-left-${faq.id || faq.question}`}
@@ -666,7 +666,7 @@ export default function WebDevelopmentTemplate({ data }) {
                       className="accordion-item"
                       key={faq.id || `right-${faq.question}`}
                     >
-                      <h2 className="accordion-header">
+                      <h3 className="accordion-header">
                         <button
                           className="accordion-button collapsed"
                           type="button"
@@ -677,7 +677,7 @@ export default function WebDevelopmentTemplate({ data }) {
                         >
                           {faq.question}
                         </button>
-                      </h2>
+                      </h3>
 
                       <div
                         id={`faq-right-${faq.id || faq.question}`}

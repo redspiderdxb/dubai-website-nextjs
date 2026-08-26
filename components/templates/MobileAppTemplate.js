@@ -385,19 +385,17 @@ export default function MobileAppTemplate({ data }) {
             <div className="container" style={{ maxWidth: "1500px" }}>
               <div className="row align-items-center text-center text-lg-start mb-5">
                 <div className="col-lg-12">
-                  <h1 className="hero-titleinner">
+                  <h2 className="hero-titleinner">
                     <strong>Mobile App Development</strong> company in{" "}
                     <span className="title-red">Dubai</span>
-                  </h1>
+                  </h2>
                 </div>
               </div>
               <div className="row align-items-center g-4 text-center text-lg-start mt-4">
                 <div className="col-12 col-lg-4">
                   <p className="rs-desc pe-md-5">{intro_description}</p>
                   <p>
-                    At RedSpider, our mobile app development services focus on
-                    building scalable, secure, and userfriendly applications for
-                    both startups and established businesses. From concept
+                     From concept
                     planning to deployment, our team develops mobile apps
                     designed to deliver seamless performance across devices
                     while supporting long-term business growth.
@@ -439,13 +437,15 @@ export default function MobileAppTemplate({ data }) {
           id="mobile-app-ser"
           className="mobile-app-ser section dark-background rs-service-grid-outline"
         >
-          <div className="container" >
+          <div className="container">
             <div className="section-title text-center text-white mb-3">
               <h2 className="fw-bold">{features_title}</h2>
+
               <p className="rs-subtitle">{features_subtitle}</p>
             </div>
           </div>
-          <div className="container" >
+
+          <div className="container">
             <div className="row rs-grid-row text-center">
               {servicesData.slice(0, 4).map((service, index) => (
                 <div
@@ -458,7 +458,8 @@ export default function MobileAppTemplate({ data }) {
                       className="rs-icon-ser mb-3"
                       alt={service.title}
                     />
-                    <h6
+
+                    <h3
                       dangerouslySetInnerHTML={{
                         __html: service.title.replace(/\n/g, "<br />"),
                       }}
@@ -467,6 +468,7 @@ export default function MobileAppTemplate({ data }) {
                 </div>
               ))}
             </div>
+
             <div className="row rs-grid-row text-center">
               {servicesData.slice(4, 7).map((service, index) => (
                 <div
@@ -478,7 +480,8 @@ export default function MobileAppTemplate({ data }) {
                     className="rs-icon-ser mb-3"
                     alt={service.title}
                   />
-                  <h6
+
+                  <h3
                     dangerouslySetInnerHTML={{
                       __html: service.title.replace(/\n/g, "<br />"),
                     }}
@@ -487,15 +490,17 @@ export default function MobileAppTemplate({ data }) {
               ))}
             </div>
           </div>
+
           <div className="container mt-5" style={{ maxWidth: "950px" }}>
             <div className="row">
               <div className="col-12 text-center">
-                <h6 className="ma-info">
+                <p className="ma-info">
                   Each project is developed with a focus on performance,
                   usability, and scalability to ensure the application supports
                   business objectives effectively.
-                </h6>
+                </p>
               </div>
+
               <div className="col-12 text-center">
                 <a
                   href={cta_button_link || "#"}
@@ -519,7 +524,7 @@ export default function MobileAppTemplate({ data }) {
           id="whychooseus"
           className="whychooseus section light-background"
         >
-          <div className="container" >
+          <div className="container">
             <div className="section-title text-center text-white mb-3">
               <h2 className="fw-bold">{benefits_title}</h2>
               <p className="rs-subtitle">{benefits_subtitle}</p>
@@ -553,7 +558,7 @@ export default function MobileAppTemplate({ data }) {
     processes: {
       component: (
         <section key="processes" id="process-sec" className="process-sec py-5">
-          <div className="container" >
+          <div className="container">
             <div className="section-title text-center text-white mb-3">
               <h2 className="fw-bold">{processes_title}</h2>
               <p className="rs-subtitle">{processes_subtitle}</p>
@@ -688,7 +693,7 @@ export default function MobileAppTemplate({ data }) {
             <div className="accordion rs-faq-custom" id="rsFaqOne">
               {faqData.map((faq, index) => (
                 <div className="accordion-item" key={faq.id || index}>
-                  <h2 className="accordion-header">
+                  <h3 className="accordion-header">
                     <button
                       className={`accordion-button rs-faq-btn ${index === 0 ? "" : "collapsed"}`}
                       type="button"
@@ -698,7 +703,7 @@ export default function MobileAppTemplate({ data }) {
                       <span className="faq-icon">+</span>
                       {faq.question}
                     </button>
-                  </h2>
+                  </h3>
                   <div
                     id={`faq${index}`}
                     className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
@@ -759,7 +764,7 @@ export default function MobileAppTemplate({ data }) {
       id="readytobuild"
       className="readytobuild section light-background"
     >
-      <div className="container" >
+      <div className="container">
         <div className="section-title text-center text-white mb-3">
           <h2 className="fw-bold">Ready to build a strong brand identity?</h2>
           <p className="rs-subtitle">
@@ -768,7 +773,7 @@ export default function MobileAppTemplate({ data }) {
           </p>
         </div>
       </div>
-      <div className="container" >
+      <div className="container">
         <div className="inlinebtns text-center d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center">
           <a
             href={cta_button_link || "#"}
@@ -825,7 +830,7 @@ export default function MobileAppTemplate({ data }) {
       key="industries"
       className="industry-devlopment section dark-background"
     >
-      <div className="container mb-4" >
+      <div className="container mb-4">
         <div className="section-title text-center text-white mb-3">
           <h2 className="fw-normal">
             Industries Using Mobile Applications in UAE
@@ -987,8 +992,6 @@ export default function MobileAppTemplate({ data }) {
         <ProfessionalSection />
         <KeyFeaturesSection />
         <IndustriesSection />
-        
-     
       </main>
       {custom_js && <script dangerouslySetInnerHTML={{ __html: custom_js }} />}
     </div>
