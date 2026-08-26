@@ -174,25 +174,25 @@ export default function SmsMarketingTemplate({ data }) {
   // Benefits - Static
 
   const benefitsLeft = [
-    "SMS Marketing UAE campaigns provide a direct way to reach customers with promotions, reminders and business updates.",
+    "SMS campaigns provide a direct way to reach customers with promotions, reminders and business updates.",
     "Send time-sensitive messages quickly based on your campaign requirements.",
     "Manage campaigns through an easy-to-use web-based messaging platform.",
     "Segment audiences using relevant campaign criteria for more focused communication.",
     "Schedule messages in advance for promotions, reminders and important updates.",
     "Review campaign activity through available reporting and tracking tools.",
     "Integrate messaging capabilities with supported business applications where required.",
-    "Bulk SMS UAE solutions can support different campaign volumes and business communication needs.",
+    "Bulk messaging solutions can support different campaign volumes and business communication needs.",
   ];
 
   const benefitsRight = [
-    "Bulk SMS Dubai campaigns can help businesses communicate with customers across different locations and audience groups.",
+    "Bulk messaging campaigns can help businesses communicate with customers across different locations and audience groups.",
     "Reach mobile users without requiring them to be connected to the internet.",
     "Personalize messages for selected customer segments and campaign requirements.",
     "Plan messaging for customers across Dubai and other parts of the UAE.",
     "Keep customers informed about offers, services, appointments and business updates.",
     "Manage seasonal promotions and time-sensitive campaigns efficiently.",
     "Send messages according to your preferred campaign schedule.",
-    "Use SMS Marketing Dubai campaigns for relevant promotions, announcements and customer communication.",
+    "These campaigns can support relevant promotions, announcements and customer communication.",
   ];
 
   // App Features - Static
@@ -218,10 +218,11 @@ export default function SmsMarketingTemplate({ data }) {
             {/* Row 1 */}
             <div className="row align-items-center text-center text-lg-start mb-5 gy-4">
               <div className="col-12 col-lg-8">
-                <h1 className="hero-titleinner text-center text-lg-start mb-0">
-                  <strong>SMS Marketing and Bulk SMS</strong>
-                  <span className="title-red">Dubai</span>
-                </h1>
+                <h2 className="hero-titleinner text-center text-lg-start mb-0">
+                  <strong>
+                    Bulk SMS Marketing Solutions for UAE Businesses
+                  </strong>
+                </h2>
               </div>
               <div className="col-12 col-lg-4">
                 <p className="rs-desc mb-0">
@@ -697,10 +698,6 @@ export default function SmsMarketingTemplate({ data }) {
         </div>
       </section>
 
-      
-
-    
-
       {/* FAQs - Dynamic */}
       {faqs.length > 0 && (
         <section
@@ -709,7 +706,9 @@ export default function SmsMarketingTemplate({ data }) {
         >
           <div className="container" style={{ maxWidth: "1000px" }}>
             <div className="text-center mb-5">
-              <h2 className="fw-bold">Frequently Asked Questions About SMS Marketing</h2>
+              <h2 className="fw-bold">
+                Frequently Asked Questions About SMS Marketing
+              </h2>
             </div>
             <div className="accordion rs-faq-custom" id="rsFaqOne">
               {faqs.map((faq, index) => (

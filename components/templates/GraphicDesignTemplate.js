@@ -728,12 +728,12 @@ export default function GraphicDesignTemplate({ data }) {
 
                   <div className="col-lg-5 px-lg-5">
                     <div className="archidex-small-title mb-3 text-white">
-                      <h6 className="text-white">
+                      <h2 className="text-white">
                         Our <br />
                         Graphic Design
                         <br />
                         Process
-                      </h6>
+                      </h2>
                     </div>
 
                     <p>{processes_subtitle}</p>
@@ -747,7 +747,7 @@ export default function GraphicDesignTemplate({ data }) {
                           className="accordion-item"
                           key={process.id || index}
                         >
-                          <h2
+                          <h3
                             className="accordion-header"
                             id={`headingGraphic${index}`}
                           >
@@ -767,7 +767,7 @@ export default function GraphicDesignTemplate({ data }) {
 
                               <span className="arch-arrow">↗</span>
                             </button>
-                          </h2>
+                          </h3>
 
                           <div
                             id={`collapseGraphic${index}`}
@@ -1108,7 +1108,7 @@ export default function GraphicDesignTemplate({ data }) {
               borderRadius: "30px",
             }}
           >
-            <div className="text-start mb-5 border-bottom pb-3">
+            <div className="text-center mb-5 border-bottom pb-3">
               <h2 className="fw-bold">
                 {faqs_title || "Frequently Asked Questions"}
               </h2>
@@ -1130,7 +1130,7 @@ export default function GraphicDesignTemplate({ data }) {
                           className="accordion-item"
                           key={faq.id || `left-${idx}`}
                         >
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -1139,7 +1139,7 @@ export default function GraphicDesignTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
 
                           <div
                             id={`faq-graphic-left-${idx}`}
@@ -1162,7 +1162,7 @@ export default function GraphicDesignTemplate({ data }) {
                           className="accordion-item"
                           key={faq.id || `right-${idx}`}
                         >
-                          <h2 className="accordion-header">
+                          <h3 className="accordion-header">
                             <button
                               className="accordion-button collapsed"
                               type="button"
@@ -1171,7 +1171,7 @@ export default function GraphicDesignTemplate({ data }) {
                             >
                               {faq.question}
                             </button>
-                          </h2>
+                          </h3>
 
                           <div
                             id={`faq-graphic-right-${idx}`}

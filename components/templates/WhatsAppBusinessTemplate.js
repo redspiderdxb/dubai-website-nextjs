@@ -334,7 +334,8 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
     "/assets/img/whatsapp-img/whatsapp-crm.webp",
   );
 
-  const integrationImage = "/assets/img/whatsapp-img/whatsapp-integrations.webp";
+  const integrationImage =
+    "/assets/img/whatsapp-img/whatsapp-integrations.webp";
 
   // ============================================================
   // CONTENT
@@ -392,7 +393,7 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
 
   const cloudApiDescription = value(
     service.whatsapp_cloud_api_description,
-    "The WhatsApp Cloud API is Meta’s cloud-based solution for business messaging. It allows companies to connect WhatsApp with websites, software platforms and customised applications without managing their own WhatsApp API server infrastructure.",
+    "The WhatsApp Cloud API is Meta's cloud-based solution for business messaging. It allows companies to connect WhatsApp with websites, software platforms and customised applications without managing their own WhatsApp API server infrastructure.",
   );
 
   const marketingHeading = value(
@@ -442,7 +443,7 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
 
   const whyChooseDescription = value(
     service.whatsapp_why_choose_description,
-    "RedSpider Web & Art Design has been providing digital solutions to businesses in Dubai since 2013. Our team understands website development, business automation, CRM systems and digital marketing.",
+    "RedSpider Web & Art Design has been providing digital solutions to businesses in Dubai since 2010. Our team understands website development, business automation, CRM systems and digital marketing.",
   );
 
   return (
@@ -459,7 +460,7 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
                 <h1 className="rs-process-title mb-3">
                   WhatsApp Business
                   <span className="rs-process-highlight">
-                    API Integration
+                    API Integration in Dubai
                     <svg
                       className="rs-process-underline"
                       viewBox="0 0 320 22"
@@ -502,10 +503,9 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
               >
                 <span className="rs-eyebrow">{introSmallHeading}</span>
 
-                <h1 className="rs-title">
-                  WhatsApp Business API Integration and{" "}
-                  <span>Marketing in Dubai</span>
-                </h1>
+                <h2 className="rs-title">
+                  WhatsApp Business API Integration &amp; Marketing Solutions
+                </h2>
 
                 <div className="rs-description">
                   <p>{introDescription}</p>
@@ -640,7 +640,6 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
 
             <h2 className="rs-title">
               Our WhatsApp Business API <span>Integration Services</span>
-            
             </h2>
 
             <p className="rsdescription">{servicesDescription}</p>
@@ -696,10 +695,8 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
                 <span className="rs-eyebrow">Automated Customer Journeys</span>
 
                 <h2 className="rs-title">
-                 WhatsApp Business API Integration <span>with Chatbot</span>
-                
-                  
-                 </h2>
+                  WhatsApp Business API Integration <span>with Chatbot</span>
+                </h2>
 
                 <p className="rs-description">{chatbotDescription}</p>
 
@@ -790,11 +787,8 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
                 <span className="rs-eyebrow">Connected messaging</span>
 
                 <h2 className="rs-title">
-                  
-                 WhatsApp Cloud <span>API Integration</span>
-                
-                  
-                  </h2>
+                  WhatsApp Cloud <span>API Integration</span>
+                </h2>
 
                 <p className="rs-description">{cloudApiDescription}</p>
 
@@ -827,12 +821,7 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
             <span className="rs-eyebrow">Campaign possibilities</span>
 
             <h2 className="rs-title">
-              
-
               WhatsApp Marketing <span>Services in Dubai</span>
-            
-
-
             </h2>
 
             <p className="rs-description">{marketingDescription}</p>
@@ -904,8 +893,7 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
                 <span className="rs-eyebrow">Team Inbox</span>
 
                 <h2 className="rs-title">
-                 Shared WhatsApp <span> Inbox for Your Team</span>
-                
+                  Shared WhatsApp <span> Inbox for Your Team</span>
                 </h2>
 
                 <p className="rs-description">{inboxDescription}</p>
@@ -939,7 +927,8 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
               <div className="rs-copy" data-aos="fade-up">
                 <span className="rs-eyebrow">CRM Integration</span>
 
-                <h2 className="rs-title">Connect WhatsApp <span> with Your CRM</span>
+                <h2 className="rs-title">
+                  Connect WhatsApp <span> with Your CRM</span>
                 </h2>
 
                 <p className="rs-description">{crmDescription}</p>
@@ -983,8 +972,9 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
       <section className="rs-api-pricing-section">
         <div className="container">
           <header className="rs-pricing-heading" data-aos="fade-up">
-            <h2 className="rs-common-title">WhatsApp Business <span>API Pricing</span>
-          </h2>
+            <h2 className="rs-common-title">
+              WhatsApp Business <span>API Pricing</span>
+            </h2>
 
             <p className="rs-common-description">{pricingDescription}</p>
 
@@ -1037,7 +1027,8 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
       <section className="rs-why-hub-section">
         <div className="container">
           <header className="rs-heading" data-aos="fade-up">
-            <h2 className="rs-common-title">Why Choose <span>RedSpider?</span>
+            <h2 className="rs-common-title">
+              Why Choose <span>RedSpider?</span>
             </h2>
 
             <p className="rs-common-description">{whyChooseDescription}</p>
