@@ -8,14 +8,22 @@ import ContactInfoForm from "../components/contact/ContactInfoForm";
 import ContactMap from "../components/contact/ContactMap";
 
 export default function Contact({ contactData }) {
-  // Fallback SEO if data is not available
   const seoData = {
-    title: contactData?.seo_title || "Contact RedSpider - Web Design & Development Agency Dubai",
-    description: contactData?.seo_description || "Get in touch with RedSpider for professional web design, development, and digital marketing services in Dubai. Call, email, or fill out our contact form.",
-    keywords: contactData?.seo_keywords || "contact redspider, web design agency dubai contact, website development company uae",
-    canonical: contactData?.canonical_url || "https://www.redspider.ae/contact",
+    title:
+      contactData?.seo_title ||
+      "Contact RedSpider - Web Design & Development Agency Dubai",
+
+    description:
+      contactData?.seo_description ||
+      "Get in touch with RedSpider for professional web design, development, and digital marketing services in Dubai. Call, email, or fill out our contact form.",
+
+    keywords:
+      contactData?.seo_keywords ||
+      "contact redspider, web design agency dubai contact, website development company uae",
+
+    canonical: "https://www.redspider.ae/contact-us/",
+
     image: "https://www.redspider.ae/contact-og-image.jpg",
-    noIndex: false,
   };
 
   return (

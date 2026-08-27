@@ -16,14 +16,17 @@ export default function About({ aboutData }) {
   const seoData = {
     title:
       aboutData?.seo_title || "About RedSpider - Web Design Agency in Dubai",
+
     description:
       aboutData?.seo_description ||
       "Learn about RedSpider, a leading web design company with 14+ years of experience in Dubai and UAE.",
+
     keywords:
       aboutData?.seo_keywords || "about redspider, dubai web design agency",
-    canonical: aboutData?.canonical_url || "https://www.redspider.ae/about",
+
+    canonical: "https://www.redspider.ae/about-us/",
+
     image: "https://www.redspider.ae/about-og-image.jpg",
-    noIndex: false,
   };
 
   return (

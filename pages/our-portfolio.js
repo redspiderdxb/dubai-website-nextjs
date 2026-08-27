@@ -19,13 +19,12 @@ export default function Portfolio({ initialGalleries, initialPagination }) {
     keywords:
       "web design portfolio dubai, redspider projects, website development examples uae",
 
-    canonical: "https://www.redspider.ae/portfolio",
+    canonical: "https://www.redspider.ae/our-portfolio/",
 
     image: "https://www.redspider.ae/portfolio-og-image.jpg",
 
     noIndex: false,
   };
-
   return (
     <Layout>
       <SEO {...seoData} />
@@ -62,4 +61,3 @@ export async function getStaticProps() {
     revalidate: 60,
   };
 }
-

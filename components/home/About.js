@@ -249,7 +249,7 @@ export default function About({ data }) {
                 <Image
                   src={aboutImageUrl}
                   alt={aboutHeading}
-                  className="img-fluid"
+                  className="img-fluid laptop-mobile"
                   width={900}
                   height={700}
                   sizes="(max-width: 991px) 100vw, 50vw"

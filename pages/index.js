@@ -44,7 +44,7 @@ export default function Home({
 
     image: "https://www.redspider.ae/assets/img/og-image.webp",
 
-    robots: "noindex,nofollow",
+    robots: "index,follow",
   };
 
   // ============================================
@@ -74,7 +74,6 @@ export default function Home({
         }
       : null;
 
-      
   return (
     <>
       <SEO {...seo} includeBusinessSchema={true} faqSchema={faqSchema} />
@@ -106,7 +105,6 @@ export default function Home({
         ========================================== */}
 
         <BlogStats data={homepageData} initialBlogPosts={initialBlogPosts} />
-
 
         <FAQIndustries data={homepageData} />
 

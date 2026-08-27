@@ -275,7 +275,7 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
                 logoUrl.startsWith("http://") || logoUrl.startsWith("https://");
 
               return (
-                <div key={index} className="col-lg-2">
+                <div key={index} className="col-lg-2 col-4">
                   <div
                     className="g-review-wrap text-center rs-logo-hover"
                     data-aos="fade-up"

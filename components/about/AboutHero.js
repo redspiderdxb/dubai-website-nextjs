@@ -35,7 +35,7 @@ export default function AboutHero({ data }) {
                 <span className="rs-process-subtitle">{heroSubtitle}</span>
               )}
 
-              <h1 className="rs-process-title mb-3">
+              <h1 className="rs-process-title mb-3 about-h1">
                 RedSpider -
                 <span className="rs-process-highlight">
                   Your Digital Partner in the UAE

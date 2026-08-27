@@ -99,7 +99,7 @@ export default function FAQIndustries({ data }) {
         >
           {/* FAQ HEADER */}
 
-          <div className="text-center mb-5 border-bottom pb-3">
+          <div className="text-center mb-3 border-bottom pb-3">
             <h2 className="fw-bold">{faqTitle}</h2>
 
             <p>{faqDescription}</p>
@@ -220,7 +220,7 @@ export default function FAQIndustries({ data }) {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="col-lg-3 col-md-6 text-center mb-4 mb-lg-0"
+                className="col-lg-3 col-6 text-center mb-4 mb-lg-0"
                 data-aos="zoom-in-up"
                 data-aos-delay={100 + index * 150}
                 data-aos-duration="900"
@@ -244,7 +244,7 @@ export default function FAQIndustries({ data }) {
 
       <section
         id="mobile-app-ser"
-        className="mobile-app-ser section dark-background rs-service-grid-outline py-0"
+        className="mobile-app-ser section dark-background rs-service-grid-outline pb-0"
       >
         {/* EXPERIENCE CONTENT */}
 

@@ -949,7 +949,7 @@ export default function CrmTemplate({ data }) {
             <div className="col-lg-12" data-aos="fade-right">
               <div className="rs-process-title-sec">
                 <h1 className="rs-process-title mb-3">
-                  <span className="rs-process-highlight">
+                  <span className="rs-process-highlight fdf">
                     {heroHighlight}
 
                     <svg

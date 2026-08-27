@@ -62,11 +62,8 @@ function initVideoZoomEffect() {
   gsap.registerPlugin(ScrollTrigger);
 
   const section = document.querySelector(".rs-video-zoom-sec");
-
   const title = document.querySelector(".rs-video-zoom-sec .rs-video-title");
-
   const video = document.querySelector(".rs-video-zoom-sec .rs-video-wrap");
-
   const container = document.querySelector(".rs-video-zoom-sec .container");
 
   if (!section || !title || !video || !container) {
@@ -83,6 +80,20 @@ function initVideoZoomEffect() {
     oldTrigger.kill();
   }
 
+  const isMobile = window.innerWidth <= 767;
+
+  if (isMobile) {
+    gsap.set(section, {
+      height: "460px",
+      minHeight: "460px",
+      maxHeight: "460px",
+    });
+  }
+
+  /* -----------------------------------------
+     RESET
+  ----------------------------------------- */
+
   gsap.set(title, {
     clearProps: "transform,opacity",
   });
@@ -91,11 +102,9 @@ function initVideoZoomEffect() {
     clearProps: "transform,width,height,borderRadius,left,x,xPercent",
   });
 
-  gsap.set(video, {
-    left: "0%",
-    xPercent: 0,
-    width: "550px",
-  });
+  /* -----------------------------------------
+     CONTAINER SPACING
+  ----------------------------------------- */
 
   const getContainerSpacing = () => {
     const rect = container.getBoundingClientRect();
@@ -103,11 +112,59 @@ function initVideoZoomEffect() {
     return Math.max(rect.left, 0);
   };
 
+  /* -----------------------------------------
+     DESKTOP WIDTH
+     Keep your existing desktop design
+  ----------------------------------------- */
+
   const getFinalVideoWidth = () => {
     const spacing = getContainerSpacing();
 
     return Math.max(window.innerWidth - spacing * 2, 0);
   };
+
+  /* -----------------------------------------
+     MOBILE WIDTH
+  ----------------------------------------- */
+
+  const getMobileVideoWidth = () => {
+    return Math.min(window.innerWidth - 30, 400);
+  };
+
+  /* -----------------------------------------
+     MOBILE HEIGHT
+     16:9 ratio
+  ----------------------------------------- */
+
+  const getMobileVideoHeight = () => {
+    const width = getMobileVideoWidth();
+
+    return width * (9 / 16);
+  };
+
+  /* -----------------------------------------
+     INITIAL VIDEO
+  ----------------------------------------- */
+
+  if (isMobile) {
+    gsap.set(video, {
+      left: "50%",
+      xPercent: -50,
+      width: "calc(100% - 60px)",
+      height: "auto",
+      borderRadius: "20px",
+    });
+  } else {
+    gsap.set(video, {
+      left: "0%",
+      xPercent: 0,
+      width: "550px",
+    });
+  }
+
+  /* -----------------------------------------
+     SCROLL TIMELINE
+  ----------------------------------------- */
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -117,7 +174,8 @@ function initVideoZoomEffect() {
 
       start: "top top",
 
-      end: "+=250",
+      // Shorter animation on mobile
+      end: isMobile ? "+=160" : "+=250",
 
       scrub: 0.8,
 
@@ -133,6 +191,10 @@ function initVideoZoomEffect() {
     },
   });
 
+  /* -----------------------------------------
+     TITLE ANIMATION
+  ----------------------------------------- */
+
   tl.to(title, {
     opacity: 0,
     y: -30,
@@ -141,33 +203,62 @@ function initVideoZoomEffect() {
     ease: "power2.out",
   });
 
-  tl.to(
-    video,
-    {
-      width: () => {
-        return `${getFinalVideoWidth()}px`;
+  /* -----------------------------------------
+     VIDEO ANIMATION
+  ----------------------------------------- */
+
+  if (isMobile) {
+    tl.to(
+      video,
+      {
+        width: () => `${getMobileVideoWidth()}px`,
+
+        height: () => `${getMobileVideoHeight()}px`,
+
+        left: "50%",
+
+        xPercent: -50,
+
+        borderRadius: "18px",
+
+        duration: 1.2,
+
+        ease: "none",
       },
+      "-=0.15",
+    );
+  } else {
+    /*
+      DESKTOP — SAME AS BEFORE
+    */
 
-      height: "80vh",
+    tl.to(
+      video,
+      {
+        width: () => {
+          return `${getFinalVideoWidth()}px`;
+        },
 
-      left: "50%",
+        height: "80vh",
 
-      xPercent: -50,
+        left: "50%",
 
-      borderRadius: 0,
+        xPercent: -50,
 
-      duration: 1.8,
+        borderRadius: 0,
 
-      ease: "none",
-    },
-    "-=0.15",
-  );
+        duration: 1.8,
+
+        ease: "none",
+      },
+      "-=0.15",
+    );
+  }
 
   ScrollTrigger.refresh();
 
   return true;
 }
-
 /* =========================================================
    3. HOME PAGE - CUSTOM 3 CARD STACK
    ========================================================= */

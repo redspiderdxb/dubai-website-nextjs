@@ -11360,13 +11360,25 @@ button.rs-dropdown-trigger {
 
   .rs-card-3 .rs-agency-image {
     height: auto !important;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
   }
 
   .rs-card-3 .rs-agency-image img {
+    aspect-ratio: inherit;
     width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10;
+    height: 100%;
+  }
+
+  .rs-card-3 .col-lg-8 {
+    margin: 0px;
+  }
+
+  .rs-gsap-card {
+    padding: 2px;
+  }
+
+  .rs-gsap-stack-sec {
+    padding: 21px 0 !important;
   }
 
   .rs-card-3 .rs-location-list {
@@ -11748,15 +11760,15 @@ button.rs-dropdown-trigger {
   margin-top: -123px;
 }
 
-.porh{
+.porh {
   font-family: sans-serif;
 }
 
 .archidex-small-title h2 {
-    margin: 0;
-    font-size: 22px;
-    line-height: 1.08;
-    font-weight: 600;
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.08;
+  font-weight: 600;
 }
 
 
@@ -11838,7 +11850,8 @@ button.rs-dropdown-trigger {
 .rs-service-card-image {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 */
+  padding-top: 56.25%;
+  /* 16:9 */
   background: #f1f5f9;
   overflow: hidden;
 }

@@ -17072,154 +17072,6 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
 }
 
 
-/* Fixed contact buttons */
-/* ===================================
-   FIXED WHATSAPP AND PHONE BUTTONS
-=================================== */
-
-.rs-fixed-contact {
-  position: fixed;
-  top: 80%;
-  right: 15px;
-  z-index: 9999;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-
-  transform: translateY(-50%);
-}
-
-/* Common button style */
-.rs-fixed-contact__button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 56px;
-  height: 56px;
-  padding: 0;
-
-  color: #ffffff;
-  text-decoration: none;
-  border: 0;
-  border-radius: 50%;
-  outline: none;
-
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-
-  transition:
-    background-color 0.25s ease,
-    box-shadow 0.25s ease,
-    filter 0.25s ease;
-
-  animation: rs-contact-shake 4s ease-in-out infinite;
-}
-
-/* Common SVG style */
-.rs-fixed-contact__button svg {
-  display: block;
-  width: 27px;
-  height: 27px;
-  fill: currentColor;
-  color: #ffffff;
-  flex-shrink: 0;
-  pointer-events: none;
-}
-
-/* WhatsApp button */
-.rs-fixed-contact__button--whatsapp {
-  background-color: #18c963;
-}
-
-.rs-fixed-contact__button--whatsapp:hover {
-  color: #ffffff;
-  background-color: #10b957;
-  box-shadow: 0 8px 22px rgba(24, 201, 99, 0.35);
-}
-
-/* WhatsApp icon */
-.rs-fixed-contact__button--whatsapp .rs-whatsapp-icon {
-  width: 27px;
-  height: 27px;
-  fill: #ffffff;
-}
-
-/* Phone button */
-.rs-fixed-contact__button--phone {
-  background-color: #2196f3;
-  animation-delay: 1.5s;
-}
-
-.rs-fixed-contact__button--phone:hover {
-  color: #ffffff;
-  background-color: #087fd8;
-  box-shadow: 0 8px 22px rgba(33, 150, 243, 0.35);
-}
-
-/* Phone icon */
-.rs-fixed-contact__button--phone svg {
-  width: 27px;
-  height: 27px;
-  fill: #ffffff;
-}
-
-/* Focus style for keyboard users */
-.rs-fixed-contact__button:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.9);
-  outline-offset: 3px;
-}
-
-/* Small shaking animation */
-@keyframes rs-contact-shake {
-
-  0%,
-  80%,
-  100% {
-    transform: rotate(0deg) scale(1);
-  }
-
-  83% {
-    transform: rotate(-7deg) scale(1.03);
-  }
-
-  86% {
-    transform: rotate(7deg) scale(1.03);
-  }
-
-  89% {
-    transform: rotate(-5deg) scale(1.03);
-  }
-
-  92% {
-    transform: rotate(5deg) scale(1.03);
-  }
-
-  95% {
-    transform: rotate(0deg) scale(1);
-  }
-}
-
-/* Pause animation on hover */
-.rs-fixed-contact__button:hover {
-  animation-play-state: paused;
-  filter: brightness(1.03);
-}
-
-/* Tablet and mobile */
-@media (max-width: 767.98px) {
-  .rs-fixed-contact {
-    right: 10px;
-    gap: 11px;
-  }
-
-  .rs-fixed-contact__button {
-    width: 50px;
-    height: 50px;
-  }
-}
-
 
 
 /* Unique parent class. No root variables are used. */
@@ -24360,6 +24212,331 @@ span.red.sse {
 }
 
 
-.contact-info-left p{
+.contact-info-left p {
   color: #000;
+}
+
+
+
+
+.page-title {
+
+  padding: 249px 0 180px 0;
+}
+
+
+
+
+/* Responsive final */
+@media (max-width: 600px) {
+
+  /* Homepage */
+  .rs-hero-slider .rs-slide-title {
+
+    font-size: 21px;
+  }
+
+  .rs-hero-slider .rs-slide-description {
+
+    font-size: 14px;
+  }
+
+  .rs-hero-slider .rs-slide-kicker {
+
+    font-size: 11px;
+  }
+
+  .rs-service-card {
+
+    min-height: auto;
+
+  }
+
+  section.form-sec {
+    display: none;
+  }
+
+  .rs-gd-intro__lead.fade-title {
+
+    font-size: 26px;
+  }
+
+  p.rs-gd-intro__lead.rs-gd-intro__reveal.text-center.fs-5 {
+    font-size: 13px !important;
+  }
+
+  .about-features .h2 {
+    font-size: 17px !important;
+  }
+
+  .laptop-mobile {
+    display: none !important;
+  }
+
+  /* About buttons - Mobile */
+
+  .inlinebtns {
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    gap: 10px !important;
+    width: 100%;
+  }
+
+  .inlinebtns .btn {
+    width: auto !important;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 11px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .inlinebtns .btn-title {
+    white-space: nowrap;
+  }
+
+  .rs-video-wrap {
+    margin-left: inherit !important;
+    margin-right: auto;
+  }
+
+  .rs-video-title h3 {
+
+    font-size: 41px !important;
+
+  }
+
+  .rs-blog-stat-number,
+  .rs-plus {
+
+    font-size: 21px !important;
+
+  }
+
+  .rs-blog-stats p {
+
+    font-size: 12px !important;
+  }
+
+  section#home-blog {
+    padding-bottom: 19px !important;
+  }
+
+  .home-faq h2 {
+    font-size: 20px;
+  }
+
+  .home-faq p {
+    font-size: 11px;
+  }
+
+  .home-faq .accordion-button {
+
+    font-size: 13px;
+  }
+
+  .lin_sec {
+
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .stak-sec h3 {
+    font-size: 20px !important;
+
+  }
+
+  .stack-no {
+
+    font-size: 39px;
+
+  }
+
+  .stack-desc h4 {
+    font-size: 12px;
+  }
+
+  .mobile-app-ser p {
+    text-align: left !important;
+  }
+
+  .mobile-app-ser h2 {
+    text-align: left;
+    font-size: 20px;
+  }
+
+  /* section.rs-packages-sec.bluelight-backgroun.section {
+    padding-top: 0px;
+  } */
+
+
+  /* About Us Page */
+
+  .about-hero {
+    height: 401px !important;
+    padding: 149px 0 62px !important;
+  }
+
+  body .hero-marquee .rs-process-title {
+    font-size: 19px !important;
+  }
+
+  .para_ti {
+    font-size: 11px !important;
+  }
+
+  .rs-process-subtitle {
+    font-size: 11px;
+  }
+
+
+  .about-info-sec .about-heading {
+    margin-top: 25px;
+    font-size: 15px;
+    text-align: left;
+  }
+
+
+  .about-stats {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100%;
+  }
+
+
+  .about-stats .stat-box {
+    flex: 1 1 0;
+    width: 33.333%;
+    padding: 15px 5px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .about-stats .stat-icon {
+    margin-bottom: 5px;
+  }
+
+  .about-stats .company_numbers {
+    font-size: 22px;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .about-stats .stat-box p {
+    font-size: 9px;
+    line-height: 1.2;
+    margin: 3px 0 0;
+    white-space: nowrap;
+  }
+
+  /* 
+contact us page */
+
+  .rs-contact-hero-video {
+    height: 367px !important;
+  }
+
+
+  span.rs-process-highlight {
+    display: inline;
+    white-space: normal;
+    margin-left: 0;
+    padding-bottom: 8px;
+    overflow-wrap: break-word;
+  }
+
+  span.rs-process-highlight .rs-process-underline {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  /* Portfolio page */
+  .portfolio-page-hero {
+    height: 537px !important;
+
+  }
+
+  /* Blog page */
+  .blog-hero-custom,
+  .blog-hero-custom .row {
+
+    height: 275px !important;
+    padding: 57px 0 62px !important;
+  }
+
+  .rs-ecommerce-platforms .title {
+
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  span.rs-process-highlight {
+    margin-left: 5px;
+  }
+
+  .rs-ecommerce-platforms.emailmark-camp .team-sticky {
+    height: auto;
+  }
+
+  .rs-ecommerce-platforms.emailmark-camp .gallery {
+    height: auto;
+  }
+
+  .rs-ecommerce-platforms .card {
+
+    min-height: auto;
+  }
+
+  .hero-titleinner {
+    font-size: 26px;
+  }
+
+  .rs-full-section {
+
+    padding: 38px 0;
+
+  }
+
+  .rs-title {
+
+    font-size: 30px !important;
+
+  }
+
+  span.rs-process-highlight.fdf {
+    margin-right: 5px;
+  }
+
+  .zivora-readiness-accordion .zra-title {
+
+    font-size: 25px !important;
+  }
+
+  .zivora-systems-showcase .zss-title {
+    font-size: 25px !important;
+  }
+
+  .rs-pint-section .rs-pint-title {
+    font-size: 25px !important;
+  }
+
+  .rs-uae-invoice-section .rs-title {
+
+    font-size: 26px !important;
+  }
+
+  .zivora-why-choose .zwc-title {
+    font-size: 22px !important;
+  }
+
+  .zivora-readiness-split .zrs-title {
+    font-size: 25px !important;
+  }
+
+
 }
