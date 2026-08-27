@@ -1,18 +1,17 @@
 import { useState } from "react";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://www.redspider.ae/api/v1";
+const INITIAL_FORM_DATA = {
+  name: "",
+  country_code: "+971",
+  phone: "",
+  email: "",
+  subject: "",
+  content: "",
+  agree_terms_and_policy: true,
+};
 
 export default function QuoteForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    country_code: "+971",
-    phone: "",
-    email: "",
-    subject: "",
-    content: "",
-    agree_terms_and_policy: true,
-  });
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
   const [status, setStatus] = useState({
     type: "",
@@ -21,6 +20,10 @@ export default function QuoteForm() {
 
   const [loading, setLoading] = useState(false);
 
+  // ============================================
+  // HANDLE INPUT CHANGE
+  // ============================================
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -28,31 +31,131 @@ export default function QuoteForm() {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
+
+    // Remove old error while user is correcting form
+    if (status.type === "error") {
+      setStatus({
+        type: "",
+        message: "",
+      });
+    }
   };
+
+  // ============================================
+  // SUBMIT QUOTE FORM
+  // ============================================
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Prevent double submission
+    if (loading) {
+      return;
+    }
 
     setStatus({
       type: "",
       message: "",
     });
 
+    // ==========================================
+    // BASIC VALIDATION
+    // ==========================================
+
+    const name = formData.name.trim();
+    const phone = formData.phone.trim();
+    const email = formData.email.trim();
+    const subject = formData.subject.trim();
+    const content = formData.content.trim();
+
+    if (!name) {
+      setStatus({
+        type: "error",
+        message: "Please enter your name.",
+      });
+      return;
+    }
+
+    if (!phone) {
+      setStatus({
+        type: "error",
+        message: "Please enter your phone number.",
+      });
+      return;
+    }
+
+    if (!email) {
+      setStatus({
+        type: "error",
+        message: "Please enter your email address.",
+      });
+      return;
+    }
+
+    // Frontend email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setStatus({
+        type: "error",
+        message: "Please enter a valid email address.",
+      });
+      return;
+    }
+
+    if (!subject) {
+      setStatus({
+        type: "error",
+        message: "Please select an enquiry type.",
+      });
+      return;
+    }
+
+    if (!content) {
+      setStatus({
+        type: "error",
+        message: "Please enter your project details.",
+      });
+      return;
+    }
+
+    if (!formData.agree_terms_and_policy) {
+      setStatus({
+        type: "error",
+        message: "Please agree to the terms and privacy policy.",
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const fullPhone = `${formData.country_code}${formData.phone}`.trim();
+      // ==========================================
+      // FULL PHONE NUMBER
+      // ==========================================
+
+      const fullPhone = `${formData.country_code}${phone}`.trim();
+
+      // ==========================================
+      // API PAYLOAD
+      // ==========================================
 
       const payload = {
-        name: formData.name.trim(),
-        email: formData.email.trim(),
+        name,
+        email,
         phone: fullPhone,
-        subject: formData.subject.trim(),
-        content: formData.content.trim(),
+        subject,
+        content,
         agree_terms_and_policy: formData.agree_terms_and_policy,
       };
 
-      const response = await fetch(`${API_URL}/contacts`, {
+      // ==========================================
+      // IMPORTANT:
+      // Use INTERNAL Next.js API proxy.
+      // API key remains server-side.
+      // ==========================================
+
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,29 +164,83 @@ export default function QuoteForm() {
         body: JSON.stringify(payload),
       });
 
-      const result = await response.json();
+      // ==========================================
+      // READ API RESPONSE SAFELY
+      // ==========================================
+
+      let result = {};
+
+      try {
+        result = await response.json();
+      } catch (jsonError) {
+        console.error("Invalid API response:", jsonError);
+      }
+
+      // ==========================================
+      // VALIDATION ERROR
+      // DO NOT THROW ERROR
+      // ==========================================
+
+      if (response.status === 422) {
+        const errors = result?.errors || {};
+
+        let errorMessage = "";
+
+        // Laravel-style validation response
+        for (const value of Object.values(errors)) {
+          if (Array.isArray(value) && value.length > 0) {
+            errorMessage = value[0];
+            break;
+          }
+
+          if (typeof value === "string") {
+            errorMessage = value;
+            break;
+          }
+        }
+
+        setStatus({
+          type: "error",
+          message:
+            errorMessage ||
+            result?.message ||
+            "Please check the form details and try again.",
+        });
+
+        return;
+      }
+
+      // ==========================================
+      // RATE LIMIT
+      // ==========================================
+
+      if (response.status === 429) {
+        setStatus({
+          type: "error",
+          message:
+            result?.message ||
+            "Too many requests. Please wait a moment and try again.",
+        });
+
+        return;
+      }
+
+      // ==========================================
+      // OTHER API ERRORS
+      // ==========================================
 
       if (!response.ok) {
-        if (response.status === 422) {
-          const errors = result?.errors || {};
+        setStatus({
+          type: "error",
+          message: result?.message || "Something went wrong. Please try again.",
+        });
 
-          const firstError = Object.values(errors)?.[0]?.[0];
-
-          throw new Error(
-            firstError || "Please check the form details and try again.",
-          );
-        }
-
-        if (response.status === 429) {
-          throw new Error(
-            "Too many requests. Please wait a moment and try again.",
-          );
-        }
-
-        throw new Error(
-          result?.message || "Something went wrong. Please try again.",
-        );
+        return;
       }
+
+      // ==========================================
+      // SUCCESS
+      // ==========================================
 
       setStatus({
         type: "success",
@@ -92,22 +249,17 @@ export default function QuoteForm() {
           "We received your message and will contact you soon!",
       });
 
-      setFormData({
-        name: "",
-        country_code: "+971",
-        phone: "",
-        email: "",
-        subject: "",
-        content: "",
-        agree_terms_and_policy: true,
-      });
+      // ==========================================
+      // RESET FORM
+      // ==========================================
+
+      setFormData(INITIAL_FORM_DATA);
     } catch (error) {
       console.error("QUOTE FORM ERROR:", error);
 
       setStatus({
         type: "error",
-        message:
-          error?.message || "Unable to submit your enquiry. Please try again.",
+        message: "Unable to submit your enquiry right now. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -119,7 +271,10 @@ export default function QuoteForm() {
       <div className="containera">
         <div className="container mid_sec">
           <div className="row align-items-stretch">
-            {/* Left Content */}
+            {/* =========================================
+                LEFT CONTENT
+            ========================================== */}
+
             <div
               className="col-12 col-md-4"
               data-aos="fade-right"
@@ -135,7 +290,10 @@ export default function QuoteForm() {
               </div>
             </div>
 
-            {/* Form */}
+            {/* =========================================
+                FORM
+            ========================================== */}
+
             <div
               className="col-12 col-md-8"
               data-aos="fade-left"
@@ -153,7 +311,10 @@ export default function QuoteForm() {
                   >
                     <div className="req_block_right">
                       <div className="req_row1 row">
-                        {/* Name */}
+                        {/* =================================
+                            NAME
+                        ================================== */}
+
                         <div
                           className="home-input-cus col-12 col-md-6"
                           data-aos="fade-up"
@@ -176,7 +337,10 @@ export default function QuoteForm() {
                           </div>
                         </div>
 
-                        {/* Phone */}
+                        {/* =================================
+                            PHONE
+                        ================================== */}
+
                         <div
                           className="home-input-cus col-12 col-md-6"
                           data-aos="fade-up"
@@ -196,14 +360,23 @@ export default function QuoteForm() {
                                 aria-label="Country code"
                               >
                                 <option value="+971">🇦🇪 +971</option>
+
                                 <option value="+966">🇸🇦 +966</option>
+
                                 <option value="+968">🇴🇲 +968</option>
+
                                 <option value="+973">🇧🇭 +973</option>
+
                                 <option value="+974">🇶🇦 +974</option>
+
                                 <option value="+965">🇰🇼 +965</option>
+
                                 <option value="+91">🇮🇳 +91</option>
+
                                 <option value="+92">🇵🇰 +92</option>
+
                                 <option value="+44">🇬🇧 +44</option>
+
                                 <option value="+1">🇺🇸 +1</option>
                               </select>
 
@@ -221,7 +394,10 @@ export default function QuoteForm() {
                           </div>
                         </div>
 
-                        {/* Email */}
+                        {/* =================================
+                            EMAIL
+                        ================================== */}
+
                         <div
                           className="home-input-cus col-12 col-md-6"
                           data-aos="fade-up"
@@ -244,7 +420,10 @@ export default function QuoteForm() {
                           </div>
                         </div>
 
-                        {/* Enquiry About */}
+                        {/* =================================
+                            SUBJECT
+                        ================================== */}
+
                         <div
                           className="home-input-cus col-12 col-md-6"
                           data-aos="fade-up"
@@ -294,7 +473,10 @@ export default function QuoteForm() {
                           </div>
                         </div>
 
-                        {/* Project Details */}
+                        {/* =================================
+                            PROJECT DETAILS
+                        ================================== */}
+
                         <div
                           className="home-input-cus col-12"
                           data-aos="fade-up"
@@ -315,12 +497,15 @@ export default function QuoteForm() {
                               required
                               maxLength={10000}
                               autoComplete="off"
-                            ></textarea>
+                            />
                           </div>
                         </div>
                       </div>
 
-                      {/* Terms */}
+                      {/* =====================================
+                          TERMS
+                      ====================================== */}
+
                       <div className="req_row">
                         <div className="verify-wrap">
                           <label
@@ -340,7 +525,10 @@ export default function QuoteForm() {
                             </span>
                           </label>
 
-                          {/* Submit */}
+                          {/* =================================
+                              SUBMIT BUTTON
+                          ================================== */}
+
                           <div data-aos="fade-up" data-aos-delay="700">
                             <button
                               type="submit"
@@ -355,7 +543,10 @@ export default function QuoteForm() {
                         </div>
                       </div>
 
-                      {/* Status Message */}
+                      {/* =====================================
+                          STATUS MESSAGE
+                      ====================================== */}
+
                       {status.message && (
                         <div
                           className={`quote-form-message ${
@@ -364,12 +555,16 @@ export default function QuoteForm() {
                               : "quote-form-error"
                           }`}
                           role="alert"
+                          aria-live="polite"
                         >
                           {status.message}
                         </div>
                       )}
 
-                      {/* Anti-spam */}
+                      {/* =====================================
+                          ANTI-SPAM
+                      ====================================== */}
+
                       <input
                         name="hiddensecurity"
                         value="7869045632"

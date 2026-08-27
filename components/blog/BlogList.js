@@ -57,7 +57,13 @@ export default function BlogList({ posts = [], pagination = {} }) {
     try {
       setLoading(true);
 
-      const result = await fetchPosts(page);
+      const response = await fetch(`/api/blog?page=${page}`);
+
+      if (!response.ok) {
+        throw new Error(`Blog proxy error: ${response.status}`);
+      }
+
+      const result = await response.json();
 
       const newPosts = sortLatestFirst(result?.posts || []);
 

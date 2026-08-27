@@ -11953,3 +11953,12 @@ button.rs-dropdown-trigger {
     font-size: 1.1rem;
   }
 }
+
+.quote-form-message.quote-form-error {
+    color: white;
+    font-size: 18px;
+    margin-top: 17px;
+    background: #d42b2b;
+    text-align: center;
+    padding: 11px 0px;
+}

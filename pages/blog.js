@@ -3,11 +3,8 @@
 import Layout from "../components/layout/Layout";
 import SEO from "../components/seo/SEO";
 import BlogHero from "../components/blog/BlogHero";
-import BlogPageTitle from "../components/blog/BlogPageTitle";
 import BlogList from "../components/blog/BlogList";
 import BlogCTA from "../components/blog/BlogCTA";
-
-import { fetchPosts } from "../lib/api";
 
 export default function Blog({ posts, pagination }) {
   const seoData = {
@@ -33,8 +30,6 @@ export default function Blog({ posts, pagination }) {
       <main className="main">
         <BlogHero />
 
-        {/* <BlogPageTitle /> */}
-
         <BlogList posts={posts} pagination={pagination} />
 
         <BlogCTA />
@@ -48,14 +43,58 @@ export default function Blog({ posts, pagination }) {
 // ============================================
 
 export async function getStaticProps() {
-  const result = await fetchPosts(1);
+  try {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const API_KEY = process.env.API_KEY;
 
-  return {
-    props: {
-      posts: result.posts || [],
-      pagination: result.pagination || {},
-    },
+    if (!API_URL || !API_KEY) {
+      console.error("Blog API configuration is missing.");
 
-    revalidate: 60,
-  };
+      return {
+        props: {
+          posts: [],
+          pagination: {},
+        },
+
+        revalidate: 60,
+      };
+    }
+
+    const response = await fetch(`${API_URL}/posts?page=1`, {
+      method: "GET",
+
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": API_KEY,
+      },
+
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Blog API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return {
+      props: {
+        posts: data?.data || [],
+        pagination: data?.meta || {},
+      },
+
+      revalidate: 60,
+    };
+  } catch (error) {
+    console.error("Error fetching initial blog posts:", error);
+
+    return {
+      props: {
+        posts: [],
+        pagination: {},
+      },
+
+      revalidate: 60,
+    };
+  }
 }

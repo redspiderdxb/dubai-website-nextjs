@@ -329,6 +329,13 @@ MyApp.getInitialProps = async (appContext) => {
       fetchAllProducts(),
     ]);
 
+    console.log("========== HEADER PRODUCTS CHECK ==========");
+console.log("PRODUCTS RESULT TYPE:", Array.isArray(productsResult));
+console.log("PRODUCTS COUNT:", productsResult?.length);
+console.log("FIRST PRODUCT:", productsResult?.[0]);
+console.log("===========================================");
+
+
     if (Array.isArray(servicesResult)) {
       headerServices = servicesResult;
     } else if (Array.isArray(servicesResult?.data)) {
