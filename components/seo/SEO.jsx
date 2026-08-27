@@ -12,6 +12,7 @@ export default function SEO({
   includeBusinessSchema = false,
   faqSchema = null,
   serviceSchema = null,
+  pageSchema = null,
 }) {
   const siteUrl = "https://www.redspider.ae";
 
@@ -135,6 +136,14 @@ export default function SEO({
     schemaGraph.push(serviceSchema);
   }
 
+  if (pageSchema) {
+    if (Array.isArray(pageSchema)) {
+      schemaGraph.push(...pageSchema);
+    } else {
+      schemaGraph.push(pageSchema);
+    }
+  }
+
   const structuredData =
     schemaGraph.length > 0
       ? {
@@ -215,6 +224,16 @@ export default function SEO({
       <meta
         property="og:type"
         content="website"
+      />
+
+      <meta
+        property="og:site_name"
+        content="RedSpider Web & Art Design"
+      />
+
+      <meta
+        property="og:locale"
+        content="en_AE"
       />
 
       {/* =================================================

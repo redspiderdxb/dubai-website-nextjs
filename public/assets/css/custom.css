@@ -8987,6 +8987,10 @@ REDSPIDER CREATIVE / ACCORDION SECTION RESPONSIVE CONTENT-BASED LAYOUT==========
   background-image: url("../img/about-bg-hero.jpg");
 }
 
+.about-hero .rs-section-subtitle {
+  color: #ffffff !important;
+}
+
 
 .hero-marquee {
   display: flex;
@@ -9652,7 +9656,7 @@ REDSPIDER CREATIVE / ACCORDION SECTION RESPONSIVE CONTENT-BASED LAYOUT==========
 
 .about-info-sec {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 
@@ -9678,55 +9682,150 @@ REDSPIDER CREATIVE / ACCORDION SECTION RESPONSIVE CONTENT-BASED LAYOUT==========
 }
 
 .about-info-sec .about-who {
-  max-width: 920px;
-  margin: 0 0 56px;
+  position: relative;
+  overflow: hidden;
+  max-width: none;
+  margin: 0 18px 72px 0;
+  padding: 48px 52px 44px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(210, 0, 0, 0.07), transparent 42%),
+    #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 28px;
+  box-shadow: 18px 18px 0 #d20000;
+}
+
+.about-info-sec .about-who-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.9fr) minmax(280px, 1.1fr);
+  grid-template-areas:
+    "title text"
+    "connect text";
+  gap: 20px 56px;
+  align-items: end;
+}
+
+.about-info-sec .about-who-title {
+  grid-area: title;
+  margin-bottom: 0;
+}
+
+.about-info-sec .about-who-text {
+  grid-area: text;
+  margin-bottom: 0;
+}
+
+.about-info-sec .about-who-connect {
+  grid-area: connect;
+}
+
+.about-info-sec .about-who-watermark {
+  position: absolute;
+  top: -18px;
+  right: 18px;
+  font-size: clamp(96px, 14vw, 180px);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: rgba(10, 37, 64, 0.05);
+  pointer-events: none;
+  user-select: none;
+}
+
+.about-info-sec .about-who-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  max-width: 760px;
+}
+
+.about-info-sec .about-who-top span {
+  color: #d20000;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.about-info-sec .about-who-top small {
+  color: #8a93a0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
 }
 
 .about-info-sec .about-who .rs-process-title {
-  margin-bottom: 12px;
-}
-
-.about-info-sec .about-who .lin_sec {
-  float: none;
-  width: 72px;
-  height: 2px;
-  margin: 0 0 22px;
-  background: #d20000;
+  margin-bottom: 18px;
+  max-width: 760px;
 }
 
 .about-info-sec .about-who .rs-section-subtitle {
   text-align: left;
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: 28px;
+  margin: 0 0 32px;
+  max-width: 760px;
   color: #1b1b1b;
 }
 
-.about-info-sec .letconnect {
+.about-info-sec .about-who-connect {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   max-width: 460px;
 }
 
-.about-info-sec .letconnect .rs-btn {
-  flex-shrink: 0;
-  padding: 14px 26px;
-  background: var(--rs-btn-bg);
-  color: var(--rs-btn-text) !important;
-  border-radius: 6px;
-  font-size: inherit;
+.about-info-sec .about-who-connect span {
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.about-info-sec .letconnect .rs-btn:hover {
-  background: var(--rs-btn-bg);
-  color: var(--rs-btn-text) !important;
+.about-info-sec .about-who-connect .line {
+  flex: 1;
+  height: 1px;
+  background: #d20000;
+}
+
+.about-info-sec .about-who-connect .rs-btn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 991px) {
+  .about-info-sec .about-who {
+    margin: 0 10px 48px 0;
+    padding: 32px 24px 28px;
+    box-shadow: 10px 10px 0 #d20000;
+  }
+
+  .about-info-sec .about-who-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "text"
+      "connect";
+    gap: 20px;
+  }
 }
 
 @media (max-width: 575px) {
-  .about-info-sec .letconnect {
+  .about-info-sec .about-who {
+    padding: 28px 18px 24px;
+    border-radius: 20px;
+    box-shadow: 8px 8px 0 #d20000;
+  }
+
+  .about-info-sec .about-who-top {
     flex-wrap: wrap;
+  }
+
+  .about-info-sec .about-who-connect {
+    flex-wrap: wrap;
+    max-width: 100%;
     gap: 12px;
   }
 
-  .about-info-sec .letconnect .line {
+  .about-info-sec .about-who-connect .line {
     display: none;
   }
 }

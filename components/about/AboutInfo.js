@@ -1,4 +1,5 @@
 import Button from "../ui/Button";
+import Image from "next/image";
 
 export default function AboutInfo({ data }) {
   const infoLabel = data?.info_label || "Who We Are";
@@ -46,22 +47,46 @@ export default function AboutInfo({ data }) {
     <section className="about-info-sec py-5">
       <div className="container">
         <div className="about-who">
-          <h2 className="rs-process-title text-start">{infoLabel}</h2>
-          <div className="lin_sec"></div>
+          <span className="about-who-watermark" aria-hidden="true">
+            WHO
+          </span>
 
-          <p
-            className="rs-section-subtitle text-start"
-            dangerouslySetInnerHTML={{
-              __html: infoHeading.replace(/\n/g, "<br />"),
-            }}
-          />
+          <div className="about-who-top">
+            <span>[ 01 ]</span>
+            <small>ABOUT / TEAM / DUBAI</small>
+          </div>
 
-          <div className="letconnect">
-            <span>Let's Connect:</span>
-            <div className="line"></div>
-            <Button color="red" href="/contact-us/">
-              Book A Call
-            </Button>
+          <div className="about-who-grid">
+            <h2 className="rs-process-title text-start about-who-title">
+              Who{" "}
+              <span className="rs-process-highlight">
+                We Are
+                <svg
+                  className="rs-process-underline"
+                  viewBox="0 0 320 22"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
+                </svg>
+              </span>
+            </h2>
+
+            <p
+              className="rs-section-subtitle text-start about-who-text"
+              dangerouslySetInnerHTML={{
+                __html: infoHeading.replace(/\n/g, "<br />"),
+              }}
+            />
+
+            <div className="about-who-connect">
+              <span>Let's Connect:</span>
+              <div className="line"></div>
+              <Button color="red" href="/contact-us/">
+                Book A Call
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -92,11 +117,15 @@ export default function AboutInfo({ data }) {
 
           <div className="col-lg-9">
             <div className="about-image-card">
-              <img
+              <Image
                 src={getImageUrl(infoImage)}
-                className="img-fluid"
                 alt="RedSpider team and company overview"
+                width={1200}
+                height={750}
+                sizes="(max-width: 991px) 100vw, 75vw"
+                className="img-fluid"
                 loading="lazy"
+                style={{ width: "100%", height: "auto" }}
               />
             </div>
           </div>

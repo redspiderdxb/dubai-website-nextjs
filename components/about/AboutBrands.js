@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Button from "../ui/Button";
+
 export default function AboutBrands({ data }) {
   // Get data from API or use fallback
   const brandsTitle = data?.brands_title || "We've Worked With Amazing Brands";
@@ -10,7 +13,7 @@ export default function AboutBrands({ data }) {
 
   const brandsButtonText = data?.brands_button_text || "View Portfolio";
 
-  const brandsButtonLink = data?.brands_button_link || "/portfolio";
+  const brandsButtonLink = data?.brands_button_link || "/our-portfolio/";
 
   // Helper function to get image URL
   const getImageUrl = (imagePath) => {
@@ -50,20 +53,23 @@ export default function AboutBrands({ data }) {
 
               <p>{brandsDescription}</p>
 
-              <a href={brandsButtonLink} className="rs-company-btn">
-                {brandsButtonText}{" "}
-                <i className="bi bi-arrow-right" aria-hidden="true"></i>
-              </a>
+              <Button color="red" href={brandsButtonLink}>
+                {brandsButtonText}
+              </Button>
             </div>
           </div>
 
           <div className="col-lg-8">
             <div className="rs-company-logos">
-              <img
+              <Image
                 src={getImageUrl(brandsImage)}
                 className="img-fluid"
-                alt="Client logos and partner brands"
+                alt="Client logos and partner brands of RedSpider Dubai"
+                width={900}
+                height={520}
+                sizes="(max-width: 991px) 100vw, 66vw"
                 loading="lazy"
+                style={{ width: "100%", height: "auto" }}
               />
             </div>
           </div>

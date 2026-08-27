@@ -17,7 +17,7 @@ export default function AboutHero({ data }) {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         aria-hidden="true"
       >
         <source src="/assets/videos/contact-hero.mp4" type="video/mp4" />
@@ -53,7 +53,7 @@ export default function AboutHero({ data }) {
 
               {heroDescription && (
                 <div
-                  className="para_ti"
+                  className="rs-section-subtitle mx-auto text-center text-white"
                   dangerouslySetInnerHTML={{
                     __html: heroDescription,
                   }}
