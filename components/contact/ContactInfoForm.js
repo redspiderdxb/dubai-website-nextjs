@@ -1,6 +1,8 @@
 // components/contact/ContactInfoForm.js
 
 import { useState } from "react";
+import Button from "../ui/Button";
+import ThemedSelect from "../ui/ThemedSelect";
 
 export default function ContactInfoForm({ data }) {
   // ==========================================
@@ -265,370 +267,230 @@ export default function ContactInfoForm({ data }) {
   // ==========================================
 
   return (
-    <section
-      id="hfaq-c"
-      className="hfaq-c section darkblue-line py-5 dark-background"
-    >
-      <div className="container pt-md-5">
-        <div className="row align-items-end g-5">
-          {/* ==========================================
-              LEFT COLUMN
-          ========================================== */}
+    <section id="hfaq-c" className="rs-contact-sec">
+      <div className="container">
+        <div className="rs-contact-layout">
+          <div className="rs-contact-copy">
+            <h2 className="rs-process-title text-start">
+              {infoTitle}
+            </h2>
 
-          <div
-            className="col-lg-6 text-start mb-4 mb-lg-0"
-            data-aos="zoom-in-up"
-            data-aos-delay="150"
-            data-aos-duration="1000"
-            data-aos-once="true"
-          >
-            <div className="contact-info-left pe-lg-5">
-              <div className="section-title text-start text-white mb-3">
-                <h2 className="text-red">
-                  <b>{infoTitle}</b>
-                </h2>
+            <p className="rs-section-subtitle text-start">
+              {infoDescription}
+            </p>
 
-                <p className="text-dark">{infoDescription}</p>
-
-                <hr />
-              </div>
-
-              {/* Location */}
-
-              <div className="d-flex align-items-start mt-4">
-                <div className="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                  <i className="bi bi-geo" aria-hidden="true"></i>
-                </div>
+            <div className="rs-contact-details">
+              <div className="rs-contact-detail">
+                <span className="rs-contact-detail-icon" aria-hidden="true">
+                  <i className="bi bi-geo"></i>
+                </span>
 
                 <div>
-                  <h3 className="fs-6 text-body-emphasis text-dark text-uppercase">
-                    Location
-                  </h3>
-
+                  <h3>Location</h3>
                   <p>{address}</p>
                 </div>
               </div>
 
-              {/* Business Hours */}
-
-              <div className="d-flex align-items-start mt-4">
-                <div className="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                  <i className="bi bi-alarm" aria-hidden="true"></i>
-                </div>
+              <div className="rs-contact-detail">
+                <span className="rs-contact-detail-icon" aria-hidden="true">
+                  <i className="bi bi-alarm"></i>
+                </span>
 
                 <div>
-                  <h3 className="fs-6 text-body-emphasis text-dark text-uppercase">
-                    BUSINESS HOURS
-                  </h3>
-
+                  <h3>BUSINESS HOURS</h3>
                   <p>{businessHours}</p>
                 </div>
               </div>
 
-              {/* Phone */}
-
-              <div className="d-flex align-items-start mt-4">
-                <div className="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                  <i className="bi bi-phone" aria-hidden="true"></i>
-                </div>
+              <div className="rs-contact-detail">
+                <span className="rs-contact-detail-icon" aria-hidden="true">
+                  <i className="bi bi-phone"></i>
+                </span>
 
                 <div>
-                  <h3 className="fs-6 text-body-emphasis text-dark text-uppercase">
-                    Call us
-                  </h3>
-
+                  <h3>Call us</h3>
                   <p>
-                    <a
-                      href={`tel:${phone1.replace(/\s/g, "")}`}
-                      className="text-dark"
-                    >
-                      {phone1}
-                    </a>
+                    <a href={`tel:${phone1.replace(/\s/g, "")}`}>{phone1}</a>
                   </p>
-
                   <p>
-                    <a
-                      href={`tel:${phone2.replace(/\s/g, "")}`}
-                      className="text-dark"
-                    >
-                      {phone2}
-                    </a>
+                    <a href={`tel:${phone2.replace(/\s/g, "")}`}>{phone2}</a>
                   </p>
                 </div>
               </div>
 
-              {/* Email */}
-
-              <div className="d-flex align-items-start mt-4">
-                <div className="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                  <i className="bi bi-send" aria-hidden="true"></i>
-                </div>
+              <div className="rs-contact-detail">
+                <span className="rs-contact-detail-icon" aria-hidden="true">
+                  <i className="bi bi-send"></i>
+                </span>
 
                 <div>
-                  <h3 className="fs-6 text-body-emphasis text-dark text-uppercase">
-                    Email
-                  </h3>
-
+                  <h3>Email</h3>
                   <p>
-                    <a href={`mailto:${email}`} className="text-dark">
-                      {email}
-                    </a>
+                    <a href={`mailto:${email}`}>{email}</a>
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Extra Info */}
+            <div className="rs-contact-highlights">
+              <div className="rs-contact-highlight">
+                <i className="bi bi-people" aria-hidden="true"></i>
+                <h3>{supportTitle}</h3>
+              </div>
 
-            <div className="comp-infoext d-flex mt-5 pt-3">
-              <div className="row gx-5">
-                <div className="col d-flex align-items-center">
-                  <div className="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                    <i className="bi bi-people fs-1" aria-hidden="true"></i>
-                  </div>
-
-                  <div>
-                    <h3 className="fs-5 text-body-emphasis">{supportTitle}</h3>
-                  </div>
-                </div>
-
-                <div className="col d-flex align-items-center">
-                  <div className="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                    <i
-                      className="bi bi-shield-check fs-1"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-
-                  <div>
-                    <h3 className="fs-5 text-body-emphasis">
-                      {satisfactionTitle}
-                    </h3>
-                  </div>
-                </div>
+              <div className="rs-contact-highlight">
+                <i className="bi bi-shield-check" aria-hidden="true"></i>
+                <h3>{satisfactionTitle}</h3>
               </div>
             </div>
           </div>
 
-          {/* ==========================================
-              RIGHT COLUMN - FORM
-          ========================================== */}
+          <div className="rs-contact-form-card">
+            <h3>{formTitle}</h3>
 
-          <div
-            className="col-lg-6 text-center mb-4 mb-lg-0"
-            data-aos="zoom-in-up"
-            data-aos-delay="150"
-            data-aos-duration="1000"
-            data-aos-once="true"
-          >
-            <div className="form-touch">
-              <div className="home-form container p-5">
-                <h3 className="text-center mb-5">{formTitle}</h3>
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="rs-contact-form-grid">
+                <ThemedSelect
+                  name="country"
+                  id="country"
+                  required
+                  value={formData.country}
+                  onChange={handleChange}
+                  aria-label="Select your country"
+                  options={[
+                    { value: "", label: "Select Country", disabled: true },
+                    { value: "UAE", label: "UAE" },
+                    { value: "USA", label: "USA" },
+                    { value: "UK", label: "UK" },
+                  ]}
+                />
 
-                <form onSubmit={handleSubmit} noValidate>
-                  <div className="row g-5">
-                    {/* Country */}
+                <ThemedSelect
+                  name="service"
+                  id="service"
+                  required
+                  value={formData.service}
+                  onChange={handleChange}
+                  aria-label="Select the service you need"
+                  options={[
+                    { value: "", label: "Select Service", disabled: true },
+                    { value: "Consultation", label: "Consultation" },
+                    { value: "Support", label: "Support" },
+                  ]}
+                />
 
-                    <div className="col-md-6">
-                      <select
-                        className="form-select"
-                        required
-                        value={formData.country}
-                        onChange={handleChange}
-                        name="country"
-                        id="country"
-                        aria-label="Select your country"
-                      >
-                        <option value="" disabled>
-                          Select Country
-                        </option>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Your Full Name*"
+                  required
+                  maxLength={100}
+                  autoComplete="name"
+                  name="fullName"
+                  id="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                />
 
-                        <option value="UAE">UAE</option>
+                <div className="phone-field">
+                  <ThemedSelect
+                    id="country_code"
+                    name="country_code"
+                    className="rs-themed-select--compact"
+                    required
+                    value={formData.country_code}
+                    onChange={handleChange}
+                    aria-label="Country code"
+                    options={[
+                      { value: "+971", label: "🇦🇪 +971" },
+                      { value: "+966", label: "🇸🇦 +966" },
+                      { value: "+968", label: "🇴🇲 +968" },
+                      { value: "+973", label: "🇧🇭 +973" },
+                      { value: "+974", label: "🇶🇦 +974" },
+                      { value: "+965", label: "🇰🇼 +965" },
+                      { value: "+91", label: "🇮🇳 +91" },
+                      { value: "+92", label: "🇵🇰 +92" },
+                      { value: "+44", label: "🇬🇧 +44" },
+                      { value: "+1", label: "🇺🇸 +1" },
+                    ]}
+                  />
 
-                        <option value="USA">USA</option>
-
-                        <option value="UK">UK</option>
-                      </select>
-                    </div>
-
-                    {/* Service */}
-
-                    <div className="col-md-6">
-                      <select
-                        className="form-select"
-                        required
-                        value={formData.service}
-                        onChange={handleChange}
-                        name="service"
-                        id="service"
-                        aria-label="Select the service you need"
-                      >
-                        <option value="" disabled>
-                          Select Service
-                        </option>
-
-                        <option value="Consultation">Consultation</option>
-
-                        <option value="Support">Support</option>
-                      </select>
-                    </div>
-
-                    {/* Full Name */}
-
-                    <div className="col-md-6">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Your Full Name*"
-                        required
-                        maxLength={100}
-                        autoComplete="name"
-                        name="fullName"
-                        id="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    {/* Phone */}
-
-                    <div className="col-md-6">
-                      <div className="phone-field">
-                        <select
-                          id="country_code"
-                          name="country_code"
-                          className="country-code"
-                          required
-                          value={formData.country_code}
-                          onChange={handleChange}
-                          aria-label="Country code"
-                        >
-                          <option value="+971">🇦🇪 +971</option>
-
-                          <option value="+966">🇸🇦 +966</option>
-
-                          <option value="+968">🇴🇲 +968</option>
-
-                          <option value="+973">🇧🇭 +973</option>
-
-                          <option value="+974">🇶🇦 +974</option>
-
-                          <option value="+965">🇰🇼 +965</option>
-
-                          <option value="+91">🇮🇳 +91</option>
-
-                          <option value="+92">🇵🇰 +92</option>
-
-                          <option value="+44">🇬🇧 +44</option>
-
-                          <option value="+1">🇺🇸 +1</option>
-                        </select>
-
-                        <input
-                          type="tel"
-                          className="form-control"
-                          placeholder="Phone No"
-                          required
-                          autoComplete="tel"
-                          name="phone"
-                          id="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Email */}
-
-                    <div className="col-md-12">
-                      <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Email*"
-                        required
-                        maxLength={150}
-                        autoComplete="email"
-                        name="email"
-                        id="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    {/* Comment */}
-
-                    <div className="col-md-12">
-                      <textarea
-                        className="form-control"
-                        placeholder="Leave a comment here*"
-                        id="floatingTextarea"
-                        name="comment"
-                        rows={4}
-                        required
-                        maxLength={10000}
-                        value={formData.comment}
-                        onChange={handleChange}
-                      ></textarea>
-                    </div>
-
-                    {/* Terms */}
-
-                    <div className="col-12 text-start">
-                      <label
-                        htmlFor="contact-terms"
-                        className="d-flex align-items-center gap-2"
-                      >
-                        <input
-                          type="checkbox"
-                          id="contact-terms"
-                          name="agree_terms_and_policy"
-                          checked={formData.agree_terms_and_policy}
-                          onChange={handleChange}
-                        />
-
-                        <span>I agree to the terms and privacy policy.</span>
-                      </label>
-                    </div>
-
-                    {/* Submit */}
-
-                    <div className="col-12 text-center my-3">
-                      <button
-                        type="submit"
-                        className="btn btn-light px-5"
-                        disabled={loading}
-                      >
-                        {loading ? "Submitting..." : formButtonText}
-                      </button>
-                    </div>
-
-                    {/* Status */}
-
-                    {status.message && (
-                      <div className="col-12">
-                        <div
-                          className={
-                            status.type === "success"
-                              ? "quote-form-message quote-form-success"
-                              : "quote-form-message quote-form-error"
-                          }
-                          role="alert"
-                        >
-                          {status.message}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </form>
-
-                <div className="text-start mt-4 form-extinfo">
-                  <p className="mb-1">{formExtinfoText}</p>
-
-                  <h4>{formExtinfoPhone}</h4>
-
-                  <small className="fs-5 pt-3">{formExtinfoSmall}</small>
+                  <input
+                    type="tel"
+                    className="form-control"
+                    placeholder="Phone No"
+                    required
+                    autoComplete="tel"
+                    name="phone"
+                    id="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
                 </div>
+
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Email*"
+                  required
+                  maxLength={150}
+                  autoComplete="email"
+                  name="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+
+                <textarea
+                  className="form-control"
+                  placeholder="Leave a comment here*"
+                  id="floatingTextarea"
+                  name="comment"
+                  rows={5}
+                  required
+                  maxLength={10000}
+                  value={formData.comment}
+                  onChange={handleChange}
+                ></textarea>
+
+                <label htmlFor="contact-terms" className="rs-contact-terms">
+                  <input
+                    type="checkbox"
+                    id="contact-terms"
+                    name="agree_terms_and_policy"
+                    checked={formData.agree_terms_and_policy}
+                    onChange={handleChange}
+                  />
+                  <span>I agree to the terms and privacy policy.</span>
+                </label>
+
+                <div className="rs-contact-submit">
+                  <Button type="submit" color="red" disabled={loading}>
+                    {loading ? "Submitting..." : formButtonText}
+                  </Button>
+                </div>
+
+                {status.message && (
+                  <div
+                    className={
+                      status.type === "success"
+                        ? "quote-form-message quote-form-success"
+                        : "quote-form-message quote-form-error"
+                    }
+                    role="alert"
+                  >
+                    {status.message}
+                  </div>
+                )}
               </div>
+            </form>
+
+            <div className="rs-contact-callout">
+              <p>{formExtinfoText}</p>
+              <a href={`tel:${formExtinfoPhone.replace(/\s/g, "")}`}>
+                {formExtinfoPhone}
+              </a>
+              <small>{formExtinfoSmall}</small>
             </div>
           </div>
         </div>

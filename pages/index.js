@@ -16,12 +16,14 @@ import {
   fetchPosts,
   fetchAllGalleries,
 } from "../lib/api";
+import { getGoogleReviews } from "../lib/googleReviews";
 
 export default function Home({
   homepageData,
   initialServices,
   initialBlogPosts,
   initialGalleries,
+  googleReviews,
 }) {
   // ============================================
   // SEO
@@ -83,7 +85,7 @@ export default function Home({
       <SEO {...seo} includeBusinessSchema={true} faqSchema={faqSchema} />
 
       <Layout>
-        <Hero data={homepageData} />
+        <Hero data={homepageData} googleReviews={googleReviews} />
 
         {/* ==========================================
             SERVICES
@@ -108,7 +110,11 @@ export default function Home({
             BLOGS
         ========================================== */}
 
-        <BlogStats data={homepageData} initialBlogPosts={initialBlogPosts} />
+        <BlogStats
+          data={homepageData}
+          initialBlogPosts={initialBlogPosts}
+          googleReviews={googleReviews}
+        />
 
         <FAQIndustries data={homepageData} />
 
@@ -183,6 +189,7 @@ export async function getStaticProps() {
 
     const allGalleries = await fetchAllGalleries();
     const initialGalleries = slimHomepageGalleries(allGalleries);
+    const googleReviews = await getGoogleReviews();
 
     return {
       props: {
@@ -197,6 +204,8 @@ export async function getStaticProps() {
         initialGalleries: Array.isArray(initialGalleries)
           ? initialGalleries
           : [],
+
+        googleReviews,
       },
 
       // ISR
@@ -211,6 +220,7 @@ export async function getStaticProps() {
         initialServices: [],
         initialBlogPosts: [],
         initialGalleries: [],
+        googleReviews: null,
       },
 
       revalidate: 60,

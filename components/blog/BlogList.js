@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchPosts } from "../../lib/api";
 
 export default function BlogList({ posts = [], pagination = {} }) {
   const POSTS_PER_PAGE = 10;
@@ -70,6 +69,7 @@ export default function BlogList({ posts = [], pagination = {} }) {
       setBlogPosts(newPosts);
       setPaginationData(result?.pagination || {});
       setCurrentPage(result?.pagination?.current_page || page);
+      setActiveCategory("All");
 
       setTimeout(() => {
         document.getElementById("blog-posts")?.scrollIntoView({
@@ -122,6 +122,23 @@ export default function BlogList({ posts = [], pagination = {} }) {
     });
   }, [totalPages, currentPage]);
 
+  const filteredPosts = useMemo(() => {
+    if (activeCategory === "All") {
+      return blogPosts;
+    }
+
+    return blogPosts.filter((post) => {
+      const name =
+        post?.category?.name ||
+        (typeof post?.category === "string" ? post.category : "") ||
+        (Array.isArray(post?.categories) &&
+          (post.categories[0]?.name || post.categories[0]?.title)) ||
+        "Digital Marketing";
+
+      return String(name).toLowerCase() === activeCategory.toLowerCase();
+    });
+  }, [blogPosts, activeCategory]);
+
   if (!blogPosts || blogPosts.length === 0) {
     return (
       <section id="blog-posts" className="rs-blog-section">
@@ -139,8 +156,8 @@ export default function BlogList({ posts = [], pagination = {} }) {
    * First post = Featured post
    * Remaining posts = Normal cards
    */
-  const featuredPost = blogPosts[0];
-  const normalPosts = blogPosts.slice(1);
+  const featuredPost = filteredPosts[0];
+  const normalPosts = filteredPosts.slice(1);
 
   const getCategory = (post) => {
     if (post?.category?.name) {
@@ -162,7 +179,7 @@ export default function BlogList({ posts = [], pagination = {} }) {
     return "Digital Marketing";
   };
 
-  const getExcerpt = (post) => {
+  const getExcerpt = (post, length = 150) => {
     if (post?.excerpt) {
       return post.excerpt;
     }
@@ -177,8 +194,8 @@ export default function BlogList({ posts = [], pagination = {} }) {
         .replace(/\s+/g, " ")
         .trim();
 
-      return plainText.length > 150
-        ? `${plainText.substring(0, 150)}...`
+      return plainText.length > length
+        ? `${plainText.substring(0, length)}...`
         : plainText;
     }
 
@@ -240,6 +257,17 @@ export default function BlogList({ posts = [], pagination = {} }) {
               CATEGORY FILTER UI
           ====================================== */}
 
+          <div className="rs-blog-intro" data-aos="fade-up">
+            <div>
+              <span className="rs-blog-intro-kicker">The journal</span>
+              <p className="rs-blog-intro-count">
+                {filteredPosts.length}{" "}
+                {filteredPosts.length === 1 ? "article" : "articles"}
+                {activeCategory !== "All" ? ` in ${activeCategory}` : ""}
+              </p>
+            </div>
+          </div>
+
           <div className="rs-blog-categories" data-aos="fade-up">
             {categories.map((category) => (
               <button
@@ -255,10 +283,18 @@ export default function BlogList({ posts = [], pagination = {} }) {
             ))}
           </div>
 
+          {filteredPosts.length === 0 && (
+            <div className="rs-blog-empty">
+              <h4>No posts in this category yet.</h4>
+              <p>Try another topic or browse all articles.</p>
+            </div>
+          )}
+
           {/* =====================================
               FEATURED BLOG
           ====================================== */}
 
+          {featuredPost && (
           <article className="rs-blog-featured" data-aos="fade-up">
             <Link
               href={`/blog/${featuredPost.slug || featuredPost.id}`}
@@ -274,6 +310,8 @@ export default function BlogList({ posts = [], pagination = {} }) {
             </Link>
 
             <div className="rs-blog-featured-content">
+              <span className="rs-blog-featured-label">Featured story</span>
+
               <div className="rs-blog-meta">
                 <span>
                   <i className="bi bi-calendar3"></i>
@@ -294,7 +332,7 @@ export default function BlogList({ posts = [], pagination = {} }) {
                 </Link>
               </h2>
 
-              <p>{getExcerpt(featuredPost)}</p>
+              <p>{getExcerpt(featuredPost, 220)}</p>
 
               <Link
                 href={`/blog/${featuredPost.slug || featuredPost.id}`}
@@ -305,11 +343,13 @@ export default function BlogList({ posts = [], pagination = {} }) {
               </Link>
             </div>
           </article>
+          )}
 
           {/* =====================================
               NORMAL BLOG GRID
           ====================================== */}
 
+          {normalPosts.length > 0 && (
           <div className="rs-blog-grid">
             {normalPosts.map((post, index) => (
               <article
@@ -369,6 +409,7 @@ export default function BlogList({ posts = [], pagination = {} }) {
               </article>
             ))}
           </div>
+          )}
         </div>
       </section>
 
@@ -387,7 +428,7 @@ export default function BlogList({ posts = [], pagination = {} }) {
           PAGINATION
       ====================================== */}
 
-      {totalPages > 1 && (
+      {totalPages > 1 && activeCategory === "All" && (
         <section id="blog-pagination" className="rs-blog-pagination">
           <div className="container">
             <div className="rs-blog-pagination-wrapper">

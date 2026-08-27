@@ -1,33 +1,41 @@
-// components/contact/ContactHero.js
+import { useEffect, useState } from "react";
 
 export default function ContactHero({ data }) {
   const heroTitle =
     data?.hero_title || "Have a Project in Mind? Let's Talk";
 
+  const [loadVideo, setLoadVideo] = useState(false);
+
+  useEffect(() => {
+    const motionOk = window.matchMedia(
+      "(prefers-reduced-motion: no-preference)",
+    ).matches;
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+
+    setLoadVideo(motionOk && isDesktop);
+  }, []);
+
   return (
     <section className="rs-contact-hero rs-contact-hero-video">
-      {/* VIDEO BACKGROUND */}
-      <video
-        className="rs-contact-hero-video__bg"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-      >
-        <source
-          src="/assets/videos/contact-hero.mp4"
-          type="video/mp4"
-        />
-      </video>
+      {loadVideo && (
+        <video
+          className="rs-contact-hero-video__bg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="/assets/videos/contact-hero.mp4" type="video/mp4" />
+        </video>
+      )}
 
-      {/* BLACK OVERLAY */}
-      <div className="rs-contact-hero-video__overlay"></div>
+      <div className="rs-contact-hero-video__overlay" aria-hidden="true"></div>
 
-      {/* EXISTING CONTENT */}
       <div className="container rs-contact-hero-video__content">
         <div className="row align-items-center">
-          <div className="col-lg-12" data-aos="fade-right">
+          <div className="col-lg-12">
             <div className="rs-process-title-sec">
               <h1 className="rs-process-title mb-3">
                 <span className="rs-process-highlight">

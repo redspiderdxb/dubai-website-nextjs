@@ -766,10 +766,10 @@ export default function MobileAppTemplate({ data }) {
     >
       <div className="container">
         <div className="section-title text-center text-white mb-3">
-          <h2 className="fw-bold">Ready to build a strong brand identity?</h2>
+          <h2 className="fw-bold">Ready to start your next app project?</h2>
           <p className="rs-subtitle">
-            Let RedSpider create a professional logo that represents your
-            business the right way.
+            Talk to RedSpider about a mobile app or digital product for your
+            business in Dubai and the UAE.
           </p>
         </div>
       </div>

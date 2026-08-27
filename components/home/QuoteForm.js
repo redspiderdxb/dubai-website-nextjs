@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../ui/Button";
+import ThemedSelect from "../ui/ThemedSelect";
 
 const INITIAL_FORM_DATA = {
   name: "",
@@ -351,35 +352,28 @@ export default function QuoteForm() {
 
                           <div className="field-wrap">
                             <div className="phone-field">
-                              <select
+                              <ThemedSelect
                                 name="country_code"
                                 id="quote-country-code"
-                                className="country-code"
+                                variant="light"
+                                className="rs-themed-select--compact"
                                 value={formData.country_code}
                                 onChange={handleChange}
                                 required
                                 aria-label="Country code"
-                              >
-                                <option value="+971">🇦🇪 +971</option>
-
-                                <option value="+966">🇸🇦 +966</option>
-
-                                <option value="+968">🇴🇲 +968</option>
-
-                                <option value="+973">🇧🇭 +973</option>
-
-                                <option value="+974">🇶🇦 +974</option>
-
-                                <option value="+965">🇰🇼 +965</option>
-
-                                <option value="+91">🇮🇳 +91</option>
-
-                                <option value="+92">🇵🇰 +92</option>
-
-                                <option value="+44">🇬🇧 +44</option>
-
-                                <option value="+1">🇺🇸 +1</option>
-                              </select>
+                                options={[
+                                  { value: "+971", label: "🇦🇪 +971" },
+                                  { value: "+966", label: "🇸🇦 +966" },
+                                  { value: "+968", label: "🇴🇲 +968" },
+                                  { value: "+973", label: "🇧🇭 +973" },
+                                  { value: "+974", label: "🇶🇦 +974" },
+                                  { value: "+965", label: "🇰🇼 +965" },
+                                  { value: "+91", label: "🇮🇳 +91" },
+                                  { value: "+92", label: "🇵🇰 +92" },
+                                  { value: "+44", label: "🇬🇧 +44" },
+                                  { value: "+1", label: "🇺🇸 +1" },
+                                ]}
+                              />
 
                               <input
                                 type="tel"
@@ -433,44 +427,43 @@ export default function QuoteForm() {
                           <label htmlFor="quote-subject">Enquiry About*</label>
 
                           <div className="field-wrap">
-                            <select
+                            <ThemedSelect
                               name="subject"
                               id="quote-subject"
+                              variant="light"
                               className="req_selected mb-4"
                               value={formData.subject}
                               onChange={handleChange}
                               required
-                            >
-                              <option value="" disabled>
-                                Select
-                              </option>
-
-                              <option value="E-Commerce">E-Commerce</option>
-
-                              <option value="Corporate Website">
-                                Corporate Website
-                              </option>
-
-                              <option value="Business Emails">
-                                Business Emails
-                              </option>
-
-                              <option value="Website Hosting">
-                                Website Hosting
-                              </option>
-
-                              <option value="SMS Marketing">
-                                SMS Marketing
-                              </option>
-
-                              <option value="Email Marketing">
-                                Email Marketing
-                              </option>
-
-                              <option value="Digital Marketing">
-                                Digital Marketing
-                              </option>
-                            </select>
+                              options={[
+                                { value: "", label: "Select", disabled: true },
+                                { value: "E-Commerce", label: "E-Commerce" },
+                                {
+                                  value: "Corporate Website",
+                                  label: "Corporate Website",
+                                },
+                                {
+                                  value: "Business Emails",
+                                  label: "Business Emails",
+                                },
+                                {
+                                  value: "Website Hosting",
+                                  label: "Website Hosting",
+                                },
+                                {
+                                  value: "SMS Marketing",
+                                  label: "SMS Marketing",
+                                },
+                                {
+                                  value: "Email Marketing",
+                                  label: "Email Marketing",
+                                },
+                                {
+                                  value: "Digital Marketing",
+                                  label: "Digital Marketing",
+                                },
+                              ]}
+                            />
                           </div>
                         </div>
 

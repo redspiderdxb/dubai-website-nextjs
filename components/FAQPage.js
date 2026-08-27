@@ -1,5 +1,3 @@
-// components/FAQPage.js
-
 import Layout from "./layout/Layout";
 import ContactCTA from "./ui/ContactCTA";
 
@@ -125,27 +123,19 @@ export default function FAQPage() {
     },
   ];
 
-  // ============================================
-  // 🔥 HERO DATA
-  // ============================================
   const heroTitle = "Frequently Asked Questions";
-  const heroSubtitle ="";
-  const heroDesc ="Find answers to common questions about starting and managing a project with RedSpider.";
+  const heroDesc =
+    "Find answers to common questions about starting and managing a project with RedSpider.";
   const heroBackground = "";
 
-  // 🔥 Image URL build
   const imageUrl = heroBackground
     ? `${process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public"}/storage/${heroBackground}`
     : "";
 
-  // Split FAQs into two columns
   const midPoint = Math.ceil(faqs.length / 2);
   const leftFaqs = faqs.slice(0, midPoint);
   const rightFaqs = faqs.slice(midPoint);
 
-  // ============================================
-  // 🔥 FAQPage Schema
-  // ============================================
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -161,151 +151,123 @@ export default function FAQPage() {
 
   return (
     <Layout>
-      <main className="main">
-        {/* ============================================
-            FAQ HERO - Inline
-        ============================================ */}
-        <section
-          className="design-developemnt-hero hero-marquee"
+      <section
+        className="design-developemnt-hero hero-marquee"
+        style={{
+          backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-12" data-aos="fade-right">
+              <div className="rs-process-title-sec">
+                <h1 className="rs-process-title mb-3">{heroTitle}</h1>
+                {heroDesc && (
+                  <p className="rs-process-text mb-3">{heroDesc}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="rs-faq-sec"
+        className="home-faq rs-faq-sec section py-5 light-background"
+      >
+        <div
+          className="container"
           style={{
-            backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            maxWidth: "1600px",
+            background: "#f6f6f6",
+            padding: "40px",
+            borderRadius: "30px",
           }}
         >
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-12" data-aos="fade-right">
-                <div className="rs-process-title-sec">
-                  <h1 className="rs-process-title mb-3">
-                    {heroTitle}
-                    {heroSubtitle && (
-                      <span className="rs-process-highlight">
-                        {heroSubtitle}
-                        <svg
-                          className="rs-process-underline"
-                          viewBox="0 0 320 22"
-                          preserveAspectRatio="none"
-                          aria-hidden="true"
-                          focusable="false"
-                        >
-                          <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
-                        </svg>
-                      </span>
-                    )}
-                  </h1>
-                  {heroDesc && (
-                    <p className="rs-process-text mb-3">{heroDesc}</p>
-                  )}
-                </div>
+          <div className="row g-4">
+            <div className="col-lg-6">
+              <div className="accordion" id="faqPageLeft">
+                {leftFaqs.map((faq, index) => (
+                  <div
+                    className="accordion-item"
+                    key={`left-${faq.id || index}`}
+                  >
+                    <h3
+                      className="accordion-header"
+                      id={`faq-page-left-heading-${index}`}
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#faq-page-left-${index}`}
+                        aria-expanded="false"
+                        aria-controls={`faq-page-left-${index}`}
+                      >
+                        {faq.question}
+                      </button>
+                    </h3>
+
+                    <div
+                      id={`faq-page-left-${index}`}
+                      className="accordion-collapse collapse"
+                      aria-labelledby={`faq-page-left-heading-${index}`}
+                      data-bs-parent="#faqPageLeft"
+                    >
+                      <div className="accordion-body">{faq.answer}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="col-lg-6">
+              <div className="accordion" id="faqPageRight">
+                {rightFaqs.map((faq, index) => (
+                  <div
+                    className="accordion-item"
+                    key={`right-${faq.id || index}`}
+                  >
+                    <h3
+                      className="accordion-header"
+                      id={`faq-page-right-heading-${index}`}
+                    >
+                      <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#faq-page-right-${index}`}
+                        aria-expanded="false"
+                        aria-controls={`faq-page-right-${index}`}
+                      >
+                        {faq.question}
+                      </button>
+                    </h3>
+
+                    <div
+                      id={`faq-page-right-${index}`}
+                      className="accordion-collapse collapse"
+                      aria-labelledby={`faq-page-right-heading-${index}`}
+                      data-bs-parent="#faqPageRight"
+                    >
+                      <div className="accordion-body">{faq.answer}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ============================================
-            FAQ SECTION - Two Column Layout
-        ============================================ */}
-        <section
-          id="rs-faq-sec"
-          className="home-faq rs-faq-sec section py-5 light-background"
-        >
-          <div
-            className="container"
-            style={{
-              maxWidth: "1600px",
-              background: "#f6f6f6",
-              padding: "40px",
-              borderRadius: "30px",
-            }}
-          >
-            
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
-            {/* FAQ GRID - Two Columns */}
-            <div className="row g-4">
-              {/* LEFT COLUMN */}
-              <div className="col-lg-6">
-                <div className="accordion" id="homeFaqLeft">
-                  {leftFaqs.map((faq, index) => (
-                    <div
-                      className="accordion-item"
-                      key={`left-${faq.id || index}`}
-                    >
-                      <h3
-                        className="accordion-header"
-                        id={`faq-left-heading-${index}`}
-                      >
-                        <button
-                          className="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target={`#faq-left-${index}`}
-                          aria-expanded="false"
-                          aria-controls={`faq-left-${index}`}
-                        >
-                          {faq.question}
-                        </button>
-                      </h3>
-
-                      <div
-                        id={`faq-left-${index}`}
-                        className="accordion-collapse collapse"
-                        aria-labelledby={`faq-left-heading-${index}`}
-                        data-bs-parent="#homeFaqLeft"
-                      >
-                        <div className="accordion-body">{faq.answer}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* RIGHT COLUMN */}
-              <div className="col-lg-6">
-                <div className="accordion" id="homeFaqRight">
-                  {rightFaqs.map((faq, index) => (
-                    <div
-                      className="accordion-item"
-                      key={`right-${faq.id || index}`}
-                    >
-                      <h3
-                        className="accordion-header"
-                        id={`faq-right-heading-${index}`}
-                      >
-                        <button
-                          className="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target={`#faq-right-${index}`}
-                          aria-expanded="false"
-                          aria-controls={`faq-right-${index}`}
-                        >
-                          {faq.question}
-                        </button>
-                      </h3>
-
-                      <div
-                        id={`faq-right-${index}`}
-                        className="accordion-collapse collapse"
-                        aria-labelledby={`faq-right-heading-${index}`}
-                        data-bs-parent="#homeFaqRight"
-                      >
-                        <div className="accordion-body">{faq.answer}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================
-            FAQPage Schema
-        ============================================ */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-        <ContactCTA />
-      </main>
+      <ContactCTA />
+    </Layout>
+  );
+}

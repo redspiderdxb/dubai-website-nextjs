@@ -167,7 +167,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 992) {
+      if (window.innerWidth >= 1200) {
         setIsMobileOpen(false);
       }
     };
@@ -178,6 +178,14 @@ export default function Header() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("rs-mobile-drawer-open", isMobileOpen);
+
+    return () => {
+      document.body.classList.remove("rs-mobile-drawer-open");
+    };
+  }, [isMobileOpen]);
 
   /* =====================================================
      NAV ITEMS
@@ -256,6 +264,15 @@ export default function Header() {
           {/* NAV WRAPPER */}
 
           <div className="rs-nav-wrap">
+            {isMobileOpen ? (
+              <button
+                type="button"
+                className="rs-mobile-backdrop"
+                aria-label="Close menu"
+                onClick={closeMobileMenu}
+              />
+            ) : null}
+
             {/* NAVIGATION */}
 
             <nav
@@ -263,6 +280,23 @@ export default function Header() {
               className={`rs-navmenu ${isMobileOpen ? "rs-mobile-open" : ""}`}
               aria-label="Main Navigation"
             >
+              <div className="rs-mobile-drawer-head">
+                <Link
+                  href="/"
+                  className="rs-mobile-drawer-logo"
+                  aria-label="RedSpider Home"
+                  onClick={closeMobileMenu}
+                >
+                  <Image
+                    src="/assets/img/logo.webp"
+                    alt="RedSpider Web & Art Design"
+                    width={168}
+                    height={42}
+                  />
+                </Link>
+                <p className="rs-mobile-drawer-tag">Power up your website</p>
+              </div>
+
               <ul>
                 {navItems.map((item, index) => {
                   /* =====================================
@@ -329,12 +363,40 @@ export default function Header() {
                   return (
                     <li key={item.name}>
                       <Link href={item.path} onClick={closeMobileMenu}>
-                        {item.name}
+                        <span>{item.name}</span>
                       </Link>
                     </li>
                   );
                 })}
               </ul>
+
+              <div className="rs-mobile-drawer-foot">
+                <a
+                  href="tel:+971555515475"
+                  className="rs-mobile-drawer-call"
+                  onClick={closeMobileMenu}
+                >
+                  <i className="bi bi-telephone-fill" aria-hidden="true"></i>
+                  Call now
+                </a>
+                <a
+                  href="https://wa.me/971555515475"
+                  className="rs-mobile-drawer-wa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMobileMenu}
+                >
+                  <i className="bi bi-whatsapp" aria-hidden="true"></i>
+                  WhatsApp
+                </a>
+                <Link
+                  href="/contact-us/"
+                  className="rs-mobile-drawer-touch"
+                  onClick={closeMobileMenu}
+                >
+                  Get in Touch
+                </Link>
+              </div>
             </nav>
 
             {/* =================================================

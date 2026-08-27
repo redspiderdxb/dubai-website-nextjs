@@ -6,6 +6,7 @@ import "yet-another-react-lightbox/styles.css";
 
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
+import GoogleReviews from "../ui/GoogleReviews";
 
 export default function WebDevelopmentTemplate({ data }) {
   // ============================================
@@ -31,8 +32,8 @@ export default function WebDevelopmentTemplate({ data }) {
     intro_image = "",
 
     // CTA
-    cta_title = "Ready to build a strong brand identity?",
-    cta_description = "Let RedSpider create a professional logo that represents your business the right way.",
+    cta_title = "Ready to start your next website project?",
+    cta_description = "Talk to RedSpider about a website, app or digital experience for your business in Dubai and the UAE.",
     cta_button_text = "Schedule Free Consultation",
     cta_button_link = "#",
     cta_background = "",
@@ -572,17 +573,7 @@ export default function WebDevelopmentTemplate({ data }) {
           REVIEW SECTION
       ============================================ */}
 
-      <section id="review-sec" className="review-sec section light-background">
-        <div className="container">
-          <div className="review-wrap">
-            <img
-              src="/assets/img/reviewimg.webp"
-              alt="Reviews"
-              className="img-fluid"
-            />
-          </div>
-        </div>
-      </section>
+      <GoogleReviews />
 
       {/* ============================================
           GALLERY / PORTFOLIO - ONLY 9 ITEMS

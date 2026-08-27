@@ -1,6 +1,11 @@
 import Image from "next/image";
+import GoogleReviews from "../ui/GoogleReviews";
 
-export default function BlogStats({ data, initialBlogPosts = [] }) {
+export default function BlogStats({
+  data,
+  initialBlogPosts = [],
+  googleReviews = null,
+}) {
   // ============================================
   // BLOG TITLE
   // ============================================
@@ -315,26 +320,7 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
           REVIEWS
       ================================================== */}
 
-      <section className="gr-section light-background section pt-5 pb-0">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="g-review-wrap text-center" data-aos="fade-up">
-                <Image
-                  src="/assets/img/reviewimg.webp"
-                  alt="Google reviews and client testimonials"
-                  className="img-fluid"
-                  width={800}
-                  height={400}
-                  sizes="100vw"
-                  style={{ width: "100%", height: "auto" }}
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <GoogleReviews initialData={googleReviews} />
     </>
   );
 }

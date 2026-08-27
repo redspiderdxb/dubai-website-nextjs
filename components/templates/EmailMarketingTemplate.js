@@ -5,6 +5,7 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 import ServiceCTA from "../services/ServiceCTA";
+import GoogleReviews from "../ui/GoogleReviews";
 
 export default function EmailMarketingTemplate({ data }) {
   if (!data) {
@@ -1923,22 +1924,7 @@ export default function EmailMarketingTemplate({ data }) {
     // ============================================
 
     review: {
-      component: (
-        <section
-          key="review"
-          id="review-sec"
-          className="review-sec section light-background py-5"
-          data-aos="fade-up"
-          data-aos-duration="800"
-          data-aos-once="true"
-        >
-          <div className="container" style={{ maxWidth: "1100px" }}>
-            <div className="review-wrap">
-              <img src="assets/img/reviewimg.webp" alt className="img-fluid" />
-            </div>
-          </div>
-        </section>
-      ),
+      component: <GoogleReviews key="review" />,
       show: true,
     },
 
@@ -2081,7 +2067,7 @@ export default function EmailMarketingTemplate({ data }) {
                 data-aos-duration="700"
                 data-aos-once="true"
               >
-                Ready to build a strong brand identity?
+                Ready to grow with email marketing?
               </h2>
               <p
                 className="text-dark"

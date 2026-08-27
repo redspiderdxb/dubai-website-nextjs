@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Button from "../ui/Button";
 
-export default function Hero({ data }) {
+export default function Hero({ data, googleReviews = null }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Get slides from API data or use fallback
@@ -188,7 +188,10 @@ export default function Hero({ data }) {
                   <div className="rs-review-box">
                     <div className="rs-review-top">
                       <a
-                        href="https://share.google/Zmvt06D8A6xyIbCte"
+                        href={
+                          googleReviews?.url ||
+                          "https://share.google/Zmvt06D8A6xyIbCte"
+                        }
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -212,8 +215,13 @@ export default function Hero({ data }) {
                     </div>
 
                     <p className="rs-review-text">
-                      RedSpider is rated 4.9 stars - based on 100+ reviews in
-                      Google Business listing.
+                      RedSpider is rated{" "}
+                      {Number(googleReviews?.rating || 4.9).toFixed(1)} stars
+                      - based on{" "}
+                      {googleReviews?.available && googleReviews?.total
+                        ? googleReviews.total
+                        : "100+"}{" "}
+                      reviews in Google Business listing.
                     </p>
                   </div>
                 </div>

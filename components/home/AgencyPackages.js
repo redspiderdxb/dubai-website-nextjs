@@ -50,7 +50,7 @@ export default function AgencyPackages() {
   const accordionItems = [
     {
       id: "rsAccTwo",
-      show: false,
+      show: true,
       title: "Websites Designed to Attract and Engage Customers",
       content: (
         <>
@@ -551,27 +551,27 @@ export default function AgencyPackages() {
       <section className="rs-creative-sec pt-0">
         <div className="container-fluid p-0">
           <div className="row g-0 rs-creative-row">
-            <div className="col-lg-6" data-aos="fade-right">
+            <div className="col-lg-6 rs-creative-media" data-aos="fade-right">
               <div className="rs-creative-img">
                 <Image
                   src="/assets/img/rs-features.webp"
                   alt="Creative design studio"
-                  width={800}
-                  height={600}
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  fill
+                  sizes="(max-width: 991px) 100vw, 50vw"
+                  className="rs-creative-photo"
+                  style={{ objectFit: "cover" }}
                   loading="lazy"
                 />
               </div>
             </div>
 
-            <div className="col-lg-6" data-aos="fade-left">
+            <div className="col-lg-6 rs-creative-copy" data-aos="fade-left">
               <div className="rs-creative-content">
                 <div className="rs-creative-inner">
-                  <div className="rs-process-title-sec">
-                    <h2 className="rs-process-title mb-4 text-start">
+                  <div className="rs-creative-heading">
+                    <h2 className="rs-process-title rs-creative-title text-start">
                       <span className="rs-title-black">Why Businesses</span>
-
-                      <span className="rs-process-highlight ms-0 ml-0">
+                      <span className="rs-process-highlight">
                         Choose RedSpider
                         <svg
                           className="rs-process-underline"
@@ -595,9 +595,9 @@ export default function AgencyPackages() {
                     className="rs-creative-accordion accordion"
                     id="rsCreativeAccordion"
                   >
-                    {accordionItems.map((item, idx) => (
-                      <div className="accordion-item" key={idx}>
-                        <h3 className="accordion-header">
+                    {accordionItems.map((item) => (
+                      <div className="accordion-item" key={item.id}>
+                        <h3 className="accordion-header" id={`${item.id}Heading`}>
                           <button
                             className={`accordion-button ${
                               !item.show ? "collapsed" : ""
@@ -606,8 +606,11 @@ export default function AgencyPackages() {
                             data-bs-toggle="collapse"
                             data-bs-target={`#${item.id}`}
                             aria-expanded={item.show}
+                            aria-controls={item.id}
                           >
-                            {item.title}
+                            <span className="rs-creative-acc-label">
+                              {item.title}
+                            </span>
                           </button>
                         </h3>
 
@@ -617,6 +620,7 @@ export default function AgencyPackages() {
                             item.show ? "show" : ""
                           }`}
                           data-bs-parent="#rsCreativeAccordion"
+                          aria-labelledby={`${item.id}Heading`}
                         >
                           <div className="accordion-body">{item.content}</div>
                         </div>

@@ -1,88 +1,202 @@
 import "glightbox/dist/css/glightbox.min.css";
 import { useState, useEffect, useRef, useMemo } from "react";
-import { fetchGalleries, fetchAllGalleries } from "../../lib/api";
+import Image from "next/image";
+import { fetchAllGalleries } from "../../lib/api";
+import ThemedSelect from "../ui/ThemedSelect";
 
-export default function PortfolioGrid({
-  initialGalleries = [],
-  initialPagination = {},
-}) {
-  const lightboxInstance = useRef(null);
+const FALLBACK_IMAGE = "/assets/img/portfolio/portfolio-1.webp";
 
-  const PER_PAGE = 12;
+function getAssetUrl() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  // ============================================
-  // Format Gallery Data
-  // ============================================
+  return API_URL ? API_URL.replace("/api/v1", "").replace(/\/$/, "") : "";
+}
 
-  const formatGalleries = (data = []) => {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+function resolveGalleryImage(image) {
+  if (!image) {
+    return FALLBACK_IMAGE;
+  }
 
-    const ASSET_URL = API_URL
-      ? API_URL.replace("/api/v1", "").replace(/\/$/, "")
-      : "";
+  const value = String(image);
 
-    return data.map((gallery) => {
-      const cleanDescription = gallery.description
-        ? String(gallery.description)
-            .replace(/<[^>]*>/g, " ")
-            .replace(/\s+/g, " ")
-            .trim()
-        : "Portfolio";
+  if (
+    value.startsWith("http://") ||
+    value.startsWith("https://") ||
+    value.startsWith("/")
+  ) {
+    return value;
+  }
 
-      // Existing Project URL from backend
-      const projectUrl =
-        gallery.project_url || `/galleries/${gallery.slug || gallery.id}`;
+  const assetUrl = getAssetUrl();
 
-      // ==========================================
-      // Search Text
-      // ==========================================
+  return assetUrl ? `${assetUrl}/storage/${value}` : FALLBACK_IMAGE;
+}
 
-      const searchText = `
+function getYoutubeVideoId(url) {
+  if (!url) {
+    return "";
+  }
+
+  try {
+    const value = String(url).trim();
+
+    if (value.includes("youtube.com/watch")) {
+      return new URL(value).searchParams.get("v") || "";
+    }
+
+    if (value.includes("youtu.be/")) {
+      return new URL(value).pathname.replace("/", "").split("?")[0] || "";
+    }
+
+    if (value.includes("youtube.com/embed/")) {
+      const parts = new URL(value).pathname.split("/");
+      const embedIndex = parts.indexOf("embed");
+
+      return embedIndex !== -1 ? parts[embedIndex + 1] || "" : "";
+    }
+
+    if (value.includes("youtube.com/shorts/")) {
+      const parts = new URL(value).pathname.split("/");
+      const shortsIndex = parts.indexOf("shorts");
+
+      return shortsIndex !== -1 ? parts[shortsIndex + 1] || "" : "";
+    }
+
+    if (value.includes("youtube.com/live/")) {
+      const parts = new URL(value).pathname.split("/");
+      const liveIndex = parts.indexOf("live");
+
+      return liveIndex !== -1 ? parts[liveIndex + 1] || "" : "";
+    }
+
+    return "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function formatGalleries(data = []) {
+  return data.map((gallery) => {
+    const cleanDescription = gallery.description
+      ? String(gallery.description)
+          .replace(/<[^>]*>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+      : "Portfolio";
+
+    const projectUrl =
+      gallery.project_url || `/galleries/${gallery.slug || gallery.id}`;
+
+    const searchText = `
         ${gallery.name || ""}
         ${cleanDescription || ""}
         ${projectUrl || ""}
       `
-        .toLowerCase()
-        .replace(/\s+/g, " ")
-        .trim();
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
 
-      // ==========================================
-      // Detect YouTube URL
-      // ==========================================
+    const isYoutube =
+      typeof gallery.project_url === "string" &&
+      (gallery.project_url.includes("youtube.com/watch") ||
+        gallery.project_url.includes("youtu.be/") ||
+        gallery.project_url.includes("youtube.com/embed/") ||
+        gallery.project_url.includes("youtube.com/shorts/") ||
+        gallery.project_url.includes("youtube.com/live/"));
 
-      const isYoutube =
-        typeof gallery.project_url === "string" &&
-        (gallery.project_url.includes("youtube.com/watch") ||
-          gallery.project_url.includes("youtu.be/") ||
-          gallery.project_url.includes("youtube.com/embed/") ||
-          gallery.project_url.includes("youtube.com/shorts/") ||
-          gallery.project_url.includes("youtube.com/live/"));
+    return {
+      id: gallery.id,
+      title: gallery.name || "Untitled Project",
+      category: cleanDescription || "Portfolio",
+      image: resolveGalleryImage(gallery.image),
+      link: projectUrl,
+      searchText,
+      isYoutube,
+      youtubeId: isYoutube ? getYoutubeVideoId(gallery.project_url) : "",
+      filter: "filter-websites",
+    };
+  });
+}
 
-      return {
-        id: gallery.id,
+function PortfolioProjectImage({ src, alt, priority = false }) {
+  const [imageSrc, setImageSrc] = useState(src || FALLBACK_IMAGE);
 
-        title: gallery.name || "Untitled Project",
+  useEffect(() => {
+    setImageSrc(src || FALLBACK_IMAGE);
+  }, [src]);
 
-        category: cleanDescription || "Portfolio",
+  return (
+    <Image
+      src={imageSrc}
+      alt={alt}
+      fill
+      sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
+      priority={priority}
+      style={{
+        objectFit: "cover",
+        objectPosition: "top center",
+      }}
+      onError={() => {
+        if (imageSrc !== FALLBACK_IMAGE) {
+          setImageSrc(FALLBACK_IMAGE);
+        }
+      }}
+    />
+  );
+}
 
-        image: gallery.image
-          ? `${ASSET_URL}/storage/${gallery.image}`
-          : "/assets/img/portfolio/portfolio-1.webp",
+function PortfolioYoutubeItem({ title, videoId }) {
+  const [playing, setPlaying] = useState(false);
+  const embedUrl = videoId
+    ? `https://www.youtube-nocookie.com/embed/${videoId}`
+    : "";
+  const thumb = videoId
+    ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
+    : FALLBACK_IMAGE;
 
-        link: projectUrl,
+  if (playing && embedUrl) {
+    return (
+      <div className="portfolio-video-wrapper">
+        <iframe
+          src={`${embedUrl}?rel=0&modestbranding=1&autoplay=1`}
+          title={title}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </div>
+    );
+  }
 
-        searchText,
+  return (
+    <div className="portfolio-video-wrapper">
+      <button
+        type="button"
+        className="portfolio-youtube-facade"
+        onClick={() => setPlaying(true)}
+        aria-label={`Play ${title}`}
+      >
+        <Image
+          src={thumb}
+          alt={title}
+          fill
+          sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
+          style={{ objectFit: "cover" }}
+        />
+        <span className="portfolio-play-icon" aria-hidden="true">
+          <i className="bi bi-play-fill"></i>
+        </span>
+      </button>
+    </div>
+  );
+}
 
-        isYoutube,
+export default function PortfolioGrid({
+  initialGalleries = [],
+}) {
+  const lightboxInstance = useRef(null);
 
-        filter: "filter-websites",
-      };
-    });
-  };
-
-  // ============================================
-  // Initial Data
-  // ============================================
+  const PER_PAGE = 12;
 
   const initialFormattedGalleries = useMemo(
     () => formatGalleries(initialGalleries || []),
@@ -168,103 +282,6 @@ export default function PortfolioGrid({
       mounted = false;
     };
   }, []);
-
-  // ============================================
-  // Existing Gallery Loader
-  // ============================================
-
-  const loadGalleries = async (page) => {
-    try {
-      setLoading(true);
-
-      const result = await fetchGalleries(page, PER_PAGE);
-
-      const formatted = formatGalleries(result.galleries || []);
-
-      setGalleries(formatted);
-
-      return formatted;
-    } catch (error) {
-      console.error("Error loading portfolio:", error);
-
-      return [];
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // ============================================
-  // YouTube URL → Embed URL
-  // ============================================
-
-  const getYoutubeEmbedUrl = (url) => {
-    if (!url) {
-      return "";
-    }
-
-    try {
-      const value = String(url).trim();
-
-      // youtube.com/watch?v=VIDEO_ID
-      if (value.includes("youtube.com/watch")) {
-        const parsedUrl = new URL(value);
-
-        const videoId = parsedUrl.searchParams.get("v");
-
-        if (videoId) {
-          return `https://www.youtube.com/embed/${videoId}`;
-        }
-      }
-
-      // youtu.be/VIDEO_ID
-      if (value.includes("youtu.be/")) {
-        const parsedUrl = new URL(value);
-
-        const videoId = parsedUrl.pathname.replace("/", "").split("?")[0];
-
-        if (videoId) {
-          return `https://www.youtube.com/embed/${videoId}`;
-        }
-      }
-
-      // youtube.com/embed/VIDEO_ID
-      if (value.includes("youtube.com/embed/")) {
-        return value;
-      }
-
-      // youtube.com/shorts/VIDEO_ID
-      if (value.includes("youtube.com/shorts/")) {
-        const parsedUrl = new URL(value);
-
-        const parts = parsedUrl.pathname.split("/");
-
-        const shortsIndex = parts.indexOf("shorts");
-
-        if (shortsIndex !== -1 && parts[shortsIndex + 1]) {
-          return `https://www.youtube.com/embed/${parts[shortsIndex + 1]}`;
-        }
-      }
-
-      // youtube.com/live/VIDEO_ID
-      if (value.includes("youtube.com/live/")) {
-        const parsedUrl = new URL(value);
-
-        const parts = parsedUrl.pathname.split("/");
-
-        const liveIndex = parts.indexOf("live");
-
-        if (liveIndex !== -1 && parts[liveIndex + 1]) {
-          return `https://www.youtube.com/embed/${parts[liveIndex + 1]}`;
-        }
-      }
-
-      return "";
-    } catch (error) {
-      console.error("Invalid YouTube URL:", url, error);
-
-      return "";
-    }
-  };
 
   // ============================================
   // GLightbox
@@ -886,42 +903,35 @@ export default function PortfolioGrid({
           <div className="portfolio-search-row">
             {/* Industry */}
 
-            <select
+            <ThemedSelect
               className="portfolio-industry-select"
+              variant="dark"
               value={industryFilter}
               onChange={handleIndustryChange}
               aria-label="Industry Type"
-            >
-              <option value="">Industry Type</option>
-
-              <option value="real-estate">Real Estate Websites</option>
-
-              <option value="ecommerce">E-Commerce Websites</option>
-
-              <option value="corporate">Corporate Websites</option>
-
-              <option value="daily-deals">Daily Deals Websites</option>
-
-              <option value="web-portal">Web Portal</option>
-
-              <option value="engineering">
-                Engineering &amp; Construction
-              </option>
-
-              <option value="travel">Travel &amp; Tourism</option>
-
-              <option value="somalian">Somalian Clients</option>
-
-              <option value="international">International Projects</option>
-
-              <option value="luxury">Luxury &amp; Stunning</option>
-
-              <option value="landing">Ad Landing Pages</option>
-
-              <option value="logistics">Logistics &amp; Shipping</option>
-
-              <option value="bank">Bank</option>
-            </select>
+              options={[
+                { value: "", label: "Industry Type" },
+                { value: "real-estate", label: "Real Estate Websites" },
+                { value: "ecommerce", label: "E-Commerce Websites" },
+                { value: "corporate", label: "Corporate Websites" },
+                { value: "daily-deals", label: "Daily Deals Websites" },
+                { value: "web-portal", label: "Web Portal" },
+                {
+                  value: "engineering",
+                  label: "Engineering & Construction",
+                },
+                { value: "travel", label: "Travel & Tourism" },
+                { value: "somalian", label: "Somalian Clients" },
+                {
+                  value: "international",
+                  label: "International Projects",
+                },
+                { value: "luxury", label: "Luxury & Stunning" },
+                { value: "landing", label: "Ad Landing Pages" },
+                { value: "logistics", label: "Logistics & Shipping" },
+                { value: "bank", label: "Bank" },
+              ]}
+            />
 
             {/* Search */}
 
@@ -975,13 +985,9 @@ export default function PortfolioGrid({
             PORTFOLIO GRID
         ====================================== */}
 
-        <div
-          className="row gy-4 isotope-container"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
+        <div className="row gy-4 isotope-container">
           {filteredProjects.length > 0 ? (
-            filteredProjects.map((project) => (
+            filteredProjects.map((project, index) => (
               <div
                 key={project.id}
                 className="col-lg-4 col-md-6 portfolio-item isotope-item"
@@ -997,99 +1003,23 @@ export default function PortfolioGrid({
                       : undefined
                   }
                 >
-                  {/* ==================================
-                        YOUTUBE VIDEO
-                    ================================== */}
-
                   {project.isYoutube ? (
-                    <div
-                      className="portfolio-video-wrapper"
-                      style={{
-                        position: "relative",
-
-                        width: "100%",
-
-                        height: "100%",
-
-                        overflow: "hidden",
-
-                        background: "#000",
-
-                        margin: "0",
-
-                        padding: "0",
-                      }}
-                    >
-                      <iframe
-                        src={`${getYoutubeEmbedUrl(
-                          project.link,
-                        )}?rel=0&modestbranding=1`}
-                        title={project.title}
-                        style={{
-                          position: "absolute",
-
-                          top: 0,
-
-                          left: 0,
-
-                          width: "100%",
-
-                          height: "100%",
-
-                          border: "0",
-
-                          display: "block",
-
-                          margin: "0",
-
-                          padding: "0",
-                        }}
-                        loading="lazy"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                      />
-                    </div>
+                    <PortfolioYoutubeItem
+                      title={project.title}
+                      videoId={project.youtubeId}
+                    />
                   ) : (
                     <>
-                      {/* ==================================
-                            NORMAL IMAGE PROJECT
-                        ================================== */}
-
-                      <img
+                      <PortfolioProjectImage
                         src={project.image}
-                        className="img-fluid"
-                        alt={project.title}
-                        loading="lazy"
-                        style={{
-                          width: "100%",
-
-                          height: "100%",
-
-                          objectFit: "cover",
-                        }}
-                        onError={(e) => {
-                          console.error(
-                            "IMAGE LOAD FAILED:",
-                            e.currentTarget.src,
-                          );
-
-                          e.currentTarget.onerror = null;
-
-                          e.currentTarget.src =
-                            "/assets/img/portfolio/portfolio-1.webp";
-                        }}
+                        alt={`${project.title} web design project by RedSpider Dubai`}
+                        priority={currentPage === 1 && index < 2}
                       />
-
-                      {/* ==================================
-                            NORMAL PROJECT INFO
-                        ================================== */}
 
                       <div className="portfolio-info">
                         <h4>{project.title}</h4>
 
                         <p>{project.category}</p>
-
-                        {/* Image Preview */}
 
                         {project.image && (
                           <a
@@ -1101,8 +1031,6 @@ export default function PortfolioGrid({
                             <i className="bi bi-zoom-in" aria-hidden="true"></i>
                           </a>
                         )}
-
-                        {/* Project URL */}
 
                         <a
                           href={project.link}

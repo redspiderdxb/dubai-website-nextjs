@@ -1,3 +1,5 @@
+import GoogleReviews from "../ui/GoogleReviews";
+
 export default function ServiceBody({ service }) {
   if (!service) return null;
 
@@ -396,21 +398,7 @@ export default function ServiceBody({ service }) {
       )}
 
       {/* 🔥 Review Section - Static */}
-      <section
-        id="review-sec"
-        className="review-sec section light-background pb-0"
-      >
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div className="review-wrap">
-            <img
-              src="/assets/img/reviewimg.webp"
-              alt="Google reviews and client testimonials"
-              className="img-fluid"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
+      <GoogleReviews />
     </>
   );
 }

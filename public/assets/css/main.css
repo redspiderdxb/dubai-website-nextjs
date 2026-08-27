@@ -598,7 +598,7 @@ h6 {
 
 /* Dropdown hover */
 .rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu>li>a:hover {
-  background: rgba(210, 0, 0, 0.12);
+  background: #d20000;
 
   border-left-color: #d20000;
 

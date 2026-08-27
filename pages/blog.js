@@ -27,13 +27,11 @@ export default function Blog({ posts, pagination }) {
     <Layout>
       <SEO {...seoData} />
 
-      <main className="main">
-        <BlogHero />
+      <BlogHero />
 
-        <BlogList posts={posts} pagination={pagination} />
+      <BlogList posts={posts} pagination={pagination} />
 
-        <BlogCTA />
-      </main>
+      <BlogCTA />
     </Layout>
   );
 }

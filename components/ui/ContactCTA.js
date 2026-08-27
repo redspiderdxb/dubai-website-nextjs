@@ -1,6 +1,6 @@
-const DEFAULT_TITLE = "Ready to build a strong brand identity?";
+const DEFAULT_TITLE = "Ready to start your next project?";
 const DEFAULT_DESCRIPTION =
-  "Let RedSpider create a professional logo that represents your business the right way.";
+  "Talk to RedSpider about web design, development and digital services for your business in Dubai and the UAE.";
 
 export default function ContactCTA({
   title = DEFAULT_TITLE,

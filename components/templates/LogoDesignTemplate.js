@@ -7,6 +7,7 @@ import "yet-another-react-lightbox/styles.css";
 
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
+import GoogleReviews from "../ui/GoogleReviews";
 
 export default function LogoDesignTemplate({ data }) {
   if (!data) return <div className="text-center py-5">Loading...</div>;
@@ -1029,22 +1030,7 @@ export default function LogoDesignTemplate({ data }) {
   // ============================================
   // 💬 Review Section (Outside Section Order)
   // ============================================
-  const ReviewSection = () => (
-    <section
-      id="review-sec"
-      className="review-sec section light-background py-0"
-    >
-      <div className="container" style={{ maxWidth: "1100px" }}>
-        <div className="review-wrap">
-          <img
-            src="/assets/img/reviewimg.webp"
-            alt="Reviews"
-            className="img-fluid"
-          />
-        </div>
-      </div>
-    </section>
-  );
+  const ReviewSection = () => <GoogleReviews />;
 
   // ============================================
   // 🏗️ Render Main Template
