@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import Head from "next/head";
 import Script from "next/script";
 import App from "next/app";
 import { useEffect, useRef } from "react";
@@ -136,73 +135,6 @@ function MyApp({
 
   return (
     <>
-      <Head>
-        {/* ============================================
-            BOOTSTRAP
-            ============================================ */}
-
-        <link
-          rel="stylesheet"
-          href="/assets/vendor/bootstrap/css/bootstrap.min.css"
-        />
-
-        {/* ============================================
-            BOOTSTRAP ICONS
-            ============================================ */}
-
-        <link
-          rel="stylesheet"
-          href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
-        />
-
-        {/* ============================================
-            GLIGHTBOX
-            ============================================ */}
-
-        <link
-          rel="stylesheet"
-          href="/assets/vendor/glightbox/css/glightbox.min.css"
-        />
-
-        {/* ============================================
-            SWIPER
-            ============================================ */}
-
-        <link
-          rel="stylesheet"
-          href="/assets/vendor/swiper/swiper-bundle.min.css"
-        />
-
-        
-
-        {/* ============================================
-            MAIN CSS
-            ============================================ */}
-
-        <link rel="stylesheet" href="/assets/css/main.css" />
-
-        {/* ============================================
-            CUSTOM FONTS
-            ============================================ */}
-
-        <link rel="stylesheet" href="/assets/fonts/stylesheet.css" />
-
-        {/* ============================================
-            CUSTOM CSS
-            ============================================ */}
-
-        <link rel="stylesheet" href="/assets/css/custom.css" />
-
-        {/* ============================================
-            MATERIAL SYMBOLS
-            ============================================ */}
-
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-      </Head>
-
       {/* =================================================
           DYNAMIC HEADER DATA
           ================================================= */}

@@ -152,7 +152,7 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
             className="section-title text-center text-white mb-2 aos-init aos-animate"
             data-aos="fade-up"
           >
-            <div className="home-blog-title fw-normal">{blogTitle}</div>
+            <h2 className="home-blog-title rs-process-title">{blogTitle}</h2>
           </div>
 
           {/* BLOG POSTS */}
@@ -170,35 +170,30 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
                 return (
                   <div
                     key={post.id || post.slug || index}
-                    className="col-lg-4 col-md-6 aos-init aos-animate"
+                    className="col-12 col-md-6 col-lg-4"
                     data-aos="fade-up"
                     data-aos-delay={index * 100}
                   >
                     <div className="rs-blog-text-card">
-                      {/* IMAGE */}
-
                       <div className="blog-img">
                         {isRemote ? (
                           <img
                             src={imageUrl}
                             alt={post.title || post.name || "RedSpider Blog"}
-                            className="img-fluid"
                             loading="lazy"
                           />
                         ) : (
                           <Image
                             src={imageUrl}
                             alt={post.title || post.name || "RedSpider Blog"}
-                            className="img-fluid"
                             width={400}
                             height={300}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             loading="lazy"
+                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
                           />
                         )}
                       </div>
-
-                      {/* TITLE */}
 
                       <div className="rs-blog-post-title">
                         <h4>
@@ -227,25 +222,30 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
         ================================================== */}
 
         <div className="container">
-          <div className="rs-blog-stats row text-center justify-content-center">
-            {stats.map((stat, index) => (
-              <div key={index} className="col-3">
-                <div>
-                  <span
-                    className="rs-blog-stat-number purecounter"
-                    data-purecounter-start="0"
-                    data-purecounter-end={parseInt(stat.number) || 0}
-                    data-purecounter-duration="0"
-                  >
-                    {stat.number}
-                  </span>
+          <div className="rs-blog-stats">
+            {stats.map((stat, index) => {
+              const raw = String(stat.number || "");
+              const numeric = raw.replace(/[^\d]/g, "") || "0";
+              const suffix = raw.replace(/[\d\s]/g, "") || "+";
 
-                  <span className="rs-plus"></span>
+              return (
+                <div key={index} className="rs-blog-stat-item">
+                  <div className="rs-blog-stat-value">
+                    <span
+                      className="rs-blog-stat-number purecounter"
+                      data-purecounter-start="0"
+                      data-purecounter-end={parseInt(numeric, 10) || 0}
+                      data-purecounter-duration="0"
+                    >
+                      {numeric}
+                    </span>
+                    <span className="rs-plus">{suffix}</span>
+                  </div>
+
+                  <p>{stat.label}</p>
                 </div>
-
-                <p>{stat.label}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -255,19 +255,19 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
       ================================================== */}
 
       <section
-        className="gr-section section pt-0"
+        className="gr-section section pt-0 rs-worked-with-sec"
         style={{ background: "#000" }}
       >
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
-              <div className="rs-worked-title text-center text-white mb-5">
+              <h2 className="rs-worked-title rs-process-title text-center text-white mb-5">
                 We've worked with
-              </div>
+              </h2>
             </div>
           </div>
 
-          <div className="row justify-content-center">
+          <div className="row justify-content-center rs-worked-logos">
             {clientLogos.map((logo, index) => {
               const logoUrl = getImageUrl(logo);
 
@@ -275,7 +275,7 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
                 logoUrl.startsWith("http://") || logoUrl.startsWith("https://");
 
               return (
-                <div key={index} className="col-lg-2 col-4">
+                <div key={index} className="col-6 col-sm-4 col-lg-2">
                   <div
                     className="g-review-wrap text-center rs-logo-hover"
                     data-aos="fade-up"
@@ -297,8 +297,9 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
                           className="img-fluid"
                           width={150}
                           height={80}
-                          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 16vw"
+                          sizes="(max-width: 576px) 50vw, (max-width: 1200px) 25vw, 16vw"
                           loading="lazy"
+                          style={{ width: "100%", height: "auto" }}
                         />
                       )}
                     </div>
@@ -326,6 +327,7 @@ export default function BlogStats({ data, initialBlogPosts = [] }) {
                   width={800}
                   height={400}
                   sizes="100vw"
+                  style={{ width: "100%", height: "auto" }}
                   loading="lazy"
                 />
               </div>

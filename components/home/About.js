@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Image from "next/image";
+import Button from "../ui/Button";
 
 export default function About({ data }) {
   // =====================================================
@@ -18,7 +19,10 @@ export default function About({ data }) {
 
   const aboutImage = data?.about_image || "assets/img/about_back.webp";
 
-  const readmoreText = data?.about_readmore_text || "Read More...";
+  const readmoreText = (data?.about_readmore_text || "Read More").replace(
+    /[.…]+\s*$/,
+    "",
+  );
 
   const readmoreLink = data?.about_readmore_link || "/about";
 
@@ -192,7 +196,7 @@ export default function About({ data }) {
               data-aos-once="true"
             >
               <h2
-                className="kf-title text-white fs-1 text-uppercase"
+                className="rs-process-title text-white"
                 data-aos="fade-down"
                 data-aos-delay="100"
                 data-aos-duration="800"
@@ -205,7 +209,7 @@ export default function About({ data }) {
               <div className="clearfix"></div>
 
               <p
-                className="h2"
+                className="rs-section-subtitle text-white text-start"
                 dangerouslySetInnerHTML={{
                   __html: aboutSubtitle.replace(/\n/g, "<br />"),
                 }}
@@ -218,23 +222,23 @@ export default function About({ data }) {
                 data-aos-duration="800"
                 data-aos-once="true"
               >
-                <a
+                <Button
+                  color="white"
                   href={readmoreLink}
-                  className="btn btn-animation btn-about-readmore d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
+                  className="w-100 w-md-auto"
                   target="_blank"
-                  rel="noopener noreferrer"
                 >
-                  <span className="btn-title">{readmoreText}</span>
-                </a>
+                  {readmoreText}
+                </Button>
 
-                <a
+                <Button
+                  color="red"
                   href={portfolioLink}
-                  className="btn btn-animation btn-about-portfolio d-inline-flex align-items-center justify-content-center gap-3 w-100 w-md-auto"
+                  className="w-100 w-md-auto"
                   target="_blank"
-                  rel="noopener noreferrer"
                 >
-                  <span className="btn-title">{portfolioText}</span>
-                </a>
+                  {portfolioText}
+                </Button>
               </div>
             </div>
 
@@ -269,7 +273,7 @@ export default function About({ data }) {
         <div className="container text-center">
           <div className="rs-video-content">
             <div className="rs-video-title">
-              <h3 className="fw-bold">{videoTitle}</h3>
+              <h3 className="rs-process-title fw-bold">{videoTitle}</h3>
             </div>
 
             <div className="rs-video-wrap">

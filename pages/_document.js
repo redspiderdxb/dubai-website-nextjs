@@ -4,10 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Viewport */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
 
         <link
@@ -21,7 +17,37 @@ export default function Document() {
           rel="stylesheet"
         />
 
-        {/* Favicon */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+
+        <link
+          rel="stylesheet"
+          href="/assets/vendor/bootstrap/css/bootstrap.min.css"
+        />
+
+        <link
+          rel="stylesheet"
+          href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+        />
+
+        <link
+          rel="stylesheet"
+          href="/assets/vendor/glightbox/css/glightbox.min.css"
+        />
+
+        <link
+          rel="stylesheet"
+          href="/assets/vendor/swiper/swiper-bundle.min.css"
+        />
+
+        <link rel="stylesheet" href="/assets/css/main.css" />
+
+        <link rel="stylesheet" href="/assets/fonts/stylesheet.css" />
+
+        <link rel="stylesheet" href="/assets/css/custom.css" />
+
         <link rel="icon" href="/assets/img/favicon.webp" />
 
         <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.webp" />

@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import Image from "next/image";
+import Button from "../ui/Button";
 
 export default function AgencyPackages() {
   const sectionRef = useRef(null);
@@ -435,12 +436,7 @@ export default function AgencyPackages() {
           ===================================================== */}
 
       <section className="rs-packages-sec bluelight-backgroun section">
-        <div
-          className="container"
-          style={{
-            maxWidth: "1500px",
-          }}
-        >
+        <div className="container rs-packages-container">
           <div className="row g-5 align-items-stretch">
             <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
               <div className="rs-left-card h-100 d-flex flex-column justify-content-between">
@@ -449,7 +445,7 @@ export default function AgencyPackages() {
 
                   <hr />
 
-                  <span className="mt-4">
+                  <span className="rs-left-heading mt-4">
                     We help Making your dream into Reality
                   </span>
                 </div>
@@ -461,8 +457,9 @@ export default function AgencyPackages() {
                     className="img-fluid"
                     width={200}
                     height={60}
-                    sizes="(max-width: 768px) 100vw, 200px"
+                    sizes="(max-width: 768px) 70vw, 200px"
                     loading="lazy"
+                    style={{ width: "100%", height: "auto", maxWidth: "200px" }}
                   />
                 </div>
 
@@ -503,11 +500,11 @@ export default function AgencyPackages() {
                 >
                   <div className="p-2">
                     <div className="section-title text-start mb-0">
-                      <h2 data-aos="fade-up">
+                      <h2 className="rs-process-title rs-process-title-sm" data-aos="fade-up">
                         Experience and Expertise Behind RedSpider
                       </h2>
 
-                      <p className="text-dark mt-4" data-aos="fade-up">
+                      <p className="text-dark mt-4 rs-section-subtitle text-start" data-aos="fade-up">
                         RedSpider has become a trusted choice for website design
                         in Dubai as we have 14 years of experience in the
                         industry. We have completed 500+ successful projects and
@@ -525,14 +522,15 @@ export default function AgencyPackages() {
                         <strong>Our web design Dubai services include:</strong>
                       </p>
 
-                      <a
+                      <Button
+                        color="red"
                         href="/about-us"
-                        className="btn btn-animation btn-red d-inline-flex align-items-center mt-4"
+                        className="mt-4"
                         data-aos="fade-up"
                         data-aos-delay="550"
                       >
-                        <span className="btn-title">Know More About</span>
-                      </a>
+                        Know More About
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -621,7 +619,7 @@ export default function AgencyPackages() {
                       </span>
                     </h2>
 
-                    <p className="rs-process-text">
+                    <p className="rs-process-text rs-section-subtitle text-start">
                       We do not use a standard template, as they are not always
                       suitable for long-term business.
                     </p>
@@ -675,9 +673,9 @@ export default function AgencyPackages() {
       HEADING
   ========================= */}
         <div className="cta-heading">
-          <h2>Ready to Start Your Next Project?</h2>
+          <h2 className="rs-process-title">Ready to Start Your Next Project?</h2>
 
-          <p>
+          <p className="rs-section-subtitle mx-auto text-center">
             Tell us what you need, and our team will help you find the right
             digital solution.
           </p>
@@ -734,11 +732,8 @@ export default function AgencyPackages() {
             aria-label="WhatsApp Us"
           >
             <span className="icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.2 9.2 0 0 1-3.8-.9L3 20.5l1.5-5a8.5 8.5 0 1 1 16.5-4z" />
-                <path d="M8.2 8.1c.4 3 2.7 5.3 5.7 5.8" />
-                <path d="M13.9 13.9l1.5-1.1" />
-                <path d="M8.2 8.1l1.1-1.5" />
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.22 8.22 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.24-8.24zM8.53 7.37c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.39 1.01 2.56.12.17 1.75 2.67 4.23 3.74 2.05.88 2.48.72 2.92.67.45-.05 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.28-.24-.12-1.47-.73-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.15.17-.29.19-.53.06-.24-.12-1.01-.37-1.93-1.19-.71-.64-1.19-1.43-1.33-1.67-.14-.25-.01-.38.1-.5.11-.11.24-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42-.14 0-.3-.01-.47-.01z" />
               </svg>
             </span>
 

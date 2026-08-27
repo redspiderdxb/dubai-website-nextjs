@@ -7606,116 +7606,83 @@ button.rs-dropdown-trigger {
   padding-left: 20px;
 }
 
-.rs-contact-card {
+.rs-footer-right .rs-contact-card {
   position: relative;
-
-  width: 100%;
-  min-height: 105px;
-
-  margin-bottom: 18px;
-
-  padding: 20px 48px 18px 24px;
-
-  border-radius: 14px;
-
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 0;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  color: #fff;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
-
-/* =========================================================
-   CONTACT LABEL
-========================================================= */
-
-.rs-contact-card small {
-  display: block;
-
-  margin-bottom: 8px;
-
+.rs-footer-right .rs-contact-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
   color: #fff;
+}
 
+.rs-footer-right .rs-contact-card .rs-contact-icon {
+  position: static;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.rs-footer-right .rs-contact-card .rs-contact-icon i {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.rs-footer-right .rs-contact-card .rs-contact-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.rs-footer-right .rs-contact-card small {
+  display: block;
+  margin-bottom: 3px;
+  color: rgba(255, 255, 255, 0.65);
   font-size: 11px;
   line-height: 1.2;
 }
 
-
-/* =========================================================
-   CONTACT VALUE
-   IMPORTANT:
-   This replaces the old h5 styling.
-========================================================= */
-
-.rs-contact-card .rs-contact-value {
-  margin: 0;
-
+.rs-footer-right .rs-contact-card strong {
+  display: block;
   color: #fff;
-
-  font-size: 16px;
-  line-height: 1.25;
+  font-size: 15px;
   font-weight: 600;
-
+  line-height: 1.3;
   word-break: break-word;
 }
 
-.rs-contact-card .rs-contact-value a {
-  color: inherit;
-  text-decoration: none;
+.rs-footer-right .rs-contact-email .rs-contact-icon {
+  background: rgba(237, 28, 36, 0.18);
+  color: #ff6b70;
 }
 
-
-/* =========================================================
-   EMAIL CARD
-========================================================= */
-
-.rs-contact-email {
-  background: #ed1c24;
-}
-
-.rs-contact-email .rs-contact-value {
+.rs-footer-right .rs-contact-phone .rs-contact-icon {
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
-}
-
-
-/* =========================================================
-   PHONE CARD
-========================================================= */
-
-.rs-contact-phone {
-  background: #242424;
-}
-
-.rs-contact-phone .rs-contact-value {
-  color: #fff;
-}
-
-
-/* =========================================================
-   CONTACT ICON
-========================================================= */
-
-.rs-contact-card .rs-icon {
-  position: absolute;
-
-  right: 18px;
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  width: 30px;
-  height: 30px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-}
-
-.rs-contact-card .rs-icon img {
-  width: 22px !important;
-  height: 22px !important;
-
-  object-fit: contain;
 }
 
 
@@ -8069,9 +8036,8 @@ button.rs-dropdown-trigger {
   }
 
   .rs-contact-card {
-    min-height: 95px;
-
-    padding: 18px 45px 18px 20px;
+    min-height: 0;
+    padding: 12px 14px;
   }
 
   .rs-footer-bottom {
@@ -11122,16 +11088,15 @@ button.rs-dropdown-trigger {
 }
 
 .rs-home-blog-new .blog-img {
-  height: 206px;
   overflow: hidden;
 }
 
 .rs-home-blog-new .blog-img img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   object-fit: cover;
-  /* ← YEH ADD KARO */
+  object-position: center;
 }
 
 /* Blog title */
@@ -11153,12 +11118,8 @@ button.rs-dropdown-trigger {
 /* Mobile */
 @media (max-width: 767px) {
 
-  .rs-home-blog-new .blog-img {
-    height: 180px;
-  }
-
   .rs-home-blog-new .rs-blog-post-title h4 {
-    font-size: 17px;
+    font-size: 16px;
   }
 
 }
@@ -11603,6 +11564,122 @@ button.rs-dropdown-trigger {
   line-height: 1;
 }
 
+.rs-footer-right .rs-social {
+  gap: 10px !important;
+}
+
+.rs-footer-right .rs-social > a.rs-social-link {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff !important;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.rs-footer-right .rs-social > a.rs-social-link i {
+  font-size: 16px;
+  line-height: 1;
+  color: #fff;
+}
+
+.rs-footer-right .rs-social > a.rs-social-link:hover {
+  transform: translateY(-3px);
+  opacity: 1;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  border-color: transparent;
+}
+
+.rs-footer-right .rs-social > a.rs-social-facebook:hover {
+  background: #1877f2;
+}
+
+.rs-footer-right .rs-social > a.rs-social-twitter:hover {
+  background: #111111;
+}
+
+.rs-footer-right .rs-social > a.rs-social-linkedin:hover {
+  background: #0a66c2;
+}
+
+.rs-footer-right .rs-social > a.rs-social-instagram:hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.rs-footer-right .rs-footer-links.bottom {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.rs-footer-right .footer-app-link {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0 !important;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff !important;
+  text-decoration: none !important;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.rs-footer-right .footer-app-link i {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.rs-footer-right .footer-app-link:hover {
+  transform: translateY(-3px);
+  background: #fff;
+  border-color: #fff;
+  color: #111 !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.rs-footer-right .footer-touch-link {
+  display: inline-flex !important;
+  align-items: center;
+  margin-left: 6px !important;
+  padding: 0 !important;
+  background: none;
+  border: none;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.rs-footer-right .footer-touch-link:hover {
+  color: #ed1c24 !important;
+}
+
+@media (max-width: 575px) {
+  .rs-footer-right .rs-footer-links.bottom {
+    justify-content: center;
+  }
+
+  .rs-footer-right .rs-social {
+    justify-content: center !important;
+  }
+}
+
 
 /* =========================================================
    4. SOCIAL + GET IN TOUCH AREA
@@ -11634,7 +11711,7 @@ button.rs-dropdown-trigger {
   display: inline-block;
 
   margin: 0 !important;
-  padding: 0 0 6px 0 !important;
+  padding: 0 !important;
 
   color: #ffffff !important;
 
@@ -11644,30 +11721,11 @@ button.rs-dropdown-trigger {
   line-height: 1.2;
 
   text-decoration: none !important;
+  border-bottom: none !important;
 }
-
-
-/* Red underline */
 
 .rs-footer-right .rs-footer-links a::after {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  bottom: 0;
-
-  width: 38px;
-  height: 1px;
-
-  background: #ed1c24;
-
-  transition: width 0.25s ease;
-}
-
-
-.rs-footer-right .rs-footer-links a:hover::after {
-  width: 100%;
+  display: none;
 }
 
 
@@ -11707,13 +11765,15 @@ button.rs-dropdown-trigger {
 @media (min-width: 992px) {
 
   .rs-footer-right .rs-social {
-    float: left;
+    float: none;
+    width: 100%;
   }
 
   .rs-footer-right .rs-footer-links {
-    float: right;
-
-    margin-top: 20px !important;
+    float: none;
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 14px !important;
   }
 
 }

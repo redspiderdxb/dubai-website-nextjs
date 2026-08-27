@@ -86,23 +86,15 @@ export default function FAQIndustries({ data }) {
 
       <section
         id="rs-faq-sec"
-        className="home-faq rs-faq-sec section py-5 light-background"
+        className="home-faq rs-faq-sec section py-5"
       >
-        <div
-          className="container"
-          style={{
-            maxWidth: "1600px",
-            background: "#f6f6f6",
-            padding: "40px",
-            borderRadius: "30px",
-          }}
-        >
+        <div className="container rs-home-faq-box">
           {/* FAQ HEADER */}
 
           <div className="text-center mb-3 border-bottom pb-3">
-            <h2 className="fw-bold">{faqTitle}</h2>
+            <h2 className="fw-bold rs-process-title">{faqTitle}</h2>
 
-            <p>{faqDescription}</p>
+            <p className="rs-section-subtitle mx-auto text-center">{faqDescription}</p>
           </div>
 
           {/* FAQ GRID */}
@@ -211,7 +203,7 @@ export default function FAQIndustries({ data }) {
             data-aos="fade-up"
             data-aos-duration="800"
           >
-            <h3 className="fw-bold mb-3">
+            <h3 className="fw-bold mb-3 rs-process-title rs-process-title-sm">
               Comprehensive Web Design of a High Standard
             </h3>
           </div>
@@ -255,11 +247,11 @@ export default function FAQIndustries({ data }) {
           data-aos-duration="800"
         >
           <div className="section-title text-center text-white mb-3">
-            <h2 className="fw-normal" data-aos="fade-up" data-aos-delay="100">
+            <h2 className="rs-process-title" data-aos="fade-up" data-aos-delay="100">
               Built on Experience and Quality
             </h2>
 
-            <p className="mb-4" data-aos="fade-up" data-aos-delay="250">
+            <p className="mb-4 rs-section-subtitle mx-auto text-center" data-aos="fade-up" data-aos-delay="250">
               RedSpider is a Dubai-based web design and development agency with
               over 14 years of experience delivering high-performance digital
               solutions. Our team combines technical expertise with strategic
@@ -287,11 +279,11 @@ export default function FAQIndustries({ data }) {
           data-aos-duration="800"
         >
           <div className="section-title text-center text-white mb-0 mt-2">
-            <h2 className="fw-normal" data-aos="fade-up" data-aos-delay="200">
+            <h2 className="rs-process-title" data-aos="fade-up" data-aos-delay="200">
               Industries We Serve
             </h2>
 
-            <p className="pb-0" data-aos="fade-up" data-aos-delay="350">
+            <p className="pb-0 rs-section-subtitle mx-auto text-center" data-aos="fade-up" data-aos-delay="350">
               Customized web solutions for businesses across multiple industries
               in Dubai and the UAE.
             </p>

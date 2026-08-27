@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Button from "../ui/Button";
 
 export default function Hero({ data }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -175,12 +176,13 @@ export default function Hero({ data }) {
                   )}
 
                   {slide.button_text && (
-                    <a
-                      className="rs-slide-button"
+                    <Button
+                      color="yellow"
                       href={slide.button_link || "#portfolio"}
+                      className="rs-slide-button"
                     >
                       {slide.button_text}
-                    </a>
+                    </Button>
                   )}
 
                   <div className="rs-review-box">

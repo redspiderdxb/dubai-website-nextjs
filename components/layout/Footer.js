@@ -113,26 +113,22 @@ export default function Footer() {
   const socialIcons = [
     {
       name: "Facebook",
-      type: "image",
-      icon: "fb.svg",
+      icon: "bi bi-facebook",
       link: "https://www.facebook.com/RedSpiderWebandArtDesign/",
     },
     {
       name: "Twitter",
-      type: "icon",
       icon: "bi bi-twitter-x",
       link: "https://x.com/redspider99",
     },
     {
       name: "LinkedIn",
-      type: "image",
-      icon: "linke.svg",
+      icon: "bi bi-linkedin",
       link: "https://www.linkedin.com/company/red-spider-web-&-art-design",
     },
     {
       name: "Instagram",
-      type: "image",
-      icon: "insta.svg",
+      icon: "bi bi-instagram",
       link: "https://www.instagram.com/redspiderwebartdesign/",
     },
   ];
@@ -217,41 +213,33 @@ export default function Footer() {
             <div className="col-lg-4 col-md-12 rs-footer-right">
               {/* EMAIL */}
 
-              <div className="rs-contact-card rs-contact-email">
-                <small>Get Questions?</small>
-
-                <div className="rs-contact-value">
-                  <a href="mailto:info@redspider.ae">info@redspider.ae</a>
-                </div>
-
-                <span className="rs-icon">
-                  <Image
-                    src="/assets/img/icons/email.svg"
-                    alt="Email"
-                    width={30}
-                    height={30}
-                  />
+              <a
+                className="rs-contact-card rs-contact-email"
+                href="mailto:info@redspider.ae"
+              >
+                <span className="rs-contact-icon" aria-hidden="true">
+                  <i className="bi bi-envelope"></i>
                 </span>
-              </div>
 
-              {/* PHONE */}
-
-              <div className="rs-contact-card rs-contact-phone">
-                <small>Quick Answer?</small>
-
-                <div className="rs-contact-value">
-                  <a href="tel:+971555515475">+971 55 5515475</a>
-                </div>
-
-                <span className="rs-icon">
-                  <Image
-                    src="/assets/img/icons/ph-foot.svg"
-                    alt="Phone"
-                    width={30}
-                    height={30}
-                  />
+                <span className="rs-contact-copy">
+                  <small>Get Questions?</small>
+                  <strong>info@redspider.ae</strong>
                 </span>
-              </div>
+              </a>
+
+              <a
+                className="rs-contact-card rs-contact-phone"
+                href="tel:+971555515475"
+              >
+                <span className="rs-contact-icon" aria-hidden="true">
+                  <i className="bi bi-telephone"></i>
+                </span>
+
+                <span className="rs-contact-copy">
+                  <small>Quick Answer?</small>
+                  <strong>+971 55 551 5475</strong>
+                </span>
+              </a>
 
               {/* SOCIAL ICONS */}
 
@@ -263,17 +251,9 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
+                    className={`rs-social-link rs-social-${social.name.toLowerCase()}`}
                   >
-                    {social.type === "icon" ? (
-                      <i className={social.icon} aria-hidden="true" />
-                    ) : (
-                      <Image
-                        src={`/assets/img/social/${social.icon}`}
-                        alt={social.name}
-                        width={16}
-                        height={16}
-                      />
-                    )}
+                    <i className={social.icon} aria-hidden="true" />
                   </a>
                 ))}
               </div>
@@ -288,7 +268,7 @@ export default function Footer() {
                   aria-label="Download RedSpider on Apple App Store"
                   className="footer-app-link"
                 >
-                  <i className="bi bi-apple"></i>
+                  <i className="bi bi-apple" aria-hidden="true"></i>
                 </a>
 
                 <a
@@ -298,10 +278,12 @@ export default function Footer() {
                   aria-label="Download RedSpider on Google Play"
                   className="footer-app-link"
                 >
-                  <i className="bi bi-google-play"></i>
+                  <i className="bi bi-google-play" aria-hidden="true"></i>
                 </a>
 
-                <Link href="/contact-us/">Get In Touch</Link>
+                <Link href="/contact-us/" className="footer-touch-link">
+                  Get In Touch
+                </Link>
               </div>
             </div>
           </div>

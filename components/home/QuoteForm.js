@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../ui/Button";
 
 const INITIAL_FORM_DATA = {
   name: "",
@@ -530,15 +531,14 @@ export default function QuoteForm() {
                           ================================== */}
 
                           <div data-aos="fade-up" data-aos-delay="700">
-                            <button
+                            <Button
                               type="submit"
-                              className="btn btn-animation btn-red d-inline-flex align-items-center gap-3 mt-4 fw-normal"
+                              color="red"
+                              className="mt-4"
                               disabled={loading}
                             >
-                              <span className="btn-title">
-                                {loading ? "Submitting..." : "Submit Now"}
-                              </span>
-                            </button>
+                              {loading ? "Submitting..." : "Submit Now"}
+                            </Button>
                           </div>
                         </div>
                       </div>

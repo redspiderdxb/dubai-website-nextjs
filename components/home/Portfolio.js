@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Button from "../ui/Button";
 
 /* =========================================================
    FALLBACK PROJECTS
@@ -533,7 +534,7 @@ export default function Portfolio({ initialGalleries = [] }) {
                 }}
               >
                 <h2
-                  className="rs-gd-intro__lead rs-gd-intro__reveal fade-title mb-3"
+                  className="rs-gd-intro__lead rs-gd-intro__reveal fade-title rs-process-title mb-3 text-center mx-auto"
                   style={{
                     maxWidth: "1000px",
                     margin: "auto",
@@ -542,11 +543,10 @@ export default function Portfolio({ initialGalleries = [] }) {
                   500+ Successful Website Projects Across Dubai & UAE
                 </h2>
 
-                <p className="rs-gd-intro__lead rs-gd-intro__reveal text-center fs-5">
+                <p className="rs-gd-intro__reveal text-center rs-section-subtitle mx-auto">
                   Explore some of the websites we’ve designed and developed for
-                  businesses across Dubai and the UAE, <br />
-                  combining creative design, responsive functionality and
-                  user-focused experiences.
+                  businesses across Dubai and the UAE, combining creative
+                  design, responsive functionality and user-focused experiences.
                 </p>
               </div>
             </div>
@@ -689,12 +689,9 @@ export default function Portfolio({ initialGalleries = [] }) {
             ===================================================== */}
 
         <div className="container text-center mt-5">
-          <a
-            href="/portfolio"
-            className="btn btn-animation btn-red d-inline-flex align-items-center mt-4"
-          >
-            <span className="btn-title">View Our Work</span>
-          </a>
+          <Button color="red" href="/our-portfolio/" className="mt-4">
+            View Our Work
+          </Button>
         </div>
       </section>
     </>

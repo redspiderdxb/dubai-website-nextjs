@@ -244,7 +244,7 @@ h6 {
 --------------------------------------------------------------*/
 
 .rs-main-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -253,6 +253,15 @@ h6 {
   color: #fff;
   background: transparent;
   font-family: Arial, Helvetica, sans-serif;
+  transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rs-main-header.rs-header-scrolled {
+  padding-top: 12px;
+  padding-bottom: 8px;
+  background: rgba(5, 5, 5, 0.96);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
 }
 
 .rs-main-header .rs-header-inner {
@@ -608,6 +617,22 @@ h6 {
   justify-content: space-between;
 
   padding-top: 16px;
+  max-height: 80px;
+  opacity: 1;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+}
+
+.rs-main-header.rs-header-scrolled .rs-bottom-row {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  pointer-events: none;
+}
+
+.rs-main-header.rs-header-scrolled .rs-top-row {
+  padding-bottom: 10px;
+  border-bottom-color: rgba(255, 255, 255, 0.18);
 }
 
 /*--------------------------------------------------------------
@@ -738,6 +763,11 @@ h6 {
 
   .rs-main-header {
     padding-top: 18px;
+  }
+
+  .rs-main-header.rs-header-scrolled {
+    padding-top: 10px;
+    padding-bottom: 6px;
   }
 
   .rs-main-header .rs-top-row {
@@ -913,6 +943,11 @@ h6 {
 
   .rs-main-header {
     padding-top: 14px;
+  }
+
+  .rs-main-header.rs-header-scrolled {
+    padding-top: 8px;
+    padding-bottom: 4px;
   }
 
   .rs-main-header .rs-header-inner {

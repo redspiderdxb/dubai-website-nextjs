@@ -7,7 +7,6 @@ import { useHeaderData } from "../../context/HeaderDataContext";
 
 export default function Header() {
   const router = useRouter();
-
   const { services: apiServices, products: apiProducts } = useHeaderData();
 
   useEffect(() => {
@@ -19,29 +18,17 @@ export default function Header() {
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [isBlogScrolled, setIsBlogScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const headerRef = useRef(null);
 
   /* =====================================================
-     BLOG PAGE DETECTION
-  ===================================================== */
-
-  const isBlogPage =
-    router.pathname === "/blog" || router.pathname.startsWith("/blog/");
-
-  /* =====================================================
-     BLOG SCROLL
+     STICKY HEADER SCROLL
   ===================================================== */
 
   useEffect(() => {
-    if (!isBlogPage) {
-      setIsBlogScrolled(false);
-      return;
-    }
-
     const handleScroll = () => {
-      setIsBlogScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 20);
     };
 
     handleScroll();
@@ -50,10 +37,13 @@ export default function Header() {
       passive: true,
     });
 
+    router.events.on("routeChangeComplete", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      router.events.off("routeChangeComplete", handleScroll);
     };
-  }, [isBlogPage]);
+  }, [router.events]);
 
   /* =====================================================
      SERVICES MENU
@@ -234,8 +224,7 @@ export default function Header() {
 
   const headerClass = [
     "rs-main-header",
-    isBlogPage ? "rs-blog-fixed-header" : "",
-    isBlogPage && isBlogScrolled ? "rs-blog-header-scrolled" : "",
+    isScrolled ? "rs-header-scrolled" : "",
     isMobileOpen ? "rs-header-mobile-open" : "",
   ]
     .filter(Boolean)
@@ -375,7 +364,7 @@ export default function Header() {
             BOTTOM ROW
         ================================================= */}
 
-        <div className="rs-bottom-row">
+        <div className="rs-bottom-row" aria-hidden={isScrolled}>
           {/* CALL */}
 
           <div className="rs-call-now">
@@ -393,6 +382,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
+              tabIndex={isScrolled ? -1 : undefined}
             >
               <i className="bi bi-whatsapp"></i>
 

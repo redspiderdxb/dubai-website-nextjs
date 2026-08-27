@@ -97,10 +97,12 @@ export default function Services({ data }) {
           DESCRIPTION
       ========================================== */}
 
-      <div className="container section-title mb-4" data-aos="fade-up">
+      <div className="container section-title text-center mb-4" data-aos="fade-up">
         <div className="row">
           <div className="col-12">
-            <p className="mb-4">{servicesDescription}</p>
+            <p className="mb-4 rs-section-subtitle mx-auto text-center">
+              {servicesDescription}
+            </p>
           </div>
         </div>
       </div>
