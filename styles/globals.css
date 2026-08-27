@@ -11200,25 +11200,12 @@ button.rs-dropdown-trigger {
 /* Card 3 itself should not stretch internally */
 /* Card 3 should fill the same stack area as Cards 1 and 2 */
 .rs-gsap-cards .rs-card-3 {
-  min-height: 0 !important;
-  height: auto !important;
-
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: auto !important;
-
-  width: 100% !important;
+  width: 100%;
 }
 
-.rs-card-3 .rs-agency-card {
-  height: auto !important;
-  min-height: 0 !important;
-}
-
-.rs-card-3 .rs-agency-card {
-  height: 100% !important;
-  min-height: 100% !important;
+.rs-gsap-cards .rs-card-3 .rs-agency-card {
+  height: 100%;
+  min-height: 100%;
 }
 
 /* Row must follow actual content height */

@@ -291,10 +291,6 @@ function initHomeCardStack() {
     return false;
   }
 
-  /* =====================================================
-     REMOVE OLD TRIGGER
-     ===================================================== */
-
   const oldTrigger = ScrollTrigger.getById("rs-card-stack");
 
   if (oldTrigger) {
@@ -305,334 +301,82 @@ function initHomeCardStack() {
     oldTrigger.kill();
   }
 
-  /* =====================================================
-     RESET CARDS
-     ===================================================== */
-
   cards.forEach((card) => {
     gsap.killTweensOf(card);
-
-    gsap.set(card, {
-      clearProps: "transform,opacity,visibility,zIndex,pointerEvents",
-    });
   });
 
-  /* =====================================================
-     GET CARD HEIGHTS
-     ===================================================== */
+  const PIN_START = 80;
 
-  const getCardHeights = () => {
-    return cards.map((card) => {
-      return card.scrollHeight;
-    });
+  const getStackViewportHeight = () => {
+    return Math.max(window.innerHeight - PIN_START - 16, 480);
   };
-
-  const getMaxCardHeight = () => {
-    const heights = getCardHeights();
-
-    return Math.max(...heights);
-  };
-
-  const getLastCardHeight = () => {
-    return cards[2].scrollHeight;
-  };
-
-  /* =====================================================
-     SET STACK HEIGHT
-     ===================================================== */
 
   const setStackHeight = () => {
-    const maxHeight = getMaxCardHeight();
-    const lastCardHeight = getLastCardHeight();
-
-    if (!maxHeight || !lastCardHeight) {
-      return {
-        maxHeight: 0,
-        lastCardHeight: 0,
-      };
-    }
-
-    /*
-     * The wrapper needs the tallest card height because
-     * Cards 1 and 2 can be taller than Card 3.
-     */
-    wrapper.style.height = `${maxHeight}px`;
-
-    /*
-     * IMPORTANT:
-     *
-     * The actual document-flow height is based on
-     * the FINAL card, not the tallest hidden card.
-     *
-     * This prevents a large blank area after Card 3.
-     */
-    section.style.height = `${lastCardHeight}px`;
-
-    section.style.minHeight = "0px";
-
-    return {
-      maxHeight,
-      lastCardHeight,
-    };
+    wrapper.style.height = `${getStackViewportHeight()}px`;
+    wrapper.style.overflow = "hidden";
+    section.style.overflow = "hidden";
   };
 
-  /* =====================================================
-     INITIAL HEIGHT
-     ===================================================== */
-
-  const initialHeights = setStackHeight();
-
-  /* =====================================================
-     STACK POSITIONING
-     ===================================================== */
+  setStackHeight();
 
   gsap.set(cards, {
     position: "absolute",
-
     top: 0,
-
     left: 0,
-
     right: 0,
-
     width: "100%",
-
+    height: "100%",
+    overflow: "hidden",
     transformOrigin: "center top",
-
-    willChange: "transform, opacity",
   });
-
-  /* =====================================================
-     CARD 1
-     ===================================================== */
 
   gsap.set(cards[0], {
+    yPercent: 0,
     y: 0,
-
     scale: 1,
-
     opacity: 1,
-
-    visibility: "visible",
-
-    zIndex: 3,
-
-    pointerEvents: "auto",
+    zIndex: 1,
   });
-
-  /* =====================================================
-     CARD 2
-     ===================================================== */
 
   gsap.set(cards[1], {
-    y: 70,
-
+    yPercent: 100,
+    y: 0,
     scale: 1,
-
-    opacity: 0,
-
-    visibility: "visible",
-
+    opacity: 1,
     zIndex: 2,
-
-    pointerEvents: "none",
   });
-
-  /* =====================================================
-     CARD 3
-     ===================================================== */
 
   gsap.set(cards[2], {
-    y: 70,
-
+    yPercent: 100,
+    y: 0,
     scale: 1,
-
-    opacity: 0,
-
-    visibility: "visible",
-
-    zIndex: 1,
-
-    pointerEvents: "none",
+    opacity: 1,
+    zIndex: 3,
   });
 
-  /* =====================================================
-     SCROLL DISTANCE
-     ===================================================== */
-
-  const getStackScrollDistance = () => {
-    const maxHeight = getMaxCardHeight();
-    const lastCardHeight = getLastCardHeight();
-
-    if (!maxHeight || !lastCardHeight) {
-      return 1;
-    }
-
-    /*
-     * Timeline:
-     *
-     * 0.0 → 0.5 = Card 1 → Card 2
-     * 0.5 → 1.0 = Card 2 → Card 3
-     *
-     * Use half of the tall-card distance and half
-     * of the final-card distance so the final card
-     * doesn't leave a large dead scroll area.
-     */
-    const firstTransitionDistance = maxHeight * 0.5;
-
-    const secondTransitionDistance = lastCardHeight * 0.5;
-
-    return Math.max(
-      firstTransitionDistance + secondTransitionDistance,
-      lastCardHeight,
-    );
-  };
-
-  /* =====================================================
-     MAIN TIMELINE
-     ===================================================== */
-
-  const timeline = gsap.timeline({
-    defaults: {
-      ease: "power2.out",
-    },
-
-    scrollTrigger: {
-      id: "rs-card-stack",
-
-      trigger: section,
-
-      start: "top top",
-
-      /*
-       * Do NOT use section.offsetHeight here.
-       *
-       * Section height represents the final visible card.
-       * Scroll distance represents the complete animation.
-       */
-      end: () => {
-        return `+=${getStackScrollDistance()}`;
+  gsap
+    .timeline({
+      defaults: {
+        ease: "none",
       },
-
-      pin: true,
-
-      /*
-       * Keep this TRUE.
-       *
-       * It prevents the following section from
-       * moving underneath the pinned stack.
-       */
-      pinSpacing: true,
-
-      scrub: true,
-
-      anticipatePin: 1,
-
-      invalidateOnRefresh: true,
-
-      markers: false,
-    },
-  });
-
-  /* =====================================================
-     CARD 1 → CARD 2
-     ===================================================== */
-
-  timeline.to(
-    cards[0],
-    {
-      y: -50,
-
-      scale: 0.96,
-
-      opacity: 0,
-
-      duration: 0.5,
-
-      ease: "power2.inOut",
-    },
-    0,
-  );
-
-  timeline.to(
-    cards[1],
-    {
-      y: 0,
-
-      scale: 1,
-
-      opacity: 1,
-
-      duration: 0.5,
-
-      ease: "power2.inOut",
-
-      onStart: () => {
-        cards[1].style.pointerEvents = "auto";
+      scrollTrigger: {
+        id: "rs-card-stack",
+        trigger: wrapper,
+        start: `top ${PIN_START}px`,
+        end: () => `+=${Math.round(window.innerHeight * 3)}`,
+        pin: wrapper,
+        pinSpacing: true,
+        scrub: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onRefresh: setStackHeight,
       },
-
-      onComplete: () => {
-        cards[0].style.pointerEvents = "none";
-      },
-    },
-    0,
-  );
-
-  /* =====================================================
-     CARD 2 → CARD 3
-     ===================================================== */
-
-  timeline.to(
-    cards[1],
-    {
-      y: -50,
-
-      scale: 0.96,
-
-      opacity: 0,
-
-      duration: 0.5,
-
-      ease: "power2.inOut",
-    },
-    0.5,
-  );
-
-  timeline.to(
-    cards[2],
-    {
-      y: 0,
-
-      scale: 1,
-
-      opacity: 1,
-
-      duration: 0.5,
-
-      ease: "power2.inOut",
-
-      onStart: () => {
-        cards[2].style.pointerEvents = "auto";
-      },
-
-      onComplete: () => {
-        cards[1].style.pointerEvents = "none";
-      },
-    },
-    0.5,
-  );
-
-  /* =====================================================
-     FINAL REFRESH
-     ===================================================== */
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      setStackHeight();
-
-      ScrollTrigger.refresh();
-    });
-  });
+    })
+    .to(cards[1], { yPercent: 0, duration: 1 }, 0)
+    .to(cards[0], { scale: 0.94, y: -20, duration: 1 }, 0)
+    .to(cards[2], { yPercent: 0, duration: 1 }, 1)
+    .to(cards[1], { scale: 0.94, y: -20, duration: 1 }, 1)
+    .to(cards[2], { yPercent: 0, scale: 1, duration: 1 }, 2);
 
   return true;
 }
@@ -734,28 +478,9 @@ if (typeof window !== "undefined") {
 
       const wrapper = section?.querySelector(".rs-gsap-cards");
 
-      if (wrapper && section) {
-        const cards = Array.from(
-          wrapper.querySelectorAll(":scope > .rs-gsap-card"),
-        );
-
-        if (cards.length === 3) {
-          const maxHeight = Math.max(...cards.map((card) => card.scrollHeight));
-
-          const lastCardHeight = cards[2].scrollHeight;
-
-          /*
-           * Wrapper = tallest card.
-           */
-          wrapper.style.height = `${maxHeight}px`;
-
-          /*
-           * Section flow = final card.
-           */
-          section.style.height = `${lastCardHeight}px`;
-
-          section.style.minHeight = "0px";
-        }
+      if (wrapper && section && typeof window.initHomeCardStack === "function") {
+        window.initHomeCardStack();
+        return;
       }
 
       if (typeof window.ScrollTrigger !== "undefined") {

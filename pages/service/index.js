@@ -4,6 +4,7 @@ import ServiceHero from "../../components/services/ServiceHero";
 import { fetchAllServices } from "../../lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import ContactCTA from "../../components/ui/ContactCTA";
 
 export default function ServicesPage({ services }) {
   const heroData = {
@@ -94,6 +95,7 @@ export default function ServicesPage({ services }) {
           )}
         </div>
       </section>
+      <ContactCTA />
     </Layout>
   );
 }

@@ -10,7 +10,7 @@ export default function Layout({ children }) {
       ================================================= */}
 
       <Script
-        src="/assets/js/title-effect.js"
+        src="/assets/js/title-effect.js?v=stack-gsap-4"
         strategy="afterInteractive"
       />
 

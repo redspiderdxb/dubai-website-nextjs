@@ -417,6 +417,22 @@ const selectHomepageProjects = (projects) => {
   return selected.slice(0, 6);
 };
 
+export function slimHomepageGalleries(galleries) {
+  const normalized = normalizeProjects(galleries);
+  const selected = selectHomepageProjects(normalized);
+  const projects =
+    selected.length > 0 ? selected : normalized.slice(0, 6);
+
+  return projects.map((project) => ({
+    id: project.id,
+    name: project.name,
+    description: project.description,
+    category: project.category,
+    image: project.image,
+    project_url: project.link,
+  }));
+}
+
 /* =========================================================
    NORMALIZE API GALLERIES
    ========================================================= */

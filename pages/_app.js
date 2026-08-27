@@ -1,18 +1,11 @@
 import "@/styles/globals.css";
 import Script from "next/script";
-import App from "next/app";
 import { useEffect, useRef } from "react";
 import AOS from "aos";
 
-import { fetchAllServices, fetchAllProducts } from "../lib/api";
 import { HeaderDataProvider } from "../context/HeaderDataContext";
 
-function MyApp({
-  Component,
-  pageProps,
-  headerServices = [],
-  headerProducts = [],
-}) {
+function MyApp({ Component, pageProps }) {
   const customJsLoaded = useRef(false);
 
   // =====================================================
@@ -139,7 +132,7 @@ function MyApp({
           DYNAMIC HEADER DATA
           ================================================= */}
 
-      <HeaderDataProvider services={headerServices} products={headerProducts}>
+      <HeaderDataProvider>
         <Component {...pageProps} />
       </HeaderDataProvider>
 
@@ -244,55 +237,5 @@ function MyApp({
     </>
   );
 }
-
-// =====================================================
-// SERVER SIDE HEADER DATA
-// =====================================================
-
-MyApp.getInitialProps = async (appContext) => {
-  const appProps = await App.getInitialProps(appContext);
-
-  let headerServices = [];
-  let headerProducts = [];
-
-  try {
-    const [servicesResult, productsResult] = await Promise.all([
-      fetchAllServices(),
-      fetchAllProducts(),
-    ]);
-
-    console.log("========== HEADER PRODUCTS CHECK ==========");
-console.log("PRODUCTS RESULT TYPE:", Array.isArray(productsResult));
-console.log("PRODUCTS COUNT:", productsResult?.length);
-console.log("FIRST PRODUCT:", productsResult?.[0]);
-console.log("===========================================");
-
-
-    if (Array.isArray(servicesResult)) {
-      headerServices = servicesResult;
-    } else if (Array.isArray(servicesResult?.data)) {
-      headerServices = servicesResult.data;
-    } else {
-      headerServices = [];
-    }
-
-    if (Array.isArray(productsResult)) {
-      headerProducts = productsResult;
-    } else if (Array.isArray(productsResult?.data)) {
-      headerProducts = productsResult.data;
-    } else {
-      headerProducts = [];
-    }
-  } catch (_) {
-    headerServices = [];
-    headerProducts = [];
-  }
-
-  return {
-    ...appProps,
-    headerServices,
-    headerProducts,
-  };
-};
 
 export default MyApp;

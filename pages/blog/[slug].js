@@ -8,6 +8,7 @@ import { fetchPosts, fetchPostBySlug } from "../../lib/api";
 
 import Image from "next/image";
 import Link from "next/link";
+import ContactCTA from "../../components/ui/ContactCTA";
 
 /* =====================================================
    RELATED INSIGHTS
@@ -222,6 +223,7 @@ export default function BlogDetail({ post, recentPosts }) {
         ================================================= */}
 
         <RelatedInsights posts={recentPosts} />
+        <ContactCTA />
       </main>
     </Layout>
   );

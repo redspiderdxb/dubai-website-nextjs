@@ -1,6 +1,7 @@
 // components/FAQPage.js
 
 import Layout from "./layout/Layout";
+import ContactCTA from "./ui/ContactCTA";
 
 export default function FAQPage() {
   const faqs = [
@@ -306,7 +307,5 @@ export default function FAQPage() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
+        <ContactCTA />
       </main>
-    </Layout>
-  );
-}

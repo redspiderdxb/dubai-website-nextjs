@@ -1,10 +1,11 @@
+import Button from "../ui/Button";
+
 export default function AboutInfo({ data }) {
-  // Get data from API or use fallback
-  const infoLabel = data?.info_label || "Who We are";
+  const infoLabel = data?.info_label || "Who We Are";
 
   const infoHeading =
     data?.info_heading ||
-    "RedSpider is a professional web development company in Dubai that caters to the needs of every business. Our designers and developers have years of experience in web design, mobile application, ecommerce and digital marketing.";
+    "We are a team of designers, developers and digital specialists working together to create practical solutions for businesses. Our experience covers website design and development, ecommerce, mobile applications and other digital services, with each project shaped around the client’s requirements.";
 
   const infoImage = data?.info_image || "/assets/img/about-who.webp";
 
@@ -17,16 +18,13 @@ export default function AboutInfo({ data }) {
           { number: "100+", label: "5-Star Reviews " },
         ];
 
-  // Helper function to get image URL
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
 
-    // Full external URL
     if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
       return imagePath;
     }
 
-    // Laravel storage image
     if (imagePath.includes("storage/")) {
       const baseUrl =
         process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") ||
@@ -37,7 +35,6 @@ export default function AboutInfo({ data }) {
       return `${baseUrl}${cleanPath}`;
     }
 
-    // Local public assets
     if (imagePath.startsWith("/")) {
       return imagePath;
     }
@@ -48,30 +45,23 @@ export default function AboutInfo({ data }) {
   return (
     <section className="about-info-sec py-5">
       <div className="container">
-        <div className="row mb-5 align-items-start">
-          <div className="col-lg-3">
-            <h2 className="about-label">{infoLabel}</h2>
-          </div>
+        <div className="about-who">
+          <h2 className="rs-process-title text-start">{infoLabel}</h2>
+          <div className="lin_sec"></div>
 
-          <div className="col-lg-9">
-            <p
-              className="about-heading"
-              dangerouslySetInnerHTML={{
-                __html: infoHeading.replace(/\n/g, "<br />"),
-              }}
-            />
-          </div>
-        </div>
+          <p
+            className="rs-section-subtitle text-start"
+            dangerouslySetInnerHTML={{
+              __html: infoHeading.replace(/\n/g, "<br />"),
+            }}
+          />
 
-        <div className="row my-5">
-          <div className="col-12">
-            <div className="letconnect">
-              <span>Let's Connect:</span>
-
-              <div className="line"></div>
-
-              <a href="/contact">Book A Call</a>
-            </div>
+          <div className="letconnect">
+            <span>Let's Connect:</span>
+            <div className="line"></div>
+            <Button color="red" href="/contact-us/">
+              Book A Call
+            </Button>
           </div>
         </div>
 
@@ -93,7 +83,6 @@ export default function AboutInfo({ data }) {
 
                   <div>
                     <span className="company_numbers">{stat.number}</span>
-
                     <p>{stat.label}</p>
                   </div>
                 </div>

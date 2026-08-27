@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Button from "../ui/Button";
+import ContactCTA from "../ui/ContactCTA";
 
 export default function AgencyPackages() {
   const sectionRef = useRef(null);
@@ -21,11 +22,19 @@ export default function AgencyPackages() {
   // =========================================================
 
   const servicesList = [
-    "Corporate Website Design",
-    "Ecommerce Development",
-    "Custom Web Application",
-    "Website Redesign",
-    "Responsive Web Design",
+    { name: "Corporate Website Design", icon: "bi-building" },
+    { name: "Ecommerce Development", icon: "bi-bag" },
+    { name: "Custom Web Application", icon: "bi-code-slash" },
+    { name: "Website Redesign", icon: "bi-arrow-repeat" },
+    { name: "Responsive Web Design", icon: "bi-phone" },
+  ];
+
+  const focusAreas = [
+    { name: "User Experience", icon: "bi-people" },
+    { name: "Mobile Usability", icon: "bi-phone" },
+    { name: "Website Performance", icon: "bi-speedometer2" },
+    { name: "Lead Generation", icon: "bi-graph-up-arrow" },
+    { name: "Scalability", icon: "bi-layers" },
   ];
 
 
@@ -135,36 +144,34 @@ export default function AgencyPackages() {
               }}
               className="rs-gsap-card rs-card-1"
             >
-              <div className="rs-agency-card">
-                <div className="row g-4 align-items-stretch">
-                  {/* IMAGE */}
-                  <div
-                    className="col-lg-4"
-                    data-aos="fade-right"
-                    data-aos-duration="1000"
-                  >
-                    <div className="rs-agency-image h-100">
-                      <img
-                        src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
-                        alt="Website Design Agency Dubai office"
-                        loading="lazy"
-                      />
+              <div className="rs-agency-card rs-agency-card--creative">
+                <div className="row g-4 g-xl-5 align-items-center">
+                  <div className="col-lg-5">
+                    <div className="rs-agency-visual">
+                      <div className="rs-agency-image">
+                        <img
+                          src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
+                          alt="Website Design Agency Dubai office"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  {/* CONTENT */}
-                  <div
-                    className="col-lg-8"
-                    data-aos="fade-left"
-                    data-aos-duration="1000"
-                  >
-                    <div className="rs-agency-content h-100">
+                  <div className="col-lg-7">
+                    <div className="rs-agency-content">
+                      <span className="rs-agency-watermark" aria-hidden="true">
+                        01
+                      </span>
+
                       <div className="rs-agency-top">
                         <span>[ 001 ]</span>
                         <small>WEBSITE / DESIGN / DEVELOPMENT</small>
                       </div>
 
-                      <h2>Websites Built Around Your Business</h2>
+                      <h2 className="rs-process-title rs-process-title-sm text-start">
+                        Websites Built Around Your Business
+                      </h2>
 
                       <p className="rs-lead">
                         Businesses or brands can trust RedSpider Digital Agency
@@ -174,44 +181,40 @@ export default function AgencyPackages() {
                         Dubai and all across the UAE.
                       </p>
 
-                      <div className="row g-4 mt-4">
-                        <div className="col-md-8">
-                          <p>
-                            We will strengthen your online presence and help
-                            attract new customers. To achieve sustainable
-                            growth, having a modern and user-focused website is
-                            highly important. It will promote your brand and
-                            help you achieve your business goals.
-                          </p>
+                      <p>
+                        We will strengthen your online presence and help
+                        attract new customers. To achieve sustainable
+                        growth, having a modern and user-focused website is
+                        highly important. It will promote your brand and
+                        help you achieve your business goals.
+                      </p>
 
-                          <p>
-                            The competition among companies is intense, and if
-                            you want to win, focusing on advanced technology and
-                            creativity matters.We create visually appealing
-                            websites that are fast, reliable and built to
-                            deliver high-quality performance.
-                          </p>
+                      <p>
+                        The competition among companies is intense, and if
+                        you want to win, focusing on advanced technology and
+                        creativity matters.We create visually appealing
+                        websites that are fast, reliable and built to
+                        deliver high-quality performance.
+                      </p>
 
-                          <p>
-                            Customers don't like websites that are slow, but
-                            when they have a good browsing experience they spend
-                            more time on that website. We make sure that your
-                            website functions well, whether it is desktop,
-                            tablet or mobile device.
-                          </p>
-                        </div>
+                      <p>
+                        Customers don&apos;t like websites that are slow, but
+                        when they have a good browsing experience they spend
+                        more time on that website. We make sure that your
+                        website functions well, whether it is desktop,
+                        tablet or mobile device.
+                      </p>
 
-                        <div className="col-md-4">
-                          <div className="rs-agency-list">
-                            <span>SERVICES:</span>
+                      <span className="rs-agency-list-label">SERVICES:</span>
 
-                            <ul>
-                              {servicesList.map((service, idx) => (
-                                <li key={idx}>{service}</li>
-                              ))}
-                            </ul>
+                      <div className="rs-agency-services-grid">
+                        {servicesList.map((service, idx) => (
+                          <div className="rs-agency-service" key={service.name}>
+                            <i className={`bi ${service.icon}`} aria-hidden="true" />
+                            <em>0{idx + 1}</em>
+                            <span>{service.name}</span>
                           </div>
-                        </div>
+                        ))}
                       </div>
 
                       <p>
@@ -224,14 +227,14 @@ export default function AgencyPackages() {
 
                       <p>
                         Whether it is the corporate website, an ecommerce
-                        platform, or a custom web application, we offer the custom website solutions for businesses across Dubai and the UAE. Customers' digital
+                        platform, or a custom web application, we offer the custom website solutions for businesses across Dubai and the UAE. Customers&apos; digital
                         experience will improve when you have a website with an
                         outstanding design and reliable functionality.
                       </p>
 
                       <p>
                         When websites become old, they have many issues, but
-                        with us you don't need to worry. We can{" "}
+                        with us you don&apos;t need to worry. We can{" "}
                         <strong>redesign your existing website</strong> and help
                         grow your digital presence.
                       </p>
@@ -260,22 +263,20 @@ export default function AgencyPackages() {
               }}
               className="rs-gsap-card rs-card-2"
             >
-              <div className="rs-agency-card">
-                <div className="row g-4 align-items-stretch">
-                  {/* CONTENT */}
-                  <div
-                    className="col-lg-8"
-                    data-aos="fade-left"
-                    data-aos-duration="1000"
-                  >
-                    <div className="rs-agency-content h-100">
+              <div className="rs-agency-card rs-agency-card--creative rs-agency-card--dark">
+                <div className="row g-4 g-xl-5 align-items-center">
+                  <div className="col-lg-7">
+                    <div className="rs-agency-content">
+                      <span className="rs-agency-watermark" aria-hidden="true">
+                        02
+                      </span>
+
                       <div className="rs-agency-top">
                         <span>[ 002 ]</span>
-
                         <small>USER EXPERIENCE / PERFORMANCE / GROWTH</small>
                       </div>
 
-                      <h2>
+                      <h2 className="rs-process-title rs-process-title-sm text-start">
                         Building Digital Experiences That Help Businesses Grow
                       </h2>
 
@@ -286,38 +287,32 @@ export default function AgencyPackages() {
                         potential customers.
                       </p>
 
-                      <div className="row g-4 mt-4">
-                        <div className="col-md-8">
-                          <p>
-                            We focus on creating smooth digital experiences that
-                            make it easy for customers to find information,
-                            explore your offerings and take the next step. Every
-                            element is planned with usability, clarity and
-                            performance in mind.
-                          </p>
+                      <p>
+                        We focus on creating smooth digital experiences that
+                        make it easy for customers to find information,
+                        explore your offerings and take the next step. Every
+                        element is planned with usability, clarity and
+                        performance in mind.
+                      </p>
 
-                          <p>
-                            From mobile-friendly layouts and optimized page
-                            performance to clear navigation and strong calls to
-                            action, our approach helps businesses create
-                            websites that are easier to use and more effective
-                            at generating enquiries.
-                          </p>
-                        </div>
+                      <p>
+                        From mobile-friendly layouts and optimized page
+                        performance to clear navigation and strong calls to
+                        action, our approach helps businesses create
+                        websites that are easier to use and more effective
+                        at generating enquiries.
+                      </p>
 
-                        <div className="col-md-4">
-                          <div className="rs-agency-list">
-                            <span>FOCUS AREAS:</span>
+                      <span className="rs-agency-list-label">FOCUS AREAS:</span>
 
-                            <ul>
-                              <li>User Experience</li>
-                              <li>Mobile Usability</li>
-                              <li>Website Performance</li>
-                              <li>Lead Generation</li>
-                              <li>Scalability</li>
-                            </ul>
+                      <div className="rs-agency-services-grid">
+                        {focusAreas.map((item, idx) => (
+                          <div className="rs-agency-service" key={item.name}>
+                            <i className={`bi ${item.icon}`} aria-hidden="true" />
+                            <em>0{idx + 1}</em>
+                            <span>{item.name}</span>
                           </div>
-                        </div>
+                        ))}
                       </div>
 
                       <p>
@@ -327,47 +322,18 @@ export default function AgencyPackages() {
                         a website that can support their current goals while
                         remaining ready to scale as the business grows.
                       </p>
-
-                      <div className="rs-agency-dots">
-                        <span>
-                          <img
-                            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=300&q=80"
-                            alt="Website analytics and business growth"
-                            loading="lazy"
-                          />
-                        </span>
-
-                        <span>
-                          <img
-                            src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=300&q=80"
-                            alt="Digital team collaboration"
-                            loading="lazy"
-                          />
-                        </span>
-
-                        <span>
-                          <img
-                            src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=300&q=80"
-                            alt="Business technology and performance"
-                            loading="lazy"
-                          />
-                        </span>
-                      </div>
                     </div>
                   </div>
 
-                  {/* IMAGE */}
-                  <div
-                    className="col-lg-4"
-                    data-aos="fade-right"
-                    data-aos-duration="1000"
-                  >
-                    <div className="rs-agency-image h-100">
-                      <img
-                        src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
-                        alt="Modern digital workspace"
-                        loading="lazy"
-                      />
+                  <div className="col-lg-5">
+                    <div className="rs-agency-visual">
+                      <div className="rs-agency-image">
+                        <img
+                          src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80"
+                          alt="Modern digital workspace"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -384,42 +350,42 @@ export default function AgencyPackages() {
               }}
               className="rs-gsap-card rs-card-3"
             >
-              <div className="rs-agency-card">
-                <div className="row g-5 align-items-stretch">
-                  {/* IMAGE */}
-                  <div className="col-lg-4">
-                    <div className="rs-agency-image h-100">
-                      <img
-                        src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80"
-                        className="w-100 h-100 object-fit-cover rounded-4"
-                        alt="Dubai Skyline"
-                        loading="lazy"
-                      />
+              <div className="rs-agency-card rs-agency-card--creative">
+                <div className="row g-4 g-xl-5 align-items-center">
+                  <div className="col-lg-5">
+                    <div className="rs-agency-visual">
+                      <div className="rs-agency-image">
+                        <img
+                          src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80"
+                          alt="Dubai Skyline"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  {/* CONTENT */}
-                  <div className="col-lg-8 d-flex align-items-center">
-                    <div className="rs-agency-content w-100">
+                  <div className="col-lg-7">
+                    <div className="rs-agency-content">
+                      <span className="rs-agency-watermark" aria-hidden="true">
+                        03
+                      </span>
+
                       <div className="rs-agency-top">
                         <span>[ 003 ]</span>
-
                         <small>LOCATIONS / DUBAI / UAE</small>
                       </div>
 
-                      <h2>
+                      <h2 className="rs-process-title rs-process-title-sm text-start">
                         Working With Businesses Across Dubai &amp; the UAE
                       </h2>
 
-                      <p className="mb-4">
+                      <p className="rs-lead">
                         RedSpider provides professional website design and web
                         development services across Dubai, Sharjah and the UAE.
                         Our experienced team works with startups, SMEs,
                         corporate businesses and enterprises, delivering modern
                         websites that help businesses grow online.
                       </p>
-
-                      
                     </div>
                   </div>
                 </div>
@@ -664,86 +630,7 @@ export default function AgencyPackages() {
         </div>
       </section>
 
-      {/* =====================================================
-    CTA SECTION
-    ===================================================== */}
-
-      <section className="contact-cta" id="readytobuild">
-        {/* =========================
-      HEADING
-  ========================= */}
-        <div className="cta-heading">
-          <h2 className="rs-process-title">Ready to Start Your Next Project?</h2>
-
-          <p className="rs-section-subtitle mx-auto text-center">
-            Tell us what you need, and our team will help you find the right
-            digital solution.
-          </p>
-        </div>
-
-        {/* =========================
-      CTA CARDS
-  ========================= */}
-
-        <div className="cta-wrap">
-          {/* CALL */}
-          <a className="cta-card" href="tel:+971555515475" aria-label="Call Us">
-            <span className="icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z" />
-              </svg>
-            </span>
-
-            <span className="cta-content">
-              <span>Speak to an Expert</span>
-              <p>Call our team</p>
-            </span>
-
-            <span className="dot"></span>
-          </a>
-
-          {/* EMAIL */}
-          <a
-            className="cta-card dark"
-            href="mailto:info@RedSpider.ae"
-            aria-label="Send Enquiry"
-          >
-            <span className="icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <path d="m22 6-10 7L2 6" />
-              </svg>
-            </span>
-
-            <span className="cta-content">
-              <span>Send an Enquiry</span>
-              <p>info@RedSpider.ae</p>
-            </span>
-
-            <span className="dot"></span>
-          </a>
-
-          {/* WHATSAPP */}
-          <a
-            className="cta-card green"
-            href="https://wa.me/971555515475"
-            target="_blank"
-            rel="noopener"
-            aria-label="WhatsApp Us"
-          >
-            <span className="icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.22 8.22 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.24-8.24zM8.53 7.37c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.39 1.01 2.56.12.17 1.75 2.67 4.23 3.74 2.05.88 2.48.72 2.92.67.45-.05 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.28-.24-.12-1.47-.73-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.15.17-.29.19-.53.06-.24-.12-1.01-.37-1.93-1.19-.71-.64-1.19-1.43-1.33-1.67-.14-.25-.01-.38.1-.5.11-.11.24-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42-.14 0-.3-.01-.47-.01z" />
-              </svg>
-            </span>
-
-            <span className="cta-content">
-              <span>WhatsApp Us</span>
-              <p>+971 55 551 5475</p>
-            </span>
-          </a>
-        </div>
-      </section>
+      <ContactCTA />
     </>
   );
 }

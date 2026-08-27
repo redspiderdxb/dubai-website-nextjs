@@ -35,6 +35,18 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "redspider.rsworkspace.net",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.RedSpider.ae",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "images.unsplash.com",
         port: "",
         pathname: "/**",

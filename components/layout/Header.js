@@ -7,14 +7,8 @@ import { useHeaderData } from "../../context/HeaderDataContext";
 
 export default function Header() {
   const router = useRouter();
-  const { services: apiServices, products: apiProducts } = useHeaderData();
-
-  useEffect(() => {
-    console.log("=================================");
-    console.log("HEADER API PRODUCTS:", apiProducts);
-    console.log("PRODUCT COUNT:", apiProducts?.length);
-    console.log("=================================");
-  }, [apiProducts]);
+  const { products: apiProducts, isLoading: isHeaderNavLoading } =
+    useHeaderData();
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -315,7 +309,8 @@ export default function Header() {
                                 </Link>
                               </li>
                             ))
-                          ) : (
+                          ) : item.name === "Products" &&
+                            isHeaderNavLoading ? null : (
                             <li>
                               <span className="rs-dropdown-empty">
                                 No {item.name.toLowerCase()} available

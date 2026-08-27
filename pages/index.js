@@ -4,7 +4,7 @@ import Layout from "../components/layout/Layout";
 import Hero from "../components/home/Hero";
 import Services from "../components/home/Services";
 import QuoteForm from "../components/home/QuoteForm";
-import Portfolio from "../components/home/Portfolio";
+import Portfolio, { slimHomepageGalleries } from "../components/home/Portfolio";
 import About from "../components/home/About";
 import BlogStats from "../components/home/BlogStats";
 import FAQIndustries from "../components/home/FAQIndustries";
@@ -51,7 +51,11 @@ export default function Home({
   // FAQ SCHEMA
   // ============================================
 
-  const faqs = Array.isArray(homepageData?.faqs) ? homepageData.faqs : [];
+  const faqs = Array.isArray(homepageData?.faqs)
+    ? homepageData.faqs
+    : homepageData?.faqs && typeof homepageData.faqs === "object"
+      ? Object.values(homepageData.faqs)
+      : [];
 
   const validFaqs = faqs.filter((faq) => faq?.question && faq?.answer);
 
@@ -177,7 +181,8 @@ export async function getStaticProps() {
     // - real-estate fallback flash
     // ==========================================
 
-    const initialGalleries = await fetchAllGalleries();
+    const allGalleries = await fetchAllGalleries();
+    const initialGalleries = slimHomepageGalleries(allGalleries);
 
     return {
       props: {
