@@ -5,12 +5,15 @@ export default function ThemedSelect({
   id,
   value = "",
   onChange,
+  onBlur,
   options = [],
   required = false,
   disabled = false,
+  invalid = false,
   className = "",
   variant = "light",
   "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedBy,
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef(null);
@@ -68,16 +71,35 @@ export default function ThemedSelect({
     setOpen(false);
   };
 
+  const emitBlur = (event) => {
+    if (open) {
+      return;
+    }
+
+    if (rootRef.current?.contains(event.relatedTarget)) {
+      return;
+    }
+
+    if (typeof onBlur === "function") {
+      onBlur({
+        target: {
+          name,
+          value,
+          type: "select-one",
+        },
+      });
+    }
+  };
+
   return (
     <div
       ref={rootRef}
       className={`rs-themed-select rs-themed-select--${variant} ${
         open ? "is-open" : ""
-      } ${className}`.trim()}
+      } ${invalid ? "is-invalid" : ""} ${className}`.trim()}
     >
       <select
         name={name}
-        id={selectId}
         value={value}
         required={required}
         disabled={disabled}
@@ -99,6 +121,7 @@ export default function ThemedSelect({
 
       <button
         type="button"
+        id={selectId}
         className={`rs-themed-select-trigger ${
           isPlaceholder ? "is-placeholder" : ""
         }`}
@@ -107,6 +130,10 @@ export default function ThemedSelect({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listId}
+        aria-invalid={invalid || undefined}
+        aria-required={required || undefined}
+        aria-describedby={ariaDescribedBy}
+        onBlur={emitBlur}
         onClick={() => setOpen((current) => !current)}
       >
         <span>{label}</span>

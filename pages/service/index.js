@@ -18,9 +18,9 @@ export default function ServicesPage({ services }) {
     <Layout>
       <SEO
         title="Our Services | RedSpider"
-        description="Explore our range of professional services in Dubai"
+        description="Explore RedSpider’s digital services in Dubai, including web design, web development, ecommerce, mobile apps, WhatsApp API integration and related business solutions."
         canonical="https://www.redspider.ae/service/"
-        noIndex={false}
+        robots="index,follow"
       />
 
       {/* ============================================

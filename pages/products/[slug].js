@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Layout from "../../components/layout/Layout";
 import SEO from "../../components/seo/SEO";
 import { fetchAllProducts, fetchProductBySlug } from "../../lib/api";
+import { productionCanonical } from "../../lib/seo";
 
 import RealEstatePortalTemplate from "../../components/product-templates/RealEstatePortalTemplate";
 import SmsMarketingTemplate from "../../components/product-templates/SmsMarketingTemplate";
@@ -54,15 +55,13 @@ export default function ProductDetail({ product }) {
 
     keywords: product.seo_keywords || "",
 
-    canonical:
-      product.canonical_url ||
-      `https://www.redspider.ae/products/${product.slug}`,
+    canonical: productionCanonical(`/products/${product.slug}/`),
 
     image: product.image
       ? `https://www.redspider.ae/storage/${product.image}`
       : null,
 
-    noIndex: false,
+    robots: "index,follow",
   };
 
   return (

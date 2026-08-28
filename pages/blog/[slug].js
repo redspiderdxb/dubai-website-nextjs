@@ -184,7 +184,7 @@ export default function BlogDetail({ post, recentPosts }) {
       post.seo_keywords ||
       "blog details, web design article, redspider blog",
 
-    canonical: `https://www.redspider.ae/blog/${post.slug}`,
+    canonical: `https://www.redspider.ae/blog/${post.slug}/`,
 
     image:
       post.seo?.seo_image ||
@@ -192,7 +192,7 @@ export default function BlogDetail({ post, recentPosts }) {
       post.image ||
       "https://www.redspider.ae/blog-og-image.jpg",
 
-    noIndex: false,
+    robots: "index,follow",
   };
 
   /* ===================================================

@@ -1,6 +1,6 @@
 import { fetchAllServices, fetchAllProducts } from "../lib/api";
+import { SITE_URL, isProductionSitemapUrl } from "../lib/seo";
 
-const SITE_URL = "https://www.redspider.ae";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const API_KEY = process.env.API_KEY;
 
@@ -203,15 +203,17 @@ export async function getServerSideProps({ res }) {
     // XML GENERATION
     // =====================================================
 
-    const urlsXml = allUrls
-      .map((path) => {
-        const url = normalizeUrl(`${SITE_URL}${path}`);
+    const productionUrls = allUrls
+      .map((path) => normalizeUrl(`${SITE_URL}${path}`))
+      .filter(isProductionSitemapUrl);
 
-        return `
+    const urlsXml = productionUrls
+      .map(
+        (url) => `
   <url>
     <loc>${escapeXml(url)}</loc>
-  </url>`;
-      })
+  </url>`,
+      )
       .join("");
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>

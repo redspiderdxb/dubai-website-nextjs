@@ -1,6 +1,19 @@
 import { useState } from "react";
 import Button from "../ui/Button";
+import FormAlert from "../ui/FormAlert";
+import FormField from "../ui/FormField";
 import ThemedSelect from "../ui/ThemedSelect";
+import {
+  focusField,
+  getFirstErrorField,
+  useFormValidation,
+  validateAgreement,
+  validateEmail,
+  validateMessage,
+  validateName,
+  validatePhone,
+  validateSelect,
+} from "../../lib/formValidation";
 
 const INITIAL_FORM_DATA = {
   name: "",
@@ -12,8 +25,53 @@ const INITIAL_FORM_DATA = {
   agree_terms_and_policy: true,
 };
 
+const FIELD_ORDER = [
+  "name",
+  "phone",
+  "email",
+  "subject",
+  "content",
+  "agree_terms_and_policy",
+];
+
+const FIELD_IDS = {
+  name: "quote-name",
+  phone: "quote-phone",
+  email: "quote-email",
+  subject: "quote-subject",
+  content: "quote-content",
+  agree_terms_and_policy: "quote-terms",
+};
+
+function getQuoteFieldError(name, value) {
+  switch (name) {
+    case "name":
+      return validateName(value);
+    case "phone":
+      return validatePhone(value);
+    case "email":
+      return validateEmail(value);
+    case "subject":
+      return validateSelect(value, "Choose an enquiry type.");
+    case "content":
+      return validateMessage(value, "project details");
+    case "agree_terms_and_policy":
+      return validateAgreement(value);
+    default:
+      return "";
+  }
+}
+
 export default function QuoteForm() {
-  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const {
+    values: formData,
+    handleChange,
+    handleBlur,
+    showError,
+    validateAll,
+    applyServerErrors,
+    reset,
+  } = useFormValidation(INITIAL_FORM_DATA, getQuoteFieldError);
 
   const [status, setStatus] = useState({
     type: "",
@@ -22,35 +80,9 @@ export default function QuoteForm() {
 
   const [loading, setLoading] = useState(false);
 
-  // ============================================
-  // HANDLE INPUT CHANGE
-  // ============================================
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-
-    // Remove old error while user is correcting form
-    if (status.type === "error") {
-      setStatus({
-        type: "",
-        message: "",
-      });
-    }
-  };
-
-  // ============================================
-  // SUBMIT QUOTE FORM
-  // ============================================
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prevent double submission
     if (loading) {
       return;
     }
@@ -60,9 +92,13 @@ export default function QuoteForm() {
       message: "",
     });
 
-    // ==========================================
-    // BASIC VALIDATION
-    // ==========================================
+    const fieldErrors = validateAll();
+    const firstInvalid = getFirstErrorField(fieldErrors, FIELD_ORDER);
+
+    if (firstInvalid) {
+      focusField(FIELD_IDS[firstInvalid]);
+      return;
+    }
 
     const name = formData.name.trim();
     const phone = formData.phone.trim();
@@ -70,77 +106,10 @@ export default function QuoteForm() {
     const subject = formData.subject.trim();
     const content = formData.content.trim();
 
-    if (!name) {
-      setStatus({
-        type: "error",
-        message: "Please enter your name.",
-      });
-      return;
-    }
-
-    if (!phone) {
-      setStatus({
-        type: "error",
-        message: "Please enter your phone number.",
-      });
-      return;
-    }
-
-    if (!email) {
-      setStatus({
-        type: "error",
-        message: "Please enter your email address.",
-      });
-      return;
-    }
-
-    // Frontend email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(email)) {
-      setStatus({
-        type: "error",
-        message: "Please enter a valid email address.",
-      });
-      return;
-    }
-
-    if (!subject) {
-      setStatus({
-        type: "error",
-        message: "Please select an enquiry type.",
-      });
-      return;
-    }
-
-    if (!content) {
-      setStatus({
-        type: "error",
-        message: "Please enter your project details.",
-      });
-      return;
-    }
-
-    if (!formData.agree_terms_and_policy) {
-      setStatus({
-        type: "error",
-        message: "Please agree to the terms and privacy policy.",
-      });
-      return;
-    }
-
     setLoading(true);
 
     try {
-      // ==========================================
-      // FULL PHONE NUMBER
-      // ==========================================
-
       const fullPhone = `${formData.country_code}${phone}`.trim();
-
-      // ==========================================
-      // API PAYLOAD
-      // ==========================================
 
       const payload = {
         name,
@@ -151,12 +120,6 @@ export default function QuoteForm() {
         agree_terms_and_policy: formData.agree_terms_and_policy,
       };
 
-      // ==========================================
-      // IMPORTANT:
-      // Use INTERNAL Next.js API proxy.
-      // API key remains server-side.
-      // ==========================================
-
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -166,10 +129,6 @@ export default function QuoteForm() {
         body: JSON.stringify(payload),
       });
 
-      // ==========================================
-      // READ API RESPONSE SAFELY
-      // ==========================================
-
       let result = {};
 
       try {
@@ -178,43 +137,25 @@ export default function QuoteForm() {
         console.error("Invalid API response:", jsonError);
       }
 
-      // ==========================================
-      // VALIDATION ERROR
-      // DO NOT THROW ERROR
-      // ==========================================
-
       if (response.status === 422) {
-        const errors = result?.errors || {};
+        const serverErrors = applyServerErrors(result?.errors || {});
+        const firstServerField = getFirstErrorField(serverErrors, FIELD_ORDER);
 
-        let errorMessage = "";
-
-        // Laravel-style validation response
-        for (const value of Object.values(errors)) {
-          if (Array.isArray(value) && value.length > 0) {
-            errorMessage = value[0];
-            break;
-          }
-
-          if (typeof value === "string") {
-            errorMessage = value;
-            break;
-          }
+        if (firstServerField) {
+          focusField(FIELD_IDS[firstServerField]);
         }
 
-        setStatus({
-          type: "error",
-          message:
-            errorMessage ||
-            result?.message ||
-            "Please check the form details and try again.",
-        });
+        if (!firstServerField) {
+          setStatus({
+            type: "error",
+            message:
+              result?.message ||
+              "Please check the form details and try again.",
+          });
+        }
 
         return;
       }
-
-      // ==========================================
-      // RATE LIMIT
-      // ==========================================
 
       if (response.status === 429) {
         setStatus({
@@ -227,10 +168,6 @@ export default function QuoteForm() {
         return;
       }
 
-      // ==========================================
-      // OTHER API ERRORS
-      // ==========================================
-
       if (!response.ok) {
         setStatus({
           type: "error",
@@ -240,10 +177,6 @@ export default function QuoteForm() {
         return;
       }
 
-      // ==========================================
-      // SUCCESS
-      // ==========================================
-
       setStatus({
         type: "success",
         message:
@@ -251,11 +184,7 @@ export default function QuoteForm() {
           "We received your message and will contact you soon!",
       });
 
-      // ==========================================
-      // RESET FORM
-      // ==========================================
-
-      setFormData(INITIAL_FORM_DATA);
+      reset(INITIAL_FORM_DATA);
     } catch (error) {
       console.error("QUOTE FORM ERROR:", error);
 
@@ -273,10 +202,6 @@ export default function QuoteForm() {
       <div className="containera">
         <div className="container mid_sec">
           <div className="row align-items-stretch">
-            {/* =========================================
-                LEFT CONTENT
-            ========================================== */}
-
             <div
               className="col-12 col-md-4"
               data-aos="fade-right"
@@ -292,282 +217,237 @@ export default function QuoteForm() {
               </div>
             </div>
 
-            {/* =========================================
-                FORM
-            ========================================== */}
-
             <div
               className="col-12 col-md-8"
               data-aos="fade-left"
               data-aos-duration="1000"
               data-aos-delay="200"
             >
-              <div className="req_block">
-                <div className="home-page-form px-lg-5 py-lg-3">
-                  <form
-                    name="frm_request"
-                    method="post"
-                    id="requestform"
-                    noValidate
-                    onSubmit={handleSubmit}
-                  >
-                    <div className="req_block_right">
-                      <div className="req_row1 row">
-                        {/* =================================
-                            NAME
-                        ================================== */}
-
-                        <div
-                          className="home-input-cus col-12 col-md-6"
-                          data-aos="fade-up"
-                          data-aos-delay="100"
-                        >
-                          <label htmlFor="quote-name">Name*</label>
-
-                          <div className="field-wrap">
-                            <input
-                              type="text"
-                              name="name"
-                              id="quote-name"
-                              className="req_input mb-4"
-                              value={formData.name}
-                              onChange={handleChange}
-                              required
-                              maxLength={40}
-                              autoComplete="name"
-                            />
-                          </div>
-                        </div>
-
-                        {/* =================================
-                            PHONE
-                        ================================== */}
-
-                        <div
-                          className="home-input-cus col-12 col-md-6"
-                          data-aos="fade-up"
-                          data-aos-delay="200"
-                        >
-                          <label htmlFor="quote-phone">Phone Number*</label>
-
-                          <div className="field-wrap">
-                            <div className="phone-field">
-                              <ThemedSelect
-                                name="country_code"
-                                id="quote-country-code"
-                                variant="light"
-                                className="rs-themed-select--compact"
-                                value={formData.country_code}
-                                onChange={handleChange}
-                                required
-                                aria-label="Country code"
-                                options={[
-                                  { value: "+971", label: "🇦🇪 +971" },
-                                  { value: "+966", label: "🇸🇦 +966" },
-                                  { value: "+968", label: "🇴🇲 +968" },
-                                  { value: "+973", label: "🇧🇭 +973" },
-                                  { value: "+974", label: "🇶🇦 +974" },
-                                  { value: "+965", label: "🇰🇼 +965" },
-                                  { value: "+91", label: "🇮🇳 +91" },
-                                  { value: "+92", label: "🇵🇰 +92" },
-                                  { value: "+44", label: "🇬🇧 +44" },
-                                  { value: "+1", label: "🇺🇸 +1" },
-                                ]}
-                              />
-
-                              <input
-                                type="tel"
-                                name="phone"
-                                id="quote-phone"
-                                className="req_input border-0"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                required
-                                autoComplete="tel"
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* =================================
-                            EMAIL
-                        ================================== */}
-
-                        <div
-                          className="home-input-cus col-12 col-md-6"
-                          data-aos="fade-up"
-                          data-aos-delay="300"
-                        >
-                          <label htmlFor="quote-email">Email*</label>
-
-                          <div className="field-wrap">
-                            <input
-                              type="email"
-                              name="email"
-                              id="quote-email"
-                              className="req_input mb-4"
-                              value={formData.email}
-                              onChange={handleChange}
-                              required
-                              maxLength={80}
-                              autoComplete="email"
-                            />
-                          </div>
-                        </div>
-
-                        {/* =================================
-                            SUBJECT
-                        ================================== */}
-
-                        <div
-                          className="home-input-cus col-12 col-md-6"
-                          data-aos="fade-up"
-                          data-aos-delay="400"
-                        >
-                          <label htmlFor="quote-subject">Enquiry About*</label>
-
-                          <div className="field-wrap">
-                            <ThemedSelect
-                              name="subject"
-                              id="quote-subject"
-                              variant="light"
-                              className="req_selected mb-4"
-                              value={formData.subject}
-                              onChange={handleChange}
-                              required
-                              options={[
-                                { value: "", label: "Select", disabled: true },
-                                { value: "E-Commerce", label: "E-Commerce" },
-                                {
-                                  value: "Corporate Website",
-                                  label: "Corporate Website",
-                                },
-                                {
-                                  value: "Business Emails",
-                                  label: "Business Emails",
-                                },
-                                {
-                                  value: "Website Hosting",
-                                  label: "Website Hosting",
-                                },
-                                {
-                                  value: "SMS Marketing",
-                                  label: "SMS Marketing",
-                                },
-                                {
-                                  value: "Email Marketing",
-                                  label: "Email Marketing",
-                                },
-                                {
-                                  value: "Digital Marketing",
-                                  label: "Digital Marketing",
-                                },
-                              ]}
-                            />
-                          </div>
-                        </div>
-
-                        {/* =================================
-                            PROJECT DETAILS
-                        ================================== */}
-
-                        <div
-                          className="home-input-cus col-12"
-                          data-aos="fade-up"
-                          data-aos-delay="500"
-                        >
-                          <label htmlFor="quote-content">
-                            Project Details*
-                          </label>
-
-                          <div className="field-wrap">
-                            <textarea
-                              name="content"
-                              id="quote-content"
-                              className="req_textarea mb-4"
-                              rows="3"
-                              value={formData.content}
-                              onChange={handleChange}
-                              required
-                              maxLength={10000}
-                              autoComplete="off"
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* =====================================
-                          TERMS
-                      ====================================== */}
-
-                      <div className="req_row">
-                        <div className="verify-wrap">
-                          <label
-                            htmlFor="quote-terms"
-                            className="quote-terms-label"
-                          >
-                            <input
-                              type="checkbox"
-                              name="agree_terms_and_policy"
-                              id="quote-terms"
-                              checked={formData.agree_terms_and_policy}
-                              onChange={handleChange}
-                            />
-
-                            <span>
-                              I agree to the terms and privacy policy.
-                            </span>
-                          </label>
-
-                          {/* =================================
-                              SUBMIT BUTTON
-                          ================================== */}
-
-                          <div data-aos="fade-up" data-aos-delay="700">
-                            <Button
-                              type="submit"
-                              color="red"
-                              className="mt-4"
-                              disabled={loading}
-                            >
-                              {loading ? "Submitting..." : "Submit Now"}
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* =====================================
-                          STATUS MESSAGE
-                      ====================================== */}
-
-                      {status.message && (
-                        <div
-                          className={`quote-form-message ${
-                            status.type === "success"
-                              ? "quote-form-success"
-                              : "quote-form-error"
-                          }`}
-                          role="alert"
-                          aria-live="polite"
-                        >
-                          {status.message}
-                        </div>
-                      )}
-
-                      {/* =====================================
-                          ANTI-SPAM
-                      ====================================== */}
-
+              <div className="rs-contact-form-card">
+                <form
+                  name="frm_request"
+                  method="post"
+                  id="requestform"
+                  noValidate
+                  className="rs-contact-form"
+                  onSubmit={handleSubmit}
+                >
+                  <div className="rs-contact-form-grid">
+                    <FormField
+                      id="quote-name"
+                      label="Name"
+                      required
+                      error={showError("name")}
+                    >
                       <input
-                        name="hiddensecurity"
-                        value="7869045632"
-                        className="antispam"
-                        type="hidden"
-                        readOnly
+                        type="text"
+                        className="form-control"
+                        placeholder="John Smith"
+                        name="name"
+                        id="quote-name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        aria-invalid={Boolean(showError("name"))}
+                        aria-describedby={
+                          showError("name") ? "quote-name-error" : undefined
+                        }
+                        maxLength={40}
+                        autoComplete="name"
                       />
+                    </FormField>
+
+                    <FormField
+                      id="quote-phone"
+                      label="Phone number"
+                      required
+                      error={showError("phone")}
+                    >
+                      <div className="phone-field">
+                        <ThemedSelect
+                          name="country_code"
+                          id="quote-country-code"
+                          className="rs-themed-select--compact"
+                          value={formData.country_code}
+                          onChange={handleChange}
+                          aria-label="Country code"
+                          options={[
+                            { value: "+971", label: "🇦🇪 +971" },
+                            { value: "+966", label: "🇸🇦 +966" },
+                            { value: "+968", label: "🇴🇲 +968" },
+                            { value: "+973", label: "🇧🇭 +973" },
+                            { value: "+974", label: "🇶🇦 +974" },
+                            { value: "+965", label: "🇰🇼 +965" },
+                            { value: "+91", label: "🇮🇳 +91" },
+                            { value: "+92", label: "🇵🇰 +92" },
+                            { value: "+44", label: "🇬🇧 +44" },
+                            { value: "+1", label: "🇺🇸 +1" },
+                          ]}
+                        />
+
+                        <input
+                          type="tel"
+                          className="form-control"
+                          placeholder="50 123 4567"
+                          name="phone"
+                          id="quote-phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          inputMode="tel"
+                          aria-invalid={Boolean(showError("phone"))}
+                          aria-describedby={
+                            showError("phone") ? "quote-phone-error" : undefined
+                          }
+                          autoComplete="tel"
+                        />
+                      </div>
+                    </FormField>
+
+                    <FormField
+                      id="quote-email"
+                      label="Email address"
+                      required
+                      error={showError("email")}
+                    >
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="name@company.com"
+                        name="email"
+                        id="quote-email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        aria-invalid={Boolean(showError("email"))}
+                        aria-describedby={
+                          showError("email") ? "quote-email-error" : undefined
+                        }
+                        maxLength={80}
+                        autoComplete="email"
+                      />
+                    </FormField>
+
+                    <FormField
+                      id="quote-subject"
+                      label="Enquiry about"
+                      required
+                      error={showError("subject")}
+                    >
+                      <ThemedSelect
+                        name="subject"
+                        id="quote-subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        invalid={Boolean(showError("subject"))}
+                        aria-label="Select enquiry type"
+                        aria-describedby={
+                          showError("subject") ? "quote-subject-error" : undefined
+                        }
+                        options={[
+                          { value: "", label: "Select", disabled: true },
+                          { value: "E-Commerce", label: "E-Commerce" },
+                          {
+                            value: "Corporate Website",
+                            label: "Corporate Website",
+                          },
+                          {
+                            value: "Business Emails",
+                            label: "Business Emails",
+                          },
+                          {
+                            value: "Website Hosting",
+                            label: "Website Hosting",
+                          },
+                          {
+                            value: "SMS Marketing",
+                            label: "SMS Marketing",
+                          },
+                          {
+                            value: "Email Marketing",
+                            label: "Email Marketing",
+                          },
+                          {
+                            value: "Digital Marketing",
+                            label: "Digital Marketing",
+                          },
+                        ]}
+                      />
+                    </FormField>
+
+                    <FormField
+                      id="quote-content"
+                      label="Project details"
+                      required
+                      fullWidth
+                      error={showError("content")}
+                    >
+                      <textarea
+                        className="form-control"
+                        placeholder="Tell us about your project"
+                        name="content"
+                        id="quote-content"
+                        rows={5}
+                        value={formData.content}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        aria-invalid={Boolean(showError("content"))}
+                        aria-describedby={
+                          showError("content") ? "quote-content-error" : undefined
+                        }
+                        maxLength={10000}
+                        autoComplete="off"
+                      />
+                    </FormField>
+
+                    <FormField
+                      id="quote-terms"
+                      label="Terms and privacy policy"
+                      hideLabel
+                      fullWidth
+                      error={showError("agree_terms_and_policy")}
+                    >
+                      <label htmlFor="quote-terms" className="rs-contact-terms">
+                        <input
+                          type="checkbox"
+                          name="agree_terms_and_policy"
+                          id="quote-terms"
+                          checked={formData.agree_terms_and_policy}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          aria-invalid={Boolean(
+                            showError("agree_terms_and_policy"),
+                          )}
+                          aria-describedby={
+                            showError("agree_terms_and_policy")
+                              ? "quote-terms-error"
+                              : undefined
+                          }
+                        />
+                        <span>I agree to the terms and privacy policy.</span>
+                      </label>
+                    </FormField>
+
+                    <div className="rs-contact-submit rs-form-field--full">
+                      <Button type="submit" color="red" disabled={loading}>
+                        {loading ? "Submitting..." : "Submit Now"}
+                      </Button>
                     </div>
-                  </form>
-                </div>
+
+                    <div className="rs-form-field--full">
+                      <FormAlert type={status.type} message={status.message} />
+                    </div>
+                  </div>
+
+                  <input
+                    name="hiddensecurity"
+                    value="7869045632"
+                    className="antispam"
+                    type="hidden"
+                    readOnly
+                  />
+                </form>
               </div>
             </div>
           </div>

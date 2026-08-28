@@ -16,11 +16,11 @@ export default function Blog({ posts, pagination }) {
     keywords:
       "web design blog, development insights, redspider blog, digital marketing tips",
 
-    canonical: "https://www.redspider.ae/blog",
+    canonical: "https://www.redspider.ae/blog/",
 
     image: "https://www.redspider.ae/blog-og-image.jpg",
 
-    noIndex: false,
+    robots: "index,follow",
   };
 
   return (

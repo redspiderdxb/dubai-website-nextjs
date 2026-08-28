@@ -9,7 +9,7 @@ export default function FAQs() {
     description:
       "Find answers about working with RedSpider, including project enquiries, quotations, revisions, client responsibilities, communication, approvals and project delivery.",
     canonical: "https://www.redspider.ae/faqs/",
-    noIndex: false,
+    robots: "index,follow",
   };
 
   return (

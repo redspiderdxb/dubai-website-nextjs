@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { sanitizeCanonical } from "../../lib/seo";
 
 export default function SEO({
   title,
@@ -152,6 +153,8 @@ export default function SEO({
         }
       : null;
 
+  const productionCanonicalUrl = sanitizeCanonical(canonical);
+
   return (
     <Head>
       {/* =================================================
@@ -177,10 +180,10 @@ export default function SEO({
         content={robots}
       />
 
-      {canonical && (
+      {productionCanonicalUrl && (
         <link
           rel="canonical"
-          href={canonical}
+          href={productionCanonicalUrl}
         />
       )}
 
@@ -214,10 +217,10 @@ export default function SEO({
         />
       )}
 
-      {canonical && (
+      {productionCanonicalUrl && (
         <meta
           property="og:url"
-          content={canonical}
+          content={productionCanonicalUrl}
         />
       )}
 

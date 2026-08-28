@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Layout from "../../components/layout/Layout";
 import SEO from "../../components/seo/SEO";
 import { fetchAllServices, fetchServiceBySlug } from "../../lib/api";
+import { productionCanonical } from "../../lib/seo";
 
 import WebDevelopmentTemplate from "../../components/templates/WebDevelopmentTemplate";
 import LogoDesignTemplate from "../../components/templates/LogoDesignTemplate";
@@ -81,7 +82,7 @@ export default function ServiceDetail({ service }) {
   // FINAL SERVICE URL
   // =====================================================
 
-  const serviceUrl = `https://www.redspider.ae/service/${service.slug}/`;
+  const serviceUrl = productionCanonical(`/service/${service.slug}/`);
 
   // =====================================================
   // IMAGE URL
@@ -104,7 +105,7 @@ export default function ServiceDetail({ service }) {
 
     keywords: service.seo_keywords || "",
 
-    canonical: service.canonical_url || serviceUrl,
+    canonical: serviceUrl,
 
     image: serviceImage,
 

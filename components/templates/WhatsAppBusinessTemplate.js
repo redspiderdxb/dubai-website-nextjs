@@ -899,13 +899,6 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
                 <p className="rs-description">{inboxDescription}</p>
 
                 <p className="rs-common-description">
-                  Your team can view conversation history, add internal notes
-                  and track the status of each enquiry. This prevents customers
-                  from being ignored and reduces confusion when more than one
-                  employee is involved.
-                </p>
-
-                <p className="rs-common-description">
                   The shared inbox can support sales, customer service,
                   accounts, bookings and technical support from a central
                   platform.
@@ -932,14 +925,6 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
                 </h2>
 
                 <p className="rs-description">{crmDescription}</p>
-
-                <p className="rs-common-description">
-                  Depending on your CRM and workflow, the integration may record
-                  messages, assign leads, create follow-up tasks and update the
-                  sales pipeline. Your staff can see previous interactions
-                  before responding, providing a more informed and consistent
-                  customer experience.
-                </p>
 
                 <p className="rs-common-description">
                   RedSpider can develop customised connections between WhatsApp
@@ -1032,13 +1017,6 @@ const WhatsAppBusinessTemplate = ({ service = {} }) => {
             </h2>
 
             <p className="rs-common-description">{whyChooseDescription}</p>
-
-            <p className="rs-common-description">
-              We do more than connect an API. We help you plan a complete
-              WhatsApp communication process that supports your sales and
-              customer service teams. Our solutions can be customised according
-              to your industry, customer journey and internal workflow.
-            </p>
 
             <p className="rs-common-description">
               With RedSpider, you receive:

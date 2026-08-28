@@ -2,13 +2,74 @@
 
 import { useState } from "react";
 import Button from "../ui/Button";
+import FormAlert from "../ui/FormAlert";
+import FormField from "../ui/FormField";
 import ThemedSelect from "../ui/ThemedSelect";
+import {
+  focusField,
+  getFirstErrorField,
+  useFormValidation,
+  validateAgreement,
+  validateEmail,
+  validateMessage,
+  validateName,
+  validatePhone,
+  validateSelect,
+} from "../../lib/formValidation";
+
+const INITIAL_FORM_DATA = {
+  country: "",
+  service: "",
+  fullName: "",
+  country_code: "+971",
+  phone: "",
+  email: "",
+  comment: "",
+  agree_terms_and_policy: true,
+};
+
+const FIELD_ORDER = [
+  "country",
+  "service",
+  "fullName",
+  "phone",
+  "email",
+  "comment",
+  "agree_terms_and_policy",
+];
+
+const FIELD_IDS = {
+  country: "country",
+  service: "service",
+  fullName: "fullName",
+  phone: "phone",
+  email: "email",
+  comment: "comment",
+  agree_terms_and_policy: "contact-terms",
+};
+
+function getContactFieldError(name, value) {
+  switch (name) {
+    case "country":
+      return validateSelect(value, "Choose your country.");
+    case "service":
+      return validateSelect(value, "Choose a service.");
+    case "fullName":
+      return validateName(value, "full name");
+    case "phone":
+      return validatePhone(value);
+    case "email":
+      return validateEmail(value);
+    case "comment":
+      return validateMessage(value, "message");
+    case "agree_terms_and_policy":
+      return validateAgreement(value);
+    default:
+      return "";
+  }
+}
 
 export default function ContactInfoForm({ data }) {
-  // ==========================================
-  // CONTACT INFORMATION
-  // ==========================================
-
   const infoTitle = data?.info_title || "Contact Us";
 
   const infoDescription =
@@ -41,20 +102,15 @@ export default function ContactInfoForm({ data }) {
   const formExtinfoSmall =
     data?.form_extinfo_small || "The Support Centre is available 24/7";
 
-  // ==========================================
-  // FORM STATE
-  // ==========================================
-
-  const [formData, setFormData] = useState({
-    country: "",
-    service: "",
-    fullName: "",
-    country_code: "+971",
-    phone: "",
-    email: "",
-    comment: "",
-    agree_terms_and_policy: true,
-  });
+  const {
+    values: formData,
+    handleChange,
+    handleBlur,
+    showError,
+    validateAll,
+    applyServerErrors,
+    reset,
+  } = useFormValidation(INITIAL_FORM_DATA, getContactFieldError);
 
   const [status, setStatus] = useState({
     type: "",
@@ -63,152 +119,69 @@ export default function ContactInfoForm({ data }) {
 
   const [loading, setLoading] = useState(false);
 
-  // ==========================================
-  // HANDLE CHANGE
-  // ==========================================
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  // ==========================================
-  // HANDLE SUBMIT
-  // ==========================================
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (loading) {
+      return;
+    }
 
     setStatus({
       type: "",
       message: "",
     });
 
-    // ------------------------------------------
-    // CLIENT SIDE VALIDATION
-    // ------------------------------------------
+    const fieldErrors = validateAll();
+    const firstInvalid = getFirstErrorField(fieldErrors, FIELD_ORDER);
 
-    if (!formData.country) {
-      setStatus({
-        type: "error",
-        message: "Please select your country.",
-      });
-      return;
-    }
-
-    if (!formData.service) {
-      setStatus({
-        type: "error",
-        message: "Please select a service.",
-      });
-      return;
-    }
-
-    if (!formData.fullName.trim()) {
-      setStatus({
-        type: "error",
-        message: "Please enter your full name.",
-      });
-      return;
-    }
-
-    if (!formData.phone.trim()) {
-      setStatus({
-        type: "error",
-        message: "Please enter your phone number.",
-      });
-      return;
-    }
-
-    if (!formData.email.trim()) {
-      setStatus({
-        type: "error",
-        message: "Please enter your email address.",
-      });
-      return;
-    }
-
-    if (!formData.comment.trim()) {
-      setStatus({
-        type: "error",
-        message: "Please enter your message.",
-      });
-      return;
-    }
-
-    if (!formData.agree_terms_and_policy) {
-      setStatus({
-        type: "error",
-        message: "Please agree to the terms and privacy policy.",
-      });
+    if (firstInvalid) {
+      focusField(FIELD_IDS[firstInvalid]);
       return;
     }
 
     setLoading(true);
 
     try {
-      // ------------------------------------------
-      // FULL PHONE NUMBER
-      // ------------------------------------------
-
       const fullPhone = `${formData.country_code}${formData.phone}`.trim();
-
-      // ------------------------------------------
-      // BACKEND PAYLOAD
-      //
-      // Same /contacts API used by QuoteForm
-      // ------------------------------------------
 
       const payload = {
         name: formData.fullName.trim(),
-
         email: formData.email.trim(),
-
         phone: fullPhone,
-
         subject: `${formData.service} - ${formData.country}`,
-
         content: formData.comment.trim(),
-
         agree_terms_and_policy: formData.agree_terms_and_policy,
       };
 
-      // ------------------------------------------
-      // IMPORTANT:
-      // Use Next.js internal API proxy.
-      // API key stays on server.
-      // ------------------------------------------
-
       const response = await fetch("/api/contact", {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-
         body: JSON.stringify(payload),
       });
 
       const result = await response.json();
 
-      // ------------------------------------------
-      // API ERROR HANDLING
-      // ------------------------------------------
-
       if (!response.ok) {
         if (response.status === 422) {
-          const errors = result?.errors || {};
+          const serverErrors = applyServerErrors(result?.errors || {}, {
+            name: "fullName",
+            content: "comment",
+          });
+          const firstServerField = getFirstErrorField(
+            serverErrors,
+            FIELD_ORDER,
+          );
 
-          const firstError = Object.values(errors)?.flat()?.find(Boolean);
+          if (firstServerField) {
+            focusField(FIELD_IDS[firstServerField]);
+            return;
+          }
 
           throw new Error(
-            firstError ||
-              result?.message ||
+            result?.message ||
               "Please check the form details and try again.",
           );
         }
@@ -224,10 +197,6 @@ export default function ContactInfoForm({ data }) {
         );
       }
 
-      // ------------------------------------------
-      // SUCCESS
-      // ------------------------------------------
-
       setStatus({
         type: "success",
         message:
@@ -235,20 +204,7 @@ export default function ContactInfoForm({ data }) {
           "Thank you! Your enquiry has been submitted successfully. We will contact you soon.",
       });
 
-      // ------------------------------------------
-      // RESET FORM
-      // ------------------------------------------
-
-      setFormData({
-        country: "",
-        service: "",
-        fullName: "",
-        country_code: "+971",
-        phone: "",
-        email: "",
-        comment: "",
-        agree_terms_and_policy: true,
-      });
+      reset(INITIAL_FORM_DATA);
     } catch (error) {
       console.error("CONTACT FORM ERROR:", error);
 
@@ -262,22 +218,14 @@ export default function ContactInfoForm({ data }) {
     }
   };
 
-  // ==========================================
-  // UI
-  // ==========================================
-
   return (
     <section id="hfaq-c" className="rs-contact-sec">
       <div className="container">
         <div className="rs-contact-layout">
           <div className="rs-contact-copy">
-            <h2 className="rs-process-title text-start">
-              {infoTitle}
-            </h2>
+            <h2 className="rs-process-title text-start">{infoTitle}</h2>
 
-            <p className="rs-section-subtitle text-start">
-              {infoDescription}
-            </p>
+            <p className="rs-section-subtitle text-start">{infoDescription}</p>
 
             <div className="rs-contact-details">
               <div className="rs-contact-detail">
@@ -348,140 +296,215 @@ export default function ContactInfoForm({ data }) {
           <div className="rs-contact-form-card">
             <h3>{formTitle}</h3>
 
-            <form onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit} noValidate className="rs-contact-form">
               <div className="rs-contact-form-grid">
-                <ThemedSelect
-                  name="country"
+                <FormField
                   id="country"
+                  label="Country"
                   required
-                  value={formData.country}
-                  onChange={handleChange}
-                  aria-label="Select your country"
-                  options={[
-                    { value: "", label: "Select Country", disabled: true },
-                    { value: "UAE", label: "UAE" },
-                    { value: "USA", label: "USA" },
-                    { value: "UK", label: "UK" },
-                  ]}
-                />
-
-                <ThemedSelect
-                  name="service"
-                  id="service"
-                  required
-                  value={formData.service}
-                  onChange={handleChange}
-                  aria-label="Select the service you need"
-                  options={[
-                    { value: "", label: "Select Service", disabled: true },
-                    { value: "Consultation", label: "Consultation" },
-                    { value: "Support", label: "Support" },
-                  ]}
-                />
-
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Your Full Name*"
-                  required
-                  maxLength={100}
-                  autoComplete="name"
-                  name="fullName"
-                  id="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                />
-
-                <div className="phone-field">
+                  error={showError("country")}
+                >
                   <ThemedSelect
-                    id="country_code"
-                    name="country_code"
-                    className="rs-themed-select--compact"
-                    required
-                    value={formData.country_code}
+                    name="country"
+                    id="country"
+                    value={formData.country}
                     onChange={handleChange}
-                    aria-label="Country code"
+                    onBlur={handleBlur}
+                    invalid={Boolean(showError("country"))}
+                    aria-label="Select your country"
+                    aria-describedby={
+                      showError("country") ? "country-error" : undefined
+                    }
                     options={[
-                      { value: "+971", label: "🇦🇪 +971" },
-                      { value: "+966", label: "🇸🇦 +966" },
-                      { value: "+968", label: "🇴🇲 +968" },
-                      { value: "+973", label: "🇧🇭 +973" },
-                      { value: "+974", label: "🇶🇦 +974" },
-                      { value: "+965", label: "🇰🇼 +965" },
-                      { value: "+91", label: "🇮🇳 +91" },
-                      { value: "+92", label: "🇵🇰 +92" },
-                      { value: "+44", label: "🇬🇧 +44" },
-                      { value: "+1", label: "🇺🇸 +1" },
+                      { value: "", label: "Select country", disabled: true },
+                      { value: "UAE", label: "UAE" },
+                      { value: "USA", label: "USA" },
+                      { value: "UK", label: "UK" },
                     ]}
                   />
+                </FormField>
 
+                <FormField
+                  id="service"
+                  label="Service"
+                  required
+                  error={showError("service")}
+                >
+                  <ThemedSelect
+                    name="service"
+                    id="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    invalid={Boolean(showError("service"))}
+                    aria-label="Select the service you need"
+                    aria-describedby={
+                      showError("service") ? "service-error" : undefined
+                    }
+                    options={[
+                      { value: "", label: "Select service", disabled: true },
+                      { value: "Consultation", label: "Consultation" },
+                      { value: "Support", label: "Support" },
+                    ]}
+                  />
+                </FormField>
+
+                <FormField
+                  id="fullName"
+                  label="Full name"
+                  required
+                  error={showError("fullName")}
+                >
                   <input
-                    type="tel"
+                    type="text"
                     className="form-control"
-                    placeholder="Phone No"
-                    required
-                    autoComplete="tel"
-                    name="phone"
-                    id="phone"
-                    value={formData.phone}
+                    placeholder="John Smith"
+                    maxLength={100}
+                    autoComplete="name"
+                    name="fullName"
+                    id="fullName"
+                    value={formData.fullName}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={Boolean(showError("fullName"))}
+                    aria-describedby={
+                      showError("fullName") ? "fullName-error" : undefined
+                    }
                   />
-                </div>
+                </FormField>
 
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Email*"
+                <FormField
+                  id="phone"
+                  label="Phone number"
                   required
-                  maxLength={150}
-                  autoComplete="email"
-                  name="email"
+                  error={showError("phone")}
+                >
+                  <div className="phone-field">
+                    <ThemedSelect
+                      id="country_code"
+                      name="country_code"
+                      className="rs-themed-select--compact"
+                      value={formData.country_code}
+                      onChange={handleChange}
+                      aria-label="Country code"
+                      options={[
+                        { value: "+971", label: "🇦🇪 +971" },
+                        { value: "+966", label: "🇸🇦 +966" },
+                        { value: "+968", label: "🇴🇲 +968" },
+                        { value: "+973", label: "🇧🇭 +973" },
+                        { value: "+974", label: "🇶🇦 +974" },
+                        { value: "+965", label: "🇰🇼 +965" },
+                        { value: "+91", label: "🇮🇳 +91" },
+                        { value: "+92", label: "🇵🇰 +92" },
+                        { value: "+44", label: "🇬🇧 +44" },
+                        { value: "+1", label: "🇺🇸 +1" },
+                      ]}
+                    />
+
+                    <input
+                      type="tel"
+                      className="form-control"
+                      placeholder="50 123 4567"
+                      autoComplete="tel"
+                      inputMode="tel"
+                      name="phone"
+                      id="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      aria-invalid={Boolean(showError("phone"))}
+                      aria-describedby={
+                        showError("phone") ? "phone-error" : undefined
+                      }
+                    />
+                  </div>
+                </FormField>
+
+                <FormField
                   id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-
-                <textarea
-                  className="form-control"
-                  placeholder="Leave a comment here*"
-                  id="floatingTextarea"
-                  name="comment"
-                  rows={5}
+                  label="Email address"
                   required
-                  maxLength={10000}
-                  value={formData.comment}
-                  onChange={handleChange}
-                ></textarea>
-
-                <label htmlFor="contact-terms" className="rs-contact-terms">
+                  error={showError("email")}
+                >
                   <input
-                    type="checkbox"
-                    id="contact-terms"
-                    name="agree_terms_and_policy"
-                    checked={formData.agree_terms_and_policy}
+                    type="email"
+                    className="form-control"
+                    placeholder="name@company.com"
+                    maxLength={150}
+                    autoComplete="email"
+                    name="email"
+                    id="email"
+                    value={formData.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={Boolean(showError("email"))}
+                    aria-describedby={
+                      showError("email") ? "email-error" : undefined
+                    }
                   />
-                  <span>I agree to the terms and privacy policy.</span>
-                </label>
+                </FormField>
 
-                <div className="rs-contact-submit">
+                <FormField
+                  id="comment"
+                  label="Message"
+                  required
+                  fullWidth
+                  error={showError("comment")}
+                >
+                  <textarea
+                    className="form-control"
+                    placeholder="Tell us about your project or enquiry"
+                    id="comment"
+                    name="comment"
+                    rows={5}
+                    maxLength={10000}
+                    value={formData.comment}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={Boolean(showError("comment"))}
+                    aria-describedby={
+                      showError("comment") ? "comment-error" : undefined
+                    }
+                  ></textarea>
+                </FormField>
+
+                <FormField
+                  id="contact-terms"
+                  label="Terms and privacy policy"
+                  hideLabel
+                  fullWidth
+                  error={showError("agree_terms_and_policy")}
+                >
+                  <label htmlFor="contact-terms" className="rs-contact-terms">
+                    <input
+                      type="checkbox"
+                      id="contact-terms"
+                      name="agree_terms_and_policy"
+                      checked={formData.agree_terms_and_policy}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      aria-invalid={Boolean(
+                        showError("agree_terms_and_policy"),
+                      )}
+                      aria-describedby={
+                        showError("agree_terms_and_policy")
+                          ? "contact-terms-error"
+                          : undefined
+                      }
+                    />
+                    <span>I agree to the terms and privacy policy.</span>
+                  </label>
+                </FormField>
+
+                <div className="rs-contact-submit rs-form-field--full">
                   <Button type="submit" color="red" disabled={loading}>
                     {loading ? "Submitting..." : formButtonText}
                   </Button>
                 </div>
 
-                {status.message && (
-                  <div
-                    className={
-                      status.type === "success"
-                        ? "quote-form-message quote-form-success"
-                        : "quote-form-message quote-form-error"
-                    }
-                    role="alert"
-                  >
-                    {status.message}
-                  </div>
-                )}
+                <div className="rs-form-field--full">
+                  <FormAlert type={status.type} message={status.message} />
+                </div>
               </div>
             </form>
 

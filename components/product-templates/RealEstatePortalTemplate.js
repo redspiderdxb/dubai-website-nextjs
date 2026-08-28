@@ -512,12 +512,12 @@ export default function RealEstatePortalTemplate({ data }) {
         className="section dynamic-text effect-title pb-0"
       >
         <div className="container">
-          <h2>
+          <div className="dynamic-text-heading">
             <div className="dynamic-text-clone">
               <div>500+ Successful Projects</div>
               <div>Delivered Across Dubai & UAE</div>
             </div>
-          </h2>
+          </div>
         </div>
       </section>
 
