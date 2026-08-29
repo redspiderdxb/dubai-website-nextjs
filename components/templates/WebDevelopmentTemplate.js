@@ -440,13 +440,15 @@ export default function WebDevelopmentTemplate({ data }) {
                               aria-expanded={index === 0 ? "true" : "false"}
                             >
                               <h3 className="hjs">
-                                <span>
+                                <span className="rsu-acc-num">
                                   {String(index + 1).padStart(2, "0")}
                                 </span>
 
-                                <strong>{point.title}</strong>
+                                <strong className="rsu-acc-title">
+                                  {point.title}
+                                </strong>
 
-                                <i className="bi bi-plus-lg"></i>
+                                <i className="bi bi-plus-lg rsu-acc-icon"></i>
                               </h3>
                             </button>
 
@@ -482,8 +484,8 @@ export default function WebDevelopmentTemplate({ data }) {
           <div className="archidex-bg-shape"></div>
 
           <div className="container" style={{ maxWidth: "1550px" }}>
-            <div className="row g-5 align-items-start justify-content-between">
-              <div className="col-lg-4">
+            <div className="row g-4 g-lg-5 align-items-start justify-content-between">
+              <div className="col-lg-5 col-xl-4">
                 <h2 className="archidex-title">
                   Custom Development for Business Requirements
                 </h2>
@@ -499,16 +501,16 @@ export default function WebDevelopmentTemplate({ data }) {
                   </li>
                 </ul>
 
-                <div className="letconnect mt-5">
+                <div className="letconnect mt-4 mt-lg-5">
                   <span className="text-white">Let's Connect :</span>
 
                   <div className="line"></div>
 
-                  <a href="#">Book A Call</a>
+                  <a href="#contact">Book A Call</a>
                 </div>
               </div>
 
-              <div className="col-lg-7 px-lg-5">
+              <div className="col-lg-7 px-lg-4 px-xl-5">
                 <div className="archidex-small-title">
                   <h2>
                     Our Web Development
@@ -785,8 +787,6 @@ export default function WebDevelopmentTemplate({ data }) {
           </div>
         </section>
       )}
-
-
 
       {/* ============================================
           CTA

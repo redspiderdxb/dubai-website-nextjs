@@ -16,7 +16,7 @@ export default function ContactHero({ data }) {
   }, []);
 
   return (
-    <section className="rs-contact-hero rs-contact-hero-video">
+    <section className="rs-inner-hero rs-contact-hero rs-contact-hero-video">
       {loadVideo && (
         <video
           className="rs-contact-hero-video__bg"

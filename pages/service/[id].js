@@ -30,6 +30,24 @@ const TEMPLATE_COMPONENTS = {
   "whatsapp-business": WhatsAppBusinessTemplate,
 };
 
+const discardInvalidCustomJs = (service) => {
+  if (typeof service?.custom_js !== "string" || !service.custom_js.trim()) {
+    return service;
+  }
+
+  try {
+    new Function(service.custom_js);
+    return service;
+  } catch (error) {
+    console.error(`Invalid custom_js for service "${service.slug}":`, error);
+
+    return {
+      ...service,
+      custom_js: "",
+    };
+  }
+};
+
 export default function ServiceDetail({ service }) {
   const router = useRouter();
 
@@ -200,7 +218,7 @@ export async function getStaticProps({ params }) {
       };
     }
 
-    const service = await fetchServiceBySlug(params.id);
+    const service = discardInvalidCustomJs(await fetchServiceBySlug(params.id));
 
     console.log("SERVICE DETAIL:", params.id, service);
 

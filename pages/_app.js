@@ -145,7 +145,7 @@ function MyApp({ Component, pageProps }) {
           ================================================ */}
 
       <Script
-        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        src="/assets/vendor/jquery/jquery-3.7.1.min.js"
         strategy="beforeInteractive"
       />
 
@@ -190,7 +190,7 @@ function MyApp({ Component, pageProps }) {
           ================================================ */}
 
       <Script
-        src="https://unpkg.com/gsap@3/dist/gsap.min.js"
+        src="/assets/vendor/gsap/gsap.min.js"
         strategy="afterInteractive"
       />
 
@@ -199,7 +199,7 @@ function MyApp({ Component, pageProps }) {
           ================================================ */}
 
       <Script
-        src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"
+        src="/assets/vendor/gsap/ScrollTrigger.min.js"
         strategy="afterInteractive"
       />
 
@@ -207,7 +207,10 @@ function MyApp({ Component, pageProps }) {
           SPLIT TYPE
           ================================================ */}
 
-      <Script src="https://unpkg.com/split-type" strategy="afterInteractive" />
+      <Script
+        src="/assets/vendor/split-type/split-type.min.js"
+        strategy="afterInteractive"
+      />
 
       {/* ================================================
           AOS

@@ -3,7 +3,8 @@
 export default function PortfolioHero() {
   return (
     <>
-      <section className="about-hero hero-marquee portfolio-page-hero">
+      <section className="rs-inner-hero about-hero hero-marquee portfolio-page-hero">
+        <div className="rs-hero-overlay" aria-hidden="true"></div>
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-12">

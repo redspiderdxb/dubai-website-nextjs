@@ -2,7 +2,8 @@ import Link from "next/link";
 
 export default function BlogHero({ title = "Latest Blog", breadcrumb = true }) {
   return (
-    <section className="about-hero hero-marquee blog-hero-custom">
+    <section className="rs-inner-hero about-hero hero-marquee blog-hero-custom">
+      <div className="rs-hero-overlay" aria-hidden="true"></div>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-12" data-aos="fade-right">

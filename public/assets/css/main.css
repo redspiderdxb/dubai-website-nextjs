@@ -15,7 +15,7 @@
   /* Background color for the entire website, including individual sections */
   --default-color: #222;
   /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #0b1320;
+  --heading-color: #171717;
   /* Color for headings, subheadings and title throughout the website */
   --accent-color: #DE1515;
   /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
@@ -46,14 +46,14 @@
 .light-background {
   --background-color: #fff;
   --surface-color: #ffffff;
-  --heading-color: #0b1320;
+  --heading-color: #171717;
 }
 
 .dark-background {
-  --background-color: #000910;
+  --background-color: #050505;
   --default-color: #ffffff;
   --heading-color: #ffffff;
-  --surface-color: #28323a;
+  --surface-color: #262626;
   --contrast-color: #ffffff;
 }
 

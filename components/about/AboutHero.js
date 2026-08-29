@@ -9,7 +9,7 @@ export default function AboutHero({ data }) {
     "RedSpider Web & Art Design is a professional web design company in Dubai, having been in the business for more than 14 years, providing creative and effective digital solutions. We've been helping startups and businesses establish a solid online identity with our high-quality, responsive, and SEO-optimized websites since 2010. We have a strong belief in using creativity, technology and user experience to develop web solutions that will be stunning, as well as working seamlessly across all devices.";
 
   return (
-    <section className="about-hero hero-marquee rs-contact-hero rs-contact-hero-video">
+    <section className="rs-inner-hero about-hero hero-marquee rs-contact-hero rs-contact-hero-video">
       {/* VIDEO BACKGROUND */}
       <video
         className="rs-contact-hero-video__bg"

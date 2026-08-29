@@ -212,6 +212,17 @@ const normalizePintGroups = (groups, fallbackGroups = []) => {
 // Backend data will override this automatically.
 // ============================================================
 
+const DEFAULT_ERP_LIST = [
+  "SAP",
+  "Oracle",
+  "Microsoft Dynamics 365",
+  "Odoo",
+  "Zoho",
+  "Sage",
+  "Infor",
+  "Custom ERP",
+];
+
 const DEFAULT_PROCESS_STEPS = [
   {
     icon: "receipt_long",
@@ -647,23 +658,55 @@ export default function CrmTemplate({ data }) {
   );
 
   // ==========================================================
-  // ABOUT
+  // ABOUT / ERP INTEGRATION & COMPLIANCE
   // ==========================================================
 
   const aboutLabel = valueOr(data.about_label, "UAE e-Invoicing CRM Software");
 
-  const aboutHeading = valueOr(
-    data.about_heading,
-    `
-        Whether your company uses SAP, Oracle, Microsoft Dynamics 365,
-        Odoo, Zoho, Sage, Infor or a custom ERP, ZIVORA.ONE can provide
-        a practical integration path.
-        <br/><br/>
-        Important: A PDF, scanned document, image or emailed invoice is
-        not considered an e-Invoice. An e-Invoice must contain structured,
-        machine-readable data that can be electronically exchanged and reported.
-      `,
-  );
+  const rawAboutHeading = data?.about_heading;
+  const isDefaultHeading =
+    !rawAboutHeading ||
+    rawAboutHeading.includes("Whether your company uses SAP");
+
+  let aboutMainContent = null;
+  let aboutNoticeAlert =
+    "A PDF, scanned document, image or emailed invoice is not considered an e-Invoice.";
+  let aboutNoticeDetails =
+    "An e-Invoice must contain structured, machine-readable data that can be electronically exchanged and reported.";
+
+  if (isDefaultHeading) {
+    aboutMainContent = (
+      <>
+        Whether your company uses <strong>SAP</strong>, <strong>Oracle</strong>,{" "}
+        <strong>Microsoft Dynamics 365</strong>, <strong>Odoo</strong>,{" "}
+        <strong>Zoho</strong>, <strong>Sage</strong>, <strong>Infor</strong> or
+        a <strong>custom ERP</strong>,{" "}
+        <span className="rs-crm-highlight">ZIVORA.ONE</span> can provide a
+        practical integration path.
+      </>
+    );
+  } else {
+    const cleanText = rawAboutHeading.replace(/<br\s*\/?>/gi, " ");
+    const match = cleanText.match(/Important\s*:\s*([\s\S]+)/i);
+    if (match) {
+      const mainPart = cleanText.replace(/Important\s*:\s*[\s\S]+/i, "").trim();
+      aboutMainContent = (
+        <span dangerouslySetInnerHTML={{ __html: mainPart }} />
+      );
+      aboutNoticeAlert = match[1].trim();
+      aboutNoticeDetails = "";
+    } else {
+      aboutMainContent = (
+        <span dangerouslySetInnerHTML={{ __html: rawAboutHeading }} />
+      );
+      if (data.about_notice) {
+        aboutNoticeAlert = data.about_notice;
+        aboutNoticeDetails = data.about_notice_details || "";
+      }
+    }
+  }
+
+  const erpList = safeArray(data.erp_list, DEFAULT_ERP_LIST);
 
   // ==========================================================
   // API
@@ -982,23 +1025,93 @@ export default function CrmTemplate({ data }) {
       </section>
 
       {/* ======================================================
-          ABOUT
+          ABOUT / ERP INTEGRATION & COMPLIANCE
       ====================================================== */}
 
-      <section className="broucher-info about-info-sec pix-bg">
+      <section className="rs-crm-about-section">
         <div className="container">
-          <div className="row align-items-start">
-            <div className="col-lg-3">
-              <span className="about-label">{aboutLabel}</span>
-            </div>
+          <div
+            className="rs-crm-about-wrapper"
+            data-aos="fade-up"
+            data-aos-duration="750"
+          >
+            <div className="row g-4 g-xl-5 align-items-center">
+              {/* Left Column: Badge, Main Heading, ERP Chips */}
+              <div className="col-lg-7">
+                <div className="rs-crm-about-main-col">
+                  <div className="rs-crm-about-badge">
+                    <span className="rs-crm-badge-dot"></span>
+                    <span>{aboutLabel}</span>
+                  </div>
 
-            <div className="col-lg-9">
-              <div
-                className="about-heading rs-main-title text-white"
-                dangerouslySetInnerHTML={{
-                  __html: aboutHeading,
-                }}
-              />
+                  <h2 className="rs-crm-about-heading">{aboutMainContent}</h2>
+
+                  <div className="rs-crm-erp-chips">
+                    <span className="rs-crm-erp-label">
+                      Compatible ERP Platforms:
+                    </span>
+                    <div className="rs-crm-chips-list">
+                      {erpList.map((erp, idx) => (
+                        <span key={idx} className="rs-crm-chip">
+                          <span className="rs-crm-chip-check">✓</span>
+                          {typeof erp === "string"
+                            ? erp
+                            : erp.name || erp.title || ""}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Important Regulatory Notice Card */}
+              <div className="col-lg-5">
+                <aside
+                  className="rs-crm-notice-card"
+                  data-aos="fade-left"
+                  data-aos-delay="100"
+                >
+                  <div className="rs-crm-notice-header">
+                    <span className="rs-crm-notice-icon" aria-hidden="true">
+                      <span className="material-symbols-outlined">
+                        warning_amber
+                      </span>
+                    </span>
+                    <div>
+                      <span className="rs-crm-notice-kicker">
+                        UAE Compliance Rule
+                      </span>
+                      <h3 className="rs-crm-notice-title">
+                        What is an e-Invoice?
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="rs-crm-notice-body">
+                    <p className="rs-crm-notice-alert">
+                      <strong>Important:</strong> {aboutNoticeAlert}
+                    </p>
+                    {aboutNoticeDetails && (
+                      <p className="rs-crm-notice-desc">{aboutNoticeDetails}</p>
+                    )}
+                  </div>
+
+                  <div className="rs-crm-notice-footer">
+                    <span className="rs-crm-notice-tag">
+                      <span className="material-symbols-outlined">
+                        data_object
+                      </span>
+                      Structured XML Data
+                    </span>
+                    <span className="rs-crm-notice-tag">
+                      <span className="material-symbols-outlined">
+                        verified
+                      </span>
+                      PINT AE Compliant
+                    </span>
+                  </div>
+                </aside>
+              </div>
             </div>
           </div>
         </div>

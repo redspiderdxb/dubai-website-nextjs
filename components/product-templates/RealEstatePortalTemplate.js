@@ -186,6 +186,18 @@ export default function RealEstatePortalTemplate({ data }) {
 
   const validFaqs = faqSource.filter((faq) => faq?.question && faq?.answer);
 
+  const faqTitle = data?.faq_title || "Frequently Asked Questions";
+
+  const faqDescription =
+    data?.faq_description ||
+    "Find quick answers to common questions about our real estate portal.";
+
+  const faqMidPoint = Math.ceil(validFaqs.length / 2);
+
+  const leftFaqs = validFaqs.slice(0, faqMidPoint);
+
+  const rightFaqs = validFaqs.slice(faqMidPoint);
+
   return (
     <>
       {/* ============================================
@@ -868,43 +880,89 @@ export default function RealEstatePortalTemplate({ data }) {
       {validFaqs.length > 0 && (
         <section
           id="rs-faq-sec"
-          className="rs-faq-sec section py-5 light-background"
+          className="home-faq rs-faq-sec section py-5 light-background"
         >
-          <div className="container" style={{ maxWidth: "1000px" }}>
-            <div className="text-center mb-5">
-              <h2 className="fw-bold">FAQ's</h2>
+          <div className="container rs-home-faq-box">
+            <div className="text-center mb-3 border-bottom pb-3">
+              <h2 className="fw-bold rs-process-title">{faqTitle}</h2>
+
+              <p className="rs-section-subtitle mx-auto text-center">
+                {faqDescription}
+              </p>
             </div>
 
-            <div className="accordion rs-faq-custom" id="rsFaqOne">
-              {validFaqs.map((faq, index) => (
-                <div className="accordion-item" key={faq.id || index}>
-                  <h3 className="accordion-header">
-                    <button
-                      className={`accordion-button rs-faq-btn ${
-                        index === 0 ? "" : "collapsed"
-                      }`}
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target={`#faq${index}`}
-                      aria-expanded={index === 0}
-                      aria-controls={`faq${index}`}
+            <div className="row g-4">
+              <div className="col-lg-6">
+                <div className="accordion" id="realEstateFaqLeft">
+                  {leftFaqs.map((faq, index) => (
+                    <div
+                      className="accordion-item"
+                      key={`left-${faq.id || index}`}
                     >
-                      <span className="faq-icon">+</span>
-                      {faq.question}
-                    </button>
-                  </h3>
+                      <h3
+                        className="accordion-header"
+                        id={`real-estate-faq-left-heading-${index}`}
+                      >
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#real-estate-faq-left-${index}`}
+                          aria-expanded="false"
+                          aria-controls={`real-estate-faq-left-${index}`}
+                        >
+                          {faq.question}
+                        </button>
+                      </h3>
 
-                  <div
-                    id={`faq${index}`}
-                    className={`accordion-collapse collapse ${
-                      index === 0 ? "show" : ""
-                    }`}
-                    data-bs-parent="#rsFaqOne"
-                  >
-                    <div className="accordion-body">{faq.answer}</div>
-                  </div>
+                      <div
+                        id={`real-estate-faq-left-${index}`}
+                        className="accordion-collapse collapse"
+                        aria-labelledby={`real-estate-faq-left-heading-${index}`}
+                        data-bs-parent="#realEstateFaqLeft"
+                      >
+                        <div className="accordion-body">{faq.answer}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              <div className="col-lg-6">
+                <div className="accordion" id="realEstateFaqRight">
+                  {rightFaqs.map((faq, index) => (
+                    <div
+                      className="accordion-item"
+                      key={`right-${faq.id || index}`}
+                    >
+                      <h3
+                        className="accordion-header"
+                        id={`real-estate-faq-right-heading-${index}`}
+                      >
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#real-estate-faq-right-${index}`}
+                          aria-expanded="false"
+                          aria-controls={`real-estate-faq-right-${index}`}
+                        >
+                          {faq.question}
+                        </button>
+                      </h3>
+
+                      <div
+                        id={`real-estate-faq-right-${index}`}
+                        className="accordion-collapse collapse"
+                        aria-labelledby={`real-estate-faq-right-heading-${index}`}
+                        data-bs-parent="#realEstateFaqRight"
+                      >
+                        <div className="accordion-body">{faq.answer}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

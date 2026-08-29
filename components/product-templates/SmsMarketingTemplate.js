@@ -35,6 +35,31 @@ export default function SmsMarketingTemplate({ data }) {
   } = data;
 
   // ============================================
+  // FAQ DATA
+  // ============================================
+
+  const faqSource = Array.isArray(faqs)
+    ? faqs
+    : faqs && typeof faqs === "object"
+      ? Object.values(faqs)
+      : [];
+
+  const validFaqs = faqSource.filter((faq) => faq?.question && faq?.answer);
+
+  const faqTitle =
+    data?.faq_title || "Frequently Asked Questions About SMS Marketing";
+
+  const faqDescription =
+    data?.faq_description ||
+    "Find quick answers to common questions about our SMS marketing platform.";
+
+  const faqMidPoint = Math.ceil(validFaqs.length / 2);
+
+  const leftFaqs = validFaqs.slice(0, faqMidPoint);
+
+  const rightFaqs = validFaqs.slice(faqMidPoint);
+
+  // ============================================
   // ❌ STATIC FIELDS - Abhi hardcoded (Future Dynamic)
   // ============================================
 
@@ -699,40 +724,92 @@ export default function SmsMarketingTemplate({ data }) {
       </section>
 
       {/* FAQs - Dynamic */}
-      {faqs.length > 0 && (
+      {validFaqs.length > 0 && (
         <section
           id="rs-faq-sec"
-          className="rs-faq-sec section pb-5 pt-0 light-background"
+          className="home-faq rs-faq-sec section pb-5 pt-0 light-background"
         >
-          <div className="container" style={{ maxWidth: "1000px" }}>
-            <div className="text-center mb-5">
-              <h2 className="fw-bold">
-                Frequently Asked Questions About SMS Marketing
-              </h2>
+          <div className="container rs-home-faq-box">
+            <div className="text-center mb-3 border-bottom pb-3">
+              <h2 className="fw-bold rs-process-title">{faqTitle}</h2>
+
+              <p className="rs-section-subtitle mx-auto text-center">
+                {faqDescription}
+              </p>
             </div>
-            <div className="accordion rs-faq-custom" id="rsFaqOne">
-              {faqs.map((faq, index) => (
-                <div className="accordion-item" key={faq.id || index}>
-                  <h3 className="accordion-header">
-                    <button
-                      className={`accordion-button rs-faq-btn ${index === 0 ? "" : "collapsed"}`}
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target={`#faq-${index}`}
+
+            <div className="row g-4">
+              <div className="col-lg-6">
+                <div className="accordion" id="smsFaqLeft">
+                  {leftFaqs.map((faq, index) => (
+                    <div
+                      className="accordion-item"
+                      key={`left-${faq.id || index}`}
                     >
-                      <span className="faq-icon">+</span>
-                      {faq.question}
-                    </button>
-                  </h3>
-                  <div
-                    id={`faq-${index}`}
-                    className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
-                    data-bs-parent="#rsFaqOne"
-                  >
-                    <div className="accordion-body">{faq.answer}</div>
-                  </div>
+                      <h3
+                        className="accordion-header"
+                        id={`sms-faq-left-heading-${index}`}
+                      >
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#sms-faq-left-${index}`}
+                          aria-expanded="false"
+                          aria-controls={`sms-faq-left-${index}`}
+                        >
+                          {faq.question}
+                        </button>
+                      </h3>
+
+                      <div
+                        id={`sms-faq-left-${index}`}
+                        className="accordion-collapse collapse"
+                        aria-labelledby={`sms-faq-left-heading-${index}`}
+                        data-bs-parent="#smsFaqLeft"
+                      >
+                        <div className="accordion-body">{faq.answer}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              <div className="col-lg-6">
+                <div className="accordion" id="smsFaqRight">
+                  {rightFaqs.map((faq, index) => (
+                    <div
+                      className="accordion-item"
+                      key={`right-${faq.id || index}`}
+                    >
+                      <h3
+                        className="accordion-header"
+                        id={`sms-faq-right-heading-${index}`}
+                      >
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target={`#sms-faq-right-${index}`}
+                          aria-expanded="false"
+                          aria-controls={`sms-faq-right-${index}`}
+                        >
+                          {faq.question}
+                        </button>
+                      </h3>
+
+                      <div
+                        id={`sms-faq-right-${index}`}
+                        className="accordion-collapse collapse"
+                        aria-labelledby={`sms-faq-right-heading-${index}`}
+                        data-bs-parent="#smsFaqRight"
+                      >
+                        <div className="accordion-body">{faq.answer}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

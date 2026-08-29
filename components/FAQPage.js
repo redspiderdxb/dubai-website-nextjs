@@ -152,18 +152,34 @@ export default function FAQPage() {
   return (
     <Layout>
       <section
-        className="design-developemnt-hero hero-marquee"
+        className="rs-inner-hero design-developemnt-hero hero-marquee faq-hero-custom"
         style={{
-          backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
+          backgroundImage: imageUrl
+            ? `url(${imageUrl})`
+            : "url(/assets/img/re-bg-hero.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
+        <div className="rs-hero-overlay" aria-hidden="true"></div>
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-12" data-aos="fade-right">
               <div className="rs-process-title-sec">
-                <h1 className="rs-process-title mb-3">{heroTitle}</h1>
+                <h1 className="rs-process-title mb-3">
+                  <span className="rs-process-highlight">
+                    {heroTitle}
+                    <svg
+                      className="rs-process-underline"
+                      viewBox="0 0 320 22"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
+                    </svg>
+                  </span>
+                </h1>
                 {heroDesc && (
                   <p className="rs-process-text mb-3">{heroDesc}</p>
                 )}
