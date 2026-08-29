@@ -584,7 +584,10 @@ export default function LogoDesignTemplate({ data }) {
     },
     benefits: {
       component: (
-        <section key="benefits" className="rs-specialization-sec">
+        <section
+          key="benefits"
+          className="rs-specialization-sec logo-mission-section"
+        >
           <div
             className="container rs-specialization-wrap"
             style={{ maxWidth: "1320px" }}
@@ -924,10 +927,6 @@ export default function LogoDesignTemplate({ data }) {
       ),
       show: show_faqs,
     },
-    cta: {
-      component: <ServiceCTA service={data} key="cta" />,
-      show: show_cta,
-    },
   };
 
   // ============================================
@@ -999,7 +998,10 @@ export default function LogoDesignTemplate({ data }) {
   );
 
   const IndustriesMarquee = () => (
-    <section key="industries" className="rs-text-marquee-sec mb-4">
+    <section
+      key="industries"
+      className="rs-text-marquee-sec logo-industries-section mb-4"
+    >
       <div className="rs-text-marquee-wrap">
         <div className="rs-text-marquee-track">
           <div className="rs-text-item">
@@ -1038,7 +1040,7 @@ export default function LogoDesignTemplate({ data }) {
   return (
     <div style={styles}>
       {custom_css && <style dangerouslySetInnerHTML={{ __html: custom_css }} />}
-      <main className="service-template">
+      <main className="service-template logo-design-template">
         {renderSections()}
         <PackagesSection />
         <IndustriesMarquee />

@@ -326,18 +326,14 @@ export default function ServiceBody({ service }) {
           id="rs-faq-sec"
           className="home-faq rs-faq-sec section py-5 light-background"
         >
-          <div
-            className="container"
-            style={{
-              maxWidth: "1600px",
-              background: "#f6f6f6",
-              padding: "40px",
-              borderRadius: "30px",
-            }}
-          >
-            <div className="text-start mb-5 border-bottom pb-3">
-              <h2 className="fw-bold">Frequently Asked Questions</h2>
-              <p>Find quick answers to common questions about our services.</p>
+          <div className="container rs-home-faq-box">
+            <div className="text-center mb-3 border-bottom pb-3">
+              <h2 className="fw-bold rs-process-title">
+                Frequently Asked Questions
+              </h2>
+              <p className="rs-section-subtitle mx-auto text-center">
+                Find quick answers to common questions about our services.
+              </p>
             </div>
             <div className="row g-4">
               <div className="col-lg-6">

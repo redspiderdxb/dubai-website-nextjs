@@ -25977,10 +25977,300 @@ html {
   opacity: 1 !important;
 }
 
+.rs-inner-hero.contact-shared-hero-bg {
+  background-image: url("/assets/img/about-bg5.webp") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.rs-inner-hero.about-hero.contact-shared-hero-bg,
+.rs-inner-hero.rs-contact-hero.contact-shared-hero-bg {
+  background-image: url("/assets/img/about-bg5.webp") !important;
+}
+
+.rs-inner-hero.contact-shared-hero-bg::before,
+.rs-inner-hero.contact-shared-hero-bg .rs-contact-hero-video__overlay {
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+.rs-inner-hero.contact-shared-hero-bg .rs-contact-hero-video__bg {
+  display: none !important;
+}
+
 .rs-inner-hero.hero-marquee > .container,
 .rs-inner-hero.hero-marquee > .rs-contact-hero-video__content {
   position: relative;
   z-index: 2;
+}
+
+/* Logo design page layout */
+.logo-design-template .archidex-accordion-sec {
+  padding: 80px 0;
+}
+
+.logo-design-template .archidex-accordion-sec > .container {
+  max-width: 1320px;
+}
+
+.logo-design-template .archidex-list.dw {
+  max-width: 460px;
+}
+
+.logo-design-template .archidex-small-title {
+  margin-bottom: 28px;
+}
+
+.logo-design-template .rs-specialization-sec .rs-main-title {
+  max-width: 560px;
+}
+
+.logo-design-template .rs-logo-types-sec {
+  padding: 90px 0;
+}
+
+.logo-design-template .logo-mission-section {
+  background: #f4f1ed;
+}
+
+.logo-design-template .logo-mission-section .rs-specialization-wrap {
+  position: relative;
+}
+
+.logo-design-template .logo-mission-section .rs-main-title {
+  max-width: 560px;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.03;
+  letter-spacing: -0.02em;
+}
+
+.logo-design-template .logo-mission-section .rs-special-list {
+  max-width: 560px;
+  gap: 0;
+  border-top: 1px solid rgba(17, 17, 17, 0.14);
+}
+
+.logo-design-template .logo-mission-section .rs-special-item {
+  min-height: 58px;
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.14);
+}
+
+.logo-design-template .logo-mission-section .rs-special-item:hover,
+.logo-design-template .logo-mission-section .rs-special-item.active {
+  padding-left: 18px;
+  background: #fff;
+}
+
+.logo-design-template .logo-mission-section .rs-image-area {
+  min-height: 560px;
+  padding: 24px;
+  background: #171717;
+}
+
+.logo-design-template .logo-mission-section .rs-main-image-box {
+  width: 100%;
+  min-height: 480px;
+}
+
+.logo-design-template .logo-mission-section .rs-main-image-box img {
+  height: 480px;
+}
+
+.logo-design-template .logo-industries-section {
+  margin-bottom: 0 !important;
+  padding: 96px 0 112px;
+  background: #171717;
+}
+
+.logo-design-template .logo-industries-section .rs-text-marquee-wrap {
+  width: 100%;
+  margin-left: 0;
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.logo-design-template .logo-industries-section .rs-text-marquee-wrap.red-strip {
+  margin-top: 14px;
+  transform: none;
+}
+
+.logo-design-template .logo-industries-section .rs-text-item {
+  padding: 22px 0;
+  font-size: clamp(24px, 3vw, 40px);
+}
+
+@media (max-width: 991px) {
+  .logo-design-template .logo-mission-section .rs-image-area {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .logo-design-template .logo-mission-section .rs-main-image-box {
+    min-height: auto;
+  }
+
+  .logo-design-template .logo-mission-section .rs-main-image-box img {
+    height: 420px;
+  }
+}
+
+.logo-design-template .rs-logo-types-sec .title-wrap {
+  position: sticky;
+  top: 110px;
+}
+
+@media (max-width: 991px) {
+  .logo-design-template .archidex-accordion-sec {
+    padding: 58px 0;
+  }
+
+  .logo-design-template .archidex-accordion-sec > .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row {
+    row-gap: 34px;
+  }
+
+  .logo-design-template .archidex-list.dw {
+    max-width: none;
+  }
+
+  .logo-design-template .archidex-small-title {
+    margin-top: 0;
+  }
+
+  .logo-design-template .rs-logo-types-sec {
+    padding: 65px 0;
+  }
+
+  .logo-design-template .rs-logo-types-sec .title-wrap {
+    position: static;
+  }
+}
+
+@media (max-width: 575px) {
+  .logo-design-template .archidex-accordion-sec {
+    padding: 42px 0 48px;
+  }
+
+  .logo-design-template .archidex-accordion-sec > .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row {
+    display: block;
+  }
+
+  .logo-design-template .archidex-accordion-sec [class*="col-"] {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 34px;
+  }
+
+  .logo-design-template .archidex-title {
+    font-size: 30px;
+    line-height: 1.12;
+  }
+
+  .logo-design-template .archidex-list li {
+    gap: 9px;
+    font-size: 14px;
+  }
+
+  .logo-design-template .archidex-small-title h2 {
+    font-size: 20px;
+  }
+
+  .logo-design-template .archidex-accordion .accordion-button {
+    grid-template-columns: 30px minmax(0, 1fr) 22px;
+    min-height: 54px;
+    font-size: 14px;
+  }
+
+  .logo-design-template .archidex-accordion .accordion-body {
+    padding-left: 30px;
+    font-size: 13px;
+  }
+
+  .logo-design-template .rs-specialization-sec {
+    padding: 52px 0 90px;
+  }
+
+  .logo-design-template .logo-mission-section .rs-main-title {
+    font-size: 31px;
+  }
+
+  .logo-design-template .logo-mission-section .rs-image-area {
+    padding: 12px;
+  }
+
+  .logo-design-template .logo-mission-section .rs-main-image-box img {
+    height: 300px;
+  }
+
+  .logo-design-template .logo-industries-section {
+    padding: 58px 0 70px;
+  }
+
+  .logo-design-template .logo-industries-section .rs-text-item {
+    padding: 16px 0;
+    font-size: 22px;
+  }
+
+  .logo-design-template .rs-specialization-sec .rs-main-title {
+    font-size: 29px;
+    line-height: 1.12;
+  }
+
+  .logo-design-template .rs-special-list {
+    gap: 8px;
+  }
+
+  .logo-design-template .rs-image-area {
+    margin-top: 26px;
+  }
+
+  .logo-design-template .rs-logo-types-sec {
+    padding: 48px 0 60px;
+  }
+
+  .logo-design-template .rs-logo-types-sec > .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .logo-design-template .rs-logo-types-sec .row {
+    row-gap: 20px;
+  }
+
+  .logo-design-template .rs-logo-types-sec .title-wrap h3 {
+    font-size: 29px;
+    line-height: 1.12;
+  }
+
+  .logo-design-template .rs-logo-type-card {
+    min-height: 76px;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .logo-design-template .rs-logo-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+  }
+
+  .logo-design-template .rs-logo-type-card h5 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
 }
 
 /* =========================================================

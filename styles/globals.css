@@ -8475,6 +8475,7 @@ button.rs-dropdown-trigger {
 
   .rs-footer-intro {
     min-height: auto;
+    padding-bottom: 32px;
   }
 
   .rs-footer-intro .rs-heading {
@@ -8571,6 +8572,10 @@ button.rs-dropdown-trigger {
 ========================================================= */
 
 @media (max-width: 480px) {
+  .rs-footer-intro {
+    padding-bottom: 28px;
+  }
+
   .rs-footer-intro .rs-heading {
     font-size: 23px;
   }
@@ -8606,6 +8611,265 @@ button.rs-dropdown-trigger {
 
 .rs-footer-bottom-content .rs-social a:hover i {
   color: #fff;
+}
+
+/* Logo design page responsive layout */
+.logo-design-template .archidex-accordion-sec {
+  padding: 80px 0;
+}
+
+.logo-design-template .archidex-accordion-sec > .container {
+  max-width: 1320px;
+}
+
+.logo-design-template .rs-logo-types-sec {
+  padding: 90px 0;
+}
+
+.logo-design-template .rs-logo-types-sec .title-wrap {
+  position: sticky;
+  top: 110px;
+}
+
+@media (max-width: 991px) {
+  .logo-design-template .archidex-accordion-sec {
+    padding: 58px 0;
+  }
+
+  .logo-design-template .archidex-accordion-sec > .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row {
+    row-gap: 34px;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row > [class*="col-"] {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .logo-design-template .rs-logo-types-sec {
+    padding: 65px 0;
+  }
+
+  .logo-design-template .rs-logo-types-sec .title-wrap {
+    position: static;
+  }
+}
+
+@media (max-width: 575px) {
+  .logo-design-template .archidex-accordion-sec {
+    padding: 42px 0 48px;
+  }
+
+  .logo-design-template .archidex-accordion-sec > .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row {
+    display: block;
+  }
+
+  .logo-design-template .archidex-accordion-sec [class*="col-"] {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 34px;
+  }
+
+  .logo-design-template .archidex-title {
+    font-size: 30px;
+    line-height: 1.12;
+  }
+
+  .logo-design-template .archidex-list li {
+    gap: 9px;
+    font-size: 14px;
+  }
+
+  .logo-design-template .archidex-small-title h2 {
+    font-size: 20px;
+  }
+
+  .logo-design-template .archidex-accordion .accordion-button {
+    grid-template-columns: 30px minmax(0, 1fr) 22px;
+    min-height: 54px;
+    font-size: 14px;
+  }
+
+  .logo-design-template .archidex-accordion .accordion-body {
+    padding-left: 30px;
+    font-size: 13px;
+  }
+
+  .logo-design-template .rs-specialization-sec {
+    padding: 52px 0 90px;
+  }
+
+  .logo-design-template .rs-specialization-sec .rs-main-title {
+    font-size: 29px;
+    line-height: 1.12;
+  }
+
+  .logo-design-template .rs-image-area {
+    margin-top: 26px;
+  }
+
+  .logo-design-template .rs-logo-types-sec {
+    padding: 48px 0 60px;
+  }
+
+  .logo-design-template .rs-logo-types-sec > .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .logo-design-template .rs-logo-types-sec .row {
+    row-gap: 20px;
+  }
+
+  .logo-design-template .rs-logo-types-sec .title-wrap h3 {
+    font-size: 29px;
+    line-height: 1.12;
+  }
+
+  .logo-design-template .rs-logo-type-card {
+    min-height: 76px;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .logo-design-template .rs-logo-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+  }
+
+  .logo-design-template .rs-logo-type-card h5 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}
+
+/* Logo design offer section redesign */
+.logo-design-template .archidex-accordion-sec {
+  background: #f3f2ef;
+}
+
+.logo-design-template .archidex-accordion-sec > .container {
+  padding: 0 20px;
+}
+
+.logo-design-template .archidex-accordion-sec .archidex-top-line {
+  display: none;
+}
+
+.logo-design-template .archidex-accordion-sec .row {
+  align-items: stretch !important;
+  gap: 20px;
+  margin: 0;
+}
+
+.logo-design-template .archidex-accordion-sec .row > [class*="col-"] {
+  padding: 30px;
+  margin: 0;
+  border: 1px solid rgba(17, 17, 17, 0.09);
+  border-radius: 18px;
+}
+
+.logo-design-template .archidex-accordion-sec .row > .col-lg-4 {
+  flex: 1 1 0;
+  background: #fff;
+}
+
+.logo-design-template .archidex-accordion-sec .row > .col-lg-5 {
+  flex: 1.25 1 0;
+  background: #111;
+  color: #fff;
+}
+
+.logo-design-template .archidex-accordion-sec .row > .col-md-3 {
+  flex: 0 1 270px;
+  background: #c90024;
+}
+
+.logo-design-template .archidex-accordion-sec .row > .col-lg-5 .archidex-small-title h2,
+.logo-design-template .archidex-accordion-sec .row > .col-lg-5 .arch-name,
+.logo-design-template .archidex-accordion-sec .row > .col-lg-5 .arch-arrow {
+  color: #fff;
+}
+
+.logo-design-template .archidex-accordion-sec .row > .col-lg-5 .archidex-accordion {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.logo-design-template .archidex-accordion-sec .row > .col-lg-5 .archidex-accordion .accordion-item {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.logo-design-template .archidex-accordion-sec .row > .col-lg-5 .archidex-accordion .accordion-button {
+  color: #fff;
+}
+
+.logo-design-template .archidex-accordion-sec .row > .col-md-3 .recieve-format h6,
+.logo-design-template .archidex-accordion-sec .row > .col-md-3 .rs-receive-stack-item h5 {
+  color: #fff;
+}
+
+.logo-design-template .archidex-accordion-sec .row > .col-md-3 .rs-receive-stack-wrap {
+  max-width: none;
+  padding: 20px 0 8px;
+  background: transparent;
+}
+
+@media (max-width: 991px) {
+  .logo-design-template .archidex-accordion-sec .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row > .col-lg-4,
+  .logo-design-template .archidex-accordion-sec .row > .col-lg-5,
+  .logo-design-template .archidex-accordion-sec .row > .col-md-3 {
+    width: auto;
+    max-width: none;
+    flex: none;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row > .col-md-3 {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 575px) {
+  .logo-design-template .archidex-accordion-sec > .container {
+    padding: 0 14px;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row {
+    display: flex;
+    gap: 14px;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row > [class*="col-"] {
+    padding: 22px 18px;
+    border-radius: 14px;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row > .col-lg-4,
+  .logo-design-template .archidex-accordion-sec .row > .col-lg-5,
+  .logo-design-template .archidex-accordion-sec .row > .col-md-3 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .logo-design-template .archidex-accordion-sec .row > .col-md-3 {
+    order: 3;
+  }
 }
 
 
