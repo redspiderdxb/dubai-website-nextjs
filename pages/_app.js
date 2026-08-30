@@ -5,6 +5,7 @@ import "aos/dist/aos.css";
 import Script from "next/script";
 import { useEffect, useRef } from "react";
 import AOS from "aos";
+import { PagesTopLoader } from "nextjs-toploader/pages";
 
 import { HeaderDataProvider } from "../context/HeaderDataContext";
 
@@ -136,6 +137,15 @@ function MyApp({ Component, pageProps }) {
           ================================================= */}
 
       <HeaderDataProvider>
+        <PagesTopLoader
+          color="#e31e24"
+          height={3}
+          showSpinner={false}
+          shadow={false}
+          zIndex={1000000}
+          easing="ease"
+          speed={400}
+        />
         <Component {...pageProps} />
       </HeaderDataProvider>
 

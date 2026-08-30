@@ -55,3 +55,15 @@ html,
 body {
   font-family: var(--default-font);
 }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000000;
+}
