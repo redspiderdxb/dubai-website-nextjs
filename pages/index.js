@@ -15,7 +15,7 @@ import {
   fetchHomepageData,
   fetchFeaturedServices,
   fetchPosts,
-  fetchAllGalleries,
+  fetchGalleries,
 } from "../lib/api";
 import { getGoogleReviews } from "../lib/googleReviews";
 
@@ -137,28 +137,23 @@ export async function getStaticProps() {
     // ==========================================
 
     const homepageData = await fetchHomepageData();
-
-    // ==========================================
-    // Services
-    // ==========================================
-
     const servicesLimit = Number(homepageData?.services_limit) || 6;
 
-    const initialServices = await fetchFeaturedServices(servicesLimit);
-
-    // ==========================================
-    // Latest Blog Posts
-    // ==========================================
-
-    const initialBlogResult = await fetchPosts(1);
+    const [
+      initialServices,
+      initialBlogResult,
+      galleriesResult,
+      googleReviews,
+    ] = await Promise.all([
+      fetchFeaturedServices(servicesLimit),
+      fetchPosts(1),
+      fetchGalleries(1, 50),
+      getGoogleReviews(),
+    ]);
 
     let initialBlogPosts = Array.isArray(initialBlogResult?.posts)
       ? [...initialBlogResult.posts]
       : [];
-
-    // ==========================================
-    // SORT LATEST FIRST
-    // ==========================================
 
     initialBlogPosts = initialBlogPosts
       .sort((a, b) => {
@@ -170,28 +165,15 @@ export async function getStaticProps() {
         }
 
         const dateA = new Date(a?.created_at || 0).getTime();
-
         const dateB = new Date(b?.created_at || 0).getTime();
 
         return dateB - dateA;
       })
       .slice(0, 3);
 
-    // ==========================================
-    // HOMEPAGE PORTFOLIO
-    //
-    // IMPORTANT:
-    // Fetch on SERVER, not browser.
-    //
-    // This prevents:
-    // - blank portfolio
-    // - 2 sec loading gap
-    // - real-estate fallback flash
-    // ==========================================
-
-    const allGalleries = await fetchAllGalleries();
-    const initialGalleries = slimHomepageGalleries(allGalleries);
-    const googleReviews = await getGoogleReviews();
+    const initialGalleries = slimHomepageGalleries(
+      galleriesResult?.galleries || [],
+    );
 
     return {
       props: {
