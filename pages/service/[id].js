@@ -1,3 +1,4 @@
+import PageStyles from "../../components/seo/PageStyles";
 import { useRouter } from "next/router";
 import Layout from "../../components/layout/Layout";
 import SEO from "../../components/seo/SEO";
@@ -58,6 +59,7 @@ export default function ServiceDetail({ service }) {
   if (router.isFallback) {
     return (
       <Layout>
+        <PageStyles href="/assets/css/pages/service.css" />
         <div className="container py-5 text-center">
           <h2>Loading...</h2>
         </div>
@@ -163,6 +165,7 @@ export default function ServiceDetail({ service }) {
 
   return (
     <Layout>
+      <PageStyles href="/assets/css/pages/service.css" />
       <SEO {...seoData} serviceSchema={serviceSchema} />
 
       <main className="main">

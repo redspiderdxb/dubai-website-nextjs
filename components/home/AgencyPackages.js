@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "../ui/Button";
 import ContactCTA from "../ui/ContactCTA";
 
@@ -401,142 +402,116 @@ export default function AgencyPackages() {
           PACKAGES SECTION
           ===================================================== */}
 
-      <section className="rs-packages-sec bluelight-backgroun section">
-        <div className="container rs-packages-container">
-          <div className="row g-5 align-items-stretch">
-            <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-              <div className="rs-left-card h-100 d-flex flex-column justify-content-between">
-                <div>
-                  <span className="rs-join">CREATING GREAT OPPORTUNITIES</span>
+      {/* =====================================================
+          OPPORTUNITY / EXPERIENCE SECTION
+          ===================================================== */}
 
-                  <hr />
+      <section className="rs-opportunity section">
+        <div className="container rs-opportunity__container">
+          <div className="rs-opportunity__layout">
+            <aside className="rs-opportunity__poster" data-aos="fade-up">
+              <p className="rs-opportunity__eyebrow">Creating great opportunities</p>
 
-                  <span className="rs-left-heading mt-4">
-                    We help Making your dream into Reality
-                  </span>
+              <h2 className="rs-opportunity__headline">
+                We help turn your{" "}
+                <span className="rs-opportunity__accent">dream</span> into reality
+              </h2>
+
+              <div className="rs-opportunity__rating">
+                <div className="rs-opportunity__score" aria-hidden="true">
+                  4.9
                 </div>
 
-                <div className="google-box my-2">
+                <div className="rs-opportunity__rating-copy">
                   <Image
                     src="/assets/img/google-h.webp"
                     alt="Google rating"
-                    className="img-fluid"
-                    width={200}
-                    height={60}
-                    sizes="(max-width: 768px) 70vw, 200px"
+                    width={120}
+                    height={36}
+                    sizes="120px"
                     loading="lazy"
-                    style={{ width: "100%", height: "auto", maxWidth: "200px" }}
                   />
-                </div>
-
-                <div className="quick-contect">
-                  <small>RedSpider is rated</small>
-
-                  <p>4.9 Stars</p>
-
-                  <small>
-                    based on 100+ reviews in Google Business listing.
-                  </small>
-                </div>
-
-                <div className="rs-arrow-btn mt-4">
-                  <span>
-                    <a href="/contact-us">
-                      <Image
-                        src="/assets/img/arrow-icon-40.svg"
-                        alt="Contact us"
-                        className="arrow-40deg-icon"
-                        width={40}
-                        height={40}
-                        loading="lazy"
-                      />
-                    </a>
-                  </span>
+                  <p>
+                    RedSpider is rated <strong>4.9 stars</strong>
+                  </p>
+                  <span>based on 100+ Google Business reviews</span>
                 </div>
               </div>
-            </div>
 
-            <div className="col-lg-8">
-              <div className="row g-4">
-                <div
-                  className="col-md-6"
-                  data-aos="fade-up"
-                  data-aos-delay="150"
-                  data-aos-duration="900"
-                >
-                  <div className="p-2">
-                    <div className="section-title text-start mb-0">
-                      <h2 className="rs-process-title rs-process-title-sm" data-aos="fade-up">
-                        Experience and Expertise Behind RedSpider
-                      </h2>
+              <Link href="/contact-us" className="rs-opportunity__contact">
+                Contact us
+                <i className="bi bi-arrow-up-right" aria-hidden="true" />
+              </Link>
+            </aside>
 
-                      <p className="text-dark mt-4 rs-section-subtitle text-start" data-aos="fade-up">
-                        RedSpider has become a trusted choice for website design
-                        in Dubai as we have 14 years of experience in the
-                        industry. We have completed 500+ successful projects and
-                        continue to help businesses strengthen their online
-                        presence. Our web designers are highly skilled who are
-                        helping various businesses have a strong online
-                        presence. Our experienced web designers create new
-                        websites and improve existing ones with a strong focus
-                        on design, usability and performance. Your website will
-                        look visually appealing and that helps grow your
-                        business over time.
-                      </p>
+            <div className="rs-opportunity__main">
+              <div className="rs-opportunity__story" data-aos="fade-up" data-aos-delay="80">
+                <h3 className="rs-opportunity__title">
+                  Experience and Expertise Behind RedSpider
+                </h3>
 
-                      <p className="text-dark mt-4" data-aos="fade-up">
-                        <strong>Our web design Dubai services include:</strong>
-                      </p>
+                <p>
+                  RedSpider has become a trusted choice for website design in
+                  Dubai as we have 14 years of experience in the industry. We
+                  have completed 500+ successful projects and continue to help
+                  businesses strengthen their online presence. Our web designers
+                  are highly skilled who are helping various businesses have a
+                  strong online presence. Our experienced web designers create
+                  new websites and improve existing ones with a strong focus on
+                  design, usability and performance. Your website will look
+                  visually appealing and that helps grow your business over
+                  time.
+                </p>
 
-                      <Button
-                        color="red"
-                        href="/about-us"
-                        className="mt-4"
-                        data-aos="fade-up"
-                        data-aos-delay="550"
-                      >
-                        Know More About
-                      </Button>
-                    </div>
+                <div className="rs-opportunity__stats" aria-label="RedSpider highlights">
+                  <div>
+                    <strong>14+</strong>
+                    <span>Years</span>
+                  </div>
+                  <div>
+                    <strong>500+</strong>
+                    <span>Projects</span>
+                  </div>
+                  <div>
+                    <strong>100+</strong>
+                    <span>5★ Reviews</span>
                   </div>
                 </div>
 
-                <div
-                  className="col-md-6"
-                  data-aos="fade-left"
-                  data-aos-delay="300"
-                  data-aos-duration="1000"
-                >
-                  <div className="rs-card">
-                    <ul>
-                      {features.map((feature, idx) => (
-                        <li
-                          key={idx}
-                          data-aos="fade-left"
-                          data-aos-delay={400 + idx * 50}
-                        >
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+                <Button color="red" href="/about-us" className="mt-1">
+                  Know More About
+                </Button>
+              </div>
 
-                    <div
-                      className="liimg mt-5"
-                      data-aos="zoom-in"
-                      data-aos-delay="700"
-                      data-aos-duration="1000"
-                    >
-                      <Image
-                        src="/assets/img/cpane-laptop.webp"
-                        className="img-fluid"
-                        alt="Laptop with web design"
-                        width={500}
-                        height={350}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
+              <div
+                className="rs-opportunity__services"
+                data-aos="fade-up"
+                data-aos-delay="140"
+              >
+                <p className="rs-opportunity__include">
+                  Our web design Dubai services include:
+                </p>
+
+                <ol className="rs-opportunity__list">
+                  {features.map((feature, idx) => (
+                    <li key={idx}>
+                      <span className="rs-opportunity__num">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ol>
+
+                <div className="rs-opportunity__visual">
+                  <Image
+                    src="/assets/img/cpane-laptop.webp"
+                    alt="Laptop with web design"
+                    width={560}
+                    height={390}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 420px"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>

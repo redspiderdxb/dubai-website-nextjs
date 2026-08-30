@@ -1,3 +1,4 @@
+import PageStyles from "../../components/seo/PageStyles";
 import Layout from "../../components/layout/Layout";
 import SEO from "../../components/seo/SEO";
 import ServiceHero from "../../components/services/ServiceHero";
@@ -16,6 +17,7 @@ export default function ServicesPage({ services }) {
 
   return (
     <Layout>
+        <PageStyles href="/assets/css/pages/service.css" />
       <SEO
         title="Our Services | RedSpider"
         description="Explore RedSpider’s digital services in Dubai, including web design, web development, ecommerce, mobile apps, WhatsApp API integration and related business solutions."

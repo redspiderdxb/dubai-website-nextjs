@@ -1,3 +1,4 @@
+import PageStyles from "../components/seo/PageStyles";
 import SEO from "../components/seo/SEO";
 import Layout from "../components/layout/Layout";
 
@@ -82,6 +83,7 @@ export default function Home({
 
   return (
     <>
+      <PageStyles href="/assets/css/pages/home.css" />
       <SEO {...seo} includeBusinessSchema={true} faqSchema={faqSchema} />
 
       <Layout>

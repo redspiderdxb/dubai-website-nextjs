@@ -1,5 +1,6 @@
 // pages/faqs/index.js
 
+import PageStyles from "../../components/seo/PageStyles";
 import FAQPage from "../../components/FAQPage";
 import SEO from "../../components/seo/SEO";
 
@@ -14,6 +15,7 @@ export default function FAQs() {
 
   return (
     <>
+      <PageStyles href="/assets/css/pages/faqs.css" />
       <SEO {...seoData} />
       <FAQPage />
     </>

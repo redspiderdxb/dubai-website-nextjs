@@ -1,11 +1,8 @@
-import { Fragment, useState } from "react";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 import ServiceFaqs from "../services/ServiceFaqs";
 import GoogleReviews from "../ui/GoogleReviews";
+import ServiceWorkGallery from "../services/ServiceWorkGallery";
 
 const SERVICE_ICONS = [
   "bi-vector-pen",
@@ -25,9 +22,6 @@ const TYPE_ICONS = [
 ];
 
 export default function LogoDesignTemplate({ data }) {
-  const [galleryLightboxOpen, setGalleryLightboxOpen] = useState(false);
-  const [galleryLightboxIndex, setGalleryLightboxIndex] = useState(0);
-
   if (!data) {
     return <div className="text-center py-5">Loading...</div>;
   }
@@ -289,13 +283,6 @@ export default function LogoDesignTemplate({ data }) {
     ).values(),
   );
 
-  const gallerySlides = uniqueGalleryImages.map((item) => ({
-    src: item.image.replace(
-      "http://localhost/redspider/public/",
-      "https://redspider.rsworkspace.net/admin/public/",
-    ),
-  }));
-
   const styles = {
     "--primary-color": primary_color,
     "--secondary-color": secondary_color,
@@ -467,67 +454,18 @@ export default function LogoDesignTemplate({ data }) {
     },
     gallery: {
       component: (
-        <Fragment key="gallery">
-          <Lightbox
-            open={galleryLightboxOpen}
-            close={() => setGalleryLightboxOpen(false)}
-            index={galleryLightboxIndex}
-            slides={gallerySlides}
-          />
-          <section
-            id="portfolio"
-            className="portfolio section rs-custom-gallery rs-creative-gallery"
-          >
-            <div className="container">
-              <div className="rs-creative-head">
-                <span className="rs-creative-kicker">Selected work</span>
-                <h2>{gallery_title || "Our Gallery"}</h2>
-                {gallery_subtitle ? <p>{gallery_subtitle}</p> : null}
-              </div>
-              <div className="rs-custom-gallery-grid">
-                {uniqueGalleryImages.length > 0 ? (
-                  uniqueGalleryImages.map((item, index) => (
-                    <div
-                      key={`${item.image}-${index}`}
-                      className="rs-custom-gallery-item"
-                    >
-                      <div
-                        className="rs-custom-gallery-card portfolio-content h-100"
-                        onClick={() => {
-                          setGalleryLightboxIndex(index);
-                          setGalleryLightboxOpen(true);
-                        }}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            setGalleryLightboxIndex(index);
-                            setGalleryLightboxOpen(true);
-                          }
-                        }}
-                      >
-                        <img
-                          src={item.image}
-                          className="img-fluid"
-                          alt={item.title || "Gallery Image"}
-                          loading="lazy"
-                        />
-                        <div className="portfolio-info">
-                          <h3>{item.title || "Gallery Image"}</h3>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="rs-custom-gallery-empty">
-                    <p>No gallery images available</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </section>
-        </Fragment>
+        <ServiceWorkGallery
+          key="gallery"
+          title={gallery_title || "Our Gallery"}
+          subtitle={gallery_subtitle}
+          items={uniqueGalleryImages}
+          getImageSrc={(src) =>
+            String(src).replace(
+              "http://localhost/redspider/public/",
+              "https://redspider.rsworkspace.net/admin/public/",
+            )
+          }
+        />
       ),
       show: show_gallery,
     },

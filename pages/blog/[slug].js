@@ -1,3 +1,4 @@
+import PageStyles from "../../components/seo/PageStyles";
 import Layout from "../../components/layout/Layout";
 import SEO from "../../components/seo/SEO";
 import BlogPageTitle from "../../components/blog/BlogPageTitle";
@@ -150,6 +151,7 @@ export default function BlogDetail({ post, recentPosts }) {
   if (!post) {
     return (
       <Layout>
+        <PageStyles href="/assets/css/pages/blog-detail.css" />
         <SEO title="Post Not Found" />
 
         <main className="main">
@@ -201,6 +203,7 @@ export default function BlogDetail({ post, recentPosts }) {
 
   return (
     <Layout>
+      <PageStyles href="/assets/css/pages/blog-detail.css" />
       <SEO {...seoData} />
 
       <main className="main rs-blog-detail-page">
@@ -208,7 +211,7 @@ export default function BlogDetail({ post, recentPosts }) {
             BREADCRUMB
         ================================================= */}
 
-        <BlogPageTitle />
+        <BlogPageTitle title={post.title || post.name} />
 
         {/* =================================================
             BLOG DETAIL

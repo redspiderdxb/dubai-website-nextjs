@@ -1,0 +1,936 @@
+/* Portfolio page styles */
+
+/* ==========================================
+   PORTFOLIO PAGINATION
+========================================== */
+
+.portfolio-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 55px;
+  min-height: 45px;
+}
+
+.portfolio-page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.portfolio-page-number,
+.portfolio-page-arrow {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #333;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.portfolio-page-number:hover,
+.portfolio-page-arrow:hover:not(:disabled) {
+  background: #e31e24;
+  border-color: #e31e24;
+  color: #fff;
+}
+
+.portfolio-page-number.active {
+  background: #e31e24;
+  border-color: #e31e24;
+  color: #fff;
+  font-weight: 600;
+}
+
+.portfolio-page-arrow:disabled,
+.portfolio-page-number:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.portfolio-page-ellipsis {
+  width: 25px;
+  text-align: center;
+  color: #777;
+  font-weight: 500;
+}
+
+/* ==========================================
+   PORTFOLIO LOADING
+========================================== */
+
+.portfolio-count {
+  margin-top: 40px;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.portfolio-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 576px) {
+  .portfolio-pagination {
+    gap: 4px;
+    margin-top: 40px;
+  }
+
+  .portfolio-page-numbers {
+    gap: 4px;
+  }
+
+  .portfolio-page-number,
+  .portfolio-page-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 13px;
+  }
+
+  .portfolio-page-ellipsis {
+    width: 18px;
+  }
+}
+
+/* ============================================
+   PORTFOLIO TOP UI
+   ORIGINAL REDSPIDER STYLE
+============================================ */
+
+.portfolio-top-filter {
+  width: 100%;
+  margin: 0 0 28px 0;
+  padding: 0;
+}
+
+/* ============================================
+   CATEGORY ROW
+============================================ */
+
+.portfolio-category-tabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px 0;
+  padding: 0;
+}
+
+/* ============================================
+   CATEGORY BUTTONS
+============================================ */
+
+.portfolio-category-tab {
+  color: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+  height: auto;
+  min-height: 44px;
+  box-shadow: none;
+  background: #333;
+  border: none;
+  border-radius: 0;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: inline-flex;
+}
+
+.portfolio-category-tab:hover {
+  background: #444;
+}
+
+.portfolio-category-tab.active {
+  background: #b40000;
+}
+
+/* ============================================
+   YOUTUBE
+============================================ */
+
+.portfolio-youtube-btn {
+  display: inline-flex;
+  align-items: center;
+
+  height: 44px;
+  margin: 0;
+  padding: 0 12px;
+
+  gap: 8px;
+
+  color: #222;
+  background: transparent;
+
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.portfolio-youtube-btn i {
+  display: inline-block;
+
+  color: #ff0000;
+
+  font-size: 22px;
+  line-height: 1;
+}
+
+.portfolio-youtube-btn:hover {
+  color: #222;
+  text-decoration: none;
+}
+
+/* ============================================
+   SEARCH ROW
+============================================ */
+
+.portfolio-search-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================
+   INDUSTRY DROPDOWN
+============================================ */
+
+.portfolio-industry-select {
+  width: auto;
+  min-width: 240px;
+  flex: 0 0 auto;
+}
+
+/* ============================================
+   SEARCH INPUT
+============================================ */
+
+.portfolio-search-input {
+  width: auto;
+  flex: 1 1 280px;
+  min-width: 220px;
+  height: 44px;
+
+  padding: 0 14px;
+
+  border: 1px solid #888;
+  border-radius: 0;
+
+  background: #fff;
+  color: #333;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+
+  outline: none;
+}
+
+.portfolio-search-input::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+/* ============================================
+   SEARCH BUTTON
+============================================ */
+
+.portfolio-search-btn {
+  width: auto;
+  min-width: 96px;
+  height: 44px;
+
+  padding: 0 22px;
+
+  border: 0;
+  border-radius: 0;
+
+  background: #333;
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+
+  line-height: 44px;
+
+  cursor: pointer;
+}
+
+.portfolio-search-btn:hover {
+  background: #222;
+}
+
+.portfolio-search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #888;
+  background: #fff;
+  color: #333;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.portfolio-search-clear:hover {
+  background: #f3f3f3;
+}
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media (max-width: 767px) {
+
+  .portfolio-heading {
+    font-size: 27px;
+    margin-bottom: 15px;
+  }
+
+  .portfolio-category-tabs {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .portfolio-category-tab {
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .portfolio-youtube-btn {
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .portfolio-search-row {
+    flex-wrap: wrap;
+  }
+
+  .portfolio-industry-select,
+  .portfolio-search-input,
+  .portfolio-search-btn {
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
+    font-size: 15px;
+  }
+
+  .portfolio-search-btn {
+    line-height: 44px;
+  }
+
+  .portfolio-search-clear {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.portfolio-youtube-facade {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: #000;
+  cursor: pointer;
+}
+
+.portfolio-youtube-facade img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.portfolio-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 48px;
+  transform: translate(-50%, -50%);
+  background: #ff0000;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.portfolio-youtube-facade:hover .portfolio-play-icon {
+  background: #cc0000;
+}
+
+/* =========================================================
+   PORTFOLIO HERO
+   ========================================================= */
+
+.portfolio-page-hero {
+  position: relative;
+
+  min-height: 500px;
+  height: 500px;
+
+  display: flex;
+  align-items: center;
+
+  background-image: url("/assets/img/about-bg5.webp");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+  padding: 170px 0 56px;
+}
+
+.portfolio-page-hero.about-hero,
+.portfolio-page-hero.hero-marquee {
+  height: 500px !important;
+}
+
+/* Dark overlay like original website */
+
+.portfolio-page-hero .portfolio-hero-overlay,
+.rs-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(9, 9, 12, 0.78) 0%, rgba(17, 17, 21, 0.68) 52%, rgba(124, 18, 18, 0.26) 100%);
+  z-index: 1;
+}
+
+/* Keep content above overlay */
+
+.portfolio-page-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Main title */
+
+.portfolio-page-hero .rs-process-title {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  text-align: center;
+}
+
+/* Red highlighted text */
+
+.portfolio-page-hero .rs-process-highlight {
+  position: relative;
+
+  display: inline-block;
+
+  color: #e00000;
+}
+
+/* Underline */
+
+.portfolio-page-hero .rs-process-underline {
+  position: absolute;
+
+  left: 0;
+  bottom: -7px;
+
+  width: 100%;
+  height: 14px;
+
+  overflow: visible;
+
+  pointer-events: none;
+}
+
+.portfolio-page-hero .rs-process-underline path {
+  fill: none;
+
+  stroke: #e00000;
+
+  stroke-width: 3;
+
+  stroke-linecap: round;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+  .portfolio-page-hero,
+  .portfolio-page-hero.about-hero,
+  .portfolio-page-hero.hero-marquee {
+    height: 500px !important;
+    min-height: 500px;
+    padding: 150px 0 48px !important;
+  }
+
+  .portfolio-page-hero .rs-process-title-sec {
+    padding: 0 12px !important;
+  }
+
+  .portfolio-page-hero .rs-process-title {
+    font-size: 25px;
+  }
+
+  .portfolio-projects-hero {
+    min-height: 280px !important;
+
+    padding: 55px 20px 45px !important;
+  }
+
+  .portfolio-projects-hero .hero-titleinner {
+    font-size: 42px;
+  }
+
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .portfolio-page-hero,
+  .portfolio-page-hero.about-hero,
+  .portfolio-page-hero.hero-marquee {
+    height: 500px !important;
+    min-height: 500px;
+    padding: 145px 0 40px !important;
+    background-position: center center;
+  }
+
+  .portfolio-page-hero .rs-process-title {
+    font-size: 21px;
+
+    line-height: 1.25;
+  }
+
+  .portfolio-page-hero .rs-process-underline {
+    bottom: -5px;
+
+    height: 10px;
+  }
+
+  .portfolio-projects-hero {
+    min-height: 250px !important;
+
+    padding: 45px 15px 40px !important;
+  }
+
+  .portfolio-projects-hero .hero-titleinner {
+    margin-bottom: 22px;
+
+    font-size: 36px;
+  }
+
+  .portfolio-projects-hero .section-title h2 {
+    font-size: 18px;
+  }
+
+  .portfolio-projects-hero .section-title p {
+    font-size: 10px;
+
+    line-height: 1.5;
+  }
+
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .portfolio-page-hero,
+  .portfolio-page-hero.about-hero,
+  .portfolio-page-hero.hero-marquee {
+    padding: 140px 0 36px !important;
+    height: 500px !important;
+    min-height: 500px;
+  }
+
+  .portfolio-page-hero .rs-process-title {
+    font-size: 18px;
+  }
+
+  .portfolio-projects-hero {
+    padding: 40px 12px 35px !important;
+  }
+
+  .portfolio-projects-hero .hero-titleinner {
+    font-size: 31px;
+  }
+
+  .portfolio-projects-hero .section-title h2 {
+    font-size: 16px;
+  }
+
+}
+
+.porh {
+  font-family: var(--default-font);
+}
+
+/* ============================================
+   PORTFOLIO CARD - FINAL
+============================================ */
+
+#portfolio .portfolio-item {
+  margin-bottom: 0;
+}
+
+#portfolio .portfolio-content {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.78 / 1;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #111;
+}
+
+/* Image */
+
+#portfolio .portfolio-content img {
+  display: block;
+  width: 100%;
+  height: 100% !important;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+
+  object-fit: cover;
+  object-position: top center;
+
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+/* ============================================
+   TOP TITLE BADGE
+============================================ */
+
+#portfolio .portfolio-info h3 {
+  position: absolute !important;
+
+  top: 12px !important;
+  left: 12px !important;
+
+  margin: 0 !important;
+  padding: 5px 9px !important;
+
+  background: #d90000 !important;
+  color: #fff !important;
+
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+
+  white-space: nowrap;
+
+  z-index: 5;
+}
+
+/* ============================================
+   BOTTOM TEXT - ALWAYS VISIBLE
+============================================ */
+
+#portfolio .portfolio-info p {
+  position: absolute !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 10px !important;
+
+  margin: 0 !important;
+  padding: 0 12px !important;
+
+  background: transparent !important;
+  color: #fff !important;
+
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+
+  text-align: center !important;
+
+  z-index: 5;
+}
+
+/* ============================================
+   INFO CONTAINER
+============================================ */
+
+#portfolio .portfolio-info {
+  position: absolute !important;
+  inset: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  z-index: 3;
+}
+
+/* ============================================
+   HOVER DARK OVERLAY
+============================================ */
+
+#portfolio .portfolio-content::after {
+  content: "";
+  opacity: 0;
+  z-index: 2;
+  background: #00000094;
+  transition: opacity 0.3s;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#portfolio .portfolio-content:has(.portfolio-video-wrapper)::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+#portfolio .portfolio-video-wrapper {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+#portfolio .portfolio-video-wrapper iframe {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: auto;
+}
+
+#portfolio .portfolio-content:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   IMAGE HOVER
+============================================ */
+
+#portfolio .portfolio-content:hover img {
+  transform: scale(1.015);
+}
+
+/* ============================================
+   CENTER ICONS
+============================================ */
+
+#portfolio .portfolio-info .preview-link,
+#portfolio .portfolio-info .details-link {
+  position: absolute !important;
+
+  top: 50% !important;
+
+  width: 34px !important;
+  height: 34px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  color: #fff !important;
+
+  font-size: 21px !important;
+  line-height: 1 !important;
+
+  opacity: 0;
+  visibility: hidden;
+
+  z-index: 6;
+
+  transform: translateY(-50%) !important;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Zoom icon */
+
+#portfolio .portfolio-info .preview-link {
+  left: calc(50% - 38px) !important;
+}
+
+/* Link icon */
+
+#portfolio .portfolio-info .details-link {
+  left: calc(50% + 5px) !important;
+}
+
+/* ============================================
+   SHOW ICONS ONLY ON HOVER
+============================================ */
+
+#portfolio .portfolio-content:hover .preview-link,
+#portfolio .portfolio-content:hover .details-link {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ============================================
+   ICON HOVER
+============================================ */
+
+#portfolio .portfolio-info .preview-link:hover,
+#portfolio .portfolio-info .details-link:hover {
+  color: #d90000 !important;
+}
+
+/* ============================================
+   TABLET
+============================================ */
+
+@media (max-width: 991px) and (min-width: 768px) {
+
+  #portfolio .portfolio-content {
+    aspect-ratio: 0.82 / 1;
+  }
+
+}
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media (max-width: 767px) {
+
+  #portfolio .portfolio-content {
+    aspect-ratio: 0.90 / 1;
+  }
+
+  #portfolio .portfolio-info h3 {
+    top: 10px !important;
+    left: 10px !important;
+
+    font-size: 10px !important;
+  }
+
+  #portfolio .portfolio-info p {
+    bottom: 10px !important;
+
+    font-size: 11px !important;
+  }
+
+}
+
+/* ============================================
+   BOTTOM TEXT HIDDEN UNTIL HOVER
+============================================ */
+
+/* Bottom description/title hidden */
+
+#portfolio .portfolio-info p {
+  opacity: 0 !important;
+  visibility: hidden !important;
+
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+/* Show bottom text on hover */
+
+#portfolio .portfolio-content:hover .portfolio-info p {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ============================================
+   CENTER ICONS - HIDDEN
+============================================ */
+
+#portfolio .portfolio-info .preview-link,
+#portfolio .portfolio-info .details-link {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* ============================================
+   CENTER ICONS - SHOW ON HOVER
+============================================ */
+
+#portfolio .portfolio-content:hover .portfolio-info .preview-link,
+#portfolio .portfolio-content:hover .portfolio-info .details-link {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ============================================
+   SMALL MOBILE
+============================================ */
+
+@media (max-width: 480px) {
+
+  #portfolio .portfolio-content {
+    aspect-ratio: 0.95 / 1;
+  }
+
+}
+

@@ -1,0 +1,1420 @@
+/* Blog detail page styles */
+
+.page-title {
+
+  padding: 249px 0 180px 0;
+}
+
+/* =========================================================
+   BLOG DETAIL PAGE
+========================================================= */
+
+.rs-blog-detail-page {
+  background: #fff;
+}
+
+/* =========================================================
+   BLOG HEADER
+========================================================= */
+
+.rs-blog-header {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto 28px;
+}
+
+.rs-blog-title {
+  margin: 0 0 20px;
+
+  color: #18141b;
+
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.08;
+  font-weight: 700;
+
+  letter-spacing: -1.5px;
+}
+
+.rs-author-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #ed1c24;
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   FEATURE IMAGE
+========================================================= */
+
+.rs-blog-feature-image {
+  position: relative;
+
+  width: 100%;
+  max-width: 1180px;
+
+  margin: 0 auto 55px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background: #f5f5f5;
+}
+
+.rs-blog-feature-image:hover .rs-blog-feature-img {
+  transform: scale(1.015);
+}
+
+.rs-image-caption {
+  position: absolute;
+
+  left: 20px;
+  bottom: 18px;
+
+  padding: 7px 11px;
+
+  border-radius: 5px;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+
+  font-size: 9px;
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition: all 0.3s ease;
+}
+
+.rs-blog-feature-image:hover .rs-image-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   BLOG BODY
+========================================================= */
+
+.rs-blog-body-layout {
+  width: 100%;
+  max-width: 1080px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    275px minmax(0, 1fr);
+
+  gap: 55px;
+
+  /*
+    IMPORTANT:
+    Do NOT use sticky here.
+    Sticky is controlled by BlogDetailSidebar.jsx
+  */
+
+  align-items: stretch;
+
+  position: relative;
+}
+
+/* =========================================================
+   SIDEBAR COLUMN
+========================================================= */
+
+.rs-blog-sidebar-column {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  /*
+    Makes the column take the full article height.
+    This gives the JS sticky/absolute system
+    a proper boundary.
+  */
+
+  align-self: stretch;
+
+  height: 100%;
+
+  z-index: 10;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.rs-blog-sidebar {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  height: max-content;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   TOC BOX
+========================================================= */
+
+.rs-blog-toc {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 20px;
+
+  border: 1px solid #e6e0e7;
+  border-radius: 10px;
+
+  background: #fff;
+
+  box-shadow:
+    0 8px 25px rgba(30, 20, 35, 0.045);
+}
+
+/* =========================================================
+   TOC TITLE
+========================================================= */
+
+.rs-toc-title {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding-bottom: 14px;
+  margin-bottom: 7px;
+
+  border-bottom: 1px solid #eee8ef;
+
+  color: #211c25;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+/* =========================================================
+   TOC ICON
+========================================================= */
+
+.rs-toc-icon {
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 6px;
+
+  background: #fff0f0;
+  color: #ed1c24;
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   TOC NAV
+========================================================= */
+
+.rs-toc-nav {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+/* =========================================================
+   TOC ITEM
+========================================================= */
+
+.rs-toc-item {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 9px 10px 9px 13px;
+
+  border-left: 2px solid transparent;
+
+  color: #68616b;
+
+  font-size: 10px;
+  line-height: 1.45;
+
+  text-decoration: none;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    padding-left 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.rs-toc-item:hover {
+  color: #ed1c24;
+
+  background: #fff6f6;
+
+  padding-left: 17px;
+
+  text-decoration: none;
+}
+
+.rs-toc-item.active {
+  color: #ed1c24;
+
+  background: #fff3f3;
+
+  border-left-color: #ed1c24;
+
+  font-weight: 600;
+
+  padding-left: 17px;
+}
+
+/* =========================================================
+   H3 / SUB ITEM
+========================================================= */
+
+.rs-toc-item.sub-item {
+  padding-left: 25px;
+
+  font-size: 9px;
+}
+
+.rs-toc-item.sub-item:hover,
+.rs-toc-item.sub-item.active {
+  padding-left: 29px;
+}
+
+/* =========================================================
+   EMPTY TOC
+========================================================= */
+
+.rs-toc-empty {
+  color: #999;
+
+  font-size: 10px;
+}
+
+/* =========================================================
+   ARTICLE CONTENT
+========================================================= */
+
+.rs-blog-content {
+  min-width: 0;
+
+  width: 100%;
+  max-width: 100%;
+
+  color: #565058;
+
+  font-size: 14px;
+  line-height: 1.85;
+
+  position: relative;
+
+  z-index: 1;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   BLOG HTML
+========================================================= */
+
+.rs-blog-html {
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+
+  overflow-wrap: break-word;
+
+  word-break: normal;
+}
+
+.rs-blog-html p {
+  margin: 0 0 21px;
+}
+
+/* =========================================================
+   H2
+========================================================= */
+
+.rs-blog-html h2 {
+  position: relative;
+
+  margin: 45px 0 17px;
+
+  padding-left: 42px;
+
+  color: #211c25;
+
+  font-size: 25px;
+  line-height: 1.3;
+
+  font-weight: 700;
+
+  scroll-margin-top: 120px;
+}
+
+/* =========================================================
+   H3
+========================================================= */
+
+.rs-blog-html h3 {
+  margin: 32px 0 13px;
+
+  color: #29232c;
+
+  font-size: 19px;
+  line-height: 1.4;
+
+  font-weight: 650;
+
+  scroll-margin-top: 120px;
+}
+
+/* =========================================================
+   H4
+========================================================= */
+
+.rs-blog-html h4 {
+  margin: 25px 0 10px;
+
+  color: #29232c;
+
+  font-size: 16px;
+
+  font-weight: 650;
+}
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.rs-blog-html ul,
+.rs-blog-html ol {
+  margin: 15px 0 24px;
+
+  padding-left: 23px;
+}
+
+.rs-blog-html li {
+  margin-bottom: 8px;
+}
+
+.rs-blog-html li::marker {
+  color: #ed1c24;
+}
+
+/* =========================================================
+   STRONG
+========================================================= */
+
+.rs-blog-html strong {
+  color: #2b2630;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.rs-blog-html a {
+  color: #ed1c24;
+
+  text-decoration: underline;
+
+  text-underline-offset: 3px;
+}
+
+.rs-blog-html a:hover {
+  color: #b90e15;
+}
+
+/* =========================================================
+   BLOCKQUOTE
+========================================================= */
+
+.rs-blog-html blockquote {
+  margin: 30px 0;
+
+  padding: 21px 24px;
+
+  border-left: 4px solid #ed1c24;
+
+  border-radius: 0 8px 8px 0;
+
+  background: #fff6f6;
+
+  color: #403941;
+
+  line-height: 1.75;
+}
+
+/* =========================================================
+   CONTENT IMAGES
+========================================================= */
+
+.rs-blog-html img {
+  display: block;
+
+  max-width: 100%;
+  height: auto;
+
+  margin: 30px auto;
+
+  border-radius: 8px;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.rs-blog-html table {
+  width: 100%;
+
+  margin: 28px 0;
+
+  border-collapse: collapse;
+
+  font-size: 12px;
+}
+
+.rs-blog-html th,
+.rs-blog-html td {
+  padding: 11px 13px;
+
+  border: 1px solid #e2dce3;
+
+  text-align: left;
+}
+
+.rs-blog-html th {
+  background: #f8f6f8;
+
+  color: #252029;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   TAGS
+========================================================= */
+
+.rs-blog-bottom-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-top: 45px;
+
+  padding-top: 22px;
+
+  border-top: 1px solid #e8e2e8;
+}
+
+.rs-blog-bottom-tags a {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 11px;
+
+  border: 1px solid #ded7df;
+
+  border-radius: 20px;
+
+  color: #655e68;
+
+  background: #fff;
+
+  font-size: 9px;
+
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+.rs-blog-bottom-tags a:hover {
+  border-color: #ed1c24;
+
+  background: #ed1c24;
+
+  color: #fff;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+  .rs-blog-title {
+    font-size: 40px;
+  }
+
+  .rs-blog-body-layout {
+    grid-template-columns:
+      220px minmax(0, 1fr);
+
+    gap: 30px;
+  }
+
+  .rs-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+  .rs-blog-wrapper {
+    padding: 25px 15px 55px;
+  }
+
+  .rs-blog-title {
+    font-size: 30px;
+
+    line-height: 1.15;
+  }
+
+  .rs-blog-meta {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .rs-blog-meta-right {
+    flex-wrap: wrap;
+
+    gap: 10px 15px;
+  }
+
+  .rs-blog-feature-image {
+    margin-bottom: 35px;
+
+    border-radius: 8px;
+  }
+
+  .rs-blog-feature-img {
+    min-height: 220px;
+
+    object-fit: cover;
+  }
+
+
+  /* =====================================================
+     MOBILE BODY
+  ===================================================== */
+
+  .rs-blog-body-layout {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 28px;
+
+    width: 100%;
+
+    max-width: 100%;
+  }
+
+
+  /* =====================================================
+     MOBILE SIDEBAR COLUMN
+  ===================================================== */
+
+  .rs-blog-sidebar-column {
+    position: relative !important;
+
+    width: 100% !important;
+
+    height: auto !important;
+
+    order: -1;
+
+    align-self: auto;
+
+    z-index: 10;
+  }
+
+
+  /* =====================================================
+     MOBILE SIDEBAR
+  ===================================================== */
+
+  .rs-blog-sidebar {
+    position: static !important;
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    height: auto !important;
+
+    top: auto !important;
+
+    left: auto !important;
+
+    right: auto !important;
+
+    bottom: auto !important;
+
+    z-index: auto !important;
+  }
+
+
+  /* =====================================================
+     MOBILE TOC
+  ===================================================== */
+
+  .rs-blog-toc {
+    padding: 16px;
+  }
+
+  .rs-toc-item {
+    font-size: 10px;
+  }
+
+
+  /* =====================================================
+     MOBILE CONTENT
+  ===================================================== */
+
+  .rs-blog-content {
+    width: 100%;
+
+    max-width: 100%;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+  }
+
+  .rs-blog-intro {
+    font-size: 14px;
+
+    line-height: 1.75;
+  }
+
+  .rs-blog-html h2 {
+    margin-top: 35px;
+
+    padding-left: 37px;
+
+    font-size: 20px;
+  }
+
+  .rs-blog-html h2::before {
+    width: 25px;
+
+    height: 25px;
+  }
+
+  .rs-blog-html h2::after {
+    left: 6px;
+
+    top: 8px;
+  }
+
+  .rs-blog-html h3 {
+    font-size: 17px;
+  }
+
+
+  /* =====================================================
+     MOBILE RELATED
+  ===================================================== */
+
+  .rs-related-section {
+    padding: 55px 15px 60px;
+  }
+
+  .rs-related-heading h2 {
+    font-size: 29px;
+  }
+
+  .rs-related-featured {
+    min-height: 330px;
+  }
+
+  .rs-related-overlay {
+    padding: 20px;
+  }
+
+  .rs-related-overlay h3 {
+    font-size: 20px;
+  }
+
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .rs-blog-title {
+    font-size: 27px;
+  }
+
+  .rs-blog-feature-img {
+    min-height: 195px;
+  }
+
+  .rs-related-small {
+    grid-template-columns:
+      85px 1fr;
+
+    min-height: 105px;
+  }
+
+  .rs-related-small-image {
+    min-height: 85px;
+  }
+
+  .rs-related-small-content h4 {
+    font-size: 11px;
+  }
+
+}
+
+/* =========================================================
+   BLOG ARTICLE CONTENT
+   ONLY INNER DYNAMIC BLOG CONTENT
+========================================================= */
+
+.rs-blog-html {
+  width: 100%;
+  max-width: 100%;
+  color: #30253a;
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* =========================================================
+   PARAGRAPHS
+========================================================= */
+
+.rs-blog-html p {
+  margin: 0 0 14px;
+  color: #40364a;
+  font-size: 14px;
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+.rs-blog-html p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.rs-blog-html a {
+  color: #5b16b8;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(91, 22, 184, 0.25);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.rs-blog-html a:hover {
+  color: #ed1c24;
+  border-bottom-color: #ed1c24;
+}
+
+/* =========================================================
+   H2
+========================================================= */
+
+.rs-blog-html h2 {
+  position: relative;
+
+  margin: 34px 0 10px;
+  padding: 0 0 0 0;
+
+  color: #21172d;
+
+  font-size: 25px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+
+  scroll-margin-top: 120px;
+}
+
+/* Small red/purple accent before H2 */
+
+.rs-blog-html h2::before {
+  content: "";
+  display: block;
+
+  width: 34px;
+  height: 3px;
+
+  margin-bottom: 9px;
+
+  background: #ed1c24;
+  border-radius: 5px;
+}
+
+/* =========================================================
+   H3
+========================================================= */
+
+.rs-blog-html h3 {
+  position: relative;
+
+  margin: 26px 0 8px;
+
+  color: #2a1b36;
+
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.15px;
+
+  scroll-margin-top: 120px;
+}
+
+.rs-blog-html h3::before {
+  content: "";
+  display: inline-block;
+
+  width: 5px;
+  height: 5px;
+
+  margin: 0 8px 3px 0;
+
+  border-radius: 50%;
+  background: #ed1c24;
+}
+
+/* =========================================================
+   FIRST PARAGRAPH / INTRO FEEL
+========================================================= */
+
+.rs-blog-html>p:first-child {
+  margin-top: 0;
+}
+
+/* =========================================================
+   LISTS
+========================================================= */
+
+.rs-blog-html ul,
+.rs-blog-html ol {
+  margin: 14px 0 18px;
+  padding-left: 0;
+
+  list-style: none;
+}
+
+.rs-blog-html ul li,
+.rs-blog-html ol li {
+  position: relative;
+
+  margin: 7px 0;
+  padding: 10px 14px 10px 34px;
+
+  color: #40364a;
+
+  font-size: 13px;
+  line-height: 1.55;
+
+  background: #faf7fc;
+
+  border: 1px solid #e8dff0;
+  border-radius: 8px;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Check icon */
+
+.rs-blog-html ul li::before {
+  content: "✓";
+
+  position: absolute;
+  left: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 15px;
+  height: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ed1c24;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  border: 1px solid rgba(237, 28, 36, 0.3);
+  border-radius: 50%;
+}
+
+/* Numbered list */
+
+.rs-blog-html ol {
+  counter-reset: rsBlogCounter;
+}
+
+.rs-blog-html ol li {
+  counter-increment: rsBlogCounter;
+}
+
+.rs-blog-html ol li::before {
+  content: counter(rsBlogCounter);
+
+  position: absolute;
+  left: 10px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+  background: #5b16b8;
+
+  border-radius: 50%;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.rs-blog-html ul li:hover,
+.rs-blog-html ol li:hover {
+  background: #fff;
+  border-color: #d9c6e7;
+  transform: translateX(2px);
+}
+
+/* =========================================================
+   NESTED LISTS
+========================================================= */
+
+.rs-blog-html li ul,
+.rs-blog-html li ol {
+  margin: 8px 0 0;
+}
+
+.rs-blog-html li li {
+  margin: 5px 0;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background: #fff;
+}
+
+/* =========================================================
+   IMAGES
+========================================================= */
+
+.rs-blog-html img {
+  display: block;
+
+  width: auto;
+  max-width: 100%;
+  height: auto;
+
+  margin: 24px auto;
+
+  border-radius: 10px;
+
+  border: 1px solid #e5dce9;
+
+  box-shadow: 0 10px 30px rgba(35, 20, 45, 0.08);
+}
+
+/* WordPress image alignment */
+
+.rs-blog-html img.alignleft {
+  float: left;
+  max-width: 48%;
+  margin: 6px 24px 18px 0;
+}
+
+.rs-blog-html img.alignright {
+  float: right;
+  max-width: 48%;
+  margin: 6px 0 18px 24px;
+}
+
+.rs-blog-html img.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================================
+   FIGURE
+========================================================= */
+
+.rs-blog-html figure {
+  margin: 24px 0;
+}
+
+.rs-blog-html figure img {
+  margin: 0 auto;
+}
+
+.rs-blog-html figcaption {
+  margin-top: 7px;
+
+  color: #817688;
+
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.rs-blog-html table {
+  width: 100% !important;
+  max-width: 100%;
+
+  margin: 24px 0;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  overflow: hidden;
+
+  background: #fff;
+
+  border: 1px solid #e3d8ea;
+  border-radius: 10px;
+
+  font-size: 12px;
+}
+
+/* Table wrapper generated by external/editor HTML */
+
+.rs-blog-html .TyagGW_tableContainer,
+.rs-blog-html .TyagGW_tableWrapper {
+  width: 100%;
+  max-width: 100%;
+
+  overflow-x: auto;
+
+  margin: 24px 0;
+}
+
+/* Remove duplicate table margin */
+
+.rs-blog-html .TyagGW_tableContainer table,
+.rs-blog-html .TyagGW_tableWrapper table {
+  margin: 0;
+}
+
+/* Table head */
+
+.rs-blog-html table thead {
+  background: #f7f1fa;
+}
+
+.rs-blog-html table th {
+  padding: 12px 14px;
+
+  color: #291b35;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-align: left;
+
+  border-bottom: 1px solid #dfd2e7;
+}
+
+/* Table cells */
+
+.rs-blog-html table td {
+  padding: 11px 14px;
+
+  color: #51475a;
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  border-bottom: 1px solid #eee7f1;
+}
+
+/* Remove last border */
+
+.rs-blog-html table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Table hover */
+
+.rs-blog-html table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.rs-blog-html table tbody tr:hover {
+  background: #faf7fc;
+}
+
+/* =========================================================
+   BLOCKQUOTE
+========================================================= */
+
+.rs-blog-html blockquote {
+  position: relative;
+
+  margin: 22px 0;
+  padding: 17px 20px 17px 23px;
+
+  color: #40364a;
+
+  background: linear-gradient(135deg,
+      #faf5ff 0%,
+      #fff7f6 100%);
+
+  border: 1px solid #eaddec;
+  border-left: 4px solid #ed1c24;
+
+  border-radius: 8px;
+}
+
+.rs-blog-html blockquote p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   STRONG / BOLD
+========================================================= */
+
+.rs-blog-html strong,
+.rs-blog-html b {
+  color: #24172f;
+  font-weight: 700;
+}
+
+/* =========================================================
+   HORIZONTAL LINE
+========================================================= */
+
+.rs-blog-html hr {
+  height: 1px;
+
+  margin: 30px 0;
+
+  border: 0;
+
+  background: linear-gradient(to right,
+      #ed1c24,
+      #e8dfea,
+      transparent);
+}
+
+/* =========================================================
+   CODE
+========================================================= */
+
+.rs-blog-html code {
+  padding: 2px 6px;
+
+  color: #5b16b8;
+  background: #f6f0fa;
+
+  border: 1px solid #e7dced;
+  border-radius: 4px;
+
+  font-size: 12px;
+}
+
+.rs-blog-html pre {
+  margin: 20px 0;
+  padding: 17px;
+
+  overflow-x: auto;
+
+  color: #f5f5f5;
+  background: #21182b;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   TEXT SELECTION
+========================================================= */
+
+.rs-blog-html ::selection {
+  background: #ed1c24;
+  color: #fff;
+}
+
+/* =========================================================
+   CLEAR FLOATS
+========================================================= */
+
+.rs-blog-html::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+  .rs-blog-html {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .rs-blog-html p {
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .rs-blog-html h2 {
+    margin-top: 28px;
+    margin-bottom: 9px;
+
+    font-size: 21px;
+    line-height: 1.3;
+  }
+
+  .rs-blog-html h3 {
+    margin-top: 23px;
+
+    font-size: 17px;
+  }
+
+  .rs-blog-html ul,
+  .rs-blog-html ol {
+    margin: 12px 0 16px;
+  }
+
+  .rs-blog-html ul li,
+  .rs-blog-html ol li {
+    padding: 9px 11px 9px 31px;
+
+    font-size: 12px;
+  }
+
+  .rs-blog-html table {
+    min-width: 600px;
+  }
+
+  .rs-blog-html .TyagGW_tableContainer,
+  .rs-blog-html .TyagGW_tableWrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .rs-blog-html img.alignleft,
+  .rs-blog-html img.alignright {
+    float: none;
+
+    display: block;
+
+    max-width: 100%;
+
+    margin: 20px auto;
+  }
+
+  .rs-blog-html blockquote {
+    padding: 14px 16px 14px 18px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .rs-blog-html h2 {
+    font-size: 19px;
+  }
+
+  .rs-blog-html h3 {
+    font-size: 16px;
+  }
+
+  .rs-blog-html p {
+    font-size: 12.5px;
+  }
+
+  .rs-blog-html ul li,
+  .rs-blog-html ol li {
+    font-size: 11.5px;
+  }
+}
+
+.rs-blog-html img {
+  display: none !important;
+}

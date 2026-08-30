@@ -46,8 +46,6 @@ export default function Document() {
 
         <link rel="stylesheet" href="/assets/fonts/stylesheet.css" />
 
-        <link rel="stylesheet" href="/assets/css/custom.css" />
-
         <link rel="icon" href="/assets/img/favicon.webp" />
 
         <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.webp" />

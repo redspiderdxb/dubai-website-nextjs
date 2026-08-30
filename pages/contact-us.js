@@ -1,3 +1,4 @@
+import PageStyles from "../components/seo/PageStyles";
 import Layout from "../components/layout/Layout";
 import SEO from "../components/seo/SEO";
 import { fetchContactData } from "../lib/api";
@@ -95,6 +96,7 @@ export default function Contact({ contactData }) {
 
   return (
     <Layout>
+        <PageStyles href="/assets/css/pages/contact.css" />
       <SEO
         {...seoData}
         includeBusinessSchema={true}

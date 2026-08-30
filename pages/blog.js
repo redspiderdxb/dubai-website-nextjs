@@ -1,5 +1,6 @@
 // pages/blog.js
 
+import PageStyles from "../components/seo/PageStyles";
 import Layout from "../components/layout/Layout";
 import SEO from "../components/seo/SEO";
 import BlogHero from "../components/blog/BlogHero";
@@ -25,6 +26,7 @@ export default function Blog({ posts, pagination }) {
 
   return (
     <Layout>
+        <PageStyles href="/assets/css/pages/blog.css" />
       <SEO {...seoData} />
 
       <BlogHero />

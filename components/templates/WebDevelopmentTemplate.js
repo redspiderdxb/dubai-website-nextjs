@@ -1,10 +1,7 @@
-import { Fragment, useState } from "react";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-
 import ServiceCTA from "../services/ServiceCTA";
 import ServiceFaqs from "../services/ServiceFaqs";
 import GoogleReviews from "../ui/GoogleReviews";
+import ServiceWorkGallery from "../services/ServiceWorkGallery";
 
 const SERVICE_ICONS = [
   "bi-code-slash",
@@ -26,9 +23,6 @@ const BENEFIT_ICONS = [
 ];
 
 export default function WebDevelopmentTemplate({ data }) {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
   if (!data) {
     return <div className="text-center py-5">Loading...</div>;
   }
@@ -190,10 +184,6 @@ export default function WebDevelopmentTemplate({ data }) {
         .map((item) => [item.image, item]),
     ).values(),
   ).slice(0, 9);
-
-  const gallerySlides = uniqueGallery.map((item) => ({
-    src: getImageUrl(item.image),
-  }));
 
   const sectionMap = {
     hero: {
@@ -380,67 +370,13 @@ export default function WebDevelopmentTemplate({ data }) {
     },
     gallery: {
       component: (
-        <Fragment key="gallery">
-          <Lightbox
-            open={lightboxOpen}
-            close={() => setLightboxOpen(false)}
-            index={lightboxIndex}
-            slides={gallerySlides}
-          />
-          <section
-            id="portfolio"
-            className="portfolio section rs-custom-gallery rs-creative-gallery"
-          >
-            <div className="container">
-              <div className="rs-creative-head">
-                <span className="rs-creative-kicker">Selected work</span>
-                <h2>{gallery_title || "Our Work"}</h2>
-                {gallery_subtitle ? <p>{gallery_subtitle}</p> : null}
-              </div>
-              <div className="rs-custom-gallery-grid">
-                {uniqueGallery.length > 0 ? (
-                  uniqueGallery.map((item, index) => (
-                    <div
-                      key={`${item.image}-${index}`}
-                      className="rs-custom-gallery-item"
-                    >
-                      <div
-                        className="rs-custom-gallery-card portfolio-content h-100"
-                        onClick={() => {
-                          setLightboxIndex(index);
-                          setLightboxOpen(true);
-                        }}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            setLightboxIndex(index);
-                            setLightboxOpen(true);
-                          }
-                        }}
-                      >
-                        <img
-                          src={getImageUrl(item.image)}
-                          className="img-fluid"
-                          alt={item.title || "Gallery Image"}
-                          loading="lazy"
-                        />
-                        <div className="portfolio-info">
-                          <h3>{item.title || "Gallery Image"}</h3>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="rs-custom-gallery-empty">
-                    <p>No gallery images available</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </section>
-        </Fragment>
+        <ServiceWorkGallery
+          key="gallery"
+          title={gallery_title || "Our Work"}
+          subtitle={gallery_subtitle}
+          items={uniqueGallery}
+          getImageSrc={getImageUrl}
+        />
       ),
       show: show_gallery,
     },

@@ -1,3 +1,4 @@
+import PageStyles from "../components/seo/PageStyles";
 import Layout from "../components/layout/Layout";
 import SEO from "../components/seo/SEO";
 
@@ -76,6 +77,7 @@ export default function Portfolio({ initialGalleries, initialPagination }) {
 
   return (
     <Layout>
+        <PageStyles href="/assets/css/pages/portfolio.css" />
       <SEO
         {...seoData}
         includeBusinessSchema={true}

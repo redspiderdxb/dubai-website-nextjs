@@ -1,3 +1,4 @@
+import PageStyles from "../components/seo/PageStyles";
 import Layout from "../components/layout/Layout";
 import SEO from "../components/seo/SEO";
 import { fetchAboutData } from "../lib/api";
@@ -96,6 +97,7 @@ export default function About({ aboutData }) {
 
   return (
     <Layout>
+        <PageStyles href="/assets/css/pages/about.css" />
       <SEO
         {...seoData}
         includeBusinessSchema={true}

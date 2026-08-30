@@ -1,10 +1,7 @@
-import { Fragment, useState } from "react";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 import ServiceFaqs from "../services/ServiceFaqs";
+import ServiceWorkGallery from "../services/ServiceWorkGallery";
 
 const SERVICE_ICONS = [
   "bi-journal-richtext",
@@ -23,9 +20,6 @@ const BENEFIT_ICONS = [
 ];
 
 export default function GraphicDesignTemplate({ data }) {
-  const [galleryLightboxOpen, setGalleryLightboxOpen] = useState(false);
-  const [galleryLightboxIndex, setGalleryLightboxIndex] = useState(0);
-
   if (!data) {
     return <div className="text-center py-5">Loading...</div>;
   }
@@ -210,10 +204,6 @@ export default function GraphicDesignTemplate({ data }) {
     ).values(),
   );
 
-  const gallerySlides = uniqueGalleryImages.map((item) => ({
-    src: item.image,
-  }));
-
   const styles = {
     "--primary-color": primary_color,
     "--secondary-color": secondary_color,
@@ -371,81 +361,12 @@ export default function GraphicDesignTemplate({ data }) {
 
     gallery: {
       component: (
-        <Fragment key="gallery">
-          <Lightbox
-            open={galleryLightboxOpen}
-            close={() => setGalleryLightboxOpen(false)}
-            index={galleryLightboxIndex}
-            slides={gallerySlides}
-          />
-          <section
-            id="portfolio"
-            className="portfolio section rs-custom-gallery rs-creative-gallery"
-          >
-            <div className="container">
-              <div className="rs-creative-head">
-                <span className="rs-creative-kicker">Selected work</span>
-                <h2>{gallery_title || "Our Gallery"}</h2>
-                {gallery_subtitle ? <p>{gallery_subtitle}</p> : null}
-              </div>
-
-              <div className="rs-custom-gallery-grid">
-                {uniqueGalleryImages.length > 0 ? (
-                  uniqueGalleryImages.map((item, index) => (
-                    <div
-                      key={`${item.image}-${index}`}
-                      className="rs-custom-gallery-item"
-                    >
-                      <div
-                        className="rs-custom-gallery-card portfolio-content h-100"
-                        onClick={() => {
-                          setGalleryLightboxIndex(index);
-                          setGalleryLightboxOpen(true);
-                        }}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            setGalleryLightboxIndex(index);
-                            setGalleryLightboxOpen(true);
-                          }
-                        }}
-                      >
-                        <img
-                          src={item.image}
-                          className="img-fluid"
-                          alt={item.title || "Gallery Image"}
-                          loading="lazy"
-                        />
-                        <div className="portfolio-info">
-                          <h3>{item.title || "Gallery Image"}</h3>
-                          {item.description && <p>{item.description}</p>}
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setGalleryLightboxIndex(index);
-                              setGalleryLightboxOpen(true);
-                            }}
-                            className="preview-link border-0 bg-transparent text-white"
-                            aria-label={`View ${item.title || "Gallery Image"}`}
-                          >
-                            <i className="bi bi-zoom-in" aria-hidden="true"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="rs-custom-gallery-empty">
-                    <p>No gallery images available</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </section>
-        </Fragment>
+        <ServiceWorkGallery
+          key="gallery"
+          title={gallery_title || "Our Gallery"}
+          subtitle={gallery_subtitle}
+          items={uniqueGalleryImages}
+        />
       ),
       show: show_gallery,
     },

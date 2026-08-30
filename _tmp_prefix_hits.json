@@ -1,0 +1,1852 @@
+{
+  "shared": [
+    {
+      "prefix": "rs-process-",
+      "custom": 82,
+      "globals": 18
+    },
+    {
+      "prefix": "rs-process-title",
+      "custom": 27,
+      "globals": 10
+    },
+    {
+      "prefix": "rs-process-highlight",
+      "custom": 12,
+      "globals": 3
+    },
+    {
+      "prefix": "rs-process-underline",
+      "custom": 5,
+      "globals": 5
+    },
+    {
+      "prefix": "rs-process-text",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-process-title-sec",
+      "custom": 4,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-process-subtitle",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-section-subtitle",
+      "custom": 14,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-inner-hero",
+      "custom": 17,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-hero-overlay",
+      "custom": 5,
+      "globals": 1
+    },
+    {
+      "prefix": "hero-marquee",
+      "custom": 18,
+      "globals": 8
+    },
+    {
+      "prefix": "design-developemnt-hero",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "contact-shared-hero-bg",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "breadcrumbs",
+      "custom": 0,
+      "globals": 9
+    },
+    {
+      "prefix": "page-title",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "section-title",
+      "custom": 17,
+      "globals": 8
+    },
+    {
+      "prefix": "btn-animation",
+      "custom": 9,
+      "globals": 0
+    },
+    {
+      "prefix": "btn-red",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "btn-black",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "btn-title",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "phone-field",
+      "custom": 44,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-themed-select",
+      "custom": 63,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-form-field",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-field-",
+      "custom": 35,
+      "globals": 4
+    },
+    {
+      "prefix": "home-faq",
+      "custom": 33,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-faq-sec",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-home-faq-box",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "re-process",
+      "custom": 33,
+      "globals": 0
+    },
+    {
+      "prefix": "re-process-card",
+      "custom": 16,
+      "globals": 0
+    },
+    {
+      "prefix": "re-process-icon",
+      "custom": 9,
+      "globals": 0
+    },
+    {
+      "prefix": "contact-cta",
+      "custom": 19,
+      "globals": 2
+    },
+    {
+      "prefix": "cta-heading",
+      "custom": 11,
+      "globals": 0
+    },
+    {
+      "prefix": "cta-wrap",
+      "custom": 8,
+      "globals": 0
+    },
+    {
+      "prefix": "cta-card",
+      "custom": 16,
+      "globals": 0
+    },
+    {
+      "prefix": "cta-content",
+      "custom": 8,
+      "globals": 0
+    },
+    {
+      "prefix": "icon-box",
+      "custom": 10,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-header",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-nav",
+      "custom": 17,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-dropdown",
+      "custom": 8,
+      "globals": 10
+    },
+    {
+      "prefix": "rs-mobile",
+      "custom": 15,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-footer",
+      "custom": 4,
+      "globals": 125
+    },
+    {
+      "prefix": "rs-logo",
+      "custom": 32,
+      "globals": 11
+    },
+    {
+      "prefix": "rs-top-row",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-bottom-row",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-call-now",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-social",
+      "custom": 2,
+      "globals": 38
+    },
+    {
+      "prefix": "rs-whatsapp",
+      "custom": 53,
+      "globals": 3
+    },
+    {
+      "prefix": "rs-fixed-contact",
+      "custom": 3,
+      "globals": 10
+    },
+    {
+      "prefix": "scroll-top",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "swim-foot",
+      "custom": 1,
+      "globals": 5
+    },
+    {
+      "prefix": "footer-app-link",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "footer-touch-link",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-copyright",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "rs-heading",
+      "custom": 14,
+      "globals": 6
+    },
+    {
+      "prefix": "rs-menu",
+      "custom": 3,
+      "globals": 11
+    },
+    {
+      "prefix": "rs-services",
+      "custom": 8,
+      "globals": 20
+    },
+    {
+      "prefix": "about-hero",
+      "custom": 6,
+      "globals": 8
+    }
+  ],
+  "home": [
+    {
+      "prefix": "rs-hero-slider",
+      "custom": 85,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-slide",
+      "custom": 32,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-slide-content",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-slide-kicker",
+      "custom": 5,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-slide-title",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-slide-description",
+      "custom": 5,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-slide-button",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-slide-count",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-review-box",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-review-top",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-review-text",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-google-word",
+      "custom": 11,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-google-reviews",
+      "custom": 29,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-google-review",
+      "custom": 38,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-google-g",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-stars",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-marquee",
+      "custom": 31,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-gsap",
+      "custom": 28,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-agency",
+      "custom": 159,
+      "globals": 9
+    },
+    {
+      "prefix": "rs-packages",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-left-card",
+      "custom": 13,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-left-heading",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-join",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-arrow-btn",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-card",
+      "custom": 55,
+      "globals": 18
+    },
+    {
+      "prefix": "rs-creative-sec",
+      "custom": 10,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-row",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-media",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-img",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-photo",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-copy",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-content",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-inner",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-heading",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-title",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-accordion",
+      "custom": 18,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-acc-label",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-title-black",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-home-blog",
+      "custom": 35,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-home-clients",
+      "custom": 13,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-gd-intro",
+      "custom": 58,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-video-zoom-sec",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-video-wrap",
+      "custom": 11,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-video-content",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-video-title",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-service-card",
+      "custom": 26,
+      "globals": 17
+    },
+    {
+      "prefix": "rs-service-grid-outline",
+      "custom": 11,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-service-icon",
+      "custom": 5,
+      "globals": 0
+    },
+    {
+      "prefix": "key-features",
+      "custom": 86,
+      "globals": 0
+    },
+    {
+      "prefix": "about-features",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "laptop-mobile",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "inlinebtns",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "lin_sec",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "ideo-grow-se",
+      "custom": 5,
+      "globals": 0
+    },
+    {
+      "prefix": "play-btn",
+      "custom": 5,
+      "globals": 0
+    },
+    {
+      "prefix": "video-thumb",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "video-link",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "form-sec",
+      "custom": 90,
+      "globals": 0
+    },
+    {
+      "prefix": "containera",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "mid_sec",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "req_block_left",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "stak-sec",
+      "custom": 5,
+      "globals": 0
+    },
+    {
+      "prefix": "stak-wrap",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "stack-no",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "stack-desc",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "bluelight-backgroun",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "google-box",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "quick-contect",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "liimg",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "darkblue-line",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "fade-title",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "services-sec",
+      "custom": 26,
+      "globals": 7
+    },
+    {
+      "prefix": "service-card",
+      "custom": 31,
+      "globals": 17
+    },
+    {
+      "prefix": "process-sec",
+      "custom": 5,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-full-section",
+      "custom": 2,
+      "globals": 0
+    }
+  ],
+  "about": [
+    {
+      "prefix": "rs-about-company",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-company-left",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-company-logos",
+      "custom": 5,
+      "globals": 0
+    },
+    {
+      "prefix": "about-h1",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "about-info-sec",
+      "custom": 48,
+      "globals": 0
+    },
+    {
+      "prefix": "about-who",
+      "custom": 23,
+      "globals": 0
+    },
+    {
+      "prefix": "about-who-watermark",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "about-who-top",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "about-who-grid",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "about-who-title",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "about-who-text",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "about-who-connect",
+      "custom": 7,
+      "globals": 0
+    },
+    {
+      "prefix": "about-stats",
+      "custom": 8,
+      "globals": 0
+    },
+    {
+      "prefix": "about-image-card",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "stat-box",
+      "custom": 11,
+      "globals": 0
+    },
+    {
+      "prefix": "stat-icon",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "company_numbers",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "service-container-red",
+      "custom": 23,
+      "globals": 0
+    },
+    {
+      "prefix": "service-section-inner",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-hero-video",
+      "custom": 31,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-hero",
+      "custom": 39,
+      "globals": 4
+    }
+  ],
+  "blog": [
+    {
+      "prefix": "rs-blog-section",
+      "custom": 0,
+      "globals": 7
+    },
+    {
+      "prefix": "rs-blog-empty",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-blog-intro",
+      "custom": 0,
+      "globals": 6
+    },
+    {
+      "prefix": "rs-blog-intro-kicker",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-intro-count",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-categories",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "rs-blog-category",
+      "custom": 0,
+      "globals": 7
+    },
+    {
+      "prefix": "rs-blog-featured",
+      "custom": 0,
+      "globals": 43
+    },
+    {
+      "prefix": "rs-blog-featured-image",
+      "custom": 0,
+      "globals": 10
+    },
+    {
+      "prefix": "rs-blog-featured-badge",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-blog-featured-content",
+      "custom": 0,
+      "globals": 17
+    },
+    {
+      "prefix": "rs-blog-featured-label",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-image-overlay",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-blog-meta",
+      "custom": 0,
+      "globals": 15
+    },
+    {
+      "prefix": "rs-meta-dot",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-read-more",
+      "custom": 0,
+      "globals": 8
+    },
+    {
+      "prefix": "rs-blog-grid",
+      "custom": 0,
+      "globals": 6
+    },
+    {
+      "prefix": "rs-blog-card",
+      "custom": 0,
+      "globals": 32
+    },
+    {
+      "prefix": "rs-blog-card-image",
+      "custom": 0,
+      "globals": 10
+    },
+    {
+      "prefix": "rs-blog-card-image-wrap",
+      "custom": 0,
+      "globals": 6
+    },
+    {
+      "prefix": "rs-blog-card-category",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-blog-card-content",
+      "custom": 0,
+      "globals": 13
+    },
+    {
+      "prefix": "rs-blog-hover-icon",
+      "custom": 0,
+      "globals": 5
+    },
+    {
+      "prefix": "rs-blog-loading",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-spinner",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-pagination",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-blog-page-arrow",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-blog-page-numbers",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-page-ellipsis",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-page-number",
+      "custom": 0,
+      "globals": 6
+    },
+    {
+      "prefix": "blog-hero-custom",
+      "custom": 7,
+      "globals": 38
+    },
+    {
+      "prefix": "rs-blog-hero-kicker",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-blog-hero-copy",
+      "custom": 0,
+      "globals": 3
+    }
+  ],
+  "blog-detail": [
+    {
+      "prefix": "rs-blog-detail",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-header",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-title",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-blog-author",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-author-avatar",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-blog-meta-right",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-blog-feature-image",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-blog-feature-img",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-image-caption",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-blog-body-layout",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "rs-blog-sidebar-column",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-blog-sidebar",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-blog-content",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-blog-html",
+      "custom": 0,
+      "globals": 92
+    },
+    {
+      "prefix": "rs-blog-intro",
+      "custom": 0,
+      "globals": 6
+    },
+    {
+      "prefix": "rs-blog-bottom-tags",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "rs-blog-toc",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-toc-title",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-toc-icon",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-toc-nav",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-toc-empty",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-toc-",
+      "custom": 0,
+      "globals": 11
+    }
+  ],
+  "contact": [
+    {
+      "prefix": "rs-contact-sec",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-layout",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-copy",
+      "custom": 6,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-contact-details",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-detail",
+      "custom": 12,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-detail-icon",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-highlights",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-highlight",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-form-card",
+      "custom": 55,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-form",
+      "custom": 63,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-form-grid",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-submit",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-terms",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-callout",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-map-sec",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-map",
+      "custom": 13,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-contact-map-facade",
+      "custom": 5,
+      "globals": 0
+    }
+  ],
+  "portfolio": [
+    {
+      "prefix": "portfolio-page-hero",
+      "custom": 7,
+      "globals": 23
+    },
+    {
+      "prefix": "portfolio-page-",
+      "custom": 7,
+      "globals": 36
+    },
+    {
+      "prefix": "portfolio-top-filter",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "portfolio-category-tabs",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "portfolio-category-tab",
+      "custom": 0,
+      "globals": 6
+    },
+    {
+      "prefix": "portfolio-youtube-btn",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "portfolio-youtube-facade",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "portfolio-search-row",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "portfolio-industry-select",
+      "custom": 1,
+      "globals": 2
+    },
+    {
+      "prefix": "portfolio-search-input",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "portfolio-search-btn",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "portfolio-search-clear",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "portfolio-loading",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "portfolio-pagination",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "portfolio-page-arrow",
+      "custom": 0,
+      "globals": 4
+    },
+    {
+      "prefix": "portfolio-page-numbers",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "portfolio-page-ellipsis",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "portfolio-page-number",
+      "custom": 0,
+      "globals": 7
+    },
+    {
+      "prefix": "portfolio-count",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "portfolio-video-wrapper",
+      "custom": 0,
+      "globals": 3
+    },
+    {
+      "prefix": "portfolio-play-icon",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "porh",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "filter-cwp",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "filter-nl",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "filter-video",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "filter-websites",
+      "custom": 0,
+      "globals": 0
+    }
+  ],
+  "service": [
+    {
+      "prefix": "rs-creative-page",
+      "custom": 10,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-intro",
+      "custom": 8,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-kicker",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-link",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-btn",
+      "custom": 7,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-head",
+      "custom": 9,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-card",
+      "custom": 13,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-services",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-why",
+      "custom": 14,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-process",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-steps",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-step",
+      "custom": 8,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-pill",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-industry",
+      "custom": 7,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-platforms",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-creative-industries",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-custom-gallery",
+      "custom": 31,
+      "globals": 0
+    },
+    {
+      "prefix": "service-template",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "web-development-template",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "ecommerce-template",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "email-marketing-template",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "graphic-design-template",
+      "custom": 92,
+      "globals": 0
+    },
+    {
+      "prefix": "logo-design-template",
+      "custom": 74,
+      "globals": 58
+    },
+    {
+      "prefix": "mobile-app-template",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "brochure-design-template",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "whatsapp-business-template",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "web-hosting-template",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "archidex-",
+      "custom": 88,
+      "globals": 70
+    },
+    {
+      "prefix": "arch-arrow",
+      "custom": 8,
+      "globals": 3
+    },
+    {
+      "prefix": "arch-name",
+      "custom": 10,
+      "globals": 5
+    },
+    {
+      "prefix": "arch-no",
+      "custom": 6,
+      "globals": 2
+    },
+    {
+      "prefix": "opposite-gallery",
+      "custom": 5,
+      "globals": 2
+    },
+    {
+      "prefix": "gallery-inner",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "gallery-track",
+      "custom": 9,
+      "globals": 0
+    },
+    {
+      "prefix": "gallery-title-wrap",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "pix-bg",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "dark-cs-bg",
+      "custom": 4,
+      "globals": 3
+    },
+    {
+      "prefix": "dev-before",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "cus-20",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "cus-title-ani-1",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-main-title",
+      "custom": 17,
+      "globals": 1
+    },
+    {
+      "prefix": "letconnect",
+      "custom": 20,
+      "globals": 4
+    },
+    {
+      "prefix": "title-wrap",
+      "custom": 18,
+      "globals": 10
+    }
+  ],
+  "products": [
+    {
+      "prefix": "crm-hero",
+      "custom": 0,
+      "globals": 2
+    },
+    {
+      "prefix": "rs-crm-",
+      "custom": 0,
+      "globals": 51
+    },
+    {
+      "prefix": "rs-sms-",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "sms-intrest-ser",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "sms-target-ser",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "hero-banner",
+      "custom": 2,
+      "globals": 1
+    },
+    {
+      "prefix": "hero-titleinner",
+      "custom": 4,
+      "globals": 5
+    },
+    {
+      "prefix": "rs-hero-banner",
+      "custom": 0,
+      "globals": 1
+    },
+    {
+      "prefix": "rs-full-section",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-circle-",
+      "custom": 8,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-desc",
+      "custom": 9,
+      "globals": 3
+    },
+    {
+      "prefix": "rs-subtitle",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-video-wrapper",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "daily-features",
+      "custom": 12,
+      "globals": 0
+    },
+    {
+      "prefix": "df-header",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "df-right",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "df-row",
+      "custom": 7,
+      "globals": 0
+    },
+    {
+      "prefix": "dubizzle-clone-features",
+      "custom": 8,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-classified",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-directory",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-best-realestate",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-project-gallery",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-gallery-shape",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-project-img",
+      "custom": 8,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-gallery-badge",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-dashed-line",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-best-content",
+      "custom": 8,
+      "globals": 0
+    },
+    {
+      "prefix": "re-label",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "re-features",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "re-feature-box",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "re-item",
+      "custom": 31,
+      "globals": 0
+    },
+    {
+      "prefix": "re-launch",
+      "custom": 6,
+      "globals": 0
+    },
+    {
+      "prefix": "re-launch-content",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "re-launch-img",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "re-launch-wrap",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "re-services-showcase",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "why-sticky-sec",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "why-sticky-content",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "why-label",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "why-mini-stats",
+      "custom": 5,
+      "globals": 0
+    },
+    {
+      "prefix": "why-card-list",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "why-row-card",
+      "custom": 17,
+      "globals": 0
+    },
+    {
+      "prefix": "dynamic-text",
+      "custom": 7,
+      "globals": 0
+    },
+    {
+      "prefix": "effect-title",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "mobile-app-bs",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "mobile-app-ser",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "key-features",
+      "custom": 86,
+      "globals": 0
+    },
+    {
+      "prefix": "kf-title",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "kf-list",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "kf-phone",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "grid-box",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-grid-row",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-grid-item",
+      "custom": 9,
+      "globals": 0
+    },
+    {
+      "prefix": "ma-info",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "dot-bg",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "line-bg-dark",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "host-list",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "imgbox",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "parent-div",
+      "custom": 1,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-api",
+      "custom": 65,
+      "globals": 137
+    },
+    {
+      "prefix": "rs-chip",
+      "custom": 2,
+      "globals": 4
+    },
+    {
+      "prefix": "rs-brand",
+      "custom": 10,
+      "globals": 2
+    },
+    {
+      "prefix": "ecommerce-platforms",
+      "custom": 60,
+      "globals": 3
+    },
+    {
+      "prefix": "email-campaign-types",
+      "custom": 11,
+      "globals": 0
+    },
+    {
+      "prefix": "ect-card",
+      "custom": 7,
+      "globals": 0
+    },
+    {
+      "prefix": "ect-heading",
+      "custom": 2,
+      "globals": 0
+    },
+    {
+      "prefix": "ect-icon",
+      "custom": 3,
+      "globals": 0
+    },
+    {
+      "prefix": "ect-text",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "ep-card",
+      "custom": 4,
+      "globals": 0
+    },
+    {
+      "prefix": "rs-sms",
+      "custom": 0,
+      "globals": 0
+    },
+    {
+      "prefix": "fdf",
+      "custom": 4,
+      "globals": 2
+    }
+  ],
+  "faqs": [
+    {
+      "prefix": "faq-hero-custom",
+      "custom": 0,
+      "globals": 0
+    }
+  ]
+}
