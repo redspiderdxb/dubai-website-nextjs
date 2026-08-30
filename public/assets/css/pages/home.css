@@ -1410,7 +1410,7 @@
 
 .form-sec {
   position: relative;
-  background: #111 url("/assets/img/form-bg.jpg") center center no-repeat;
+  background: #111 url("/assets/img/form-bg.webp") center center no-repeat;
   background-size: cover;
   padding: 50px 0;
   overflow: hidden;

@@ -64,24 +64,46 @@ export default function Document() {
           href="/assets/vendor/bootstrap/css/bootstrap.min.css"
         />
 
-        <link
-          rel="stylesheet"
-          href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
-        />
-
-        <link
-          rel="stylesheet"
-          href="/assets/vendor/glightbox/css/glightbox.min.css"
-        />
-
-        <link
-          rel="stylesheet"
-          href="/assets/vendor/swiper/swiper-bundle.min.css"
-        />
-
         <link rel="stylesheet" href="/assets/css/main.css" />
 
         <link rel="stylesheet" href="/assets/fonts/stylesheet.css" />
+
+        {/* Non-critical CSS — load without blocking first paint / Speed Index */}
+        <link
+          rel="stylesheet"
+          href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+          media="print"
+          // eslint-disable-next-line react/no-unknown-property
+          onLoad="this.media='all'"
+        />
+        <link
+          rel="stylesheet"
+          href="/assets/vendor/glightbox/css/glightbox.min.css"
+          media="print"
+          // eslint-disable-next-line react/no-unknown-property
+          onLoad="this.media='all'"
+        />
+        <link
+          rel="stylesheet"
+          href="/assets/vendor/swiper/swiper-bundle.min.css"
+          media="print"
+          // eslint-disable-next-line react/no-unknown-property
+          onLoad="this.media='all'"
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+          />
+          <link
+            rel="stylesheet"
+            href="/assets/vendor/glightbox/css/glightbox.min.css"
+          />
+          <link
+            rel="stylesheet"
+            href="/assets/vendor/swiper/swiper-bundle.min.css"
+          />
+        </noscript>
       </Head>
 
       <body>

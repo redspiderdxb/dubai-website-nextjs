@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Button from "../ui/Button";
@@ -597,15 +598,16 @@ export default function Portfolio({ initialGalleries = [] }) {
                             ================================== */}
 
                       {imageSrc ? (
-                        <img
+                        <Image
                           src={imageSrc}
                           className="img-fluid"
                           alt={project.title}
-                          width="600"
-                          height="400"
-                          loading={index < 3 ? "eager" : "lazy"}
-                          fetchPriority={index < 3 ? "high" : "auto"}
-                          decoding="async"
+                          width={600}
+                          height={400}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                          quality={70}
+                          priority={index === 0}
+                          loading={index === 0 ? undefined : "lazy"}
                           style={{
                             width: "100%",
                             height: "100%",
@@ -624,13 +626,15 @@ export default function Portfolio({ initialGalleries = [] }) {
                           }}
                         />
                       ) : (
-                        <img
+                        <Image
                           src="/assets/img/portfolio/portfolio-1.webp"
                           className="img-fluid"
                           alt={project.title}
-                          width="600"
-                          height="400"
-                          loading={index < 3 ? "eager" : "lazy"}
+                          width={600}
+                          height={400}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                          quality={70}
+                          loading="lazy"
                         />
                       )}
 

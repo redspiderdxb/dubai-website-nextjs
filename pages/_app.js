@@ -159,7 +159,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/jquery/jquery-3.7.1.min.js"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
 
       {/* ================================================
@@ -177,7 +177,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/swiper/swiper-bundle.min.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* ================================================
@@ -186,7 +186,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* ================================================
@@ -195,7 +195,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* ================================================
@@ -204,7 +204,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/gsap/gsap.min.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* ================================================
@@ -213,7 +213,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/gsap/ScrollTrigger.min.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* ================================================
@@ -222,14 +222,14 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/split-type/split-type.min.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* ================================================
           AOS
           ================================================ */}
 
-      <Script src="/assets/vendor/aos/aos.js" strategy="afterInteractive" />
+      <Script src="/assets/vendor/aos/aos.js" strategy="lazyOnload" />
 
       {/* ================================================
           GLIGHTBOX
@@ -237,7 +237,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/glightbox/js/glightbox.min.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* ================================================
@@ -246,7 +246,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/purecounter/purecounter_vanilla.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       
