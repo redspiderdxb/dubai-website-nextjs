@@ -1,5 +1,6 @@
 import Layout from "./layout/Layout";
 import ContactCTA from "./ui/ContactCTA";
+import ServiceFaqs from "./services/ServiceFaqs";
 
 export default function FAQPage() {
   const faqs = [
@@ -132,10 +133,6 @@ export default function FAQPage() {
     ? `${process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public"}/storage/${heroBackground}`
     : "";
 
-  const midPoint = Math.ceil(faqs.length / 2);
-  const leftFaqs = faqs.slice(0, midPoint);
-  const rightFaqs = faqs.slice(midPoint);
-
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -189,94 +186,12 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section
-        id="rs-faq-sec"
-        className="home-faq rs-faq-sec section py-5 light-background"
-      >
-        <div
-          className="container"
-          style={{
-            maxWidth: "1600px",
-            background: "#f6f6f6",
-            padding: "40px",
-            borderRadius: "30px",
-          }}
-        >
-          <div className="row g-4">
-            <div className="col-lg-6">
-              <div className="accordion" id="faqPageLeft">
-                {leftFaqs.map((faq, index) => (
-                  <div
-                    className="accordion-item"
-                    key={`left-${faq.id || index}`}
-                  >
-                    <h3
-                      className="accordion-header"
-                      id={`faq-page-left-heading-${index}`}
-                    >
-                      <button
-                        className="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#faq-page-left-${index}`}
-                        aria-expanded="false"
-                        aria-controls={`faq-page-left-${index}`}
-                      >
-                        {faq.question}
-                      </button>
-                    </h3>
-
-                    <div
-                      id={`faq-page-left-${index}`}
-                      className="accordion-collapse collapse"
-                      aria-labelledby={`faq-page-left-heading-${index}`}
-                      data-bs-parent="#faqPageLeft"
-                    >
-                      <div className="accordion-body">{faq.answer}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="col-lg-6">
-              <div className="accordion" id="faqPageRight">
-                {rightFaqs.map((faq, index) => (
-                  <div
-                    className="accordion-item"
-                    key={`right-${faq.id || index}`}
-                  >
-                    <h3
-                      className="accordion-header"
-                      id={`faq-page-right-heading-${index}`}
-                    >
-                      <button
-                        className="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#faq-page-right-${index}`}
-                        aria-expanded="false"
-                        aria-controls={`faq-page-right-${index}`}
-                      >
-                        {faq.question}
-                      </button>
-                    </h3>
-
-                    <div
-                      id={`faq-page-right-${index}`}
-                      className="accordion-collapse collapse"
-                      aria-labelledby={`faq-page-right-heading-${index}`}
-                      data-bs-parent="#faqPageRight"
-                    >
-                      <div className="accordion-body">{faq.answer}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ServiceFaqs
+        faqs={faqs}
+        title={heroTitle}
+        subtitle={heroDesc}
+        idPrefix="faqpage"
+      />
 
       <script
         type="application/ld+json"

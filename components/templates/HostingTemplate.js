@@ -1,59 +1,49 @@
-"use client";
-
-import { useState } from "react";
-
 import ServiceCTA from "../services/ServiceCTA";
+import ServiceFaqs from "../services/ServiceFaqs";
+
+const SOLUTION_ICONS = [
+  "bi-hdd-stack",
+  "bi-server",
+  "bi-cloud-check",
+  "bi-cpu",
+  "bi-diagram-3",
+  "bi-globe2",
+];
+
+const WHY_ICONS = [
+  "bi-geo-alt",
+  "bi-activity",
+  "bi-headset",
+  "bi-shield-lock",
+  "bi-gift",
+  "bi-clock-history",
+];
 
 export default function HostingTemplate({ data }) {
-  if (!data) return <div className="text-center py-5">Loading...</div>;
+  if (!data) {
+    return <div className="text-center py-5">Loading...</div>;
+  }
 
-  // ============================================
-  // ✅ DYNAMIC FIELDS - Backend se aayenge
-  // ============================================
   const {
-    name,
-    description,
-    content,
-    image,
-    hero_title,
     hero_subtitle,
     hero_description,
     hero_image,
     hero_background,
     intro_small_heading = "Web Hosting · Dubai",
-    intro_main_heading = "",
     intro_description = "Our hosting infrastructure promises high performance, advanced security and a 99.99% uptime guarantee, ensuring that your website is always accessible. All hosting packages come with fully trained technical support as well as tools to assist you in managing your website with confidence.",
-    intro_image = "",
-    cta_title,
-    cta_description,
     cta_button_text,
     cta_button_link,
-    cta_background,
-
-    // Repeater Data
     features = [],
     benefits = [],
     processes = [],
     technologies = [],
     faqs = [],
-    gallery = [],
-
-    // ============================================
-    // 🆕 NEW - FRONTEND DYNAMIC SETTINGS
-    // ============================================
-
-    // Design & Layout
-    layout_style = "grid",
-    columns_count = 3,
     primary_color = "#FF6B35",
     secondary_color = "#111111",
     background_color = "#F8F9FA",
     text_color = "#1A1A1A",
     button_color = "#FF6B35",
     button_text_color = "#FFFFFF",
-    section_padding = "large",
-
-    // Section Visibility
     show_hero = true,
     show_intro = true,
     show_features = true,
@@ -61,33 +51,17 @@ export default function HostingTemplate({ data }) {
     show_processes = true,
     show_technologies = true,
     show_faqs = true,
-    show_gallery = true,
     show_cta = true,
-
-    // Content Customization
-    hero_button_text = "Get Started",
-    hero_button_url = "/contact",
     features_title = "Our Web Hosting Solutions",
     features_subtitle = "Select the hosting environment that will suit your business.",
     benefits_title = "Benefits of Hosting Your Website with RedSpider",
     benefits_subtitle = "When you choose RedSpider, you receive more than just web hosting. Our reliable hosting platform includes advanced performance, security, technical support and complete digital solutions.",
     processes_title = "Why Choose RedSpider?",
-    processes_subtitle = "",
+    processes_subtitle = "Local support, reliable uptime and the tools you need to manage your website with confidence.",
     technologies_title = "Free Website Applications",
     technologies_subtitle = "Our one click application installer makes launching a Website very easy. Install popular content management system (CMS) platforms such as:",
     faqs_title = "Frequently Asked Questions",
     faqs_subtitle = "Find quick answers to common questions about web hosting.",
-    gallery_title = "Our Work",
-    gallery_subtitle = "",
-    cta_subtitle = "",
-    cta_button_url = "/contact",
-
-    // Animation
-    animation_enabled = false,
-    animation_type = "fade",
-    animation_duration = "medium",
-
-    // Section Order
     section_order = [
       "hero",
       "intro",
@@ -95,22 +69,18 @@ export default function HostingTemplate({ data }) {
       "benefits",
       "processes",
       "technologies",
-      "gallery",
       "hosting_tools",
       "faqs",
       "cta",
     ],
-
-    // Custom Code
     custom_css = "",
     custom_js = "",
   } = data;
 
-  // ============================================
-  // 📌 FALLBACK DATA - Jab backend se data na aaye
-  // ============================================
+  const imageBase =
+    process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public";
+  const contactHref = cta_button_link || "/contact-us/";
 
-  // 1. Hosting Benefits - Dynamic from benefits or static fallback
   const hostingBenefitsList =
     benefits.length > 0
       ? benefits
@@ -129,7 +99,6 @@ export default function HostingTemplate({ data }) {
           "Digital Marketing Solutions",
         ];
 
-  // 2. Hosting Solutions - Dynamic from features or static fallback
   const hostingSolutions =
     features.length > 0
       ? features
@@ -172,7 +141,6 @@ export default function HostingTemplate({ data }) {
           },
         ];
 
-  // 3. CMS Platforms - Dynamic from technologies or static fallback
   const cmsPlatforms =
     technologies.length > 0
       ? technologies
@@ -183,34 +151,42 @@ export default function HostingTemplate({ data }) {
           { icon: "drupal", name: "Drupal" },
         ];
 
-  // 4. Process Data - Dynamic from processes or static fallback
   const processData =
     processes.length > 0
       ? processes
       : [
           {
-            title: "Looking for a Website, Too?",
+            title: "Local UAE Presence",
             description:
-              "Our knowledgeable designers build modern, responsive websites that work perfectly on every device and provide an excellent user experience. From a basic business website to a complete custom-designed platform, we will create a professional website that helps your business achieve its goals.",
+              "You can always contact our local staff. No overseas support centers or lengthy waiting times, only fast and reliable support when needed.",
           },
           {
-            title: "Email Marketing Services in Dubai",
+            title: "Reliable Hosting",
             description:
-              "Want to reach thousands of potential customers? Our email marketing services help businesses promote products, services, offers and announcements through carefully planned campaigns. Using a large verified database and strategic campaign planning, you can increase engagement and generate quality leads.",
+              "We provide a guarantee of 99.99% uptime and website stability through our reliable hosting infrastructure.",
           },
           {
-            title: "SMS Marketing Services",
+            title: "Dedicated Account Support",
             description:
-              "SMS remains one of the quickest ways to communicate with your customers. Our affordable SMS marketing services help businesses send professional messages, alerts, offers and important updates directly to their target audience.",
+              "All customers of our web hosting service receive access to cPanel and expert assistance from our knowledgeable support team whenever needed.",
           },
           {
-            title: "Logo & Brochure Design",
+            title: "Enterprise-Level Security",
             description:
-              "Your image and visual identity create your first impression. RedSpider designs professional logos, brochures, company profiles, flyers and other marketing materials that help businesses stand out. We also offer high-quality printing services to companies across Dubai and the UAE.",
+              "We use modern server technologies, regular software updates, advanced firewalls and continuous monitoring to protect your website and data.",
+          },
+          {
+            title: "Free Hosting Resources",
+            description:
+              "Our hosting plans include valuable features such as free email accounts, generous storage space, bandwidth and domain-related benefits.",
+          },
+          {
+            title: "24/7 Technical Support",
+            description:
+              "Our hosting experts are available 24 hours a day to assist with technical problems, website migrations, account administration and general support.",
           },
         ];
 
-  // 5. FAQ Data - Dynamic from faqs or static fallback
   const faqData =
     faqs.length > 0
       ? faqs
@@ -237,24 +213,6 @@ export default function HostingTemplate({ data }) {
           },
         ];
 
-  // 6. Gallery Images - Dynamic from backend
-  const galleryImages = gallery.length > 0 ? gallery : [];
-
-  // ============================================
-  // 🎨 UI State
-  // ============================================
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [activeProcess, setActiveProcess] = useState(0);
-
-  const handleAccordionClick = (index) => {
-    setActiveIndex(index === activeIndex ? -1 : index);
-  };
-
-  const handleProcessClick = (index) => {
-    setActiveProcess(index === activeProcess ? -1 : index);
-  };
-
-  // Static Data (hardcoded)
   const domainExtensions = [
     { name: ".com", price: "AED 65/year" },
     { name: ".ae", price: "AED 160/year" },
@@ -263,80 +221,6 @@ export default function HostingTemplate({ data }) {
     { name: ".co", price: "AED 95/year" },
   ];
 
-  const securityFeatures = [
-    { icon: "bi-patch-check", title: "Free SSL Certificates" },
-    { icon: "bi-router", title: "Dedicated IP Options" },
-    { icon: "bi-shield-lock", title: "DDoS Protection" },
-    { icon: "bi-arrow-repeat", title: "Regular Security Updates" },
-    { icon: "bi-server", title: "Secure Server Infrastructure" },
-    { icon: "bi-activity", title: "Continuous Monitoring" },
-  ];
-
-  const cpanelFeatures = [
-    "Set up and configure email accounts",
-    "Install WordPress and other applications",
-    "Manage domains and subdomains",
-    "Upload and manage website files",
-    "Create and manage backups",
-    "Manage website databases",
-    "Monitor website performance",
-  ];
-
-  const emailFeatures = [
-    "Access from desktop and mobile devices",
-    "Compatible with iOS and Android",
-    "Advanced spam filtering",
-    "Reliable email uptime",
-    "Automatic email responders",
-    "Email forwarding",
-    "Vacation messages",
-    "Secure email access",
-  ];
-
-  const whyChooseItems = [
-    {
-      title: "Local UAE Presence",
-      description:
-        "You can always contact our local staff. No overseas support centers or lengthy waiting times, only fast and reliable support when needed.",
-    },
-    {
-      title: "Reliable Hosting",
-      description:
-        "We provide a guarantee of 99.99% uptime and website stability through our reliable hosting infrastructure.",
-    },
-    {
-      title: "Dedicated Account Support",
-      description:
-        "All customers of our web hosting service receive access to cPanel and expert assistance from our knowledgeable support team whenever needed.",
-    },
-    {
-      title: "Enterprise-Level Security",
-      description:
-        "We use modern server technologies, regular software updates, advanced firewalls and continuous monitoring to protect your website and data.",
-    },
-    {
-      title: "Free Hosting Resources",
-      description:
-        "Our hosting plans include valuable features such as free email accounts, generous storage space, bandwidth and domain-related benefits.",
-    },
-    {
-      title: "24/7 Technical Support",
-      description:
-        "Our hosting experts are available 24 hours a day to assist with technical problems, website migrations, account administration and general support.",
-    },
-  ];
-
-  const migrationServices = [
-    { icon: "bi-window-stack", title: "Website Migration" },
-    { icon: "bi-globe2", title: "Transfer or Renew a Domain" },
-    { icon: "bi-envelope-arrow-up", title: "Email Migration" },
-    { icon: "bi-puzzle", title: "Theme and Plugin Restoration" },
-    { icon: "bi-database-up", title: "Database Transfer" },
-  ];
-
-  // ============================================
-  // 🎨 Dynamic Styles
-  // ============================================
   const styles = {
     "--primary-color": primary_color,
     "--secondary-color": secondary_color,
@@ -346,9 +230,6 @@ export default function HostingTemplate({ data }) {
     "--button-text-color": button_text_color,
   };
 
-  // ============================================
-  // 📐 Section Order Mapping
-  // ============================================
   const sectionMap = {
     hero: {
       component: (
@@ -357,15 +238,9 @@ export default function HostingTemplate({ data }) {
           className="design-developemnt-hero hero-marquee"
           style={{
             backgroundImage: hero_background
-              ? `url(${
-                  process.env.NEXT_PUBLIC_IMAGE_URL ||
-                  "http://localhost/redspider/public"
-                }/storage/${hero_background})`
+              ? `url(${imageBase}/storage/${hero_background})`
               : hero_image
-                ? `url(${
-                    process.env.NEXT_PUBLIC_IMAGE_URL ||
-                    "http://localhost/redspider/public"
-                  }/storage/${hero_image})`
+                ? `url(${imageBase}/storage/${hero_image})`
                 : "none",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -373,16 +248,11 @@ export default function HostingTemplate({ data }) {
         >
           <div className="container">
             <div className="row align-items-center">
-              <div
-                className="col-lg-12"
-                data-aos="fade-right"
-                data-aos-duration="800"
-                data-aos-once="true"
-              >
+              <div className="col-lg-12">
                 <div className="rs-process-title-sec">
                   <h1 className="rs-process-title mb-3">
                     Web Hosting
-                    {hero_subtitle && (
+                    {hero_subtitle ? (
                       <span className="rs-process-highlight">
                         in Dubai
                         <svg
@@ -395,17 +265,10 @@ export default function HostingTemplate({ data }) {
                           <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
                         </svg>
                       </span>
-                    )}
+                    ) : null}
                   </h1>
-
-                  {hero_description && (
-                    <p
-                      className="rs-process-text mb-3"
-                      data-aos="fade-up"
-                      data-aos-delay="150"
-                      data-aos-duration="700"
-                      data-aos-once="true"
-                    >
+                  {hero_description ? (
+                    <p className="rs-process-text mb-3">
                       RedSpider Web & Art Design provides reliable web hosting
                       in Dubai for businesses that need secure, fast and
                       professionally managed website hosting. Our hosting
@@ -413,7 +276,7 @@ export default function HostingTemplate({ data }) {
                       technical support for websites of different sizes and
                       requirements.
                     </p>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -422,37 +285,27 @@ export default function HostingTemplate({ data }) {
       ),
       show: show_hero,
     },
+
     intro: {
       component: (
-        <section key="intro" className="rs-gd-intro">
-          <span className="rs-gd-intro__shape" aria-hidden="true"></span>
-          <div className="container px-3 px-md-4 px-xl-5">
-            <div className="row gx-xl-5 align-items-start">
-              <div className="col-lg-3">
-                <div className="rs-gd-intro__rail">
-                  <span className="rs-gd-intro__rail-icon">
-                    <i className="bi bi-server"></i>
-                  </span>
-                  <span className="rs-gd-intro__rail-text">
-                    {intro_small_heading}
-                  </span>
-                </div>
+        <section key="intro" className="rs-creative-intro">
+          <div className="container">
+            <div className="rs-creative-intro__grid">
+              <div className="rs-creative-intro__meta">
+                <span className="rs-creative-kicker">{intro_small_heading}</span>
+                <p className="rs-creative-intro__note">99.99% uptime focus</p>
               </div>
-              <div className="col-lg-7">
-                <div className="rs-gd-intro__copy">
-                  <p className="rs-gd-intro__lead rs-gd-intro__reveal">
-                    {intro_description}
-                  </p>
-                  <div className="rs-gd-intro__footer">
-                    <a className="rs-gd-intro__link" href="#">
-                      <span>Explore our Service</span>
-                      <i className="bi bi-arrow-up-right"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-2">
-                <div className="rs-gd-intro__meta">Creative since 2010</div>
+              <div className="rs-creative-intro__copy">
+                <p className="rs-creative-intro__lead">{intro_description}</p>
+                <p className="rs-creative-intro__support">
+                  From shared hosting to dedicated servers, we help businesses
+                  in Dubai keep websites fast, secure and easy to manage — with
+                  local support when you need it.
+                </p>
+                <a className="rs-creative-link" href="#web-hosting-solutions">
+                  Explore hosting plans
+                  <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -460,61 +313,43 @@ export default function HostingTemplate({ data }) {
       ),
       show: show_intro,
     },
+
     features: {
       component: (
         <section
-          className="rs-why-brochure owhsol"
-          aria-labelledby="rs-hosting-solutions-title"
+          key="features"
+          id="web-hosting-solutions"
+          className="rs-creative-services"
         >
           <div className="container">
-            <div className="row justify-content-center text-center">
-              <div className="col-lg-8 col-md-10">
-                <div className="rs-why-brochure__intro py-0">
-                  <span className="rs-why-brochure__label">
-                    Hosting Solutions
-                  </span>
-                  <h2
-                    className="rs-title-effect rs-title-letter-flip fs-1 mb-3"
-                    data-title={features_title}
-                  >
-                    {features_title}
-                  </h2>
-                  <p>{features_subtitle}</p>
-                </div>
-              </div>
+            <div className="rs-creative-head">
+              <span className="rs-creative-kicker">Hosting solutions</span>
+              <h2>{features_title}</h2>
+              <p>{features_subtitle}</p>
             </div>
-            <div className="row g-4 justify-content-center mt-0">
+            <div className="rs-creative-card-grid">
               {hostingSolutions.map((solution, index) => (
-                <div className="col-lg-4 col-md-6" key={solution.id || index}>
-                  <article className="rs-why-brochure__card">
-                    <div className="rs-why-brochure__card-inner">
-                      <div className="rs-why-brochure__card-face rs-why-brochure__card-front">
-                        <div className="rs-why-brochure__top">
-                          <span className="rs-why-brochure__icon">
-                            <i
-                              className={solution.icon || "bi-box"}
-                              aria-hidden="true"
-                            ></i>
-                          </span>
-                          <span className="rs-why-brochure__number">
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-                        </div>
-                        <h3 className="rs-why-brochure__card-title">
-                          {solution.title}
-                        </h3>
-                      </div>
-                      <div className="rs-why-brochure__card-face rs-why-brochure__card-back">
-                        <p className="rs-why-brochure__text">
-                          {solution.description}
-                        </p>
-                        <span className="rs-why-brochure__back-number">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                      </div>
-                    </div>
-                  </article>
-                </div>
+                <article
+                  key={`${solution.id || "solution"}-${index}`}
+                  className="rs-creative-card"
+                >
+                  <div className="rs-creative-card__top">
+                    <span className="rs-creative-card__icon" aria-hidden="true">
+                      <i
+                        className={`bi ${
+                          solution.icon && String(solution.icon).startsWith("bi")
+                            ? solution.icon
+                            : SOLUTION_ICONS[index % SOLUTION_ICONS.length]
+                        }`}
+                      ></i>
+                    </span>
+                    <span className="rs-creative-card__num">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3>{solution.title}</h3>
+                  <p>{solution.description}</p>
+                </article>
               ))}
             </div>
           </div>
@@ -522,73 +357,38 @@ export default function HostingTemplate({ data }) {
       ),
       show: show_features,
     },
+
     benefits: {
       component: (
-        <section className="rs-mail-tech">
-          <div className="container px-lg-5">
-            <div className="rs-mail-tech__frame">
-              <span className="rs-mail-tech__scan" aria-hidden="true"></span>
-              <div className="row align-items-center g-5 w-100">
-                <div className="col-lg-2">
-                  <div className="rs-mail-tech__index">
-                    <p className="rs-mail-tech__category">
-                      Reliable Website Hosting
-                      <br />
-                      Security &amp; Performance
-                    </p>
-                  </div>
-                </div>
-                <div className="col-lg-5">
-                  <div className="rs-mail-tech__content">
-                    <h2 className="rs-mail-tech__title">{benefits_title}</h2>
-                  </div>
-                </div>
-                <div className="col-lg-5">
-                  <div className="rs-mail-tech__content">
-                    <p className="rs-mail-tech__description">
-                      RedSpider combines hosting infrastructure, security
-                      features, website management tools and technical
-                      assistance to help businesses maintain a reliable online
-                      presence.
-                    </p>
-                    <a
-                      className="rs-mail-tech__button"
-                      href="#rs-hosting-benefit-list"
+        <section key="benefits" className="rs-creative-why">
+          <div className="container">
+            <div className="rs-creative-why__layout">
+              <div className="rs-creative-why__intro">
+                <span className="rs-creative-kicker">Included with hosting</span>
+                <h2>{benefits_title}</h2>
+                <p>{benefits_subtitle}</p>
+                <a className="rs-creative-btn" href={contactHref}>
+                  {cta_button_text || "Book a call"}
+                  <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div className="rs-creative-pill-grid">
+                {hostingBenefitsList.map((benefit, index) => {
+                  const text =
+                    typeof benefit === "string"
+                      ? benefit
+                      : benefit.title || benefit.description;
+
+                  return (
+                    <article
+                      key={`${benefit.id || "benefit"}-${index}`}
+                      className="rs-creative-pill"
                     >
-                      <span>View Benefits</span>
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M5 12h14M14 6l6 6-6 6"></path>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-                <div className="col-lg-12">
-                  <ul
-                    id="rs-hosting-benefit-list"
-                    className="rs-mail-tech__specs rs-mail-tech__specs-half"
-                  >
-                    {hostingBenefitsList.map((benefit, index) => {
-                      const benefitText =
-                        typeof benefit === "string"
-                          ? benefit
-                          : benefit.title || benefit.description || "Benefit";
-                      return (
-                        <li
-                          className="rs-mail-tech__spec"
-                          key={benefit.id || index}
-                        >
-                          <span className="rs-mail-tech__spec-label">
-                            Benefit {String(index + 1).padStart(2, "0")}
-                          </span>
-                          <span className="rs-mail-tech__spec-text">
-                            {benefitText}
-                          </span>
-                          <span className="rs-mail-tech__spec-arrow">→</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <h3>{text}</h3>
+                    </article>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -596,71 +396,49 @@ export default function HostingTemplate({ data }) {
       ),
       show: show_benefits,
     },
+
     processes: {
       component: (
-        <section className="kk-why-section">
+        <section key="processes" className="rs-creative-process">
           <div className="container">
-            <div className="kk-why-inner">
-              <div className="kk-why-grid">
-                <div className="kk-why-left">
-                  <h2 className="kk-why-title">{processes_title}</h2>
-                  <div className="kk-accordion-list">
-                    {whyChooseItems.map((item, index) => (
-                      <div className="kk-accordion-item" key={index}>
-                        <button
-                          className={`kk-accordion-btn ${activeIndex === index ? "kk-active" : ""}`}
-                          type="button"
-                          onClick={() => handleAccordionClick(index)}
-                          aria-expanded={activeIndex === index}
-                        >
-                          <h3 className="text-white">
-                            <span className="kk-accordion-symbol">
-                              {activeIndex === index ? "−" : "+"}
-                            </span>
-                            <span className="kk-accordion-label">
-                              {item.title}
-                            </span>
-                          </h3>
-                        </button>
-                        <div
-                          className={`kk-accordion-content ${activeIndex === index ? "kk-open" : ""}`}
-                        >
-                          <div className="kk-accordion-body">
-                            {item.description}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="kk-footer">
-                    <span className="kk-footer-text">Know More About :</span>
-                    <div className="kk-footer-line"></div>
-                    <a href="#" className="kk-footer-link">
-                      Contact us
-                    </a>
-                  </div>
-                </div>
-              </div>
+            <div className="rs-creative-head rs-creative-head--light">
+              <span className="rs-creative-kicker">Why RedSpider</span>
+              <h2>{processes_title}</h2>
+              {processes_subtitle ? <p>{processes_subtitle}</p> : null}
             </div>
+            <ol className="rs-creative-steps">
+              {processData.map((item, index) => (
+                <li
+                  key={`${item.id || "why"}-${index}`}
+                  className="rs-creative-step"
+                >
+                  <span className="rs-creative-step__num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="rs-creative-why__icon" aria-hidden="true">
+                    <i className={`bi ${WHY_ICONS[index % WHY_ICONS.length]}`}></i>
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
       ),
       show: show_processes,
     },
+
     technologies: {
       component: (
-        <section className="ak-cms-section" id="ak-cms-platforms">
-          <div className="ak-cms-sticky">
-            <div className="ak-cms-title-wrap">
-              <h2 className="ak-cms-title">
-                <span className="ak-cms-red">{technologies_title}</span>
-              </h2>
-              <p className="ak-cms-subtitle">{technologies_subtitle}</p>
+        <section key="technologies" className="rs-creative-platforms">
+          <div className="container">
+            <div className="rs-creative-head">
+              <span className="rs-creative-kicker">One-click apps</span>
+              <h2>{technologies_title}</h2>
+              <p>{technologies_subtitle}</p>
             </div>
-            <div
-              className="ak-cms-gallery"
-              aria-label="Content management system platforms"
-            >
+            <div className="rs-creative-platform-grid rs-creative-platform-grid--four">
               {cmsPlatforms.map((platform, index) => {
                 const iconMap = {
                   wordpress: "wordpress",
@@ -672,39 +450,34 @@ export default function HostingTemplate({ data }) {
                   typeof platform.icon === "string" &&
                   platform.icon.startsWith("bi-")
                     ? platform.icon
-                    : iconMap[platform.icon] || "default";
+                    : iconMap[platform.icon] || platform.icon || "wordpress";
 
                 return (
-                  <article className="ak-cms-card" key={platform.id || index}>
-                    <div className="ak-cms-card-content">
-                      <span className="ak-cms-card-number">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <div className="ak-cms-platform-icon" aria-hidden="true">
-                        {typeof iconName === "string" &&
-                        iconName.startsWith("bi-") ? (
-                          <i
-                            className={`bi ${iconName}`}
-                            style={{ fontSize: "3rem", color: "#FF6B35" }}
-                          ></i>
-                        ) : (
-                          <img
-                            src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName}/${iconName}-plain.svg`}
-                            alt={platform.name}
-                            className="ak-cms-icon"
-                          />
-                        )}
-                      </div>
-                      <h3 className="ak-cms-platform-name">{platform.name}</h3>
-                    </div>
+                  <article
+                    key={`${platform.id || platform.name}-${index}`}
+                    className="rs-creative-platform"
+                  >
+                    <span className="rs-creative-platform__num">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {typeof iconName === "string" &&
+                    iconName.startsWith("bi-") ? (
+                      <i className={`bi ${iconName}`} aria-hidden="true"></i>
+                    ) : (
+                      <img
+                        src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName}/${iconName}-plain.svg`}
+                        alt=""
+                      />
+                    )}
+                    <h3>{platform.name}</h3>
                   </article>
                 );
               })}
             </div>
-            <p className="ak-cms-bottom-text">
-              Whether it is creating blogs, business websites, online stores,
-              and custom web applications do it with no hassle. Just Install
-              themes, plugins and edit content from a single dashboard.
+            <p className="rs-creative-platforms__note">
+              Create blogs, business websites, online stores and custom web
+              applications from a single dashboard — then install themes,
+              plugins and edit content with ease.
             </p>
           </div>
         </section>
@@ -714,197 +487,80 @@ export default function HostingTemplate({ data }) {
 
     hosting_tools: {
       component: (
-        <section className="rs-hosting-tools">
-          <span
-            className="rs-hosting-tools__floating-icon rs-hosting-tools__floating-icon--left"
-            aria-hidden="true"
-          >
-            <i className="bi bi-window-sidebar"></i>
-          </span>
-
-          <span
-            className="rs-hosting-tools__floating-icon rs-hosting-tools__floating-icon--right"
-            aria-hidden="true"
-          >
-            <i className="bi bi-envelope-paper"></i>
-          </span>
-
+        <section key="hosting_tools" className="rs-creative-tools">
           <div className="container">
-            <div className="row g-4 align-items-stretch">
-              {/* WEBSITE HOSTING MIGRATION */}
-
-              <div className="col-lg-6">
-                <article className="rs-hosting-tools__panel">
-                  <div className="rs-hosting-tools__panel-top">
-                    <span className="rs-hosting-tools__panel-icon">
-                      <i
-                        className="bi bi-window-sidebar"
-                        aria-hidden="true"
-                      ></i>
-                    </span>
-
-                    <div>
-                      <h2 className="rs-hosting-tools__title">
-                        Website Hosting Migration
-                      </h2>
-
-                      <p className="rs-hosting-tools__description">
-                        Already hosting your website with another provider?
-                        RedSpider can assist with moving eligible website files,
-                        databases and configurations to a suitable hosting
-                        environment. Migration requirements are reviewed
-                        according to the website platform, current server setup
-                        and selected hosting package.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* <div className="mt-4">
-                    <a
-                      href="/contact"
-                      className="btn btn-animation btn-red d-inline-flex align-items-center"
-                    >
-                      <span className="btn-title">
-                        Ask About Website Migration
-                      </span>
-                    </a>
-                  </div> */}
+            <div className="rs-creative-head">
+              <span className="rs-creative-kicker">Hosting support</span>
+              <h2>Migration, management and domains</h2>
+              <p>
+                Move your website, manage hosting from cPanel, and register the
+                domain that represents your business.
+              </p>
+            </div>
+            <div className="rs-creative-tools__grid">
+              <article className="rs-creative-card">
+                <div className="rs-creative-card__top">
+                  <span className="rs-creative-card__icon" aria-hidden="true">
+                    <i className="bi bi-window-sidebar"></i>
+                  </span>
+                </div>
+                <h3>Website Hosting Migration</h3>
+                <p>
+                  Already hosting your website with another provider? RedSpider
+                  can assist with moving eligible website files, databases and
+                  configurations to a suitable hosting environment.
+                </p>
+              </article>
+              <article className="rs-creative-card">
+                <div className="rs-creative-card__top">
+                  <span className="rs-creative-card__icon" aria-hidden="true">
+                    <i className="bi bi-envelope-check"></i>
+                  </span>
+                </div>
+                <h3>Simple Website and Hosting Management</h3>
+                <p>
+                  Manage website files, databases, email accounts and
+                  applications through supported control-panel tools, with help
+                  from our team when you need it.
+                </p>
+              </article>
+            </div>
+            <div className="rs-creative-domain-grid">
+              {domainExtensions.map((domain) => (
+                <article key={domain.name} className="rs-creative-domain">
+                  <h3>{domain.name}</h3>
+                  <p>{domain.price}</p>
                 </article>
-              </div>
-
-              {/* SIMPLE WEBSITE AND HOSTING MANAGEMENT */}
-
-              <div className="col-lg-6">
-                <article className="rs-hosting-tools__panel rs-hosting-tools__panel--email">
-                  <div className="rs-hosting-tools__panel-top">
-                    <span className="rs-hosting-tools__panel-icon">
-                      <i
-                        className="bi bi-envelope-check"
-                        aria-hidden="true"
-                      ></i>
-                    </span>
-
-                    <div>
-                      <h2 className="rs-hosting-tools__title">
-                        Simple Website and Hosting Management
-                      </h2>
-
-                      <p className="rs-hosting-tools__description">
-                        Hosting customers can manage essential website functions
-                        through supported control-panel tools, including website
-                        files, databases, email accounts and applications. Our
-                        team can also provide assistance with hosting
-                        configuration and account-related requirements when
-                        needed.
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              </div>
+              ))}
             </div>
           </div>
         </section>
       ),
       show: true,
     },
+
     faqs: {
       component: (
-        <section
+        <ServiceFaqs
           key="faqs"
-          id="rs-faq-sec"
-          className="home-faq rs-faq-sec section light-background pb-0"
-        >
-          <div
-            className="container"
-            style={{
-              maxWidth: "1600px",
-              background: "#f6f6f6",
-              padding: "40px",
-              borderRadius: "30px",
-            }}
-          >
-            <div className="text-center mb-5 border-bottom pb-3">
-              <h2 className="fw-bold">{faqs_title}</h2>
-              <p>{faqs_subtitle}</p>
-            </div>
-            {faqData.length > 0 ? (
-              <div className="row g-4">
-                <div className="col-lg-6">
-                  <div className="accordion" id="faqLeft-hosting">
-                    {faqData
-                      .slice(0, Math.ceil(faqData.length / 2))
-                      .map((faq, idx) => (
-                        <div className="accordion-item" key={faq.id || idx}>
-                          <h3 className="accordion-header">
-                            <button
-                              className="accordion-button collapsed"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target={`#faq-hosting-left-${idx}`}
-                            >
-                              {faq.question}
-                            </button>
-                          </h3>
-                          <div
-                            id={`faq-hosting-left-${idx}`}
-                            className="accordion-collapse collapse"
-                            data-bs-parent="#faqLeft-hosting"
-                          >
-                            <div className="accordion-body">{faq.answer}</div>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="accordion" id="faqRight-hosting">
-                    {faqData
-                      .slice(Math.ceil(faqData.length / 2))
-                      .map((faq, idx) => (
-                        <div className="accordion-item" key={faq.id || idx}>
-                          <h3 className="accordion-header">
-                            <button
-                              className="accordion-button collapsed"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target={`#faq-hosting-right-${idx}`}
-                            >
-                              {faq.question}
-                            </button>
-                          </h3>
-                          <div
-                            id={`faq-hosting-right-${idx}`}
-                            className="accordion-collapse collapse"
-                            data-bs-parent="#faqRight-hosting"
-                          >
-                            <div className="accordion-body">{faq.answer}</div>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <p className="text-center">No FAQs available</p>
-            )}
-          </div>
-        </section>
+          faqs={faqData}
+          title={faqs_title}
+          subtitle={faqs_subtitle}
+          idPrefix="hosting"
+        />
       ),
       show: show_faqs,
     },
+
     cta: {
       component: <ServiceCTA service={data} key="cta" />,
       show: show_cta,
     },
   };
 
-  // ============================================
-  // 🏗️ Render Sections Based on Order
-  // ============================================
   const renderSections = () => {
     let order = section_order;
 
-    // Backend se string aa sakti hai
     if (typeof order === "string") {
       order = order
         .split(",")
@@ -912,7 +568,6 @@ export default function HostingTemplate({ data }) {
         .filter(Boolean);
     }
 
-    // Agar backend se valid order nahi mila
     if (!Array.isArray(order) || order.length === 0) {
       order = [
         "hero",
@@ -921,53 +576,29 @@ export default function HostingTemplate({ data }) {
         "benefits",
         "processes",
         "technologies",
-        "gallery",
+        "hosting_tools",
         "faqs",
         "cta",
       ];
     }
 
-    // =====================================================
-    // FORCE HOSTING TOOLS BEFORE FAQ
-    // =====================================================
-
-    // Pehle agar backend ne hosting_tools bheja hai
-    // to usko remove kar do
-    order = order.filter((key) => key !== "hosting_tools");
-
-    // FAQ ki position find karo
-    const faqIndex = order.indexOf("faqs");
-
-    if (faqIndex !== -1) {
-      // FAQ se just pehle hosting_tools insert karo
-      order.splice(faqIndex, 0, "hosting_tools");
-    } else {
-      // FAQ nahi mila to CTA se pehle add karo
-      const ctaIndex = order.indexOf("cta");
-
-      if (ctaIndex !== -1) {
-        order.splice(ctaIndex, 0, "hosting_tools");
+    if (!order.includes("hosting_tools")) {
+      const faqIndex = order.indexOf("faqs");
+      if (faqIndex !== -1) {
+        order = [
+          ...order.slice(0, faqIndex),
+          "hosting_tools",
+          ...order.slice(faqIndex),
+        ];
       } else {
-        order.push("hosting_tools");
+        order = [...order, "hosting_tools"];
       }
     }
-
-    console.log("FINAL SECTION ORDER:", order);
 
     return order
       .map((key) => {
         const section = sectionMap[key];
-
-        if (!section) {
-          console.warn("Section not found:", key);
-          return null;
-        }
-
-        if (section.show === false) {
-          console.warn("Section hidden:", key);
-          return null;
-        }
-
+        if (!section || section.show === false) return null;
         return section.component;
       })
       .filter(Boolean);
@@ -975,9 +606,15 @@ export default function HostingTemplate({ data }) {
 
   return (
     <div style={styles}>
-      {custom_css && <style dangerouslySetInnerHTML={{ __html: custom_css }} />}
-      <main className="service-template">{renderSections()}</main>
-      {custom_js && <script dangerouslySetInnerHTML={{ __html: custom_js }} />}
+      {custom_css ? (
+        <style dangerouslySetInnerHTML={{ __html: custom_css }} />
+      ) : null}
+      <main className="service-template web-hosting-template rs-creative-page">
+        {renderSections()}
+      </main>
+      {custom_js ? (
+        <script dangerouslySetInnerHTML={{ __html: custom_js }} />
+      ) : null}
     </div>
   );
 }
