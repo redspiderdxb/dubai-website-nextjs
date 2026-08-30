@@ -147,6 +147,13 @@ filter: progid:DXImageTransform.Microsoft.gradient(
   color: #fff;
   position: relative;
   overflow-x: hidden;
+  z-index: 2;
+}
+
+main:has(.contact-cta) + .rs-footer-sec,
+main:has(.contact-cta) ~ .rs-footer-sec {
+  margin-top: -80px;
+  padding-top: 110px;
 }
 
 .rs-footer-sec::before {
@@ -157,6 +164,34 @@ filter: progid:DXImageTransform.Microsoft.gradient(
     linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
   z-index: 0;
+}
+
+main:has(.contact-cta) + .rs-footer-sec::before,
+main:has(.contact-cta) ~ .rs-footer-sec::before {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 90px, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 90px, #000 100%);
+}
+
+.rs-footer-sec::after {
+  content: none;
+}
+
+main:has(.contact-cta) + .rs-footer-sec::after,
+main:has(.contact-cta) ~ .rs-footer-sec::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 120px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    #010101 0%,
+    rgba(1, 1, 1, 0.75) 40%,
+    transparent 100%
+  );
 }
 
 .rs-footer-sec .container {
@@ -1590,13 +1625,15 @@ span.rs-process-highlight {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 88px 0;
+  padding: 88px 0 120px;
   min-height: 420px;
+  margin-bottom: 0;
   color: #fff;
-  background-color: #0c0806;
+  background-color: #010101;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: 1;
 }
 
 .contact-cta__overlay {
@@ -1606,12 +1643,36 @@ span.rs-process-highlight {
   pointer-events: none;
   background:
     linear-gradient(
-      105deg,
-      rgba(8, 6, 5, 0.92) 0%,
-      rgba(8, 6, 5, 0.78) 48%,
-      rgba(8, 6, 5, 0.55) 100%
+      to bottom,
+      rgba(1, 1, 1, 0.15) 0%,
+      rgba(1, 1, 1, 0.35) 45%,
+      rgba(1, 1, 1, 0.82) 78%,
+      #010101 100%
     ),
-    linear-gradient(0deg, rgba(222, 21, 21, 0.12), transparent 55%);
+    linear-gradient(
+      105deg,
+      rgba(8, 6, 5, 0.88) 0%,
+      rgba(8, 6, 5, 0.62) 48%,
+      rgba(8, 6, 5, 0.4) 100%
+    ),
+    linear-gradient(0deg, rgba(222, 21, 21, 0.1), transparent 55%);
+}
+
+.contact-cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(1, 1, 1, 0.55) 45%,
+    #010101 100%
+  );
 }
 
 .contact-cta__inner {
@@ -1822,7 +1883,7 @@ span.rs-process-highlight {
 
 @media (max-width: 991px) {
   .contact-cta {
-    padding: 64px 0;
+    padding: 64px 0 100px;
     min-height: 0;
   }
 
@@ -1839,7 +1900,7 @@ span.rs-process-highlight {
 
 @media (max-width: 600px) {
   .contact-cta {
-    padding: 52px 0;
+    padding: 52px 0 90px;
   }
 
   .contact-cta .cta-heading {
@@ -3070,6 +3131,12 @@ span.rs-process-highlight {
   padding: 50px 60px 30px;
 }
 
+main:has(.contact-cta) + .rs-footer-sec,
+main:has(.contact-cta) ~ .rs-footer-sec {
+  padding: 110px 60px 30px;
+  margin-top: -80px;
+}
+
 .rs-footer-sec::before {
   content: "";
   position: absolute;
@@ -3084,6 +3151,12 @@ span.rs-process-highlight {
       transparent 1px);
 
   background-size: 32px 32px;
+}
+
+main:has(.contact-cta) + .rs-footer-sec::before,
+main:has(.contact-cta) ~ .rs-footer-sec::before {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 100px, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 100px, #000 100%);
 }
 
 .rs-footer-container {
@@ -3432,6 +3505,12 @@ span.rs-process-highlight {
     padding: 40px 0 25px;
   }
 
+  main:has(.contact-cta) + .rs-footer-sec,
+  main:has(.contact-cta) ~ .rs-footer-sec {
+    padding: 90px 0 25px;
+    margin-top: -60px;
+  }
+
   .rs-footer-top {
     min-height: auto;
   }
@@ -3475,6 +3554,12 @@ span.rs-process-highlight {
 @media (max-width: 767px) {
   .rs-footer-sec {
     padding: 38px 20px 25px;
+  }
+
+  main:has(.contact-cta) + .rs-footer-sec,
+  main:has(.contact-cta) ~ .rs-footer-sec {
+    padding: 80px 20px 25px;
+    margin-top: -50px;
   }
 
   .rs-footer-intro {
