@@ -92,13 +92,6 @@ export default function ServiceDetail({ service }) {
     TEMPLATE_COMPONENTS[service.template] || WebDevelopmentTemplate;
 
   // =====================================================
-  // DEBUG
-  // =====================================================
-
-  console.log("SERVICE TEMPLATE:", service.template);
-  console.log("SERVICE DATA:", service);
-
-  // =====================================================
   // FINAL SERVICE URL
   // =====================================================
 
