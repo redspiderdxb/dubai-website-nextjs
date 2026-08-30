@@ -2922,13 +2922,17 @@ span.rs-process-highlight {
   }
 
   .rs-fixed-contact__button {
-    width: 45px !important;
-    height: 45px !important;
+    width: 48px !important;
+    height: 48px !important;
   }
 
-  .rs-fixed-contact__button svg {
-    width: 22px !important;
-    height: 22px !important;
+  .rs-fixed-contact__button svg,
+  .rs-fixed-contact__button i {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    font-size: 24px !important;
   }
 }
 
@@ -3440,12 +3444,14 @@ main:has(.contact-cta) ~ .rs-footer-sec::before {
   display: flex;
   flex-direction: column;
 
-  gap: 10px;
+  gap: 14px;
 }
 
 .rs-fixed-contact__button {
-  width: 46px;
-  height: 46px;
+  position: relative;
+
+  width: 52px;
+  height: 52px;
 
   border-radius: 50%;
 
@@ -3455,6 +3461,7 @@ main:has(.contact-cta) ~ .rs-footer-sec::before {
   justify-content: center;
 
   text-decoration: none;
+  flex-shrink: 0;
 
   box-shadow:
     0 4px 14px rgba(0, 0, 0, 0.25);
@@ -3462,28 +3469,108 @@ main:has(.contact-cta) ~ .rs-footer-sec::before {
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
+
+  isolation: isolate;
+}
+
+.rs-fixed-contact__button::before,
+.rs-fixed-contact__button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+  box-shadow: 0 0 0 0 currentColor;
+  opacity: 0.55;
+}
+
+.rs-fixed-contact__button::before {
+  animation: rsContactWave 2s ease-out infinite;
+}
+
+.rs-fixed-contact__button::after {
+  animation: rsContactWave 2s ease-out infinite 1s;
 }
 
 .rs-fixed-contact__button:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.06);
 
   box-shadow:
     0 7px 20px rgba(0, 0, 0, 0.35);
 }
 
-.rs-fixed-contact__button svg {
-  width: 23px;
-  height: 23px;
+.rs-fixed-contact__button:hover::before,
+.rs-fixed-contact__button:hover::after {
+  animation-duration: 1.2s;
+  opacity: 0.75;
+}
 
+.rs-fixed-contact__button:active {
+  transform: scale(0.96);
+}
+
+.rs-fixed-contact__button svg,
+.rs-fixed-contact__button i {
+  position: relative;
+  z-index: 1;
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  min-height: 26px;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  display: block;
   fill: #fff;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  font-style: normal;
 }
 
 .rs-fixed-contact__button--whatsapp {
-  background: #20d466;
+  background: #25d366;
+  color: #25d366;
+}
+
+.rs-fixed-contact__button--whatsapp:hover {
+  background: #20bd5a;
 }
 
 .rs-fixed-contact__button--phone {
-  background: #111111;
+  background: #1e88e5;
+  color: #1e88e5;
+}
+
+.rs-fixed-contact__button--phone:hover {
+  background: #1976d2;
+}
+
+@keyframes rsContactWave {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0.55;
+  }
+
+  70% {
+    transform: scale(1.35);
+    box-shadow: 0 0 0 14px currentColor;
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.35);
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-fixed-contact__button::before,
+  .rs-fixed-contact__button::after {
+    animation: none;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -3645,13 +3732,22 @@ main:has(.contact-cta) ~ .rs-footer-sec::before {
   }
 
   .rs-fixed-contact__button {
-    width: 43px;
-    height: 43px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .rs-fixed-contact__button svg,
+  .rs-fixed-contact__button i {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    font-size: 24px;
   }
 
   #scroll-top {
     right: 12px;
-    bottom: 120px;
+    bottom: 130px;
   }
 }
 

@@ -323,31 +323,21 @@ export default function Footer() {
 
       <div className="rs-fixed-contact">
         <a
-          className="rs-whatsapp-float"
+          className="rs-fixed-contact__button rs-fixed-contact__button--phone"
+          href="tel:+971555515475"
+          aria-label="Call us"
+        >
+          <i className="bi bi-telephone-fill" aria-hidden="true" />
+        </a>
+
+        <a
+          className="rs-fixed-contact__button rs-fixed-contact__button--whatsapp"
           href="https://wa.me/971555515475"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact us on WhatsApp"
         >
-          <span className="rs-whatsapp-pulse"></span>
-
-          <span className="rs-whatsapp-icon">
-            <svg
-              viewBox="0 0 32 32"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                fill="#ffffff"
-                d="M19.11 17.47c-.27-.14-1.58-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.66 1.12 2.84c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.55.57.65.21 1.24.18 1.71.11.52-.08 1.58-.65 1.8-1.27.22-.62.22-1.15.16-1.27-.07-.11-.25-.18-.52-.32z"
-              />
-
-              <path
-                fill="#ffffff"
-                d="M16.01 3.2C8.93 3.2 3.17 8.96 3.17 16.04c0 2.26.59 4.46 1.71 6.4L3.05 28.8l6.51-1.71a12.8 12.8 0 0 0 6.45 1.74h.01c7.08 0 12.84-5.76 12.84-12.84S23.09 3.2 16.01 3.2zm0 23.51h-.01a10.65 10.65 0 0 1-5.43-1.49l-.39-.23-3.86 1.01 1.03-3.76-.25-.39a10.67 10.67 0 1 1 8.91 4.86z"
-              />
-            </svg>
-          </span>
+          <i className="bi bi-whatsapp" aria-hidden="true" />
         </a>
       </div>
     </>

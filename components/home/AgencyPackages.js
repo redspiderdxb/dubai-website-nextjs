@@ -38,8 +38,6 @@ export default function AgencyPackages() {
     { name: "Scalability", icon: "bi-layers" },
   ];
 
-
-
   const features = [
     "Custom website designs that reflect the story and values of your brand",
     "User-friendly websites that work smoothly on all devices",
@@ -171,10 +169,10 @@ export default function AgencyPackages() {
                       </h2>
 
                       <p className="rs-lead">
-                        RedSpider is a trusted web design and development partner
-                        for businesses across Dubai and the UAE. We build modern,
-                        fast websites that strengthen your online presence and
-                        help attract new customers.
+                        RedSpider is a trusted web design and development
+                        partner for businesses across Dubai and the UAE. We
+                        build modern, fast websites that strengthen your online
+                        presence and help attract new customers.
                       </p>
 
                       <p>
@@ -189,7 +187,10 @@ export default function AgencyPackages() {
                       <div className="rs-agency-services-grid">
                         {servicesList.map((service, idx) => (
                           <div className="rs-agency-service" key={service.name}>
-                            <i className={`bi ${service.icon}`} aria-hidden="true" />
+                            <i
+                              className={`bi ${service.icon}`}
+                              aria-hidden="true"
+                            />
                             <em>0{idx + 1}</em>
                             <span>{service.name}</span>
                           </div>
@@ -225,14 +226,16 @@ export default function AgencyPackages() {
                       </h2>
 
                       <p className="rs-lead">
-                        A successful website should be easy to use, fast to load,
-                        mobile-friendly and built to turn visitors into enquiries.
+                        A successful website should be easy to use, fast to
+                        load, mobile-friendly and built to turn visitors into
+                        enquiries.
                       </p>
 
                       <p>
                         We plan every layout for clarity and performance — from
                         navigation and calls to action to mobile usability — so
-                        customers can find what they need and take the next step.
+                        customers can find what they need and take the next
+                        step.
                       </p>
 
                       <span className="rs-agency-list-label">FOCUS AREAS:</span>
@@ -240,7 +243,10 @@ export default function AgencyPackages() {
                       <div className="rs-agency-services-grid">
                         {focusAreas.map((item, idx) => (
                           <div className="rs-agency-service" key={item.name}>
-                            <i className={`bi ${item.icon}`} aria-hidden="true" />
+                            <i
+                              className={`bi ${item.icon}`}
+                              aria-hidden="true"
+                            />
                             <em>0{idx + 1}</em>
                             <span>{item.name}</span>
                           </div>
@@ -301,8 +307,8 @@ export default function AgencyPackages() {
 
                       <p className="rs-lead">
                         RedSpider provides website design and development across
-                        Dubai, Sharjah and the wider UAE — for startups, SMEs and
-                        enterprises that need a stronger digital presence.
+                        Dubai, Sharjah and the wider UAE — for startups, SMEs
+                        and enterprises that need a stronger digital presence.
                       </p>
 
                       <p>
@@ -319,8 +325,6 @@ export default function AgencyPackages() {
         </div>
       </section>
 
-
-      
       {/* =====================================================
           PACKAGES SECTION
           ===================================================== */}
@@ -333,11 +337,14 @@ export default function AgencyPackages() {
         <div className="container rs-opportunity__container">
           <div className="rs-opportunity__layout">
             <aside className="rs-opportunity__poster" data-aos="fade-up">
-              <p className="rs-opportunity__eyebrow">Creating great opportunities</p>
+              <p className="rs-opportunity__eyebrow">
+                Creating great opportunities
+              </p>
 
               <h2 className="rs-opportunity__headline">
                 We help turn your{" "}
-                <span className="rs-opportunity__accent">dream</span> into reality
+                <span className="rs-opportunity__accent">dream</span> into
+                reality
               </h2>
 
               <div className="rs-opportunity__rating">
@@ -368,7 +375,11 @@ export default function AgencyPackages() {
             </aside>
 
             <div className="rs-opportunity__main">
-              <div className="rs-opportunity__story" data-aos="fade-up" data-aos-delay="80">
+              <div
+                className="rs-opportunity__story"
+                data-aos="fade-up"
+                data-aos-delay="80"
+              >
                 <h3 className="rs-opportunity__title">
                   Experience and Expertise Behind RedSpider
                 </h3>
@@ -386,7 +397,10 @@ export default function AgencyPackages() {
                   time.
                 </p>
 
-                <div className="rs-opportunity__stats" aria-label="RedSpider highlights">
+                <div
+                  className="rs-opportunity__stats"
+                  aria-label="RedSpider highlights"
+                >
                   <div>
                     <strong>14+</strong>
                     <span>Years</span>
@@ -495,7 +509,10 @@ export default function AgencyPackages() {
                   >
                     {accordionItems.map((item) => (
                       <div className="accordion-item" key={item.id}>
-                        <h3 className="accordion-header" id={`${item.id}Heading`}>
+                        <h3
+                          className="accordion-header"
+                          id={`${item.id}Heading`}
+                        >
                           <button
                             className={`accordion-button ${
                               !item.show ? "collapsed" : ""
