@@ -30,6 +30,24 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   // =====================================================
+  // Load GLightbox CSS only when needed (non-blocking)
+  // =====================================================
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    if (document.querySelector('link[data-rs-glightbox-css="true"]')) {
+      return;
+    }
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/assets/vendor/glightbox/css/glightbox.min.css";
+    link.setAttribute("data-rs-glightbox-css", "true");
+    document.head.appendChild(link);
+  }, []);
+
+  // =====================================================
   // LOAD CUSTOM.JS ONLY AFTER ALL REQUIRED LIBRARIES
   // ARE AVAILABLE
   // =====================================================
@@ -177,7 +195,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/swiper/swiper-bundle.min.js"
-        strategy="lazyOnload"
+        strategy="afterInteractive"
       />
 
       {/* ================================================
