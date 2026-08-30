@@ -146,7 +146,7 @@ export default function AgencyPackages() {
               className="rs-gsap-card rs-card-1"
             >
               <div className="rs-agency-card rs-agency-card--creative">
-                <div className="row g-4 g-xl-5 align-items-center">
+                <div className="row g-0 align-items-stretch rs-agency-split">
                   <div className="col-lg-5">
                     <div className="rs-agency-visual">
                       <div className="rs-agency-image">
@@ -161,49 +161,27 @@ export default function AgencyPackages() {
 
                   <div className="col-lg-7">
                     <div className="rs-agency-content">
-                      <span className="rs-agency-watermark" aria-hidden="true">
-                        01
-                      </span>
-
                       <div className="rs-agency-top">
                         <span>[ 001 ]</span>
                         <small>WEBSITE / DESIGN / DEVELOPMENT</small>
                       </div>
 
-                      <h2 className="rs-process-title rs-process-title-sm text-start">
+                      <h2 className="rs-agency-heading">
                         Websites Built Around Your Business
                       </h2>
 
                       <p className="rs-lead">
-                        Businesses or brands can trust RedSpider Digital Agency
-                        as their trusted partner. You can get professional
-                        website design and web development services at
-                        affordable rates. We also offer digital solutions in
-                        Dubai and all across the UAE.
+                        RedSpider is a trusted web design and development partner
+                        for businesses across Dubai and the UAE. We build modern,
+                        fast websites that strengthen your online presence and
+                        help attract new customers.
                       </p>
 
                       <p>
-                        We will strengthen your online presence and help
-                        attract new customers. To achieve sustainable
-                        growth, having a modern and user-focused website is
-                        highly important. It will promote your brand and
-                        help you achieve your business goals.
-                      </p>
-
-                      <p>
-                        The competition among companies is intense, and if
-                        you want to win, focusing on advanced technology and
-                        creativity matters.We create visually appealing
-                        websites that are fast, reliable and built to
-                        deliver high-quality performance.
-                      </p>
-
-                      <p>
-                        Customers don&apos;t like websites that are slow, but
-                        when they have a good browsing experience they spend
-                        more time on that website. We make sure that your
-                        website functions well, whether it is desktop,
-                        tablet or mobile device.
+                        From corporate sites and ecommerce platforms to custom
+                        web applications, our team focuses on design, usability
+                        and performance so your website works on every device
+                        and supports long-term growth.
                       </p>
 
                       <span className="rs-agency-list-label">SERVICES:</span>
@@ -217,37 +195,6 @@ export default function AgencyPackages() {
                           </div>
                         ))}
                       </div>
-
-                      <p>
-                        At RedSpider, we understand that a website should be
-                        much more than visually appealing. It should communicate
-                        your message to the customers and build trust. If you
-                        are launching a new business, it will also enhance your
-                        long-term business value.
-                      </p>
-
-                      <p>
-                        Whether it is the corporate website, an ecommerce
-                        platform, or a custom web application, we offer the custom website solutions for businesses across Dubai and the UAE. Customers&apos; digital
-                        experience will improve when you have a website with an
-                        outstanding design and reliable functionality.
-                      </p>
-
-                      <p>
-                        When websites become old, they have many issues, but
-                        with us you don&apos;t need to worry. We can{" "}
-                        <strong>redesign your existing website</strong> and help
-                        grow your digital presence.
-                      </p>
-
-                      <p>
-                        <strong>Our experienced website</strong> designers and
-                        web developers will create customized solutions that
-                        align with your business goals. Your search ends here,
-                        as RedSpider is the trusted choice for any business
-                        looking for a reliable website design and development
-                        service in Dubai and UAE.
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -265,43 +212,27 @@ export default function AgencyPackages() {
               className="rs-gsap-card rs-card-2"
             >
               <div className="rs-agency-card rs-agency-card--creative rs-agency-card--dark">
-                <div className="row g-4 g-xl-5 align-items-center">
+                <div className="row g-0 align-items-stretch rs-agency-split">
                   <div className="col-lg-7">
                     <div className="rs-agency-content">
-                      <span className="rs-agency-watermark" aria-hidden="true">
-                        02
-                      </span>
-
                       <div className="rs-agency-top">
                         <span>[ 002 ]</span>
                         <small>USER EXPERIENCE / PERFORMANCE / GROWTH</small>
                       </div>
 
-                      <h2 className="rs-process-title rs-process-title-sm text-start">
+                      <h2 className="rs-agency-heading">
                         Building Digital Experiences That Help Businesses Grow
                       </h2>
 
                       <p className="rs-lead">
-                        A successful website is more than just a digital
-                        presence. It should be easy to use, fast to load,
-                        mobile-friendly and built to turn visitors into
-                        potential customers.
+                        A successful website should be easy to use, fast to load,
+                        mobile-friendly and built to turn visitors into enquiries.
                       </p>
 
                       <p>
-                        We focus on creating smooth digital experiences that
-                        make it easy for customers to find information,
-                        explore your offerings and take the next step. Every
-                        element is planned with usability, clarity and
-                        performance in mind.
-                      </p>
-
-                      <p>
-                        From mobile-friendly layouts and optimized page
-                        performance to clear navigation and strong calls to
-                        action, our approach helps businesses create
-                        websites that are easier to use and more effective
-                        at generating enquiries.
+                        We plan every layout for clarity and performance — from
+                        navigation and calls to action to mobile usability — so
+                        customers can find what they need and take the next step.
                       </p>
 
                       <span className="rs-agency-list-label">FOCUS AREAS:</span>
@@ -315,14 +246,6 @@ export default function AgencyPackages() {
                           </div>
                         ))}
                       </div>
-
-                      <p>
-                        A strong digital presence also builds credibility. By
-                        combining a professional interface, reliable performance
-                        and a clear customer journey, we help businesses create
-                        a website that can support their current goals while
-                        remaining ready to scale as the business grows.
-                      </p>
                     </div>
                   </div>
 
@@ -352,7 +275,7 @@ export default function AgencyPackages() {
               className="rs-gsap-card rs-card-3"
             >
               <div className="rs-agency-card rs-agency-card--creative">
-                <div className="row g-4 g-xl-5 align-items-center">
+                <div className="row g-0 align-items-stretch rs-agency-split">
                   <div className="col-lg-5">
                     <div className="rs-agency-visual">
                       <div className="rs-agency-image">
@@ -367,25 +290,25 @@ export default function AgencyPackages() {
 
                   <div className="col-lg-7">
                     <div className="rs-agency-content">
-                      <span className="rs-agency-watermark" aria-hidden="true">
-                        03
-                      </span>
-
                       <div className="rs-agency-top">
                         <span>[ 003 ]</span>
                         <small>LOCATIONS / DUBAI / UAE</small>
                       </div>
 
-                      <h2 className="rs-process-title rs-process-title-sm text-start">
+                      <h2 className="rs-agency-heading">
                         Working With Businesses Across Dubai &amp; the UAE
                       </h2>
 
                       <p className="rs-lead">
-                        RedSpider provides professional website design and web
-                        development services across Dubai, Sharjah and the UAE.
-                        Our experienced team works with startups, SMEs,
-                        corporate businesses and enterprises, delivering modern
-                        websites that help businesses grow online.
+                        RedSpider provides website design and development across
+                        Dubai, Sharjah and the wider UAE — for startups, SMEs and
+                        enterprises that need a stronger digital presence.
+                      </p>
+
+                      <p>
+                        Our team delivers modern, reliable websites built around
+                        your goals, so you can grow online with a partner that
+                        understands the local market.
                       </p>
                     </div>
                   </div>

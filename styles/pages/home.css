@@ -2431,6 +2431,144 @@
 .rs-gsap-cards .rs-card-3 .rs-agency-card {
   height: 100% !important;
   min-height: 100% !important;
+  padding: 0 !important;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* One composition: image + copy share the full card height */
+.rs-gsap-cards .rs-agency-split {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
+}
+
+.rs-gsap-cards .rs-agency-split > [class*="col-"] {
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+  height: 100%;
+  min-height: 0;
+}
+
+.rs-gsap-cards .rs-agency-visual {
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+  padding: 0 !important;
+}
+
+.rs-gsap-cards .rs-agency-visual .rs-agency-image,
+.rs-gsap-cards .rs-agency-image {
+  flex: 1;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.rs-gsap-cards .rs-agency-visual .rs-agency-image img,
+.rs-gsap-cards .rs-agency-image img {
+  display: block;
+  width: 100%;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  object-fit: cover;
+  border-radius: 0 !important;
+}
+
+.rs-gsap-cards .rs-agency-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(28px, 3.5vw, 48px) clamp(24px, 3.5vw, 52px);
+  scrollbar-width: thin;
+}
+
+.rs-gsap-cards .rs-agency-heading {
+  font-size: clamp(26px, 2.8vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #171717;
+  margin: 0 0 16px;
+  text-align: left;
+}
+
+.rs-gsap-cards .rs-agency-card--dark .rs-agency-heading {
+  color: #fff;
+}
+
+.rs-gsap-cards .rs-agency-content .rs-lead {
+  font-size: 16px;
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.rs-gsap-cards .rs-agency-content p {
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.rs-gsap-cards .rs-agency-services-grid {
+  margin: 4px 0 0;
+  gap: 8px;
+}
+
+.rs-gsap-cards .rs-agency-service {
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+.rs-gsap-cards .rs-agency-list-label {
+  margin: 4px 0 10px;
+}
+
+@media (max-width: 991px) {
+  .rs-gsap-cards .rs-agency-split {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .rs-gsap-cards .rs-agency-split > [class*="col-"] {
+    height: auto;
+  }
+
+  .rs-gsap-cards .rs-agency-visual {
+    height: auto;
+    min-height: 220px;
+  }
+
+  .rs-gsap-cards .rs-agency-visual .rs-agency-image,
+  .rs-gsap-cards .rs-agency-image {
+    min-height: 220px !important;
+    height: 220px !important;
+  }
+
+  .rs-gsap-cards .rs-agency-visual .rs-agency-image img,
+  .rs-gsap-cards .rs-agency-image img {
+    min-height: 220px !important;
+    height: 220px !important;
+  }
+
+  .rs-gsap-cards .rs-agency-content {
+    justify-content: flex-start;
+    height: auto;
+    padding: 24px 22px 28px;
+  }
 }
 
 /* Keep the section after the pinned cards in normal document flow. */
@@ -2471,19 +2609,7 @@
   }
 }
 
-.rs-card-3 .rs-agency-image img {
-  height: 420px;
-  width: 100%;
-  object-fit: cover;
-}
-
-.rs-card-3 h2 {
-  font-size: 42px;
-  font-weight: 700;
-  color: #171717;
-}
-
-/*  */
+/* Card 3 image height is controlled by .rs-gsap-cards split layout */
 
 .rs-card-4 {
   background: #ffffff;
@@ -10997,138 +11123,14 @@ contact us page */
 
 /* common css for title, eyebrow, paragraph */
 
-/* ============================================
-   CARD 3 - FINAL RESPONSIVE LAYOUT
-   Only Card 3
-   ============================================ */
-
-/* Card 3 itself should not stretch internally */
-
-/* Card 3 should fill the same stack area as Cards 1 and 2 */
-
-.rs-gsap-cards .rs-card-3 {
-  width: 100%;
-}
-
-.rs-gsap-cards .rs-card-3 .rs-agency-card {
-  height: 100%;
-  min-height: 100%;
-}
-
-/* Row must follow actual content height */
-
-.rs-card-3 .row {
-  height: auto !important;
-  min-height: 0 !important;
-  align-items: stretch !important;
-}
-
-/* ============================================
-   IMAGE
-   ============================================ */
-
-.rs-card-3 .rs-agency-image {
-  height: 100% !important;
-  min-height: 0 !important;
-  max-height: none !important;
-
-  overflow: hidden;
-  border-radius: 24px;
-}
-
-.rs-card-3 .rs-agency-image img {
-  display: block;
-
-  width: 100% !important;
-  height: 100% !important;
-
-  min-height: 0 !important;
-  max-height: none !important;
-
-  object-fit: cover;
-
-  border-radius: 24px;
-}
-
-/* ============================================
-   CONTENT
-   ============================================ */
-
-.rs-card-3 .col-lg-8 {
-  display: flex !important;
-  align-items: flex-start !important;
-}
-
-.rs-card-3 .rs-agency-content {
-  width: 100%;
-  height: auto !important;
-  min-height: 0 !important;
-}
-
-/* ============================================
-   LOCATION LIST
-   ============================================ */
-
 .rs-card-3 .rs-location-list {
   display: flex;
   flex-wrap: wrap;
-
   gap: 12px;
-
   margin-top: 25px;
 }
 
-/* ============================================
-   HEADING
-   ============================================ */
-
-.rs-card-3 h2 {
-  font-size: clamp(30px, 3.2vw, 42px);
-  line-height: 1.15;
-  font-weight: 700;
-  color: #171717;
-}
-
-/* ============================================
-   TABLET
-   ============================================ */
-
-@media (max-width: 991px) {
-
-  .rs-card-3 .rs-agency-image {
-    height: auto !important;
-  }
-
-  .rs-card-3 .rs-agency-image img {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 11;
-    object-fit: cover;
-  }
-
-}
-
-/* ============================================
-   MOBILE
-   ============================================ */
-
 @media (max-width: 575px) {
-
-  .rs-card-3 .rs-agency-image {
-    height: auto !important;
-    margin-bottom: 0px;
-  }
-
-  .rs-card-3 .rs-agency-image img {
-    aspect-ratio: inherit;
-    width: 100% !important;
-    height: 100%;
-  }
-
-  .rs-card-3 .col-lg-8 {
-    margin: 0px;
-  }
-
   .rs-gsap-card {
     padding: 2px;
   }
