@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 
   try {
     const html = await render(
-      entry.component(getEmailTemplateProps(entry.sampleProps)),
+      entry.component(getEmailTemplateProps(entry.sampleProps, { forSend: false })),
     );
 
     res.setHeader("Content-Type", "text/html; charset=utf-8");

@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
+    "generate:email-logo": "node scripts/generate-email-logo.mjs",
+    "prebuild": "node scripts/generate-email-logo.mjs",
+    "dev": "node scripts/generate-email-logo.mjs && next dev --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
