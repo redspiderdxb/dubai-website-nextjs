@@ -22,6 +22,22 @@ const TEMPLATES = {
       ipAddress: "203.0.113.42",
       location: "Dubai, Dubai, United Arab Emirates",
       formCountry: "UAE",
+      formSource: "contact",
+    },
+  },
+  "team-notification-quote": {
+    component: TeamNotificationEmail,
+    sampleProps: {
+      name: "John Smith",
+      email: "john.smith@example.com",
+      phone: "+971 50 123 4567",
+      subject: "Corporate Website",
+      content:
+        "We need a quote for a new corporate website with CMS and multilingual support.",
+      ipAddress: "203.0.113.42",
+      location: "Dubai, Dubai, United Arab Emirates",
+      formCountry: "UAE",
+      formSource: "quote",
     },
   },
 };

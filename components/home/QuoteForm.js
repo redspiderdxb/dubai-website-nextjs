@@ -3,6 +3,7 @@ import Button from "../ui/Button";
 import FormAlert from "../ui/FormAlert";
 import FormField from "../ui/FormField";
 import ThemedSelect from "../ui/ThemedSelect";
+import { getCountryFromCode } from "../../lib/countryCodes";
 import {
   focusField,
   getFirstErrorField,
@@ -115,8 +116,11 @@ export default function QuoteForm() {
         name,
         email,
         phone: fullPhone,
+        country: getCountryFromCode(formData.country_code),
+        country_code: formData.country_code,
         subject,
         content,
+        formSource: "quote",
         agree_terms_and_policy: formData.agree_terms_and_policy,
       };
 
@@ -129,59 +133,43 @@ export default function QuoteForm() {
         body: JSON.stringify(payload),
       });
 
-      let result = {};
-
-      try {
-        result = await response.json();
-      } catch (jsonError) {
-        console.error("Invalid API response:", jsonError);
-      }
-
-      if (response.status === 422) {
-        const serverErrors = applyServerErrors(result?.errors || {});
-        const firstServerField = getFirstErrorField(serverErrors, FIELD_ORDER);
-
-        if (firstServerField) {
-          focusField(FIELD_IDS[firstServerField]);
-        }
-
-        if (!firstServerField) {
-          setStatus({
-            type: "error",
-            message:
-              result?.message ||
-              "Please check the form details and try again.",
-          });
-        }
-
-        return;
-      }
-
-      if (response.status === 429) {
-        setStatus({
-          type: "error",
-          message:
-            result?.message ||
-            "Too many requests. Please wait a moment and try again.",
-        });
-
-        return;
-      }
+      const result = await response.json();
 
       if (!response.ok) {
-        setStatus({
-          type: "error",
-          message: result?.message || "Something went wrong. Please try again.",
-        });
+        if (response.status === 422) {
+          const serverErrors = applyServerErrors(result?.errors || {});
+          const firstServerField = getFirstErrorField(
+            serverErrors,
+            FIELD_ORDER,
+          );
 
-        return;
+          if (firstServerField) {
+            focusField(FIELD_IDS[firstServerField]);
+            return;
+          }
+
+          throw new Error(
+            result?.message ||
+              "Please check the form details and try again.",
+          );
+        }
+
+        if (response.status === 429) {
+          throw new Error(
+            "Too many requests. Please wait a moment and try again.",
+          );
+        }
+
+        throw new Error(
+          result?.message || "Something went wrong. Please try again.",
+        );
       }
 
       setStatus({
         type: "success",
         message:
           result?.message ||
-          "We received your message and will contact you soon!",
+          "Thank you! Your enquiry has been submitted successfully. We will contact you soon.",
       });
 
       reset(INITIAL_FORM_DATA);
@@ -190,7 +178,8 @@ export default function QuoteForm() {
 
       setStatus({
         type: "error",
-        message: "Unable to submit your enquiry right now. Please try again.",
+        message:
+          error?.message || "Unable to submit your enquiry. Please try again.",
       });
     } finally {
       setLoading(false);

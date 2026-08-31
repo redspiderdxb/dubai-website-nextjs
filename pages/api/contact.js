@@ -83,6 +83,7 @@ export default async function handler(req, res) {
   const content = String(body.content).trim();
   const ipAddress = getClientIp(req);
   const formCountry = String(body.country || "").trim();
+  const formSource = String(body.formSource || "contact").trim();
   const location = await getLocationFromIp(ipAddress);
 
   try {
@@ -95,6 +96,7 @@ export default async function handler(req, res) {
       ipAddress,
       location,
       formCountry,
+      formSource,
     });
 
     return res.status(200).json({

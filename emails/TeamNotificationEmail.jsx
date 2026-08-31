@@ -4,15 +4,33 @@ import { BRAND } from "./constants";
 
 function DetailRow({ label, value, href }) {
   return (
-  <Section style={detailRow}>
-    <Text style={detailLabel}>{label}</Text>
-    {href ? (
-      <Link href={href} style={detailValueLink}>{value}</Link>
-    ) : (
-      <Text style={detailValue}>{value}</Text>
-    )}
-  </Section>
+    <Section style={detailRow}>
+      <Text style={detailLabel}>{label}</Text>
+      {href ? (
+        <Link href={href} style={detailValueLink}>{value}</Link>
+      ) : (
+        <Text style={detailValue}>{value}</Text>
+      )}
+    </Section>
   );
+}
+
+function getFormLabels(formSource) {
+  if (formSource === "quote") {
+    return {
+      badge: "New quote request",
+      intro:
+        "A new quote request was submitted through the RedSpider home page form.",
+      formName: "Request a Quote",
+    };
+  }
+
+  return {
+    badge: "New website enquiry",
+    intro:
+      "A new enquiry was submitted through the RedSpider contact page form.",
+    formName: "Contact Us",
+  };
 }
 
 export default function TeamNotificationEmail({
@@ -24,25 +42,31 @@ export default function TeamNotificationEmail({
   ipAddress = "Unknown",
   location = "Unknown",
   formCountry = "",
+  formSource = "contact",
   logoUrl = "",
 }) {
+  const labels = getFormLabels(formSource);
+
   return (
     <EmailLayout
-      preview={`New enquiry from ${name}: ${subject}`}
+      preview={`${labels.badge} from ${name}: ${subject}`}
       logoUrl={logoUrl}
     >
-      <Section style={badge}>New website enquiry</Section>
+      <Section style={badge}>{labels.badge}</Section>
 
       <Heading style={heading}>{subject}</Heading>
 
-      <Text style={intro}>
-        A new enquiry was submitted through the RedSpider website contact form.
-      </Text>
+      <Text style={intro}>{labels.intro}</Text>
 
       <Section style={detailsCard}>
+        <DetailRow label="Form" value={labels.formName} />
         <DetailRow label="Name" value={name} />
         <DetailRow label="Email" value={email} href={`mailto:${email}`} />
-        <DetailRow label="Phone" value={phone} href={`tel:${phone.replace(/\s/g, "")}`} />
+        <DetailRow
+          label="Phone"
+          value={phone}
+          href={`tel:${phone.replace(/\s/g, "")}`}
+        />
         <DetailRow label="Enquiry about" value={subject} />
         <DetailRow label="IP address" value={ipAddress} />
         <DetailRow label="Location" value={location} />
