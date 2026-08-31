@@ -6,8 +6,7 @@ import { fetchContactData } from "../lib/api";
 import ContactHero from "../components/contact/ContactHero";
 import ContactInfoForm from "../components/contact/ContactInfoForm";
 import ContactMap from "../components/contact/ContactMap";
-
-const SITE_URL = "https://www.redspider.ae";
+import { SITE_URL } from "../lib/seo";
 
 function slimContactData(data) {
   if (!data || typeof data !== "object") {

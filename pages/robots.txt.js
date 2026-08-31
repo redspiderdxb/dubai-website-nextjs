@@ -1,14 +1,16 @@
+import { SITE_URL } from "../lib/seo";
+
 export async function getServerSideProps({ res }) {
   const robots = `User-agent: *
 Allow: /
 
-Sitemap: https://www.redspider.ae/sitemap.xml
+Sitemap: ${SITE_URL}/sitemap.xml
 `;
 
   res.setHeader("Content-Type", "text/plain");
   res.setHeader(
     "Cache-Control",
-    "public, s-maxage=3600, stale-while-revalidate=86400"
+    "public, s-maxage=3600, stale-while-revalidate=86400",
   );
   res.write(robots);
   res.end();

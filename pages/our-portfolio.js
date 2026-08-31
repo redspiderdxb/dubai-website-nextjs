@@ -8,8 +8,7 @@ import PortfolioCTA from "../components/portfolio/PortfolioCTA";
 
 import { fetchGalleries } from "../lib/api";
 import { slimGalleries, slimPagination } from "../lib/galleries";
-
-const SITE_URL = "https://www.redspider.ae";
+import { SITE_URL } from "../lib/seo";
 
 export default function Portfolio({ initialGalleries, initialPagination }) {
   const title = "Web Design Portfolio Dubai | RedSpider Projects";

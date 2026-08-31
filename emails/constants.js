@@ -1,4 +1,6 @@
-export const SITE_URL = "https://www.redspider.ae";
+import { SITE_URL } from "../lib/seo";
+
+export { SITE_URL };
 export const SITE_NAME = "RedSpider Web & Art Design";
 export const LOGO_URL = `${SITE_URL}/assets/img/logo.webp`;
 export const LOGO_WHITE_URL = `${SITE_URL}/assets/img/Logo_White.webp`;

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { sanitizeCanonical } from "../../lib/seo";
+import { SITE_URL, sanitizeCanonical } from "../../lib/seo";
 
 export default function SEO({
   title,
@@ -15,7 +15,7 @@ export default function SEO({
   serviceSchema = null,
   pageSchema = null,
 }) {
-  const siteUrl = "https://www.redspider.ae";
+  const siteUrl = SITE_URL;
 
   /*
    * =====================================================

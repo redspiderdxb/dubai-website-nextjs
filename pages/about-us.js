@@ -9,8 +9,7 @@ import AboutValue from "../components/about/AboutValue";
 import AboutBrands from "../components/about/AboutBrands";
 import AboutServices from "../components/about/AboutServices";
 import AboutCTA from "../components/about/AboutCTA";
-
-const SITE_URL = "https://www.redspider.ae";
+import { SITE_URL } from "../lib/seo";
 
 function slimAboutData(data) {
   if (!data || typeof data !== "object") {
