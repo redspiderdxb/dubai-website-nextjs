@@ -21,6 +21,7 @@ export default function TeamNotificationEmail({
   phone = "",
   subject = "",
   content = "",
+  ipAddress = "Unknown",
   logoUrl = "",
 }) {
   return (
@@ -41,6 +42,7 @@ export default function TeamNotificationEmail({
         <DetailRow label="Email" value={email} href={`mailto:${email}`} />
         <DetailRow label="Phone" value={phone} href={`tel:${phone.replace(/\s/g, "")}`} />
         <DetailRow label="Enquiry about" value={subject} />
+        <DetailRow label="IP address" value={ipAddress} />
       </Section>
 
       <Hr style={divider} />

@@ -6,6 +6,7 @@ import {
   validatePhone,
 } from "../../lib/formValidation";
 import { sendContactEmails } from "../../lib/email";
+import { getClientIp } from "../../lib/getClientIp";
 
 const SUCCESS_MESSAGE =
   "Thank you! Your enquiry has been submitted successfully. We will contact you soon.";
@@ -79,6 +80,7 @@ export default async function handler(req, res) {
   const phone = String(body.phone).trim();
   const subject = String(body.subject).trim();
   const content = String(body.content).trim();
+  const ipAddress = getClientIp(req);
 
   try {
     await sendContactEmails({
@@ -87,6 +89,7 @@ export default async function handler(req, res) {
       phone,
       subject,
       content,
+      ipAddress,
     });
 
     return res.status(200).json({
