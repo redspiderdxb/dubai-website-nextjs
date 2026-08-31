@@ -6,7 +6,7 @@
   }
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const API_KEY = process.env.API_KEY;
+  const API_KEY = process.env.API_KEY || process.env.NEXT_PUBLIC_API_KEY;
 
   if (!API_URL || !API_KEY) {
     console.error("Products API configuration is missing.");
