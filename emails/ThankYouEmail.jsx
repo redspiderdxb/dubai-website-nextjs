@@ -7,9 +7,17 @@ import {
   SUPPORT_PHONE_LINK,
 } from "./constants";
 
-export default function ThankYouEmail({ name = "there" }) {
+export default function ThankYouEmail({
+  name = "there",
+  logoUrl = "",
+  faviconUrl = "",
+}) {
   return (
-    <EmailLayout preview={`Thank you for contacting RedSpider, ${name}`}>
+    <EmailLayout
+      preview={`Thank you for contacting RedSpider, ${name}`}
+      logoUrl={logoUrl}
+      faviconUrl={faviconUrl}
+    >
       <Heading style={heading}>Thank you for reaching out</Heading>
 
       <Text style={paragraph}>Dear {name},</Text>
