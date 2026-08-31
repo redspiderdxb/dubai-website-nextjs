@@ -12,6 +12,11 @@ export default function PageStyles({ href }) {
       {hrefs.map((item) => (
         <link key={item} rel="stylesheet" href={item} precedence="default" />
       ))}
+      <link
+        rel="stylesheet"
+        href="/assets/css/shared/fonts.css"
+        precedence="high"
+      />
     </>
   );
 }

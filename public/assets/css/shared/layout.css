@@ -213,7 +213,7 @@ main:has(.contact-cta) ~ .rs-footer-sec::after {
 
 .key-features .kf-title {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: var(--heading-font-weight);
   color: #111;
   margin-bottom: 20px;
   line-height: 1.2;
@@ -292,7 +292,7 @@ main:has(.contact-cta) ~ .rs-footer-sec::after {
 
 .home-faq h2 {
   font-size: 42px;
-  font-weight: 700;
+  font-weight: var(--heading-font-weight);
 }
 
 .home-faq p {
@@ -312,7 +312,7 @@ main:has(.contact-cta) ~ .rs-footer-sec::after {
   background: #fff;
   color: #222;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: var(--body-font-weight);
   padding: 18px 20px;
   box-shadow: none;
   border: none;
@@ -1001,7 +1001,7 @@ main:has(.contact-cta) ~ .rs-footer-sec::after {
 
 .hero-marquee .rs-process-title {
   font-size: clamp(29px, 4.6vw, 44px) !important;
-  font-weight: 800;
+  font-weight: var(--heading-font-weight);
   color: #fff;
 }
 
@@ -2260,7 +2260,6 @@ span.rs-process-highlight {
   background: #f8f8f8;
   color: #111;
   font-size: 15px;
-  font-family: inherit;
   text-align: left;
   cursor: pointer;
 }
@@ -2318,7 +2317,6 @@ span.rs-process-highlight {
   background: transparent;
   color: #fff;
   font-size: 14px;
-  font-family: inherit;
   text-align: left;
   cursor: pointer;
 }

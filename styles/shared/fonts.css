@@ -1,0 +1,73 @@
+/**
+ * Global typography — single source of truth.
+ * Body: Karla Medium (500) | Headings: Lato Medium (500)
+ * Loaded last so it overrides legacy per-section font rules.
+ */
+
+:root {
+  --default-font: "Karla", sans-serif;
+  --heading-font: "Lato", sans-serif;
+  --body-font-weight: 500;
+  --heading-font-weight: 500;
+  --nav-font: var(--default-font);
+  --bs-font-sans-serif: var(--default-font);
+  --bs-body-font-family: var(--default-font);
+}
+
+html {
+  font-family: var(--default-font) !important;
+  font-weight: var(--body-font-weight) !important;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+optgroup {
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: var(--heading-font) !important;
+  font-weight: var(--heading-font-weight) !important;
+}
+
+h1.fw-bold,
+h2.fw-bold,
+h3.fw-bold,
+h4.fw-bold,
+h5.fw-bold,
+h6.fw-bold,
+.h1.fw-bold,
+.h2.fw-bold,
+.h3.fw-bold,
+.h4.fw-bold,
+.h5.fw-bold,
+.h6.fw-bold {
+  font-weight: var(--heading-font-weight) !important;
+}
+
+/* Icon fonts (not text) */
+.bi,
+[class^="bi-"]::before,
+[class*=" bi-"]::before,
+.bootstrap-icons {
+  font-family: bootstrap-icons !important;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined" !important;
+}

@@ -66,7 +66,7 @@
   margin: 0;
   font-size: clamp(24px, 2.4vw, 32px);
   line-height: 1.18;
-  font-weight: 700;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.03em;
   max-width: 16ch;
   color: #171311;
@@ -368,10 +368,9 @@
 
 .rs-left-card span,
 .rs-left-card .rs-left-heading {
-  font-weight: 700;
+  font-weight: var(--heading-font-weight);
   font-size: 30px;
   color: #fff;
-  font-family: var(--default-font);
   line-height: 1.25;
   display: block;
 }
@@ -898,7 +897,6 @@
   background: #170008;
   padding: 0;
   color: #ffffff;
-  font-family: var(--default-font);
 }
 
 .rs-hero-slider .carousel,
@@ -964,7 +962,7 @@
   margin: 0;
   color: #ffffff;
   font-size: clamp(35px, 4.2vw, 36px);
-  font-weight: 700;
+  font-weight: var(--heading-font-weight);
   line-height: 1.08;
   letter-spacing: -.8px;
   text-transform: uppercase;
@@ -1477,7 +1475,7 @@
   color: #ffffff;
   font-size: 30px;
   line-height: 1.2;
-  font-weight: normal;
+  font-weight: var(--heading-font-weight);
   text-transform: uppercase;
 }
 
@@ -1639,7 +1637,6 @@
 .form-sec .req_selected,
 .form-sec .req_textarea {
   background-color: transparent;
-  font-family: var(--default-font) !important;
   border-width: 0 0 0px 0;
   border-color: #fff;
   border-style: solid;
@@ -1769,8 +1766,7 @@
 }
 
 #services .rs-service-card h3 {
-  font-weight: bold;
-  font-family: var(--default-font);
+  font-weight: var(--heading-font-weight);
 }
 
 .rs-service-card::before {
@@ -1824,7 +1820,7 @@
 
 .rs-service-card h3 {
   font-size: 21px;
-  font-weight: 700;
+  font-weight: var(--heading-font-weight);
   color: #171717;
   margin-bottom: 14px;
   transition: all 0.35s ease;
@@ -2500,7 +2496,7 @@
 
 .rs-gsap-cards .rs-agency-heading {
   font-size: clamp(26px, 2.8vw, 40px);
-  font-weight: 700;
+  font-weight: var(--heading-font-weight);
   line-height: 1.15;
   color: #171717;
   margin: 0 0 16px;
@@ -5127,7 +5123,6 @@
   padding: 100px 0;
   background: #f8f8f8;
   color: #242424;
-  font-family: var(--default-font);
   font-weight: 400;
 }
 
@@ -5504,7 +5499,6 @@
   padding: 115px 0 100px;
   background: #050505 url("");
   color: #ffffff;
-  font-family: var(--default-font);
   font-weight: 400;
 }
 
@@ -6124,7 +6118,6 @@ section.rs-vertical-cards .rs-vertical-cards__label {
 
   color: rgba(255, 255, 255, 0.72) !important;
 
-  font-family: inherit !important;
 
   font-size: 9px !important;
   font-weight: 600 !important;
@@ -6176,7 +6169,6 @@ section.rs-vertical-cards .rs-vertical-cards__word {
 
   color: #f5f5f5 !important;
 
-  font-family: inherit !important;
 
   font-size: clamp(150px,
       21vw,
@@ -7108,7 +7100,6 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
   padding: clamp(70px, 8vw, 130px) 0;
   color: #121212;
   background: #faf9f7;
-  font-family: var(--default-font);
 }
 
 .rs-key-features .rs-dot {
@@ -7347,7 +7338,6 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
       #ffffff 0%,
       #f5f5f5 50%,
       #ffffff 100%);
-  font-family: var(--default-font);
 }
 
 .rs-key-features:before {
@@ -7828,7 +7818,6 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
   border-radius: 30px;
   color: #555;
   background: rgba(255, 255, 255, .55);
-  font-family: var(--default-font);
   font-size: 13px;
 }
 
@@ -7901,7 +7890,7 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
   padding-left: clamp(22px, 2.5vw, 45px);
   color: #fff;
   font-size: clamp(34px, 4.5vw, 84px);
-  font-weight: 700;
+  font-weight: var(--heading-font-weight);
   line-height: 1;
   letter-spacing: -.015em;
   white-space: nowrap;
@@ -8093,7 +8082,7 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
   margin: 16px 0 0;
   font-size: 18px;
   line-height: 1.4;
-  font-weight: 600;
+  font-weight: var(--heading-font-weight);
   min-height: 2.8em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -8641,7 +8630,6 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
   overflow: hidden;
   background: #f4f2ee;
   color: #181818;
-  font-family: var(--default-font);
 }
 
 .email-industries-showcase * {
@@ -9053,7 +9041,6 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
   background:
     radial-gradient(circle at 88% 13%, rgba(210, 0, 0, .09), transparent 27%),
     linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
-  font-family: var(--default-font);
 }
 
 .rs-email-roi-showcase *,
@@ -9449,7 +9436,6 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
   padding: 55px 0 90px;
   color: #070707;
   background: #f7f7f4;
-  font-family: var(--default-font);
 }
 
 .rs-mail-services-editorial *,

@@ -1,7 +1,6 @@
 /* Shared utilities and cross-page leftovers */
 
 .title-red {
-  font-family: var(--default-font);
   color: #DE1515;
 }
 
@@ -200,7 +199,6 @@
 /* Step Number */
 
 .process-img-wrap .step {
-  font-family: var(--default-font);
   position: absolute;
   top: -10px;
   left: -10px;
@@ -961,7 +959,6 @@
   font-size: 48px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.2);
-  font-family: var(--default-font);
   display: block;
   line-height: 1;
   margin-bottom: 15px;
@@ -1104,7 +1101,7 @@
 
 .hosting-app .hero-title {
   font-size: 42px;
-  font-weight: 600;
+  font-weight: var(--heading-font-weight);
 }
 
 @media (max-width: 768px) {
@@ -1154,7 +1151,7 @@
 
 .uae-host .uae-title {
   font-size: 36px;
-  font-weight: 600;
+  font-weight: var(--heading-font-weight);
   margin-bottom: 15px;
 }
 
@@ -1401,7 +1398,6 @@
   font-weight: 700;
   color: #e50914;
   margin-bottom: 15px;
-  font-family: var(--default-font);
 }
 
 /* Title */
@@ -4467,7 +4463,6 @@ section.text-revel {
 */
 
 .rs-gd-intro__lead.fade-title {
-  font-family: var(--default-font);
   font-size: calc(2.2rem + 1.4vw);
   font-weight: 700;
   line-height: 1.2;
@@ -6335,7 +6330,6 @@ section.text-revel {
     radial-gradient(circle at 8% 18%, rgba(227, 30, 36, 0.08), transparent 25%),
     radial-gradient(circle at 92% 75%, rgba(0, 0, 0, 0.04), transparent 25%),
     linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
-  font-family: var(--default-font);
   isolation: isolate;
 }
 
@@ -6750,7 +6744,6 @@ section.text-revel {
       rgba(0, 0, 0, 0.06) 58%,
       #ffffff 82%,
       #ffffff 100%);
-  font-family: var(--default-font);
   isolation: isolate;
 }
 
@@ -7033,7 +7026,6 @@ section.text-revel {
     radial-gradient(circle at 10% 48%, rgba(227, 30, 36, 0.07), transparent 26%),
     radial-gradient(circle at 90% 52%, rgba(20, 20, 24, 0.06), transparent 27%),
     linear-gradient(180deg, #ffffff 0%, #f5f5f6 50%, #ffffff 100%);
-  font-family: var(--default-font);
 }
 
 .rs-hosting-tools .rs-hosting-tools__floating-icon {
@@ -8659,7 +8651,6 @@ section.text-revel {
   padding: 58px 0;
   background: #fff;
   color: #222;
-  font-family: var(--default-font);
 }
 
 .rs-why-hub-section .rs-heading {
@@ -8672,7 +8663,6 @@ section.text-revel {
   max-width: 760px;
   margin: 0 auto 14px;
   color: #141418;
-  font-family: var(--default-font);
   font-size: 40px;
   line-height: 1.1;
   font-weight: 500;
@@ -8758,7 +8748,6 @@ section.text-revel {
 .rs-why-hub-section .rs-hub-card h3 {
   margin: 0;
   color: #1d1d22;
-  font-family: var(--default-font);
   font-size: 16px;
   line-height: 1.42;
   font-weight: 500;
@@ -8841,7 +8830,6 @@ section.text-revel {
 
 .rs-why-hub-section .rs-hub-core strong {
   color: #141418;
-  font-family: var(--default-font);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 600;
@@ -9801,35 +9789,6 @@ body.rs-mobile-drawer-open {
   border-radius: 8px;
 }
 
-/* =========================================================
-   UNIFIED TYPOGRAPHY
-========================================================= */
-
-:root {
-  --default-font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --heading-font: var(--default-font);
-  --nav-font: var(--default-font);
-}
-
-html,
-body,
-button,
-input,
-select,
-textarea {
-  font-family: var(--default-font);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--default-font);
-}
-
 .rs-creative-intro__grid {
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
@@ -10706,7 +10665,6 @@ body {
 .platform-number {
   font-size: 16px;
   font-weight: 700;
-  font-family: var(--default-font);
   min-width: 38px;
   padding-top: 2px;
   letter-spacing: 0.5px;
@@ -10825,7 +10783,6 @@ body {
   right: 20px;
   font-size: 14px;
   font-weight: 600;
-  font-family: var(--default-font);
   color: rgba(0, 0, 0, 0.25);
   letter-spacing: 0.5px;
 }
@@ -10989,7 +10946,6 @@ button.rs-dropdown-trigger {
   cursor: pointer;
   transition: color var(--wk-transition), padding-left var(--wk-transition);
   text-align: left;
-  font-family: inherit;
   position: relative;
 }
 
@@ -11209,7 +11165,6 @@ button.rs-dropdown-trigger {
   cursor: pointer;
   transition: color var(--wk-transition);
   text-align: left;
-  font-family: inherit;
   font-size: 15px;
 }
 
@@ -12451,7 +12406,6 @@ button.rs-dropdown-trigger {
   cursor: pointer;
   transition: color var(--kk-transition), padding-left var(--kk-transition);
   text-align: left;
-  font-family: inherit;
   position: relative;
 }
 
@@ -12611,7 +12565,6 @@ button.rs-dropdown-trigger {
   cursor: pointer;
   transition: color var(--kk-transition);
   text-align: left;
-  font-family: inherit;
   font-size: 15px;
 }
 
@@ -13688,7 +13641,6 @@ button.rs-dropdown-trigger {
   max-width: 700px;
   margin: 0 0 20px;
   color: #111;
-  font-family: var(--default-font);
   font-size: 40px;
   line-height: 1.1;
   font-weight: 500;
@@ -13784,7 +13736,6 @@ button.rs-dropdown-trigger {
   padding: 20px 22px;
   background: #fbfbfb;
   color: #4f4f56;
-  font-family: var(--default-font);
   font-size: 12.5px;
   line-height: 1.55
 }
@@ -13949,7 +13900,6 @@ button.rs-dropdown-trigger {
 .rs-pint-section .rs-group-title {
   margin: 0;
   color: #18181c;
-  font-family: var(--default-font);
   font-size: 24px;
   font-weight: 600;
   line-height: 1.15
@@ -14075,7 +14025,6 @@ button.rs-dropdown-trigger {
   padding: 110px 0;
   background: #fff;
   color: #171717;
-  font-family: var(--default-font)
 }
 
 .rs-uae-invoice-section:before {

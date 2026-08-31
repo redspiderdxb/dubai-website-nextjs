@@ -70,8 +70,7 @@ const pageStyle = {
   minHeight: "100vh",
   background: "#f3f4f6",
   padding: "40px 20px",
-  fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  fontFamily: "Karla, sans-serif",
 };
 
 const headerStyle = {

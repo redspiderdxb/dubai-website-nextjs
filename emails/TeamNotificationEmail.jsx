@@ -96,7 +96,7 @@ const badge = {
   color: BRAND.white,
   display: "inline-block",
   fontSize: "12px",
-  fontWeight: "700",
+  fontWeight: BRAND.headingFontWeight,
   letterSpacing: "0.04em",
   lineHeight: "1",
   margin: "0 0 16px",
@@ -106,8 +106,9 @@ const badge = {
 
 const heading = {
   color: BRAND.text,
+  fontFamily: BRAND.headingFont,
   fontSize: "22px",
-  fontWeight: "700",
+  fontWeight: BRAND.headingFontWeight,
   lineHeight: "30px",
   margin: "0 0 12px",
 };

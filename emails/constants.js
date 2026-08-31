@@ -14,6 +14,10 @@ export const BRAND = {
   border: "#e5e7eb",
   background: "#f3f4f6",
   white: "#ffffff",
+  bodyFont: "Karla, sans-serif",
+  headingFont: "Lato, sans-serif",
+  bodyFontWeight: 500,
+  headingFontWeight: 500,
 };
 
 export const SOCIAL_LINKS = [

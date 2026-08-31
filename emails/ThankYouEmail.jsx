@@ -55,8 +55,9 @@ export default function ThankYouEmail({ name = "there", logoUrl = "" }) {
 
 const heading = {
   color: BRAND.text,
+  fontFamily: BRAND.headingFont,
   fontSize: "24px",
-  fontWeight: "700",
+  fontWeight: BRAND.headingFontWeight,
   lineHeight: "32px",
   margin: "0 0 20px",
 };
@@ -78,8 +79,9 @@ const highlightBox = {
 
 const highlightTitle = {
   color: BRAND.red,
+  fontFamily: BRAND.headingFont,
   fontSize: "14px",
-  fontWeight: "700",
+  fontWeight: BRAND.headingFontWeight,
   lineHeight: "22px",
   margin: "0 0 10px",
 };

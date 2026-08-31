@@ -248,7 +248,6 @@
 .about-info-sec .stat-box h3 {
   font-size: 52px;
   font-weight: 400;
-  font-family: var(--default-font);
   color: #111;
   margin-bottom: 5px;
 }
@@ -458,7 +457,6 @@
 .company_numbers {
   font-size: 52px;
   font-weight: 400;
-  font-family: var(--default-font);
   color: #111;
   margin-bottom: 5px;
 }

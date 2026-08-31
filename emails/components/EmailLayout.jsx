@@ -23,7 +23,12 @@ import {
 export default function EmailLayout({ preview, children, logoUrl = "" }) {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Karla:wght@500&family=Lato:wght@500&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       {preview ? <Preview>{preview}</Preview> : null}
       <Body style={bodyStyle}>
         <Container style={outerContainer}>
@@ -83,8 +88,8 @@ const bodyStyle = {
   backgroundColor: BRAND.background,
   margin: "0",
   padding: "24px 12px",
-  fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  fontFamily: BRAND.bodyFont,
+  fontWeight: BRAND.bodyFontWeight,
 };
 
 const outerContainer = {
@@ -114,7 +119,7 @@ const logoImage = {
 const logoFallback = {
   color: BRAND.white,
   fontSize: "20px",
-  fontWeight: "700",
+  fontWeight: String(BRAND.headingFontWeight),
   margin: "0",
   textAlign: "center",
 };
@@ -140,7 +145,8 @@ const footerSection = {
 const footerTitle = {
   color: BRAND.text,
   fontSize: "14px",
-  fontWeight: "700",
+  fontWeight: BRAND.headingFontWeight,
+  fontFamily: BRAND.headingFont,
   margin: "0 0 6px",
 };
 

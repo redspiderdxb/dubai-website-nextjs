@@ -1,7 +1,6 @@
 /* Shared utilities and cross-page leftovers */
 
 .title-red {
-  font-family: var(--default-font);
   color: #de1515;
 }
 
@@ -199,7 +198,6 @@
 /* Step Number */
 
 .process-img-wrap .step {
-  font-family: var(--default-font);
   position: absolute;
   top: -10px;
   left: -10px;
@@ -212,7 +210,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   z-index: 2;
 }
 
@@ -395,7 +393,7 @@
 
   color: #fff !important;
   border: none;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
 }
 
 /* Content above effects */
@@ -989,7 +987,6 @@
   font-size: 48px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.2);
-  font-family: var(--default-font);
   display: block;
   line-height: 1;
   margin-bottom: 15px;
@@ -1130,7 +1127,7 @@
 
 .hosting-app .hero-title {
   font-size: 42px;
-  font-weight: 600;
+  font-weight: var(--heading-font-weight);
 }
 
 @media (max-width: 768px) {
@@ -1180,7 +1177,7 @@
 
 .uae-host .uae-title {
   font-size: 36px;
-  font-weight: 600;
+  font-weight: var(--heading-font-weight);
   margin-bottom: 15px;
 }
 
@@ -1390,7 +1387,7 @@
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   animation: fadeIn 2.5s ease;
 }
 
@@ -1430,7 +1427,6 @@
   font-weight: 700;
   color: #e50914;
   margin-bottom: 15px;
-  font-family: var(--default-font);
 }
 
 /* Title */
@@ -1707,7 +1703,7 @@ p {
 }
 
 .home-form h3 {
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   font-size: 40px;
 }
 
@@ -1754,7 +1750,7 @@ p {
 }
 
 .home-form h4 {
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
 }
 
 .form-extinfo p {
@@ -2925,7 +2921,7 @@ section.text-revel {
 .rs-lead {
   font-size: 18px;
   color: #171717;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   line-height: 1.55;
   margin-bottom: 16px;
 }
@@ -4403,7 +4399,6 @@ section.text-revel {
 */
 
 .rs-gd-intro__lead.fade-title {
-  font-family: var(--default-font);
   font-size: calc(2.2rem + 1.4vw);
   font-weight: 700;
   line-height: 1.2;
@@ -4723,7 +4718,7 @@ section.text-revel {
 
 .rs-receive-stack-title span {
   color: #d20000;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
 }
 
 .rs-receive-stack-title::after {
@@ -4995,7 +4990,7 @@ section.text-revel {
 .work-card h4 {
   color: #fff;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.7px;
   margin-bottom: 16px;
 }
@@ -5078,7 +5073,7 @@ section.text-revel {
   padding: 14px 0;
   font-size: 16px;
   color: #111;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -6035,7 +6030,7 @@ section.text-revel {
   min-width: 18px;
   font-size: 26px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   color: #fff;
   transition: 0.25s;
 }
@@ -6267,7 +6262,6 @@ section.text-revel {
     radial-gradient(circle at 8% 18%, rgba(227, 30, 36, 0.08), transparent 25%),
     radial-gradient(circle at 92% 75%, rgba(0, 0, 0, 0.04), transparent 25%),
     linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
-  font-family: var(--default-font);
   isolation: isolate;
 }
 
@@ -6283,7 +6277,7 @@ section.text-revel {
   margin: 0 0 18px;
   color: #171717;
   font-size: clamp(32px, 4vw, 54px);
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   line-height: 1.15;
   letter-spacing: -0.03em;
 }
@@ -6314,7 +6308,7 @@ section.text-revel {
   margin: 0 0 28px;
   color: #171717;
   font-size: clamp(24px, 3vw, 34px);
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   line-height: 1.3;
   text-align: center;
 }
@@ -6354,7 +6348,7 @@ section.text-revel {
   background-color: transparent;
   color: #171717;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   outline: 0;
   cursor: pointer;
 }
@@ -6366,7 +6360,7 @@ section.text-revel {
   background: linear-gradient(135deg, #e31e24, #b81118);
   color: #ffffff;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
@@ -6422,7 +6416,7 @@ section.text-revel {
   margin: 0 0 12px;
   color: #171717;
   font-size: clamp(23px, 2.6vw, 30px);
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   line-height: 1.35;
 }
 
@@ -6683,7 +6677,6 @@ section.text-revel {
     #ffffff 82%,
     #ffffff 100%
   );
-  font-family: var(--default-font);
   isolation: isolate;
 }
 
@@ -6904,7 +6897,7 @@ section.text-revel {
   margin: 0;
   color: #2a2a2a;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   line-height: 1.4;
 }
 
@@ -6972,7 +6965,6 @@ section.text-revel {
     ),
     radial-gradient(circle at 90% 52%, rgba(20, 20, 24, 0.06), transparent 27%),
     linear-gradient(180deg, #ffffff 0%, #f5f5f6 50%, #ffffff 100%);
-  font-family: var(--default-font);
 }
 
 .rs-hosting-tools .rs-hosting-tools__floating-icon {
@@ -7437,7 +7429,7 @@ section.text-revel {
   background: #fff;
   color: #34343a;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   transition: 0.3s ease;
 }
 
@@ -7571,7 +7563,7 @@ section.text-revel {
   color: #e71928;
   font-size: 42px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.04em;
 }
 
@@ -7697,7 +7689,7 @@ section.text-revel {
   color: #29292f;
   font-size: 15px;
   line-height: 1.4;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
 }
 
 .rs-chatbot-light-section .rs-step {
@@ -7871,7 +7863,7 @@ section.text-revel {
   background: #fff;
   color: #37373d;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   box-shadow: 0 8px 24px rgba(20, 20, 24, 0.035);
   transition: 0.3s ease;
 }
@@ -8291,7 +8283,7 @@ section.text-revel {
   color: #141418;
   font-size: clamp(32px, 4vw, 48px);
   line-height: 1.08;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.025em;
   text-transform: uppercase;
 }
@@ -8434,7 +8426,7 @@ section.text-revel {
   color: #16161b;
   font-size: clamp(28px, 3vw, 40px);
   line-height: 1.15;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.025em;
 }
 
@@ -8625,7 +8617,6 @@ section.text-revel {
   padding: 58px 0;
   background: #fff;
   color: #222;
-  font-family: var(--default-font);
 }
 
 .rs-why-hub-section .rs-heading {
@@ -8638,10 +8629,9 @@ section.text-revel {
   max-width: 760px;
   margin: 0 auto 14px;
   color: #141418;
-  font-family: var(--default-font);
   font-size: 40px;
   line-height: 1.1;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
@@ -8729,10 +8719,9 @@ section.text-revel {
 .rs-why-hub-section .rs-hub-card h3 {
   margin: 0;
   color: #1d1d22;
-  font-family: var(--default-font);
   font-size: 16px;
   line-height: 1.42;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
 }
 
 .rs-why-hub-section .rs-center-hub {
@@ -8818,7 +8807,6 @@ section.text-revel {
 
 .rs-why-hub-section .rs-hub-core strong {
   color: #141418;
-  font-family: var(--default-font);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 600;
@@ -8925,7 +8913,7 @@ section.text-revel {
   color: #141418;
   font-size: 40px;
   line-height: 1.1;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
@@ -9519,7 +9507,7 @@ html {
 .rs-google-reviews .rs-google-word {
   display: inline-block;
   font-size: 28px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -1.5px;
   line-height: 1;
 }
@@ -9764,36 +9752,6 @@ body.rs-mobile-drawer-open {
   text-align: center;
   padding: 11px 16px;
   border-radius: 8px;
-}
-
-/* =========================================================
-   UNIFIED TYPOGRAPHY
-========================================================= */
-
-:root {
-  --default-font:
-    "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
-  --heading-font: var(--default-font);
-  --nav-font: var(--default-font);
-}
-
-html,
-body,
-button,
-input,
-select,
-textarea {
-  font-family: var(--default-font);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--default-font);
 }
 
 .rs-creative-intro__grid {
@@ -10467,7 +10425,7 @@ body {
 .connect-label {
   color: #fff;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   white-space: nowrap;
 }
 
@@ -10675,7 +10633,6 @@ body {
 .platform-number {
   font-size: 16px;
   font-weight: 700;
-  font-family: var(--default-font);
   min-width: 38px;
   padding-top: 2px;
   letter-spacing: 0.5px;
@@ -10794,7 +10751,6 @@ body {
   right: 20px;
   font-size: 14px;
   font-weight: 600;
-  font-family: var(--default-font);
   color: rgba(0, 0, 0, 0.25);
   letter-spacing: 0.5px;
 }
@@ -10960,7 +10916,6 @@ button.rs-dropdown-trigger {
     color var(--wk-transition),
     padding-left var(--wk-transition);
   text-align: left;
-  font-family: inherit;
   position: relative;
 }
 
@@ -11182,7 +11137,6 @@ button.rs-dropdown-trigger {
   cursor: pointer;
   transition: color var(--wk-transition);
   text-align: left;
-  font-family: inherit;
   font-size: 15px;
 }
 
@@ -11685,7 +11639,7 @@ button.rs-dropdown-trigger {
 .wk-platform-name {
   color: #1a1a1a;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   margin: 0;
   letter-spacing: 0.01em;
   transition: color 0.3s ease;
@@ -12065,7 +12019,7 @@ button.rs-dropdown-trigger {
 .ak-cms-platform-name {
   color: #1a1a1a;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   margin: 0;
   letter-spacing: 0.01em;
   transition: color 0.3s ease;
@@ -12436,7 +12390,6 @@ button.rs-dropdown-trigger {
     color var(--kk-transition),
     padding-left var(--kk-transition);
   text-align: left;
-  font-family: inherit;
   position: relative;
 }
 
@@ -12598,7 +12551,6 @@ button.rs-dropdown-trigger {
   cursor: pointer;
   transition: color var(--kk-transition);
   text-align: left;
-  font-family: inherit;
   font-size: 15px;
 }
 
@@ -13168,7 +13120,7 @@ button.rs-dropdown-trigger {
 
   line-height: 1.15;
 
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
 }
 
 .rs-related-heading h2 strong {
@@ -13672,10 +13624,9 @@ button.rs-dropdown-trigger {
   max-width: 700px;
   margin: 0 0 20px;
   color: #111;
-  font-family: var(--default-font);
   font-size: 40px;
   line-height: 1.1;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
@@ -13769,7 +13720,6 @@ button.rs-dropdown-trigger {
   padding: 20px 22px;
   background: #fbfbfb;
   color: #4f4f56;
-  font-family: var(--default-font);
   font-size: 12.5px;
   line-height: 1.55;
 }
@@ -13946,7 +13896,6 @@ button.rs-dropdown-trigger {
 .rs-pint-section .rs-group-title {
   margin: 0;
   color: #18181c;
-  font-family: var(--default-font);
   font-size: 24px;
   font-weight: 600;
   line-height: 1.15;
@@ -14073,7 +14022,6 @@ button.rs-dropdown-trigger {
   padding: 110px 0;
   background: #fff;
   color: #171717;
-  font-family: var(--default-font);
 }
 
 .rs-uae-invoice-section:before {
@@ -14146,7 +14094,7 @@ button.rs-dropdown-trigger {
   margin: 0 0 22px;
   font-size: 36px;
   line-height: 1.3;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
@@ -14521,7 +14469,7 @@ button.rs-dropdown-trigger {
   color: #141418;
   font-size: 40px;
   line-height: 1.1;
-  font-weight: 500;
+  font-weight: var(--heading-font-weight);
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }

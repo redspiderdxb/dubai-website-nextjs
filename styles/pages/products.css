@@ -362,7 +362,6 @@
   background: #f5f5f5;
   border-radius: 10px;
   overflow: hidden;
-  font-family: inherit;
 }
 
 /* HEADER */
@@ -543,7 +542,6 @@
 
 .dynamic-text h2,
 .dynamic-text .dynamic-text-heading {
-  font-family: var(--default-font);
   font-size: calc(2rem + 3.5vw);
   font-weight: normal;
   line-height: 1.1;
@@ -1508,7 +1506,6 @@
   padding: 42px 0;
   background: radial-gradient(circle at 8% 18%, rgba(210, 0, 0, .055), transparent 24%), radial-gradient(circle at 92% 82%, rgba(20, 20, 24, .045), transparent 22%), linear-gradient(180deg, #fafafa 0%, #f5f5f6 100%);
   color: #222;
-  font-family: var(--default-font);
 }
 
 .rs-api-pricing-section::before,
@@ -1546,7 +1543,6 @@
   max-width: 760px;
   margin: 0 auto 16px;
   color: #141418;
-  font-family: var(--default-font);
   font-size: 40px;
   line-height: 1.1;
   font-weight: 500;
@@ -1666,7 +1662,6 @@
   justify-content: center;
   width: 30px;
   height: 30px;
-  font-family: "Material Symbols Outlined";
   font-weight: normal;
   font-style: normal;
   line-height: 1;
@@ -1707,7 +1702,6 @@
 .rs-api-pricing-section .rs-pricing-card h3 {
   margin: 0;
   color: #1d1d22;
-  font-family: var(--default-font);
   font-size: 16px;
   line-height: 1.4;
   font-weight: 600;
@@ -1788,7 +1782,6 @@
   background: #0a0a0a;
   padding: 100px 0;
   position: relative;
-  font-family: var(--default-font);
 }
 
 .premium-container {
@@ -2760,7 +2753,6 @@
   right: -8px;
   bottom: -31px;
   color: rgba(255, 255, 255, .025);
-  font-family: var(--default-font);
   font-size: 112px;
   font-weight: 800;
   line-height: 1;
@@ -2772,7 +2764,6 @@
   z-index: 2;
   margin-bottom: 25px;
   color: #fff;
-  font-family: var(--default-font);
   font-size: 20px;
   font-weight: 700;
 }
@@ -2781,7 +2772,6 @@
   display: block;
   margin-top: 5px;
   color: #8f8f96;
-  font-family: var(--default-font);
   font-size: 11px;
   font-weight: 400;
   letter-spacing: .11em;
@@ -2924,7 +2914,6 @@
 .rs-api-service-section .rs-api-process-title {
   margin: 0 0 10px;
   color: #17171b;
-  font-family: var(--default-font);
   font-size: 26px;
   font-weight: 600;
   line-height: 1.2;
@@ -3014,7 +3003,6 @@
 .rs-api-service-section .rs-api-step h3 {
   margin: 2px 0 7px;
   color: #1d1d22;
-  font-family: var(--default-font);
   font-size: 16px;
   font-weight: 700;
   line-height: 1.35;
@@ -3048,7 +3036,6 @@
   display: block;
   margin-bottom: 5px;
   color: #1d1d22;
-  font-family: var(--default-font);
   font-size: 16px;
 }
 
@@ -3148,7 +3135,6 @@
   padding: 68px 0;
   background: #fff;
   color: #222;
-  font-family: var(--default-font)
 }
 
 .zivora-readiness-accordion:before {
@@ -3188,7 +3174,6 @@
 .zivora-readiness-accordion .zra-title {
   margin: 0 0 20px;
   color: #17171b;
-  font-family: var(--default-font);
 
   font-size: 40px;
   line-height: 1.1;
@@ -3281,7 +3266,6 @@
   padding: 17px 18px;
   background: #fff !important;
   color: #222 !important;
-  font-family: var(--default-font);
   font-size: 20px;
   font-weight: 600;
   box-shadow: none !important
@@ -3351,7 +3335,6 @@
   left: 2px;
   top: 7px;
   color: #d20000;
-  font-family: "Material Symbols Outlined";
   font-size: 18px
 }
 
@@ -3405,7 +3388,6 @@
 
 .zivora-readiness-accordion .zra-deliverable h2 {
   margin: 0 0 5px;
-  font-family: var(--default-font);
   font-size: 25px;
   font-weight: 600
 }
@@ -3515,7 +3497,6 @@
   max-width: 760px;
   margin: 0;
   color: #111;
-  font-family: var(--default-font);
 
   font-size: 40px;
   line-height: 1.1;
@@ -3677,7 +3658,6 @@
 .zivora-systems-showcase .zss-system-card h3 {
   margin: 0 0 8px;
   color: #17171b;
-  font-family: var(--default-font);
   font-size: 21px;
   line-height: 1.25;
   font-weight: 600
@@ -3792,7 +3772,6 @@
   padding: 75px 0;
   background: #fff;
   color: #222;
-  font-family: var(--default-font)
 }
 
 .zivora-invoice-status:before {
@@ -4114,7 +4093,6 @@
   padding: 85px 0;
   background: #f8f8f8;
   color: #222;
-  font-family: var(--default-font)
 }
 
 .zivora-why-choose:before {

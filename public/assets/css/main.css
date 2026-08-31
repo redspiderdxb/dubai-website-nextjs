@@ -1,13 +1,7 @@
 /*--------------------------------------------------------------
 # Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
+# Typography: see /assets/css/shared/fonts.css
 --------------------------------------------------------------*/
-/* Fonts */
-:root {
-  --default-font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --heading-font: var(--default-font);
-  --nav-font: var(--default-font);
-}
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root {
@@ -83,7 +77,6 @@
 body {
   color: var(--default-color);
   background-color: var(--background-color);
-  font-family: var(--default-font);
 }
 
 a {
@@ -104,7 +97,6 @@ h4,
 h5,
 h6 {
   color: var(--heading-color);
-  font-family: var(--heading-font);
 }
 
 /* PHP Email Form Messages
@@ -252,7 +244,6 @@ h6 {
   padding-top: 28px;
   color: #fff;
   background: transparent;
-  font-family: var(--default-font);
   transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -383,7 +374,6 @@ h6 {
 
   color: #fff;
 
-  font-family: inherit;
   font-size: 14px;
   font-weight: 400;
 
@@ -466,7 +456,6 @@ h6 {
 
   color: #fff;
 
-  font-family: inherit;
   font-size: 14px;
   font-weight: 400;
 
@@ -1034,15 +1023,14 @@ h6 {
 
 .footer .footer-about .logo span {
   font-size: 26px;
-  font-weight: 700;
+  font-weight: var(--heading-font-weight);
   letter-spacing: 1px;
-  font-family: var(--heading-font);
   color: var(--heading-color);
 }
 
 .footer .footer-about p {
   font-size: 14px;
-  font-family: var(--heading-font);
+  font-weight: var(--body-font-weight);
 }
 
 .footer .social-links a {
@@ -1520,7 +1508,6 @@ section,
 .stats .stats-item p {
   padding: 0;
   margin: 0;
-  font-family: var(--heading-font);
   font-size: 16px;
 }
 

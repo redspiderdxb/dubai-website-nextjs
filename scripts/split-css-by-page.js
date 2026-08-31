@@ -719,9 +719,6 @@ function main() {
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --default-font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --heading-font: var(--default-font);
-  --nav-font: var(--default-font);
   --rs-scroll-track: #111111;
   --rs-scroll-thumb: #d20000;
   --rs-scroll-thumb-hover: #ff2d2d;
@@ -767,9 +764,16 @@ html {
   --font-mono: var(--default-font);
 }
 
-html,
-body {
-  font-family: var(--default-font);
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000000;
 }
 `;
 

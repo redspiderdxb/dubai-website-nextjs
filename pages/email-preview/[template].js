@@ -68,8 +68,7 @@ export default function EmailPreviewInlinePage() {
 const pageStyle = {
   minHeight: "100vh",
   padding: "40px 20px",
-  fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  fontFamily: "Karla, sans-serif",
 };
 
 const toolbarStyle = {
@@ -79,8 +78,7 @@ const toolbarStyle = {
   padding: "12px 20px",
   background: "#111827",
   color: "#ffffff",
-  fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  fontFamily: "Karla, sans-serif",
 };
 
 const backLinkStyle = {

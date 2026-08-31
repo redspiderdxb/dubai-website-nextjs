@@ -124,7 +124,6 @@
 
 .archidex-title span {
   display: block;
-  font-family: var(--default-font);
   font-style: italic;
   font-weight: 700;
 }
@@ -1523,7 +1522,7 @@
   margin-bottom: 22px;
   color: #d20000 !important;
   font-size: 12px;
-  font-weight: 700 !important;
+  font-weight: var(--heading-font-weight) !important;
   letter-spacing: .14em;
 }
 
@@ -1618,7 +1617,6 @@
 ========================================================= */
 
 .rs-creative-page {
-  font-family: var(--default-font);
   color: #171717;
   overflow-x: hidden;
 }
@@ -1631,7 +1629,6 @@
 .rs-creative-page a,
 .rs-creative-page button,
 .rs-creative-page li {
-  font-family: var(--default-font);
 }
 
 .rs-creative-kicker {
