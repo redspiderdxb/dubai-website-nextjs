@@ -136,9 +136,9 @@ const outerContainer = {
 };
 
 const headerSection = {
-  backgroundColor: "#fef2f2",
+  backgroundColor: BRAND.red,
   borderRadius: "12px 12px 0 0",
-  border: `1px solid #fecaca`,
+  border: `1px solid ${BRAND.redDark}`,
   borderBottom: "none",
   textAlign: "center",
   padding: "28px 24px",
@@ -153,7 +153,7 @@ const logoTable = {
 };
 
 const faviconCell = {
-  paddingRight: "12px",
+  paddingRight: "14px",
   verticalAlign: "middle",
 };
 
@@ -164,7 +164,8 @@ const logoCell = {
 const faviconImage = {
   display: "block",
   border: "0",
-  borderRadius: "8px",
+  borderRadius: "10px",
+  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
 };
 
 const logoImage = {
@@ -174,7 +175,7 @@ const logoImage = {
 };
 
 const logoFallback = {
-  color: BRAND.red,
+  color: BRAND.white,
   fontSize: "20px",
   fontWeight: "700",
   margin: "0",
