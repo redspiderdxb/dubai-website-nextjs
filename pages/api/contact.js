@@ -7,6 +7,7 @@ import {
 } from "../../lib/formValidation";
 import { sendContactEmails } from "../../lib/email";
 import { getClientIp } from "../../lib/getClientIp";
+import { getLocationFromIp } from "../../lib/getLocationFromIp";
 
 const SUCCESS_MESSAGE =
   "Thank you! Your enquiry has been submitted successfully. We will contact you soon.";
@@ -81,6 +82,8 @@ export default async function handler(req, res) {
   const subject = String(body.subject).trim();
   const content = String(body.content).trim();
   const ipAddress = getClientIp(req);
+  const formCountry = String(body.country || "").trim();
+  const location = await getLocationFromIp(ipAddress);
 
   try {
     await sendContactEmails({
@@ -90,6 +93,8 @@ export default async function handler(req, res) {
       subject,
       content,
       ipAddress,
+      location,
+      formCountry,
     });
 
     return res.status(200).json({

@@ -22,6 +22,8 @@ export default function TeamNotificationEmail({
   subject = "",
   content = "",
   ipAddress = "Unknown",
+  location = "Unknown",
+  formCountry = "",
   logoUrl = "",
 }) {
   return (
@@ -43,6 +45,10 @@ export default function TeamNotificationEmail({
         <DetailRow label="Phone" value={phone} href={`tel:${phone.replace(/\s/g, "")}`} />
         <DetailRow label="Enquiry about" value={subject} />
         <DetailRow label="IP address" value={ipAddress} />
+        <DetailRow label="Location" value={location} />
+        {formCountry ? (
+          <DetailRow label="Country selected" value={formCountry} />
+        ) : null}
       </Section>
 
       <Hr style={divider} />

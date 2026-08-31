@@ -148,6 +148,7 @@ export default function ContactInfoForm({ data }) {
         name: formData.fullName.trim(),
         email: formData.email.trim(),
         phone: fullPhone,
+        country: formData.country.trim(),
         subject: `${formData.service} - ${formData.country}`,
         content: formData.comment.trim(),
         agree_terms_and_policy: formData.agree_terms_and_policy,

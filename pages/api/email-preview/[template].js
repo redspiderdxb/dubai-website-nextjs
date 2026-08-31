@@ -20,6 +20,8 @@ const TEMPLATES = {
       content:
         "We are looking for a modern corporate website with CMS integration and multilingual support. Please share your packages and timeline.",
       ipAddress: "203.0.113.42",
+      location: "Dubai, Dubai, United Arab Emirates",
+      formCountry: "UAE",
     },
   },
 };
