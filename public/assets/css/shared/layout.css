@@ -2073,7 +2073,7 @@ span.rs-process-highlight {
   margin: 0 0 24px;
   color: #111;
   font-size: clamp(28px, 3vw, 36px);
-  font-weight: 700;
+  font-weight: var(--heading-font-weight);
   text-align: left;
 }
 
@@ -2665,7 +2665,7 @@ span.rs-process-highlight {
   margin-bottom: 6px;
   color: #242424;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: var(--body-font-weight);
   line-height: 1.3;
 }
 
@@ -2694,13 +2694,13 @@ span.rs-process-highlight {
   margin: 6px 0 0;
   color: #c81e1e;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: var(--body-font-weight);
   line-height: 1.35;
   animation: rs-field-error-in 0.2s ease;
 }
 
 .rs-field-error__text {
-  font-weight: 700;
+  font-weight: var(--body-font-weight);
 }
 
 .rs-field-error i {
@@ -2713,13 +2713,13 @@ span.rs-process-highlight {
 .rs-contact-form-card .rs-field-error {
   margin: 6px 0 0;
   color: #c81e1e;
-  font-weight: 700;
+  font-weight: var(--body-font-weight);
 }
 
 .rs-contact-form-card .rs-field-error i,
 .rs-contact-form-card .rs-field-error__text {
   color: #c81e1e;
-  font-weight: 700;
+  font-weight: var(--body-font-weight);
 }
 
 .rs-form-error-summary {
@@ -2737,7 +2737,7 @@ span.rs-process-highlight {
   gap: 8px;
   margin-bottom: 8px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: var(--body-font-weight);
 }
 
 .rs-form-error-summary ul {
