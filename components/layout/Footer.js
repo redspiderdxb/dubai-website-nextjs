@@ -104,6 +104,10 @@ export default function Footer() {
       name: "Contact Us",
       path: "/contact-us/",
     },
+    {
+      name: "Sitemap",
+      path: "/sitemap/",
+    },
   ];
 
   /* =====================================================

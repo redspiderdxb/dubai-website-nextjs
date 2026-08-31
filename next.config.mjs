@@ -5,8 +5,22 @@ const nextConfig = {
 
   trailingSlash: true,
 
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap-xml",
+      },
+    ];
+  },
+
   async redirects() {
     return [
+      {
+        source: "/sitemap.xml/",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
       {
         source: "/about",
         destination: "/about-us/",
