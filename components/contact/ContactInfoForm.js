@@ -1,10 +1,12 @@
 // components/contact/ContactInfoForm.js
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Button from "../ui/Button";
 import FormAlert from "../ui/FormAlert";
 import FormField from "../ui/FormField";
 import ThemedSelect from "../ui/ThemedSelect";
+import { useHeaderData } from "../../context/HeaderDataContext";
+import { buildServiceSelectOptions } from "../../lib/formServiceOptions";
 import {
   focusField,
   getFirstErrorField,
@@ -70,6 +72,13 @@ function getContactFieldError(name, value) {
 }
 
 export default function ContactInfoForm({ data }) {
+  const { services } = useHeaderData();
+
+  const serviceOptions = useMemo(
+    () => buildServiceSelectOptions(services, "Select service"),
+    [services],
+  );
+
   const infoTitle = data?.info_title || "Contact Us";
 
   const infoDescription =
@@ -343,11 +352,7 @@ export default function ContactInfoForm({ data }) {
                     aria-describedby={
                       showError("service") ? "service-error" : undefined
                     }
-                    options={[
-                      { value: "", label: "Select service", disabled: true },
-                      { value: "Consultation", label: "Consultation" },
-                      { value: "Support", label: "Support" },
-                    ]}
+                    options={serviceOptions}
                   />
                 </FormField>
 

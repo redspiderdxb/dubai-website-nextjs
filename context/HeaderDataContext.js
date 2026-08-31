@@ -8,7 +8,7 @@ const HeaderDataContext = createContext({
   isLoading: true,
 });
 
-let memoryCache = { products: [] };
+let memoryCache = { products: [], services: [] };
 let inflight = null;
 
 function readSessionNav() {
@@ -21,11 +21,10 @@ function readSessionNav() {
 
     const parsed = JSON.parse(raw);
 
-    if (!Array.isArray(parsed?.products)) {
-      return null;
-    }
-
-    return { products: parsed.products };
+    return {
+      products: Array.isArray(parsed?.products) ? parsed.products : [],
+      services: Array.isArray(parsed?.services) ? parsed.services : [],
+    };
   } catch {
     return null;
   }
@@ -45,10 +44,13 @@ function loadHeaderNav() {
   }
 
   inflight = fetch("/api/header-nav/")
-    .then((response) => (response.ok ? response.json() : { products: [] }))
+    .then((response) =>
+      response.ok ? response.json() : { products: [], services: [] },
+    )
     .then((payload) => {
       const data = {
         products: Array.isArray(payload?.products) ? payload.products : [],
+        services: Array.isArray(payload?.services) ? payload.services : [],
       };
 
       memoryCache = data;
@@ -66,15 +68,22 @@ function loadHeaderNav() {
 
 export function HeaderDataProvider({ children }) {
   const [products, setProducts] = useState(memoryCache.products);
-  const [isLoading, setIsLoading] = useState(!memoryCache.products.length);
+  const [services, setServices] = useState(memoryCache.services);
+  const [isLoading, setIsLoading] = useState(
+    !memoryCache.products.length && !memoryCache.services.length,
+  );
 
   useEffect(() => {
     const sessionNav = readSessionNav();
 
-    if (sessionNav?.products?.length) {
+    if (sessionNav) {
       memoryCache = sessionNav;
       setProducts(sessionNav.products);
-      setIsLoading(false);
+      setServices(sessionNav.services);
+
+      if (sessionNav.products.length || sessionNav.services.length) {
+        setIsLoading(false);
+      }
     }
 
     let cancelled = false;
@@ -85,6 +94,7 @@ export function HeaderDataProvider({ children }) {
       }
 
       setProducts(data.products);
+      setServices(data.services);
       setIsLoading(false);
     });
 
@@ -96,7 +106,7 @@ export function HeaderDataProvider({ children }) {
   return (
     <HeaderDataContext.Provider
       value={{
-        services: [],
+        services,
         products,
         isLoading,
       }}

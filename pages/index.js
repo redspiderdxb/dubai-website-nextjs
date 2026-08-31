@@ -83,7 +83,7 @@ export default function Home({
 
   return (
     <>
-      <PageStyles href="/assets/css/pages/home.css" />
+      <PageStyles href="/assets/css/pages/home.css?v=hero-grid-center" />
       <SEO {...seo} includeBusinessSchema={true} faqSchema={faqSchema} />
 
       <Layout>

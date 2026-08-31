@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "../ui/Button";
 
 export default function Hero({ data, googleReviews = null }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const heroRef = useRef(null);
 
   // Get slides from API data or use fallback
   const slides =
@@ -61,6 +62,39 @@ export default function Hero({ data, googleReviews = null }) {
 
     return () => clearInterval(interval);
   }, [slides.length]);
+
+  // Match hero top spacing to the real fixed header height (varies by breakpoint).
+  useEffect(() => {
+    const hero = heroRef.current;
+    const header = document.querySelector(".rs-main-header");
+
+    if (!hero || !header) return;
+
+    const syncHeaderOffset = () => {
+      const height = Math.ceil(header.getBoundingClientRect().height);
+      hero.style.setProperty("--rs-hero-header-offset", `${height}px`);
+    };
+
+    syncHeaderOffset();
+
+    window.addEventListener("resize", syncHeaderOffset);
+
+    const observer =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(syncHeaderOffset)
+        : null;
+
+    if (observer) {
+      observer.observe(header);
+    }
+
+    return () => {
+      window.removeEventListener("resize", syncHeaderOffset);
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, []);
 
   // Helper function to get image URL
   const getImageUrl = (imagePath) => {
@@ -121,7 +155,7 @@ export default function Hero({ data, googleReviews = null }) {
   };
 
   return (
-    <section className="rs-hero-slider">
+    <section className="rs-hero-slider" ref={heroRef}>
       <div
         id="rsHeroCarousel"
         className="carousel slide"

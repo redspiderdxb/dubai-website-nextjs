@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Button from "../ui/Button";
 import FormAlert from "../ui/FormAlert";
 import FormField from "../ui/FormField";
 import ThemedSelect from "../ui/ThemedSelect";
+import { useHeaderData } from "../../context/HeaderDataContext";
+import { buildServiceSelectOptions } from "../../lib/formServiceOptions";
 import { getCountryFromCode } from "../../lib/countryCodes";
 import {
   focusField,
@@ -64,6 +66,13 @@ function getQuoteFieldError(name, value) {
 }
 
 export default function QuoteForm() {
+  const { services } = useHeaderData();
+
+  const serviceOptions = useMemo(
+    () => buildServiceSelectOptions(services, "Select"),
+    [services],
+  );
+
   const {
     values: formData,
     handleChange,
@@ -334,34 +343,7 @@ export default function QuoteForm() {
                         aria-describedby={
                           showError("subject") ? "quote-subject-error" : undefined
                         }
-                        options={[
-                          { value: "", label: "Select", disabled: true },
-                          { value: "E-Commerce", label: "E-Commerce" },
-                          {
-                            value: "Corporate Website",
-                            label: "Corporate Website",
-                          },
-                          {
-                            value: "Business Emails",
-                            label: "Business Emails",
-                          },
-                          {
-                            value: "Website Hosting",
-                            label: "Website Hosting",
-                          },
-                          {
-                            value: "SMS Marketing",
-                            label: "SMS Marketing",
-                          },
-                          {
-                            value: "Email Marketing",
-                            label: "Email Marketing",
-                          },
-                          {
-                            value: "Digital Marketing",
-                            label: "Digital Marketing",
-                          },
-                        ]}
+                        options={serviceOptions}
                       />
                     </FormField>
 

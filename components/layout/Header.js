@@ -4,10 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
 import { useHeaderData } from "../../context/HeaderDataContext";
+import {
+  getServiceNavPath,
+  resolveHeaderServices,
+} from "../../lib/formServiceOptions";
 
 export default function Header() {
   const router = useRouter();
-  const { products: apiProducts, isLoading: isHeaderNavLoading } =
+  const { products: apiProducts, services: apiServices, isLoading: isHeaderNavLoading } =
     useHeaderData();
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -43,52 +47,10 @@ export default function Header() {
      SERVICES MENU
   ===================================================== */
 
-  const services = [
-    {
-      name: "Web Design & Development",
-      path: "/service/web-development",
-    },
-    {
-      name: "eCommerce Website Development",
-      path: "/service/ecommerce-web-design-dubai",
-    },
-    {
-      name: "Real Estate Website Development",
-      path: "/products/real-estate-portal",
-    },
-    {
-      name: "Mobile App Development",
-      path: "/service/mobile-app-development-company-dubai",
-    },
-    {
-      name: "Branding & Logo Design",
-      path: "/service/logo-designing-company-dubai-brand-identity",
-    },
-    {
-      name: "Graphic Design",
-      path: "/service/graphic-design-services",
-    },
-    {
-      name: "Brochure & Company Profile Design",
-      path: "/service/brochure-design-company-in-dubai",
-    },
-    {
-      name: "Email Marketing",
-      path: "/service/email-marketing",
-    },
-    {
-      name: "SMS Marketing",
-      path: "/products/sms-marketing-uae",
-    },
-    {
-      name: "Web Hosting & Server Solutions",
-      path: "/service/web-hosting",
-    },
-    {
-      name: "WhatsApp Business API Integration",
-      path: "/service/whatsapp-business-api-integration",
-    },
-  ];
+  const services = resolveHeaderServices(apiServices).map((service) => ({
+    name: service.name,
+    path: getServiceNavPath(service),
+  }));
 
   /* =====================================================
      DYNAMIC PRODUCTS

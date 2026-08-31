@@ -897,30 +897,33 @@
   background: #170008;
   padding: 0;
   color: #ffffff;
-  --rs-hero-header-offset: 172px;
-  --rs-hero-footer-offset: 56px;
+  --rs-hero-header-offset: 190px;
+  --rs-hero-footer-offset: 72px;
 }
 
 .rs-hero-slider .carousel,
 .rs-hero-slider .carousel-inner,
 .rs-hero-slider .carousel-item {
-  height: 100%;
+  height: 100vh;
   min-height: 650px;
 }
 
 .rs-hero-slider .carousel-item {
   transition: transform .85s cubic-bezier(.65, 0, .35, 1);
-  height: 100%;
+  height: 100vh;
 }
 
 .rs-hero-slider .rs-slide {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  min-height: 650px;
-  padding: var(--rs-hero-header-offset) 90px var(--rs-hero-footer-offset);
+  display: grid;
+  grid-template-rows:
+    var(--rs-hero-header-offset)
+    minmax(0, 1fr)
+    var(--rs-hero-footer-offset);
+  align-items: stretch;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 0 90px;
   box-sizing: border-box;
   overflow: hidden;
   background-position: center;
@@ -945,6 +948,7 @@
 }
 
 .rs-hero-slider .rs-slide-content {
+  grid-row: 2;
   position: relative;
   z-index: 2;
   width: min(1040px, 100%);
@@ -956,6 +960,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  justify-self: center;
+  min-height: 0;
 }
 
 .rs-hero-slider .rs-slide-kicker {
@@ -1165,11 +1172,10 @@
   }
 }
 
-/* Laptop screens: shorter viewport, full desktop header */
+/* Laptop: shorter viewport, tighten vertical spacing */
 @media (max-height: 920px) and (min-width: 992px) {
   .rs-hero-slider {
-    --rs-hero-header-offset: 168px;
-    --rs-hero-footer-offset: 52px;
+    --rs-hero-footer-offset: 64px;
   }
 
   .rs-hero-slider .rs-slide-button {
@@ -1183,8 +1189,7 @@
 
 @media (max-height: 800px) and (min-width: 992px) {
   .rs-hero-slider {
-    --rs-hero-header-offset: 152px;
-    --rs-hero-footer-offset: 44px;
+    --rs-hero-footer-offset: 56px;
   }
 
   .rs-hero-slider .rs-slide-kicker {
@@ -1216,8 +1221,7 @@
   }
 
   .rs-hero-slider {
-    --rs-hero-header-offset: 104px;
-    --rs-hero-footer-offset: 48px;
+    --rs-hero-footer-offset: 64px;
   }
 
   .rs-hero-slider .rs-slide {
@@ -1256,8 +1260,7 @@
   }
 
   .rs-hero-slider {
-    --rs-hero-header-offset: 88px;
-    --rs-hero-footer-offset: 44px;
+    --rs-hero-footer-offset: 56px;
   }
 
   .rs-hero-slider .rs-slide {
