@@ -20,12 +20,7 @@ import {
   SUPPORT_PHONE_LINK,
 } from "../constants";
 
-export default function EmailLayout({
-  preview,
-  children,
-  logoUrl = "",
-  faviconUrl = "",
-}) {
+export default function EmailLayout({ preview, children, logoUrl = "" }) {
   return (
     <Html lang="en">
       <Head />
@@ -34,46 +29,17 @@ export default function EmailLayout({
         <Container style={outerContainer}>
           <Section style={headerSection}>
             <Link href={SITE_URL} style={logoLink}>
-              <table
-                align="center"
-                border="0"
-                cellPadding="0"
-                cellSpacing="0"
-                role="presentation"
-                style={logoTable}
-              >
-                <tbody>
-                  <tr>
-                    {faviconUrl ? (
-                      <td style={faviconCell}>
-                        <Img
-                          src={faviconUrl}
-                          width="44"
-                          height="44"
-                          alt="RedSpider"
-                          style={faviconImage}
-                        />
-                      </td>
-                    ) : null}
-                    {logoUrl ? (
-                      <td style={logoCell}>
-                        <Img
-                          src={logoUrl}
-                          width="170"
-                          height="48"
-                          alt={SITE_NAME}
-                          style={logoImage}
-                        />
-                      </td>
-                    ) : null}
-                    {!logoUrl && !faviconUrl ? (
-                      <td>
-                        <Text style={logoFallback}>{SITE_NAME}</Text>
-                      </td>
-                    ) : null}
-                  </tr>
-                </tbody>
-              </table>
+              {logoUrl ? (
+                <Img
+                  src={logoUrl}
+                  width="170"
+                  height="48"
+                  alt={SITE_NAME}
+                  style={logoImage}
+                />
+              ) : (
+                <Text style={logoFallback}>{SITE_NAME}</Text>
+              )}
             </Link>
           </Section>
 
@@ -82,15 +48,6 @@ export default function EmailLayout({
           <Hr style={divider} />
 
           <Section style={footerSection}>
-            {faviconUrl ? (
-              <Img
-                src={faviconUrl}
-                width="32"
-                height="32"
-                alt="RedSpider"
-                style={footerFavicon}
-              />
-            ) : null}
             <Text style={footerTitle}>{SITE_NAME}</Text>
             <Text style={footerText}>
               Web design, development & digital marketing in Dubai
@@ -148,26 +105,6 @@ const logoLink = {
   textDecoration: "none",
 };
 
-const logoTable = {
-  margin: "0 auto",
-};
-
-const faviconCell = {
-  paddingRight: "14px",
-  verticalAlign: "middle",
-};
-
-const logoCell = {
-  verticalAlign: "middle",
-};
-
-const faviconImage = {
-  display: "block",
-  border: "0",
-  borderRadius: "10px",
-  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-};
-
 const logoImage = {
   display: "block",
   margin: "0 auto",
@@ -198,13 +135,6 @@ const divider = {
 const footerSection = {
   textAlign: "center",
   padding: "0 8px",
-};
-
-const footerFavicon = {
-  display: "block",
-  margin: "0 auto 10px",
-  border: "0",
-  borderRadius: "6px",
 };
 
 const footerTitle = {

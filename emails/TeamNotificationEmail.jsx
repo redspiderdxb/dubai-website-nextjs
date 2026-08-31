@@ -22,13 +22,11 @@ export default function TeamNotificationEmail({
   subject = "",
   content = "",
   logoUrl = "",
-  faviconUrl = "",
 }) {
   return (
     <EmailLayout
       preview={`New enquiry from ${name}: ${subject}`}
       logoUrl={logoUrl}
-      faviconUrl={faviconUrl}
     >
       <Section style={badge}>New website enquiry</Section>
 
