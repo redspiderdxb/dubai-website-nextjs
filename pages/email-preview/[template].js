@@ -68,7 +68,7 @@ export default function EmailPreviewInlinePage() {
 const pageStyle = {
   minHeight: "100vh",
   padding: "40px 20px",
-  fontFamily: "Karla, sans-serif",
+  fontFamily: "Lato, sans-serif",
 };
 
 const toolbarStyle = {
@@ -78,7 +78,7 @@ const toolbarStyle = {
   padding: "12px 20px",
   background: "#111827",
   color: "#ffffff",
-  fontFamily: "Karla, sans-serif",
+  fontFamily: "Lato, sans-serif",
 };
 
 const backLinkStyle = {

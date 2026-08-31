@@ -25,7 +25,7 @@ export default function EmailLayout({ preview, children, logoUrl = "" }) {
     <Html lang="en">
       <Head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Karla:wght@500&family=Lato:wght@500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@500&display=swap"
           rel="stylesheet"
         />
       </Head>

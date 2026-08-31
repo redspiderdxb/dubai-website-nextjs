@@ -70,7 +70,7 @@ const pageStyle = {
   minHeight: "100vh",
   background: "#f3f4f6",
   padding: "40px 20px",
-  fontFamily: "Karla, sans-serif",
+  fontFamily: "Lato, sans-serif",
 };
 
 const headerStyle = {

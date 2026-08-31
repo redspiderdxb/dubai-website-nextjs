@@ -1,8 +1,8 @@
 import "@/styles/globals.css";
 import "@/styles/shared/layout.css";
 import "@/styles/shared/utilities.css";
-import "@/styles/shared/fonts.css";
 import "aos/dist/aos.css";
+import "@/styles/shared/fonts.css";
 import Script from "next/script";
 import { useEffect, useRef } from "react";
 import AOS from "aos";

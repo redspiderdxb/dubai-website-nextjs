@@ -3,6 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --default-font: "Lato", sans-serif;
+  --heading-font: "Lato", sans-serif;
+  --body-font-weight: 500;
+  --heading-font-weight: 500;
+  --nav-font: var(--default-font);
+  --bs-font-sans-serif: var(--default-font);
+  --bs-body-font-family: var(--default-font);
+  --bs-body-font-weight: var(--body-font-weight);
   --rs-scroll-track: #111111;
   --rs-scroll-thumb: #d20000;
   --rs-scroll-thumb-hover: #ff2d2d;

@@ -1,152 +1,182 @@
-/**
- * Global typography — single source of truth.
- * Body / forms / UI: Karla Medium (500) | Headings: Lato Medium (500)
- * Loaded last so it overrides legacy per-section font rules.
- */
-
-:root {
-  --default-font: "Karla", sans-serif;
-  --heading-font: "Lato", sans-serif;
-  --body-font-weight: 500;
-  --heading-font-weight: 500;
-  --nav-font: var(--default-font);
-  --bs-font-sans-serif: var(--default-font);
-  --bs-body-font-family: var(--default-font);
-  --bs-body-font-weight: var(--body-font-weight);
-}
-
-html {
-  font-family: var(--default-font) !important;
-  font-weight: var(--body-font-weight) !important;
-}
-
-body,
-button,
-input,
-select,
-textarea,
-optgroup {
-  font-family: inherit;
-  font-weight: inherit;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  font-family: var(--heading-font) !important;
-  font-weight: var(--heading-font-weight) !important;
-}
-
-h1.fw-bold,
-h2.fw-bold,
-h3.fw-bold,
-h4.fw-bold,
-h5.fw-bold,
-h6.fw-bold,
-.h1.fw-bold,
-.h2.fw-bold,
-.h3.fw-bold,
-.h4.fw-bold,
-.h5.fw-bold,
-.h6.fw-bold {
-  font-weight: var(--heading-font-weight) !important;
-}
-
-/* ─── Forms, labels, inputs, selects, messages (Karla Medium) ─── */
-.form-control,
-.form-select,
-.form-label,
-.form-check-label,
-label,
-legend,
-.rs-form-label,
-.rs-contact-terms,
-.quote-terms-label,
-.rs-themed-select,
-.rs-themed-select-trigger,
-.rs-themed-select-trigger span,
-.rs-themed-select-option,
-.rs-themed-select-menu,
-.req_input,
-.req_textarea,
-.req_selected,
-.rs-field-error,
-.rs-field-error__text,
-.rs-form-alert,
-.rs-form-error-summary,
-.rs-form-error-summary__title,
-.rs-form-error-summary li,
-.php-email-form,
-.home-form,
-.rs-contact-form,
-.rs-contact-form-card,
-.rs-quote-form,
-.phone-field,
-.country-code {
-  font-family: var(--default-font) !important;
-  font-weight: var(--body-font-weight) !important;
-}
-
-button,
-[type="button"],
-[type="submit"],
-[type="reset"],
-.btn,
-.rs-btn,
-.send {
-  font-family: var(--default-font) !important;
-  font-weight: var(--body-font-weight) !important;
-}
-
-input::placeholder,
-textarea::placeholder,
-.form-control::placeholder,
-.req_input::placeholder,
-.req_textarea::placeholder {
-  font-family: inherit !important;
-  font-weight: inherit !important;
-}
-
-select,
-select option {
-  font-family: var(--default-font) !important;
-  font-weight: var(--body-font-weight) !important;
-}
-
-/* Bootstrap weight utilities on body / form text */
-.fw-light,
-.fw-lighter,
-.fw-normal {
-  font-weight: var(--body-font-weight) !important;
-}
-
-p.fw-bold,
-span.fw-bold,
-label.fw-bold,
-div.fw-bold:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6),
-.btn.fw-bold,
-.rs-btn.fw-bold {
-  font-weight: var(--body-font-weight) !important;
-}
-
-/* Icon fonts (not text) */
-.bi,
-[class^="bi-"]::before,
-[class*=" bi-"]::before,
-.bootstrap-icons {
-  font-family: bootstrap-icons !important;
-}
-
-.material-symbols-outlined {
-  font-family: "Material Symbols Outlined" !important;
-}
-
+/**
+ * Global typography — Lato Medium (500) site-wide (headings + body + forms).
+ * Must load LAST (after layout, utilities, page CSS, Bootstrap, Tailwind).
+ */
+
+:root {
+  --default-font: "Lato", sans-serif;
+  --heading-font: "Lato", sans-serif;
+  --body-font-weight: 500;
+  --heading-font-weight: 500;
+  --nav-font: var(--default-font);
+  --bs-font-sans-serif: var(--default-font);
+  --bs-body-font-family: var(--default-font);
+  --bs-body-font-weight: var(--body-font-weight);
+}
+
+html {
+  font-family: var(--heading-font) !important;
+  font-weight: var(--body-font-weight) !important;
+}
+
+body {
+  font-family: var(--heading-font) !important;
+  font-weight: var(--body-font-weight) !important;
+}
+
+button,
+input,
+select,
+textarea,
+optgroup {
+  font-family: var(--heading-font) !important;
+  font-weight: var(--body-font-weight) !important;
+}
+
+p,
+span,
+a,
+li,
+ul,
+ol,
+td,
+th,
+label,
+legend,
+blockquote,
+figcaption,
+small,
+em,
+strong,
+nav,
+header,
+footer,
+main,
+section,
+article,
+aside,
+.navmenu,
+.navmenu a,
+.nav-link,
+.footer,
+.rs-section-subtitle,
+.rs-process-text,
+.rs-description,
+.rs-lead {
+  font-family: var(--heading-font) !important;
+  font-weight: var(--body-font-weight) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: var(--heading-font) !important;
+  font-weight: var(--heading-font-weight) !important;
+}
+
+h1.fw-bold,
+h2.fw-bold,
+h3.fw-bold,
+h4.fw-bold,
+h5.fw-bold,
+h6.fw-bold,
+.h1.fw-bold,
+.h2.fw-bold,
+.h3.fw-bold,
+.h4.fw-bold,
+.h5.fw-bold,
+.h6.fw-bold {
+  font-weight: var(--heading-font-weight) !important;
+}
+
+.form-control,
+.form-select,
+.form-label,
+.form-check-label,
+.rs-form-label,
+.rs-contact-terms,
+.quote-terms-label,
+.rs-themed-select,
+.rs-themed-select-trigger,
+.rs-themed-select-trigger span,
+.rs-themed-select-option,
+.rs-themed-select-menu,
+.req_input,
+.req_textarea,
+.req_selected,
+.rs-field-error,
+.rs-field-error__text,
+.rs-form-alert,
+.rs-form-error-summary,
+.rs-form-error-summary__title,
+.rs-form-error-summary li,
+.php-email-form,
+.home-form,
+.rs-contact-form,
+.rs-contact-form-card,
+.rs-quote-form,
+.phone-field,
+.country-code {
+  font-family: var(--heading-font) !important;
+  font-weight: var(--body-font-weight) !important;
+}
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+.btn,
+.rs-btn,
+.send {
+  font-family: var(--heading-font) !important;
+  font-weight: var(--body-font-weight) !important;
+}
+
+input::placeholder,
+textarea::placeholder,
+.form-control::placeholder,
+.req_input::placeholder,
+.req_textarea::placeholder {
+  font-family: inherit !important;
+  font-weight: inherit !important;
+}
+
+select,
+select option {
+  font-family: var(--heading-font) !important;
+  font-weight: var(--body-font-weight) !important;
+}
+
+.fw-light,
+.fw-lighter,
+.fw-normal {
+  font-weight: var(--body-font-weight) !important;
+}
+
+p.fw-bold,
+span.fw-bold,
+label.fw-bold,
+.btn.fw-bold,
+.rs-btn.fw-bold {
+  font-weight: var(--body-font-weight) !important;
+}
+
+.bi,
+[class^="bi-"]::before,
+[class*=" bi-"]::before,
+.bootstrap-icons {
+  font-family: bootstrap-icons !important;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined" !important;
+}

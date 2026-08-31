@@ -18,7 +18,7 @@ export default function Document() {
         />
 
         <link
-          href="https://fonts.googleapis.com/css2?family=Karla:wght@500&family=Lato:wght@500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@500&display=swap"
           rel="stylesheet"
         />
 
@@ -45,7 +45,6 @@ export default function Document() {
         />
 
         <link rel="stylesheet" href="/assets/css/main.css" />
-        <link rel="stylesheet" href="/assets/css/shared/fonts.css" />
       </Head>
 
       <body>
