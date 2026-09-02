@@ -6,7 +6,16 @@ export default function Document() {
       <Head>
         {/* Favicon — RS logo */}
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="96x96"
+          href="/favicon-96x96.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="application-name" content="RedSpider" />
+        <meta name="apple-mobile-web-app-title" content="RedSpider" />
         <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.webp" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
