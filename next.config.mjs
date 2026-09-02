@@ -138,6 +138,13 @@ const nextConfig = {
         destination: "/products/daily-deal-website-script/",
         permanent: true,
       },
+
+      {
+        source:
+          "/real-estate-website-designing-that-generates-quality-leads-in-dubai",
+        destination: "/products/real-estate-portal/",
+        permanent: true,
+      },
     ];
   },
 
