@@ -131,6 +131,13 @@ const nextConfig = {
         destination: "/products/daily-deal-website-script/",
         permanent: true,
       },
+
+      // 301 Redirect: Old Daily Deal Website URL → New Daily Deal Website URL
+      {
+        source: "/products/daily-deal-website",
+        destination: "/products/daily-deal-website-script/",
+        permanent: true,
+      },
     ];
   },
 
