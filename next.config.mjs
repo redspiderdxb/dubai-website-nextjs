@@ -76,6 +76,14 @@ const nextConfig = {
         destination: "/service/logo-designing-company-dubai-brand-identity/",
         permanent: true,
       },
+
+      // 301 Redirect: Old Graphic Design URL → New Graphic Design URL
+      {
+        source: "/service/graphic-design-services",
+        destination: "/service/graphic-design-company-dubai/",
+        permanent: true,
+      },
+
       {
         source: "/services/mobile-app-development-company-dubai",
         destination: "/service/mobile-app-development-company-dubai/",
@@ -186,3 +194,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
