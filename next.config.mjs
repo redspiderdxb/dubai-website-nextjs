@@ -96,6 +96,14 @@ const nextConfig = {
         destination: "/service/mobile-app-development-company-dubai/",
         permanent: true,
       },
+
+      // 301 Redirect: Old Mobile App Development URL → New Mobile App Development URL
+      {
+        source: "/service/mobile-app-development",
+        destination: "/service/mobile-app-development-company-dubai/",
+        permanent: true,
+      },
+
       {
         source: "/real-estate-web-design-company",
         destination: "/products/real-estate-portal/",
