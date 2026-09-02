@@ -67,3 +67,11 @@ html {
   width: 100%;
   z-index: 1000000;
 }
+
+
+.rs-main-header .rs-call-now a{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    white-space: nowrap;
+}

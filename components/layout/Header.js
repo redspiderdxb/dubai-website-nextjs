@@ -11,8 +11,11 @@ import {
 
 export default function Header() {
   const router = useRouter();
-  const { products: apiProducts, services: apiServices, isLoading: isHeaderNavLoading } =
-    useHeaderData();
+  const {
+    products: apiProducts,
+    services: apiServices,
+    isLoading: isHeaderNavLoading,
+  } = useHeaderData();
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -215,7 +218,7 @@ export default function Header() {
             onClick={closeMobileMenu}
           >
             <Image
-              src="/assets/img/logo.webp"
+              src="/assets/img/logo.svg"
               alt="RedSpider Web & Art Design"
               width={200}
               height={50}
@@ -250,7 +253,7 @@ export default function Header() {
                   onClick={closeMobileMenu}
                 >
                   <Image
-                    src="/assets/img/logo.webp"
+                    src="/assets/img/logo.svg"
                     alt="RedSpider Web & Art Design"
                     width={168}
                     height={42}
@@ -389,7 +392,10 @@ export default function Header() {
           <div className="rs-call-now">
             <i className="bi bi-telephone-fill"></i>
 
-            <span>Call Now : +971 50 5698733, +971 55 5515475</span>
+            <span>
+              Call Now : <a href="tel:+971505698733">+971 50 5698733</a>,{" "}
+              <a href="tel:+971555515475">+971 55 5515475</a>
+            </span>
           </div>
 
           {/* SOCIAL */}
