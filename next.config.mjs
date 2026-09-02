@@ -79,8 +79,8 @@ const nextConfig = {
 
       // 301 Redirect: Old Graphic Design URL → New Graphic Design URL
       {
-        source: "/service/graphic-design-services",
-        destination: "/service/graphic-design-company-dubai/",
+        source: "/service/graphic-design-company-dubai",
+        destination: "/service/graphic-design-services/",
         permanent: true,
       },
 
@@ -194,4 +194,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-
