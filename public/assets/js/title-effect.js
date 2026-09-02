@@ -179,9 +179,9 @@ function initVideoZoomEffect() {
 
       scrub: 0.8,
 
-      pin: true,
+      pin: !isMobile,
 
-      pinSpacing: true,
+      pinSpacing: !isMobile,
 
       anticipatePin: 1,
 
@@ -364,8 +364,8 @@ function initHomeCardStack() {
         trigger: wrapper,
         start: `top ${PIN_START}px`,
         end: () => `+=${Math.round(window.innerHeight * 3)}`,
-        pin: wrapper,
-        pinSpacing: true,
+        pin: window.innerWidth > 767 ? wrapper : false,
+        pinSpacing: window.innerWidth > 767,
         scrub: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
@@ -478,7 +478,11 @@ if (typeof window !== "undefined") {
 
       const wrapper = section?.querySelector(".rs-gsap-cards");
 
-      if (wrapper && section && typeof window.initHomeCardStack === "function") {
+      if (
+        wrapper &&
+        section &&
+        typeof window.initHomeCardStack === "function"
+      ) {
         window.initHomeCardStack();
         return;
       }
