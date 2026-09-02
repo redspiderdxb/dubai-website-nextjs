@@ -119,6 +119,13 @@ const nextConfig = {
         destination: "/products/dubizzle-clone/",
         permanent: true,
       },
+      // 301 Redirect: Old Classified Directory URL → New Dubizzle Clone URL
+      {
+        source: "/products/classified-directory",
+        destination: "/products/dubizzle-clone/",
+        permanent: true,
+      },
+
       {
         source: "/daily-deal-website-script",
         destination: "/products/daily-deal-website-script/",
