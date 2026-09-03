@@ -30,9 +30,7 @@ function collectFieldErrors(body) {
     errors.phone = phoneError;
   }
 
-  const subjectError = body.subject?.trim()
-    ? ""
-    : "Choose an enquiry type.";
+  const subjectError = body.subject?.trim() ? "" : "Choose an enquiry type.";
 
   if (subjectError) {
     errors.subject = subjectError;
@@ -51,18 +49,42 @@ function collectFieldErrors(body) {
   return errors;
 }
 
+async function saveContactToDashboard(payload) {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiKey = process.env.API_KEY || process.env.NEXT_PUBLIC_API_KEY;
+
+  if (!apiUrl || !apiKey) {
+    throw new Error("Contact API configuration is missing.");
+  }
+
+  const response = await fetch(`${apiUrl}/contacts`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-API-KEY": apiKey,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    const error = new Error(data?.message || "Failed to save contact enquiry.");
+
+    error.status = response.status;
+    error.details = data;
+
+    throw error;
+  }
+
+  return data;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
       message: "Method not allowed",
-    });
-  }
-
-  if (!process.env.RESEND_API_KEY) {
-    console.error("RESEND_API_KEY is not configured.");
-
-    return res.status(500).json({
-      message: "Email service is not configured",
     });
   }
 
@@ -86,6 +108,31 @@ export default async function handler(req, res) {
   const formSource = String(body.formSource || "contact").trim();
   const location = await getLocationFromIp(ipAddress);
 
+  const contactPayload = {
+    name,
+    email,
+    phone,
+    country: formCountry,
+    formSource,
+    subject,
+    content,
+    agree_terms_and_policy: body.agree_terms_and_policy,
+  };
+
+  // Save enquiry to dashboard/database first.
+  try {
+    await saveContactToDashboard(contactPayload);
+  } catch (error) {
+    console.error("Contact dashboard save error:", error);
+
+    return res.status(error?.status || 500).json({
+      message:
+        error?.details?.message ||
+        "Failed to save your enquiry. Please try again later.",
+    });
+  }
+
+  // Existing email functionality preserved as-is.
   try {
     await sendContactEmails({
       name,
