@@ -11,7 +11,7 @@ export default function BlogHero({ title = "Latest Blog", breadcrumb = true }) {
               <span className="rs-blog-hero-kicker">From the studio</span>
 
               <h1 className="rs-process-title mb-3">
-                Latest{" "}
+              Latest  {" "}
                 <span className="rs-process-highlight">
                   Blog
                   <svg
@@ -24,25 +24,11 @@ export default function BlogHero({ title = "Latest Blog", breadcrumb = true }) {
                     <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
                   </svg>
                 </span>
+                - Stories, ideas and digital thinking from RedSpider Dubai
               </h1>
 
-              <p className="rs-process-text rs-blog-hero-copy">
-                Stories, ideas and digital thinking from RedSpider Dubai.
-              </p>
-
-              {breadcrumb && (
-                <nav className="breadcrumbs" aria-label="Breadcrumb">
-                  <ol>
-                    <li>
-                      <Link href="/">Home</Link>
-                    </li>
-                    <li>
-                      <Link href="/blog">Blog</Link>
-                    </li>
-                    <li className="current">{title}</li>
-                  </ol>
-                </nav>
-              )}
+  
+             
             </div>
           </div>
         </div>
