@@ -310,6 +310,7 @@
 }
 
 @media (max-width: 767px) {
+
   .rs-opportunity.section,
   .rs-opportunity {
     padding-top: 36px !important;
@@ -917,9 +918,7 @@
   position: relative;
   display: grid;
   grid-template-rows:
-    var(--rs-hero-header-offset)
-    minmax(0, 1fr)
-    var(--rs-hero-footer-offset);
+    var(--rs-hero-header-offset) minmax(0, 1fr) var(--rs-hero-footer-offset);
   align-items: stretch;
   min-height: 100vh;
   height: 100vh;
@@ -2497,7 +2496,7 @@
   --bs-gutter-y: 0;
 }
 
-.rs-gsap-cards .rs-agency-split > [class*="col-"] {
+.rs-gsap-cards .rs-agency-split>[class*="col-"] {
   display: flex;
   flex-direction: column;
   padding: 0 !important;
@@ -2591,7 +2590,7 @@
     overflow-y: auto;
   }
 
-  .rs-gsap-cards .rs-agency-split > [class*="col-"] {
+  .rs-gsap-cards .rs-agency-split>[class*="col-"] {
     height: auto;
   }
 
@@ -2678,7 +2677,7 @@
   margin: 0;
 }
 
-.rs-creative-sec + .contact-cta {
+.rs-creative-sec+.contact-cta {
   padding-top: 88px;
   margin-top: 0;
 }
@@ -2863,6 +2862,7 @@
 }
 
 @media (min-width: 992px) {
+
   .rs-creative-media,
   .rs-creative-copy {
     display: flex;
@@ -3253,6 +3253,7 @@
   height: 1px;
   background: #111111;
 }
+
 .blog-hero-custom::before,
 .rs-contact-hero-video .rs-contact-hero-video__overlay,
 .portfolio-page-hero .portfolio-hero-overlay,
@@ -8266,7 +8267,6 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
   }
 
   .rs-home-blog__stats {
-    grid-template-columns: 1fr;
     margin-top: 36px;
   }
 
@@ -8275,7 +8275,7 @@ section.rs-vertical-cards .rs-vertical-cards__card:hover .rs-vertical-cards__tex
   }
 
   .rs-home-blog__stat-value {
-    font-size: 42px;
+    font-size: 26px;
   }
 
   .rs-home-clients {
@@ -10771,7 +10771,7 @@ contact us page */
 
 .form-sec .home-input-cus .rs-field-error,
 .form-sec .verify-wrap .rs-field-error,
-.form-sec .field-wrap + .rs-field-error {
+.form-sec .field-wrap+.rs-field-error {
   margin: 6px 2px 14px;
   color: #ff5c5c;
   font-weight: 700;
@@ -10779,10 +10779,10 @@ contact us page */
 
 .form-sec .home-input-cus .rs-field-error i,
 .form-sec .verify-wrap .rs-field-error i,
-.form-sec .field-wrap + .rs-field-error i,
+.form-sec .field-wrap+.rs-field-error i,
 .form-sec .home-input-cus .rs-field-error__text,
 .form-sec .verify-wrap .rs-field-error__text,
-.form-sec .field-wrap + .rs-field-error__text {
+.form-sec .field-wrap+.rs-field-error__text {
   color: #ff5c5c;
   font-weight: 700;
 }
@@ -11321,4 +11321,11 @@ contact us page */
   .rs-service-card-title {
     font-size: 1.1rem;
   }
+
+  .rs-home-blog__stat p {
+
+    font-size: 11px;
+  }
+
+
 }

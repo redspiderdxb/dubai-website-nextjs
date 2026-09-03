@@ -1,7 +1,7 @@
 /* Blog detail page styles */
 .page-title {
-    padding: 23px 0 166px 0;
-    background: #050505 !important;
+  padding: 23px 0 166px 0;
+  background: #050505 !important;
 }
 
 /* =========================================================
@@ -1417,19 +1417,23 @@
   display: none !important;
 }
 
-
 /* ============================================
    BLOG DETAIL - BREADCRUMB OUTSIDE HERO
 ============================================ */
 
-.rs-blog-detail-page .breadcrumbs {
+.blog-detail-breadcrumb-wrap {
   width: 100%;
-  margin: 0;
-  padding: 12px 0 14px;
   background: #fff;
 }
 
-.rs-blog-detail-page .breadcrumbs ol {
+.blog-detail-breadcrumb-wrap .breadcrumbs {
+  width: 100%;
+  margin: 0;
+  padding: 10px 0 12px;
+  background: #fff;
+}
+
+.blog-detail-breadcrumb-wrap .breadcrumbs ol {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1441,33 +1445,39 @@
   line-height: 1.5;
 }
 
-.rs-blog-detail-page .breadcrumbs ol li {
+.blog-detail-breadcrumb-wrap .breadcrumbs ol li {
   display: inline-flex;
   align-items: center;
-  color: #333;
+  flex: 0 1 auto;
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
-.rs-blog-detail-page .breadcrumbs ol li + li::before {
+.blog-detail-breadcrumb-wrap .breadcrumbs ol li+li::before {
   content: "/";
-  margin: 0 8px;
+  margin: 0 7px;
   color: #999;
 }
 
-.rs-blog-detail-page .breadcrumbs a {
+.blog-detail-breadcrumb-wrap .breadcrumbs a {
   color: #ed1c24;
   text-decoration: none;
 }
 
-.rs-blog-detail-page .breadcrumbs a:hover {
+.blog-detail-breadcrumb-wrap .breadcrumbs a:hover {
   color: #c9141b;
 }
 
-.rs-blog-detail-page .breadcrumbs .current {
+.blog-detail-breadcrumb-wrap .breadcrumbs .current {
   color: #333;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
+/* ============================================
+   BLOG META RIGHT
+============================================ */
 
 .rs-blog-meta-right {
   display: flex;
@@ -1488,7 +1498,7 @@
   padding: 0;
 }
 
-.rs-blog-meta-right span + span::before {
+.rs-blog-meta-right span+span::before {
   content: "";
   width: 1px;
   height: 14px;
@@ -1508,7 +1518,20 @@
     font-size: 13px;
   }
 
-  .rs-blog-meta-right span + span::before {
+  .rs-blog-meta-right span+span::before {
     margin-right: 7px;
   }
+
+  .blog-detail-breadcrumb-wrap .breadcrumbs ol {
+    display: flex;
+    flex-wrap: nowrap;
+
+    font-size: 10px;
+
+  }
+
+  .page-title {
+    padding: 23px 0 108px 0;
+  }
+
 }

@@ -14,8 +14,8 @@ export default function BlogPageTitle({ title, breadcrumb = true }) {
       </div>
 
       {breadcrumb && (
-        <div className="container">
-          <nav className="breadcrumbs">
+        <div className="container blog-detail-breadcrumb-wrap">
+          <nav className="breadcrumbs" aria-label="Breadcrumb">
             <ol>
               <li>
                 <Link href="/">Home</Link>

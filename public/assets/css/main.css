@@ -2903,3 +2903,14 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
 }
+
+@media (max-width: 575px) {
+  span.rs-process-highlight {
+    white-space: normal !important;
+  }
+
+  .rs-main-header .rs-call-now a {
+    font-size: 13px !important;
+  }
+
+}

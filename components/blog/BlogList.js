@@ -199,7 +199,7 @@ export default function BlogList({ posts = [], pagination = {} }) {
         : plainText;
     }
 
-    return "Read the latest insights, strategies and digital marketing ideas from RedSpider.";
+    return "";
   };
 
   const formatDate = (date) => {
