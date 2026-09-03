@@ -11,6 +11,8 @@ import Image from "next/image";
 import Link from "next/link";
 import ContactCTA from "../../components/ui/ContactCTA";
 
+import { buildBlogPostSchema } from "../../lib/schema/blogPostSchema";
+
 /* =====================================================
    RELATED INSIGHTS
 ===================================================== */
@@ -143,7 +145,7 @@ function RelatedInsights({ posts = [] }) {
    PAGE
 ===================================================== */
 
-export default function BlogDetail({ post, recentPosts }) {
+export default function BlogDetail({ post, recentPosts, pageSchema }) {
   /* ===================================================
      NOT FOUND
   ================================================== */
@@ -204,7 +206,7 @@ export default function BlogDetail({ post, recentPosts }) {
   return (
     <Layout>
       <PageStyles href="/assets/css/pages/blog-detail.css" />
-      <SEO {...seoData} />
+      <SEO {...seoData} pageSchema={pageSchema} />
 
       <main className="main rs-blog-detail-page">
         {/* =================================================
@@ -281,6 +283,7 @@ export async function getStaticProps({ params }) {
     ================================================= */
 
     const post = await fetchPostBySlug(params.slug);
+    const pageSchema = buildBlogPostSchema(post);
 
     if (!post) {
       return {
@@ -308,6 +311,7 @@ export async function getStaticProps({ params }) {
       props: {
         post,
         recentPosts,
+        pageSchema,
       },
 
       revalidate: 60,
