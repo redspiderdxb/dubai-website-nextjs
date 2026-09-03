@@ -172,6 +172,9 @@ export default function BlogDetailMain({ post }) {
               {readingTime} min read
             </span>
           </div>
+
+
+          
         </div>
       </header>
 

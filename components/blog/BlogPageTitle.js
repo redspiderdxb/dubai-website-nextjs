@@ -1,20 +1,20 @@
 import Link from "next/link";
 
 export default function BlogPageTitle({ title, breadcrumb = true }) {
-  // Agar title nahi diya gaya toh fallback
   const pageTitle = title || "Latest Blog";
 
   return (
-    <div
-      className="page-title dark-background"
-      data-aos="fade"
-      style={{ backgroundImage: 'url(/assets/img/plans-bg.webp)' }}
-    >
-      <div className="container position-relative">
-        <h1>{pageTitle}</h1>
-        
-        {/* Breadcrumb — Optional */}
-        {breadcrumb && (
+    <>
+      <div
+        className="page-title dark-background"
+        data-aos="fade"
+        style={{ backgroundImage: "url(/assets/img/plans-bg.webp)" }}
+      >
+        <div className="container position-relative"></div>
+      </div>
+
+      {breadcrumb && (
+        <div className="container">
           <nav className="breadcrumbs">
             <ol>
               <li>
@@ -26,8 +26,8 @@ export default function BlogPageTitle({ title, breadcrumb = true }) {
               <li className="current">{pageTitle}</li>
             </ol>
           </nav>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 }
