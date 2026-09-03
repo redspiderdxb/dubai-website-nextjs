@@ -1176,6 +1176,11 @@
   }
 }
 
+.blog-hero-custom .rs-process-highlight {
+  margin-right: 7px !important;
+}
+
+
 @media (max-width: 767px) {
   .blog-hero-custom,
   .blog-hero-custom.about-hero,
