@@ -12,6 +12,12 @@ import ClassifiedDirectoryTemplate from "../../components/product-templates/Clas
 // 🔥 CRM Template Import
 import CrmTemplate from "../../components/product-templates/CrmTemplate";
 
+import dubizzleCloneSchema from "../../lib/schema/dubizzle-clone.json";
+import uaeEInvoicingCrmSchema from "../../lib/schema/uae-e-invoicing-crm-software.json";
+import dailyDealWebsiteSchema from "../../lib/schema/daily-deal-website-script.json";
+import realEstatePortalSchema from "../../lib/schema/real-estate-portal.json";
+import smsMarketingUaeSchema from "../../lib/schema/sms-marketing-uae.json";
+
 const TEMPLATE_COMPONENTS = {
   "real-estate-portal": RealEstatePortalTemplate,
   "sms-marketing": SmsMarketingTemplate,
@@ -69,8 +75,22 @@ export default function ProductDetail({ product }) {
   return (
     <Layout>
       <PageStyles href="/assets/css/pages/products.css" />
-      <SEO {...seoData} />
-
+      <SEO
+        {...seoData}
+        pageSchema={
+          product.slug === "dubizzle-clone"
+            ? dubizzleCloneSchema["@graph"]
+            : product.slug === "uae-e-invoicing-crm-software"
+              ? uaeEInvoicingCrmSchema["@graph"]
+              : product.slug === "daily-deal-website-script"
+                ? dailyDealWebsiteSchema["@graph"]
+                : product.slug === "real-estate-portal"
+                  ? realEstatePortalSchema["@graph"]
+                  : product.slug === "sms-marketing-uae"
+                    ? smsMarketingUaeSchema["@graph"]
+                    : null
+        }
+      />
       <main className="main">
         <TemplateComponent data={product} />
       </main>

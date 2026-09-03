@@ -133,18 +133,7 @@ export default function FAQPage() {
     ? `${process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public"}/storage/${heroBackground}`
     : "";
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
+ 
 
   return (
     <Layout>
@@ -193,11 +182,7 @@ export default function FAQPage() {
         idPrefix="faqpage"
       />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
+    
       <ContactCTA />
     </Layout>
   );

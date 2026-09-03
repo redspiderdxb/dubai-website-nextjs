@@ -1,0 +1,48 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/service/web-development/#service",
+      "serviceType": "Web Development",
+      "name": "Web Development Company in Dubai",
+      "description": "RedSpider provides custom web development in Dubai, including CMS development, WordPress solutions, ecommerce integration and scalable websites tailored to business requirements.",
+      "url": "https://www.redspider.ae/service/web-development/",
+      "image": "https://www.redspider.ae/assets/img/og-image.webp",
+      "provider": { "@id": "https://www.redspider.ae/#localbusiness" },
+      "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web Development Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Web Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Management System" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ecommerce Integration" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WordPress Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom WordPress Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landing Page Web Design" } }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/service/web-development/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.redspider.ae/service/web-development/" },
+        { "@type": "ListItem", "position": 3, "name": "Web Development", "item": "https://www.redspider.ae/service/web-development/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.redspider.ae/service/web-development/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Why is my current website not generating leads?", "acceptedAnswer": { "@type": "Answer", "text": "Many websites fail because they lack clear structure, strong call-to-actions, and proper user flow." } },
+        { "@type": "Question", "name": "How long does it take to complete a website design project in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "Timelines depend on content readiness and project complexity. Standard business websites usually take 2–4 weeks." } },
+        { "@type": "Question", "name": "Why does website cost vary so much between agencies?", "acceptedAnswer": { "@type": "Answer", "text": "Pricing differs based on design customization, functionality, CMS selection, integrations, and long-term scalability." } },
+        { "@type": "Question", "name": "Will the website work properly on mobile devices?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Modern website design must be fully responsive. Layouts automatically adapt to mobile screens." } },
+        { "@type": "Question", "name": "What happens if content is not ready?", "acceptedAnswer": { "@type": "Answer", "text": "Content planning is part of the web design process. Structure, layout, and content hierarchy can be planned first." } }
+      ]
+    }
+  ]
+}

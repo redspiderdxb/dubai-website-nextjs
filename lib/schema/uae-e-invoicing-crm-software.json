@@ -1,0 +1,57 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.redspider.ae/products/uae-e-invoicing-crm-software/#software",
+      "name": "ZIVORA.ONE",
+      "alternateName": ["UAE e-Invoicing CRM Software", "ZIVORA.ONE ERP Integration"],
+      "description": "ZIVORA.ONE helps businesses prepare their existing ERP, accounting, billing or invoicing software for UAE e-Invoicing. It works as a secure API connector between a business system and a UAE Accredited Service Provider, converting invoice data into the required PINT AE structured format, validating information and supporting electronic document exchange without replacing existing software.",
+      "url": "https://www.redspider.ae/products/uae-e-invoicing-crm-software/",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "e-Invoicing / ERP Integration Software",
+      "operatingSystem": "Cloud-based / API",
+      "image": "https://www.redspider.ae/assets/img/crm-img/API-system-integration.webp",
+      "publisher": { "@id": "https://www.redspider.ae/#organization" },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.redspider.ae/products/uae-e-invoicing-crm-software/",
+        "availability": "https://schema.org/InStock",
+        "seller": { "@id": "https://www.redspider.ae/#localbusiness" }
+      },
+      "featureList": [
+        "API connector between ERP/accounting systems and UAE Accredited Service Providers",
+        "Conversion of invoice data to PINT AE XML structure",
+        "Compatible with SAP, Oracle, Microsoft Dynamics 365, Odoo, Zoho, Sage, Infor, and custom ERPs",
+        "Invoice field and format validation",
+        "VAT and tax breakdown checks",
+        "Status updates and processing acknowledgements",
+        "Support for B2B, B2G, export, credit note, and recurring invoices",
+        "ERP readiness assessment and data-gap analysis",
+        "Connects ERP, accounting, billing, and third-party applications"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/products/uae-e-invoicing-crm-software/#service",
+      "serviceType": "UAE e-Invoicing Readiness Assessment and ERP API Integration",
+      "name": "UAE e-Invoicing Readiness Assessment",
+      "description": "A readiness and risk assessment that reviews a business's ERP, accounting or billing system to identify data and technical gaps before integrating UAE e-Invoicing via the ZIVORA.ONE API connector.",
+      "provider": { "@id": "https://www.redspider.ae/#localbusiness" },
+      "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Businesses using SAP, Oracle, Microsoft Dynamics 365, Odoo, Zoho, Sage, Infor or custom ERP systems"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/products/uae-e-invoicing-crm-software/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
+        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.redspider.ae/products/" },
+        { "@type": "ListItem", "position": 3, "name": "UAE e-Invoicing CRM Software", "item": "https://www.redspider.ae/products/uae-e-invoicing-crm-software/" }
+      ]
+    }
+  ]
+}

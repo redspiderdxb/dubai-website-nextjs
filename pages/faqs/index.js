@@ -3,6 +3,7 @@
 import PageStyles from "../../components/seo/PageStyles";
 import FAQPage from "../../components/FAQPage";
 import SEO from "../../components/seo/SEO";
+import faqsSchema from "../../lib/schema/faqs.json";
 
 export default function FAQs() {
   const seoData = {
@@ -16,7 +17,12 @@ export default function FAQs() {
   return (
     <>
       <PageStyles href="/assets/css/pages/faqs.css" />
-      <SEO {...seoData} />
+
+      <SEO
+        {...seoData}
+        pageSchema={faqsSchema["@graph"]}
+      />
+
       <FAQPage />
     </>
   );

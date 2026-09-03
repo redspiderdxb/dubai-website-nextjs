@@ -15,6 +15,16 @@ import HostingTemplate from "../../components/templates/HostingTemplate";
 import MobileAppTemplate from "../../components/templates/MobileAppTemplate";
 import WhatsAppBusinessTemplate from "../../components/templates/WhatsAppBusinessTemplate";
 
+import webDevelopmentSchema from "../../lib/schema/web-development.json";
+import graphicDesignSchema from "../../lib/schema/graphic-design-services.json";
+import brochureDesignSchema from "../../lib/schema/brochure-design-company-in-dubai.json";
+import ecommerceWebDesignSchema from "../../lib/schema/ecommerce-web-design-dubai.json";
+import emailMarketingSchema from "../../lib/schema/email-marketing.json";
+import webHostingSchema from "../../lib/schema/web-hosting.json";
+import logoDesignSchema from "../../lib/schema/logo-designing-company-dubai-brand-identity.json";
+import mobileAppSchema from "../../lib/schema/mobile-app-development-company-dubai.json";
+import whatsappBusinessSchema from "../../lib/schema/whatsapp-business-api-integration.json";
+
 // =====================================================
 // TEMPLATE COMPONENTS
 // =====================================================
@@ -159,8 +169,45 @@ export default function ServiceDetail({ service }) {
   return (
     <Layout>
       <PageStyles href="/assets/css/pages/service.css" />
-      <SEO {...seoData} serviceSchema={serviceSchema} />
-
+      <SEO
+        {...seoData}
+        serviceSchema={
+          service.slug === "web-development" ||
+          service.slug === "graphic-design-services" ||
+          service.slug === "brochure-design-company-in-dubai" ||
+          service.slug === "ecommerce-web-design-dubai" ||
+          service.slug === "email-marketing" ||
+          service.slug === "web-hosting" ||
+          service.slug === "logo-designing-company-dubai-brand-identity" ||
+          service.slug === "mobile-app-development-company-dubai" ||
+          service.slug === "whatsapp-business-api-integration"
+            ? null
+            : serviceSchema
+        }
+        pageSchema={
+          service.slug === "web-development"
+            ? webDevelopmentSchema["@graph"]
+            : service.slug === "graphic-design-services"
+              ? graphicDesignSchema["@graph"]
+              : service.slug === "brochure-design-company-in-dubai"
+                ? brochureDesignSchema["@graph"]
+                : service.slug === "ecommerce-web-design-dubai"
+                  ? ecommerceWebDesignSchema["@graph"]
+                  : service.slug === "email-marketing"
+                    ? emailMarketingSchema["@graph"]
+                    : service.slug === "web-hosting"
+                      ? webHostingSchema["@graph"]
+                      : service.slug ===
+                          "logo-designing-company-dubai-brand-identity"
+                        ? logoDesignSchema["@graph"]
+                        : service.slug ===
+                            "mobile-app-development-company-dubai"
+                          ? mobileAppSchema["@graph"]
+                          : service.slug === "whatsapp-business-api-integration"
+                            ? whatsappBusinessSchema["@graph"]
+                            : null
+        }
+      />
       <main className="main">
         <TemplateComponent data={service} service={service} />
       </main>

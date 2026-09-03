@@ -1,0 +1,46 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/service/graphic-design-services/#service",
+      "serviceType": "Graphic Design",
+      "name": "Creative Graphic Design Services in Dubai",
+      "description": "Professional graphic design services in Dubai, including logo design, business card design, letterhead design, flyer design, and banner and advertising design for print and digital platforms.",
+      "url": "https://www.redspider.ae/service/graphic-design-services/",
+      "image": "https://www.redspider.ae/assets/img/og-image.webp",
+      "provider": { "@id": "https://www.redspider.ae/#localbusiness" },
+      "areaServed": { "@type": "City", "name": "Dubai" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Graphic Design Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Logo Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Card Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Letterhead Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Flyer Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Banner & Advertising Design" } }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/service/graphic-design-services/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.redspider.ae/service/graphic-design-services/" },
+        { "@type": "ListItem", "position": 3, "name": "Graphic Design", "item": "https://www.redspider.ae/service/graphic-design-services/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.redspider.ae/service/graphic-design-services/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What graphic design services do you offer in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "We offer a wide range of graphic design services including brochure design, logo design, business card design, letterhead design, flyer design, banner design, and advertising design." } },
+        { "@type": "Question", "name": "How long does it take to complete a graphic design project?", "acceptedAnswer": { "@type": "Answer", "text": "Timelines depend on project complexity. Simple designs typically take 2-5 days, while comprehensive branding projects may take 1-2 weeks." } },
+        { "@type": "Question", "name": "Do you provide print-ready files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, all designs are delivered in print-ready formats including CMYK, high-resolution PDF, and vector files for commercial printing." } },
+        { "@type": "Question", "name": "Can you redesign my existing brand materials?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer rebranding and redesign services to modernize your existing brand materials while maintaining brand recognition." } }
+      ]
+    }
+  ]
+}

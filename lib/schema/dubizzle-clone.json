@@ -1,0 +1,63 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.redspider.ae/products/dubizzle-clone/#software",
+      "name": "RSClassify - Dubizzle Clone Script",
+      "alternateName": ["Dubizzle Clone", "OLX Clone", "Classified Directory Website Script"],
+      "description": "Powerful and easy-to-use software for creating online directories and classified ad websites like Dubizzle and OLX. Supports unlimited categories, listings, payment integration, and monetization options.",
+      "url": "https://www.redspider.ae/products/dubizzle-clone/",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Classified Ads / Online Directory Software",
+      "operatingSystem": "Web-based",
+      "image": "https://www.redspider.ae/assets/img/Dubizzle-Olx-768x768.webp",
+      "publisher": { "@id": "https://www.redspider.ae/#organization" },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.redspider.ae/products/dubizzle-clone/",
+        "availability": "https://schema.org/InStock",
+        "seller": { "@id": "https://www.redspider.ae/#localbusiness" }
+      },
+      "featureList": [
+        "Advanced listing fields by category",
+        "Featured listings",
+        "Unlimited categories and sub-categories",
+        "Photo upload with automatic resizing",
+        "Google Maps integration for listings",
+        "Advanced search with saved searches",
+        "Unlimited pricing plans (individual, subscription, category-based)",
+        "Customer self-service account panel",
+        "Captcha and email registration validation",
+        "PCI-compliant payment processing",
+        "Mobile responsive design",
+        "Full-featured admin back office"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/products/dubizzle-clone/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
+        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.redspider.ae/products/" },
+        { "@type": "ListItem", "position": 3, "name": "Dubizzle Clone", "item": "https://www.redspider.ae/products/dubizzle-clone/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.redspider.ae/products/dubizzle-clone/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is RSClassify?", "acceptedAnswer": { "@type": "Answer", "text": "RSClassify is a powerful software solution for building general-purpose classified advertising websites like Dubizzle and OLX. It allows you to create online directories and classified ad websites for any item for sale including cars, electronics, furniture, sporting goods, real estate, etc." } },
+        { "@type": "Question", "name": "Can I customize the website design?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, RSClassify is fully customizable. You can adapt it to your unique business needs and create a site that serves various niche markets or a broad selection of categories." } },
+        { "@type": "Question", "name": "How can I monetize my classified website?", "acceptedAnswer": { "@type": "Answer", "text": "You can monetize your website using Google AdSense, affiliate programs, or by implementing different pricing plans for listings. The platform also supports payment integration with multiple gateways like PayPal or custom payment processors." } },
+        { "@type": "Question", "name": "What payment gateways are supported?", "acceptedAnswer": { "@type": "Answer", "text": "The platform supports multiple payment gateways including PayPal, Authorize.net, and custom payment processors. You can take payments directly on your site." } },
+        { "@type": "Question", "name": "Does it include a mobile responsive design?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, the software is mobile responsive, so your site will look great and function smoothly across all devices including desktops, tablets, and smartphones." } },
+        { "@type": "Question", "name": "Can I manage listings easily?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, RSClassify offers an intuitive, web-based admin interface that makes site management seamless. You can manage listings, track users, and optimize content through an easy-to-navigate admin panel." } },
+        { "@type": "Question", "name": "What are the pricing plan options?", "acceptedAnswer": { "@type": "Answer", "text": "You can create unlimited pricing plans with various plan types including individual listing, subscription, and category-based pricing." } },
+        { "@type": "Question", "name": "Is there a Google Maps integration?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, RSClassify includes advanced Google Mapping features including Google map for all listings and the ability to mark Google location during ad listing step." } },
+        { "@type": "Question", "name": "What security features are included?", "acceptedAnswer": { "@type": "Answer", "text": "Security features include security codes (Captcha) on forms, registration validation via email, and credit card data never stored on your server for PCI compliance." } },
+        { "@type": "Question", "name": "Can customers manage their own listings?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, customers have a self-service portal where they can register, login, manage their profile, update listings, refer friends, and access their account control panel." } }
+      ]
+    }
+  ]
+}

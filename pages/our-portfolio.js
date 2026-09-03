@@ -10,6 +10,8 @@ import { fetchGalleries } from "../lib/api";
 import { slimGalleries, slimPagination } from "../lib/galleries";
 import { SITE_URL } from "../lib/seo";
 
+import ourPortfolioSchema from "../lib/schema/our-portfolio.json";
+
 export default function Portfolio({ initialGalleries, initialPagination }) {
   const title = "Web Design Portfolio Dubai | RedSpider Projects";
   const description =
@@ -25,62 +27,14 @@ export default function Portfolio({ initialGalleries, initialPagination }) {
     robots: "index,follow",
   };
 
-  const pageSchema = [
-    {
-      "@type": "CollectionPage",
-      "@id": `${SITE_URL}/our-portfolio/#webpage`,
-      url: `${SITE_URL}/our-portfolio/`,
-      name: title,
-      description,
-      isPartOf: {
-        "@id": `${SITE_URL}/#website`,
-      },
-      about: {
-        "@id": `${SITE_URL}/#organization`,
-      },
-      mainEntity: {
-        "@id": `${SITE_URL}/our-portfolio/#projects`,
-      },
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": `${SITE_URL}/our-portfolio/#breadcrumb`,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: `${SITE_URL}/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Portfolio",
-          item: `${SITE_URL}/our-portfolio/`,
-        },
-      ],
-    },
-    {
-      "@type": "ItemList",
-      "@id": `${SITE_URL}/our-portfolio/#projects`,
-      itemListElement: (initialGalleries || []).slice(0, 12).map(
-        (gallery, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: gallery.name,
-          url: gallery.project_url || `${SITE_URL}/our-portfolio/`,
-        }),
-      ),
-    },
-  ];
-
   return (
     <Layout>
-        <PageStyles href="/assets/css/pages/portfolio.css" />
+      <PageStyles href="/assets/css/pages/portfolio.css" />
+
       <SEO
         {...seoData}
         includeBusinessSchema={true}
-        pageSchema={pageSchema}
+        pageSchema={ourPortfolioSchema["@graph"]}
       />
 
       <PortfolioHero />

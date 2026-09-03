@@ -7,6 +7,8 @@ import BlogHero from "../components/blog/BlogHero";
 import BlogList from "../components/blog/BlogList";
 import BlogCTA from "../components/blog/BlogCTA";
 
+import blogSchema from "../lib/schema/blog.json";
+
 export default function Blog({ posts, pagination }) {
   const seoData = {
     title: "Blog - RedSpider | Latest Insights on Web Design & Development",
@@ -26,8 +28,12 @@ export default function Blog({ posts, pagination }) {
 
   return (
     <Layout>
-        <PageStyles href="/assets/css/pages/blog.css" />
-      <SEO {...seoData} />
+      <PageStyles href="/assets/css/pages/blog.css" />
+
+      <SEO
+        {...seoData}
+        pageSchema={blogSchema["@graph"]}
+      />
 
       <BlogHero />
 

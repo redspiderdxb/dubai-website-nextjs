@@ -19,89 +19,6 @@ export default function SEO({
 
   /*
    * =====================================================
-   * ORGANIZATION
-   * =====================================================
-   */
-
-  const organizationSchema = {
-    "@type": "Organization",
-    "@id": `${siteUrl}/#organization`,
-    name: "RedSpider Web & Art Design",
-    url: siteUrl,
-
-    logo: {
-      "@type": "ImageObject",
-      "@id": `${siteUrl}/#logo`,
-      url: `${siteUrl}/assets/img/logo.webp`,
-    },
-
-    email: "info@redspider.ae",
-    telephone: "+971555515475",
-
-    sameAs: [
-      "https://www.facebook.com/RedSpiderWebandArtDesign/",
-      "https://x.com/redspider99",
-      "https://www.linkedin.com/company/red-spider-web-&-art-design",
-      "https://www.instagram.com/redspiderwebartdesign/",
-    ],
-  };
-
-  /*
-   * =====================================================
-   * LOCAL BUSINESS
-   * =====================================================
-   */
-
-  const localBusinessSchema = {
-    "@type": "LocalBusiness",
-    "@id": `${siteUrl}/#localbusiness`,
-
-    name: "RedSpider Web & Art Design",
-    url: siteUrl,
-
-    parentOrganization: {
-      "@id": `${siteUrl}/#organization`,
-    },
-
-    logo: {
-      "@id": `${siteUrl}/#logo`,
-    },
-
-    image:
-      image ||
-      `${siteUrl}/assets/img/og-image.webp`,
-
-    email: "info@redspider.ae",
-    telephone: "+971555515475",
-
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Dubai",
-      addressCountry: "AE",
-    },
-  };
-
-  /*
-   * =====================================================
-   * WEBSITE
-   * =====================================================
-   */
-
-  const websiteSchema = {
-    "@type": "WebSite",
-    "@id": `${siteUrl}/#website`,
-
-    url: siteUrl,
-
-    name: "RedSpider Web & Art Design",
-
-    publisher: {
-      "@id": `${siteUrl}/#organization`,
-    },
-  };
-
-  /*
-   * =====================================================
    * SCHEMA GRAPH
    * =====================================================
    */
@@ -109,17 +26,19 @@ export default function SEO({
   const schemaGraph = [];
 
   /*
-   * Business + Website schemas are added ONLY when
-   * explicitly enabled.
+   * Global Organization / LocalBusiness / WebSite schemas
+   * are now loaded once globally from:
+   *
+   * lib/schema/global.json
+   *
+   * through:
+   * components/layout/Layout.js
+   *
+   * Keep includeBusinessSchema for backwards compatibility,
+   * but do not output duplicate global schemas here.
    */
 
-  if (includeBusinessSchema) {
-    schemaGraph.push(
-      organizationSchema,
-      localBusinessSchema,
-      websiteSchema
-    );
-  }
+  void includeBusinessSchema;
 
   /*
    * FAQ
@@ -137,6 +56,10 @@ export default function SEO({
     schemaGraph.push(serviceSchema);
   }
 
+  /*
+   * Page-specific schemas
+   */
+
   if (pageSchema) {
     if (Array.isArray(pageSchema)) {
       schemaGraph.push(...pageSchema);
@@ -153,7 +76,8 @@ export default function SEO({
         }
       : null;
 
-  const productionCanonicalUrl = sanitizeCanonical(canonical);
+  const productionCanonicalUrl =
+    sanitizeCanonical(canonical);
 
   return (
     <Head>

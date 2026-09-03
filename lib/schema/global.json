@@ -1,0 +1,61 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.redspider.ae/#organization",
+      "name": "RedSpider Web & Art Design",
+      "url": "https://www.redspider.ae",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://www.redspider.ae/#logo",
+        "url": "https://www.redspider.ae/assets/img/logo.webp"
+      },
+      "image": "https://www.redspider.ae/assets/img/og-image.webp",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Sofitel, Burj Gate Tower, Office 1002, Sheikh Zayed Road, Downtown Dubai",
+        "addressLocality": "Dubai",
+        "addressCountry": "AE"
+      },
+      "email": "info@redspider.ae",
+      "telephone": "+971555515475",
+      "sameAs": [
+        "https://www.facebook.com/RedSpiderWebandArtDesign/",
+        "https://x.com/redspider99",
+        "https://www.linkedin.com/company/red-spider-web-&-art-design",
+        "https://www.instagram.com/redspiderwebartdesign/"
+      ]
+    },
+    {
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "@id": "https://www.redspider.ae/#localbusiness",
+      "name": "RedSpider Web & Art Design",
+      "url": "https://www.redspider.ae",
+      "parentOrganization": { "@id": "https://www.redspider.ae/#organization" },
+      "logo": { "@id": "https://www.redspider.ae/#logo" },
+      "image": "https://www.redspider.ae/assets/img/og-image.webp",
+      "email": "info@redspider.ae",
+      "telephone": "+971555515475",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Sofitel, Burj Gate Tower, Office 1002, Sheikh Zayed Road, Downtown Dubai",
+        "addressLocality": "Dubai",
+        "addressCountry": "AE"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "121",
+        "bestRating": "5"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.redspider.ae/#website",
+      "url": "https://www.redspider.ae",
+      "name": "RedSpider Web & Art Design",
+      "publisher": { "@id": "https://www.redspider.ae/#organization" }
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/service/whatsapp-business-api-integration/#service",
+      "serviceType": "WhatsApp Business API Integration",
+      "name": "WhatsApp Business API Integration in Dubai",
+      "description": "Professional WhatsApp Business API integration in Dubai, connecting WhatsApp with chatbots, CRM software, websites, customer support systems and marketing platforms for businesses across the UAE.",
+      "url": "https://www.redspider.ae/service/whatsapp-business-api-integration/",
+      "image": "https://www.redspider.ae/assets/img/og-image.webp",
+      "provider": { "@id": "https://www.redspider.ae/#localbusiness" },
+      "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "WhatsApp Business API Integration Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WhatsApp Business API Account Setup" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WhatsApp Cloud API Configuration" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Chatbot Design and Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Shared Team Inbox Integration" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CRM and ERP Integration" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website and Landing-Page Integration" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Marketing Campaign Setup" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Message Template Configuration" } }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/service/whatsapp-business-api-integration/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.redspider.ae/service/whatsapp-business-api-integration/" },
+        { "@type": "ListItem", "position": 3, "name": "WhatsApp Business API Integration", "item": "https://www.redspider.ae/service/whatsapp-business-api-integration/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.redspider.ae/service/whatsapp-business-api-integration/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is WhatsApp Business API?", "acceptedAnswer": { "@type": "Answer", "text": "The WhatsApp Business API is Meta's official solution for medium and large businesses to communicate with customers at scale. It allows multiple users to manage conversations, automate responses and integrate WhatsApp with other business systems." } },
+        { "@type": "Question", "name": "How is WhatsApp Business API different from WhatsApp Business App?", "acceptedAnswer": { "@type": "Answer", "text": "The WhatsApp Business App is designed for small businesses with a single user, while the API supports multiple users, automation, CRM integration and advanced messaging features for growing companies." } },
+        { "@type": "Question", "name": "Is WhatsApp Business API expensive?", "acceptedAnswer": { "@type": "Answer", "text": "Pricing includes Meta's messaging charges, platform subscription fees and optional services like chatbot development. We provide customised quotations based on your message volume and requirements." } },
+        { "@type": "Question", "name": "Can I keep my existing phone number?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, you can keep your existing WhatsApp Business phone number during the API setup process. The number will be verified and connected to the API." } },
+        { "@type": "Question", "name": "How long does the integration take?", "acceptedAnswer": { "@type": "Answer", "text": "Most integrations are completed within 2-4 weeks, depending on the complexity of your requirements, existing systems and customisation needs." } },
+        { "@type": "Question", "name": "What kind of businesses can use WhatsApp Business API?", "acceptedAnswer": { "@type": "Answer", "text": "Any business that communicates with customers via WhatsApp can use the API. It's suitable for ecommerce, real estate, healthcare, education, hospitality and professional services." } }
+      ]
+    }
+  ]
+}

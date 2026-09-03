@@ -19,6 +19,8 @@ import {
 } from "../lib/api";
 import { getGoogleReviews } from "../lib/googleReviews";
 
+import homepageSchema from "../lib/schema/homepage.json";
+
 export default function Home({
   homepageData,
   initialServices,
@@ -50,41 +52,14 @@ export default function Home({
     robots: "index,follow",
   };
 
-  // ============================================
-  // FAQ SCHEMA
-  // ============================================
-
-  const faqs = Array.isArray(homepageData?.faqs)
-    ? homepageData.faqs
-    : homepageData?.faqs && typeof homepageData.faqs === "object"
-      ? Object.values(homepageData.faqs)
-      : [];
-
-  const validFaqs = faqs.filter((faq) => faq?.question && faq?.answer);
-
-  const faqSchema =
-    validFaqs.length > 0
-      ? {
-          "@type": "FAQPage",
-          "@id": "https://www.redspider.ae/#faq",
-
-          mainEntity: validFaqs.map((faq) => ({
-            "@type": "Question",
-
-            name: faq.question,
-
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }
-      : null;
-
   return (
     <>
       <PageStyles href="/assets/css/pages/home.css?v=hero-grid-center" />
-      <SEO {...seo} includeBusinessSchema={true} faqSchema={faqSchema} />
+      <SEO
+        {...seo}
+        includeBusinessSchema={true}
+        pageSchema={homepageSchema["@graph"]}
+      />
 
       <Layout>
         <Hero data={homepageData} googleReviews={googleReviews} />
@@ -139,17 +114,13 @@ export async function getStaticProps() {
     const homepageData = await fetchHomepageData();
     const servicesLimit = Number(homepageData?.services_limit) || 6;
 
-    const [
-      initialServices,
-      initialBlogResult,
-      galleriesResult,
-      googleReviews,
-    ] = await Promise.all([
-      fetchFeaturedServices(servicesLimit),
-      fetchPosts(1),
-      fetchGalleries(1, 50),
-      getGoogleReviews(),
-    ]);
+    const [initialServices, initialBlogResult, galleriesResult, googleReviews] =
+      await Promise.all([
+        fetchFeaturedServices(servicesLimit),
+        fetchPosts(1),
+        fetchGalleries(1, 50),
+        getGoogleReviews(),
+      ]);
 
     let initialBlogPosts = Array.isArray(initialBlogResult?.posts)
       ? [...initialBlogResult.posts]

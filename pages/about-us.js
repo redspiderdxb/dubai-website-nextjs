@@ -9,6 +9,7 @@ import AboutValue from "../components/about/AboutValue";
 import AboutBrands from "../components/about/AboutBrands";
 import AboutServices from "../components/about/AboutServices";
 import AboutCTA from "../components/about/AboutCTA";
+import aboutUsSchema from "../lib/schema/about-us.json";
 import { SITE_URL } from "../lib/seo";
 
 function slimAboutData(data) {
@@ -60,48 +61,16 @@ export default function About({ aboutData }) {
     robots: "index,follow",
   };
 
-  const pageSchema = [
-    {
-      "@type": "AboutPage",
-      "@id": `${SITE_URL}/about-us/#webpage`,
-      url: `${SITE_URL}/about-us/`,
-      name: title,
-      description,
-      isPartOf: {
-        "@id": `${SITE_URL}/#website`,
-      },
-      about: {
-        "@id": `${SITE_URL}/#organization`,
-      },
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": `${SITE_URL}/about-us/#breadcrumb`,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: `${SITE_URL}/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "About Us",
-          item: `${SITE_URL}/about-us/`,
-        },
-      ],
-    },
-  ];
-
   return (
     <Layout>
-        <PageStyles href="/assets/css/pages/about.css" />
+      <PageStyles href="/assets/css/pages/about.css" />
+
       <SEO
         {...seoData}
         includeBusinessSchema={true}
-        pageSchema={pageSchema}
+        pageSchema={aboutUsSchema["@graph"]}
       />
+
       <AboutHero data={aboutData} />
       <AboutInfo data={aboutData} />
       <AboutValue data={aboutData} />
