@@ -31,30 +31,32 @@ function RelatedInsights({ posts = [] }) {
     <section className="rs-related-section">
       <div className="container">
         {/* =================================================
-            HEADING
-        ================================================= */}
+          HEADING
+      ================================================= */}
 
         <div className="rs-related-heading">
-          <div>
-            <span>KEEP EXPLORING</span>
+          <div className="rs-related-heading-inner">
+            <div className="rs-related-kicker">
+              <span className="rs-related-kicker-line"></span>
+              <span>LATEST INSIGHTS</span>
+            </div>
 
-            <h2>
-              Related
-              <strong>Insights</strong>
-            </h2>
+            <div className="rs-related-title">
+              Related <strong>Insights</strong>
+            </div>
 
             <p>More ideas for websites, portals and growth.</p>
           </div>
         </div>
 
         {/* =================================================
-            RELATED GRID
-        ================================================= */}
+          RELATED GRID
+      ================================================= */}
 
         <div className="rs-related-grid">
           {/* =================================================
-              FEATURED
-          ================================================= */}
+            FEATURED
+        ================================================= */}
 
           {featured && (
             <Link
@@ -77,7 +79,9 @@ function RelatedInsights({ posts = [] }) {
                   {featured.categories?.[0]?.name || "Digital Marketing"}
                 </small>
 
-                <h3>{featured.title || featured.name || "Related Article"}</h3>
+                <div className="rs-related-featured-title">
+                  {featured.title || featured.name || "Related Article"}
+                </div>
 
                 <p>
                   {featured.description ||
@@ -93,8 +97,8 @@ function RelatedInsights({ posts = [] }) {
           )}
 
           {/* =================================================
-              SIDE POSTS
-          ================================================= */}
+            SIDE POSTS
+        ================================================= */}
 
           <div className="rs-related-side">
             {sidePosts.map((item, index) => (
@@ -119,7 +123,9 @@ function RelatedInsights({ posts = [] }) {
                     {item.categories?.[0]?.name || "Digital Marketing"}
                   </span>
 
-                  <h4>{item.title || item.name || "Related Article"}</h4>
+                  <div className="rs-related-small-title">
+                    {item.title || item.name || "Related Article"}
+                  </div>
                 </div>
               </Link>
             ))}
@@ -127,8 +133,8 @@ function RelatedInsights({ posts = [] }) {
         </div>
 
         {/* =================================================
-            VIEW MORE
-        ================================================= */}
+          VIEW MORE
+      ================================================= */}
 
         <div className="rs-related-more">
           <Link href="/blog">

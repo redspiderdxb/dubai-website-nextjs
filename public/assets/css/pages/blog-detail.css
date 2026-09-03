@@ -1512,6 +1512,87 @@
   line-height: 1;
 }
 
+
+/* =====================================================
+   RELATED INSIGHTS — HEADING STYLE
+===================================================== */
+
+.rs-related-heading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.rs-related-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #e91c23;
+}
+
+.rs-related-kicker-line {
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: #e95b67;
+  flex-shrink: 0;
+}
+
+.rs-related-title {
+  margin: 0;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -1px;
+  color: #222;
+}
+
+.rs-related-title strong {
+  margin-left: 6px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 400;
+  color: #e91c23;
+}
+
+.rs-related-heading-inner > p {
+  margin-top: 10px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+  .rs-related-title {
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+
+  .rs-related-kicker {
+    font-size: 9px;
+    letter-spacing: 1.2px;
+    gap: 8px;
+  }
+
+  .rs-related-kicker-line {
+    width: 15px;
+  }
+
+  .rs-related-title strong {
+    margin-left: 4px;
+  }
+}
+
+
 @media (max-width: 575px) {
   .rs-blog-meta-right {
     gap: 10px;
