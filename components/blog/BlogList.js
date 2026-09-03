@@ -257,16 +257,7 @@ export default function BlogList({ posts = [], pagination = {} }) {
               CATEGORY FILTER UI
           ====================================== */}
 
-          <div className="rs-blog-intro" data-aos="fade-up">
-            <div>
-              <span className="rs-blog-intro-kicker">The journal</span>
-              <p className="rs-blog-intro-count">
-                {filteredPosts.length}{" "}
-                {filteredPosts.length === 1 ? "article" : "articles"}
-                {activeCategory !== "All" ? ` in ${activeCategory}` : ""}
-              </p>
-            </div>
-          </div>
+          
 
           <div className="rs-blog-categories" data-aos="fade-up">
             {categories.map((category) => (
