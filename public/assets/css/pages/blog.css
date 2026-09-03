@@ -1244,3 +1244,44 @@
     min-height: 358px !important;
   
 }
+
+span.rs-meta-dot {
+    display: none;
+}
+
+/* =====================================================
+   BLOG META — MOBILE FIX
+===================================================== */
+
+@media (max-width: 575px) {
+  .rs-blog-meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+  }
+
+  .rs-blog-meta > span {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  .rs-blog-meta .rs-meta-dot {
+    flex-shrink: 0;
+    margin: 0 2px;
+  }
+
+  .rs-blog-meta i {
+    flex-shrink: 0;
+    margin-right: 4px;
+  }
+}
+
