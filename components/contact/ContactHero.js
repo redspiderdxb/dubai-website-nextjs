@@ -1,8 +1,28 @@
+// components/contact/ContactHero.js
+
 export default function ContactHero({ data }) {
   const heroTitle = data?.hero_title || "Have a Project in Mind? Let's Talk";
 
   return (
     <section className="rs-inner-hero rs-contact-hero rs-contact-hero-video contact-shared-hero-bg">
+      {/* =========================================
+          BACKGROUND VIDEO
+      ========================================= */}
+      <video
+        className="rs-contact-hero-video__background"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="/assets/img/videos/header.mp4" type="video/mp4" />
+      </video>
+
+      {/* =========================================
+          DARK OVERLAY
+      ========================================= */}
       <div className="rs-contact-hero-video__overlay" aria-hidden="true"></div>
 
       <div className="container rs-contact-hero-video__content">

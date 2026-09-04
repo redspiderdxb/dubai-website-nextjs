@@ -44,7 +44,7 @@
   border-radius: 16px;
 }
 
-.rs-contact-detail > div {
+.rs-contact-detail>div {
   min-width: 0;
   flex: 1;
 }
@@ -78,7 +78,7 @@
   line-height: 1.6;
 }
 
-.rs-contact-detail p + p {
+.rs-contact-detail p+p {
   margin-top: 4px;
 }
 
@@ -235,6 +235,42 @@
   filter: brightness(1.05);
 }
 
+
+/* =====================================================
+   CONTACT HERO VIDEO BACKGROUND
+===================================================== */
+
+.rs-contact-hero-video {
+  position: relative;
+  overflow: hidden;
+  background-image: none !important;
+  background-color: #000;
+}
+
+.rs-contact-hero-video__background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.rs-contact-hero-video__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.rs-contact-hero-video__content {
+  position: relative;
+  z-index: 2;
+}
+
+
 @media (max-width: 991px) {
   .rs-contact-hero.rs-contact-hero-video {
     min-height: 280px;
@@ -261,7 +297,7 @@
     margin-right: 0;
   }
 
-  .rs-contact-hero .row > [class*="col-"] {
+  .rs-contact-hero .row>[class*="col-"] {
     padding-left: 0;
     padding-right: 0;
   }
@@ -283,7 +319,7 @@
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
   }
 
-  .rs-contact-form-grid > *,
+  .rs-contact-form-grid>*,
   .rs-contact-form-card .rs-themed-select,
   .rs-contact-form-card .form-control {
     min-width: 0;
