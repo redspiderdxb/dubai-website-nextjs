@@ -11339,6 +11339,11 @@ contact us page */
   transform: translateX(4px);
 }
 
+
+.rs-opportunity__poster {
+    height: 552px;
+}
+
 /* --- Responsive fine-tune --- */
 
 @media (max-width: 640px) {
@@ -11372,5 +11377,8 @@ contact us page */
     font-size: 11px;
   }
 
+  .rs-opportunity__poster {
+    height: auto !important;
+}
 
 }

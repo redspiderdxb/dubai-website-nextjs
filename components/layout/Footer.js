@@ -260,18 +260,13 @@ export default function Footer() {
                     <i className={social.icon} aria-hidden="true" />
                   </a>
                 ))}
-              </div>
 
-              {/* GET IN TOUCH */}
-
-              <div className="rs-footer-links bottom">
-                <div className="rs-footer-app-row">
-                  <a
+                 <a
                     href="https://apps.apple.com/us/app/redspider-web-art-design/id6748980550?platform=vision"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Download RedSpider on Apple App Store"
-                    className="footer-app-link"
+                    className="rs-social-link"
                   >
                     <i className="bi bi-apple" aria-hidden="true"></i>
                   </a>
@@ -281,16 +276,23 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Download RedSpider on Google Play"
-                    className="footer-app-link"
+                    className="rs-social-link"
                   >
                     <i className="bi bi-google-play" aria-hidden="true"></i>
                   </a>
-                </div>
+                  
+                   <div className="rs-footer-links bottom">
+                
 
                 <Link href="/contact-us/" className="footer-touch-link">
                   Get In Touch
                 </Link>
               </div>
+              </div>
+
+              {/* GET IN TOUCH */}
+
+             
             </div>
           </div>
 
