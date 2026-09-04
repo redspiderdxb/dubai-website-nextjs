@@ -10,6 +10,24 @@ export default function AboutHero({ data }) {
 
   return (
     <section className="rs-inner-hero about-hero hero-marquee rs-contact-hero rs-contact-hero-video contact-shared-hero-bg">
+      {/* =========================================
+          BACKGROUND VIDEO
+      ========================================= */}
+      <video
+        className="rs-contact-hero-video__background"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="/assets/img/videos/header.mp4" type="video/mp4" />
+      </video>
+
+      {/* =========================================
+          DARK OVERLAY
+      ========================================= */}
       <div className="rs-contact-hero-video__overlay" aria-hidden="true"></div>
 
       <div className="container rs-contact-hero-video__content">
@@ -21,7 +39,7 @@ export default function AboutHero({ data }) {
               )}
 
               <h1 className="rs-process-title mb-3 about-h1">
-                RedSpider -
+                RedSpider-
                 <span className="rs-process-highlight">
                   Your Digital Partner in the UAE
                   <svg

@@ -2036,7 +2036,7 @@ span.rs-process-highlight {
   padding: 170px 0 72px !important;
   overflow: hidden;
   background-color: #000 !important;
-  background-image: url("/assets/img/about-bg5.webp") !important;
+  /* background-image: url("/assets/img/about-bg5.webp") !important; */
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -2413,7 +2413,7 @@ span.rs-process-highlight {
   opacity: 1 !important;
 }
 
-.rs-inner-hero.contact-shared-hero-bg {
+/* .rs-inner-hero.contact-shared-hero-bg {
   background-image: url("/assets/img/about-bg5.webp") !important;
   background-size: cover !important;
   background-position: center center !important;
@@ -2423,7 +2423,7 @@ span.rs-process-highlight {
 .rs-inner-hero.about-hero.contact-shared-hero-bg,
 .rs-inner-hero.rs-contact-hero.contact-shared-hero-bg {
   background-image: url("/assets/img/about-bg5.webp") !important;
-}
+} */
 
 .rs-inner-hero.contact-shared-hero-bg::before,
 .rs-inner-hero.contact-shared-hero-bg .rs-contact-hero-video__overlay {
@@ -3095,7 +3095,6 @@ span.rs-process-highlight {
 
   overflow: hidden;
 
-  background-image: url("/assets/img/about-bg5.webp");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

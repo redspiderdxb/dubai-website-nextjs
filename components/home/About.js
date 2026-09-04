@@ -186,8 +186,31 @@ export default function About({ data }) {
 
   return (
     <>
-      <section className="key-features py-5 about-features dark-background py-3">
-        <div className="container" style={{ maxWidth: "1290px" }}>
+      <section className="key-features py-5 about-features dark-background py-3 about-features-video">
+        {/* =========================================
+      BACKGROUND VIDEO
+  ========================================= */}
+        <video
+          className="about-features-video__background"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="/assets/img/videos/header.mp4" type="video/mp4" />
+        </video>
+
+        {/* =========================================
+      DARK OVERLAY
+  ========================================= */}
+        <div className="about-features-video__overlay" aria-hidden="true"></div>
+
+        <div
+          className="container about-features-video__content"
+          style={{ maxWidth: "1290px" }}
+        >
           <div className="row align-items-center g-5">
             <div
               className="col-lg-6"
@@ -304,4 +327,3 @@ export default function About({ data }) {
     </>
   );
 }
-

@@ -2413,17 +2413,17 @@ span.rs-process-highlight {
   opacity: 1 !important;
 }
 
-.rs-inner-hero.contact-shared-hero-bg {
+/* .rs-inner-hero.contact-shared-hero-bg {
   background-image: url("/assets/img/about-bg5.webp") !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
-}
+} */
 
-.rs-inner-hero.about-hero.contact-shared-hero-bg,
+/* .rs-inner-hero.about-hero.contact-shared-hero-bg,
 .rs-inner-hero.rs-contact-hero.contact-shared-hero-bg {
   background-image: url("/assets/img/about-bg5.webp") !important;
-}
+} */
 
 .rs-inner-hero.contact-shared-hero-bg::before,
 .rs-inner-hero.contact-shared-hero-bg .rs-contact-hero-video__overlay {

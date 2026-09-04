@@ -409,7 +409,7 @@
   display: flex;
   align-items: center;
 
-  background-image: url("/assets/img/about-bg5.webp");
+  /* background-image: url("/assets/img/about-bg5.webp"); */
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
