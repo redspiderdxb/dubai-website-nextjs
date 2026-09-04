@@ -191,9 +191,7 @@ function PortfolioYoutubeItem({ title, videoId }) {
   );
 }
 
-export default function PortfolioGrid({
-  initialGalleries = [],
-}) {
+export default function PortfolioGrid({ initialGalleries = [] }) {
   const lightboxInstance = useRef(null);
 
   const PER_PAGE = 12;
@@ -990,7 +988,7 @@ export default function PortfolioGrid({
             filteredProjects.map((project, index) => (
               <div
                 key={project.id}
-                className="col-lg-4 col-md-6 portfolio-item isotope-item"
+                className="col-lg-6 col-md-6 portfolio-item isotope-item"
               >
                 <div
                   className="portfolio-content"
@@ -1015,6 +1013,22 @@ export default function PortfolioGrid({
                         alt={`${project.title} web design project by RedSpider Dubai`}
                         priority={currentPage === 1 && index < 2}
                       />
+                      {project.link && project.link !== "#" && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="portfolio-project-link"
+                          title={`Visit ${project.title} website`}
+                          aria-label={`Visit ${project.title} website`}
+                        >
+                          <img
+                            src="/assets/img/project-link.svg"
+                            alt=""
+                            aria-hidden="true"
+                          />
+                        </a>
+                      )}
 
                       <div className="portfolio-info">
                         <h4>{project.title}</h4>

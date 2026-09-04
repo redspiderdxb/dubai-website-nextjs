@@ -965,12 +965,98 @@
   z-index: 2;
 }
 
+
+
+
+
+/* =====================================================
+   PORTFOLIO LIVE BADGE
+===================================================== */
+
+.portfolio-live-badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 10px;
+  background: #f00000;
+  color: #fff !important;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  text-decoration: none !important;
+  border-radius: 0;
+  transition: none
+}
+
+.portfolio-live-badge i {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.portfolio-live-badge:hover,
+.portfolio-live-badge:focus {
+  background: #f00000;
+  color: #fff !important;
+  transform: none;
+  text-decoration: none !important;
+}
+
+@media (max-width: 767px) {
+  .portfolio-live-badge {
+    padding: 6px 9px;
+    font-size: 10px;
+  }
+
+  .portfolio-live-badge i {
+    font-size: 10px;
+  }
+}
+
+
+/* =====================================================
+   PORTFOLIO PROJECT LINK
+===================================================== */
+
+.portfolio-content {
+  position: relative;
+}
+
+.portfolio-project-link {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  z-index: 20;
+  display: block;
+  width: 84px;
+  line-height: 0;
+  text-decoration: none !important;
+}
+
+.portfolio-project-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 767px) {
+  .portfolio-project-link {
+    top: 0;
+    right: 0;
+    width: 62px;
+  }
+}
+
 @media (max-width: 480px) {
 
   .portfolio-page-hero,
   .portfolio-page-hero.about-hero,
   .portfolio-page-hero.hero-marquee {
-   
+
     height: 669px !important;
     min-height: 500px;
   }
