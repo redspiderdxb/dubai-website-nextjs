@@ -1028,7 +1028,7 @@
 
 .portfolio-project-link {
   position: absolute;
-  top: 0;
+  top: 7%;
   right: 0px;
   z-index: 20;
   display: block;
@@ -1043,9 +1043,22 @@
   height: auto;
 }
 
+.portfolio .portfolio-content .portfolio-info h4 {
+  position: absolute;
+  top: 7%;
+
+}
+
+
 @media (max-width: 767px) {
+  .portfolio .portfolio-content .portfolio-info h4 {
+            top: 7%;
+
+
+  }
+
   .portfolio-project-link {
-    top: 0;
+    top: 7%;
     right: 0;
     width: 62px;
   }
