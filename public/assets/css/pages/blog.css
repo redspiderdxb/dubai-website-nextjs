@@ -596,6 +596,7 @@
 .rs-blog-categories {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
   margin-bottom: 28px;
@@ -797,8 +798,8 @@
   background: #f6f4f7;
 }
 
-.rs-blog-section + .contact-cta,
-.rs-blog-pagination + .contact-cta {
+.rs-blog-section+.contact-cta,
+.rs-blog-pagination+.contact-cta {
   padding-top: 40px;
 }
 
@@ -904,19 +905,14 @@
 .rs-blog-category {
   display: inline-flex;
   align-items: center;
-
-  padding: 6px 13px;
+  padding: 10px 16px;
   margin-bottom: 14px;
-
   background: #ed1c24;
   color: #fff;
-
   border-radius: 30px;
-
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1;
-
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -995,7 +991,7 @@
 
 .blog-hero-custom.about-hero,
 .blog-hero-custom.hero-marquee {
-    height: 366px !important;
+  height: 366px !important;
   background-color: transparent !important;
 }
 
@@ -1003,12 +999,10 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    120deg,
-    rgba(9, 9, 12, 0.78) 0%,
-    rgba(17, 17, 21, 0.68) 55%,
-    rgba(120, 16, 16, 0.25) 100%
-  );
+  background: linear-gradient(120deg,
+      rgba(9, 9, 12, 0.78) 0%,
+      rgba(17, 17, 21, 0.68) 55%,
+      rgba(120, 16, 16, 0.25) 100%);
   z-index: 1;
 }
 
@@ -1154,6 +1148,7 @@
 }
 
 @media (max-width: 991px) {
+
   .blog-hero-custom,
   .blog-hero-custom.about-hero,
   .blog-hero-custom.hero-marquee {
@@ -1182,6 +1177,7 @@
 
 
 @media (max-width: 767px) {
+
   .blog-hero-custom,
   .blog-hero-custom.about-hero,
   .blog-hero-custom.hero-marquee {
@@ -1219,6 +1215,7 @@
 }
 
 @media (max-width: 480px) {
+
   .blog-hero-custom,
   .blog-hero-custom.about-hero,
   .blog-hero-custom.hero-marquee {
@@ -1240,13 +1237,16 @@
   }
 }
 
-.rs-inner-hero.hero-marquee, .rs-inner-hero.rs-contact-hero, .rs-inner-hero.blog-hero-custom, .rs-inner-hero.portfolio-page-hero {
-    min-height: 358px !important;
-  
+.rs-inner-hero.hero-marquee,
+.rs-inner-hero.rs-contact-hero,
+.rs-inner-hero.blog-hero-custom,
+.rs-inner-hero.portfolio-page-hero {
+  min-height: 358px !important;
+
 }
 
 span.rs-meta-dot {
-    display: none;
+  display: none;
 }
 
 /* =====================================================
@@ -1266,7 +1266,7 @@ span.rs-meta-dot {
     white-space: nowrap;
   }
 
-  .rs-blog-meta > span {
+  .rs-blog-meta>span {
     display: inline-flex;
     align-items: center;
     flex-shrink: 0;
@@ -1284,4 +1284,3 @@ span.rs-meta-dot {
     margin-right: 4px;
   }
 }
-

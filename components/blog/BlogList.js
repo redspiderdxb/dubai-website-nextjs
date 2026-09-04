@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -39,11 +39,97 @@ export default function BlogList({ posts = [], pagination = {} }) {
 
   const [loading, setLoading] = useState(false);
 
+  /*
+   * All blog posts used only for category filtering.
+   * Loaded once in the background when the blog page opens.
+   */
+  const [allFilterPosts, setAllFilterPosts] = useState(null);
+
+  const [filterLoading, setFilterLoading] = useState(false);
+
   // UI active category only
   const [activeCategory, setActiveCategory] = useState("All");
 
   const totalPages = Number(paginationData?.last_page) || 1;
 
+  /*
+   * Load all blog posts once in the background.
+   *
+   * This keeps category filtering instant when the user clicks
+   * a category because the complete dataset is already available.
+   */
+  const loadAllFilterPosts = async () => {
+    if (allFilterPosts !== null || filterLoading) {
+      return;
+    }
+
+    try {
+      setFilterLoading(true);
+
+      const firstResponse = await fetch("/api/blog?page=1");
+
+      if (!firstResponse.ok) {
+        throw new Error(`Blog proxy error: ${firstResponse.status}`);
+      }
+
+      const firstResult = await firstResponse.json();
+
+      const filterTotalPages = Number(firstResult?.pagination?.last_page) || 1;
+
+      let combinedPosts = Array.isArray(firstResult?.posts)
+        ? [...firstResult.posts]
+        : [];
+
+      if (filterTotalPages > 1) {
+        const pageRequests = [];
+
+        for (let page = 2; page <= filterTotalPages; page++) {
+          pageRequests.push(
+            fetch(`/api/blog?page=${page}`)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error(`Blog proxy error: ${response.status}`);
+                }
+
+                return response.json();
+              })
+              .then((result) =>
+                Array.isArray(result?.posts) ? result.posts : [],
+              ),
+          );
+        }
+
+        const remainingPages = await Promise.all(pageRequests);
+
+        remainingPages.forEach((pagePosts) => {
+          combinedPosts.push(...pagePosts);
+        });
+      }
+
+      setAllFilterPosts(sortLatestFirst(combinedPosts));
+    } catch (error) {
+      console.error("Error preloading blog posts for filters:", error);
+    } finally {
+      setFilterLoading(false);
+    }
+  };
+
+  /*
+   * Start loading the complete filter dataset as soon as
+   * the blog page mounts.
+   *
+   * This is intentionally separate from category clicking.
+   */
+  useEffect(() => {
+    loadAllFilterPosts();
+  }, []);
+
+  /*
+   * Category click only changes the active category.
+   *
+   * No API request happens here because the full filter dataset
+   * has already been loaded in the background.
+   */
   const handleCategoryClick = (category) => {
     setActiveCategory(category);
   };
@@ -122,22 +208,81 @@ export default function BlogList({ posts = [], pagination = {} }) {
     });
   }, [totalPages, currentPage]);
 
+  const categoryFilterKeywords = {
+    "SMS Marketing": ["sms marketing", "sms"],
+
+    "Digital Marketing": ["digital marketing"],
+
+    "CRM Software": ["crm software", "crm"],
+
+    "Social Media": ["social media", "social"],
+
+    Chatbots: ["chatbot", "chatbots"],
+
+    "Real Estate SEO": [
+      "real estate",
+      "real estate website",
+      "property",
+      "seo",
+    ],
+  };
+
   const filteredPosts = useMemo(() => {
+    /*
+     * Existing All behaviour stays exactly the same.
+     */
     if (activeCategory === "All") {
       return blogPosts;
     }
 
-    return blogPosts.filter((post) => {
-      const name =
-        post?.category?.name ||
-        (typeof post?.category === "string" ? post.category : "") ||
-        (Array.isArray(post?.categories) &&
-          (post.categories[0]?.name || post.categories[0]?.title)) ||
-        "Digital Marketing";
+    /*
+     * For category filters, use the complete preloaded dataset.
+     *
+     * While the initial preload is still happening, return an empty
+     * array instead of incorrectly filtering only the current 10 posts.
+     */
+    if (allFilterPosts === null) {
+      return [];
+    }
 
-      return String(name).toLowerCase() === activeCategory.toLowerCase();
+    const keywords = categoryFilterKeywords[activeCategory] || [
+      activeCategory.toLowerCase(),
+    ];
+
+    return allFilterPosts.filter((post) => {
+      const titleText = [post?.title, post?.name].filter(Boolean).join(" ");
+
+      const directCategoryText =
+        typeof post?.category === "string"
+          ? post.category
+          : post?.category?.name || post?.category?.title || "";
+
+      const categoryListText = Array.isArray(post?.categories)
+        ? post.categories
+            .flatMap((category) => {
+              if (!category) {
+                return [];
+              }
+
+              const value = category?.name || category?.title || "";
+
+              return String(value)
+                .split("|")
+                .map((item) => item.trim());
+            })
+            .join(" ")
+        : "";
+
+      const searchableText = [titleText, directCategoryText, categoryListText]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      return keywords.some((keyword) =>
+        searchableText.includes(keyword.toLowerCase()),
+      );
     });
-  }, [blogPosts, activeCategory]);
+  }, [blogPosts, allFilterPosts, activeCategory]);
 
   if (!blogPosts || blogPosts.length === 0) {
     return (
@@ -257,8 +402,6 @@ export default function BlogList({ posts = [], pagination = {} }) {
               CATEGORY FILTER UI
           ====================================== */}
 
-          
-
           <div className="rs-blog-categories" data-aos="fade-up">
             {categories.map((category) => (
               <button
@@ -274,66 +417,72 @@ export default function BlogList({ posts = [], pagination = {} }) {
             ))}
           </div>
 
-          {filteredPosts.length === 0 && (
-            <div className="rs-blog-empty">
-              <h4>No posts in this category yet.</h4>
-              <p>Try another topic or browse all articles.</p>
-            </div>
-          )}
+          {/* =====================================
+              CATEGORY EMPTY STATE
+          ====================================== */}
+
+          {activeCategory !== "All" &&
+            allFilterPosts !== null &&
+            filteredPosts.length === 0 && (
+              <div className="rs-blog-empty">
+                <h4>No posts in this category yet.</h4>
+                <p>Try another topic or browse all articles.</p>
+              </div>
+            )}
 
           {/* =====================================
               FEATURED BLOG
           ====================================== */}
 
           {featuredPost && (
-          <article className="rs-blog-featured" data-aos="fade-up">
-            <Link
-              href={`/blog/${featuredPost.slug || featuredPost.id}`}
-              className="rs-blog-featured-image"
-            >
-              {renderImage(featuredPost, true)}
-
-              <span className="rs-blog-image-overlay"></span>
-
-              <span className="rs-blog-featured-badge">
-                {getCategory(featuredPost)}
-              </span>
-            </Link>
-
-            <div className="rs-blog-featured-content">
-              <span className="rs-blog-featured-label">Featured story</span>
-
-              <div className="rs-blog-meta">
-                <span>
-                  <i className="bi bi-calendar3"></i>
-                  {formatDate(featuredPost.created_at)}
-                </span>
-
-                <span className="rs-meta-dot">•</span>
-
-                <span>
-                  <i className="bi bi-clock"></i>
-                  {getReadingTime(featuredPost)}
-                </span>
-              </div>
-
-              <h2>
-                <Link href={`/blog/${featuredPost.slug || featuredPost.id}`}>
-                  {featuredPost.title || featuredPost.name || "Untitled Post"}
-                </Link>
-              </h2>
-
-              <p>{getExcerpt(featuredPost, 220)}</p>
-
+            <article className="rs-blog-featured" data-aos="fade-up">
               <Link
                 href={`/blog/${featuredPost.slug || featuredPost.id}`}
-                className="rs-blog-read-more"
+                className="rs-blog-featured-image"
               >
-                Read Article
-                <i className="bi bi-arrow-right"></i>
+                {renderImage(featuredPost, true)}
+
+                <span className="rs-blog-image-overlay"></span>
+
+                <span className="rs-blog-featured-badge">
+                  {getCategory(featuredPost)}
+                </span>
               </Link>
-            </div>
-          </article>
+
+              <div className="rs-blog-featured-content">
+                <span className="rs-blog-featured-label">Featured story</span>
+
+                <div className="rs-blog-meta">
+                  <span>
+                    <i className="bi bi-calendar3"></i>
+                    {formatDate(featuredPost.created_at)}
+                  </span>
+
+                  <span className="rs-meta-dot">•</span>
+
+                  <span>
+                    <i className="bi bi-clock"></i>
+                    {getReadingTime(featuredPost)}
+                  </span>
+                </div>
+
+                <h2>
+                  <Link href={`/blog/${featuredPost.slug || featuredPost.id}`}>
+                    {featuredPost.title || featuredPost.name || "Untitled Post"}
+                  </Link>
+                </h2>
+
+                <p>{getExcerpt(featuredPost, 220)}</p>
+
+                <Link
+                  href={`/blog/${featuredPost.slug || featuredPost.id}`}
+                  className="rs-blog-read-more"
+                >
+                  Read Article
+                  <i className="bi bi-arrow-right"></i>
+                </Link>
+              </div>
+            </article>
           )}
 
           {/* =====================================
@@ -341,65 +490,65 @@ export default function BlogList({ posts = [], pagination = {} }) {
           ====================================== */}
 
           {normalPosts.length > 0 && (
-          <div className="rs-blog-grid">
-            {normalPosts.map((post, index) => (
-              <article
-                key={post.id}
-                className="rs-blog-card"
-                data-aos="fade-up"
-                data-aos-delay={(index % 3) * 100}
-              >
-                <Link
-                  href={`/blog/${post.slug || post.id}`}
-                  className="rs-blog-card-image-wrap"
+            <div className="rs-blog-grid">
+              {normalPosts.map((post, index) => (
+                <article
+                  key={post.id}
+                  className="rs-blog-card"
+                  data-aos="fade-up"
+                  data-aos-delay={(index % 3) * 100}
                 >
-                  {renderImage(post)}
-
-                  <span className="rs-blog-image-overlay"></span>
-
-                  <span className="rs-blog-card-category">
-                    {getCategory(post)}
-                  </span>
-
-                  <span className="rs-blog-hover-icon">
-                    <i className="bi bi-arrow-up-right"></i>
-                  </span>
-                </Link>
-
-                <div className="rs-blog-card-content">
-                  <div className="rs-blog-meta">
-                    <span>
-                      <i className="bi bi-calendar3"></i>
-                      {formatDate(post.created_at)}
-                    </span>
-
-                    <span className="rs-meta-dot">•</span>
-
-                    <span>
-                      <i className="bi bi-clock"></i>
-                      {getReadingTime(post)}
-                    </span>
-                  </div>
-
-                  <h3>
-                    <Link href={`/blog/${post.slug || post.id}`}>
-                      {post.title || post.name || "Untitled Post"}
-                    </Link>
-                  </h3>
-
-                  <p>{getExcerpt(post)}</p>
-
                   <Link
                     href={`/blog/${post.slug || post.id}`}
-                    className="rs-blog-read-more"
+                    className="rs-blog-card-image-wrap"
                   >
-                    Read Article
-                    <i className="bi bi-arrow-right"></i>
+                    {renderImage(post)}
+
+                    <span className="rs-blog-image-overlay"></span>
+
+                    <span className="rs-blog-card-category">
+                      {getCategory(post)}
+                    </span>
+
+                    <span className="rs-blog-hover-icon">
+                      <i className="bi bi-arrow-up-right"></i>
+                    </span>
                   </Link>
-                </div>
-              </article>
-            ))}
-          </div>
+
+                  <div className="rs-blog-card-content">
+                    <div className="rs-blog-meta">
+                      <span>
+                        <i className="bi bi-calendar3"></i>
+                        {formatDate(post.created_at)}
+                      </span>
+
+                      <span className="rs-meta-dot">•</span>
+
+                      <span>
+                        <i className="bi bi-clock"></i>
+                        {getReadingTime(post)}
+                      </span>
+                    </div>
+
+                    <h3>
+                      <Link href={`/blog/${post.slug || post.id}`}>
+                        {post.title || post.name || "Untitled Post"}
+                      </Link>
+                    </h3>
+
+                    <p>{getExcerpt(post)}</p>
+
+                    <Link
+                      href={`/blog/${post.slug || post.id}`}
+                      className="rs-blog-read-more"
+                    >
+                      Read Article
+                      <i className="bi bi-arrow-right"></i>
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
           )}
         </div>
       </section>
