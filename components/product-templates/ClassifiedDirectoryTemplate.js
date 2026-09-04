@@ -364,33 +364,22 @@ export default function ClassifiedDirectoryTemplate({ data }) {
             <div className="col-12">
               <div className="rs-left-card h-100 d-flex flex-column flex-lg-row justify-content-between align-items-center text-center text-lg-start">
                 <div className="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4 gap-md-5">
-                  <span className="rs-join">Join With Us</span>
-                  <h4 className="mb-0">
-                    Amazing Pricing For <br />
-                    Growth Business
-                  </h4>
-                  <div className="rs-arrow-btn">
-                    <span>
-                      <img
-                        src="/assets/img/arrow-icon-40.svg"
-                        alt=""
-                        className="arrow-40deg-icon"
-                      />
-                    </span>
-                  </div>
+                  
+                  
                 </div>
                 <div className="mt-4 mt-lg-0 quick-contect text-center text-lg-end">
                   <small>Quick Contact</small>
-                  <h5>: 971555515475</h5>
+                  <h5>
+                    <a className="text-white" href="tel:+971555515475">
+                      +971 5555 15475
+                    </a>
+                  </h5>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      
-     
 
       {/* FAQs - Dynamic */}
       {validFaqs.length > 0 && (

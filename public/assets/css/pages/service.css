@@ -9,6 +9,7 @@
   /* background: #d42b2b url("/assets/img/h3-slide-2-img-3.png") center center no-repeat; */
   padding: 80px 0 0;
   background-image: url("/assets/img/re-bg-hero.jpg");
+      background-size: contain;
 }
 
 /* .re-process::after {

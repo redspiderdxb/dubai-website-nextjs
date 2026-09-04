@@ -217,16 +217,17 @@ const normalizeText = (value) => {
 /* =========================================================
    SELECT HOMEPAGE PROJECTS
 
-   TARGET:
+   HOMEPAGE TARGET:
 
-   2 Real Estate
-   1 Corporate
-   1 Ecommerce
-   1 Healthcare / Hospitality
-   1 Technology / Industrial
+   1. Mansion Edition
+   2. Fogo de Chão
+   3. Dome International
+   4. Arenco Logistics
+   5. Pixium
+   6. BOJ
 
-   If a category does not exist in API data,
-   remaining slots are filled automatically.
+   These are selected by their existing portfolio URL.
+   All other project data remains untouched.
    ========================================================= */
 
 const selectHomepageProjects = (projects) => {
@@ -234,195 +235,52 @@ const selectHomepageProjects = (projects) => {
     return [];
   }
 
-  const usedIds = new Set();
-
-  const getSearchText = (project) =>
-    normalizeText(
-      [project.title, project.name, project.category, project.description]
-        .filter(Boolean)
-        .join(" "),
-    );
-
-  const findProject = (keywords) => {
-    let bestProject = null;
-    let bestScore = 0;
-
-    projects.forEach((project) => {
-      if (!project || usedIds.has(project.id)) {
-        return;
-      }
-
-      const text = getSearchText(project);
-
-      let score = 0;
-
-      keywords.forEach((keyword) => {
-        const normalizedKeyword = normalizeText(keyword);
-
-        if (normalizedKeyword && text.includes(normalizedKeyword)) {
-          score += normalizedKeyword.length > 5 ? 3 : 2;
-        }
-      });
-
-      if (score > bestScore) {
-        bestScore = score;
-        bestProject = project;
-      }
-    });
-
-    return bestProject;
-  };
-
-  const selected = [];
-
-  /* =========================================
-     REAL ESTATE - 2
-     ========================================= */
-
-  const realEstate = [
-    "real estate",
-    "real-estate",
-    "real estate developer",
-    "property",
-    "properties",
-    "property developer",
-    "developer",
-    "development",
-    "broker",
-    "realty",
-    "offplan",
-    "off plan",
+  const targetUrls = [
+    "https://mansionedition.ae/",
+    "https://fogodechao.com/",
+    "https://domeint.com/",
+    "https://arencologistics.com/",
+    "https://www.pixium.rsworkspace.com/",
+    "http://boj.rsworkspace.net/",
   ];
 
-  for (let i = 0; i < 2; i++) {
-    const project = findProject(realEstate);
-
-    if (project) {
-      selected.push(project);
-      usedIds.add(project.id);
+  const normalizeUrl = (value) => {
+    if (!value || typeof value !== "string") {
+      return "";
     }
-  }
 
-  /* =========================================
-     CORPORATE - 1
-     ========================================= */
+    return value
+      .trim()
+      .toLowerCase()
+      .replace(/^https?:\/\//, "")
+      .replace(/^www\./, "")
+      .replace(/\/+$/, "");
+  };
 
-  const corporate = findProject([
-    "corporate",
-    "corporate website",
-    "business",
-    "company",
-    "enterprise",
-    "professional services",
-    "consulting",
-    "finance",
-    "financial",
-    "legal",
-  ]);
+  const projectMap = new Map();
 
-  if (corporate) {
-    selected.push(corporate);
-    usedIds.add(corporate.id);
-  }
-
-  /* =========================================
-     ECOMMERCE - 1
-     ========================================= */
-
-  const ecommerce = findProject([
-    "ecommerce",
-    "e-commerce",
-    "online store",
-    "online shop",
-    "shopping",
-    "retail",
-    "woocommerce",
-    "shopify",
-    "marketplace",
-  ]);
-
-  if (ecommerce) {
-    selected.push(ecommerce);
-    usedIds.add(ecommerce.id);
-  }
-
-  /* =========================================
-     HEALTHCARE / HOSPITALITY - 1
-     ========================================= */
-
-  const healthcareHospitality = findProject([
-    "healthcare",
-    "health care",
-    "hospital",
-    "clinic",
-    "medical",
-    "doctor",
-    "dental",
-    "hospitality",
-    "hotel",
-    "resort",
-    "restaurant",
-    "travel",
-    "tourism",
-  ]);
-
-  if (healthcareHospitality) {
-    selected.push(healthcareHospitality);
-    usedIds.add(healthcareHospitality.id);
-  }
-
-  /* =========================================
-     TECHNOLOGY / INDUSTRIAL - 1
-     ========================================= */
-
-  const technologyIndustrial = findProject([
-    "technology",
-    "technology company",
-    "tech",
-    "software",
-    "saas",
-    "app",
-    "mobile app",
-    "industrial",
-    "manufacturing",
-    "engineering",
-    "automation",
-    "logistics",
-    "construction",
-  ]);
-
-  if (technologyIndustrial) {
-    selected.push(technologyIndustrial);
-    usedIds.add(technologyIndustrial.id);
-  }
-
-  /* =========================================
-     FILL REMAINING SLOTS
-
-     Always try to show 6 projects.
-     ========================================= */
-
-  if (selected.length < 6) {
-    for (const project of projects) {
-      if (selected.length >= 6) {
-        break;
-      }
-
-      if (!usedIds.has(project.id)) {
-        selected.push(project);
-        usedIds.add(project.id);
-      }
+  projects.forEach((project) => {
+    if (!project?.link) {
+      return;
     }
-  }
 
-  return selected.slice(0, 6);
+    const normalizedLink = normalizeUrl(project.link);
+
+    if (normalizedLink && !projectMap.has(normalizedLink)) {
+      projectMap.set(normalizedLink, project);
+    }
+  });
+
+  return targetUrls
+    .map((url) => projectMap.get(normalizeUrl(url)))
+    .filter(Boolean)
+    .slice(0, 6);
 };
 
 export function slimHomepageGalleries(galleries) {
   const normalized = normalizeProjects(galleries);
   const selected = selectHomepageProjects(normalized);
-  const projects =
-    selected.length > 0 ? selected : normalized.slice(0, 6);
+  const projects = selected.length > 0 ? selected : normalized.slice(0, 6);
 
   return projects.map((project) => ({
     id: project.id,
@@ -491,7 +349,7 @@ export default function Portfolio({ initialGalleries = [] }) {
 
   /*
    * If server has valid API data:
-   * use balanced homepage selection.
+   * use fixed homepage project selection.
    *
    * If API returned nothing:
    * use fallback.

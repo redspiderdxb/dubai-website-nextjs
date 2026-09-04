@@ -75,3 +75,8 @@ html {
     font-weight: 400;
     white-space: nowrap;
 }
+
+.rs-card li {
+  list-style-type: disc !important;
+  margin-left: 20px;
+}
