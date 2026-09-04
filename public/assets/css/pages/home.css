@@ -10921,7 +10921,7 @@ contact us page */
    TOP TITLE BADGE
 ============================================ */
 
-#portfolio .portfolio-info h3 {
+#portfolio .portfolio-info h3 a{
   position: absolute !important;
 
   top: 12px !important;
@@ -11135,7 +11135,7 @@ contact us page */
     aspect-ratio: 0.90 / 1;
   }
 
-  #portfolio .portfolio-info h3 {
+  #portfolio .portfolio-info h3 a{
     top: 10px !important;
     left: 10px !important;
 

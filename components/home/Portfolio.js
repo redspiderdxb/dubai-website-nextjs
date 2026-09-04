@@ -501,8 +501,20 @@ export default function Portfolio({ initialGalleries = [] }) {
                             ================================== */}
 
                       <div className="portfolio-info">
-                        <h3>{project.title}</h3>
-
+                        <h3>
+                          {project.link && project.link !== "#" ? (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Visit ${project.title} website`}
+                            >
+                              {project.title}
+                            </a>
+                          ) : (
+                            project.title
+                          )}
+                        </h3>
                         <p>{project.category}</p>
 
                         {/* ==================================
