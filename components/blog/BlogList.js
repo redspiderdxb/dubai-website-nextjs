@@ -466,11 +466,11 @@ export default function BlogList({ posts = [], pagination = {} }) {
                   </span>
                 </div>
 
-                <h2>
+                <h3>
                   <Link href={`/blog/${featuredPost.slug || featuredPost.id}`}>
                     {featuredPost.title || featuredPost.name || "Untitled Post"}
                   </Link>
-                </h2>
+                </h3>
 
                 <p>{getExcerpt(featuredPost, 220)}</p>
 
