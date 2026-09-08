@@ -109,6 +109,14 @@ const nextConfig = {
         destination: "/products/real-estate-portal/",
         permanent: true,
       },
+
+      {
+        // 301 Redirect: Old blog URL → New blog URL
+        source: "/sub-domains-vs-sub-directories-which-is-better-for-seo",
+        destination: "/blog/sub-domains-vs-sub-directories/",
+        permanent: true,
+      },
+
       {
         source: "/sms-marketing-uae",
         destination: "/products/sms-marketing-uae/",
