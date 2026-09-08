@@ -1241,12 +1241,16 @@
 .rs-inner-hero.rs-contact-hero,
 .rs-inner-hero.blog-hero-custom,
 .rs-inner-hero.portfolio-page-hero {
-  min-height: 358px !important;
+  min-height: 433px !important;
 
 }
 
 span.rs-meta-dot {
   display: none;
+}
+
+.blog-hero-custom p {
+  color: white;
 }
 
 /* =====================================================
@@ -1283,4 +1287,29 @@ span.rs-meta-dot {
     flex-shrink: 0;
     margin-right: 4px;
   }
+
+
+  .rs-inner-hero.hero-marquee,
+  .rs-inner-hero.rs-contact-hero,
+  .rs-inner-hero.blog-hero-custom,
+  .rs-inner-hero.portfolio-page-hero {
+    min-height: 588px !important;
+
+  }
+
+      body .hero-marquee .rs-process-title {
+        font-size: 25px !important;
+    }
+
+  blog-hero-custom .rs-process-highlight {
+  
+    padding-bottom: 0px;
+}
+  
+.blog-hero-custom p {
+    font-size: 13px;
+    color: white;
+}
+
+
 }

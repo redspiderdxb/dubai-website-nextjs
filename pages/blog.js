@@ -11,10 +11,10 @@ import blogSchema from "../lib/schema/blog.json";
 
 export default function Blog({ posts, pagination }) {
   const seoData = {
-    title: "Blog - RedSpider | Latest Insights on Web Design & Development",
+    title: "Blog - Web Design & Digital Marketing Insights | RedSpider",
 
     description:
-      "Read the latest blogs and insights on web design, development, and digital marketing trends from the experts at RedSpider.",
+      "Explore expert insights on web design, SEO, e-commerce, and digital marketing trends in Dubai and the UAE — from RedSpider's blog.",
 
     keywords:
       "web design blog, development insights, redspider blog, digital marketing tips",
@@ -30,10 +30,7 @@ export default function Blog({ posts, pagination }) {
     <Layout>
       <PageStyles href="/assets/css/pages/blog.css" />
 
-      <SEO
-        {...seoData}
-        pageSchema={blogSchema["@graph"]}
-      />
+      <SEO {...seoData} pageSchema={blogSchema["@graph"]} />
 
       <BlogHero />
 
