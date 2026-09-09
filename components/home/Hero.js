@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import Head from "next/head";
 import Button from "../ui/Button";
 
 export default function Hero({ data, googleReviews = null }) {
@@ -142,6 +143,8 @@ export default function Hero({ data, googleReviews = null }) {
     return imagePath;
   };
 
+  const firstSlideImageUrl = getImageUrl(slides[0]?.image);
+
   const goToSlide = (index) => {
     setActiveIndex(index);
   };
@@ -155,7 +158,14 @@ export default function Hero({ data, googleReviews = null }) {
   };
 
   return (
-    <section className="rs-hero-slider" ref={heroRef}>
+    <>
+      {firstSlideImageUrl ? (
+        <Head>
+          <link rel="preload" as="image" href={firstSlideImageUrl} />
+        </Head>
+      ) : null}
+
+      <section className="rs-hero-slider" ref={heroRef}>
       <div
         id="rsHeroCarousel"
         className="carousel slide"
@@ -193,8 +203,6 @@ export default function Hero({ data, googleReviews = null }) {
                 style={{
                   backgroundImage: `url("${getImageUrl(slide.image)}")`,
                 }}
-                role="img"
-                aria-label={`Hero slide ${index + 1}`}
               >
                 <div className="rs-slide-content">
                   {slide.subtitle && (
@@ -228,6 +236,7 @@ export default function Hero({ data, googleReviews = null }) {
                         }
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Read RedSpider Google reviews"
                       >
                         <span className="rs-google-word" aria-hidden="true">
                           <span className="rs-blue">G</span>
@@ -298,5 +307,6 @@ export default function Hero({ data, googleReviews = null }) {
         </button>
       </div>
     </section>
+    </>
   );
 }

@@ -164,7 +164,7 @@ export async function getStaticProps() {
       },
 
       // ISR
-      revalidate: 60,
+      revalidate: 300,
     };
   } catch (error) {
     console.error("Error fetching homepage data:", error);
@@ -178,7 +178,7 @@ export async function getStaticProps() {
         googleReviews: null,
       },
 
-      revalidate: 60,
+      revalidate: 300,
     };
   }
 }

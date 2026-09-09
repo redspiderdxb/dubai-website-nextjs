@@ -292,7 +292,12 @@ export default function GoogleReviews({ initialData = null }) {
             <p className="rs-google-reviews-based">
               Based on <strong>{totalLabel} reviews</strong>
             </p>
-            <a href={url} target="_blank" rel="noopener noreferrer">
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Read RedSpider Google reviews"
+            >
               <GoogleWord />
             </a>
           </div>

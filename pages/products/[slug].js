@@ -1,4 +1,5 @@
 import PageStyles from "../../components/seo/PageStyles";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import Layout from "../../components/layout/Layout";
 import SEO from "../../components/seo/SEO";
@@ -75,6 +76,14 @@ export default function ProductDetail({ product }) {
   return (
     <Layout>
       <PageStyles href="/assets/css/pages/products.css" />
+      {product.template === "crm-software" ? (
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+          />
+        </Head>
+      ) : null}
       <SEO
         {...seoData}
         pageSchema={

@@ -151,6 +151,8 @@ export default function AgencyPackages() {
                         <img
                           src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
                           alt="Website Design Agency Dubai office"
+                          width={900}
+                          height={600}
                           loading="lazy"
                         />
                       </div>
@@ -261,6 +263,8 @@ export default function AgencyPackages() {
                         <img
                           src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80"
                           alt="Modern digital workspace"
+                          width={900}
+                          height={600}
                           loading="lazy"
                         />
                       </div>
@@ -288,6 +292,8 @@ export default function AgencyPackages() {
                         <img
                           src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80"
                           alt="Dubai Skyline"
+                          width={900}
+                          height={600}
                           loading="lazy"
                         />
                       </div>

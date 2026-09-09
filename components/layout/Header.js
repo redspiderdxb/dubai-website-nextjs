@@ -393,8 +393,20 @@ export default function Header() {
             <i className="bi bi-telephone-fill"></i>
 
             <span>
-              Call Now : <a href="tel:+971505698733">+971 50 5698733</a>,{" "}
-              <a href="tel:+971555515475">+971 55 5515475</a>
+              Call Now :{" "}
+              <a
+                href="tel:+971505698733"
+                tabIndex={isScrolled ? -1 : undefined}
+              >
+                +971 50 5698733
+              </a>
+              ,{" "}
+              <a
+                href="tel:+971555515475"
+                tabIndex={isScrolled ? -1 : undefined}
+              >
+                +971 55 5515475
+              </a>
             </span>
           </div>
 

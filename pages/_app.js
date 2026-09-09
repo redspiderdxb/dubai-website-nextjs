@@ -18,6 +18,8 @@ function MyApp({ Component, pageProps }) {
   // =====================================================
 
   useEffect(() => {
+    window.AOS = AOS;
+
     AOS.init({
       duration: 1000,
       once: true,
@@ -65,10 +67,7 @@ function MyApp({ Component, pageProps }) {
       return (
         typeof window.jQuery !== "undefined" &&
         typeof window.gsap !== "undefined" &&
-        typeof window.ScrollTrigger !== "undefined" &&
-        typeof window.Swiper !== "undefined" &&
-        typeof window.AOS !== "undefined" &&
-        typeof window.Isotope !== "undefined"
+        typeof window.ScrollTrigger !== "undefined"
       );
     };
 
@@ -96,7 +95,7 @@ function MyApp({ Component, pageProps }) {
 
       const script = document.createElement("script");
 
-      script.src = "/assets/js/custom.js";
+      script.src = "/assets/js/custom.js?v=homepage-perf";
       script.async = false;
       script.setAttribute("data-redspider-custom-js", "true");
 
@@ -196,15 +195,6 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/swiper/swiper-bundle.min.js"
-        strategy="afterInteractive"
-      />
-
-      {/* ================================================
-          IMAGES LOADED
-          ================================================ */}
-
-      <Script
-        src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"
         strategy="lazyOnload"
       />
 
@@ -236,21 +226,6 @@ function MyApp({ Component, pageProps }) {
       />
 
       {/* ================================================
-          SPLIT TYPE
-          ================================================ */}
-
-      <Script
-        src="/assets/vendor/split-type/split-type.min.js"
-        strategy="lazyOnload"
-      />
-
-      {/* ================================================
-          AOS
-          ================================================ */}
-
-      <Script src="/assets/vendor/aos/aos.js" strategy="lazyOnload" />
-
-      {/* ================================================
           GLIGHTBOX
           ================================================ */}
 
@@ -258,17 +233,6 @@ function MyApp({ Component, pageProps }) {
         src="/assets/vendor/glightbox/js/glightbox.min.js"
         strategy="lazyOnload"
       />
-
-      {/* ================================================
-          PURECOUNTER
-          ================================================ */}
-
-      <Script
-        src="/assets/vendor/purecounter/purecounter_vanilla.js"
-        strategy="lazyOnload"
-      />
-
-      
     </>
   );
 }

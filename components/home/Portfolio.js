@@ -464,8 +464,7 @@ export default function Portfolio({ initialGalleries = [] }) {
                           height={400}
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
                           quality={70}
-                          priority={index === 0}
-                          loading={index === 0 ? undefined : "lazy"}
+                          loading="lazy"
                           style={{
                             width: "100%",
                             height: "100%",

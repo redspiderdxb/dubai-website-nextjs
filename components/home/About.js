@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Button from "../ui/Button";
+
+const ABOUT_BACKGROUND_VIDEO = "/assets/img/videos/header.mp4";
 
 export default function About({ data }) {
   // =====================================================
@@ -76,6 +78,67 @@ export default function About({ data }) {
 
   const aboutImageUrl = getImageUrl(aboutImage);
   const videoThumbnailUrl = getImageUrl(videoThumbnail);
+  const aboutSectionRef = useRef(null);
+  const backgroundVideoRef = useRef(null);
+
+  // =====================================================
+  // BACKGROUND VIDEO — load/play only when near viewport
+  // =====================================================
+
+  useEffect(() => {
+    const video = backgroundVideoRef.current;
+
+    if (!video || typeof window === "undefined") return undefined;
+
+    const source = video.querySelector("source");
+
+    const loadAndPlay = () => {
+      if (video.dataset.rsBackgroundLoaded === "true") return;
+
+      video.dataset.rsBackgroundLoaded = "true";
+
+      if (source && !source.getAttribute("src")) {
+        source.setAttribute("src", ABOUT_BACKGROUND_VIDEO);
+      }
+
+      video.preload = "auto";
+      video.autoplay = true;
+      video.load();
+
+      const playPromise = video.play();
+
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+    };
+
+    if (typeof IntersectionObserver !== "function") {
+      loadAndPlay();
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          loadAndPlay();
+          observer.disconnect();
+        });
+      },
+      {
+        root: null,
+        rootMargin: "200px 0px",
+        threshold: 0.01,
+      },
+    );
+
+    observer.observe(aboutSectionRef.current || video);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   // =====================================================
   // GLIGHTBOX INITIALIZATION
@@ -186,20 +249,23 @@ export default function About({ data }) {
 
   return (
     <>
-      <section className="key-features py-5 about-features dark-background py-3 about-features-video">
+      <section
+        ref={aboutSectionRef}
+        className="key-features py-5 about-features dark-background py-3 about-features-video"
+      >
         {/* =========================================
       BACKGROUND VIDEO
   ========================================= */}
         <video
+          ref={backgroundVideoRef}
           className="about-features-video__background"
-          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           aria-hidden="true"
         >
-          <source src="/assets/img/videos/header.mp4" type="video/mp4" />
+          <source type="video/mp4" />
         </video>
 
         {/* =========================================
