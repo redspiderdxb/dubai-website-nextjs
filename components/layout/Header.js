@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useHeaderData } from "../../context/HeaderDataContext";
 import {
   getServiceNavPath,
+  mergeStaticServiceNavItems,
   resolveHeaderServices,
 } from "../../lib/formServiceOptions";
 
@@ -50,7 +51,9 @@ export default function Header() {
      SERVICES MENU
   ===================================================== */
 
-  const services = resolveHeaderServices(apiServices).map((service) => ({
+  const services = mergeStaticServiceNavItems(
+    resolveHeaderServices(apiServices),
+  ).map((service) => ({
     name: service.name,
     path: getServiceNavPath(service),
   }));

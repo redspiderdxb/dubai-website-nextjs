@@ -1,0 +1,647 @@
+import Link from "next/link";
+import ServiceFaqs from "../services/ServiceFaqs";
+import ContactCTA from "../ui/ContactCTA";
+
+const WHATSAPP_URL = "https://wa.me/971555515475";
+const CONTACT_URL = "/contact-us/";
+const PORTFOLIO_URL = "/our-portfolio/";
+
+const APPROACH_STEPS = [
+  {
+    title: "Custom Strategy Building",
+    intro: "Every business is different, and so should be its SEO plan.",
+    body: "We create a custom SEO strategy based on your goals, audience, and competition to position your brand strongly in search results.",
+    process: [
+      "Project brief: Understanding your business model, objectives, and current website performance.",
+      "Keyword Research: Identifying high-intent, relevant keywords that match your customer’s search behavior.",
+      "SEO Audit: Conducting a deep technical, on-page, and content analysis to define your SEO baseline.",
+      "Competitive Analysis: Reviewing competitor strengths, backlink profiles, and content strategies to find ranking opportunities.",
+    ],
+    closing:
+      "With a clear roadmap and measurable goals, your website begins its journey toward becoming an online authority.",
+    cta: { label: "Get Started Now", href: CONTACT_URL },
+  },
+  {
+    title: "Diverse Idea Generation",
+    intro:
+      "Strong SEO strategies are built on creative thinking and market understanding.",
+    body: "At this stage, we bring together our content, design, and technical teams to generate diverse ideas that align with your business goals and audience expectations.",
+    process: [
+      "Understanding the Idea: Reviewing your vision, target audience, and long-term goals.",
+      "Idea Analysis: Evaluating opportunities and challenges within your market.",
+      "Idea Audit: Assessing how your current digital presence aligns with your business objectives.",
+      "Diverse Suggestions: Presenting multiple strategies and actionable solutions for maximum reach and engagement.",
+    ],
+    closing:
+      "This step ensures your SEO plan is not only strategic but also innovative and built for long-term sustainability.",
+    cta: { label: "Get Started Now", href: CONTACT_URL },
+  },
+  {
+    title: "Setting Up Quarterly Targets",
+    intro: "SEO growth happens over time, not overnight.",
+    body: "That’s why we set SMART quarterly targets to track performance and maintain consistency. These milestones help us monitor progress, adjust strategies, and keep your business moving toward higher rankings.",
+    process: [
+      "Creating Quarterly Goals: Setting realistic objectives based on data and performance analysis.",
+      "Think Quarterly: Structuring campaigns around measurable 90-day cycles for clarity and accountability.",
+      "Set Benchmarks: Holding regular meetings with clients to review progress and performance.",
+      "Room for Flexibility: Adapting strategies to respond to Google updates, competition, and changing business needs.",
+    ],
+    closing:
+      "This proactive approach ensures that your SEO campaign stays focused, flexible, and result-oriented.",
+  },
+  {
+    title: "Weekly Calls & Monthly Meetings",
+    intro: "At RedSpider, we believe communication is key to performance.",
+    body: "We keep our clients informed through regular meetings and transparent reporting, showing exactly how the campaign is progressing week by week.",
+    process: [
+      "Advanced Preparation: Reviewing reports, analytics, and updates before every client call.",
+      "Reliable Format: Following a structured meeting format for clear communication and accountability.",
+      "Role Responsibilities: Assigning tasks and discussing action points across the SEO and content teams.",
+      "Make a Commitment: Setting new challenges, refining goals, and maintaining consistency in performance.",
+    ],
+    closing:
+      "With regular feedback and open collaboration, you’ll always see how your SEO company in Dubai is driving measurable improvements.",
+  },
+  {
+    title: "Regular Roadmap Analysis",
+    intro: "SEO is a continuous process — not a one-time setup.",
+    body: "Our experts consistently evaluate your SEO roadmap to ensure your business keeps improving in search visibility and traffic growth.",
+    process: [
+      "Establish Goals: Reconfirming your roadmap objectives and KPIs every quarter.",
+      "Gather Inputs: Reviewing existing data, market trends, and ongoing research.",
+      "Visualize and Share: Presenting progress through visual performance reports and timelines.",
+      "Regular Updates: Making strategic adjustments to maintain ranking stability and increase visibility.",
+    ],
+    closing:
+      "This ongoing analysis helps us keep your brand aligned with Google’s evolving algorithms and your long-term business ambitions.",
+  },
+];
+
+const SEO_SERVICES = [
+  {
+    title: "Global SEO",
+    icon: "bi-globe2",
+    description:
+      "Expand your reach with our global SEO services. We optimize multilingual websites, target regional keywords, and build international backlinks to improve rankings across multiple countries and search engines.",
+  },
+  {
+    title: "Local SEO Dubai",
+    icon: "bi-geo-alt",
+    description:
+      "Our local SEO Dubai strategy improves your Google Maps ranking and visibility in nearby searches. We optimize Google Business profiles, manage citations, and create local content that attracts customers within your city.",
+  },
+  {
+    title: "National SEO",
+    icon: "bi-flag",
+    description:
+      "Dominate search results across the UAE with our national SEO services. We target city-based keywords, strengthen domain authority, and ensure consistent visibility in Dubai, Abu Dhabi, Sharjah, and beyond.",
+  },
+  {
+    title: "E-Commerce SEO",
+    icon: "bi-bag",
+    description:
+      "Boost online sales with our eCommerce SEO in Dubai. We optimize product pages, schema markup, and internal links to improve visibility in Google Shopping and organic product listings.",
+  },
+  {
+    title: "Link Building & Guest Posting",
+    icon: "bi-link-45deg",
+    description:
+      "Build authority with our link-building services. We publish high-quality guest posts on trusted domains to earn backlinks that strengthen your rankings and domain trust.",
+  },
+  {
+    title: "App Store Optimisation",
+    icon: "bi-phone",
+    description:
+      "With our ASO services in Dubai, your mobile app ranks higher on Google Play and App Store. We optimize keywords, visuals, and metadata to increase visibility and downloads.",
+  },
+  {
+    title: "Mobile SEO",
+    icon: "bi-phone-flip",
+    description:
+      "Our mobile SEO services ensure your website loads fast, performs well, and ranks high on mobile searches. We focus on user experience, page speed, and mobile-first indexing.",
+  },
+  {
+    title: "Content Marketing",
+    icon: "bi-file-earmark-text",
+    description:
+      "Our content optimization services help you rank for high-intent keywords. We write SEO-friendly blogs, service pages, and landing content that attract search traffic and convert visitors into customers.",
+  },
+];
+
+const OFFERINGS = [
+  {
+    title: "Strategic SEO Planning",
+    icon: "bi-diagram-3",
+    description:
+      "We begin with a clear, data-driven plan designed for your specific business goals. From keyword mapping to competitor analysis, our experts create a structured SEO roadmap that increases visibility, credibility, and conversions.",
+  },
+  {
+    title: "Performance Tracking & Reporting",
+    icon: "bi-graph-up-arrow",
+    description:
+      "Our clients receive weekly and monthly updates on rankings, backlinks, and keyword performance. As a trusted SEO company in Dubai, we make sure you can track every improvement and understand the value of your investment.",
+  },
+  {
+    title: "Long-Term Growth Approach",
+    icon: "bi-hourglass-split",
+    description:
+      "We don’t chase short-term rankings. Our SEO services in UAE focus on building steady, lasting growth through ethical practices, technical excellence, and quality content that keeps your brand visible and competitive.",
+  },
+];
+
+const INDUSTRIES = [
+  {
+    title: "Healthcare",
+    icon: "bi-heart-pulse",
+    description:
+      "Our SEO campaigns for hospitals and clinics focus on service-based keywords, improving visibility for treatments, specialists, and healthcare facilities.",
+  },
+  {
+    title: "Finance",
+    icon: "bi-bank",
+    description:
+      "We assist banks, insurance firms, and financial advisors in building trust and ranking for high-value financial and investment keywords.",
+  },
+  {
+    title: "Real Estate",
+    icon: "bi-buildings",
+    description:
+      "We help real estate developers, agencies, and property portals increase leads and rank higher for location-based property searches across Dubai and the UAE.",
+  },
+  {
+    title: "Government & Corporate",
+    icon: "bi-building",
+    description:
+      "Our experience includes secure, compliant SEO for government and enterprise-level websites, focusing on transparency, accessibility, and reach.",
+  },
+  {
+    title: "Technology & IT",
+    icon: "bi-cpu",
+    description:
+      "For tech companies and IT solution providers, we build strong keyword strategies that highlight expertise, innovation, and technical services.",
+  },
+  {
+    title: "Automotive & Industrial",
+    icon: "bi-truck",
+    description:
+      "We optimize for parts, services, and dealership keywords to boost visibility for manufacturers and suppliers in the automotive industry.",
+  },
+  {
+    title: "Retail & E-Commerce",
+    icon: "bi-shop",
+    description:
+      "Our SEO experts optimize online stores and retail brands for product visibility, higher conversions, and consistent traffic growth.",
+  },
+  {
+    title: "Education",
+    icon: "bi-mortarboard",
+    description:
+      "We help schools, colleges, and training institutes reach potential students through optimized content and local SEO visibility.",
+  },
+  {
+    title: "Blinds & Curtains",
+    icon: "bi-window",
+    description:
+      "We help blinds and curtains businesses in Dubai appear higher on Google through local SEO and product-focused keywords that attract ready-to-buy customers.",
+  },
+];
+
+const STATS = [
+  { value: "2L+", label: "Keyword Rank" },
+  { value: "700+", label: "Project Successful Completed" },
+  { value: "5.5M", label: "Organic Traffic Generate" },
+  { value: "1281", label: "Happy Customers" },
+];
+
+const CLIENT_RESULTS = [
+  { value: "+38%", label: "Increase in organic website traffic" },
+  { value: "+27%", label: "Improvement in keyword rankings on Google" },
+  { value: "+22%", label: "Growth in leads and online inquiries" },
+];
+
+const FAQS = [
+  {
+    question: "What is SEO in Digital Marketing?",
+    answer:
+      "SEO (Search Engine Optimization) is the process of improving your website’s visibility on search engines like Google. It helps people find your business when they search for products or services you offer.",
+  },
+  {
+    question: "How to Do SEO for a Website?",
+    answer:
+      "To start SEO, you need to research keywords, optimize on-page content, build quality backlinks, and monitor performance. It’s an ongoing process that improves both visibility and user experience.",
+  },
+  {
+    question: "How to Make My Site SEO-Friendly?",
+    answer:
+      "Ensure your site loads fast, has mobile-friendly design, uses proper meta tags, and includes useful, keyword-optimized content. A structured layout helps both users and search engines navigate easily.",
+  },
+  {
+    question: "What is Off-Page SEO?",
+    answer:
+      "Off-page SEO involves actions taken outside your website — like backlink building, guest posting, and brand mentions — to improve your domain authority and rankings.",
+  },
+  {
+    question: "Why On-Page SEO is Important?",
+    answer:
+      "On-page SEO helps search engines understand your page content. Proper title tags, headings, and internal linking improve visibility and ensure your site ranks for relevant searches.",
+  },
+  {
+    question: "How to Do Local SEO Marketing?",
+    answer:
+      "Local SEO focuses on attracting nearby customers by optimizing your Google Business Profile, collecting local reviews, and using location-based keywords.",
+  },
+  {
+    question: "How to Do SEO Analysis of a Website?",
+    answer:
+      "You can analyze your site using tools like Google Search Console and Ahrefs to check indexing, backlinks, and page performance. It highlights what’s working and what needs fixing.",
+  },
+  {
+    question: "What Are the 4 Types of SEO?",
+    answer:
+      "The main types are On-Page SEO, Off-Page SEO, Technical SEO, and Local SEO. Each plays a specific role in improving search visibility and overall performance.",
+  },
+  {
+    question: "How Long Does SEO Take to Work?",
+    answer:
+      "SEO is a gradual process. Most websites start seeing results within 3–6 months depending on competition, content quality, and consistency.",
+  },
+  {
+    question: "What is the Golden Rule of SEO?",
+    answer:
+      "Focus on value. Create high-quality content for users, not search engines. When users find your site helpful, Google rewards it with better rankings.",
+  },
+];
+
+function CtaRow({ children }) {
+  return <div className="seo-cta-row">{children}</div>;
+}
+
+function PrimaryLink({ href, children }) {
+  const isExternal = href.startsWith("http");
+
+  if (isExternal) {
+    return (
+      <a
+        className="rs-creative-btn"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+        <i className="bi bi-arrow-up-right" aria-hidden="true" />
+      </a>
+    );
+  }
+
+  return (
+    <Link className="rs-creative-btn" href={href}>
+      {children}
+      <i className="bi bi-arrow-up-right" aria-hidden="true" />
+    </Link>
+  );
+}
+
+function SecondaryLink({ href, children }) {
+  return (
+    <Link className="rs-creative-link" href={href}>
+      {children}
+      <i className="bi bi-arrow-up-right" aria-hidden="true" />
+    </Link>
+  );
+}
+
+export default function SeoAgencyTemplate() {
+  return (
+    <div className="service-template seo-agency-page rs-creative-page">
+      <section className="design-developemnt-hero hero-marquee">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-12">
+              <div className="rs-process-title-sec">
+                <h1 className="rs-process-title mb-3">
+                  SEO Agency Dubai Boost Your Business Visibility with Proven SEO Strategies
+                  
+                </h1>
+                <p className="rs-process-text mb-3">
+                  RedSpider is a professional SEO agency in Dubai helping
+                  businesses achieve consistent growth through data-driven and
+                  transparent SEO practices. With over 13 years of hands-on
+                  experience, we have served global brands and local
+                  enterprises, delivering measurable improvements in rankings,
+                  leads, and sales. Our team understands how the Dubai market
+                  behaves — and how search engines reward authority, content
+                  quality, and user trust.
+                </p>
+                <p className="rs-process-text mb-3">
+                  We don’t just bring traffic. We bring customers who are ready
+                  to engage, inquire, and convert.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="seo-section seo-approach">
+        <div className="container">
+          <div className="seo-section-head seo-section-head--light">
+            <span className="seo-kicker">How we work</span>
+            <h2 className="text-dark">Our Approach to SEO Success</h2>
+            <p className="text-dark">
+              At RedSpider, we follow a five-step process built on experience,
+              data, and precision. With over 13 years of real SEO work for
+              global and UAE-based brands, our strategies are not
+              experimental—they’re proven. Each step is designed to strengthen
+              visibility, improve rankings, and deliver measurable growth for
+              your business. Our focus is simple: consistent organic traffic
+              that converts into real results.
+            </p>
+          </div>
+
+          <ol className="seo-timeline">
+            {APPROACH_STEPS.map((step, index) => (
+              <li key={step.title} className="seo-timeline__item">
+                <div className="seo-timeline__index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </div>
+                <article className="seo-timeline__card">
+                  <h3>{step.title}</h3>
+                  <p>{step.intro}</p>
+                  <p>{step.body}</p>
+                  <p className="seo-approach-label">Process</p>
+                  <ul className="seo-approach-list">
+                    {step.process.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <p>{step.closing}</p>
+                  {step.cta ? (
+                    <Link className="rs-creative-btn" href={step.cta.href}>
+                      {step.cta.label}
+                      <i className="bi bi-arrow-up-right" aria-hidden="true" />
+                    </Link>
+                  ) : null}
+                </article>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section id="seo-services" className="seo-section seo-services">
+        <div className="container">
+          <div className="seo-section-head">
+            <span className="seo-kicker">What we deliver</span>
+            <h2>SEO Services We Offer</h2>
+            <p className="seo-section-head__lead">
+              Want to generate more traffic to your website? We know how to
+              drive long-term growth
+            </p>
+            <p>
+              Our SEO services are designed to deliver measurable results
+              through smart planning, research, and continuous improvement. We
+              blend over 13 years of professional SEO experience with proven
+              strategies that help businesses gain visibility, attract genuine
+              customers, and stay ahead in search results. Every service we
+              provide is customized to your business type, target audience, and
+              market goals.
+            </p>
+          </div>
+
+          <div className="seo-service-grid">
+            {SEO_SERVICES.map((service, index) => (
+              <article key={service.title} className="seo-service-card">
+                <div className="seo-service-card__top">
+                  <span className="seo-icon" aria-hidden="true">
+                    <i className={`bi ${service.icon}`} />
+                  </span>
+                  <span className="seo-service-card__num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </article>
+            ))}
+          </div>
+
+         
+        </div>
+      </section>
+
+      <section className="seo-section seo-offerings">
+        <div className="container">
+          <div className="seo-section-head seo-section-head--center">
+            <span className="seo-kicker">Why RedSpider</span>
+            <h2>What Do We Offer You as an SEO Agency?</h2>
+            <p className="seo-section-head__lead">
+              Implementing Effective SEO Strategy for Long-Term Business Growth
+            </p>
+            <p>
+              As a professional SEO agency in Dubai, we help businesses
+              strengthen their online visibility and attract consistent organic
+              traffic. Our team uses proven SEO techniques, real data, and
+              transparent reporting to improve search rankings and deliver
+              measurable business growth. Every strategy we build focuses on
+              long-term results and sustainable performance.
+            </p>
+          </div>
+
+          <div className="seo-offer-grid">
+            {OFFERINGS.map((item, index) => (
+              <article key={item.title} className="seo-offer-card">
+                <span className="seo-icon" aria-hidden="true">
+                  <i className={`bi ${item.icon}`} />
+                </span>
+                <span className="seo-offer-card__num">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+
+          <CtaRow>
+            <PrimaryLink href={CONTACT_URL}>Get Started Now</PrimaryLink>
+          </CtaRow>
+        </div>
+      </section>
+
+      <section className="seo-section seo-industries">
+        <div className="container">
+          <div className="seo-section-head">
+            <span className="seo-kicker">Industries</span>
+            <h2>Industries We Serve</h2>
+            <p className="seo-section-head__lead">
+              Driving SEO Growth Across Every Business Sector
+            </p>
+            <p>
+              We provide expert SEO services in Dubai tailored to different
+              industries and audiences. Our experience spans real estate,
+              healthcare, finance, retail, technology, and government sectors —
+              helping each achieve stronger online visibility and measurable
+              growth. Whether you run a local service company or a global
+              enterprise, our SEO agency in Dubai understands your market,
+              audience, and search intent. We use data-driven strategies and
+              proven optimization techniques to help your business stand out,
+              attract qualified leads, and stay ahead in search results across
+              the UAE and beyond.
+            </p>
+          </div>
+          <div className="seo-industry-grid">
+            {INDUSTRIES.map((industry) => (
+              <article key={industry.title} className="seo-industry-card">
+                <span className="seo-icon" aria-hidden="true">
+                  <i className={`bi ${industry.icon}`} />
+                </span>
+                <div>
+                  <h3>{industry.title}</h3>
+                  <p>{industry.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="seo-section seo-numbers">
+        <div className="container">
+          <div className="seo-section-head seo-section-head--light seo-section-head--center">
+            <span className="seo-kicker">Results</span>
+            <h2>
+              Let’s Talk Numbers – Partner with the Best SEO Agency in Dubai
+            </h2>
+            <p className="seo-section-head__lead">
+              Turning Data into Measurable Growth for Your Business
+            </p>
+            <p>
+              We’ve spent over a decade helping companies achieve top Google
+              rankings and lasting success.
+            </p>
+            <p>Now, it’s your turn.</p>
+            <p>
+              Schedule a free consultation with our SEO experts in Dubai and
+              let’s plan a winning strategy for your business.
+            </p>
+            <p>
+              We don’t sell packages — we build performance partnerships that
+              grow over time.
+            </p>
+          </div>
+
+          <div className="seo-stat-grid">
+            {STATS.map((stat) => (
+              <article key={stat.label} className="seo-stat-card">
+                <p className="seo-stat-value">{stat.value}</p>
+                <h3>{stat.label}</h3>
+              </article>
+            ))}
+          </div>
+
+          <CtaRow>
+            <PrimaryLink href={CONTACT_URL}>Get Started Now</PrimaryLink>
+          </CtaRow>
+        </div>
+      </section>
+
+      <section className="seo-section seo-results">
+        <div className="container">
+          <div className="seo-section-head seo-section-head--center">
+            <span className="seo-kicker">Client results</span>
+            <h2>Our Clients Get Results</h2>
+            <p className="seo-section-head__lead">
+              We Work Together to Deliver Real SEO Performance
+            </p>
+            <p>
+              We believe real success is measured by results — not promises. Our
+              SEO strategies consistently help businesses in Dubai and across
+              the UAE grow their online visibility, traffic, and lead
+              conversions. From local startups to global brands, our data-driven
+              SEO campaigns have turned websites into powerful lead-generation
+              tools.
+            </p>
+            <p>
+              These numbers reflect what we deliver every day — measurable SEO
+              growth backed by strategy, analysis, and experience.
+            </p>
+          </div>
+
+          <div className="seo-result-grid">
+            {CLIENT_RESULTS.map((result) => (
+              <article key={result.label} className="seo-result-card">
+                <p className="seo-stat-value">{result.value}</p>
+                <h3>{result.label}</h3>
+              </article>
+            ))}
+          </div>
+
+          <CtaRow>
+            <SecondaryLink href={PORTFOLIO_URL}>See Our Portfolio</SecondaryLink>
+            <PrimaryLink href={WHATSAPP_URL}>Talk to our Expert</PrimaryLink>
+          </CtaRow>
+        </div>
+      </section>
+
+      <div className="seo-faq">
+        <ServiceFaqs
+          faqs={FAQS}
+          title="Frequently Asked Questions About SEO Services"
+          subtitle="Answering Your Most Common SEO Questions Clearly and Simply"
+          idPrefix="seo-agency"
+        />
+      </div>
+
+      <section className="seo-section seo-advanced">
+        <div className="container">
+          <div className="seo-advanced__grid">
+            <div className="seo-advanced__meta">
+              <span className="seo-kicker">Advanced SEO</span>
+              <p className="seo-advanced__note">13+ years of SEO experience</p>
+            </div>
+            <div className="seo-advanced__copy">
+              <h2>Get Traffic Moving With Our Advanced SEO Services</h2>
+              <p>
+                Give your business a measurable boost with RedSpider, a trusted
+                SEO company in Dubai focused on growth, rankings, and ROI. We go
+                beyond traditional SEO by combining in-depth market insights,
+                advanced analytics, and proven optimization methods to make your
+                brand stand out online.
+              </p>
+              <p>
+                Our approach is simple — build visibility, attract the right
+                audience, and turn clicks into conversions. Every strategy is
+                tailored to your goals, industry, and competition, ensuring
+                long-term success in the UAE’s fast-evolving digital market.
+              </p>
+              <p>
+                We provide complete SEO optimization services including on-page
+                improvements, technical performance fixes, authority building,
+                and content enhancement. Whether you need local SEO for Dubai,
+                e-commerce SEO for your online store, or full website
+                optimization for better organic reach, our team ensures
+                consistent growth backed by transparent reporting.
+              </p>
+              <p>
+                With 13+ years of SEO experience, we’ve helped brands across
+                real estate, healthcare, retail, and technology achieve higher
+                visibility and stronger engagement — turning data into results
+                that last.
+              </p>
+              <Link className="rs-creative-btn" href={CONTACT_URL}>
+                Get Started Now
+                <i className="bi bi-arrow-up-right" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <ContactCTA
+        title="Schedule a free consultation with our SEO experts in Dubai"
+        description="We don’t sell packages — we build performance partnerships that grow over time."
+      />
+    </div>
+  );
+}

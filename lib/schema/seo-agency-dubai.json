@@ -1,0 +1,55 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/service/seo-agency-dubai/#service",
+      "serviceType": "Search Engine Optimization",
+      "name": "Best SEO Services in UAE | Top SEO Agency in Dubai",
+      "description": "We are a leading SEO agency in Dubai, UAE. We offer the best search engine optimization services to help businesses rank higher on search engines.",
+      "url": "https://www.redspider.ae/service/seo-agency-dubai/",
+      "image": "https://www.redspider.ae/assets/img/og-image.webp",
+      "provider": { "@id": "https://www.redspider.ae/#localbusiness" },
+      "areaServed": { "@type": "City", "name": "Dubai" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "SEO Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Global SEO" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO Dubai" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "National SEO" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-Commerce SEO" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Link Building & Guest Posting" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "App Store Optimisation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile SEO" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Marketing" } }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/service/seo-agency-dubai/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.redspider.ae/service/" },
+        { "@type": "ListItem", "position": 3, "name": "Search Engine Optimization", "item": "https://www.redspider.ae/service/seo-agency-dubai/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.redspider.ae/service/seo-agency-dubai/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is SEO in Digital Marketing?", "acceptedAnswer": { "@type": "Answer", "text": "SEO (Search Engine Optimization) is the process of improving your website’s visibility on search engines like Google. It helps people find your business when they search for products or services you offer." } },
+        { "@type": "Question", "name": "How to Do SEO for a Website?", "acceptedAnswer": { "@type": "Answer", "text": "To start SEO, you need to research keywords, optimize on-page content, build quality backlinks, and monitor performance. It’s an ongoing process that improves both visibility and user experience." } },
+        { "@type": "Question", "name": "How to Make My Site SEO-Friendly?", "acceptedAnswer": { "@type": "Answer", "text": "Ensure your site loads fast, has mobile-friendly design, uses proper meta tags, and includes useful, keyword-optimized content. A structured layout helps both users and search engines navigate easily." } },
+        { "@type": "Question", "name": "What is Off-Page SEO?", "acceptedAnswer": { "@type": "Answer", "text": "Off-page SEO involves actions taken outside your website — like backlink building, guest posting, and brand mentions — to improve your domain authority and rankings." } },
+        { "@type": "Question", "name": "Why On-Page SEO is Important?", "acceptedAnswer": { "@type": "Answer", "text": "On-page SEO helps search engines understand your page content. Proper title tags, headings, and internal linking improve visibility and ensure your site ranks for relevant searches." } },
+        { "@type": "Question", "name": "How to Do Local SEO Marketing?", "acceptedAnswer": { "@type": "Answer", "text": "Local SEO focuses on attracting nearby customers by optimizing your Google Business Profile, collecting local reviews, and using location-based keywords." } },
+        { "@type": "Question", "name": "How to Do SEO Analysis of a Website?", "acceptedAnswer": { "@type": "Answer", "text": "You can analyze your site using tools like Google Search Console and Ahrefs to check indexing, backlinks, and page performance. It highlights what’s working and what needs fixing." } },
+        { "@type": "Question", "name": "What Are the 4 Types of SEO?", "acceptedAnswer": { "@type": "Answer", "text": "The main types are On-Page SEO, Off-Page SEO, Technical SEO, and Local SEO. Each plays a specific role in improving search visibility and overall performance." } },
+        { "@type": "Question", "name": "How Long Does SEO Take to Work?", "acceptedAnswer": { "@type": "Answer", "text": "SEO is a gradual process. Most websites start seeing results within 3–6 months depending on competition, content quality, and consistency." } },
+        { "@type": "Question", "name": "What is the Golden Rule of SEO?", "acceptedAnswer": { "@type": "Answer", "text": "Focus on value. Create high-quality content for users, not search engines. When users find your site helpful, Google rewards it with better rankings." } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,683 @@
+/* SEO Agency Dubai — premium page-specific styles */
+
+.seo-agency-page {
+  overflow-x: hidden;
+  color: #171717;
+  background: #f7f5f6;
+}
+
+.seo-agency-page h1,
+.seo-agency-page h2,
+.seo-agency-page h3,
+.seo-agency-page p,
+.seo-agency-page li {
+  overflow-wrap: break-word;
+}
+
+.seo-kicker {
+  display: inline-block;
+  margin: 0 0 14px;
+  color: #d20000;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.seo-section {
+  padding: 88px 0;
+}
+
+.seo-section-head {
+  max-width: 760px;
+  margin: 0 0 48px;
+}
+
+.seo-section-head--center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.seo-section-head h2 {
+  margin: 0 0 16px;
+  color: #111;
+  font-size: clamp(30px, 4.4vw, 48px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.seo-section-head p {
+  margin: 0;
+  color: #555;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.seo-section-head p+p {
+  margin-top: 14px;
+}
+
+.seo-section-head__lead {
+  color: #111 !important;
+  font-size: 18px !important;
+  font-weight: 600;
+  line-height: 1.55 !important;
+}
+
+.seo-section-head--light h2,
+.seo-section-head--light .seo-section-head__lead {
+  color: #fff !important;
+}
+
+h2.text-dark {
+  color: #111 !important;
+
+}
+
+.seo-section-head--light p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.seo-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 16px;
+  margin-top: 28px;
+}
+
+.seo-section-head--center+.seo-offer-grid,
+.seo-section-head--center+.seo-stat-grid,
+.seo-section-head--center+.seo-result-grid {
+  margin-top: 8px;
+}
+
+.seo-cta-row .rs-creative-btn,
+.seo-cta-row .rs-creative-link,
+.seo-agency-page .rs-creative-btn,
+.seo-agency-page .rs-creative-link {
+  margin-top: 0;
+}
+
+.seo-agency-page .rs-creative-btn {
+  min-height: 52px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(210, 0, 0, 0.22);
+}
+
+.seo-agency-page .rs-creative-link {
+  min-height: 52px;
+  padding: 14px 8px;
+  font-weight: 700;
+}
+
+.seo-agency-page .design-developemnt-hero .seo-cta-row {
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* =========================================================
+   5-STEP TIMELINE
+========================================================= */
+
+.seo-approach {
+  background: #ffffff;
+}
+
+.seo-timeline {
+  position: relative;
+  display: grid;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seo-timeline::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 27px;
+  width: 2px;
+  background: linear-gradient(180deg, #d20000, rgba(210, 0, 0, 0.15));
+}
+
+.seo-timeline__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.seo-timeline__index {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #d20000;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  box-shadow: 0 0 0 6px #111, 0 10px 24px rgba(210, 0, 0, 0.35);
+}
+
+.seo-timeline__card {
+  min-width: 0;
+  padding: 28px 26px 26px;
+  background: rgb(17 17 17);
+  border: 1px solid rgb(0 0 0 / 48%);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.seo-timeline__card h3 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.seo-timeline__card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.seo-timeline__card p+p {
+  margin-top: 12px;
+}
+
+.seo-approach-label {
+  margin: 20px 0 8px !important;
+  color: #d20000 !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.seo-approach-list {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.seo-approach-list li {
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 22px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.seo-approach-list li::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d20000;
+}
+
+.seo-timeline__card .rs-creative-btn {
+  margin-top: 18px;
+}
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.seo-services {
+  background: #fff;
+}
+
+.seo-service-grid,
+.seo-offer-grid,
+.seo-industry-grid,
+.seo-stat-grid,
+.seo-result-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.seo-service-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.seo-service-card,
+.seo-offer-card,
+.seo-industry-card,
+.seo-result-card {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #ece8e8;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(17, 24, 39, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.seo-service-card {
+  padding: 26px 22px 24px;
+}
+
+.seo-service-card:hover,
+.seo-offer-card:hover,
+.seo-industry-card:hover,
+.seo-result-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(210, 0, 0, 0.28);
+  box-shadow: 0 18px 40px rgba(17, 24, 39, 0.1);
+}
+
+.seo-service-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.seo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: #111;
+  color: #fff;
+  font-size: 20px;
+}
+
+.seo-service-card__num,
+.seo-offer-card__num {
+  color: #d20000;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.seo-service-card h3,
+.seo-offer-card h3,
+.seo-industry-card h3 {
+  margin: 0 0 10px;
+  color: #111;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.seo-service-card p,
+.seo-offer-card p,
+.seo-industry-card p {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   OFFERINGS
+========================================================= */
+
+.seo-offerings {
+  background: #f7f5f6;
+}
+
+.seo-offer-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.seo-offer-card {
+  position: relative;
+  padding: 32px 26px 28px;
+}
+
+.seo-offer-card .seo-icon {
+  margin-bottom: 20px;
+}
+
+.seo-offer-card__num {
+  position: absolute;
+  top: 28px;
+  right: 24px;
+}
+
+.seo-offerings .seo-cta-row {
+  justify-content: center;
+}
+
+/* =========================================================
+   INDUSTRIES
+========================================================= */
+
+.seo-industries {
+  background: #fff;
+}
+
+.seo-industry-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.seo-industry-card {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  padding: 22px 20px;
+}
+
+.seo-industry-card h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+/* =========================================================
+   STATS / RESULTS
+========================================================= */
+
+.seo-numbers {
+  background:
+    radial-gradient(ellipse 60% 70% at 0% 0%, rgba(210, 0, 0, 0.22), transparent 55%),
+    #111;
+}
+
+.seo-stat-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.seo-stat-card {
+  min-width: 0;
+  padding: 32px 20px 28px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid #d20000;
+  border-radius: 20px;
+}
+
+.seo-stat-value {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.seo-stat-card h3 {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.seo-numbers .seo-cta-row,
+.seo-results .seo-cta-row {
+  justify-content: center;
+}
+
+.seo-results {
+  background: #f7f5f6;
+}
+
+.seo-result-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.seo-result-card {
+  padding: 36px 24px 30px;
+  text-align: center;
+}
+
+.seo-result-card .seo-stat-value {
+  color: #d20000;
+}
+
+.seo-result-card h3 {
+  margin: 0;
+  color: #111;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.seo-faq .home-faq.rs-faq-sec {
+  padding: 88px 0;
+  background: #fff;
+}
+
+.seo-faq .home-faq .rs-home-faq-box {
+  max-width: 1140px;
+  padding: 0 12px;
+}
+
+.seo-faq .home-faq h2.rs-process-title {
+  margin-bottom: 8px;
+  color: #111;
+  font-size: clamp(30px, 4.4vw, 44px);
+}
+
+.seo-faq .home-faq .border-bottom {
+  border-bottom: 0 !important;
+  margin-bottom: 28px !important;
+  padding-bottom: 0 !important;
+}
+
+.seo-faq .home-faq .accordion-item {
+  margin-bottom: 12px;
+  border: 1px solid #ece8e8;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.04);
+  overflow: hidden;
+}
+
+.seo-faq .home-faq .accordion-button {
+  padding: 18px 22px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+}
+
+.seo-faq .home-faq .accordion-button:not(.collapsed) {
+  color: #d20000;
+  background: #fff;
+}
+
+.seo-faq .home-faq .accordion-body {
+  padding: 0 22px 20px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   ADVANCED
+========================================================= */
+
+.seo-advanced {
+  background: #fff;
+}
+
+.seo-advanced__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr);
+  gap: 48px;
+  align-items: start;
+  padding: 12px 0;
+}
+
+.seo-advanced__note {
+  margin: 8px 0 0;
+  color: #111;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.seo-advanced__copy h2 {
+  margin: 0 0 18px;
+  color: #111;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.seo-advanced__copy p {
+  margin: 0 0 14px;
+  color: #555;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.seo-advanced__copy .rs-creative-btn {
+  margin-top: 10px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1199px) {
+
+  .seo-service-grid,
+  .seo-industry-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .seo-stat-grid,
+  .seo-result-grid,
+  .seo-offer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .seo-advanced__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+
+  .seo-section,
+  .seo-faq .home-faq.rs-faq-sec {
+    padding: 64px 0;
+  }
+}
+
+
+
+.realestate-hero,
+.design-developemnt-hero {
+
+  background: black !important;
+
+}
+
+.hero-marquee {
+
+  height: 647px !important;
+}
+
+
+
+@media (max-width: 767px) {
+
+  body .hero-marquee .rs-process-title {
+    font-size: 22px !important;
+  }
+
+  .hero-marquee .rs-process-text {
+    color: #fff;
+    font-size: 13px !important;
+  }
+
+  .hero-marquee {
+    height: 598px !important;
+  }
+
+  .seo-section,
+  .seo-faq .home-faq.rs-faq-sec {
+    padding: 52px 0;
+  }
+
+  .seo-section-head {
+    margin-bottom: 28px;
+  }
+
+  .seo-timeline::before {
+    left: 21px;
+  }
+
+  .seo-timeline__item {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .seo-timeline__index {
+    width: 44px;
+    height: 44px;
+    font-size: 13px;
+    box-shadow: 0 0 0 5px #111, 0 8px 18px rgba(210, 0, 0, 0.35);
+  }
+
+  .seo-timeline__card,
+  .seo-service-card,
+  .seo-offer-card,
+  .seo-industry-card,
+  .seo-result-card,
+  .seo-stat-card {
+    padding: 20px 18px;
+  }
+
+  .seo-service-grid,
+  .seo-offer-grid,
+  .seo-industry-grid,
+  .seo-stat-grid,
+  .seo-result-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .seo-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .seo-cta-row .rs-creative-btn,
+  .seo-cta-row .rs-creative-link,
+  .seo-agency-page .rs-creative-btn,
+  .seo-agency-page .rs-creative-link {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .seo-faq .home-faq .accordion-button {
+    font-size: 15px;
+    padding: 16px 16px;
+  }
+
+  .seo-faq .home-faq .accordion-body {
+    padding: 0 16px 16px;
+  }
+}

@@ -77,6 +77,10 @@ export default function Footer() {
       name: "WhatsApp Business API Integration",
       path: "/service/whatsapp-business-api-integration",
     },
+    {
+      name: "Search Engine Optimization",
+      path: "/service/seo-agency-dubai",
+    },
   ];
 
   /* =====================================================
