@@ -243,6 +243,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "old.redspider.ae",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

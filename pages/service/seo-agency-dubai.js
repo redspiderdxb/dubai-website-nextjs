@@ -18,7 +18,7 @@ export default function SeoAgencyDubai() {
       <PageStyles
         href={[
           "/assets/css/pages/service.css",
-          "/assets/css/pages/seo-agency.css?v=premium-ui",
+          "/assets/css/pages/seo-agency.css?v=services-equal",
         ]}
       />
 

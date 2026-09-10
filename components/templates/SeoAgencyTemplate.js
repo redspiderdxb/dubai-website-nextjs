@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import ServiceFaqs from "../services/ServiceFaqs";
 import ContactCTA from "../ui/ContactCTA";
@@ -9,6 +10,8 @@ const PORTFOLIO_URL = "/our-portfolio/";
 const APPROACH_STEPS = [
   {
     title: "Custom Strategy Building",
+    icon: "bi-bullseye",
+    image: "/assets/img/seo/1.svg",
     intro: "Every business is different, and so should be its SEO plan.",
     body: "We create a custom SEO strategy based on your goals, audience, and competition to position your brand strongly in search results.",
     process: [
@@ -23,6 +26,8 @@ const APPROACH_STEPS = [
   },
   {
     title: "Diverse Idea Generation",
+    icon: "bi-lightbulb",
+    image: "/assets/img/seo/idea-generation.svg",
     intro:
       "Strong SEO strategies are built on creative thinking and market understanding.",
     body: "At this stage, we bring together our content, design, and technical teams to generate diverse ideas that align with your business goals and audience expectations.",
@@ -38,6 +43,8 @@ const APPROACH_STEPS = [
   },
   {
     title: "Setting Up Quarterly Targets",
+    icon: "bi-code-slash",
+    image: "/assets/img/seo/quarterly-targets.svg",
     intro: "SEO growth happens over time, not overnight.",
     body: "That’s why we set SMART quarterly targets to track performance and maintain consistency. These milestones help us monitor progress, adjust strategies, and keep your business moving toward higher rankings.",
     process: [
@@ -51,6 +58,8 @@ const APPROACH_STEPS = [
   },
   {
     title: "Weekly Calls & Monthly Meetings",
+    icon: "bi-window",
+    image: "/assets/img/seo/calls-Monthly-Meetings.svg",
     intro: "At RedSpider, we believe communication is key to performance.",
     body: "We keep our clients informed through regular meetings and transparent reporting, showing exactly how the campaign is progressing week by week.",
     process: [
@@ -64,6 +73,8 @@ const APPROACH_STEPS = [
   },
   {
     title: "Regular Roadmap Analysis",
+    icon: "bi-graph-up",
+    image: "/assets/img/seo/roadmap-analysis.svg",
     intro: "SEO is a continuous process — not a one-time setup.",
     body: "Our experts consistently evaluate your SEO roadmap to ensure your business keeps improving in search visibility and traffic growth.",
     process: [
@@ -81,48 +92,64 @@ const SEO_SERVICES = [
   {
     title: "Global SEO",
     icon: "bi-globe2",
+    image:
+      "/assets/img/seo/global-seo-img.webp",
     description:
       "Expand your reach with our global SEO services. We optimize multilingual websites, target regional keywords, and build international backlinks to improve rankings across multiple countries and search engines.",
   },
   {
     title: "Local SEO Dubai",
     icon: "bi-geo-alt",
+    image:
+      "/assets/img/seo/local-seo-img.webp",
     description:
       "Our local SEO Dubai strategy improves your Google Maps ranking and visibility in nearby searches. We optimize Google Business profiles, manage citations, and create local content that attracts customers within your city.",
   },
   {
     title: "National SEO",
     icon: "bi-flag",
+    image:
+      "/assets/img/seo/national-seo-img.webp",
     description:
       "Dominate search results across the UAE with our national SEO services. We target city-based keywords, strengthen domain authority, and ensure consistent visibility in Dubai, Abu Dhabi, Sharjah, and beyond.",
   },
   {
     title: "E-Commerce SEO",
     icon: "bi-bag",
+    image:
+      "/assets/img/seo/ecommerce-market-img.webp",
     description:
       "Boost online sales with our eCommerce SEO in Dubai. We optimize product pages, schema markup, and internal links to improve visibility in Google Shopping and organic product listings.",
   },
   {
     title: "Link Building & Guest Posting",
     icon: "bi-link-45deg",
+    image:
+      "/assets/img/seo/gp-img.webp",
     description:
       "Build authority with our link-building services. We publish high-quality guest posts on trusted domains to earn backlinks that strengthen your rankings and domain trust.",
   },
   {
     title: "App Store Optimisation",
     icon: "bi-phone",
+    image:
+      "/assets/img/seo/app-store-img.webp",
     description:
       "With our ASO services in Dubai, your mobile app ranks higher on Google Play and App Store. We optimize keywords, visuals, and metadata to increase visibility and downloads.",
   },
   {
     title: "Mobile SEO",
     icon: "bi-phone-flip",
+    image:
+      "/assets/img/seo/mobile-app-img.webp",
     description:
       "Our mobile SEO services ensure your website loads fast, performs well, and ranks high on mobile searches. We focus on user experience, page speed, and mobile-first indexing.",
   },
   {
     title: "Content Marketing",
     icon: "bi-file-earmark-text",
+    image:
+      "/assets/img/seo/content-marketing-img1.webp",
     description:
       "Our content optimization services help you rank for high-intent keywords. We write SEO-friendly blogs, service pages, and landing content that attract search traffic and convert visitors into customers.",
   },
@@ -310,6 +337,21 @@ function SecondaryLink({ href, children }) {
   );
 }
 
+function ApproachProcessItem({ item }) {
+  const colonIndex = item.indexOf(":");
+
+  if (colonIndex === -1) {
+    return <li>{item}</li>;
+  }
+
+  return (
+    <li>
+      <strong>{item.slice(0, colonIndex + 1)}</strong>
+      {item.slice(colonIndex + 1)}
+    </li>
+  );
+}
+
 export default function SeoAgencyTemplate() {
   return (
     <div className="service-template seo-agency-page rs-creative-page">
@@ -345,10 +387,9 @@ export default function SeoAgencyTemplate() {
 
       <section className="seo-section seo-approach">
         <div className="container">
-          <div className="seo-section-head seo-section-head--light">
-            <span className="seo-kicker">How we work</span>
-            <h2 className="text-dark">Our Approach to SEO Success</h2>
-            <p className="text-dark">
+          <div className="seo-section-head seo-section-head--center">
+            <h2>Our Approach to SEO Success</h2>
+            <p>
               At RedSpider, we follow a five-step process built on experience,
               data, and precision. With over 13 years of real SEO work for
               global and UAE-based brands, our strategies are not
@@ -359,113 +400,206 @@ export default function SeoAgencyTemplate() {
             </p>
           </div>
 
-          <ol className="seo-timeline">
-            {APPROACH_STEPS.map((step, index) => (
-              <li key={step.title} className="seo-timeline__item">
-                <div className="seo-timeline__index" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
+          <ul className="nav seo-approach-nav" role="tablist">
+            {APPROACH_STEPS.map((step, index) => {
+              const isActive = index === 0;
+              const paneId = `seo-approach-pane-${index}`;
+              const tabId = `seo-approach-tab-${index}`;
+
+              return (
+                <li className="nav-item" key={step.title} role="presentation">
+                  <button
+                    className={`nav-link seo-approach-nav__btn${isActive ? " active" : ""}`}
+                    id={tabId}
+                    data-bs-toggle="tab"
+                    data-bs-target={`#${paneId}`}
+                    type="button"
+                    role="tab"
+                    aria-controls={paneId}
+                    aria-selected={isActive}
+                  >
+                    <i className={`bi ${step.icon}`} aria-hidden="true" />
+                    <span className="visually-hidden">{step.title}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="tab-content seo-approach-panels">
+            {APPROACH_STEPS.map((step, index) => {
+              const isActive = index === 0;
+              const paneId = `seo-approach-pane-${index}`;
+              const tabId = `seo-approach-tab-${index}`;
+
+              return (
+                <div
+                  className={`tab-pane fade${isActive ? " show active" : ""}`}
+                  id={paneId}
+                  role="tabpanel"
+                  aria-labelledby={tabId}
+                  key={step.title}
+                  tabIndex={0}
+                >
+                  <div className="row align-items-center g-4 g-lg-5">
+                    <div className="col-lg-6">
+                      <div className="seo-approach-copy">
+                        <h3>{step.title}</h3>
+                        <p>{step.intro}</p>
+                        <p>{step.body}</p>
+                        <p className="seo-approach-label">Process</p>
+                        <ul className="seo-approach-list">
+                          {step.process.map((item) => (
+                            <ApproachProcessItem key={item} item={item} />
+                          ))}
+                        </ul>
+                        <p>{step.closing}</p>
+                        {step.cta ? (
+                          <Link className="rs-creative-btn" href={step.cta.href}>
+                            {step.cta.label}
+                            <i
+                              className="bi bi-arrow-up-right"
+                              aria-hidden="true"
+                            />
+                          </Link>
+                        ) : null}
+                      </div>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="seo-approach-visual">
+                        <Image
+                          src={step.image}
+                          alt=""
+                          width={320}
+                          height={320}
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <article className="seo-timeline__card">
-                  <h3>{step.title}</h3>
-                  <p>{step.intro}</p>
-                  <p>{step.body}</p>
-                  <p className="seo-approach-label">Process</p>
-                  <ul className="seo-approach-list">
-                    {step.process.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                  <p>{step.closing}</p>
-                  {step.cta ? (
-                    <Link className="rs-creative-btn" href={step.cta.href}>
-                      {step.cta.label}
-                      <i className="bi bi-arrow-up-right" aria-hidden="true" />
-                    </Link>
-                  ) : null}
-                </article>
-              </li>
-            ))}
-          </ol>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       <section id="seo-services" className="seo-section seo-services">
-        <div className="container">
-          <div className="seo-section-head">
-            <span className="seo-kicker">What we deliver</span>
-            <h2>SEO Services We Offer</h2>
-            <p className="seo-section-head__lead">
-              Want to generate more traffic to your website? We know how to
-              drive long-term growth
-            </p>
-            <p>
-              Our SEO services are designed to deliver measurable results
-              through smart planning, research, and continuous improvement. We
-              blend over 13 years of professional SEO experience with proven
-              strategies that help businesses gain visibility, attract genuine
-              customers, and stay ahead in search results. Every service we
-              provide is customized to your business type, target audience, and
-              market goals.
-            </p>
+        <div className="seo-services-head">
+          <div className="container">
+            <div className="seo-services-head__grid">
+              <div className="seo-services-head__intro">
+                <span className="seo-kicker">What we deliver</span>
+                <h2>SEO Services We Offer</h2>
+                <p className="seo-section-head__lead">
+                  Want to generate more traffic to your website? We know how to
+                  drive long-term growth
+                </p>
+              </div>
+              <div className="seo-services-head__copy">
+                <p>
+                  Our SEO services are designed to deliver measurable results
+                  through smart planning, research, and continuous improvement.
+                  We blend over 13 years of professional SEO experience with
+                  proven strategies that help businesses gain visibility,
+                  attract genuine customers, and stay ahead in search results.
+                  Every service we provide is customized to your business type,
+                  target audience, and market goals.
+                </p>
+              </div>
+            </div>
           </div>
+          <div className="seo-services-head__deco" aria-hidden="true" />
+        </div>
 
-          <div className="seo-service-grid">
-            {SEO_SERVICES.map((service, index) => (
-              <article key={service.title} className="seo-service-card">
-                <div className="seo-service-card__top">
-                  <span className="seo-icon" aria-hidden="true">
-                    <i className={`bi ${service.icon}`} />
-                  </span>
-                  <span className="seo-service-card__num">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
+        <div className="seo-service-grid">
+          {SEO_SERVICES.map((service, index) => (
+            <article
+              key={service.title}
+              className={`seo-service-card seo-service-card--${index + 1}`}
+            >
+              <div className="seo-service-card__media">
+                <Image
+                  src={service.image}
+                  alt=""
+                  width={120}
+                  height={88}
+                  unoptimized
+                />
+              </div>
+              <div className="seo-service-card__body">
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
-              </article>
-            ))}
-          </div>
-
-         
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="seo-section seo-offerings">
         <div className="container">
-          <div className="seo-section-head seo-section-head--center">
-            <span className="seo-kicker">Why RedSpider</span>
-            <h2>What Do We Offer You as an SEO Agency?</h2>
-            <p className="seo-section-head__lead">
-              Implementing Effective SEO Strategy for Long-Term Business Growth
-            </p>
-            <p>
-              As a professional SEO agency in Dubai, we help businesses
-              strengthen their online visibility and attract consistent organic
-              traffic. Our team uses proven SEO techniques, real data, and
-              transparent reporting to improve search rankings and deliver
-              measurable business growth. Every strategy we build focuses on
-              long-term results and sustainable performance.
-            </p>
-          </div>
+          <div className="row align-items-center g-4 g-xl-5">
+            <div className="col-lg-5">
+              <div className="seo-offerings-visual" aria-hidden="true">
+                <div className="seo-offerings-visual__card">
+                  <Image
+                    src="/assets/img/seo/Group_36y85.svg"
+                    alt=""
+                    width={220}
+                    height={220}
+                  />
+                </div>
+                {OFFERINGS.map((item) => (
+                  <span
+                    className="seo-offerings-visual__chip"
+                    key={item.title}
+                  >
+                    <i className={`bi ${item.icon}`} />
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="col-lg-7">
+              <div className="seo-section-head">
+                <span className="seo-kicker">Why RedSpider</span>
+                <h2>What Do We Offer You as an SEO Agency?</h2>
+                <p className="seo-section-head__lead">
+                  Implementing Effective SEO Strategy for Long-Term Business
+                  Growth
+                </p>
+                <p>
+                  As a professional SEO agency in Dubai, we help businesses
+                  strengthen their online visibility and attract consistent
+                  organic traffic. Our team uses proven SEO techniques, real
+                  data, and transparent reporting to improve search rankings
+                  and deliver measurable business growth. Every strategy we
+                  build focuses on long-term results and sustainable
+                  performance.
+                </p>
+              </div>
 
-          <div className="seo-offer-grid">
-            {OFFERINGS.map((item, index) => (
-              <article key={item.title} className="seo-offer-card">
-                <span className="seo-icon" aria-hidden="true">
-                  <i className={`bi ${item.icon}`} />
-                </span>
-                <span className="seo-offer-card__num">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))}
-          </div>
+              <div className="seo-offer-grid">
+                {OFFERINGS.map((item, index) => (
+                  <article
+                    key={item.title}
+                    className={`seo-offer-card seo-offer-card--${index + 1}`}
+                  >
+                    <span className="seo-icon" aria-hidden="true">
+                      <i className={`bi ${item.icon}`} />
+                    </span>
+                    <span className="seo-offer-card__num">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </article>
+                ))}
+              </div>
 
-          <CtaRow>
-            <PrimaryLink href={CONTACT_URL}>Get Started Now</PrimaryLink>
-          </CtaRow>
+              <CtaRow>
+                <PrimaryLink href={CONTACT_URL}>Get Started Now</PrimaryLink>
+              </CtaRow>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -507,74 +641,106 @@ export default function SeoAgencyTemplate() {
       </section>
 
       <section className="seo-section seo-numbers">
-        <div className="container">
-          <div className="seo-section-head seo-section-head--light seo-section-head--center">
-            <span className="seo-kicker">Results</span>
-            <h2>
-              Let’s Talk Numbers – Partner with the Best SEO Agency in Dubai
-            </h2>
-            <p className="seo-section-head__lead">
-              Turning Data into Measurable Growth for Your Business
-            </p>
-            <p>
-              We’ve spent over a decade helping companies achieve top Google
-              rankings and lasting success.
-            </p>
-            <p>Now, it’s your turn.</p>
-            <p>
-              Schedule a free consultation with our SEO experts in Dubai and
-              let’s plan a winning strategy for your business.
-            </p>
-            <p>
-              We don’t sell packages — we build performance partnerships that
-              grow over time.
-            </p>
-          </div>
+        <div className="seo-numbers__split">
+          <div
+            className="seo-numbers__visual"
+            style={{
+              backgroundImage:
+                "url(https://www.eseosolutions.ae/assets/images/let-talk-bg.png)",
+            }}
+            aria-hidden="true"
+          />
+          <div className="seo-numbers__copy">
+            <div className="seo-section-head">
+              <span className="seo-kicker">Results</span>
+              <h2>
+                Let’s Talk Numbers – Partner with the Best SEO Agency in Dubai
+              </h2>
+              <p className="seo-section-head__lead">
+                Turning Data into Measurable Growth for Your Business
+              </p>
+              <p>
+                We’ve spent over a decade helping companies achieve top Google
+                rankings and lasting success.
+              </p>
+              <p>Now, it’s your turn.</p>
+              <p>
+                Schedule a free consultation with our SEO experts in Dubai and
+                let’s plan a winning strategy for your business.
+              </p>
+              <p>
+                We don’t sell packages — we build performance partnerships that
+                grow over time.
+              </p>
+            </div>
 
-          <div className="seo-stat-grid">
-            {STATS.map((stat) => (
-              <article key={stat.label} className="seo-stat-card">
-                <p className="seo-stat-value">{stat.value}</p>
-                <h3>{stat.label}</h3>
-              </article>
-            ))}
+            <CtaRow>
+              <PrimaryLink href={CONTACT_URL}>Get Started Now</PrimaryLink>
+            </CtaRow>
           </div>
+        </div>
 
-          <CtaRow>
-            <PrimaryLink href={CONTACT_URL}>Get Started Now</PrimaryLink>
-          </CtaRow>
+        <div className="seo-stat-grid">
+          {STATS.map((stat) => (
+            <article key={stat.label} className="seo-stat-card">
+              <p className="seo-stat-value">{stat.value}</p>
+              <h3>{stat.label}</h3>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="seo-section seo-results">
         <div className="container">
           <div className="seo-section-head seo-section-head--center">
-            <span className="seo-kicker">Client results</span>
             <h2>Our Clients Get Results</h2>
             <p className="seo-section-head__lead">
               We Work Together to Deliver Real SEO Performance
             </p>
-            <p>
-              We believe real success is measured by results — not promises. Our
-              SEO strategies consistently help businesses in Dubai and across
-              the UAE grow their online visibility, traffic, and lead
-              conversions. From local startups to global brands, our data-driven
-              SEO campaigns have turned websites into powerful lead-generation
-              tools.
-            </p>
-            <p>
-              These numbers reflect what we deliver every day — measurable SEO
-              growth backed by strategy, analysis, and experience.
-            </p>
           </div>
 
-          <div className="seo-result-grid">
-            {CLIENT_RESULTS.map((result) => (
-              <article key={result.label} className="seo-result-card">
-                <p className="seo-stat-value">{result.value}</p>
-                <h3>{result.label}</h3>
-              </article>
-            ))}
+          <div className="seo-results-panel">
+            <div className="row g-4 g-lg-5 align-items-start">
+              <div className="col-lg-6">
+                <div className="seo-results-copy">
+                  <p>
+                    We believe real success is measured by results — not
+                    promises. Our SEO strategies consistently help businesses in
+                    Dubai and across the UAE grow their online visibility,
+                    traffic, and lead conversions. From local startups to
+                    global brands, our data-driven SEO campaigns have turned
+                    websites into powerful lead-generation tools.
+                  </p>
+                  <p>
+                    These numbers reflect what we deliver every day — measurable
+                    SEO growth backed by strategy, analysis, and experience.
+                  </p>
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <div className="seo-results-visual">
+                  <Image
+                    src="https://old.redspider.ae/wp-content/themes/redspider/images/case-study-img11.png"
+                    alt=""
+                    width={720}
+                    height={480}
+                    unoptimized
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="seo-results-metrics">
+              <span className="seo-kicker">Client results</span>
+              <div className="seo-result-grid">
+                {CLIENT_RESULTS.map((result) => (
+                  <article key={result.label} className="seo-result-card">
+                    <p className="seo-stat-value">{result.value}</p>
+                    <h3>{result.label}</h3>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
 
           <CtaRow>
@@ -597,8 +763,11 @@ export default function SeoAgencyTemplate() {
         <div className="container">
           <div className="seo-advanced__grid">
             <div className="seo-advanced__meta">
-              <span className="seo-kicker">Advanced SEO</span>
-              <p className="seo-advanced__note">13+ years of SEO experience</p>
+              <div className="seo-advanced__meta-top">
+                <span className="seo-kicker">Advanced SEO</span>
+                <p className="seo-advanced__note">13+ years of SEO experience</p>
+              </div>
+              <div className="seo-advanced__visual" aria-hidden="true" />
             </div>
             <div className="seo-advanced__copy">
               <h2>Get Traffic Moving With Our Advanced SEO Services</h2>
