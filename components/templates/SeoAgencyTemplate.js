@@ -9,7 +9,7 @@ const PORTFOLIO_URL = "/our-portfolio/";
 
 const APPROACH_STEPS = [
   {
-    title: "Custom Strategy Building",
+    title: "Website & Competitor Audit ",
     icon: "bi-bullseye",
     image: "/assets/img/seo/1.svg",
     intro: "Every business is different, and so should be its SEO plan.",
@@ -42,7 +42,7 @@ const APPROACH_STEPS = [
     cta: { label: "Get Started Now", href: CONTACT_URL },
   },
   {
-    title: "Setting Up Quarterly Targets",
+    title: "Keyword & Search Intent Strategy",
     icon: "bi-code-slash",
     image: "/assets/img/seo/quarterly-targets.svg",
     intro: "SEO growth happens over time, not overnight.",
@@ -72,7 +72,7 @@ const APPROACH_STEPS = [
       "With regular feedback and open collaboration, you’ll always see how your SEO company in Dubai is driving measurable improvements.",
   },
   {
-    title: "Regular Roadmap Analysis",
+    title: "Reporting & Continuous Growth ",
     icon: "bi-graph-up",
     image: "/assets/img/seo/roadmap-analysis.svg",
     intro: "SEO is a continuous process — not a one-time setup.",
@@ -90,69 +90,109 @@ const APPROACH_STEPS = [
 
 const SEO_SERVICES = [
   {
-    title: "Global SEO",
-    icon: "bi-globe2",
-    image:
-      "/assets/img/seo/global-seo-img.webp",
+    title: "Technical SEO",
+    icon: "bi-gear",
+    image: "/assets/img/seo/global-seo-img.webp",
     description:
-      "Expand your reach with our global SEO services. We optimize multilingual websites, target regional keywords, and build international backlinks to improve rankings across multiple countries and search engines.",
+      "Improve crawlability, indexing, Core Web Vitals, page speed, site architecture, schema and technical website health.",
+  },
+  {
+    title: "On-Page SEO",
+    icon: "bi-file-earmark-text",
+    image: "/assets/img/seo/national-seo-img.webp",
+    description:
+      "Optimize titles, meta descriptions, headings, content, internal links, URLs and page structure around search intent.",
   },
   {
     title: "Local SEO Dubai",
     icon: "bi-geo-alt",
-    image:
-      "/assets/img/seo/local-seo-img.webp",
+    image: "/assets/img/seo/local-seo-img.webp",
     description:
-      "Our local SEO Dubai strategy improves your Google Maps ranking and visibility in nearby searches. We optimize Google Business profiles, manage citations, and create local content that attracts customers within your city.",
+      "Improve visibility for location-based searches through local landing pages, business information and local search signals.",
   },
   {
-    title: "National SEO",
-    icon: "bi-flag",
-    image:
-      "/assets/img/seo/national-seo-img.webp",
-    description:
-      "Dominate search results across the UAE with our national SEO services. We target city-based keywords, strengthen domain authority, and ensure consistent visibility in Dubai, Abu Dhabi, Sharjah, and beyond.",
-  },
-  {
-    title: "E-Commerce SEO",
+    title: "Ecommerce SEO",
     icon: "bi-bag",
-    image:
-      "/assets/img/seo/ecommerce-market-img.webp",
+    image: "/assets/img/seo/ecommerce-market-img.webp",
     description:
-      "Boost online sales with our eCommerce SEO in Dubai. We optimize product pages, schema markup, and internal links to improve visibility in Google Shopping and organic product listings.",
+      "Optimize product pages, category pages, technical structure and commercial keywords to support organic sales growth.",
   },
   {
-    title: "Link Building & Guest Posting",
+    title: "Content SEO",
+    icon: "bi-pencil-square",
+    image: "/assets/img/seo/content-marketing-img1.webp",
+    description:
+      "Create and optimize service pages, landing pages and supporting content around real customer search intent.",
+  },
+  {
+    title: "Link Building & Authority",
     icon: "bi-link-45deg",
-    image:
-      "/assets/img/seo/gp-img.webp",
+    image: "/assets/img/seo/gp-img.webp",
     description:
-      "Build authority with our link-building services. We publish high-quality guest posts on trusted domains to earn backlinks that strengthen your rankings and domain trust.",
+      "Build relevant backlinks, mentions and authority through quality content and outreach.",
+  },
+];
+
+const AI_SEO_FEATURES = [
+  {
+    title: "AI Search Visibility",
+    description:
+      "Structure website content so services, locations, expertise and company information are easy for search engines and AI systems to understand.",
   },
   {
-    title: "App Store Optimisation",
-    icon: "bi-phone",
-    image:
-      "/assets/img/seo/app-store-img.webp",
+    title: "Google AI Search Optimization",
     description:
-      "With our ASO services in Dubai, your mobile app ranks higher on Google Play and App Store. We optimize keywords, visuals, and metadata to increase visibility and downloads.",
+      "Strengthen technical SEO, content quality, topical authority and structure to improve visibility across evolving Google search experiences.",
   },
   {
-    title: "Mobile SEO",
-    icon: "bi-phone-flip",
-    image:
-      "/assets/img/seo/mobile-app-img.webp",
+    title: "Answer Engine Optimization",
     description:
-      "Our mobile SEO services ensure your website loads fast, performs well, and ranks high on mobile searches. We focus on user experience, page speed, and mobile-first indexing.",
+      "Create clear and useful answers around customer questions, services and commercial topics.",
   },
   {
-    title: "Content Marketing",
-    icon: "bi-file-earmark-text",
-    image:
-      "/assets/img/seo/content-marketing-img1.webp",
+    title: "Entity & Brand Authority",
     description:
-      "Our content optimization services help you rank for high-intent keywords. We write SEO-friendly blogs, service pages, and landing content that attract search traffic and convert visitors into customers.",
+      "Strengthen consistent business information, expertise and authority signals across the website.",
   },
+  {
+    title: "AI-Friendly Content Strategy",
+    description:
+      "Create original, business-specific content that adds real value instead of generic AI-generated copy.",
+  },
+];
+
+const PPC_FEATURES = [
+  {
+    title: "Google Search Ads",
+    description:
+      "Target customers actively searching for relevant products or services using high-intent keyword campaigns.",
+  },
+  {
+    title: "PPC Campaign Management",
+    description:
+      "Campaign setup, keyword research, bidding, budget control, audience targeting and ongoing optimization.",
+  },
+  {
+    title: "Landing Page Optimization",
+    description:
+      "Improve page messaging, forms, calls to action and mobile usability to increase conversions.",
+  },
+  {
+    title: "Conversion Tracking",
+    description:
+      "Track calls, contact forms, WhatsApp enquiries, purchases and other valuable actions.",
+  },
+  {
+    title: "Remarketing Campaigns",
+    description:
+      "Reconnect with previous visitors and interested audiences to support repeat engagement and conversions.",
+  },
+];
+
+const SEARCH_STRATEGY_PILLARS = [
+  { title: "SEO", label: "Long-term organic visibility" },
+  { title: "PPC", label: "Immediate high-intent reach" },
+  { title: "AI Search", label: "Emerging search experiences" },
 ];
 
 const OFFERINGS = [
@@ -177,24 +217,6 @@ const OFFERINGS = [
 ];
 
 const INDUSTRIES = [
-  {
-    title: "Healthcare",
-    icon: "bi-heart-pulse",
-    description:
-      "Our SEO campaigns for hospitals and clinics focus on service-based keywords, improving visibility for treatments, specialists, and healthcare facilities.",
-  },
-  {
-    title: "Finance",
-    icon: "bi-bank",
-    description:
-      "We assist banks, insurance firms, and financial advisors in building trust and ranking for high-value financial and investment keywords.",
-  },
-  {
-    title: "Real Estate",
-    icon: "bi-buildings",
-    description:
-      "We help real estate developers, agencies, and property portals increase leads and rank higher for location-based property searches across Dubai and the UAE.",
-  },
   {
     title: "Government & Corporate",
     icon: "bi-building",
@@ -235,9 +257,9 @@ const INDUSTRIES = [
 
 const STATS = [
   { value: "2L+", label: "Keyword Rank" },
-  { value: "700+", label: "Project Successful Completed" },
-  { value: "5.5M", label: "Organic Traffic Generate" },
-  { value: "1281", label: "Happy Customers" },
+  { value: "700+", label: "Successful Projects Completed" },
+  { value: "5.5M", label: "Organic Visits Generated" },
+  { value: "1281", label: "Clients Served" },
 ];
 
 const CLIENT_RESULTS = [
@@ -361,24 +383,20 @@ export default function SeoAgencyTemplate() {
             <div className="col-lg-12">
               <div className="rs-process-title-sec">
                 <h1 className="rs-process-title mb-3">
-                  SEO Agency Dubai Boost Your Business Visibility with Proven SEO Strategies
-                  
+                  SEO Agency Dubai for SEO, AI Search & PPC Growth
                 </h1>
                 <p className="rs-process-text mb-3">
                   RedSpider is a professional SEO agency in Dubai helping
-                  businesses achieve consistent growth through data-driven and
-                  transparent SEO practices. With over 13 years of hands-on
-                  experience, we have served global brands and local
-                  enterprises, delivering measurable improvements in rankings,
-                  leads, and sales. Our team understands how the Dubai market
-                  behaves — and how search engines reward authority, content
-                  quality, and user trust.
+                  businesses improve visibility across Google Search, local
+                  search, AI-powered search experiences and paid advertising.
                 </p>
                 <p className="rs-process-text mb-3">
-                  We don’t just bring traffic. We bring customers who are ready
-                  to engage, inquire, and convert.
+                  Our SEO services combine technical optimization, content
+                  strategy, local SEO, authority building, AI search
+                  optimization and PPC campaign management to attract relevant
+                  traffic, generate qualified leads and support long-term
+                  growth.
                 </p>
-                
               </div>
             </div>
           </div>
@@ -388,7 +406,7 @@ export default function SeoAgencyTemplate() {
       <section className="seo-section seo-approach">
         <div className="container">
           <div className="seo-section-head seo-section-head--center">
-            <h2>Our Approach to SEO Success</h2>
+            <h2>Our SEO & Search Marketing Process </h2>
             <p>
               At RedSpider, we follow a five-step process built on experience,
               data, and precision. With over 13 years of real SEO work for
@@ -455,7 +473,10 @@ export default function SeoAgencyTemplate() {
                         </ul>
                         <p>{step.closing}</p>
                         {step.cta ? (
-                          <Link className="rs-creative-btn" href={step.cta.href}>
+                          <Link
+                            className="rs-creative-btn"
+                            href={step.cta.href}
+                          >
                             {step.cta.label}
                             <i
                               className="bi bi-arrow-up-right"
@@ -535,6 +556,95 @@ export default function SeoAgencyTemplate() {
         </div>
       </section>
 
+      <section className="seo-section seo-ai">
+        <div className="container">
+          <div className="seo-section-head seo-section-head--center">
+            <span className="seo-kicker">AI Search</span>
+            <h2>AI SEO & AI Search Optimization</h2>
+            <p>
+              Search behaviour is changing. Customers increasingly use
+              AI-powered search experiences to research businesses, compare
+              services and find answers before making decisions. RedSpider
+              should highlight AI SEO and AI Search Optimization as part of its
+              modern search strategy.
+            </p>
+          </div>
+
+          <div className="seo-ai-grid">
+            {AI_SEO_FEATURES.map((item, index) => (
+              <article key={item.title} className="seo-feature-card">
+                <span className="seo-feature-card__num" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="seo-section seo-ppc">
+        <div className="container">
+          <div className="seo-ppc__layout">
+            <div className="seo-section-head">
+              <span className="seo-kicker">Paid Search</span>
+              <h2>PPC & Google Ads Management Dubai</h2>
+              <p>
+                SEO supports long-term growth, while PPC can provide faster
+                visibility for customers actively searching for products or
+                services. This section should position RedSpider for PPC Agency
+                Dubai, Google Ads Agency Dubai and PPC Services Dubai searches.
+              </p>
+            </div>
+
+            <div className="seo-ppc-list">
+              {PPC_FEATURES.map((item, index) => (
+                <article key={item.title} className="seo-ppc-item">
+                  <span className="seo-ppc-item__num" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="seo-section seo-strategy">
+        <div className="container">
+          <div className="seo-strategy__layout">
+            <div className="seo-section-head">
+              <span className="seo-kicker">Combined strategy</span>
+              <h2>SEO + PPC + AI Search Strategy</h2>
+              <p>
+                SEO builds long-term organic visibility. PPC provides immediate
+                visibility for high-intent searches. AI SEO improves how the
+                business and its content are understood across emerging
+                AI-powered search experiences.
+              </p>
+              <p>
+                Combining these channels gives businesses a broader search
+                strategy and reduces dependence on one traffic source.
+              </p>
+            </div>
+
+            <div className="seo-strategy-pillars" aria-label="Search channels">
+              {SEARCH_STRATEGY_PILLARS.map((item) => (
+                <article key={item.title} className="seo-strategy-pillar">
+                  <h3>{item.title}</h3>
+                  <p>{item.label}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="seo-section seo-offerings">
         <div className="container">
           <div className="row align-items-center g-4 g-xl-5">
@@ -549,10 +659,7 @@ export default function SeoAgencyTemplate() {
                   />
                 </div>
                 {OFFERINGS.map((item) => (
-                  <span
-                    className="seo-offerings-visual__chip"
-                    key={item.title}
-                  >
+                  <span className="seo-offerings-visual__chip" key={item.title}>
                     <i className={`bi ${item.icon}`} />
                   </span>
                 ))}
@@ -561,7 +668,7 @@ export default function SeoAgencyTemplate() {
             <div className="col-lg-7">
               <div className="seo-section-head">
                 <span className="seo-kicker">Why RedSpider</span>
-                <h2>What Do We Offer You as an SEO Agency?</h2>
+                <h2>Why Choose RedSpider as Your SEO Agency in Dubai?</h2>
                 <p className="seo-section-head__lead">
                   Implementing Effective SEO Strategy for Long-Term Business
                   Growth
@@ -570,10 +677,9 @@ export default function SeoAgencyTemplate() {
                   As a professional SEO agency in Dubai, we help businesses
                   strengthen their online visibility and attract consistent
                   organic traffic. Our team uses proven SEO techniques, real
-                  data, and transparent reporting to improve search rankings
-                  and deliver measurable business growth. Every strategy we
-                  build focuses on long-term results and sustainable
-                  performance.
+                  data, and transparent reporting to improve search rankings and
+                  deliver measurable business growth. Every strategy we build
+                  focuses on long-term results and sustainable performance.
                 </p>
               </div>
 
@@ -603,7 +709,7 @@ export default function SeoAgencyTemplate() {
         </div>
       </section>
 
-      <section className="seo-section seo-industries">
+      <section className="seo-section seo-industries pt-0">
         <div className="container">
           <div className="seo-section-head">
             <span className="seo-kicker">Industries</span>
@@ -654,7 +760,7 @@ export default function SeoAgencyTemplate() {
             <div className="seo-section-head">
               <span className="seo-kicker">Results</span>
               <h2>
-                Let’s Talk Numbers – Partner with the Best SEO Agency in Dubai
+                SEO Results That Support Business Growth 
               </h2>
               <p className="seo-section-head__lead">
                 Turning Data into Measurable Growth for Your Business
@@ -707,9 +813,9 @@ export default function SeoAgencyTemplate() {
                     We believe real success is measured by results — not
                     promises. Our SEO strategies consistently help businesses in
                     Dubai and across the UAE grow their online visibility,
-                    traffic, and lead conversions. From local startups to
-                    global brands, our data-driven SEO campaigns have turned
-                    websites into powerful lead-generation tools.
+                    traffic, and lead conversions. From local startups to global
+                    brands, our data-driven SEO campaigns have turned websites
+                    into powerful lead-generation tools.
                   </p>
                   <p>
                     These numbers reflect what we deliver every day — measurable
@@ -720,7 +826,7 @@ export default function SeoAgencyTemplate() {
               <div className="col-lg-6">
                 <div className="seo-results-visual">
                   <Image
-                    src="https://old.redspider.ae/wp-content/themes/redspider/images/case-study-img11.png"
+                    src="/assets/img/seo/case-study-img.webp"
                     alt=""
                     width={720}
                     height={480}
@@ -744,7 +850,9 @@ export default function SeoAgencyTemplate() {
           </div>
 
           <CtaRow>
-            <SecondaryLink href={PORTFOLIO_URL}>See Our Portfolio</SecondaryLink>
+            <SecondaryLink href={PORTFOLIO_URL}>
+              See Our Portfolio
+            </SecondaryLink>
             <PrimaryLink href={WHATSAPP_URL}>Talk to our Expert</PrimaryLink>
           </CtaRow>
         </div>
@@ -759,57 +867,11 @@ export default function SeoAgencyTemplate() {
         />
       </div>
 
-      <section className="seo-section seo-advanced">
-        <div className="container">
-          <div className="seo-advanced__grid">
-            <div className="seo-advanced__meta">
-              <div className="seo-advanced__meta-top">
-                <span className="seo-kicker">Advanced SEO</span>
-                <p className="seo-advanced__note">13+ years of SEO experience</p>
-              </div>
-              <div className="seo-advanced__visual" aria-hidden="true" />
-            </div>
-            <div className="seo-advanced__copy">
-              <h2>Get Traffic Moving With Our Advanced SEO Services</h2>
-              <p>
-                Give your business a measurable boost with RedSpider, a trusted
-                SEO company in Dubai focused on growth, rankings, and ROI. We go
-                beyond traditional SEO by combining in-depth market insights,
-                advanced analytics, and proven optimization methods to make your
-                brand stand out online.
-              </p>
-              <p>
-                Our approach is simple — build visibility, attract the right
-                audience, and turn clicks into conversions. Every strategy is
-                tailored to your goals, industry, and competition, ensuring
-                long-term success in the UAE’s fast-evolving digital market.
-              </p>
-              <p>
-                We provide complete SEO optimization services including on-page
-                improvements, technical performance fixes, authority building,
-                and content enhancement. Whether you need local SEO for Dubai,
-                e-commerce SEO for your online store, or full website
-                optimization for better organic reach, our team ensures
-                consistent growth backed by transparent reporting.
-              </p>
-              <p>
-                With 13+ years of SEO experience, we’ve helped brands across
-                real estate, healthcare, retail, and technology achieve higher
-                visibility and stronger engagement — turning data into results
-                that last.
-              </p>
-              <Link className="rs-creative-btn" href={CONTACT_URL}>
-                Get Started Now
-                <i className="bi bi-arrow-up-right" aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
       <ContactCTA
-        title="Schedule a free consultation with our SEO experts in Dubai"
-        description="We don’t sell packages — we build performance partnerships that grow over time."
+        title="Grow Your Visibility Across Google & AI Search"
+        description="RedSpider combines SEO, AI Search Optimization and PPC services to help businesses improve visibility, attract qualified traffic and generate measurable opportunities. Whether you want stronger Google rankings, better Local SEO performance or immediate visibility through PPC, our Dubai team can develop a strategy around your goals."
       />
     </div>
   );

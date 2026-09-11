@@ -6,10 +6,10 @@ import seoAgencySchema from "../../lib/schema/seo-agency-dubai.json";
 import { SITE_URL } from "../../lib/seo";
 
 export default function SeoAgencyDubai() {
-  const title = "Best SEO Services in UAE | Top SEO Agency in Dubai";
+  const title = "SEO Agency Dubai | AI SEO & PPC Services UAE";
 
   const description =
-    "We are a leading SEO agency in Dubai, UAE. We offer the best search engine optimization services to help businesses rank higher on search engines.";
+    "Grow your visibility with SEO, AI search optimization and PPC services in Dubai. RedSpider helps UAE businesses increase rankings, traffic and leads.";
 
   const pageUrl = `${SITE_URL}/service/seo-agency-dubai/`;
 
