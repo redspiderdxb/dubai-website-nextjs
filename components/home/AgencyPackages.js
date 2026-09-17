@@ -54,9 +54,10 @@ export default function AgencyPackages() {
       content: (
         <>
           <p>
-            Looking for an experienced web designer in Dubai? RedSpider is here
-            to help. We create modern, user-friendly websites that are designed
-            to match your business goals and leave a great first impression.
+            Looking for the <b> best web design company in Dubai? </b>RedSpider
+            is here to help. We create modern, user-friendly websites that are
+            designed to match your business goals and leave a great first
+            impression.{" "}
           </p>
 
           <p>
@@ -77,14 +78,14 @@ export default function AgencyPackages() {
       content: (
         <>
           <p>
-            At RedSpider, we create websites that are not only simple to use,
-            but are mobile-friendly and optimized for a positive user
-            experience. We don't use pre-designed templates, we design them
-            according to your brand and business objectives. Calls to action are
-            placed at strategic points. where the audience is likely to take
-            action, such as contacting a business, making a purchase, or taking
-            the next step. Once the project is complete, you receive{" "}
-            <b> full ownership of your website</b>.
+            As a <b> responsive web design company, </b> we create websites that are not
+            only simple to use, but are mobile-friendly and optimized for a
+            positive user experience. We don't use pre-designed templates, we
+            design them according to your brand and business objectives. Calls
+            to action are placed at strategic points. where the audience is
+            likely to take action, such as contacting a business, making a
+            purchase, or taking the next step. Once the project is complete, you
+            receive full ownership of your website.{" "}
           </p>
 
           <p>
@@ -171,10 +172,10 @@ export default function AgencyPackages() {
                       </h2>
 
                       <p className="rs-lead">
-                        RedSpider is a trusted web design and development
-                        partner for businesses across Dubai and the UAE. We
-                        build modern, fast websites that strengthen your online
-                        presence and help attract new customers.
+                        RedSpider is a trusted <b> Dubai web design company </b>{" "}
+                        and development partner for businesses across Dubai and
+                        the UAE. We build modern, fast websites that strengthen
+                        your online presence and help attract new customers.
                       </p>
 
                       <p>
@@ -504,8 +505,9 @@ export default function AgencyPackages() {
                     </h2>
 
                     <p className="rs-process-text rs-section-subtitle text-start">
-                      We do not use a standard template, as they are not always
-                      suitable for long-term business.
+                      For our web design Dubai projects, we do not use standard
+                      templates, as they are not always suitable for long-term
+                      business.
                     </p>
                   </div>
 
