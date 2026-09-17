@@ -116,10 +116,9 @@ export default function DailyDealTemplate({ data }) {
             {/* Row 1 : Title */}
             <div className="row align-items-center text-center text-lg-start mb-5">
               <div className="col-12 col-lg-10">
-                <h1 className="hero-titleinner text-center text-lg-start">
-                  <strong>Daily Deal </strong>
-                  Website Script
-                </h1>
+                <h2 className="hero-titleinner text-center text-lg-start">
+                Launch Your Platform with the Best Daily Deal Website Script
+                </h2>
               </div>
               <div className="col-12"></div>
             </div>

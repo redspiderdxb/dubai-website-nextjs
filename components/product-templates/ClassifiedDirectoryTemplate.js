@@ -203,10 +203,9 @@ export default function ClassifiedDirectoryTemplate({ data }) {
           <div className="container" style={{ maxWidth: "1600px" }}>
             <div className="row align-items-center g-4 text-center text-lg-start mt-4">
               <div className="col-12 col-md-12 col-lg-6 order-2 order-lg-1 pe-lg-5">
-                <h1 className="hero-titleinner text-center text-lg-start mb-4 ext-title">
-                  <strong>Classified Website, </strong>
-                  Dubizzle Clone, Olx Clone
-                </h1>
+                <h2 className="hero-titleinner text-center text-lg-start mb-4 ext-title">
+                  Build a Powerful Classified Directory Like OLX & Dubizzle
+                </h2>
                 <p className="rs-desc">
                   Powerful and Easy-to-Use Software for Creating Online
                   Directories & Classified Ad Websites like Dubizzle, Olx
