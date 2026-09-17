@@ -102,13 +102,13 @@ export default function RealEstatePortalTemplate({ data }) {
       icon: "bi-clock-history",
       title: "On-Time Delivery",
       description:
-        "Simple real estate websites can be completed within approximately 2–4 weeks, while custom property portals with CRM, feeds and advanced integrations may require 6–12 weeks.",
+        "Simple real estate websites can be completed within approximately 2–4 weeks, while custom property portals with CRM, feeds, and advanced integrations may require 6–12 weeks.",
     },
     {
       icon: "bi-headset",
       title: "Reliable Support & Maintenance",
       description:
-        "RedSpider provides ongoing support and maintenance services to ensure your website remains up-to-date and fully functional.",
+        "We provides ongoing support and maintenance services to ensure your website remains up-to-date and fully functional.",
     },
   ];
 
@@ -307,8 +307,12 @@ export default function RealEstatePortalTemplate({ data }) {
                 </div>
 
                 <p>
-                  {intro_description ||
-                    "Looking for a powerful real estate website? We create websites that help you sell faster and manage more easily. We specialize in custom solutions that connect property developers, agents, and buyers through clean layouts, quick search tools, and mobile-friendly pages."}
+                  Looking for a powerful real estate website? As a leading
+                  <b> Dubai real estate website design company,</b> we create
+                  websites that help you sell faster and manage more easily. We
+                  specialize in custom solutions that connect property
+                  developers, agents, and buyers through clean layouts, quick
+                  search tools, and mobile-friendly pages.
                 </p>
 
                 <p>
@@ -345,12 +349,19 @@ export default function RealEstatePortalTemplate({ data }) {
                 </div>
 
                 <p>
-                  RedSpider has extensive experience working with real estate
-                  businesses and understands the requirements of the Dubai
-                  property market. Our experienced team creates custom websites
-                  that help agencies, brokers, and developers showcase
-                  properties, manage inquiries, and deliver a better user
-                  experience.
+                  <a
+                    href="https://www.redspider.ae/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    RedSpider Web & Art Design
+                  </a>{" "}
+                  has extensive experience working with real estate businesses
+                  and understands the requirements of the Dubai property market.
+                  As a trusted <b> real estate web design company in Dubai,</b>{" "}
+                  our experienced team creates custom websites that help
+                  agencies, brokers, and developers showcase properties, manage
+                  inquiries, and deliver a better user experience.
                 </p>
 
                 <p>
@@ -474,9 +485,10 @@ export default function RealEstatePortalTemplate({ data }) {
                 </p>
 
                 <p>
-                  We help property businesses build professional digital
-                  platforms that support their marketing goals, improve customer
-                  engagement, and generate meaningful enquiries.
+                  Our <b> Dubai real estate web design company </b> helps
+                  property businesses build professional digital platforms that
+                  support their marketing goals, improve customer engagement,
+                  and generate meaningful enquiries.
                 </p>
 
                 <p>
@@ -624,7 +636,7 @@ export default function RealEstatePortalTemplate({ data }) {
                 improve customer engagement.
               </p>
 
-              <a href="#" className="service-btn">
+              <a href="/contact-us/" className="service-btn">
                 Learn More
               </a>
             </div>
@@ -651,17 +663,15 @@ export default function RealEstatePortalTemplate({ data }) {
               </div>
 
               <p>
-                We create custom digital solutions for agencies, brokers and
+                As a top <b> real estate website development company</b> dubai,
+                we create custom digital solutions for agencies, brokers and
                 developers using advanced property search, CRM integration and
-                lead generation tools.
+                lead generation tools. Every website is designed to simplify
+                property management while delivering a seamless experience for
+                visitors.
               </p>
 
-              <p>
-                Every website is designed to simplify property management while
-                delivering a seamless experience for visitors.
-              </p>
-
-              <a href="#" className="service-btn">
+              <a href="/our-portfolio/" className="service-btn">
                 View Portfolio
               </a>
             </div>
@@ -686,16 +696,16 @@ export default function RealEstatePortalTemplate({ data }) {
 
               <p>
                 We build elegant and user-friendly websites that help property
-                businesses manage listings, track inquiries and streamline
+                businesses manage listings, track inquiries, and streamline
                 communication.
               </p>
 
               <p>
                 Our responsive websites include CRM integration, SEO
-                optimization and modern UI that turns visitors into buyers.
+                optimization, and modern UI that turns visitors into buyers.
               </p>
 
-              <a href="#" className="service-btn">
+              <a href="/contact-us/" className="service-btn">
                 Start Project
               </a>
             </div>
@@ -722,7 +732,8 @@ export default function RealEstatePortalTemplate({ data }) {
                   <p>
                     Did you just start your business as a real estate agency in
                     Dubai or a property dealer in Dubai? You will need a new
-                    website to promote it properly.
+                    website with expert <b> real estate website designing </b>{" "}
+                    to promote it properly.
                   </p>
 
                   <p>
@@ -733,8 +744,8 @@ export default function RealEstatePortalTemplate({ data }) {
 
                   <p>
                     Similarly, we can update your existing website with quality
-                    features and enhance its functionality. At RedSpider, we
-                    make the development process easy and hassle-free.
+                    features and enhance its functionality. We make the
+                    development process easy and hassle-free.
                   </p>
                 </div>
               </div>
@@ -774,10 +785,9 @@ export default function RealEstatePortalTemplate({ data }) {
               </div>
 
               <p>
-                At RedSpider, we specialize in designing and developing
-                high-quality websites for property businesses. We create
-                websites that are fast and easy to use for both buyers and
-                sellers.
+                We specialize in <b> real estate website designing</b> and
+                development for property businesses. We create websites that are
+                fast and easy to use for both buyers and sellers.
               </p>
 
               <p>
@@ -817,10 +827,11 @@ export default function RealEstatePortalTemplate({ data }) {
               </p>
 
               <p>
-                At RedSpider, we design custom websites that showcase property
-                listings to potential buyers. With immersive 360 tours and
-                user-friendly galleries, visitors can explore properties and
-                understand what you offer.
+                We offer top-tier <b> real estate website design Dubai </b> to
+                create custom websites that showcase property listings to
+                potential buyers. With immersive 360 tours and user-friendly
+                galleries, visitors can explore properties and understand what
+                you offer.
               </p>
 
               <p>
