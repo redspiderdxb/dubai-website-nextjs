@@ -265,38 +265,32 @@ export default function Footer() {
                   </a>
                 ))}
 
-                 <a
-                    href="https://apps.apple.com/us/app/redspider-web-art-design/id6748980550?platform=vision"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Download RedSpider on Apple App Store"
-                    className="rs-social-link"
-                  >
-                    <i className="bi bi-apple" aria-hidden="true"></i>
-                  </a>
+                <a
+                  href="#nogo"
+                  aria-label="Download RedSpider on Apple App Store"
+                  className="rs-social-link"
+                >
+                  <i className="bi bi-apple" aria-hidden="true"></i>
+                </a>
 
-                  <a
-                    href="https://play.google.com/store/apps/details?id=com.app.redspider&hl=en"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Download RedSpider on Google Play"
-                    className="rs-social-link"
-                  >
-                    <i className="bi bi-google-play" aria-hidden="true"></i>
-                  </a>
-                  
-                   <div className="rs-footer-links bottom">
-                
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.app.redspider&hl=en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Download RedSpider on Google Play"
+                  className="rs-social-link"
+                >
+                  <i className="bi bi-google-play" aria-hidden="true"></i>
+                </a>
 
-                <Link href="/contact-us/" className="footer-touch-link">
-                  Get In Touch
-                </Link>
-              </div>
+                <div className="rs-footer-links bottom">
+                  <Link href="/contact-us/" className="footer-touch-link">
+                    Get In Touch
+                  </Link>
+                </div>
               </div>
 
               {/* GET IN TOUCH */}
-
-             
             </div>
           </div>
 
