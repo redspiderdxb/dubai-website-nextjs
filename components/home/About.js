@@ -30,7 +30,11 @@ export default function About({ data }) {
 
   const portfolioText = data?.about_portfolio_text || "View Portfolio";
 
-  const portfolioLink = data?.about_portfolio_link || "/portfolio";
+  const rawPortfolioLink = data?.about_portfolio_link || "/our-portfolio/";
+  const portfolioLink =
+    rawPortfolioLink === "/portfolio" || rawPortfolioLink === "/portfolio/"
+      ? "/our-portfolio/"
+      : rawPortfolioLink;
 
   const videoTitle =
     data?.video_title || "Why Businesses Trust Our Web Design Expertise";

@@ -220,7 +220,12 @@ export default function Hero({ data, googleReviews = null }) {
                   {slide.button_text && (
                     <Button
                       color="yellow"
-                      href={slide.button_link || "#portfolio"}
+                      href={
+                        slide.button_link === "/portfolio" ||
+                        slide.button_link === "/portfolio/"
+                          ? "/our-portfolio/"
+                          : slide.button_link || "#portfolio"
+                      }
                       className="rs-slide-button"
                     >
                       {slide.button_text}

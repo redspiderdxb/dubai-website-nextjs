@@ -3,6 +3,7 @@ import { SITE_URL } from "../lib/seo";
 export async function getServerSideProps({ res }) {
   const robots = `User-agent: *
 Allow: /
+Disallow: /?*
 
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
