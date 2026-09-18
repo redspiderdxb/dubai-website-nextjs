@@ -252,8 +252,15 @@ export default function SmsMarketingTemplate({ data }) {
               <div className="col-12 col-lg-4">
                 <p className="rs-desc mb-0">
                   Reach customers across the UAE with targeted SMS campaigns
-                  designed for promotions, updates and business communication.
-                  RedSpider provides reliable bulk SMS solutions with campaign
+                  designed for promotions, updates and business communication.{" "}
+                  <a
+                    href="https://www.redspider.ae/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    RedSpider
+                  </a>{" "}
+                  provides reliable bulk SMS UAE solutions with campaign
                   scheduling, audience targeting and reporting tools to help
                   businesses manage messaging efficiently.
                 </p>
@@ -264,12 +271,12 @@ export default function SmsMarketingTemplate({ data }) {
             <div className="row align-items-center g-4 text-center text-lg-start mt-4">
               <div className="col-12 col-lg-4 order-2 order-lg-1">
                 <p>
-                  Our bulk SMS solutions help businesses send promotional
-                  messages, customer updates, reminders and important
-                  notifications efficiently. Campaigns can be planned according
-                  to your messaging volume, audience requirements and business
-                  objectives, with flexible options available for different
-                  campaign sizes.
+                  Our solutions for bulk SMS in UAE help businesses send
+                  promotional messages, customer updates, reminders and
+                  important notifications efficiently. Campaigns can be planned
+                  according to your messaging volume, audience requirements and
+                  business objectives, with flexible options available for
+                  different campaign sizes.
                 </p>
                 <p className="mb-0">
                   RedSpider also provides campaign scheduling, audience
@@ -321,11 +328,11 @@ export default function SmsMarketingTemplate({ data }) {
         <div className="container" style={{ maxWidth: "950px" }}>
           <div className="section-title text-center text-white mb-3">
             <h2 className="fw-bold mb-4">SMS Campaign Targeting Options</h2>
-            <p className="rs-subtitle">
-              Reach the right audience with flexible SMS campaign targeting
-              options based on your business requirements. Campaigns can be
-              planned using relevant audience criteria to help deliver more
-              focused and effective business messages.
+            <p className="rs-subtitle text-dark">
+              Reach the right audience with flexible SMS Marketing Dubai
+              campaign targeting options based on your business requirements.
+              Campaigns can be planned using relevant audience criteria to help
+              deliver more focused and effective business messages.
             </p>
           </div>
         </div>
@@ -614,11 +621,11 @@ export default function SmsMarketingTemplate({ data }) {
             <div className="col-12 text-center">
               <div className="mt-5">
                 <p>
-                  SMS gives businesses a direct way to communicate with
-                  customers through their mobile phones. It can be used for
-                  promotions, service updates, reminders, announcements and
-                  other time-sensitive messages without requiring users to be
-                  connected to the internet.
+                  SMS marketing in Dubai gives businesses a direct way to
+                  communicate with customers through their mobile phones. It can
+                  be used for promotions, service updates, reminders,
+                  announcements and other time-sensitive messages without
+                  requiring users to be connected to the internet.
                 </p>
                 <p>
                   RedSpider helps businesses plan and manage SMS campaigns
