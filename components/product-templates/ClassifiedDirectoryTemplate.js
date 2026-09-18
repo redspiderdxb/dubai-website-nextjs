@@ -200,7 +200,7 @@ export default function ClassifiedDirectoryTemplate({ data }) {
       {/* Hero Banner Section */}
       <section id="hero-banner" className="hero-banner section rs-full-section">
         <div className="rs-hero-banner">
-          <div className="container" style={{ maxWidth: "1600px" }}>
+          <div className="container" >
             <div className="row align-items-center g-4 text-center text-lg-start mt-4">
               <div className="col-12 col-md-12 col-lg-6 order-2 order-lg-1 pe-lg-5">
                 <h2 className="hero-titleinner text-center text-lg-start mb-4 ext-title">
@@ -263,7 +263,7 @@ export default function ClassifiedDirectoryTemplate({ data }) {
               {intro_main_heading ||
                 "Dubizzle Clone: Build Your Own Classified Ad Website with RSClassify"}
             </h2>
-            <p className="rs-subtitle">
+            <p className="rs-subtitle text-dark">
               {intro_description ||
                 "Looking to create a successful online directory or classified ad website like Dubizzle Clone? RSClassify is the perfect software solution for developing a fully functional platform similar to popular websites like Dubizzle and OLX. It is designed to make building, managing, and monetizing your classified ad website simple and effective, catering to a wide range of listings."}
             </p>
@@ -273,7 +273,7 @@ export default function ClassifiedDirectoryTemplate({ data }) {
 
       {/* Feature Cards */}
       <section className="card-icon-types section dark-background line-bg-dark">
-        <div className="container" style={{ maxWidth: "1700px" }}>
+        <div className="container" >
           <div className="row g-4">
             {featureCards.map((card, index) => (
               <div className="col-lg-4 col-md-6" key={index}>
@@ -296,7 +296,7 @@ export default function ClassifiedDirectoryTemplate({ data }) {
 
       {/* Frontend Features Accordion */}
       <div className="dubizzle-clone-features section dark-background rs-service-grid-outline pt-0">
-        <div className="container" style={{ maxWidth: "1100px" }}>
+        <div className="container" >
           <div className="section-title text-center text-white mb-3">
             <h2 className="fw-bold">Frontend Features</h2>
           </div>
@@ -339,7 +339,7 @@ export default function ClassifiedDirectoryTemplate({ data }) {
 
       {/* Admin Features */}
       <section className="rs-packages-sec dark-background section">
-        <div className="container" style={{ maxWidth: "1550px" }}>
+        <div className="container" >
           <div className="section-title text-center text-white mb-4">
             <h2 className="fw-bold">Admin Features</h2>
             <p className="rs-subtitle">Administration Rich Features Detail</p>

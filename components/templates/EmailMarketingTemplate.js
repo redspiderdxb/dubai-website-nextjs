@@ -240,7 +240,10 @@ export default function EmailMarketingTemplate({ data }) {
           { name: "Hospitality businesses", icon: "bi-building" },
           { name: "Financial services", icon: "bi-graph-up-arrow" },
           { name: "Corporate service providers", icon: "bi-briefcase" },
-          { name: "Professional consulting firms", icon: "bi-chat-square-text" },
+          {
+            name: "Professional consulting firms",
+            icon: "bi-chat-square-text",
+          },
           { name: "Manufacturing companies", icon: "bi-gear-wide-connected" },
         ];
 
@@ -361,7 +364,9 @@ export default function EmailMarketingTemplate({ data }) {
           <div className="container">
             <div className="rs-creative-intro__grid">
               <div className="rs-creative-intro__meta">
-                <span className="rs-creative-kicker">{intro_small_heading}</span>
+                <span className="rs-creative-kicker">
+                  {intro_small_heading}
+                </span>
                 <p className="rs-creative-intro__note">Campaigns since 2010</p>
               </div>
               <div className="rs-creative-intro__copy">
@@ -371,7 +376,10 @@ export default function EmailMarketingTemplate({ data }) {
                   informed, drive repeat business and turn subscribers into
                   qualified leads — without filling inboxes for the sake of it.
                 </p>
-                <a className="rs-creative-link" href="#email-marketing-services">
+                <a
+                  className="rs-creative-link"
+                  href="#email-marketing-services"
+                >
                   Explore our campaigns
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
                 </a>
@@ -484,7 +492,10 @@ export default function EmailMarketingTemplate({ data }) {
                   key={`${industry.id || industry.name}-${index}`}
                   className="rs-creative-industry"
                 >
-                  <span className="rs-creative-industry__icon" aria-hidden="true">
+                  <span
+                    className="rs-creative-industry__icon"
+                    aria-hidden="true"
+                  >
                     <i className={`bi ${industry.icon || "bi-buildings"}`}></i>
                   </span>
                   <h3>{industry.name || industry.title}</h3>
@@ -506,12 +517,12 @@ export default function EmailMarketingTemplate({ data }) {
                 <span className="rs-creative-kicker">Why it works</span>
                 <h2>{benefits_title}</h2>
                 <p>{benefits_subtitle}</p>
-                <a className="rs-creative-btn" href={contactHref}>
+                {/* <a className="rs-creative-btn" href={contactHref}>
                   {cta_button_text || "Book a call"}
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a>
+                </a> */}
               </div>
-              <div className="rs-creative-why__grid">
+              <div className="rs-creative-why__grid mt-5">
                 {benefitsList.map((benefit, index) => {
                   const title =
                     typeof benefit === "string"
@@ -529,7 +540,10 @@ export default function EmailMarketingTemplate({ data }) {
                       key={`${benefit.id || "benefit"}-${index}`}
                       className="rs-creative-why__card"
                     >
-                      <span className="rs-creative-why__icon" aria-hidden="true">
+                      <span
+                        className="rs-creative-why__icon"
+                        aria-hidden="true"
+                      >
                         <i
                           className={`bi ${BENEFIT_ICONS[index % BENEFIT_ICONS.length]}`}
                         ></i>
@@ -549,7 +563,10 @@ export default function EmailMarketingTemplate({ data }) {
 
     services: {
       component: (
-        <section key="services" className="rs-creative-services rs-creative-list-sec">
+        <section
+          key="services"
+          className="rs-creative-services rs-creative-list-sec"
+        >
           <div className="container">
             <div className="rs-creative-head">
               <span className="rs-creative-kicker">What we deliver</span>
@@ -650,9 +667,7 @@ export default function EmailMarketingTemplate({ data }) {
             <div className="rs-creative-quote__box">
               <div>
                 <span className="rs-creative-kicker">Get a quote</span>
-                <h2>
-                  Get an estimate for email marketing services in Dubai
-                </h2>
+                <h2>Get an estimate for email marketing services in Dubai</h2>
                 <p>
                   Starting your first campaign or improving an existing
                   strategy? Contact us for a customized email marketing

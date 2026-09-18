@@ -339,7 +339,7 @@ export default function SmsMarketingTemplate({ data }) {
         <div className="container" style={{ maxWidth: "1250px" }}>
           <div className="section-title text-center text-white mb-5">
             <h2 className="fw-bold">Bulk SMS Packages</h2>
-            <p className="rs-subtitle">
+            <p className="rs-subtitle text-white">
               Choose a flexible SMS package based on your campaign volume and
               business requirements. <br></br> Explore available messaging
               quantities and select an option that suits your campaign needs.
@@ -416,7 +416,7 @@ export default function SmsMarketingTemplate({ data }) {
             <h2 className="fw-bold" style={{ fontSize: "30px" }}>
               Location & Language-Based Targeting
             </h2>
-            <p className="rs-subtitle">
+            <p className="rs-subtitle  text-white">
               Plan SMS campaigns using location and language criteria that match
               your audience requirements. Campaigns can be organized by selected
               locations, preferred languages and other available audience
@@ -475,7 +475,7 @@ export default function SmsMarketingTemplate({ data }) {
             <h2 className="fw-bold" style={{ fontSize: "30px" }}>
               Interest-Based Campaign Segmentation
             </h2>
-            <p className="rs-subtitle">
+            <p className="rs-subtitle text-dark">
               Organize SMS campaigns around relevant audience interests to
               create more focused business messages. Interest-based segmentation
               can help businesses tailor promotions and updates to audience
@@ -701,7 +701,7 @@ export default function SmsMarketingTemplate({ data }) {
                     Why Businesses Use Bulk SMS Marketing
                   </h2>
 
-                  <p className="rs-subtitle mb-4">
+                  <p className="rs-subtitle text-white mb-4">
                     Bulk SMS marketing gives businesses a direct way to
                     communicate with customers through timely and relevant
                     messages. It can support promotions, appointment reminders,
@@ -709,7 +709,7 @@ export default function SmsMarketingTemplate({ data }) {
                     communication.
                   </p>
 
-                  <p className="rs-subtitle">
+                  <p className="rs-subtitle text-white">
                     Campaigns can be scheduled and organized around different
                     audience groups, helping businesses manage messaging more
                     efficiently. RedSpider provides practical tools for campaign
@@ -727,7 +727,7 @@ export default function SmsMarketingTemplate({ data }) {
       {validFaqs.length > 0 && (
         <section
           id="rs-faq-sec"
-          className="home-faq rs-faq-sec section pb-5 pt-0 light-background"
+          className="home-faq rs-faq-sec section pb-5  light-background"
         >
           <div className="container rs-home-faq-box">
             <div className="text-center mb-3 border-bottom pb-3">

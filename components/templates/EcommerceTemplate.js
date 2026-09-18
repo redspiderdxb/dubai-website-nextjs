@@ -50,7 +50,7 @@ export default function EcommerceTemplate({ data }) {
     show_technologies = true,
     show_faqs = true,
     show_cta = true,
-    features_title = "Ecommerce Website Solutions We Offer",
+    features_title = "Explore Our E-commerce Website Solution",
     features_subtitle = "All solutions are built around your products, customers and business goals.",
     benefits_title = "Why Choose RedSpider for Ecommerce Development Services",
     benefits_subtitle = "Stores built for product management, secure checkout and long-term growth.",
@@ -296,7 +296,7 @@ export default function EcommerceTemplate({ data }) {
           <div className="container">
             <div className="rs-creative-head">
               <span className="rs-creative-kicker">What we build</span>
-              <h2>{features_title}</h2>
+              <h2>Explore Our E-commerce Website Solution</h2>
               <p>{features_subtitle}</p>
             </div>
             <div className="rs-creative-card-grid">
@@ -369,12 +369,12 @@ export default function EcommerceTemplate({ data }) {
                 <span className="rs-creative-kicker">Store features</span>
                 <h2>{benefits_title}</h2>
                 <p>{benefits_subtitle}</p>
-                <a className="rs-creative-btn" href={contactHref}>
+                {/* <a className="rs-creative-btn" href={contactHref}>
                   {cta_button_text || "Book a call"}
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a>
+                </a> */}
               </div>
-              <div className="rs-creative-pill-grid">
+              <div className="rs-creative-pill-grid mt-5">
                 {featureItems.map((item, index) => (
                   <article
                     key={`${item.id || item.title}-${index}`}

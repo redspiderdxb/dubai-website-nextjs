@@ -458,6 +458,25 @@
   background: #fff3f5;
 }
 
+.daily-features .df-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.daily-features .df-grid .df-row:nth-child(even) {
+  border-left: 1px solid #eee;
+}
+
+@media (max-width: 767px) {
+  .daily-features .df-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-features .df-grid .df-row:nth-child(even) {
+    border-left: none;
+  }
+}
+
 .sms-target-ser {
   background: url("/assets/img/hero-happ.jpg") -560px 0 no-repeat;
 }

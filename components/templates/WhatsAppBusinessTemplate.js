@@ -249,12 +249,12 @@ export default function WhatsAppBusinessTemplate({ data, service }) {
                     "Answer common questions instantly and stay available outside working hours. The chatbot can welcome customers, understand requirements and guide them to the right service.",
                   )}
                 </p>
-                <a className="rs-creative-btn" href={contactHref}>
+                {/* <a className="rs-creative-btn" href={contactHref}>
                   {source.cta_button_text || "Book a call"}
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a>
+                </a> */}
               </div>
-              <div className="rs-creative-pill-grid">
+              <div className="rs-creative-pill-grid mt-5">
                 {chatbotCapabilities.map((item, index) => (
                   <article
                     key={`${item.title}-${index}`}
@@ -409,12 +409,12 @@ export default function WhatsAppBusinessTemplate({ data, service }) {
                     "Local setup, website integration and ongoing technical assistance.",
                   )}
                 </p>
-                <a className="rs-creative-btn" href={contactHref}>
+                {/* <a className="rs-creative-btn" href={contactHref}>
                   Book a call
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a>
+                </a> */}
               </div>
-              <div className="rs-creative-why__grid">
+              <div className="rs-creative-why__grid mt-5">
                 {whyChooseBenefits.map((item, index) => (
                   <article key={`${item.title}-${index}`} className="rs-creative-why__card">
                     <span className="rs-creative-why__icon" aria-hidden="true">

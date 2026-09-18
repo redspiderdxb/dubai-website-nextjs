@@ -92,42 +92,42 @@ const SEO_SERVICES = [
   {
     title: "Technical SEO",
     icon: "bi-gear",
-    image: "/assets/img/seo/global-seo-img.webp",
+    image: "/assets/img/seo/service/1.webp",
     description:
       "Improve crawlability, indexing, Core Web Vitals, page speed, site architecture, schema and technical website health.",
   },
   {
     title: "On-Page SEO",
     icon: "bi-file-earmark-text",
-    image: "/assets/img/seo/national-seo-img.webp",
+    image: "/assets/img/seo/service/2.webp",
     description:
       "Optimize titles, meta descriptions, headings, content, internal links, URLs and page structure around search intent.",
   },
   {
     title: "Local SEO Dubai",
     icon: "bi-geo-alt",
-    image: "/assets/img/seo/local-seo-img.webp",
+    image: "/assets/img/seo/service/3.webp",
     description:
       "Improve visibility for location-based searches through local landing pages, business information and local search signals.",
   },
   {
     title: "Ecommerce SEO",
     icon: "bi-bag",
-    image: "/assets/img/seo/ecommerce-market-img.webp",
+    image: "/assets/img/seo/service/4.webp",
     description:
       "Optimize product pages, category pages, technical structure and commercial keywords to support organic sales growth.",
   },
   {
     title: "Content SEO",
     icon: "bi-pencil-square",
-    image: "/assets/img/seo/content-marketing-img1.webp",
+    image: "/assets/img/seo/service/5.webp",
     description:
       "Create and optimize service pages, landing pages and supporting content around real customer search intent.",
   },
   {
     title: "Link Building & Authority",
     icon: "bi-link-45deg",
-    image: "/assets/img/seo/gp-img.webp",
+    image: "/assets/img/seo/service/6.webp",
     description:
       "Build relevant backlinks, mentions and authority through quality content and outreach.",
   },
@@ -388,13 +388,13 @@ export default function SeoAgencyTemplate() {
                 <p className="rs-process-text mb-3">
                   RedSpider is a professional SEO agency in Dubai helping
                   businesses improve visibility across Google Search, local
-                  search, AI-powered search experiences and paid advertising.
+                  search, <br></br> AI-powered search experiences and paid advertising.
                 </p>
                 <p className="rs-process-text mb-3">
                   Our SEO services combine technical optimization, content
                   strategy, local SEO, authority building, AI search
-                  optimization and PPC campaign management to attract relevant
-                  traffic, generate qualified leads and support long-term
+                  optimization and PPC campaign management <br></br> to attract relevant
+                  traffic,  generate qualified leads and support long-term
                   growth.
                 </p>
               </div>
@@ -460,7 +460,7 @@ export default function SeoAgencyTemplate() {
                   tabIndex={0}
                 >
                   <div className="row align-items-center g-4 g-lg-5">
-                    <div className="col-lg-6">
+                    <div className="col-lg-8">
                       <div className="seo-approach-copy">
                         <h3>{step.title}</h3>
                         <p>{step.intro}</p>
@@ -486,7 +486,7 @@ export default function SeoAgencyTemplate() {
                         ) : null}
                       </div>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-4">
                       <div className="seo-approach-visual">
                         <Image
                           src={step.image}
@@ -505,54 +505,84 @@ export default function SeoAgencyTemplate() {
       </section>
 
       <section id="seo-services" className="seo-section seo-services">
-        <div className="seo-services-head">
-          <div className="container">
-            <div className="seo-services-head__grid">
-              <div className="seo-services-head__intro">
-                <span className="seo-kicker">What we deliver</span>
-                <h2>SEO Services We Offer</h2>
-                <p className="seo-section-head__lead">
-                  Want to generate more traffic to your website? We know how to
-                  drive long-term growth
-                </p>
+        <div className="container">
+          <div className="seo-services-head">
+            <div className="seo-services-kicker">
+              <span className="seo-kicker">What we deliver</span>
+            </div>
+            <h2>
+              Our <span> 
+                 SEO Services </span>
+            </h2>
+            <p className="seo-section-head__lead">
+              Want to generate more traffic to your website? We know how to
+              drive long-term growth
+            </p>
+          </div>
+
+          <div className="seo-service-grid">
+            {SEO_SERVICES.map((service, index) => (
+              <article
+                key={service.title}
+                className={`seo-service-card seo-service-card--${index + 1}`}
+              >
+                <span className="seo-service-card__badge" aria-hidden="true">
+                  <i className={`bi ${service.icon}`} />
+                </span>
+                <div className="seo-service-card__media">
+                  <span className="seo-service-card__blob" aria-hidden="true" />
+                  <Image
+                    src={service.image}
+                    alt=""
+                    width={120}
+                    height={120}
+                    unoptimized
+                  />
+                </div>
+                <div className="seo-service-card__body">
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
+                  {/* <span className="seo-service-card__more">
+                    Learn more
+                    <i className="bi bi-arrow-right" aria-hidden="true" />
+                  </span> */}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="seo-services-benefits">
+            <div className="seo-services-benefit">
+              <span className="seo-services-benefit__icon" aria-hidden="true">
+                <i className="bi bi-graph-up-arrow" />
+              </span>
+              <div>
+                <strong>Higher Rankings</strong>
+                <p>Get found by more customers</p>
               </div>
-              <div className="seo-services-head__copy">
+            </div>
+            <div className="seo-services-benefit">
+              <span className="seo-services-benefit__icon" aria-hidden="true">
+                <i className="bi bi-people" />
+              </span>
+              <div>
+                <strong>More Qualified Traffic</strong>
                 <p>
-                  Our SEO services are designed to deliver measurable results
-                  through smart planning, research, and continuous improvement.
-                  We blend over 13 years of professional SEO experience with
-                  proven strategies that help businesses gain visibility,
-                  attract genuine customers, and stay ahead in search results.
-                  Every service we provide is customized to your business type,
-                  target audience, and market goals.
+                 Attract the right audience
+
                 </p>
               </div>
             </div>
+            <div className="seo-services-benefit">
+              <span className="seo-services-benefit__icon" aria-hidden="true">
+                <i className="bi bi-trophy" />
+              </span>
+              <div>
+                <strong>Sustainable Growth</strong>
+                <p>Build long-term success</p>
+              </div>
+            </div>
           </div>
-          <div className="seo-services-head__deco" aria-hidden="true" />
-        </div>
-
-        <div className="seo-service-grid">
-          {SEO_SERVICES.map((service, index) => (
-            <article
-              key={service.title}
-              className={`seo-service-card seo-service-card--${index + 1}`}
-            >
-              <div className="seo-service-card__media">
-                <Image
-                  src={service.image}
-                  alt=""
-                  width={120}
-                  height={88}
-                  unoptimized
-                />
-              </div>
-              <div className="seo-service-card__body">
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </div>
-            </article>
-          ))}
         </div>
       </section>
 

@@ -458,6 +458,25 @@
   background: #fff3f5;
 }
 
+.daily-features .df-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.daily-features .df-grid .df-row:nth-child(even) {
+  border-left: 1px solid #eee;
+}
+
+@media (max-width: 767px) {
+  .daily-features .df-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-features .df-grid .df-row:nth-child(even) {
+    border-left: none;
+  }
+}
+
 .sms-target-ser {
   background: url("/assets/img/hero-happ.jpg") -560px 0 no-repeat;
 }
@@ -4646,4 +4665,27 @@
     animation: none !important;
     transition: none !important;
   }
+}
+
+
+.rs-fotnd p{
+      font-size: 15px !important; 
+}
+
+
+.daily-features .check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #000000;
+    color: #fffdfd;
+    font-size: 14px;
+    transition: all 0.35s ease;
+}
+.home-faq h2 {
+    font-size: 42px !important;
+    font-weight: var(--heading-font-weight) !important;
 }

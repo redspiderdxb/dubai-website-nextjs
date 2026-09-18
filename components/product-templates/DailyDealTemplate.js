@@ -115,7 +115,7 @@ export default function DailyDealTemplate({ data }) {
           <div className="container" >
             {/* Row 1 : Title */}
             <div className="row align-items-center text-center text-lg-start mb-5">
-              <div className="col-12 col-lg-10">
+              <div className="col-12 col-lg-12">
                 <h2 className="hero-titleinner text-center text-lg-start">
                 Launch Your Platform with the Best Daily Deal Website Script
                 </h2>
@@ -175,7 +175,7 @@ export default function DailyDealTemplate({ data }) {
             <h2 className="fw-bold mb-4">
               {intro_main_heading || "What is Groupon/Cobone?"}
             </h2>
-            <p className="rs-subtitle">
+            <p className="rs-subtitle text-dark">
               {intro_description ||
                 "Launched in 2008, Groupon/Cobone has taken the web world by storm. Groupon is a deal of the day website that offers you daily discounted deals which range from restaurants, shopping to air tickets and package tours. Groupon is based on the simple concept of making all the amazing deals to their subscribers each day. Users can easily sign up for daily alerts of the deals. Anyone who likes it can select and buy a deal easily."}
             </p>
@@ -222,7 +222,7 @@ export default function DailyDealTemplate({ data }) {
       <section className="card-icon-types section dark-background line-bg-dark pb-4">
         <div className="container">
           <div className="row g-4 align-items-stretch">
-            <div className="col-lg-4">
+            <div className="col-lg-2">
               <div className="rs-left-card h-100 d-flex flex-column justify-content-between">
                 <div>
                   <h4 className="mt-4">Why us?</h4>
@@ -236,17 +236,14 @@ export default function DailyDealTemplate({ data }) {
                     </span>
                   </div>
                 </div>
-                <div className="mt-5 quick-contect">
-                  <small>Quick Contact</small>
-                  <h5>: 971555515475</h5>
-                </div>
+               
               </div>
             </div>
 
-            <div className="col-lg-8">
+            <div className="col-lg-10">
               <div className="row g-4">
                 <div className="col-12">
-                  <div className="rs-card">
+                  <div className="rs-card rs-fotnd">
                     <p>
                       Groupon/Cobone is a very fast growing and successful
                       business trend. Now is the time to join this new ecommerce
@@ -303,14 +300,16 @@ export default function DailyDealTemplate({ data }) {
             <div className="text-center">Diamond Version</div>
           </div>
 
-          {diamondFeatures.map((feature, index) => (
-            <div className="df-row" key={index}>
-              <div>{feature}</div>
-              <div className="df-right">
-                <span className="check">✔</span>
+          <div className="df-grid">
+            {diamondFeatures.map((feature, index) => (
+              <div className="df-row" key={index}>
+                <div>{feature}</div>
+                <div className="df-right">
+                  <span className="check">✔</span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
 
           <div className="df-row highlight">
             <div>iPhone, Android Mobile Application Development available</div>

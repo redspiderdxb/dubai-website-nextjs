@@ -367,12 +367,12 @@ export default function HostingTemplate({ data }) {
                 <span className="rs-creative-kicker">Included with hosting</span>
                 <h2>{benefits_title}</h2>
                 <p>{benefits_subtitle}</p>
-                <a className="rs-creative-btn" href={contactHref}>
+                {/* <a className="rs-creative-btn" href={contactHref}>
                   {cta_button_text || "Book a call"}
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a>
+                </a> */}
               </div>
-              <div className="rs-creative-pill-grid">
+              <div className="rs-creative-pill-grid mt-5">
                 {hostingBenefitsList.map((benefit, index) => {
                   const text =
                     typeof benefit === "string"

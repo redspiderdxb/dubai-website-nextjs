@@ -402,12 +402,12 @@ export default function LogoDesignTemplate({ data }) {
                 <span className="rs-creative-kicker">Deliverables</span>
                 <h2>{benefits_title}</h2>
                 <p>{benefits_subtitle}</p>
-                <a className="rs-creative-btn" href={contactHref}>
+                {/* <a className="rs-creative-btn" href={contactHref}>
                   {cta_button_text || "Book a call"}
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a>
+                </a> */}
               </div>
-              <div className="rs-creative-pill-grid">
+              <div className="rs-creative-pill-grid mt-5">
                 {formatsData.map((item, index) => (
                   <article
                     key={`${item.id || item.name}-${index}`}

@@ -361,13 +361,13 @@ export default function BrochureDesignTemplate({ data }) {
                     businesses across the UAE.
                   </p>
                 )}
-                <a className="rs-creative-btn" href={contactHref}>
+                {/* <a className="rs-creative-btn" href={contactHref}>
                   {cta_button_text || "Book a call"}
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a>
+                </a> */}
               </div>
 
-              <div className="rs-creative-why__grid">
+              <div className="rs-creative-why__grid mt-5">
                 {whyChooseCards.map((item, index) => (
                   <article key={`${item.id || "why"}-${index}`} className="rs-creative-why__card">
                     <span className="rs-creative-why__icon" aria-hidden="true">

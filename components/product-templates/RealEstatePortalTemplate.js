@@ -531,15 +531,15 @@ export default function RealEstatePortalTemplate({ data }) {
           PORTFOLIO INTRO
       ============================================ */}
 
-      <section
-        id="section-two"
-        className="section dynamic-text effect-title pb-0"
-      >
-        <div className="container">
-          <div className="dynamic-text-heading">
-            <div className="dynamic-text-clone">
-              <div>500+ Successful Projects</div>
-              <div>Delivered Across Dubai & UAE</div>
+      <section className="re-process py-5 pb-0">
+        <div className="container py-lg-5">
+          <div className="row justify-content-center text-center">
+            <div className="col-lg-10" data-aos="fade-up">
+              <div className="title-wrap">
+                <h2 className="fs-h4 fw-bold">
+                  500+ Successful Projects Delivered Across Dubai & UAE
+                </h2>
+              </div>
             </div>
           </div>
         </div>
@@ -549,7 +549,7 @@ export default function RealEstatePortalTemplate({ data }) {
           PORTFOLIO
       ============================================ */}
 
-      <section id="portfolio" className="portfolio section">
+      <section id="portfolio" className="portfolio section pt-0">
         <div className="container">
           <div
             className="isotope-layout"
