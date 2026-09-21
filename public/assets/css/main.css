@@ -596,6 +596,122 @@ h6 {
   padding-left: 23px;
 }
 
+/* Services desktop mega-menu */
+.rs-main-header .rs-navmenu>ul>li.rs-services-dropdown>.rs-services-mega-menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 28px;
+  row-gap: 0;
+  left: 50%;
+  width: 650px;
+  min-width: 650px;
+  margin-left: -325px;
+  padding: 22px 26px 24px;
+  background: #090909;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.rs-main-header .rs-services-mega-intro {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 0 14px;
+  padding: 0 0 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.rs-main-header .rs-services-mega-intro>span {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.rs-main-header .rs-services-mega-intro>small {
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.rs-main-header .rs-navmenu .rs-services-mega-menu>li.rs-services-mega-item {
+  width: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rs-main-header .rs-navmenu .rs-services-mega-menu>li.rs-services-mega-item:nth-child(2),
+.rs-main-header .rs-navmenu .rs-services-mega-menu>li.rs-services-mega-item:nth-child(3) {
+  border-top: 0;
+}
+
+.rs-main-header .rs-navmenu .rs-services-mega-menu>li>.rs-services-mega-link {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+     padding: 5px 0 !important;
+  border-left: 0;
+  background: transparent;
+  color: #fff;
+  text-transform: none;
+  white-space: normal;
+}
+
+.rs-main-header .rs-services-mega-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+ 
+  background: rgba(255, 255, 255, 0.045);
+  color: #fff;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.rs-main-header .rs-services-mega-icon i {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.rs-main-header .rs-services-mega-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rs-main-header .rs-services-mega-name {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.rs-main-header .rs-services-mega-description {
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.rs-main-header .rs-navmenu .rs-services-mega-menu>li>.rs-services-mega-link:hover {
+  padding-left: 8px;
+  border-left: 0;
+  background: rgba(255, 255, 255, 0.055);
+  color: #fff;
+}
+
+.rs-main-header .rs-services-mega-menu>li>.rs-services-mega-link:hover .rs-services-mega-icon {
+  border-color: #d20000;
+  background: #d20000;
+}
+
+.rs-main-header .rs-services-mega-menu>li>.rs-services-mega-link:hover .rs-services-mega-description {
+  color: rgba(255, 255, 255, 0.78);
+}
+
 /*--------------------------------------------------------------
 # BOTTOM ROW
 --------------------------------------------------------------*/
@@ -879,11 +995,20 @@ h6 {
 
   /* Open mobile dropdown */
   .rs-main-header .rs-navmenu .dropdown.rs-dropdown-open>.rs-dropdown-menu {
-    max-height: 600px;
+    max-height: 741px !important;
 
     opacity: 1;
     visibility: visible;
   }
+
+
+      .rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu {
+       
+        padding: 0 14px 0px !important;
+     
+    }
+
+
 
   /* Mobile dropdown items */
   .rs-main-header .rs-navmenu .dropdown>.rs-dropdown-menu>li {
@@ -904,6 +1029,54 @@ h6 {
     background: rgba(210, 0, 0, 0.12);
 
     border-left: 0;
+  }
+
+  /* Keep Services as the existing compact, expandable mobile list. */
+  .rs-main-header .rs-navmenu>ul>li.rs-services-dropdown>.rs-services-mega-menu {
+    display: block;
+    left: auto;
+    width: 100%;
+    min-width: 100%;
+    margin-left: 0;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border: 0;
+  }
+
+  .rs-main-header .rs-services-mega-intro,
+  .rs-main-header .rs-services-mega-icon,
+  .rs-main-header .rs-services-mega-description {
+    display: none;
+  }
+
+  .rs-main-header .rs-navmenu .rs-services-mega-menu>li.rs-services-mega-item {
+    width: 100%;
+    border-top: 0;
+  }
+
+  .rs-main-header .rs-navmenu .rs-services-mega-menu>li>.rs-services-mega-link {
+    display: flex;
+    min-height: 0;
+    padding: 11px 14px;
+    background: transparent;
+    color: #fff;
+    font-size: 13px;
+  }
+
+  .rs-main-header .rs-services-mega-copy {
+    display: block;
+  }
+
+  .rs-main-header .rs-services-mega-name {
+    color: inherit;
+    font-size: inherit;
+    font-weight: 400;
+    line-height: inherit;
+  }
+
+  .rs-main-header .rs-navmenu .rs-services-mega-menu>li>.rs-services-mega-link:hover {
+    padding-left: 18px;
+    background: rgba(210, 0, 0, 0.12);
   }
 
   /* Call */
@@ -2920,3 +3093,144 @@ section,
     font-weight: var(--heading-font-weight);
 }
 
+
+
+/* =========================================================
+   Services mega-menu — MOBILE / TABLET
+   Same visual language as desktop, single column, touch-friendly
+   ========================================================= */
+
+@media (max-width: 991px) {
+  li.rs-services-mega-intro {
+    display: none !important;
+}
+
+  /* Intro block — stacks cleanly */
+  .rs-main-header .rs-services-mega-intro {
+    grid-column: 1 / -1;
+    gap: 4px;
+    margin: 0 0 10px;
+    padding: 0 0 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .rs-main-header .rs-services-mega-intro > span {
+    font-size: 14px;
+  }
+
+  .rs-main-header .rs-services-mega-intro > small {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* Items — full width, thicker touch rows */
+  .rs-main-header .rs-navmenu .rs-services-mega-menu > li.rs-services-mega-item {
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Reset the desktop "first two items have no top border" rule */
+  .rs-main-header .rs-navmenu .rs-services-mega-menu > li.rs-services-mega-item:nth-child(2),
+  .rs-main-header .rs-navmenu .rs-services-mega-menu > li.rs-services-mega-item:nth-child(3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Link row — icon + copy, taller tap target */
+  .rs-main-header .rs-navmenu .rs-services-mega-menu > li > .rs-services-mega-link {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    padding: 12px 6px !important;
+    border-left: 0;
+    background: transparent;
+    color: #fff;
+    text-transform: none;
+    white-space: normal;
+    min-height: 60px;
+  }
+
+  /* Icon — slightly bigger on mobile */
+  .rs-main-header .rs-services-mega-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .rs-main-header .rs-services-mega-icon i {
+    font-size: 18px;
+  }
+
+  /* Copy */
+  .rs-main-header .rs-services-mega-copy {
+    gap: 4px;
+  }
+
+  .rs-main-header .rs-services-mega-name {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .rs-main-header .rs-services-mega-description {
+    font-size: 12px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Touch feedback (active state instead of hover on touch) */
+  .rs-main-header .rs-navmenu .rs-services-mega-menu > li > .rs-services-mega-link:active {
+    background: rgba(255, 255, 255, 0.07);
+    padding-left: 12px;
+  }
+
+  .rs-main-header .rs-services-mega-menu > li > .rs-services-mega-link:active .rs-services-mega-icon {
+    border-color: #d20000;
+    background: #d20000;
+  }
+
+  /* Keep hover working on tablets with pointer */
+  @media (hover: hover) {
+    .rs-main-header .rs-navmenu .rs-services-mega-menu > li > .rs-services-mega-link:hover {
+      padding-left: 12px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .rs-main-header .rs-services-mega-menu > li > .rs-services-mega-link:hover .rs-services-mega-icon {
+      border-color: #d20000;
+      background: #d20000;
+    }
+
+    .rs-main-header .rs-services-mega-menu > li > .rs-services-mega-link:hover .rs-services-mega-description {
+      color: rgba(255, 255, 255, 0.78);
+    }
+  }
+}
+
+/* Small phones — tighter padding */
+@media (max-width: 575px) {
+  .rs-main-header .rs-navmenu > ul > li.rs-services-dropdown > .rs-services-mega-menu {
+    padding: 0px 12px 0px;
+  }
+
+  .rs-main-header .rs-navmenu .rs-services-mega-menu > li > .rs-services-mega-link {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 12px;
+    padding: 11px 4px !important;
+    min-height: 56px;
+  }
+
+  .rs-main-header .rs-services-mega-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .rs-main-header .rs-services-mega-icon i {
+    font-size: 16px;
+  }
+
+  .rs-main-header .rs-services-mega-name {
+    font-size: 13.5px;
+  }
+
+  .rs-main-header .rs-services-mega-description {
+    font-size: 11.5px;
+  }
+}

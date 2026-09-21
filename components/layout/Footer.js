@@ -87,6 +87,9 @@ export default function Footer() {
     },
   ];
 
+  const mid = Math.ceil(services.length / 2);
+  const leftServices = services.slice(0, 6);
+  const rightServices = services.slice(6);
   /* =====================================================
    FOOTER MENU
 ===================================================== */
@@ -162,7 +165,7 @@ export default function Footer() {
                 LEFT COLUMN
             ================================================= */}
 
-            <div className="col-lg-4 col-md-6 rs-footer-left">
+            <div className="col-lg-3 col-md-6 rs-footer-left">
               {/* =================================================
                   HEADING + IMAGE
               ================================================= */}
@@ -205,11 +208,11 @@ export default function Footer() {
                 OUR SERVICES
             ================================================= */}
 
-            <div className="col-lg-4 col-md-6 rs-footer-services-col">
+            <div className="col-lg-3 col-md-6 rs-footer-services-col">
               <div className="rs-footer-services-heading">Our Services</div>
 
               <ul className="rs-services">
-                {services.map((service) => (
+                {leftServices.map((service) => (
                   <li key={service.name}>
                     <Link href={service.path}>{service.name}</Link>
                   </li>
@@ -217,12 +220,23 @@ export default function Footer() {
               </ul>
             </div>
 
+            <div className="col-lg-3 col-md-6 rs-footer-services-col">
+              {/* <div className="rs-footer-services-heading"></div> */}
+
+              <ul className="rs-services phone-rs-services">
+                {rightServices.map((service) => (
+                  <li key={service.name}>
+                    <Link href={service.path}>{service.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
             {/* =================================================
                 RIGHT COLUMN
                 EMAIL / PHONE / SOCIAL / GET IN TOUCH
             ================================================= */}
 
-            <div className="col-lg-4 col-md-12 rs-footer-right">
+            <div className="col-lg-3 col-md-12 rs-footer-right">
               {/* EMAIL */}
 
               <a
@@ -287,7 +301,7 @@ export default function Footer() {
                   <i className="bi bi-google-play" aria-hidden="true"></i>
                 </a>
 
-                <div className="rs-footer-links bottom">
+                <div className="rs-footer-links bottom d-nonee">
                   <Link href="/contact-us/" className="footer-touch-link">
                     Get In Touch
                   </Link>

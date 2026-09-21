@@ -16,9 +16,9 @@ import {
 } from "../../lib/formValidation";
 
 const WHATSAPP_URL = "https://wa.me/971555515475";
-const CONTACT_ANCHOR = "#smo-contact";
+const CONTACT_ANCHOR = "/contact-us";
 const SOCIAL_BLOCK_IMAGE =
-  "https://www.moonbox.ae/social-media-agency-in-dubai/assets/images/social-block.png";
+  "/assets/img/smo/social-block.png";
 
 const IMG = {
   astronaut: "/assets/img/smo/astronaut.webp",
@@ -90,17 +90,17 @@ const PACKAGES = [
   {
     title: "Brand Presence",
     body: "Instagram and LinkedIn content, captions, Reels planning and reporting for a consistent brand presence.",
-    image: "/assets/img/smo/package-brand-presence.png",
+    image: "/assets/img/smo/1.png",
   },
   {
     title: "Social + Search",
     body: "Reels, paid social, Google Search and landing pages built for enquiries, bookings and sales.",
-    image: "/assets/img/smo/package-social-search.png",
+    image: "/assets/img/smo/2.png",
   },
   {
     title: "Growth Engine",
     body: "Brand, creative, paid social, search, tracking and reporting working together across every priority platform.",
-    image: "/assets/img/smo/package-growth-engine.png",
+    image: "/assets/img/smo/3.png",
   },
 ];
 
@@ -1001,9 +1001,9 @@ export default function SocialMediaAgencyTemplate() {
                     ))}
                   </div>
                 </div>
-                <span className="smo-capx-arrow">
+                {/* <span className="smo-capx-arrow">
                   <Arrow />
-                </span>
+                </span> */}
               </a>
             ))}
           </div>
@@ -1069,35 +1069,74 @@ export default function SocialMediaAgencyTemplate() {
         </div>
       </section>
 
-      <section className="smo-paper smo-packages" id="smo-packages">
-        <div className="container smo-wrap">
-          <div className="smo-head smo-reveal">
-            <span className="smo-eye">Pick the level</span>
-            <h2>Keep the lead-gen standard.</h2>
-            <p>
+      <section className="rs-smo-packages" id="smo-packages">
+        <div className="container">
+          <div className="rs-smo-packages__head smo-reveal">
+            <span className="rs-smo-packages__eyebrow">
+              <span
+                className="rs-smo-packages__eyebrow-line"
+                aria-hidden="true"
+              />
+              Pick the level
+              <span
+                className="rs-smo-packages__eyebrow-line"
+                aria-hidden="true"
+              />
+            </span>
+            <h2 className="rs-smo-packages__title">
+              Keep the{" "}
+              <span className="rs-smo-packages__title-accent">lead-gen</span>{" "}
+              standard.
+            </h2>
+            <p className="rs-smo-packages__intro">
               Some brands need Instagram and LinkedIn handled properly. Others
               need the full growth stack: social, ads, landing pages and
               reporting. Scope follows the outcome.
             </p>
           </div>
-          <div className="smo-pkg-grid">
+
+          <div className="row rs-smo-packages__grid">
             {PACKAGES.map((pack, index) => (
-              <article
-                className={`smo-pkg smo-reveal smo-d${index + 1}`}
-                key={pack.title}
-              >
-                <div className="smo-pkg__visual" aria-hidden="true">
-                  <Image
-                    src={pack.image}
-                    alt=""
-                    width={256}
-                    height={256}
-                    unoptimized
-                  />
-                </div>
-                <h3>{pack.title}</h3>
-                <p>{pack.body}</p>
-              </article>
+              <div className="col-lg-4 col-md-6 col-12" key={pack.title}>
+                <article
+                  className={`rs-smo-package-card smo-reveal smo-d${index + 1}`}
+                >
+                  <div className="rs-smo-package-card__num">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <span
+                      className="rs-smo-package-card__num-line"
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <div
+                    className="rs-smo-package-card__media"
+                    aria-hidden="true"
+                  >
+                    <Image
+                      src={pack.image}
+                      alt=""
+                      width={512}
+                      height={512}
+                      unoptimized
+                    />
+                  </div>
+
+                  <div className="rs-smo-package-card__body">
+                    <h3 className="rs-smo-package-card__title">{pack.title}</h3>
+                    <p className="rs-smo-package-card__text">{pack.body}</p>
+                  </div>
+
+                  {/* <a
+                    className="rs-smo-package-card__cta"
+                    href={CONTACT_ANCHOR}
+                    aria-label={`Learn more about ${pack.title}`}
+                  >
+                    <span>Learn more</span>
+                    <Arrow />
+                  </a> */}
+                </article>
+              </div>
             ))}
           </div>
         </div>
@@ -1125,7 +1164,7 @@ export default function SocialMediaAgencyTemplate() {
           <div className="smo-manifesto__visual" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element -- external asset with a local fallback */}
             <img
-              src="https://go.moonbox.ae/wp-content/themes/moonbox-lp/pages/_shared/assets/brand/shiny-logo-transparent.webp"
+              src="/assets/img/smo/shiny-logo-transparent.webp"
               alt=""
               onError={(event) => {
                 event.currentTarget.src = IMG.glass22;
@@ -1135,7 +1174,7 @@ export default function SocialMediaAgencyTemplate() {
         </div>
       </section>
 
-      <section className="smo-paper smo-why">
+      {/* <section className="smo-paper smo-why">
         <div className="container smo-wrap">
           <div className="smo-head smo-reveal">
             <span className="smo-eye">Why RedSpider</span>
@@ -1164,7 +1203,7 @@ export default function SocialMediaAgencyTemplate() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="smo-paper smo-conversations">
         <div className="container smo-wrap">
@@ -1215,7 +1254,7 @@ export default function SocialMediaAgencyTemplate() {
         </div>
       </section>
 
-      <section className="smo-pf-section">
+      <section className="smo-pf-section pt-0">
         <div className="container smo-wrap">
           <div className="smo-pf-head smo-reveal">
             <span className="smo-pf-eye">Platform focus</span>
@@ -1250,7 +1289,7 @@ export default function SocialMediaAgencyTemplate() {
           {/* eslint-disable-next-line @next/next/no-img-element -- external asset */}
           <img
             className="smo-urg-bg__img"
-            src="https://go.moonbox.ae/wp-content/themes/moonbox-lp/pages/_shared/assets/quote/floating-man2.webp"
+            src="/assets/img/smo/floating-man2.webp"
             alt=""
             loading="lazy"
             onError={(event) => {
@@ -1322,16 +1361,14 @@ export default function SocialMediaAgencyTemplate() {
         </div>
       </section>
 
-      <section className="smo-data-section" id="smo-data">
+      <section className="rs-dd-section" id="smo-data">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-10 col-xl-9 text-center">
-              <h2 className="smo-data-heading smo-reveal">
-                Data-Driven Decisions,
-               
-                Dynamic Growth
+            <div className="col-lg-12 col-xl-12 text-center">
+              <h2 className="rs-dd-heading smo-reveal">
+                Data-Driven Decisions, Dynamic Growth
               </h2>
-              <p className="smo-data-intro smo-reveal smo-d1">
+              <p className="rs-dd-intro smo-reveal smo-d1">
                 Launch with a data-backed social media marketing service in
                 Dubai. We provide businesses and agencies with suitable insights
                 to achieve measurable digital growth.
@@ -1339,68 +1376,90 @@ export default function SocialMediaAgencyTemplate() {
             </div>
           </div>
 
-          <div className="row smo-data-row align-items-stretch g-0">
-            <div className="col-lg-6 smo-data-media smo-reveal smo-reveal-l">
-              <img
-                src="https://www.moonbox.ae/social-media-agency-in-dubai/assets/images/engine-1.png"
-                alt="Website analytics dashboard"
-                loading="lazy"
-              />
+          <div className="row rs-dd-grid">
+            <div className="col-lg-4 col-md-6 col-12">
+              <article className="rs-dd-card smo-reveal smo-d1">
+                <div className="rs-dd-card__media">
+                  <img
+                    src="/assets/img/smo/data-driven/1.png"
+                    alt="Website analytics dashboard"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="rs-dd-card__inner">
+                  <div className="rs-dd-card__num">
+                    <span>01</span>
+                    <span className="rs-dd-card__num-line" aria-hidden="true" />
+                  </div>
+                  <h3 className="rs-dd-card__title">Website Optimization</h3>
+                  <p className="rs-dd-card__text">
+                    We offer data-driven social media marketing services in
+                    Dubai that are designed to optimize your website
+                    performance. With a focus on lead generation, we help you
+                    achieve measurable growth.
+                  </p>
+                  <a className="rs-dd-card__cta" href={CONTACT_ANCHOR}>
+                    <span>Start Now</span>
+                    <Arrow />
+                  </a>
+                </div>
+              </article>
             </div>
-            <div className="col-lg-6 smo-data-body smo-data-body--right smo-reveal smo-reveal-r">
-              <h3>Website Optimization</h3>
-              <p>
-                We offer data-driven social media marketing services in Dubai
-                that are designed to optimize your website performance. With a
-                focus on lead generation, we help you achieve measurable growth.
-              </p>
-              <a className="smo-data-btn" href={CONTACT_ANCHOR}>
-                Start Now
-                <Arrow />
-              </a>
-            </div>
-          </div>
 
-          <div className="row smo-data-row align-items-stretch g-0">
-            <div className="col-lg-6 order-lg-2 smo-data-media smo-reveal smo-reveal-r">
-              <img
-                src="https://www.moonbox.ae/social-media-agency-in-dubai/assets/images/engine-2.png"
-                alt="Light trails representing targeted traffic"
-                loading="lazy"
-              />
+            <div className="col-lg-4 col-md-6 col-12">
+              <article className="rs-dd-card smo-reveal smo-d2">
+                <div className="rs-dd-card__media">
+                  <img
+                    src="/assets/img/smo/data-driven/2.png"
+                    alt="Light trails representing targeted traffic"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="rs-dd-card__inner">
+                  <div className="rs-dd-card__num">
+                    <span>02</span>
+                    <span className="rs-dd-card__num-line" aria-hidden="true" />
+                  </div>
+                  <h3 className="rs-dd-card__title">Targeted Traffic</h3>
+                  <p className="rs-dd-card__text">
+                    With our data-driven approach to SEO and paid campaigns, we
+                    help you attract the right audience and convert them into
+                    customers.
+                  </p>
+                  <a className="rs-dd-card__cta" href={CONTACT_ANCHOR}>
+                    <span>Boost Visibility</span>
+                    <Arrow />
+                  </a>
+                </div>
+              </article>
             </div>
-            <div className="col-lg-6 order-lg-1 smo-data-body smo-reveal smo-reveal-l">
-              <h3>Targeted Traffic</h3>
-              <p>
-                With our data-driven approach to SEO and paid campaigns, we help
-                you attract the right audience and convert them into customers.
-              </p>
-              <a className="smo-data-btn" href={CONTACT_ANCHOR}>
-                Boost Visibility
-                <Arrow />
-              </a>
-            </div>
-          </div>
 
-          <div className="row smo-data-row align-items-stretch g-0">
-            <div className="col-lg-6 smo-data-media smo-reveal smo-reveal-l">
-              <img
-                src="https://www.moonbox.ae/social-media-agency-in-dubai/assets/images/engine-3.png"
-                alt="Stopwatch representing performance"
-                loading="lazy"
-              />
-            </div>
-            <div className="col-lg-6 smo-data-body smo-data-body--right smo-reveal smo-reveal-r">
-              <h3>Remarkable Performance</h3>
-              <p>
-                Our social media marketing services in Dubai are also about
-                performance. With a focus on tracking, we help you improve your
-                marketing campaigns for better growth.
-              </p>
-              <a className="smo-data-btn" href={CONTACT_ANCHOR}>
-                Know More
-                <Arrow />
-              </a>
+            <div className="col-lg-4 col-md-6 col-12">
+              <article className="rs-dd-card smo-reveal smo-d3">
+                <div className="rs-dd-card__media">
+                  <img
+                    src="/assets/img/smo/data-driven/3.png"
+                    alt="Stopwatch representing performance"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="rs-dd-card__inner">
+                  <div className="rs-dd-card__num">
+                    <span>03</span>
+                    <span className="rs-dd-card__num-line" aria-hidden="true" />
+                  </div>
+                  <h3 className="rs-dd-card__title">Remarkable Performance</h3>
+                  <p className="rs-dd-card__text">
+                    Our social media marketing services in Dubai are also about
+                    performance. With a focus on tracking, we help you improve
+                    your marketing campaigns for better growth.
+                  </p>
+                  <a className="rs-dd-card__cta" href={CONTACT_ANCHOR}>
+                    <span>Know More</span>
+                    <Arrow />
+                  </a>
+                </div>
+              </article>
             </div>
           </div>
         </div>

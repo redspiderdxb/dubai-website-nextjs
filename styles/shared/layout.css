@@ -3183,7 +3183,7 @@ main:has(.contact-cta)~.rs-footer-sec::before {
   .rs-footer-intro .swim-foot {
     position: absolute;
     right: 0;
-    top: 60px;
+    top: 101px;
     margin-top: 0;
     max-width: 150px;
     width: 150px;
@@ -4167,8 +4167,20 @@ main:has(.contact-cta)~.rs-footer-sec::before {
   margin-top: -123px;
 }
 
+
 @media (max-width: 605px) {
   .rs-footer-right .rs-footer-links.bottom {
     display: none !important;
   }
+
+  ul.rs-services.phone-rs-services {
+    margin-top: -56px;
+}
+
+}
+
+
+
+.rs-footer-links.bottom.d-nonee {
+    display: none !important;
 }

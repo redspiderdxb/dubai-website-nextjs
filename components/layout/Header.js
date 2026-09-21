@@ -10,6 +10,94 @@ import {
   resolveHeaderServices,
 } from "../../lib/formServiceOptions";
 
+const SERVICE_MENU_META = {
+  "Web Design & Development": {
+    icon: "bi-code-square",
+    description: "Websites designed to perform and convert.",
+  },
+  "Web Development": {
+    icon: "bi-code-square",
+    description: "Websites designed to perform and convert.",
+  },
+  "eCommerce Website Development": {
+    icon: "bi-bag",
+    description: "Online stores built for seamless selling.",
+  },
+  "Ecommerce Development": {
+    icon: "bi-bag",
+    description: "Online stores built for seamless selling.",
+  },
+  "Real Estate Website Development": {
+    icon: "bi-buildings",
+    description: "Property platforms designed to generate leads.",
+  },
+  "Real Estate Web Design Company": {
+    icon: "bi-buildings",
+    description: "Property platforms designed to generate leads.",
+  },
+  "Mobile App Development": {
+    icon: "bi-phone",
+    description: "Purpose-built apps for iOS and Android.",
+  },
+  "Branding & Logo Design": {
+    icon: "bi-palette",
+    description: "Distinctive identities with a lasting presence.",
+  },
+  "Logo Designing": {
+    icon: "bi-palette",
+    description: "Distinctive identities with a lasting presence.",
+  },
+  "Graphic Design": {
+    icon: "bi-vector-pen",
+    description: "Creative visuals made for every touchpoint.",
+  },
+  "Brochure & Company Profile Design": {
+    icon: "bi-file-earmark-richtext",
+    description: "Sales collateral that tells your story clearly.",
+  },
+  "Brochure Designing": {
+    icon: "bi-file-earmark-richtext",
+    description: "Sales collateral that tells your story clearly.",
+  },
+  "Email Marketing": {
+    icon: "bi-envelope",
+    description: "Campaigns that keep your audience engaged.",
+  },
+  "SMS Marketing": {
+    icon: "bi-chat-dots",
+    description: "Direct messages with measurable impact.",
+  },
+  "SMS Marketing UAE": {
+    icon: "bi-chat-dots",
+    description: "Direct messages with measurable impact.",
+  },
+  "Web Hosting & Server Solutions": {
+    icon: "bi-hdd-network",
+    description: "Secure, reliable hosting for your website.",
+  },
+  "Web Hosting": {
+    icon: "bi-hdd-network",
+    description: "Secure, reliable hosting for your website.",
+  },
+  "WhatsApp Business API Integration": {
+    icon: "bi-whatsapp",
+    description: "Connected customer conversations at scale.",
+  },
+  "Search Engine Optimization": {
+    icon: "bi-graph-up-arrow",
+    description: "Search visibility that drives qualified traffic.",
+  },
+  "Social Media Agency": {
+    icon: "bi-share",
+    description: "Social campaigns that grow your audience.",
+  },
+};
+
+const DEFAULT_SERVICE_MENU_META = {
+  icon: "bi-grid-1x2",
+  description: "Specialist digital services for your business.",
+};
+
 export default function Header() {
   const router = useRouter();
   const {
@@ -272,10 +360,14 @@ export default function Header() {
                   ===================================== */
 
                   if (item.type === "dropdown") {
+                    const isServicesMenu = item.name === "Services";
+
                     return (
                       <li
                         key={item.name}
                         className={`dropdown ${
+                          isServicesMenu ? "rs-services-dropdown" : ""
+                        } ${
                           openDropdown === index ? "rs-dropdown-open" : ""
                         }`}
                       >
@@ -299,18 +391,59 @@ export default function Header() {
 
                         {/* DROPDOWN MENU */}
 
-                        <ul className="rs-dropdown-menu">
+                        <ul
+                          className={`rs-dropdown-menu${
+                            isServicesMenu ? " rs-services-mega-menu" : ""
+                          }`}
+                        >
+                          {isServicesMenu ? (
+                            <li className="rs-services-mega-intro">
+                              <span>Our Services</span>
+                              <br></br>
+                              <small>Digital expertise, all under one roof.</small>
+                            </li>
+                          ) : null}
                           {item.items.length > 0 ? (
-                            item.items.map((subItem, subIndex) => (
-                              <li key={`${item.name}-${subIndex}`}>
+                            item.items.map((subItem, subIndex) => {
+                              const serviceMeta =
+                                SERVICE_MENU_META[subItem.name] ||
+                                DEFAULT_SERVICE_MENU_META;
+
+                              return (
+                              <li
+                                className={
+                                  isServicesMenu ? "rs-services-mega-item" : ""
+                                }
+                                key={`${item.name}-${subIndex}`}
+                              >
                                 <Link
                                   href={subItem.path}
+                                  className={
+                                    isServicesMenu ? "rs-services-mega-link" : undefined
+                                  }
                                   onClick={closeMobileMenu}
                                 >
-                                  {subItem.name}
+                                  {isServicesMenu ? (
+                                    <>
+                                      <span className="rs-services-mega-icon" aria-hidden="true">
+                                        <i className={`bi ${serviceMeta.icon}`}></i>
+                                      </span>
+                                      <span className="rs-services-mega-copy">
+                                        <span className="rs-services-mega-name">
+                                          {subItem.name}
+                                        </span>
+                                        {/* <span className="rs-services-mega-description">
+                                          {serviceMeta.description}
+                                        </span> */}
+                                      </span>
+                                    </>
+                                  ) : (
+                                    subItem.name
+                                  )}
                                 </Link>
                               </li>
-                            ))
+                              );
+                            })
                           ) : item.name === "Products" &&
                             isHeaderNavLoading ? null : (
                             <li>
