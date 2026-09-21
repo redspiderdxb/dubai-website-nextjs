@@ -81,6 +81,10 @@ export default function Footer() {
       name: "Search Engine Optimization",
       path: "/service/seo-agency-dubai",
     },
+    {
+      name: "Social Media Agency",
+      path: "/social-media-agency-in-dubai",
+    },
   ];
 
   /* =====================================================

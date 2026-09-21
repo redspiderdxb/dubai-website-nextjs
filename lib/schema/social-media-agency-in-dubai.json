@@ -1,0 +1,125 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/social-media-agency-in-dubai/#service",
+      "serviceType": "Social Media Marketing",
+      "name": "Social Media Agency Dubai | Social Media Marketing | RedSpider",
+      "description": "Grow your brand with RedSpider, a social media agency in Dubai offering strategy, content creation, social media management, paid ads and lead generation.",
+      "url": "https://www.redspider.ae/social-media-agency-in-dubai/",
+      "image": "https://www.redspider.ae/assets/img/og-image.webp",
+      "provider": { "@id": "https://www.redspider.ae/#localbusiness" },
+      "areaServed": { "@type": "City", "name": "Dubai" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Social Media Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Strategy" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Management" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Creative Content & Graphic Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reels & Short-Form Video" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Paid Social Media Advertising" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Community Management" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Campaign & Promotion Management" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Analytics & Monthly Reporting" } }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/social-media-agency-in-dubai/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.redspider.ae/service/" },
+        { "@type": "ListItem", "position": 3, "name": "Social Media Agency Dubai", "item": "https://www.redspider.ae/social-media-agency-in-dubai/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.redspider.ae/social-media-agency-in-dubai/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does a social media agency in Dubai do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A social media agency helps businesses plan and manage their presence across platforms such as Instagram, Facebook, LinkedIn, TikTok and YouTube. Services can include strategy, content creation, graphic design, video, publishing, paid advertising, community management and performance reporting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which social media platforms should my business use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The right platforms depend on your audience and business objectives. Instagram and TikTok can work well for visual and consumer-focused brands, while LinkedIn is particularly useful for B2B and corporate marketing. Facebook, YouTube and other platforms may also be included depending on your strategy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can RedSpider completely manage our social media accounts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. RedSpider can provide end-to-end social media management including strategy, content planning, creative design, captions, publishing, campaigns and reporting based on the agreed scope."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you create social media graphics, Reels and videos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our social media services can include branded graphics, carousels, Stories, Reels, short-form videos, motion graphics and advertising creatives. Video production requirements can be customised according to the campaign."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does RedSpider manage paid social media advertising?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We can plan and manage paid campaigns for objectives including brand awareness, website traffic, lead generation, WhatsApp enquiries, appointments, ecommerce sales and retargeting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should my company post on social media?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no single posting frequency suitable for every company. The right schedule depends on your industry, platforms, content resources and objectives. We recommend a consistent publishing plan focused on content quality rather than posting simply for frequency."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we approve posts before they are published?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. An approval workflow can be established so planned content is reviewed and approved before it is scheduled or published."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you measure social media marketing performance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Performance can be measured using metrics such as reach, impressions, engagement, audience growth, website traffic, enquiries, leads, cost per lead, conversions and advertising performance. The KPIs are selected according to the objectives of the campaign."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does social media management cost in Dubai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Social media management costs depend on the number of platforms, posting frequency, creative requirements, video production, community management and paid advertising scope. RedSpider prepares customised packages according to your business requirements and marketing objectives."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How quickly can we start social media marketing with RedSpider?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Once the scope is confirmed, we begin with onboarding, account access, brand review and strategy development. The first content calendar and creative direction are then prepared for review before regular publishing and campaign management begins."
+          }
+        }
+      ]
+    }
+  ]
+}
