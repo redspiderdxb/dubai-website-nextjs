@@ -15,10 +15,8 @@ import {
   validateSelect,
 } from "../../lib/formValidation";
 
-const WHATSAPP_URL = "https://wa.me/971555515475";
 const CONTACT_ANCHOR = "/contact-us";
-const SOCIAL_BLOCK_IMAGE =
-  "/assets/img/smo/social-block.png";
+const SOCIAL_BLOCK_IMAGE = "/assets/img/smo/social-block.png";
 
 const IMG = {
   astronaut: "/assets/img/smo/astronaut.webp",
@@ -104,39 +102,6 @@ const PACKAGES = [
   },
 ];
 
-const WHY = [
-  {
-    title: "Strategy before posting",
-    body: "Objectives, audience, and content direction are locked before a single asset goes live.",
-    visual: "/assets/img/smo/package-brand-presence.png",
-  },
-  {
-    title: "Creative + technical team",
-    body: "Design, web, landing pages, and automation sit with the same Dubai digital team.",
-    visual: "/assets/img/smo/package-social-search.png",
-  },
-  {
-    title: "One connected journey",
-    body: "Content, ads, landing pages, and WhatsApp planned as one system — not separate calendars.",
-    visual: "/assets/img/smo/package-growth-engine.png",
-  },
-  {
-    title: "Built around your brand",
-    body: "Typography, colour, and tone stay consistent across feed, stories, and paid creative.",
-    visual: "/assets/img/smo/package-social-search.png",
-  },
-  {
-    title: "Clear reporting",
-    body: "Reach, engagement, enquiries, and campaign performance reviewed against agreed KPIs.",
-    visual: "/assets/img/smo/package-brand-presence.png",
-  },
-  {
-    title: "Dubai-based delivery",
-    body: "Fourteen years of digital work with companies operating in Dubai and the wider UAE.",
-    visual: "/assets/img/smo/package-growth-engine.png",
-  },
-];
-
 const CONVERSATION_CARDS = [
   {
     title: "Engage and Interact",
@@ -189,108 +154,6 @@ const PLATFORMS = [
     name: "Google SEO",
     body: "Local search, technical fixes, content systems and compounding organic demand.",
   },
-];
-
-const PROCESS = [
-  {
-    num: "01",
-    week: "Week 1",
-    title: "Audit",
-    body: "Kick-off, audience map, competitor review, current-channel audit and performance goals.",
-  },
-  {
-    num: "02",
-    week: "Week 2",
-    title: "Plan",
-    body: "Content pillars, visual direction, campaign themes, platform mix and first calendar.",
-  },
-  {
-    num: "03",
-    week: "Week 3",
-    title: "Produce",
-    body: "Reels, statics, captions, ads, landing-page hooks and tracking setup.",
-  },
-  {
-    num: "04",
-    week: "Week 4",
-    title: "Optimise",
-    body: "Publishing rhythm, campaign launch, reporting dashboard and the first optimisation cycle.",
-  },
-];
-
-const TIMELINE = [
-  {
-    day: "Day 1",
-    title: "Kickoff",
-    body: "Access, brand brief and working channel opened.",
-  },
-  {
-    day: "Day 2–3",
-    title: "Audit",
-    body: "Account scan, audience checks and pillars locked.",
-  },
-  {
-    day: "Day 4–5",
-    title: "Sprint",
-    body: "First statics, reels and captions produced for review.",
-  },
-  {
-    day: "Day 6",
-    title: "Approval",
-    body: "Feedback round, calendar and formats confirmed.",
-  },
-  { day: "Day 7", title: "Live", body: "First approved content goes live." },
-  {
-    day: "Day 14",
-    title: "Campaign",
-    body: "Paid campaigns launch where the scope includes ads.",
-  },
-  {
-    day: "Day 30",
-    title: "Review",
-    body: "First optimisation cycle and next-month rhythm.",
-  },
-];
-
-const INDUSTRIES = [
-  {
-    title: "Real Estate",
-    body: "Project launches, agent content, Reels and WhatsApp enquiries.",
-    image: IMG.result1,
-  },
-  {
-    title: "Retail & eCommerce",
-    body: "Product grids, catalogue ads, retargeting and sales creatives.",
-    image: IMG.grid3,
-  },
-  {
-    title: "Hospitality",
-    body: "Food content, offers, seasonal campaigns and location ads.",
-    image: IMG.result3,
-  },
-  {
-    title: "Beauty & Lifestyle",
-    body: "Editorial creative, Reels, promotions and visually led campaigns.",
-    image: IMG.block,
-  },
-  {
-    title: "Healthcare",
-    body: "Service awareness, educational content and appointment campaigns.",
-    image: IMG.grid2,
-  },
-  {
-    title: "Corporate & B2B",
-    body: "LinkedIn, thought leadership and lead-generation campaigns.",
-    image: IMG.grid1,
-  },
-];
-
-const WORK = [
-  { title: "Featured campaign", image: IMG.result1, size: "large" },
-  { title: "Social grid", image: IMG.grid1, size: "grid" },
-  { title: "Feed layout", image: IMG.grid4, size: "grid" },
-  { title: "Short-form video", image: IMG.grid2, size: "video" },
-  { title: "Paid creative", image: IMG.result3, size: "paid" },
 ];
 
 const FAQS = [
@@ -417,7 +280,6 @@ const PLATFORM_ICONS = {
       />
     </svg>
   ),
-
   "Google SEO": (
     <svg viewBox="0 0 24 24" width="26" height="26">
       <circle
@@ -520,250 +382,43 @@ function SmoOdo({ value }) {
   );
 }
 
-function SmoForm() {
-  const {
-    values,
-    handleChange,
-    handleBlur,
-    showError,
-    validateAll,
-    applyServerErrors,
-    reset,
-  } = useFormValidation(INITIAL_FORM, getSmoFieldError);
-
-  const [status, setStatus] = useState({ type: "", message: "" });
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (loading) {
-      return;
-    }
-
-    setStatus({ type: "", message: "" });
-
-    const fieldErrors = validateAll();
-    const firstInvalid = getFirstErrorField(fieldErrors, FIELD_ORDER);
-
-    if (firstInvalid) {
-      focusField(firstInvalid);
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const details = [
-        values.comment.trim(),
-        values.company.trim() ? `Company: ${values.company.trim()}` : "",
-        values.website.trim()
-          ? `Website / Social URL: ${values.website.trim()}`
-          : "",
-      ]
-        .filter(Boolean)
-        .join("\n");
-
-      const payload = {
-        name: values.fullName.trim(),
-        email: values.email.trim(),
-        phone: values.phone.trim(),
-        country: "United Arab Emirates",
-        formSource: "social-media-agency",
-        subject: values.service.trim(),
-        content: details,
-        agree_terms_and_policy: values.agree_terms_and_policy,
-      };
-
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        if (response.status === 422) {
-          applyServerErrors(result?.errors || {}, {
-            name: "fullName",
-            content: "comment",
-            subject: "service",
-          });
-          return;
-        }
-
-        throw new Error(
-          result?.message || "Please check the form details and try again.",
-        );
-      }
-
-      reset();
-      setStatus({
-        type: "success",
-        message:
-          result?.message ||
-          "Thank you. Your enquiry has been submitted successfully.",
-      });
-    } catch (error) {
-      setStatus({
-        type: "error",
-        message:
-          error?.message || "Failed to submit the form. Please try again.",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <form className="smo-form" onSubmit={handleSubmit} noValidate>
-      <FormAlert type={status.type} message={status.message} />
-
-      <div className="smo-form-grid">
-        <FormField
-          id="fullName"
-          label="Your name"
-          required
-          error={showError("fullName")}
-        >
-          <input
-            className="smo-input"
-            id="fullName"
-            name="fullName"
-            placeholder="Full name"
-            value={values.fullName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoComplete="name"
-          />
-        </FormField>
-
-        <FormField id="email" label="Email" required error={showError("email")}>
-          <input
-            className="smo-input"
-            id="email"
-            name="email"
-            type="email"
-            placeholder="you@company.com"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoComplete="email"
-          />
-        </FormField>
-
-        <FormField
-          id="phone"
-          label="Contact number"
-          required
-          error={showError("phone")}
-        >
-          <input
-            className="smo-input"
-            id="phone"
-            name="phone"
-            placeholder="+971 50 000 0000"
-            value={values.phone}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoComplete="tel"
-          />
-        </FormField>
-
-        <FormField id="company" label="Company">
-          <input
-            className="smo-input"
-            id="company"
-            name="company"
-            value={values.company}
-            onChange={handleChange}
-            autoComplete="organization"
-          />
-        </FormField>
-
-        <FormField id="website" label="Website / Social URL" fullWidth>
-          <input
-            className="smo-input"
-            id="website"
-            name="website"
-            value={values.website}
-            onChange={handleChange}
-            autoComplete="url"
-          />
-        </FormField>
-
-        <FormField
-          id="service"
-          label="Service required"
-          required
-          error={showError("service")}
-          fullWidth
-        >
-          <select
-            className="smo-input"
-            id="service"
-            name="service"
-            value={values.service}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          >
-            {SERVICE_OPTIONS.map((option) => (
-              <option
-                key={option.value || "placeholder"}
-                value={option.value}
-                disabled={option.disabled}
-              >
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </FormField>
-
-        <FormField
-          id="comment"
-          label="Tell us about your project"
-          required
-          error={showError("comment")}
-          fullWidth
-        >
-          <textarea
-            className="smo-input smo-input--area"
-            id="comment"
-            name="comment"
-            rows={5}
-            placeholder="Which channels are active, what needs to improve, and what result are you targeting?"
-            value={values.comment}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        </FormField>
-      </div>
-
-      <label className="smo-terms">
-        <input
-          type="checkbox"
-          name="agree_terms_and_policy"
-          checked={values.agree_terms_and_policy}
-          onChange={handleChange}
-        />
-        I agree to the terms and privacy policy.
-      </label>
-
-      <button
-        className="smo-btn smo-btn--primary"
-        type="submit"
-        disabled={loading}
-      >
-        {loading ? "Sending..." : "Request a growth plan"}
-        <Arrow />
-      </button>
-    </form>
-  );
-}
+const PROCESS_STEPS = [
+  {
+    num: "01",
+    title: "Discover",
+    body: "We understand your business, services, audience, competitors and marketing goals.",
+  },
+  {
+    num: "02",
+    title: "Audit",
+    body: "We review your existing social presence, content quality, brand consistency and current performance.",
+  },
+  {
+    num: "03",
+    title: "Strategise",
+    body: "We define your platforms, audience, content pillars, campaign direction and monthly objectives.",
+  },
+  {
+    num: "04",
+    title: "Create",
+    body: "Our designers and content team prepare posts, campaigns, graphics, captions and video content.",
+  },
+  {
+    num: "05",
+    title: "Review & Publish",
+    body: "Content is shared through an agreed approval process before publishing.",
+  },
+  {
+    num: "06",
+    title: "Advertise & Optimise",
+    body: "Where paid campaigns are included, we launch targeted advertising and continuously improve performance.",
+  },
+  {
+    num: "07",
+    title: "Measure",
+    body: "We review the results, identify opportunities and use the findings to shape the next content cycle.",
+  },
+];
 
 export default function SocialMediaAgencyTemplate() {
   const pageRef = useRef(null);
@@ -974,7 +629,109 @@ export default function SocialMediaAgencyTemplate() {
         </div>
       </section>
 
-      <section className="smo-paper smo-capx" id="smo-services">
+      <section className="rsi2-section" id="smo-intro">
+        {/* Decorative layer */}
+        <div className="rsi2-decor" aria-hidden="true">
+          <span className="rsi2-decor__line rsi2-decor__line--top" />
+          <span className="rsi2-decor__line rsi2-decor__line--bottom" />
+          <span className="rsi2-decor__orb rsi2-decor__orb--a" />
+          <span className="rsi2-decor__orb rsi2-decor__orb--b" />
+          <span className="rsi2-decor__dot rsi2-decor__dot--1" />
+          <span className="rsi2-decor__dot rsi2-decor__dot--2" />
+          <span className="rsi2-decor__dot rsi2-decor__dot--3" />
+        </div>
+
+        <div className="container rsi2-container">
+          <div className="row rsi2-row align-items-center g-4 g-lg-5">
+            {/* LEFT — premium image card */}
+            <div className="col-lg-5 col-md-12 col-12">
+              <figure className="rsi2-media smo-reveal smo-reveal-l">
+                <div className="rsi2-media__frame">
+                  <img
+                    className="rsi2-media__img"
+                    src="/assets/img/smo/intro.webp"
+                    alt="RedSpider social media team in Dubai"
+                    loading="lazy"
+                  />
+                  <span className="rsi2-media__overlay" aria-hidden="true" />
+                  <span className="rsi2-media__accent" aria-hidden="true" />
+                  <span
+                    className="rsi2-media__corner rsi2-media__corner--tl"
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="rsi2-media__corner rsi2-media__corner--br"
+                    aria-hidden="true"
+                  />
+                </div>
+              </figure>
+            </div>
+
+            {/* RIGHT — content */}
+            <div className="col-lg-7 col-md-12 col-12">
+              <div className="rsi2-content">
+                <span className="smo-eye rsi2-eye smo-reveal">
+                  <span className="rsi2-eye__mark" aria-hidden="true" />
+                  More than just posting
+                </span>
+
+                <h2 className="rsi2-heading smo-reveal">
+                  <span className="rsi2-heading__line">
+                    <span className="rsi2-heading__word">Social</span>{" "}
+                    <span className="rsi2-heading__word">Media</span>{" "}
+                    <span className="rsi2-heading__word">Marketing</span>
+                  </span>
+                  <span className="rsi2-heading__line">
+                    <span className="rsi2-heading__word">Built</span>{" "}
+                    <span className="rsi2-heading__word">Around</span>{" "}
+                    <span className="rsi2-heading__word">Your</span>{" "}
+                    <span className="rsi2-heading__word rsi2-heading__word--accent">
+                      Business
+                    </span>
+                  </span>
+                </h2>
+
+                <p className="rsi2-lede smo-reveal smo-d1">
+                  Being active on social media is no longer enough.
+                </p>
+
+                <p className="rsi2-paragraph smo-reveal smo-d2">
+                  Your customers are scrolling through hundreds of posts,
+                  videos, stories and advertisements every day. Your brand needs
+                  a clear strategy, distinctive creative direction and
+                  consistent communication to earn their attention.
+                </p>
+
+                <p className="rsi2-paragraph smo-reveal smo-d3">
+                  As a social media agency in Dubai, RedSpider combines
+                  strategy, content creation, design, video, paid advertising
+                  and performance analysis to create a social presence that
+                  supports your actual business objectives.
+                </p>
+
+                <p className="rsi2-paragraph smo-reveal smo-d4">
+                  Whether your goal is brand awareness, website traffic,
+                  enquiries, appointments, WhatsApp leads or online sales, we
+                  build the social media strategy around the result you want to
+                  achieve.
+                </p>
+
+                <div className="rsi2-cta-row smo-reveal">
+                  <a
+                    className="smo-btn smo-btn--primary rsi2-cta"
+                    href={CONTACT_ANCHOR}
+                  >
+                    <span>Start Your Social Media Strategy</span>
+                    <Arrow />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="smo-paper smo-capx pt-0" id="smo-services">
         <div className="container smo-wrap">
           <div className="smo-head smo-reveal">
             <span className="smo-eye">What you get</span>
@@ -1001,9 +758,6 @@ export default function SocialMediaAgencyTemplate() {
                     ))}
                   </div>
                 </div>
-                {/* <span className="smo-capx-arrow">
-                  <Arrow />
-                </span> */}
               </a>
             ))}
           </div>
@@ -1126,15 +880,6 @@ export default function SocialMediaAgencyTemplate() {
                     <h3 className="rs-smo-package-card__title">{pack.title}</h3>
                     <p className="rs-smo-package-card__text">{pack.body}</p>
                   </div>
-
-                  {/* <a
-                    className="rs-smo-package-card__cta"
-                    href={CONTACT_ANCHOR}
-                    aria-label={`Learn more about ${pack.title}`}
-                  >
-                    <span>Learn more</span>
-                    <Arrow />
-                  </a> */}
                 </article>
               </div>
             ))}
@@ -1173,37 +918,6 @@ export default function SocialMediaAgencyTemplate() {
           </div>
         </div>
       </section>
-
-      {/* <section className="smo-paper smo-why">
-        <div className="container smo-wrap">
-          <div className="smo-head smo-reveal">
-            <span className="smo-eye">Why RedSpider</span>
-            <h2>Fixed scope. One team. Dubai delivery.</h2>
-          </div>
-          <div className="smo-why-grid">
-            {WHY.map((item, index) => (
-              <article
-                className={`smo-reveal smo-d${(index % 3) + 1}`}
-                key={item.title}
-              >
-                <div className="smo-why__visual" aria-hidden="true">
-                  <Image
-                    src={item.visual}
-                    alt=""
-                    width={256}
-                    height={256}
-                    unoptimized
-                  />
-                </div>
-                <div className="smo-why__body">
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section> */}
 
       <section className="smo-paper smo-conversations">
         <div className="container smo-wrap">
@@ -1356,6 +1070,59 @@ export default function SocialMediaAgencyTemplate() {
               <span>Powered by</span>
               <span className="smo-urg-meta__sep" aria-hidden="true" />
               <span>RedSpider</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="rsp-section" id="smo-process">
+        <div className="container rsp-container">
+          <div className="row rsp-row">
+            {/* LEFT — sticky editorial content */}
+            <div className="col-lg-5 col-md-12 col-12 rsp-col-aside">
+              <aside className="rsp-aside smo-reveal">
+                <span className="smo-eye rsp-eye">
+                  <span className="rsp-eye__mark" aria-hidden="true" />
+                  How we work
+                </span>
+
+                <h2 className="rsp-heading">
+                  From Strategy to Social Media Growth
+                </h2>
+
+                <p className="rsp-intro">
+                  A clear, seven-step process that takes your brand from
+                  research to results — with content, campaigns and reporting
+                  working as one system.
+                </p>
+
+                <span className="rsp-aside__line" aria-hidden="true" />
+              </aside>
+            </div>
+
+            {/* RIGHT — scrolling process cards */}
+            <div className="col-lg-7 col-md-12 col-12 rsp-col-list">
+              <ol className="rsp-list">
+                {PROCESS_STEPS.map((step, index) => (
+                  <li
+                    key={step.num}
+                    className={`rsp-card smo-reveal smo-d${(index % 4) + 1}`}
+                  >
+                    <span className="rsp-card__num" aria-hidden="true">
+                      {step.num}
+                    </span>
+
+                    <div className="rsp-card__body">
+                      <h3 className="rsp-card__title">{step.title}</h3>
+                      <p className="rsp-card__text">{step.body}</p>
+                    </div>
+
+                    {/* <span className="rsp-card__arrow" aria-hidden="true">
+                      <Arrow />
+                    </span> */}
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </div>
@@ -1517,7 +1284,7 @@ export default function SocialMediaAgencyTemplate() {
                 </div>
               </div>
 
-              <div className="col-lg-6">
+              <div className="col-lg-6 mob-version">
                 <div className="accordion" id="smoFaqRight">
                   {FAQS.slice(Math.ceil(FAQS.length / 2)).map((faq, index) => (
                     <div
@@ -1558,6 +1325,118 @@ export default function SocialMediaAgencyTemplate() {
               <p className="mb-0">No frequently asked questions available.</p>
             </div>
           )}
+        </div>
+      </section>
+
+      <section
+        className="contact-cta"
+        id="readytobuild"
+        style={{ backgroundImage: "url(/assets/img/dubai-cta.webp)" }}
+      >
+        <div className="contact-cta__overlay" aria-hidden="true" />
+
+        <div className="container contact-cta__inner">
+          <div className="cta-heading" data-aos="fade-up">
+            <h2 className="rs-process-title">
+              Build a Social Media Presence That Supports Your Business
+            </h2>
+
+            <p className="rs-section-subtitle mx-auto text-center">
+              Strategy. Creative. Social Media. Advertising. WhatsApp. Lead
+              Generation.
+              <br />
+              Bring everything together with one Dubai digital team.
+            </p>
+          </div>
+
+          <div className="cta-wrap" data-aos="fade-up" data-aos-delay="120">
+            {/* WhatsApp — primary */}
+            <a
+              className="cta-card green"
+              href="https://wa.me/971555515475"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp Us"
+            >
+              <span className="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.22 8.22 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.24-8.24zM8.53 7.37c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.39 1.01 2.56.12.17 1.75 2.67 4.23 3.74 2.05.88 2.48.72 2.92.67.45-.05 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.28-.24-.12-1.47-.73-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.15.17-.29.19-.53.06-.24-.12-1.01-.37-1.93-1.19-.71-.64-1.19-1.43-1.33-1.67-.14-.25-.01-.38.1-.5.11-.11.24-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42-.14 0-.3-.01-.47-.01z" />
+                </svg>
+              </span>
+
+              <span className="cta-content">
+                <span>Get Your Free Social Media Audit</span>
+                <p>Start on WhatsApp</p>
+              </span>
+
+              <span className="cta-arrow" aria-hidden="true">
+                <i className="bi bi-arrow-right" />
+              </span>
+            </a>
+
+            {/* Call */}
+            <a
+              className="cta-card dark"
+              href="tel:+971505698733"
+              aria-label="Call RedSpider"
+            >
+              <span className="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <span className="cta-content">
+                <span>Call RedSpider</span>
+                <p>+971 50 569 8733</p>
+              </span>
+
+              <span className="cta-arrow" aria-hidden="true">
+                <i className="bi bi-arrow-right" />
+              </span>
+            </a>
+
+            {/* Email */}
+            <a
+              className="cta-card"
+              href="mailto:info@redspider.ae"
+              aria-label="Email RedSpider"
+            >
+              <span className="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="m22 6-10 7L2 6"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <span className="cta-content">
+                <span>Email RedSpider</span>
+                <p>info@redspider.ae</p>
+              </span>
+
+              <span className="cta-arrow" aria-hidden="true">
+                <i className="bi bi-arrow-right" />
+              </span>
+            </a>
+          </div>
         </div>
       </section>
     </div>

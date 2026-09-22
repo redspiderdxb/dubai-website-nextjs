@@ -3390,3 +3390,1019 @@
     transform: none;
   }
 }
+
+
+
+
+/* =========================================================
+   Introduction — Premium split layout (rsi2-*)
+   Left image card + right editorial content
+   Reuses theme typography, colors, buttons, reveal system
+   ========================================================= */
+
+.rsi2-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(80px, 10vw, 160px) 0;
+  background: #ffffff;
+  color: var(--smo-ink);
+}
+
+/* ---------- Decorative layer ---------- */
+.rsi2-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rsi2-decor__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(210, 0, 0, 0) 0%,
+    rgba(210, 0, 0, 0.5) 25%,
+    rgba(210, 0, 0, 0.85) 50%,
+    rgba(210, 0, 0, 0.5) 75%,
+    rgba(210, 0, 0, 0) 100%
+  );
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: rsi2-lineIn 1600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0.7;
+}
+
+.rsi2-decor__line--top {
+  top: clamp(40px, 6vw, 80px);
+  animation-delay: 0.2s;
+}
+
+.rsi2-decor__line--bottom {
+  bottom: clamp(40px, 6vw, 80px);
+  animation-delay: 0.5s;
+}
+
+.rsi2-decor__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.rsi2-decor__orb--a {
+  top: -12%;
+  right: -8%;
+  width: 38%;
+  height: 52%;
+  background: radial-gradient(
+    circle,
+    rgba(210, 0, 0, 0.14),
+    rgba(210, 0, 0, 0) 65%
+  );
+  animation: rsi2-floatA 18s ease-in-out infinite alternate;
+}
+
+.rsi2-decor__orb--b {
+  bottom: -14%;
+  left: -6%;
+  width: 30%;
+  height: 44%;
+  background: radial-gradient(
+    circle,
+    rgba(120, 0, 40, 0.1),
+    rgba(120, 0, 40, 0) 70%
+  );
+  animation: rsi2-floatB 24s ease-in-out infinite alternate;
+}
+
+.rsi2-decor__dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--smo-accent);
+  box-shadow: 0 0 14px rgba(210, 0, 0, 0.55);
+  opacity: 0.85;
+  animation: rsi2-dotFloat 4.5s ease-in-out infinite;
+}
+
+.rsi2-decor__dot--1 {
+  top: 20%;
+  left: 3%;
+  animation-delay: 0s;
+}
+
+.rsi2-decor__dot--2 {
+  top: 62%;
+  right: 4%;
+  width: 4px;
+  height: 4px;
+  animation-delay: 1.4s;
+}
+
+.rsi2-decor__dot--3 {
+  bottom: 16%;
+  left: 40%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 2.6s;
+}
+
+/* ---------- Layout ---------- */
+.rsi2-container {
+  position: relative;
+  z-index: 1;
+}
+
+.rsi2-row {
+  align-items: center;
+}
+
+/* =========================================================
+   LEFT — Image card
+   ========================================================= */
+
+.rsi2-media {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  perspective: 1200px;
+}
+
+.rsi2-media__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #0b0b0a;
+  box-shadow:
+    0 20px 50px -22px rgba(11, 11, 10, 0.28),
+    0 12px 30px rgba(11, 11, 10, 0.08);
+  transform: translate3d(0, 0, 0) scale(1);
+  transition:
+    transform 720ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 720ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.rsi2-media__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+  transition:
+    transform 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 720ms ease;
+  will-change: transform;
+  filter: saturate(1.02) contrast(1.03);
+}
+
+/* Dark gradient overlay for depth */
+.rsi2-media__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 11, 10, 0) 40%,
+      rgba(11, 11, 10, 0.35) 100%
+    ),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(210, 0, 0, 0.14),
+      rgba(210, 0, 0, 0) 60%
+    );
+  pointer-events: none;
+  opacity: 0.9;
+  transition: opacity 720ms ease;
+}
+
+/* Small red accent square on the frame */
+.rsi2-media__accent {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--smo-accent);
+  box-shadow: 0 12px 28px -10px rgba(210, 0, 0, 0.65);
+  transform: translate3d(0, 0, 0);
+  transition: transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.rsi2-media__accent::after {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border-radius: 4px;
+  border: 2px solid #ffffff;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+}
+
+/* Thin corner marks for editorial feel */
+.rsi2-media__corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
+
+.rsi2-media__corner--tl {
+  top: 18px;
+  left: 18px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.rsi2-media__corner--br {
+  bottom: 18px;
+  right: 18px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* Hover state — card lift + image zoom */
+.rsi2-media:hover .rsi2-media__frame {
+  transform: translate3d(0, -8px, 0) scale(1.015);
+  box-shadow:
+    0 32px 70px -22px rgba(210, 0, 0, 0.22),
+    0 18px 44px rgba(11, 11, 10, 0.14);
+}
+
+.rsi2-media:hover .rsi2-media__img {
+  transform: scale(1.08);
+  filter: saturate(1.08) contrast(1.05);
+}
+
+.rsi2-media:hover .rsi2-media__overlay {
+  opacity: 1;
+}
+
+.rsi2-media:hover .rsi2-media__accent {
+  transform: translate3d(4px, -4px, 0);
+}
+
+/* =========================================================
+   RIGHT — Content
+   ========================================================= */
+/* 
+.rsi2-content {
+  max-width: 620px;
+} */
+
+/* Eyebrow */
+.rsi2-eye {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.rsi2-eye__mark {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: var(--smo-accent);
+  clip-path: polygon(0 0, 60% 0, 100% 100%, 40% 100%);
+  animation: rsi2-mark 3.4s ease-in-out infinite;
+}
+
+/* Heading */
+.rsi2-heading {
+  margin: 0 0 26px;
+  color: var(--smo-ink);
+  font-size: 65px;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+}
+
+.rsi2-heading__line {
+  display: block;
+  overflow: hidden;
+}
+
+.rsi2-heading__word {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 110%, 0);
+  transition:
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.rsi2-heading__word--accent {
+  color: var(--smo-accent);
+}
+
+/* Stagger */
+.rsi2-heading__line:nth-child(1) .rsi2-heading__word:nth-child(1) { transition-delay: 0.10s; }
+.rsi2-heading__line:nth-child(1) .rsi2-heading__word:nth-child(2) { transition-delay: 0.16s; }
+.rsi2-heading__line:nth-child(1) .rsi2-heading__word:nth-child(3) { transition-delay: 0.22s; }
+.rsi2-heading__line:nth-child(2) .rsi2-heading__word:nth-child(1) { transition-delay: 0.30s; }
+.rsi2-heading__line:nth-child(2) .rsi2-heading__word:nth-child(2) { transition-delay: 0.36s; }
+.rsi2-heading__line:nth-child(2) .rsi2-heading__word:nth-child(3) { transition-delay: 0.42s; }
+.rsi2-heading__line:nth-child(2) .rsi2-heading__word:nth-child(4) { transition-delay: 0.48s; }
+
+.rsi2-heading.is-in .rsi2-heading__word {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Lede */
+.rsi2-lede {
+  margin: 0 0 20px;
+  max-width: 60ch;
+  color: var(--smo-ink);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+}
+
+/* Paragraphs */
+.rsi2-paragraph {
+  margin: 0 0 20px;
+  /* max-width: 62ch; */
+  color: var(--smo-mute-dark);
+  font-size: 16.5px;
+  line-height: 1.7;
+}
+
+.rsi2-paragraph:last-of-type {
+  margin-bottom: 30px;
+}
+
+/* CTA */
+.rsi2-cta-row {
+  margin-top: 6px;
+}
+
+.rsi2-cta {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 380ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 380ms ease;
+}
+
+.rsi2-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.28) 40%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  transform: translate3d(-130%, 0, 0);
+  transition: transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.rsi2-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 52px -20px rgba(210, 0, 0, 0.55);
+}
+
+.rsi2-cta:hover::before {
+  transform: translate3d(130%, 0, 0);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes rsi2-lineIn {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes rsi2-floatA {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-3%, 4%, 0); }
+}
+
+@keyframes rsi2-floatB {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(4%, -3%, 0); }
+}
+
+@keyframes rsi2-dotFloat {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+    opacity: 0.55;
+  }
+}
+
+@keyframes rsi2-mark {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-2px) rotate(-4deg); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1199px) {
+  .rsi2-heading {
+    font-size: clamp(44px, 5.2vw, 58px);
+    line-height: 1;
+  }
+
+  .rsi2-lede {
+    font-size: 18px;
+  }
+
+  .rsi2-paragraph {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 991px) {
+  .rsi2-content {
+    max-width: 100%;
+  }
+
+  .rsi2-media__frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .rsi2-heading {
+    margin-bottom: 22px;
+    font-size: clamp(36px, 5.6vw, 48px);
+    line-height: 1.05;
+  }
+}
+
+@media (max-width: 767px) {
+  .rsi2-section {
+    padding: 64px 0;
+  }
+
+  /* Image first on mobile */
+  .rsi2-row > [class*="col-"]:first-child {
+    order: 1;
+  }
+  .rsi2-row > [class*="col-"]:last-child {
+    order: 2;
+  }
+
+  .rsi2-media__frame {
+    aspect-ratio: 5 / 4;
+    border-radius: 18px;
+  }
+
+  .rsi2-media__accent {
+    width: 40px;
+    height: 40px;
+    left: 16px;
+    bottom: 16px;
+    border-radius: 10px;
+  }
+
+  .rsi2-media__accent::after {
+    inset: 14px;
+  }
+
+  .rsi2-heading {
+    font-size: clamp(32px, 8vw, 42px);
+    line-height: 1.06;
+    margin-bottom: 20px;
+  }
+
+  .rsi2-lede {
+    font-size: 17px;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  .rsi2-paragraph {
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .rsi2-paragraph:last-of-type {
+    margin-bottom: 24px;
+  }
+
+  .rsi2-decor__dot--1,
+  .rsi2-decor__dot--3 {
+    display: none;
+  }
+
+  .rsi2-decor__line {
+    opacity: 0.45;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .rsi2-decor__line,
+  .rsi2-decor__orb--a,
+  .rsi2-decor__orb--b,
+  .rsi2-decor__dot,
+  .rsi2-eye__mark,
+  .rsi2-heading__word,
+  .rsi2-cta,
+  .rsi2-cta::before,
+  .rsi2-media__frame,
+  .rsi2-media__img,
+  .rsi2-media__accent {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .rsi2-decor__line {
+    transform: scaleX(1);
+    opacity: 0.7;
+  }
+
+  .rsi2-heading__word {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+.contact-cta .cta-heading {
+ 
+    max-width: initial !important
+    ;}
+
+
+
+
+
+
+
+
+
+
+
+
+    /* =========================================================
+   Our Process — sticky left + scrolling right cards
+   Section-specific classes (rsp-*)
+   ========================================================= */
+
+/* ---------- Section ---------- */
+.rsp-section {
+  position: relative;
+  /* NOTE: sticky ke liye overflow visible zaroori hai.
+     Decorative bleed rokne ke liye sirf horizontal clip karo. */
+  overflow-x: clip;
+  overflow-y: visible;
+  padding: clamp(80px, 10vw, 140px) 0;
+  background: #ffffff;
+  color: var(--smo-ink);
+  /* isolation: isolate sticky ko todta hai — hata diya */
+}
+
+/* ---------- Bootstrap wrapper chain — sticky-safe ---------- */
+.rsp-section .rsp-container,
+.rsp-section .rsp-row,
+.rsp-section .rsp-col-aside,
+.rsp-section .rsp-col-list {
+  overflow: visible !important;
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+  will-change: auto !important;
+}
+
+.rsp-section .rsp-row {
+  align-items: flex-start !important;
+  position: relative;
+}
+
+.rsp-section .rsp-col-aside,
+.rsp-section .rsp-col-list {
+  align-self: flex-start !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* ---------- LEFT: sticky editorial ---------- */
+.rsp-aside {
+  position: sticky;
+  top: clamp(96px, 14vh, 140px);
+  align-self: flex-start;
+  height: max-content;
+  max-width: 520px;
+  z-index: 2;
+}
+
+.rsp-eye {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.rsp-eye__mark {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: var(--smo-accent);
+  clip-path: polygon(0 0, 60% 0, 100% 100%, 40% 100%);
+  animation: rsp-mark 3.4s ease-in-out infinite;
+}
+
+.rsp-heading {
+  margin: 0 0 22px;
+  color: var(--smo-ink);
+  font-size: clamp(38px, 4.4vw, 62px);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.rsp-intro {
+  margin: 0 0 32px;
+  max-width: 52ch;
+  color: var(--smo-mute-dark);
+  font-size: 16.5px;
+  line-height: 1.7;
+}
+
+.rsp-aside__line {
+  display: block;
+  width: 56px;
+  height: 2px;
+  background: var(--smo-accent);
+  margin-top: 8px;
+}
+
+/* ---------- RIGHT: process cards ---------- */
+.rsp-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1.8vw, 22px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rsp-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: flex-start;
+  gap: clamp(16px, 2vw, 24px);
+  padding: clamp(20px, 2vw, 26px) clamp(20px, 2.4vw, 30px);
+  border: 1px solid rgba(11, 11, 10, 0.08);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow:
+    0 1px 0 rgba(11, 11, 10, 0.02),
+    0 8px 22px rgba(11, 11, 10, 0.04);
+  transition:
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 420ms ease,
+    box-shadow 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.rsp-card:hover {
+  transform: translate3d(0, -4px, 0);
+  border-color: rgba(210, 0, 0, 0.4);
+  box-shadow:
+    0 22px 44px -22px rgba(210, 0, 0, 0.18),
+    0 10px 22px rgba(11, 11, 10, 0.06);
+}
+
+.rsp-card__num {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--smo-ink);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex: 0 0 auto;
+  transition:
+    background-color 420ms ease,
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 420ms ease;
+  will-change: transform;
+}
+
+.rsp-card:hover .rsp-card__num {
+  background: var(--smo-accent);
+  transform: scale(1.06);
+  box-shadow: 0 10px 22px -8px rgba(210, 0, 0, 0.5);
+}
+
+.rsp-card__body {
+  min-width: 0;
+}
+
+.rsp-card__title {
+  margin: 0 0 6px;
+  color: var(--smo-ink);
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.rsp-card__text {
+  margin: 0;
+  color: var(--smo-mute-dark);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+.rsp-card__arrow {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(11, 11, 10, 0.12);
+  color: var(--smo-ink);
+  flex: 0 0 auto;
+  opacity: 0.55;
+  transform: translateX(0);
+  transition:
+    opacity 420ms ease,
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 420ms ease,
+    color 420ms ease,
+    background-color 420ms ease;
+}
+
+.rsp-card:hover .rsp-card__arrow {
+  opacity: 1;
+  transform: translateX(4px);
+  border-color: var(--smo-accent);
+  color: var(--smo-accent);
+  background: rgba(210, 0, 0, 0.06);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes rsp-mark {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(-4deg);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1199px) {
+  .rsp-heading {
+    font-size: clamp(34px, 4vw, 50px);
+  }
+}
+
+@media (max-width: 991px) {
+  .rsp-aside {
+    position: relative;
+    top: auto;
+    margin-bottom: 40px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .rsp-heading {
+    font-size: clamp(32px, 5vw, 44px);
+    line-height: 1.05;
+  }
+
+  .rsp-intro {
+    max-width: 62ch;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .rsp-section {
+    padding: 64px 0;
+  }
+
+  .rsp-card {
+    padding: 18px 18px;
+    gap: 14px;
+    border-radius: 14px;
+  }
+
+  .rsp-card__num {
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+    border-radius: 9px;
+  }
+
+  .rsp-card__title {
+    font-size: 17px;
+  }
+
+  .rsp-card__text {
+    font-size: 13.5px;
+  }
+
+  .rsp-card__arrow {
+    display: none;
+  }
+
+  .rsp-card:hover {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .rsp-card,
+  .rsp-card__num,
+  .rsp-card__arrow,
+  .rsp-eye__mark {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .rsp-card:hover {
+    transform: none;
+  }
+
+  .rsp-card:hover .rsp-card__num {
+    transform: none;
+  }
+
+  .rsp-card:hover .rsp-card__arrow {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   STICKY FIX — ancestor chain pe overflow-x: hidden ko
+   overflow-x: clip me convert karo (hidden sticky ko todta hai,
+   clip nahi todta). Yeh rules .smo-page aur uske andar ke
+   potential problem wrappers ko target karte hain.
+   ========================================================= */
+
+.smo-page {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+/* Section ke saare ancestors me overflow visible/clip force */
+.rsp-section,
+.rsp-section .rsp-container,
+.rsp-section .rsp-row,
+.rsp-section .rsp-col-aside,
+.rsp-section .rsp-col-list,
+.rsp-section .rsp-aside {
+  overflow: visible !important;
+}
+
+.rsp-section {
+  overflow-x: clip !important;
+}
+
+/* Transform / filter / perspective / will-change jo sticky todte hain,
+   unko is section ke andar neutralise karo */
+.rsp-section .rsp-container,
+.rsp-section .rsp-row,
+.rsp-section .rsp-col-aside,
+.rsp-section .rsp-col-list {
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+  will-change: auto !important;
+}
+
+/* Sticky element khud — heavy !important */
+.rsp-section .rsp-aside {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: clamp(96px, 14vh, 140px) !important;
+  align-self: flex-start !important;
+  height: max-content !important;
+  max-height: none !important;
+  z-index: 2 !important;
+}
+
+/* Mobile pe sticky off — still force */
+@media (max-width: 991px) {
+  .rsp-section .rsp-aside {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+  }
+}
+
+
+/* =========================================================
+   STICKY FIX — FINAL NUCLEAR (no media query)
+   ========================================================= */
+
+.rsp-section.rsp-section .rsp-row.rsp-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important;
+}
+
+.rsp-section.rsp-section .rsp-row.rsp-row > .rsp-col-aside {
+  align-self: stretch !important;
+  height: auto !important;
+  min-height: 100% !important;
+  flex: 0 0 41.666667% !important;
+  max-width: 41.666667% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.rsp-section.rsp-section .rsp-row.rsp-row > .rsp-col-list {
+  align-self: stretch !important;
+  height: auto !important;
+  min-height: 100% !important;
+  flex: 0 0 58.333333% !important;
+  max-width: 58.333333% !important;
+}
+
+.rsp-section.rsp-section .rsp-col-aside > .rsp-aside {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 120px !important;
+  align-self: flex-start !important;
+  height: max-content !important;
+  max-height: none !important;
+  z-index: 5 !important;
+  width: 100% !important;
+}
+
+/* Mobile: reset */
+@media (max-width: 991px) {
+  .rsp-section.rsp-section .rsp-row.rsp-row > .rsp-col-aside,
+  .rsp-section.rsp-section .rsp-row.rsp-row > .rsp-col-list {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .rsp-section.rsp-section .rsp-col-aside > .rsp-aside {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .smo-statline {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .smo-statline article {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .smo-statline article strong {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .smo-statline article span {
+    display: block;
+    white-space: nowrap;
+    font-size: 11px;
+  }
+
+ .mob-version {
+    margin-top: 0px !important;
+}
+
+}
