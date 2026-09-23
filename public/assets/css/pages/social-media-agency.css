@@ -683,7 +683,6 @@
 
 .smo-capx-main p {
   margin: 0 0 14px;
-  max-width: 64ch;
   color: var(--smo-mute-dark);
   line-height: 1.65;
 }

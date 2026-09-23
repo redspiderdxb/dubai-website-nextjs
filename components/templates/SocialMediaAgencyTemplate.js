@@ -48,138 +48,171 @@ const FACTS = [
 const CAPABILITIES = [
   {
     num: "01",
-    title: "Social Media Management",
-    body: "Content calendar, copy, design, community management, and reporting. Your brand shows up every week with a clear point of view.",
-    tags: ["Instagram", "LinkedIn", "Reporting"],
+    title: "Social Media Strategy",
+    body: "We build a clear social media roadmap based on your business, audience, competitors and marketing objectives. From platform selection and content pillars to campaign themes and publishing frequency, everything starts with a structured strategy.",
   },
   {
     num: "02",
-    title: "Paid Social & Performance",
-    body: "Campaigns on Meta, Instagram, TikTok, LinkedIn, and YouTube. Built for leads, sales, and measurable return — every dirham tracked.",
-    tags: ["Meta", "LinkedIn Ads", "ROAS-tuned"],
+    title: "Social Media Management",
+    body: "Let our team manage your day-to-day social media presence. We plan calendars, prepare content, schedule approved posts and maintain a consistent brand presence across your selected channels.",
   },
   {
     num: "03",
-    title: "Reels & Video Content",
-    body: "Short-form video. Shoot planning, editing, motion, subtitles, and UGC-style content for Instagram, TikTok, and YouTube Shorts.",
-    tags: ["Reels", "TikTok", "UGC-style"],
+    title: "Creative Content & Graphic Design",
+    body: "Strong social media starts with content people actually want to look at. Our creative team develops social posts, campaign visuals, carousels, stories, promotional graphics and branded content designed specifically for digital platforms.",
   },
   {
     num: "04",
-    title: "Brand & Creative Direction",
-    body: "Content pillars, campaign themes, tone of voice, and monthly creative direction so your brand looks the same across feed, ads, and follow-ups.",
-    tags: ["Brand voice", "Content pillars", "Creative system"],
+    title: "Reels & Short-Form Video",
+    body: "Short-form video has become one of the most important formats for reaching and engaging audiences. We help businesses develop creative concepts for Reels, TikTok videos, YouTube Shorts, product videos and promotional campaigns. Our services can include concept planning, script direction, editing, motion graphics, subtitles and platform-ready video formats.",
   },
   {
     num: "05",
-    title: "Search & Demand Capture",
-    body: "Search, display, remarketing, and landing pages for buyers already showing intent. Social starts the demand. Search captures it.",
-    tags: ["Search", "Landing pages", "Remarketing"],
+    title: "Paid Social Media Advertising",
+    body: "Reach potential customers beyond your existing followers. RedSpider plans and manages targeted advertising campaigns across Meta and other social platforms to support:",
   },
   {
     num: "06",
-    title: "Analytics & Growth",
-    body: "Monthly reporting on reach, engagement, traffic, enquiries, and campaign performance. Decisions from data, not guesswork.",
-    tags: ["KPIs", "Reporting", "Optimisation"],
+    title: "Community Management",
+    body: "Social media should create conversations, not just impressions. We help businesses maintain an active presence by managing comments, basic audience interaction and communication workflows according to an agreed brand guideline.",
+  },
+  {
+    num: "07",
+    title: "Campaign & Promotion Management",
+    body: "Launching a new product, property, service or seasonal promotion? We create campaign concepts that bring your creative content, advertising and calls to action together under one consistent message.",
+  },
+  {
+    num: "08",
+    title: "Analytics & Monthly Reporting",
+    body: "We track what is performing and what needs improvement. Monthly reporting can cover reach, engagement, clicks, enquiries, campaign performance, audience behaviour and other agreed KPIs. Instead of guessing what works, we use real campaign data to continuously improve the strategy.",
   },
 ];
 
 const PACKAGES = [
   {
     title: "Brand Presence",
-    body: "Instagram and LinkedIn content, captions, Reels planning and reporting for a consistent brand presence.",
+    body: "For companies that need a professional and consistent social media presence.",
     image: "/assets/img/smo/1.png",
   },
+
   {
-    title: "Social + Search",
-    body: "Reels, paid social, Google Search and landing pages built for enquiries, bookings and sales.",
+    title: "Growth & Leads",
+    body: "For businesses that want to combine content with paid social media advertising.",
     image: "/assets/img/smo/2.png",
   },
+
   {
-    title: "Growth Engine",
-    body: "Brand, creative, paid social, search, tracking and reporting working together across every priority platform.",
+    title: "Full Digital Growth",
+    body: "For businesses looking for a connected digital marketing and lead-generation solution.",
     image: "/assets/img/smo/3.png",
   },
 ];
 
 const CONVERSATION_CARDS = [
   {
-    title: "Engage and Interact",
-    body: "Build meaningful audience connections with social content designed to inform, invite participation and keep your brand in the conversation.",
+    title: "Dubai-Based Experience",
+    body: "With more than 14 years of digital experience, we understand the requirements of companies operating in Dubai and the wider UAE.",
   },
   {
-    title: "Control and Elevate",
-    body: "Manage your social presence with clear direction, consistent delivery and campaigns that elevate how your brand shows up every day.",
+    title: "Creative + Technical Team",
+    body: "Our capabilities extend beyond social posting into graphic design, branding, web development, ecommerce, landing pages, CRM integrations and marketing automation.",
   },
   {
-    title: "Influence and Connect",
-    body: "Turn insight into content that reaches the right people, influences action and creates stronger connections with your audience.",
+    title: "Strategy Before Content",
+    body: "We don't begin by randomly creating posts. We first establish your objectives, audience, content direction and expected outcomes.",
+  },
+  {
+    title: "Designed Around Your Brand",
+    body: "Content and campaigns are developed according to your company's identity rather than relying on one generic social media template.",
+  },
+  {
+    title: "Lead Generation Focus",
+    body: "Where lead generation is your objective, we can connect social advertising with landing pages, WhatsApp and other digital conversion tools.",
+  },
+  {
+    title: "Clear Reporting",
+    body: "Campaign and content performance is reviewed through agreed metrics so marketing decisions can be based on actual results.",
   },
 ];
-
 const PLATFORMS = [
   {
-    name: "LinkedIn",
-    body: "B2B authority, founder voice, case studies, lead forms and decision-maker ads.",
+    name: "Instagram Marketing",
+    body: "Build visibility through Reels, Stories, carousels, branded content, advertising and visually engaging campaigns. Ideal for lifestyle, retail, real estate, hospitality, healthcare, beauty, restaurants and consumer brands.",
   },
   {
-    name: "Instagram",
-    body: "Daily attention through Reels, Stories, creators, launches and paid social.",
+    name: "Facebook Marketing",
+    body: "Reach broad audiences through content, Meta advertising, lead-generation campaigns, retargeting and community-focused communication.",
   },
   {
-    name: "Facebook",
-    body: "Meta reach, retargeting, communities, lead forms and always-on campaign testing.",
+    name: "LinkedIn Marketing",
+    body: "Position your company, leadership and services in front of decision-makers. Ideal for B2B companies, corporate services, technology, professional services, consultants and recruitment.",
   },
   {
-    name: "X",
-    body: "Rest commentary, announcements, culture signals and high-frequency brand presence.",
+    name: "TikTok Marketing",
+    body: "Create short-form, attention-driven content designed for discovery, engagement and audience growth.",
   },
   {
-    name: "YouTube",
-    body: "Long-form content, Shorts, video ads, remarketing and search-led brand discovery.",
+    name: "YouTube Marketing",
+    body: "Use video, Shorts and advertising to educate customers, demonstrate expertise and build long-term brand visibility.",
   },
   {
-    name: "TikTok",
-    body: "Hook-first videos, creator-led formats, testing loops and short-form performance.",
+    name: "X Marketing",
+    body: "Maintain an active presence around announcements, conversations, company updates and relevant industry topics.",
   },
   {
-    name: "WhatsApp",
-    body: "Direct lead capture, follow-up scripts, nurture flows and sales-team handoff.",
+    name: "WhatsApp Marketing",
+    body: "Convert social media interest into direct conversations using WhatsApp Business solutions, campaign journeys, automation and lead follow-up.",
   },
   {
-    name: "Google Ads",
-    body: "Search intent, display, YouTube, remarketing and conversion-tracked media spend.",
+    name: "Pinterest Marketing",
+    body: "Drive website traffic and product discovery through highly visual pins, idea pins, and targeted shopping campaigns.",
   },
   {
-    name: "Google SEO",
-    body: "Local search, technical fixes, content systems and compounding organic demand.",
+    name: "Snapchat Marketing",
+    body: "Connect with a highly engaged younger demographic using immersive AR lenses, Snap Ads, and geo-targeted stories.",
   },
 ];
 
 const FAQS = [
   {
-    q: "What does a social media agency in Dubai actually run?",
-    a: "Strategy, content, design, publishing, paid campaigns, community workflows and reporting across the platforms your audience actually uses.",
+    q: "What does a social media agency in Dubai do?",
+    a: "A social media agency helps businesses plan and manage their presence across platforms such as Instagram, Facebook, LinkedIn, TikTok and YouTube. Services can include strategy, content creation, graphic design, video, publishing, paid advertising, community management and performance reporting.",
   },
   {
-    q: "Which platforms should we start with?",
-    a: "It depends on the audience. Visual brands often start on Instagram and TikTok. B2B and corporate work usually needs LinkedIn first.",
+    q: "Which social media platforms should my business use?",
+    a: "The right platforms depend on your audience and business objectives. Instagram and TikTok can work well for visual and consumer-focused brands, while LinkedIn is particularly useful for B2B and corporate marketing. Facebook, YouTube and other platforms may also be included depending on your strategy.",
   },
   {
-    q: "Can you manage our accounts end to end?",
-    a: "Yes. Planning, creative, captions, publishing, campaigns and reporting can sit in one agreed monthly scope.",
+    q: "Can RedSpider completely manage our social media accounts?",
+    a: "Yes. RedSpider can provide end-to-end social media management including strategy, content planning, creative design, captions, publishing, campaigns and reporting based on the agreed scope.",
   },
   {
-    q: "How is performance measured?",
-    a: "Reach, engagement, traffic, enquiries, cost per lead and conversions. KPIs are chosen against the commercial goal, not vanity metrics.",
+    q: "Do you create social media graphics, Reels and videos?",
+    a: "Yes. Our social media services can include branded graphics, carousels, Stories, Reels, short-form videos, motion graphics and advertising creatives. Video production requirements can be customised according to the campaign.",
   },
   {
-    q: "Can we approve posts before they go live?",
-    a: "Yes. An approval workflow can be set so planned content is reviewed before it is scheduled or published.",
+    q: "Does RedSpider manage paid social media advertising?",
+    a: "Yes. We can plan and manage paid campaigns for objectives including brand awareness, website traffic, lead generation, WhatsApp enquiries, appointments, ecommerce sales and retargeting.",
   },
   {
-    q: "How quickly can we start?",
-    a: "Once scope is confirmed we onboard, review the brand and prepare the first calendar for approval before regular publishing begins.",
+    q: "How often should my company post on social media?",
+    a: "There is no single posting frequency suitable for every company. The right schedule depends on your industry, platforms, content resources and objectives. We recommend a consistent publishing plan focused on content quality rather than posting simply for frequency.",
+  },
+  {
+    q: "Can we approve posts before they are published?",
+    a: "Yes. An approval workflow can be established so planned content is reviewed and approved before it is scheduled or published.",
+  },
+  {
+    q: "How do you measure social media marketing performance?",
+    a: "Performance can be measured using metrics such as reach, impressions, engagement, audience growth, website traffic, enquiries, leads, cost per lead, conversions and advertising performance. The KPIs are selected according to the objectives of the campaign.",
+  },
+  {
+    q: "How much does social media management cost in Dubai?",
+    a: "Social media management costs depend on the number of platforms, posting frequency, creative requirements, video production, community management and paid advertising scope. RedSpider prepares customised packages according to your business requirements and marketing objectives.",
+  },
+  {
+    q: "How quickly can we start social media marketing with RedSpider?",
+    a: "Once the scope is confirmed, we begin with onboarding, account access, brand review and strategy development. The first content calendar and creative direction are then prepared for review before regular publishing and campaign management begins.",
   },
 ];
 
@@ -194,92 +227,224 @@ const SERVICE_OPTIONS = [
 
 const PLATFORM_ICONS = {
   Instagram: (
-    <svg viewBox="0 0 24 24" width="26" height="26" fill="none">
-      <rect x="3" y="3" width="18" height="18" rx="5" fill="url(#igGrad)" />
-      <circle cx="12" cy="12" r="4" stroke="#fff" strokeWidth="1.6" />
-      <circle cx="17.2" cy="6.8" r="1.1" fill="#fff" />
+    <svg
+      viewBox="0 0 100 100"
+      width="26"
+      height="26"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <defs>
-        <linearGradient id="igGrad" x1="3" y1="21" x2="21" y2="3">
-          <stop offset="0" stopColor="#FEDA75" />
-          <stop offset="0.35" stopColor="#FA7E1E" />
-          <stop offset="0.65" stopColor="#D62976" />
-          <stop offset="1" stopColor="#962FBF" />
-        </linearGradient>
+        <radialGradient id="instaGradient" cx="30%" cy="107%" r="150%">
+          <stop offset="0%" stopColor="#fdf497" />
+          <stop offset="5%" stopColor="#fdf497" />
+          <stop offset="45%" stopColor="#fd5949" />
+          <stop offset="60%" stopColor="#d6249f" />
+          <stop offset="90%" stopColor="#285AEB" />
+        </radialGradient>
       </defs>
-    </svg>
-  ),
-  LinkedIn: (
-    <svg viewBox="0 0 24 24" width="26" height="26">
-      <rect x="3" y="3" width="18" height="18" rx="3" fill="#0A66C2" />
-      <path
-        d="M7.2 10h1.9v6.4H7.2V10Zm.95-3.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM10.7 10h1.8v.9h.03c.25-.47.87-1 1.8-1 1.9 0 2.25 1.25 2.25 2.87v3.63h-1.9v-3.22c0-.77-.02-1.76-1.07-1.76-1.07 0-1.24.84-1.24 1.7v3.28h-1.9V10Z"
-        fill="#fff"
+
+      {/* Rounded square background */}
+      <rect width="100" height="100" rx="22" fill="url(#instaGradient)" />
+
+      {/* White camera outline */}
+      <rect
+        x="22"
+        y="22"
+        width="56"
+        height="56"
+        rx="16"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeWidth="5"
       />
+
+      {/* White inner circle */}
+      <circle
+        cx="50"
+        cy="50"
+        r="14"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeWidth="5"
+      />
+
+      {/* White dot */}
+      <circle cx="70" cy="30" r="4" fill="#FFFFFF" />
     </svg>
   ),
   Facebook: (
     <svg viewBox="0 0 24 24" width="26" height="26">
       <circle cx="12" cy="12" r="9" fill="#1877F2" />
+
       <path
         d="M13.3 21v-7.2h2.4l.36-2.8h-2.76V9.2c0-.8.22-1.35 1.38-1.35h1.48V5.35c-.26-.03-1.14-.11-2.17-.11-2.15 0-3.62 1.31-3.62 3.72v2.07H8v2.8h2.37V21h2.93Z"
         fill="#fff"
       />
     </svg>
   ),
+
+  LinkedIn: (
+    <svg viewBox="0 0 24 24" width="26" height="26">
+      <rect x="3" y="3" width="18" height="18" rx="3" fill="#0A66C2" />
+
+      <path
+        d="M7.2 10h1.9v6.4H7.2V10Zm.95-3.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM10.7 10h1.8v.9h.03c.25-.47.87-1 1.8-1 1.9 0 2.25 1.25 2.25 2.87v3.63h-1.9v-3.22c0-.77-.02-1.76-1.07-1.76-1.07 0-1.24.84-1.24 1.7v3.28h-1.9V10Z"
+        fill="#fff"
+      />
+    </svg>
+  ),
+
   TikTok: (
     <svg viewBox="0 0 24 24" width="26" height="26">
       <rect x="3" y="3" width="18" height="18" rx="4" fill="#000" />
+
+      {/* Cyan shadow */}
       <path
-        d="M14.7 8.2c.55.55 1.28.9 2.1.98v1.7c-.9-.02-1.7-.3-2.35-.77v3.5c0 1.98-1.6 3.58-3.58 3.58A3.58 3.58 0 0 1 7.3 13.6c0-1.9 1.46-3.44 3.33-3.57v1.74a1.86 1.86 0 1 0 1.86 1.86V6.9h1.74c.07.46.2.9.47 1.3Z"
-        fill="#fff"
+        d="M13.5 6.2v7.1a2.35 2.35 0 1 1-2.35-2.35"
+        fill="none"
+        stroke="#25F4EE"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* Red shadow */}
+      <path
+        d="M14.4 7.1c.55.55 1.25.88 2.05.95"
+        fill="none"
+        stroke="#FE2C55"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      {/* White main */}
+      <path
+        d="M14 6.4v7.1a2.35 2.35 0 1 1-2.35-2.35"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      <path
+        d="M14.9 7.3c.55.55 1.25.88 2.05.95"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </svg>
   ),
+
   YouTube: (
     <svg viewBox="0 0 24 24" width="26" height="26">
-      <rect x="2.5" y="5.5" width="19" height="13" rx="3.5" fill="#FF0000" />
-      <path d="M10.2 9.6v4.8l4.2-2.4-4.2-2.4Z" fill="#fff" />
+      <rect x="2.5" y="5" width="19" height="14" rx="4" fill="#FF0000" />
+
+      <path d="M10 9.1v5.8l5-2.9-5-2.9Z" fill="#fff" />
     </svg>
   ),
+
   X: (
     <svg viewBox="0 0 24 24" width="26" height="26">
-      <rect x="3" y="3" width="18" height="18" rx="4" fill="#0A0A0A" />
+      <rect x="3" y="3" width="18" height="18" rx="4" fill="#000" />
+
       <path
-        d="M6.5 6.5h2.1l3.05 4.05L15.2 6.5h2.3l-4.4 5.6 4.7 5.9h-2.1l-3.35-4.25L8.9 18H6.6l4.6-5.85L6.5 6.5Z"
+        d="M6.5 6.5h2.15l3.15 4.18 3.62-4.18h2.2l-4.72 5.48 5.05 6.02h-2.16l-3.5-4.28L8.9 18H6.65l4.65-5.72L6.5 6.5Z"
         fill="#fff"
       />
     </svg>
   ),
+
   WhatsApp: (
     <svg viewBox="0 0 24 24" width="26" height="26">
       <circle cx="12" cy="12" r="9" fill="#25D366" />
+
       <path
-        d="M12 5.8a6.2 6.2 0 0 0-5.34 9.35L5.8 18.2l3.15-.83A6.2 6.2 0 1 0 12 5.8Zm3.38 8.7c-.15.42-.85.8-1.18.85-.32.05-.72.07-1.16-.07-.27-.09-.6-.2-1.03-.4-1.8-.78-2.96-2.6-3.05-2.72-.09-.12-.72-.96-.72-1.83 0-.87.46-1.3.62-1.48.16-.18.35-.22.47-.22h.34c.11 0 .26-.04.4.31.15.35.5 1.22.54 1.3.04.09.07.19.01.3-.06.12-.09.19-.18.3-.09.11-.18.24-.26.32-.09.09-.18.18-.08.36.11.18.48.79 1.02 1.28.7.62 1.28.82 1.46.9.18.09.29.07.4-.04.11-.11.46-.53.58-.72.12-.18.24-.15.41-.09.17.06 1.07.5 1.26.6.18.09.3.14.35.22.05.09.05.5-.1.92Z"
+        d="M12 5.8a6.2 6.2 0 0 0-5.34 9.35L5.8 18.2l3.15-.83A6.2 6.2 0 1 0 12 5.8Z"
         fill="#fff"
       />
+
+      <path
+        d="M15.38 14.5c-.15.42-.85.8-1.18.85-.32.05-.72.07-1.16-.07-.27-.09-.6-.2-1.03-.4-1.8-.78-2.96-2.6-3.05-2.72-.09-.12-.72-.96-.72-1.83 0-.87.46-1.3.62-1.48.16-.18.35-.22.47-.22h.34c.11 0 .26-.04.4.31.15.35.5 1.22.54 1.3.04.09.07.19.01.3-.06.12-.09.19-.18.3-.09.11-.18.24-.26.32-.09.09-.18.18-.08.36.11.18.48.79 1.02 1.28.7.62 1.28.82 1.46.9.18.09.29.07.4-.04.11-.11.46-.53.58-.72.12-.18.24-.15.41-.09.17.06 1.07.5 1.26.6.18.09.3.14.35.22.05.09.05.5-.1.92Z"
+        fill="#25D366"
+      />
     </svg>
   ),
+
+  Pinterest: (
+    <svg
+      viewBox="0 0 100 100"
+      width="26"
+      height="26"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Red rounded square background */}
+      <rect width="100" height="100" rx="20" fill="#E60023" />
+
+      {/* White Pinterest 'P' logo */}
+      <path
+        fill="#FFFFFF"
+        d="
+        M 50 20
+        C 34 20, 25 32, 25 45
+        C 25 54, 30 60, 37 60
+        C 40 60, 41 58, 40 55
+        C 39 52, 38 50, 38 47
+        C 38 38, 45 32, 53 32
+        C 62 32, 67 38, 67 46
+        C 67 56, 61 63, 54 63
+        C 50 63, 47 60, 48 56
+        L 51 44
+        C 52 40, 50 38, 47 38
+        C 43 38, 40 42, 40 48
+        C 40 51, 42 53, 42 55
+        L 37 72
+        C 35 78, 37 85, 38 86
+        C 38 86, 44 80, 46 74
+        L 50 58
+        C 52 61, 55 62, 59 62
+        C 70 62, 75 53, 75 43
+        C 75 31, 65 20, 50 20
+        Z
+      "
+      />
+    </svg>
+  ),
+
+  Snapchat: (
+    <svg viewBox="0 0 24 24" width="26" height="26">
+      <rect x="3" y="3" width="20" height="20" rx="5" fill="#FFFC00" />
+
+      <path
+        d="M12 6.1c-2.02 0-3.55 1.52-3.55 3.59v1.12c-.28.17-.61.29-.98.36-.31.06-.53.32-.53.64 0 .35.25.62.6.67.3.04.61.08.91.15.11.03.18.13.16.24-.14.66-.55 1.21-1.19 1.63-.31.2-.64.38-1 .52-.29.12-.45.4-.42.71.03.3.25.55.55.62.46.11.94.21 1.42.28.22.03.39.17.48.37.16.35.35.67.6.96.24.29.54.54.87.72.33.19.7.31 1.07.38.24.04.47.13.66.26.43.3.91.45 1.39.45s.96-.15 1.39-.45c.19-.13.42-.22.66-.26.37-.07.74-.19 1.07-.38.33-.18.63-.43.87-.72.25-.29.44-.61.6-.96.09-.2.26-.34.48-.37.48-.07.96-.17 1.42-.28.3-.07.52-.32.55-.62.03-.31-.13-.59-.42-.71-.36-.14-.69-.32-1-.52-.64-.42-1.05-.97-1.19-1.63-.02-.11.05-.21.16-.24.3-.07.61-.11.91-.15.35-.05.6-.32.6-.67 0-.32-.22-.58-.53-.64-.37-.07-.7-.19-.98-.36V9.69C15.55 7.62 14.02 6.1 12 6.1Z"
+        fill="#000"
+      />
+    </svg>
+  ),
+
   "Google Ads": (
     <svg viewBox="0 0 24 24" width="26" height="26">
-      <circle cx="12" cy="12" r="9" fill="#fff" />
       <path
-        d="M21 12c0-.7-.06-1.36-.18-2H12v3.8h5.05a4.3 4.3 0 0 1-1.87 2.83v2.35h3.03C19.93 17.2 21 14.8 21 12Z"
+        d="M9.2 4.3a3.2 3.2 0 0 1 5.6 0l5.25 9.1a3.2 3.2 0 0 1-5.55 3.2l-5.3-9.1a3.2 3.2 0 0 1 0-3.2Z"
         fill="#4285F4"
       />
+
       <path
-        d="M12 21c2.43 0 4.47-.8 5.96-2.17l-3.03-2.35c-.84.57-1.92.9-2.93.9-2.25 0-4.15-1.52-4.83-3.56H4.06v2.42A8.99 8.99 0 0 0 12 21Z"
+        d="M9.2 4.3a3.2 3.2 0 0 0 0 3.2l5.3 9.1a3.2 3.2 0 0 0 5.55-3.2L14.8 4.3a3.2 3.2 0 0 0-5.6 0Z"
         fill="#34A853"
+        opacity=".95"
       />
+
       <path
-        d="M7.17 13.82A5.4 5.4 0 0 1 6.9 12c0-.63.1-1.25.27-1.82V7.76H4.06A9 9 0 0 0 3 12c0 1.45.34 2.83.96 4.06l3.21-2.24Z"
-        fill="#FBBC05"
+        d="M9.2 4.3a3.2 3.2 0 0 0-5.55 3.2l5.3 9.1a3.2 3.2 0 0 0 5.55-3.2l-5.3-9.1Z"
+        fill="#FBBC04"
       />
-      <path
-        d="M12 6.6c1.32 0 2.5.45 3.43 1.34l2.57-2.57C16.46 3.9 14.43 3 12 3A8.99 8.99 0 0 0 4.06 7.76l3.11 2.42C7.85 8.13 9.75 6.6 12 6.6Z"
-        fill="#EA4335"
-      />
+
+      <circle cx="6.45" cy="17.2" r="2.6" fill="#EA4335" />
     </svg>
   ),
+
   "Google SEO": (
     <svg viewBox="0 0 24 24" width="26" height="26">
       <circle
@@ -290,10 +455,25 @@ const PLATFORM_ICONS = {
         stroke="#4285F4"
         strokeWidth="2"
       />
+
       <path
         d="M15.2 15.2 21 21"
         stroke="#34A853"
         strokeWidth="2.2"
+        strokeLinecap="round"
+      />
+
+      <path
+        d="M10.5 7.1a3.4 3.4 0 0 1 2.42 1"
+        stroke="#EA4335"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      <path
+        d="M7.3 13.9a3.4 3.4 0 0 1-.2-4.35"
+        stroke="#FBBC04"
+        strokeWidth="2"
         strokeLinecap="round"
       />
     </svg>
@@ -536,7 +716,9 @@ export default function SocialMediaAgencyTemplate() {
           <span className="smo-blob smo-blob--3" />
           <span className="smo-blob smo-blob--4" />
         </div>
+
         <div className="smo-grain" aria-hidden="true" />
+
         <div className="smo-stars" aria-hidden="true">
           <span className="smo-star smo-star--1" />
           <span className="smo-star smo-star--2" />
@@ -553,26 +735,43 @@ export default function SocialMediaAgencyTemplate() {
 
         <div className="container smo-hero__content">
           <div className="smo-hero__pitch">
-            <h1 className="smo-reveal">
-              Social Media Agency Dubai{" "}
+            {/* Eyebrow */}
+            <div className="smo-eyebrow smo-reveal">
+              SOCIAL MEDIA / CONTENT / PERFORMANCE
+            </div>
+
+            {/* Main Heading */}
+            <h1 className="smo-reveal smo-d1">
+              Social Media Agency in Dubai{" "}
               <span className="smo-accent">
-                for Content, Campaigns &amp; Growth
+                Turn Attention Into Engagement, Leads &amp; Business Growth
               </span>
             </h1>
-            <p className="smo-lede smo-reveal smo-d1">
-              Work with a Dubai social media team on a practical plan covering
-              content, channel priorities, campaigns, and paid media — built to
-              turn attention into enquiries.
+
+            {/* Description */}
+            <p className="smo-lede smo-reveal smo-d2">
+              Build a stronger social media presence with strategy, creative
+              content and performance-driven campaigns.
             </p>
-            <div className="smo-actions smo-reveal smo-d2">
+
+            <p className="smo-lede smo-reveal smo-d2">
+              <strong>RedSpider</strong> helps businesses in Dubai plan, create,
+              manage and advertise across social media platforms — connecting
+              great content with the right audience and turning online attention
+              into real business opportunities.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="smo-actions smo-reveal smo-d3">
               <a className="smo-btn smo-btn--primary" href={CONTACT_ANCHOR}>
-                Request a growth plan
+                Get a Free Social Media Audit
                 <Arrow />
               </a>
-              <Link className="smo-btn smo-btn--ghost" href="/our-portfolio/">
-                See our work
+
+              <a className="smo-btn smo-btn--ghost" href={CONTACT_ANCHOR}>
+                Talk to Our Team
                 <Arrow />
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -588,6 +787,7 @@ export default function SocialMediaAgencyTemplate() {
                 unoptimized
               />
             </div>
+
             <div className="smo-cube">
               <div className="smo-cube__inner">
                 <span className="smo-face smo-face--front" />
@@ -598,12 +798,15 @@ export default function SocialMediaAgencyTemplate() {
                 <span className="smo-face smo-face--bottom" />
               </div>
             </div>
+
             <span className="smo-ring smo-ring--1" />
             <span className="smo-ring smo-ring--2" />
             <span className="smo-ring smo-ring--3" />
+
             <span className="smo-dot smo-dot--1" />
             <span className="smo-dot smo-dot--2" />
             <span className="smo-dot smo-dot--3" />
+
             <svg className="smo-orbit" viewBox="0 0 600 600" fill="none">
               <ellipse
                 cx="300"
@@ -653,12 +856,16 @@ export default function SocialMediaAgencyTemplate() {
                     alt="RedSpider social media team in Dubai"
                     loading="lazy"
                   />
+
                   <span className="rsi2-media__overlay" aria-hidden="true" />
+
                   <span className="rsi2-media__accent" aria-hidden="true" />
+
                   <span
                     className="rsi2-media__corner rsi2-media__corner--tl"
                     aria-hidden="true"
                   />
+
                   <span
                     className="rsi2-media__corner rsi2-media__corner--br"
                     aria-hidden="true"
@@ -670,17 +877,20 @@ export default function SocialMediaAgencyTemplate() {
             {/* RIGHT — content */}
             <div className="col-lg-7 col-md-12 col-12">
               <div className="rsi2-content">
+                {/* Eyebrow */}
                 <span className="smo-eye rsi2-eye smo-reveal">
                   <span className="rsi2-eye__mark" aria-hidden="true" />
                   More than just posting
                 </span>
 
+                {/* Heading */}
                 <h2 className="rsi2-heading smo-reveal">
                   <span className="rsi2-heading__line">
                     <span className="rsi2-heading__word">Social</span>{" "}
                     <span className="rsi2-heading__word">Media</span>{" "}
                     <span className="rsi2-heading__word">Marketing</span>
                   </span>
+
                   <span className="rsi2-heading__line">
                     <span className="rsi2-heading__word">Built</span>{" "}
                     <span className="rsi2-heading__word">Around</span>{" "}
@@ -691,6 +901,7 @@ export default function SocialMediaAgencyTemplate() {
                   </span>
                 </h2>
 
+                {/* Introduction */}
                 <p className="rsi2-lede smo-reveal smo-d1">
                   Being active on social media is no longer enough.
                 </p>
@@ -716,6 +927,7 @@ export default function SocialMediaAgencyTemplate() {
                   achieve.
                 </p>
 
+                {/* CTA */}
                 <div className="rsi2-cta-row smo-reveal">
                   <a
                     className="smo-btn smo-btn--primary rsi2-cta"
@@ -734,10 +946,11 @@ export default function SocialMediaAgencyTemplate() {
       <section className="smo-paper smo-capx pt-0" id="smo-services">
         <div className="container smo-wrap">
           <div className="smo-head smo-reveal">
-            <span className="smo-eye">What you get</span>
+            <span className="smo-eye">What we do</span>
+
             <h2>
-              <span className="smo-line">Social, search and creative</span>
-              <span className="smo-line">working as one system.</span>
+              <span className="smo-line">Complete Social Media Marketing</span>
+              <span className="smo-line">Services in Dubai</span>
             </h2>
           </div>
 
@@ -749,14 +962,11 @@ export default function SocialMediaAgencyTemplate() {
                 key={item.num}
               >
                 <SmoOdo value={item.num} />
+
                 <div className="smo-capx-main">
                   <h3>{item.title}</h3>
+
                   <p>{item.body}</p>
-                  <div className="smo-tags">
-                    {item.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
                 </div>
               </a>
             ))}
@@ -770,22 +980,47 @@ export default function SocialMediaAgencyTemplate() {
             <span className="smo-eye smo-eye--light">
               From scroll to enquiry
             </span>
-            <h2>Lead generation needs more than posting.</h2>
+
+            <h2>Social Media Should Do More Than Collect Likes</h2>
+
             <p>
-              Posting is the start, not the strategy. We connect content, paid
-              media, landing pages and reporting into one system that delivers
-              real leads.
+              Likes and followers can help build visibility, but businesses
+              ultimately need meaningful results.
             </p>
+
+            <p>
+              That is why RedSpider connects social media with the rest of your
+              digital journey.
+            </p>
+
             <ul>
-              <li>Content people notice</li>
-              <li>Demand capture on ads</li>
-              <li>Lead-focused reporting</li>
+              <li>
+                <strong>Social Content:</strong> Attract attention with useful,
+                creative and engaging content.
+              </li>
+
+              <li>
+                <strong>Paid Campaigns:</strong> Reach specific audiences with
+                targeted advertising.
+              </li>
+
+              <li>
+                <strong>Landing Pages:</strong> Send interested users to
+                focused, conversion-driven pages.
+              </li>
+
+              <li>
+                <strong>Whatsapp:</strong> Let prospects start a conversation
+                immediately.
+              </li>
+
+              <li>
+                <strong>CRM &amp; Automation:</strong> Where required, leads can
+                be routed into your sales or CRM workflow for faster follow-up.
+              </li>
             </ul>
-            <a className="smo-btn smo-btn--primary" href={CONTACT_ANCHOR}>
-              Build the lead system
-              <Arrow />
-            </a>
           </div>
+
           <div className="smo-proof__visual smo-reveal smo-reveal-r">
             <Image
               className="smo-tile smo-tile--a"
@@ -795,6 +1030,7 @@ export default function SocialMediaAgencyTemplate() {
               height={381}
               unoptimized
             />
+
             <Image
               className="smo-tile smo-tile--b"
               src={IMG.device2}
@@ -803,6 +1039,7 @@ export default function SocialMediaAgencyTemplate() {
               height={203}
               unoptimized
             />
+
             <Image
               className="smo-tile smo-tile--c"
               src={IMG.proof}
@@ -811,6 +1048,7 @@ export default function SocialMediaAgencyTemplate() {
               height={280}
               unoptimized
             />
+
             <Image
               className="smo-tile smo-tile--d"
               src={IMG.glass22}
@@ -831,22 +1069,16 @@ export default function SocialMediaAgencyTemplate() {
                 className="rs-smo-packages__eyebrow-line"
                 aria-hidden="true"
               />
-              Pick the level
+              Flexible Management Options
               <span
                 className="rs-smo-packages__eyebrow-line"
                 aria-hidden="true"
               />
             </span>
+
             <h2 className="rs-smo-packages__title">
-              Keep the{" "}
-              <span className="rs-smo-packages__title-accent">lead-gen</span>{" "}
-              standard.
+              Choose the Social Media Support Your Business Needs
             </h2>
-            <p className="rs-smo-packages__intro">
-              Some brands need Instagram and LinkedIn handled properly. Others
-              need the full growth stack: social, ads, landing pages and
-              reporting. Scope follows the outcome.
-            </p>
           </div>
 
           <div className="row rs-smo-packages__grid">
@@ -857,6 +1089,7 @@ export default function SocialMediaAgencyTemplate() {
                 >
                   <div className="rs-smo-package-card__num">
                     <span>{String(index + 1).padStart(2, "0")}</span>
+
                     <span
                       className="rs-smo-package-card__num-line"
                       aria-hidden="true"
@@ -878,6 +1111,7 @@ export default function SocialMediaAgencyTemplate() {
 
                   <div className="rs-smo-package-card__body">
                     <h3 className="rs-smo-package-card__title">{pack.title}</h3>
+
                     <p className="rs-smo-package-card__text">{pack.body}</p>
                   </div>
                 </article>
@@ -890,22 +1124,43 @@ export default function SocialMediaAgencyTemplate() {
       <section className="smo-manifesto">
         <div className="container smo-wrap smo-manifesto__inner">
           <div className="smo-manifesto__copy smo-reveal">
-            <span className="smo-eye smo-eye--light">Your digital partner</span>
-            <h2>RedSpider is a Dubai digital team.</h2>
+            <span className="smo-eye smo-eye--light">
+              Experience You Can Rely On
+            </span>
+
+            <h2>Digital Experience Built Over 14+ Years</h2>
+
             <p>
-              Fourteen years. Web, branding, ecommerce and performance marketing
-              under one roof — so social is never disconnected from the rest of
-              the journey.
+              For more than 14 years, RedSpider has worked with companies in
+              Dubai and the UAE across web design, branding, ecommerce,
+              technology and digital marketing.
             </p>
+
+            <p>
+              Our broader digital experience allows us to look beyond individual
+              social media posts and understand how your social presence
+              connects with your website, advertising, customer enquiries and
+              overall brand experience.
+            </p>
+
             <div className="smo-statline">
-              {FACTS.slice(0, 3).map((fact) => (
-                <article key={fact.label}>
-                  <strong>{fact.value}</strong>
-                  <span>{fact.label}</span>
-                </article>
-              ))}
+              <article>
+                <strong>14+</strong>
+                <span>Years of Digital Experience</span>
+              </article>
+
+              <article>
+                <strong>100+</strong>
+                <span>Google Reviews</span>
+              </article>
+
+              <article>
+                <strong>4.9</strong>
+                <span>Google Rating</span>
+              </article>
             </div>
           </div>
+
           <div className="smo-manifesto__visual" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element -- external asset with a local fallback */}
             <img
@@ -971,11 +1226,14 @@ export default function SocialMediaAgencyTemplate() {
       <section className="smo-pf-section pt-0">
         <div className="container smo-wrap">
           <div className="smo-pf-head smo-reveal">
-            <span className="smo-pf-eye">Platform focus</span>
-            <h2 className="smo-pf-h2">Where attention turns into enquiries.</h2>
+            <span className="smo-pf-eye">Where Your Customers Are</span>
+
+            <h2 className="smo-pf-h2">Social Media Platforms We Manage</h2>
+
             <p className="smo-pf-sub">
-              Social, search, messaging and SEO planned as one lead-generation
-              system — not separate content calendars.
+              Different platforms attract different audiences. We identify the
+              channels that make the most sense for your business instead of
+              trying to be everywhere without a clear purpose.
             </p>
           </div>
 
@@ -986,10 +1244,12 @@ export default function SocialMediaAgencyTemplate() {
                 key={item.name}
               >
                 <span className="smo-pf-icon" aria-hidden="true">
-                  {PLATFORM_ICONS[item.name] || null}
+                  {PLATFORM_ICONS[item.name.replace(" Marketing", "")] || null}
                 </span>
+
                 <div className="smo-pf-body">
                   <h3 className="smo-pf-title">{item.name}</h3>
+
                   <p className="smo-pf-text">{item.body}</p>
                 </div>
               </article>
@@ -1041,36 +1301,17 @@ export default function SocialMediaAgencyTemplate() {
 
             <h2 className="smo-urg-h2">
               <span className="smo-urg-line">
-                Every silent day is your competitor&apos;s.
+                One Brand. One Consistent Visual Direction.
               </span>
             </h2>
 
             <p className="smo-urg-p">
               <span className="smo-urg-line">
-                The brand that shows up every day on social, search, inboxes and
-              </span>
-              <span className="smo-urg-line">
-                DMs wins attention. The one that doesn&apos;t, loses it.
+                We maintain consistent typography, colours, messaging and
+                creative direction so your customers recognise your brand
+                wherever they see it.
               </span>
             </p>
-
-            <div className="smo-actions smo-urg-actions">
-              <a className="smo-btn smo-btn--primary" href={CONTACT_ANCHOR}>
-                Claim a planning slot
-                <Arrow />
-              </a>
-              <a className="smo-btn smo-btn--ghost" href={CONTACT_ANCHOR}>
-                Or start with an audit
-                <Arrow />
-              </a>
-            </div>
-
-            <div className="smo-urg-meta">
-              <span className="smo-urg-meta__dot" aria-hidden="true" />
-              <span>Powered by</span>
-              <span className="smo-urg-meta__sep" aria-hidden="true" />
-              <span>RedSpider</span>
-            </div>
           </div>
         </div>
       </section>
@@ -1091,9 +1332,9 @@ export default function SocialMediaAgencyTemplate() {
                 </h2>
 
                 <p className="rsp-intro">
-                  A clear, seven-step process that takes your brand from
-                  research to results — with content, campaigns and reporting
-                  working as one system.
+                  We help your business grow online in 7 easy steps. First, we
+                  learn about your goals. Then, we make a clear plan, create
+                  great posts, and run ads to get you the best results.
                 </p>
 
                 <span className="rsp-aside__line" aria-hidden="true" />
@@ -1114,12 +1355,11 @@ export default function SocialMediaAgencyTemplate() {
 
                     <div className="rsp-card__body">
                       <h3 className="rsp-card__title">{step.title}</h3>
+
                       <p className="rsp-card__text">{step.body}</p>
                     </div>
 
-                    {/* <span className="rsp-card__arrow" aria-hidden="true">
-                      <Arrow />
-                    </span> */}
+                    {/* Arrow intentionally kept disabled */}
                   </li>
                 ))}
               </ol>
@@ -1133,98 +1373,106 @@ export default function SocialMediaAgencyTemplate() {
           <div className="row justify-content-center">
             <div className="col-lg-12 col-xl-12 text-center">
               <h2 className="rs-dd-heading smo-reveal">
-                Data-Driven Decisions, Dynamic Growth
+                Data-Backed Campaigns for Real Business Growth
               </h2>
+
               <p className="rs-dd-intro smo-reveal smo-d1">
                 Launch with a data-backed social media marketing service in
-                Dubai. We provide businesses and agencies with suitable insights
-                to achieve measurable digital growth.
+                Dubai. We provide businesses and agencies with actionable
+                insights to achieve measurable digital growth.
               </p>
             </div>
           </div>
 
           <div className="row rs-dd-grid">
+            {/* 01 — Conversion-Focused Optimization */}
             <div className="col-lg-4 col-md-6 col-12">
               <article className="rs-dd-card smo-reveal smo-d1">
                 <div className="rs-dd-card__media">
                   <img
                     src="/assets/img/smo/data-driven/1.png"
-                    alt="Website analytics dashboard"
+                    alt="Conversion-focused optimization"
                     loading="lazy"
                   />
                 </div>
+
                 <div className="rs-dd-card__inner">
                   <div className="rs-dd-card__num">
                     <span>01</span>
                     <span className="rs-dd-card__num-line" aria-hidden="true" />
                   </div>
-                  <h3 className="rs-dd-card__title">Website Optimization</h3>
+
+                  <h3 className="rs-dd-card__title">
+                    Conversion-Focused Optimization
+                  </h3>
+
                   <p className="rs-dd-card__text">
                     We offer data-driven social media marketing services in
-                    Dubai that are designed to optimize your website
-                    performance. With a focus on lead generation, we help you
-                    achieve measurable growth.
+                    Dubai designed to maximize your digital footprint. With a
+                    strict focus on lead generation, we help you achieve growth
+                    that directly impacts your bottom line.
                   </p>
-                  <a className="rs-dd-card__cta" href={CONTACT_ANCHOR}>
-                    <span>Start Now</span>
-                    <Arrow />
-                  </a>
                 </div>
               </article>
             </div>
 
+            {/* 02 — Precision Audience Targeting */}
             <div className="col-lg-4 col-md-6 col-12">
               <article className="rs-dd-card smo-reveal smo-d2">
                 <div className="rs-dd-card__media">
                   <img
                     src="/assets/img/smo/data-driven/2.png"
-                    alt="Light trails representing targeted traffic"
+                    alt="Precision audience targeting"
                     loading="lazy"
                   />
                 </div>
+
                 <div className="rs-dd-card__inner">
                   <div className="rs-dd-card__num">
                     <span>02</span>
                     <span className="rs-dd-card__num-line" aria-hidden="true" />
                   </div>
-                  <h3 className="rs-dd-card__title">Targeted Traffic</h3>
+
+                  <h3 className="rs-dd-card__title">
+                    Precision Audience Targeting
+                  </h3>
+
                   <p className="rs-dd-card__text">
-                    With our data-driven approach to SEO and paid campaigns, we
-                    help you attract the right audience and convert them into
-                    customers.
+                    With our data-first approach to social and paid campaigns,
+                    we don't just drive traffic—we help you attract the exact
+                    right audience and convert them into loyal customers.
                   </p>
-                  <a className="rs-dd-card__cta" href={CONTACT_ANCHOR}>
-                    <span>Boost Visibility</span>
-                    <Arrow />
-                  </a>
                 </div>
               </article>
             </div>
 
+            {/* 03 — Continuous Performance Tracking */}
             <div className="col-lg-4 col-md-6 col-12">
               <article className="rs-dd-card smo-reveal smo-d3">
                 <div className="rs-dd-card__media">
                   <img
                     src="/assets/img/smo/data-driven/3.png"
-                    alt="Stopwatch representing performance"
+                    alt="Continuous performance tracking"
                     loading="lazy"
                   />
                 </div>
+
                 <div className="rs-dd-card__inner">
                   <div className="rs-dd-card__num">
                     <span>03</span>
                     <span className="rs-dd-card__num-line" aria-hidden="true" />
                   </div>
-                  <h3 className="rs-dd-card__title">Remarkable Performance</h3>
+
+                  <h3 className="rs-dd-card__title">
+                    Continuous Performance Tracking
+                  </h3>
+
                   <p className="rs-dd-card__text">
-                    Our social media marketing services in Dubai are also about
-                    performance. With a focus on tracking, we help you improve
-                    your marketing campaigns for better growth.
+                    Our social media marketing services in Dubai are built
+                    entirely on results. By continuously tracking analytics and
+                    campaign data, we optimize your strategy for scalable,
+                    long-term growth.
                   </p>
-                  <a className="rs-dd-card__cta" href={CONTACT_ANCHOR}>
-                    <span>Know More</span>
-                    <Arrow />
-                  </a>
                 </div>
               </article>
             </div>
@@ -1236,7 +1484,7 @@ export default function SocialMediaAgencyTemplate() {
         <div className="container rs-home-faq-box">
           <div className="text-center mb-3 border-bottom pb-3">
             <h2 className="fw-bold rs-process-title">
-              Questions brands usually ask first.
+              Frequently Asked Questions About Social Media Marketing in Dubai
             </h2>
 
             <p className="rs-section-subtitle mx-auto text-center">
