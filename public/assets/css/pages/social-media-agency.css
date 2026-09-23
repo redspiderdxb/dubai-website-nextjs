@@ -1127,8 +1127,6 @@
 }
 
 .smo-conversations__head p {
-  max-width: 80ch;
-  margin: 0 auto 24px;
   color: #555149;
   font-size: 13px;
   line-height: 1.65;

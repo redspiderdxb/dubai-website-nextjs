@@ -1177,12 +1177,17 @@ export default function SocialMediaAgencyTemplate() {
       <section className="smo-paper smo-conversations">
         <div className="container smo-wrap">
           <div className="smo-conversations__head smo-reveal">
-            <h2>Strategies That Spark the Conversations</h2>
+            <span className="smo-section-eyebrow">YOUR DIGITAL PARTNER</span>
+
+            <h2>Why Businesses Choose RedSpider</h2>
+
             <p>
-              We connect content, campaigns and community management into a
-              practical social strategy that gets your brand seen, heard and
-              remembered.
+              Social media performs better when your creative, website,
+              advertising and lead-generation systems work together.
             </p>
+
+            <p>RedSpider brings these capabilities under one digital team.</p>
+
             <a className="smo-btn smo-conversations__cta" href={CONTACT_ANCHOR}>
               Connect with us
               <Arrow />
@@ -1222,7 +1227,6 @@ export default function SocialMediaAgencyTemplate() {
           </div>
         </div>
       </section>
-
       <section className="smo-pf-section pt-0">
         <div className="container smo-wrap">
           <div className="smo-pf-head smo-reveal">
