@@ -26,7 +26,7 @@ export default function About({ data }) {
     "",
   );
 
-  const readmoreLink = data?.about_readmore_link || "/about";
+  const readmoreLink = "/about-us/";
 
   const portfolioText = data?.about_portfolio_text || "View Portfolio";
 

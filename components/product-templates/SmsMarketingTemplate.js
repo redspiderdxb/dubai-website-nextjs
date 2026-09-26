@@ -462,7 +462,7 @@ export default function SmsMarketingTemplate({ data }) {
             </div>
             <div className="col-12 text-center">
               <a
-                href="/contact"
+                href="/contact-us/"
                 className="btn btn-animation btn-red d-inline-flex align-items-center gap-3 mt-4"
               >
                 <span className="btn-title">Schedule Free Consultation</span>
@@ -516,7 +516,7 @@ export default function SmsMarketingTemplate({ data }) {
           <div className="row">
             <div className="col-12 text-center">
               <a
-                href="/contact"
+                href="/contact-us/"
                 className="btn btn-animation btn-red d-inline-flex align-items-center gap-3 mt-4"
               >
                 <span className="btn-title">Schedule Free Consultation</span>

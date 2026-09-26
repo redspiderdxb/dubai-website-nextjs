@@ -15,7 +15,7 @@ import {
   validateSelect,
 } from "../../lib/formValidation";
 
-const CONTACT_ANCHOR = "/contact-us";
+const CONTACT_ANCHOR = "/contact-us/";
 const SOCIAL_BLOCK_IMAGE = "/assets/img/smo/social-block.png";
 
 const IMG = {
