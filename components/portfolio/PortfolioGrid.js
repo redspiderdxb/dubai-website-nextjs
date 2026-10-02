@@ -109,6 +109,7 @@ function formatGalleries(data = []) {
       title: gallery.name || "Untitled Project",
       category: cleanDescription || "Portfolio",
       image: resolveGalleryImage(gallery.image),
+      project_url: gallery.project_url,
       link: projectUrl,
       searchText,
       isYoutube,
@@ -1013,7 +1014,8 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
                         alt={`${project.title} web design project by RedSpider Dubai`}
                         priority={currentPage === 1 && index < 2}
                       />
-                      {project.link && project.link !== "#" && (
+                      {String(project.project_url || "").trim() !== "" &&
+                        String(project.project_url).trim() !== "#" && (
                         <a
                           href={project.link}
                           target="_blank"
@@ -1046,18 +1048,21 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
                           </a>
                         )}
 
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title="More Details"
-                          className="details-link"
-                        >
-                          <i
-                            className="bi bi-link-45deg"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
+                        {String(project.project_url || "").trim() !== "" &&
+                          String(project.project_url).trim() !== "#" && (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title="More Details"
+                              className="details-link"
+                            >
+                              <i
+                                className="bi bi-link-45deg"
+                                aria-hidden="true"
+                              ></i>
+                            </a>
+                          )}
                       </div>
                     </>
                   )}
