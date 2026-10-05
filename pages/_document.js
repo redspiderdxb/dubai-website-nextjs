@@ -4,6 +4,10 @@ export default function Document() {
   return (
     <Html lang="en" data-scroll-behavior="smooth">
       <Head>
+        <meta
+          name="google-site-verification"
+          content="CzWLARYO0jb-7dMxMmmlIpgaYOns7sMFkXkc0z8D0Hw"
+        />
         {/* Favicon — RS logo */}
         <link
           rel="icon"
