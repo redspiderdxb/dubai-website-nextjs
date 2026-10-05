@@ -1,9 +1,22 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
   return (
     <Html lang="en" data-scroll-behavior="smooth">
       <Head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-C5J3TF7PV3"
+          strategy="beforeInteractive"
+        />
+        <Script id="google-analytics" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-C5J3TF7PV3');
+          `}
+        </Script>
         <meta
           name="google-site-verification"
           content="CzWLARYO0jb-7dMxMmmlIpgaYOns7sMFkXkc0z8D0Hw"
