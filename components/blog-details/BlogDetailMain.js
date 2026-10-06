@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BlogDetailSidebar from "./BlogDetailSidebar";
@@ -28,12 +29,87 @@ const createSlug = (text = "") => {
    ADD IDS TO H2 / H3
 ===================================================== */
 
+const BACKEND_ORIGIN = (() => {
+  const apiUrl =
+    process.env.NEXT_PUBLIC_API_URL ||
+    "https://redspider.rsworkspace.net/admin/public/api/v1";
+
+  try {
+    return new URL(apiUrl).origin;
+  } catch {
+    return "https://redspider.rsworkspace.net";
+  }
+})();
+
+const BACKEND_PUBLIC_BASE = (
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://redspider.rsworkspace.net/admin/public/api/v1"
+)
+  .replace(/\/api\/v1\/?$/, "")
+  .replace(/\/$/, "");
+
+const normalizeContentImageUrl = (src = "") => {
+  const value = String(src).trim();
+
+  if (!value || /^https?:\/\//i.test(value) || value.startsWith("//")) {
+    return value;
+  }
+
+  if (
+    value.startsWith("/admin/public/") ||
+    value.startsWith("admin/public/")
+  ) {
+    return `${BACKEND_ORIGIN}/${value.replace(/^\/+/, "")}`;
+  }
+
+  if (value.startsWith("/storage/")) {
+    return `${BACKEND_PUBLIC_BASE}${value}`;
+  }
+
+  if (value.startsWith("storage/")) {
+    return `${BACKEND_PUBLIC_BASE}/${value}`;
+  }
+
+  if (value.startsWith("/public/storage/")) {
+    return `${BACKEND_PUBLIC_BASE}${value.replace("/public", "")}`;
+  }
+
+  if (value.startsWith("public/storage/")) {
+    return `${BACKEND_PUBLIC_BASE}/${value.replace(/^public\//, "")}`;
+  }
+
+  return value;
+};
+
+const removeEmptyContentImages = (html = "") => {
+  return html.replace(/<img\b[^>]*>/gi, (tag) => {
+    const srcMatch = tag.match(
+      /\bsrc\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/i,
+    );
+    const rawSrc = srcMatch
+      ? (srcMatch[1] ?? srcMatch[2] ?? srcMatch[3] ?? "")
+      : "";
+    const src = normalizeContentImageUrl(rawSrc);
+
+    if (!src) return "";
+
+    if (src === String(rawSrc).trim()) {
+      return tag;
+    }
+
+    return tag.replace(
+      /\bsrc\s*=\s*(?:"[^"]*"|'[^']*'|[^\s"'=<>`]+)/i,
+      `src="${src}"`,
+    );
+  });
+};
+
 const prepareBlogContent = (html = "") => {
   if (!html) return "";
 
   let index = 0;
 
-  return html.replace(
+  return removeEmptyContentImages(html).replace(
     /<(h2|h3)([^>]*)>([\s\S]*?)<\/\1>/gi,
     (match, tag, attrs, inner) => {
       const cleanText = stripHtml(inner);
@@ -58,7 +134,54 @@ const prepareBlogContent = (html = "") => {
    BLOG DETAIL MAIN
 ===================================================== */
 
+const removeBrokenImage = (img) => {
+  img.remove();
+};
+
 export default function BlogDetailMain({ post }) {
+  const contentRef = useRef(null);
+
+  const preparedContent = prepareBlogContent(post?.content || "");
+
+  useEffect(() => {
+    const root = contentRef.current;
+
+    if (!root) return undefined;
+
+    const images = root.querySelectorAll("img");
+    const cleanups = [];
+
+    images.forEach((img) => {
+      const src = (img.getAttribute("src") || "").trim();
+
+      if (!src) {
+        removeBrokenImage(img);
+        return;
+      }
+
+      const onError = () => removeBrokenImage(img);
+      const onLoad = () => {
+        if (!img.naturalWidth) removeBrokenImage(img);
+      };
+
+      img.addEventListener("error", onError);
+      img.addEventListener("load", onLoad);
+
+      cleanups.push(() => {
+        img.removeEventListener("error", onError);
+        img.removeEventListener("load", onLoad);
+      });
+
+      if (img.complete && img.naturalWidth === 0) {
+        removeBrokenImage(img);
+      }
+    });
+
+    return () => {
+      cleanups.forEach((cleanup) => cleanup());
+    };
+  }, [preparedContent]);
+
   /* ===================================================
      EMPTY STATE
   ================================================== */
@@ -114,12 +237,6 @@ export default function BlogDetailMain({ post }) {
     post.reading_time ||
     post.readingTime ||
     Math.max(1, Math.ceil(wordCount / 200));
-
-  /* ===================================================
-     PREPARE CONTENT
-  ================================================== */
-
-  const preparedContent = prepareBlogContent(post.content || "");
 
   /* ===================================================
      RENDER
@@ -224,6 +341,7 @@ export default function BlogDetailMain({ post }) {
 
           {preparedContent ? (
             <div
+              ref={contentRef}
               className="rs-blog-html"
               dangerouslySetInnerHTML={{
                 __html: preparedContent,
