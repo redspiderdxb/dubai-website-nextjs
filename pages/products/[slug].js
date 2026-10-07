@@ -57,6 +57,11 @@ export default function ProductDetail({ product }) {
   const TemplateComponent =
     TEMPLATE_COMPONENTS[product.template] || RealEstatePortalTemplate;
 
+  const usesStandaloneSchema =
+    product.slug === "daily-deal-website-script" ||
+    product.slug === "dubizzle-clone" ||
+    product.slug === "uae-e-invoicing-crm-software";
+
   const seoData = {
     title: product.seo_title || product.name || "Products | RedSpider",
 
@@ -74,7 +79,7 @@ export default function ProductDetail({ product }) {
   };
 
   return (
-    <Layout>
+    <Layout includeGlobalSchema={!usesStandaloneSchema}>
       <PageStyles href="/assets/css/pages/products.css" />
       {product.template === "crm-software" ? (
         <Head>

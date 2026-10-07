@@ -6,18 +6,20 @@ import globalSchema from "../../lib/schema/global.json";
 
 const FONTS_CSS = "/assets/css/shared/fonts.css?v=lato-medium";
 
-export default function Layout({ children }) {
+export default function Layout({ children, includeGlobalSchema = true }) {
   return (
     <>
       <Head>
         <link rel="stylesheet" href={FONTS_CSS} key="rs-site-fonts" />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(globalSchema),
-          }}
-        />
+        {includeGlobalSchema ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(globalSchema),
+            }}
+          />
+        ) : null}
       </Head>
 
       {/* =================================================
