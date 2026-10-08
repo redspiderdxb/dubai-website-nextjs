@@ -1,7 +1,7 @@
 import ServiceCTA from "../services/ServiceCTA";
 import ServiceFaqs from "../services/ServiceFaqs";
 import GoogleReviews from "../ui/GoogleReviews";
-import ServiceWorkGallery from "../services/ServiceWorkGallery";
+import WebDevelopmentPortfolio from "../services/WebDevelopmentPortfolio";
 
 const SERVICE_ICONS = [
   "bi-code-slash",
@@ -240,9 +240,7 @@ export default function WebDevelopmentTemplate({ data }) {
           <div className="container">
             <div className="rs-creative-intro__grid">
               <div className="rs-creative-intro__meta">
-                <span className="rs-creative-kicker">{intro_small_heading}</span>
-                <p className="rs-creative-intro__note">Built in Dubai since 2010</p>
-              </div>
+                </div>
               <div className="rs-creative-intro__copy">
                 <p className="rs-creative-intro__lead">{intro_description}</p>
                 <p className="rs-creative-intro__support">
@@ -270,7 +268,7 @@ export default function WebDevelopmentTemplate({ data }) {
         >
           <div className="container">
             <div className="rs-creative-head">
-              <span className="rs-creative-kicker">What we build</span>
+              
               <h2>{features_title}</h2>
               <p>{features_subtitle}</p>
             </div>
@@ -371,7 +369,7 @@ export default function WebDevelopmentTemplate({ data }) {
     },
     gallery: {
       component: (
-        <ServiceWorkGallery
+        <WebDevelopmentPortfolio
           key="gallery"
           title={gallery_title || "Our Work"}
           subtitle={gallery_subtitle}

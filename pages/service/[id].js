@@ -168,7 +168,16 @@ export default function ServiceDetail({ service }) {
 
   return (
     <Layout>
-      <PageStyles href="/assets/css/pages/service.css" />
+      <PageStyles
+        href={
+          service.template === "web-development"
+            ? [
+                "/assets/css/pages/service.css",
+                "/assets/css/pages/web-development-portfolio.css",
+              ]
+            : "/assets/css/pages/service.css"
+        }
+      />
       <SEO
         {...seoData}
         serviceSchema={
