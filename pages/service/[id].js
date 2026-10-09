@@ -174,6 +174,8 @@ export default function ServiceDetail({ service }) {
             ? [
                 "/assets/css/pages/service.css",
                 "/assets/css/pages/web-development-portfolio.css",
+                "/assets/css/pages/web-development-advantage.css",
+                "/assets/css/pages/web-development-workflow.css",
               ]
             : "/assets/css/pages/service.css"
         }

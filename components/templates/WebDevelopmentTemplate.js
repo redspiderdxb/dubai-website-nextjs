@@ -2,6 +2,7 @@ import ServiceCTA from "../services/ServiceCTA";
 import ServiceFaqs from "../services/ServiceFaqs";
 import GoogleReviews from "../ui/GoogleReviews";
 import WebDevelopmentPortfolio from "../services/WebDevelopmentPortfolio";
+import WebDevelopmentServices from "../services/WebDevelopmentServices";
 
 const SERVICE_ICONS = [
   "bi-code-slash",
@@ -12,14 +13,94 @@ const SERVICE_ICONS = [
   "bi-shield-check",
 ];
 
-const BENEFIT_ICONS = [
-  "bi-geo-alt",
-  "bi-layout-text-window",
-  "bi-graph-up-arrow",
-  "bi-search",
-  "bi-palette",
-  "bi-layers",
-  "bi-clock-history",
+const ADVANTAGE_CARDS = [
+  {
+    number: "01",
+    title: "Industry Experience Across UAE",
+    description:
+      "Experience across real estate, corporate, healthcare, education, retail, and service business websites across Dubai and the UAE.",
+    icon: "/assets/img/web-development/advantage/1.webp",
+  },
+  {
+    number: "02",
+    title: "Strategic Layout & User Experience",
+    description:
+      "Clear structure and intuitive navigation designed to improve engagement and usability.",
+    icon: "/assets/img/web-development/advantage/2.webp",
+  },
+  {
+    number: "03",
+    title: "Conversion-Focused Structure",
+    description:
+      "Smart visual flow and strong calls to action built for lead generation.",
+    icon: "/assets/img/web-development/advantage/3.webp",
+  },
+  {
+    number: "04",
+    title: "SEO-Friendly Foundation",
+    description:
+      "Clean, fast, and search-optimized website structure from the start.",
+    icon: "/assets/img/web-development/advantage/4.webp",
+  },
+  {
+    number: "05",
+    title: "Custom UI/UX Approach",
+    description:
+      "Tailored design aligned with brand identity, uniqueness, and consistency.",
+    icon: "/assets/img/web-development/advantage/5.webp",
+  },
+  {
+    number: "06",
+    title: "Scalable & Future-Ready",
+    description:
+      "Flexible design built for future updates, integration, and growth.",
+    icon: "/assets/img/web-development/advantage/6.webp",
+  },
+  {
+    number: "07",
+    title: "Transparent Workflow & Timelines",
+    description:
+      "A structured process from wireframing to deployment with clarity at each step.",
+    icon: "/assets/img/web-development/advantage/7.webp",
+  },
+];
+
+const WORKFLOW_STEPS = [
+  {
+    number: "01",
+    title: "Requirement Analysis",
+    description:
+      "We analyze business goals, target audience, and technical needs.",
+    icon: "/assets/img/web-development/workflow/1.webp",
+  },
+  {
+    number: "02",
+    title: "Wireframe & Structure Planning",
+    description:
+      "We define user flow, content hierarchy, and navigation structure.",
+    icon: "/assets/img/web-development/workflow/2.webp",
+  },
+  {
+    number: "03",
+    title: "UI/UX Planning",
+    description:
+      "We craft engaging, intuitive interfaces that strengthen user experience.",
+    icon: "/assets/img/web-development/workflow/3.webp",
+  },
+  {
+    number: "04",
+    title: "Development & Integration",
+    description:
+      "We build responsive pages and integrate required features seamlessly.",
+    icon: "/assets/img/web-development/workflow/4.webp",
+  },
+  {
+    number: "05",
+    title: "Testing & Optimization",
+    description:
+      "We test and optimize to ensure smooth performance across devices.",
+    icon: "/assets/img/web-development/workflow/5.webp",
+  },
 ];
 
 export default function WebDevelopmentTemplate({ data }) {
@@ -34,11 +115,7 @@ export default function WebDevelopmentTemplate({ data }) {
     hero_background,
     intro_small_heading = "Web Development · Dubai, UAE",
     intro_description = "We build modern websites that reflect your brand. Our team creates responsive, SEO-friendly websites that help businesses grow online.",
-    cta_button_text,
-    cta_button_link,
     features = [],
-    benefits = [],
-    processes = [],
     faqs = [],
     gallery = [],
     show_hero = true,
@@ -51,10 +128,6 @@ export default function WebDevelopmentTemplate({ data }) {
     show_cta = true,
     features_title = "Our Web Development Services",
     features_subtitle = "At RedSpider, we offer a wide range of web development services to cater to your needs.",
-    benefits_title = "Why Businesses Choose RedSpider for Web Development",
-    benefits_subtitle = "RedSpider has earned trust by offering top notch services to various businesses in the industry.",
-    processes_title = "Our Web Development Process",
-    processes_subtitle = "Every website has different technical requirements. We develop solutions around your content, functionality, integrations and future growth.",
     faqs_title = "Frequently Asked Questions",
     faqs_subtitle = "Find quick answers to common questions about our services.",
     gallery_title = "Our Work",
@@ -76,7 +149,6 @@ export default function WebDevelopmentTemplate({ data }) {
 
   const imageBase =
     process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public";
-  const contactHref = cta_button_link || "/contact-us/";
 
   const getImageUrl = (imagePath) => {
     if (!imagePath) return "";
@@ -122,58 +194,6 @@ export default function WebDevelopmentTemplate({ data }) {
             title: "Maintenance & Support",
             description:
               "Updates, security, backups and technical support after launch.",
-          },
-        ];
-
-  const benefitCards =
-    benefits.length > 0
-      ? benefits
-      : [
-          {
-            title: "Industry Experience Across UAE",
-            description:
-              "Real estate, corporate, healthcare, education, retail and service businesses across Dubai and the UAE.",
-          },
-          {
-            title: "Strategic Layout & User Experience",
-            description:
-              "Clear structure and intuitive navigation that help visitors find what they need.",
-          },
-          {
-            title: "Conversion-Focused Structure",
-            description:
-              "Content hierarchy, visual flow and calls to action designed to generate enquiries.",
-          },
-          {
-            title: "SEO-Friendly Foundation",
-            description:
-              "Clean markup, fast loading and a structure that search engines can understand.",
-          },
-        ];
-
-  const processData =
-    processes.length > 0
-      ? processes
-      : [
-          {
-            title: "Requirement Analysis",
-            description:
-              "We review your goals, content, integrations and technical constraints before design begins.",
-          },
-          {
-            title: "UX & Visual Design",
-            description:
-              "Wireframes and layouts are planned so the site is easy to use and aligned with your brand.",
-          },
-          {
-            title: "Development",
-            description:
-              "We build a secure, scalable website with the CMS, features and integrations you need.",
-          },
-          {
-            title: "Testing & Launch",
-            description:
-              "Quality checks across devices, then a structured launch with handover and training.",
           },
         ];
 
@@ -260,7 +280,9 @@ export default function WebDevelopmentTemplate({ data }) {
       show: show_intro,
     },
     features: {
-      component: (
+      component: data.slug === "web-development" ? (
+        <WebDevelopmentServices key="features" />
+      ) : (
         <section
           key="features"
           id="web-development-services"
@@ -304,35 +326,86 @@ export default function WebDevelopmentTemplate({ data }) {
     },
     benefits: {
       component: (
-        <section key="benefits" className="rs-creative-why">
-          <div className="container">
-            <div className="rs-creative-why__layout">
-              <div className="rs-creative-why__intro">
-                <span className="rs-creative-kicker">Why RedSpider</span>
-                <h2>{benefits_title}</h2>
-                <p>{benefits_subtitle}</p>
-                {/* <a className="rs-creative-btn" href={contactHref}>
-                  {cta_button_text || "Book a call"}
-                  <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a> */}
-              </div>
+        <section key="benefits" className="rs-wd-advantage">
+          <svg
+            className="rs-wd-advantage__web"
+            viewBox="0 0 480 360"
+            aria-hidden="true"
+          >
+            <g
+              fill="none"
+              stroke="#f3b7bd"
+              strokeWidth="1"
+            >
+              <path d="M250 20 C300 80 340 70 470 40" />
+              <path d="M260 30 C320 120 360 150 470 120" />
+              <path d="M270 40 C330 160 380 210 470 200" />
+              <path d="M280 50 C340 190 390 250 460 280" />
+              <path d="M300 18 C340 90 300 160 250 240" />
+              <path d="M340 16 C390 100 410 180 390 280" />
+              <path d="M390 14 C430 110 450 190 470 270" />
+              <path d="M240 80 C320 90 380 70 460 90" />
+              <path d="M250 140 C330 150 390 130 470 160" />
+              <path d="M260 200 C340 190 400 210 470 230" />
+            </g>
+          </svg>
+          <span className="rs-wd-advantage__wash rs-wd-advantage__wash--left" aria-hidden="true" />
+          <span className="rs-wd-advantage__wash rs-wd-advantage__wash--right" aria-hidden="true" />
+          <span className="rs-wd-advantage__orb rs-wd-advantage__orb--small" aria-hidden="true" />
+          <span className="rs-wd-advantage__orb rs-wd-advantage__orb--large" aria-hidden="true" />
 
-              <div className="rs-creative-why__grid mt-5">
-                {benefitCards.map((card, index) => (
-                  <article
-                    key={`${card.id || card.title}-${index}`}
-                    className="rs-creative-why__card"
-                  >
-                    <span className="rs-creative-why__icon" aria-hidden="true">
-                      <i
-                        className={`bi ${BENEFIT_ICONS[index % BENEFIT_ICONS.length]}`}
-                      ></i>
-                    </span>
+          <div className="container rs-wd-advantage__inner">
+            <div className="rs-wd-advantage__intro" data-aos="fade-up">
+              <p className="rs-wd-advantage__eyebrow">Our Advantage</p>
+              <h2>
+                Why is <span>RedSpider</span> a trustworthy{" "}
+                <br />
+                choice for businesses?
+              </h2>
+              <p>
+                We combine industry experience, strategic design, and a
+                results-driven approach to deliver websites that help
+                businesses grow with confidence.
+              </p>
+            </div>
+
+            <div className="rs-wd-advantage__grid">
+              {ADVANTAGE_CARDS.map((card, index) => (
+                <article
+                  key={card.number}
+                  className={`rs-wd-advantage__card${
+                    index === ADVANTAGE_CARDS.length - 1
+                      ? " rs-wd-advantage__card--wide"
+                      : ""
+                  }`}
+                  data-aos="fade-up"
+                  data-aos-delay={80 + index * 70}
+                  data-aos-duration="750"
+                >
+                  <img
+                    className="rs-wd-advantage__icon"
+                    src={card.icon}
+                    alt=""
+                  />
+                  <div className="rs-wd-advantage__copy">
                     <h3>{card.title}</h3>
                     <p>{card.description}</p>
-                  </article>
-                ))}
-              </div>
+                    <span className="rs-wd-advantage__rule" aria-hidden="true" />
+                  </div>
+                  <span className="rs-wd-advantage__num">{card.number}</span>
+                  <span className="rs-wd-advantage__arrow" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -341,27 +414,55 @@ export default function WebDevelopmentTemplate({ data }) {
     },
     processes: {
       component: (
-        <section key="processes" className="rs-creative-process">
-          <div className="container">
-            <div className="rs-creative-head rs-creative-head--light">
-              <span className="rs-creative-kicker">How we work</span>
-              <h2>{processes_title}</h2>
-              <p>{processes_subtitle}</p>
+        <section key="processes" className="rs-wd-workflow">
+          <span className="rs-wd-workflow__arc" aria-hidden="true" />
+          <span className="rs-wd-workflow__glow" aria-hidden="true" />
+          <span className="rs-wd-workflow__glow rs-wd-workflow__glow--bottom" aria-hidden="true" />
+          <span className="rs-wd-workflow__dots" aria-hidden="true" />
+
+          <div className="rs-wd-workflow__inner">
+            <div className="rs-wd-workflow__intro" data-aos="fade-up">
+              <p className="rs-wd-workflow__eyebrow">How we work</p>
+              <h2>Web Design &amp; Development in Dubai</h2>
+              <p>
+                Dubai is a web design and development company with extensive
+                experience and track record.
+              </p>
             </div>
-            <ol className="rs-creative-steps">
-              {processData.map((process, index) => (
-                <li
-                  key={`${process.id || process.title}-${index}`}
-                  className="rs-creative-step"
+
+            <div className="rs-wd-workflow__track">
+              {WORKFLOW_STEPS.map((step, index) => (
+                <article
+                  key={step.number}
+                  className="rs-wd-workflow__card"
+                  data-aos="fade-up"
+                  data-aos-delay={60 + index * 80}
+                  data-aos-duration="750"
                 >
-                  <span className="rs-creative-step__num">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3>{process.title}</h3>
-                  <p>{process.description}</p>
-                </li>
+                  <div className="rs-wd-workflow__badge">
+                    <span className="rs-wd-workflow__num">{step.number}</span>
+                    <span className="rs-wd-workflow__ring">
+                      <img src={step.icon} alt="" />
+                    </span>
+                  </div>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                  {index < WORKFLOW_STEPS.length - 1 ? (
+                    <span className="rs-wd-workflow__link" aria-hidden="true">
+                      <svg viewBox="0 0 12 12" fill="none">
+                        <path
+                          d="M3 2.5 7.5 6 3 9.5"
+                          stroke="currentColor"
+                          strokeWidth="1.4"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  ) : null}
+                </article>
               ))}
-            </ol>
+            </div>
           </div>
         </section>
       ),
