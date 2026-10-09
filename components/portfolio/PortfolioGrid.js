@@ -378,29 +378,7 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
       "youtu.be",
     ],
 
-    "filter-nl": [
-      "newsletter",
-      "newsletter designing",
-      "email newsletter",
-      "email design",
-      "email campaign",
-      "mailchimp",
-    ],
-
-    "filter-cwp": [
-      "customized web application",
-      "customized web app",
-      "custom web application",
-      "custom web app",
-      "web application",
-      "web app",
-      "business application",
-      "online application",
-      "management system",
-      "crm",
-      "erp",
-      "portal application",
-    ],
+    "filter-figma": ["figma design"],
   };
 
   // ============================================
@@ -570,19 +548,11 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
     }
 
     // ------------------------------------------
-    // Newsletter
+    // Figma Design
     // ------------------------------------------
 
-    if (selectedFilter === "filter-nl") {
-      return containsKeyword(text, categoryKeywords["filter-nl"]);
-    }
-
-    // ------------------------------------------
-    // Customized Web Application
-    // ------------------------------------------
-
-    if (selectedFilter === "filter-cwp") {
-      return containsKeyword(text, categoryKeywords["filter-cwp"]);
+    if (selectedFilter === "filter-figma") {
+      return containsKeyword(text, categoryKeywords["filter-figma"]);
     }
 
     // ------------------------------------------
@@ -596,14 +566,9 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
         project.isYoutube ||
         containsKeyword(text, categoryKeywords["filter-video"]);
 
-      const isNewsletter = containsKeyword(text, categoryKeywords["filter-nl"]);
+      const isFigma = containsKeyword(text, categoryKeywords["filter-figma"]);
 
-      const isCustomWebApp = containsKeyword(
-        text,
-        categoryKeywords["filter-cwp"],
-      );
-
-      return !isApp && !isVideo && !isNewsletter && !isCustomWebApp;
+      return !isApp && !isVideo && !isFigma;
     }
 
     return true;
@@ -866,21 +831,11 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
             <button
               type="button"
               className={`portfolio-category-tab ${
-                filter === "filter-nl" ? "active" : ""
+                filter === "filter-figma" ? "active" : ""
               }`}
-              onClick={() => handleFilterClick("filter-nl")}
+              onClick={() => handleFilterClick("filter-figma")}
             >
-              Newsletter Designing
-            </button>
-
-            <button
-              type="button"
-              className={`portfolio-category-tab ${
-                filter === "filter-cwp" ? "active" : ""
-              }`}
-              onClick={() => handleFilterClick("filter-cwp")}
-            >
-              Customized Web Application
+              Figma Design
             </button>
 
             {/* YouTube Channel */}
