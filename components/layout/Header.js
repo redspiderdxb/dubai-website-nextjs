@@ -1,3 +1,4 @@
+import { CALL_URL, CONTACT_PHONE, WHATSAPP_URL } from "@/lib/contact";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
@@ -473,7 +474,7 @@ export default function Header() {
 
               <div className="rs-mobile-drawer-foot">
                 <a
-                  href="tel:+971555515475"
+                  href={CALL_URL}
                   className="rs-mobile-drawer-call"
                   onClick={closeMobileMenu}
                 >
@@ -481,7 +482,7 @@ export default function Header() {
                   Call now
                 </a>
                 <a
-                  href="https://wa.me/971555515475"
+                  href={WHATSAPP_URL}
                   className="rs-mobile-drawer-wa"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -531,17 +532,10 @@ export default function Header() {
             <span>
               Call Now :{" "}
               <a
-                href="tel:+971505698733"
+                href={CALL_URL}
                 tabIndex={isScrolled ? -1 : undefined}
               >
-                +971 50 5698733
-              </a>
-              ,{" "}
-              <a
-                href="tel:+971555515475"
-                tabIndex={isScrolled ? -1 : undefined}
-              >
-                +971 55 5515475
+                {CONTACT_PHONE}
               </a>
             </span>
           </div>
@@ -550,7 +544,7 @@ export default function Header() {
 
           <div className="rs-social-wrap">
             <a
-              href="https://wa.me/971555515475"
+              href={WHATSAPP_URL}
               className="rs-whatsapp"
               target="_blank"
               rel="noopener noreferrer"

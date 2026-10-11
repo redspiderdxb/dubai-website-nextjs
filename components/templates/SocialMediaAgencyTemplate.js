@@ -1,3 +1,4 @@
+import { CALL_URL, CONTACT_PHONE, WHATSAPP_URL } from "@/lib/contact";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -1605,7 +1606,7 @@ export default function SocialMediaAgencyTemplate() {
             {/* WhatsApp — primary */}
             <a
               className="cta-card green"
-              href="https://wa.me/971555515475"
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp Us"
@@ -1629,7 +1630,7 @@ export default function SocialMediaAgencyTemplate() {
             {/* Call */}
             <a
               className="cta-card dark"
-              href="tel:+971505698733"
+              href={CALL_URL}
               aria-label="Call RedSpider"
             >
               <span className="icon-box" aria-hidden="true">
@@ -1646,7 +1647,7 @@ export default function SocialMediaAgencyTemplate() {
 
               <span className="cta-content">
                 <span>Call RedSpider</span>
-                <p>+971 50 569 8733</p>
+                <p>{CONTACT_PHONE}</p>
               </span>
 
               <span className="cta-arrow" aria-hidden="true">

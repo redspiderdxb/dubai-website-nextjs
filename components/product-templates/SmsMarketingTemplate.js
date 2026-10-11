@@ -1,4 +1,5 @@
 // frontend/components/product-templates/SmsMarketingTemplate.js
+import { CALL_URL, CONTACT_PHONE } from "@/lib/contact";
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 
@@ -374,7 +375,7 @@ export default function SmsMarketingTemplate({ data }) {
                 </div>
                 <div className="mt-5 quick-contect">
                   <small>Quick Contact</small>
-                  <h5>: 971555515475</h5>
+                  <h5>: {CONTACT_PHONE}</h5>
                 </div>
               </div>
             </div>
@@ -649,7 +650,7 @@ export default function SmsMarketingTemplate({ data }) {
                 Our Bulk SMS Application Features
               </h2>
               <a
-                href="tel:+971555515475"
+                href={CALL_URL}
                 className="btn btn-animation btn-black d-inline-flex align-items-center gap-3 mt-4"
               >
                 <span className="btn-title">Call Now</span>

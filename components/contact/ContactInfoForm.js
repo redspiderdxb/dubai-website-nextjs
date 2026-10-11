@@ -1,5 +1,6 @@
 // components/contact/ContactInfoForm.js
 
+import { CALL_URL, CONTACT_PHONE, WHATSAPP_URL } from "@/lib/contact";
 import { useMemo, useState } from "react";
 import Button from "../ui/Button";
 import FormAlert from "../ui/FormAlert";
@@ -91,9 +92,6 @@ export default function ContactInfoForm({ data }) {
 
   const businessHours = data?.business_hours || "Monday - Sunday, 8am - 8pm";
 
-  const phone1 = data?.phone_1 || "+971 55 5515 475";
-  const phone2 = data?.phone_2 || "+971 50 569 8733";
-
   const email = data?.email || "info@redspider.ae";
 
   const supportTitle = data?.support_title || "24/7 Support";
@@ -105,8 +103,6 @@ export default function ContactInfoForm({ data }) {
   const formButtonText = data?.form_button_text || "MAKE APPOINTMENT";
 
   const formExtinfoText = data?.form_extinfo_text || "Or just Give us a call";
-
-  const formExtinfoPhone = data?.form_extinfo_phone || "+971 5555 15475";
 
   const formExtinfoSmall =
     data?.form_extinfo_small || "The Support Centre is available 24/7";
@@ -269,10 +265,10 @@ export default function ContactInfoForm({ data }) {
                 <div>
                   <h3>Call us</h3>
                   <p>
-                    <a href={`tel:${phone1.replace(/\s/g, "")}`}>{phone1}</a>
+                    <a href={CALL_URL}>{CONTACT_PHONE}</a>
                   </p>
                   <p>
-                    <a href={`tel:${phone2.replace(/\s/g, "")}`}>{phone2}</a>
+                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a>
                   </p>
                 </div>
               </div>
@@ -517,8 +513,8 @@ export default function ContactInfoForm({ data }) {
 
             <div className="rs-contact-callout">
               <p>{formExtinfoText}</p>
-              <a href={`tel:${formExtinfoPhone.replace(/\s/g, "")}`}>
-                {formExtinfoPhone}
+              <a href={CALL_URL}>
+                {CONTACT_PHONE}
               </a>
               <small>{formExtinfoSmall}</small>
             </div>

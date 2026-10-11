@@ -1,3 +1,5 @@
+import { CALL_URL, CONTACT_PHONE, WHATSAPP_URL } from "@/lib/contact";
+
 const DEFAULT_TITLE = "Ready to start your next project?";
 const DEFAULT_DESCRIPTION =
   "Talk to RedSpider about web design, development and digital services for your business in Dubai and the UAE.";
@@ -30,7 +32,7 @@ export default function ContactCTA({
         </div>
 
         <div className="cta-wrap" data-aos="fade-up" data-aos-delay="120">
-          <a className="cta-card" href="tel:+971555515475" aria-label="Call Us">
+          <a className="cta-card" href={CALL_URL} aria-label="Call Us">
             <span className="icon-box" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <path
@@ -89,7 +91,7 @@ export default function ContactCTA({
 
           <a
             className="cta-card green"
-            href="https://wa.me/971555515475"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp Us"
@@ -102,7 +104,7 @@ export default function ContactCTA({
 
             <span className="cta-content">
               <span>WhatsApp Us</span>
-              <p>+971 55 551 5475</p>
+              <p>{CONTACT_PHONE}</p>
             </span>
 
             <span className="cta-arrow" aria-hidden="true">

@@ -1,4 +1,5 @@
 // frontend/components/product-templates/ClassifiedDirectoryTemplate.js
+import { CALL_URL, CONTACT_PHONE } from "@/lib/contact";
 import ServiceHero from "../services/ServiceHero";
 import ServiceCTA from "../services/ServiceCTA";
 
@@ -369,8 +370,8 @@ export default function ClassifiedDirectoryTemplate({ data }) {
                 <div className="mt-4 mt-lg-0 quick-contect text-center text-lg-end">
                   <small>Quick Contact</small>
                   <h5>
-                    <a className="text-white" href="tel:+971555515475">
-                      +971 5555 15475
+                    <a className="text-white" href={CALL_URL}>
+                      {CONTACT_PHONE}
                     </a>
                   </h5>
                 </div>

@@ -1,9 +1,9 @@
+import { WHATSAPP_URL } from "@/lib/contact";
 import Image from "next/image";
 import Link from "next/link";
 import ServiceFaqs from "../services/ServiceFaqs";
 import ContactCTA from "../ui/ContactCTA";
 
-const WHATSAPP_URL = "https://wa.me/971555515475";
 const CONTACT_URL = "/contact-us/";
 const PORTFOLIO_URL = "/our-portfolio/";
 

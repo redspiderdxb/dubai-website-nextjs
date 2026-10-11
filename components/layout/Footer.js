@@ -1,3 +1,4 @@
+import { CALL_URL, CONTACT_PHONE, WHATSAPP_URL } from "@/lib/contact";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -255,7 +256,7 @@ export default function Footer() {
 
               <a
                 className="rs-contact-card rs-contact-phone"
-                href="tel:+971555515475"
+                href={CALL_URL}
               >
                 <span className="rs-contact-icon" aria-hidden="true">
                   <i className="bi bi-telephone"></i>
@@ -263,7 +264,7 @@ export default function Footer() {
 
                 <span className="rs-contact-copy">
                   <small>Quick Answer?</small>
-                  <strong>+971 55 551 5475</strong>
+                  <strong>{CONTACT_PHONE}</strong>
                 </span>
               </a>
 
@@ -346,7 +347,7 @@ export default function Footer() {
       <div className="rs-fixed-contact">
         <a
           className="rs-fixed-contact__button rs-fixed-contact__button--phone"
-          href="tel:+971555515475"
+          href={CALL_URL}
           aria-label="Call us"
         >
           <i className="bi bi-telephone-fill" aria-hidden="true" />
@@ -354,7 +355,7 @@ export default function Footer() {
 
         <a
           className="rs-fixed-contact__button rs-fixed-contact__button--whatsapp"
-          href="https://wa.me/971555515475"
+          href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact us on WhatsApp"
