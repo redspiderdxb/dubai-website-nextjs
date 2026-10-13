@@ -1,0 +1,138 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.redspider.ae/#organization",
+      "name": "RedSpider Digital Marketing Agency Dubai",
+      "alternateName": "Top Digital Marketing Services in Dubai | RedSpider",
+      "url": "https://www.redspider.ae/",
+      "logo": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971555515475",
+        "email": "info@redspider.ae",
+        "contactType": "customer service",
+        "areaServed": "AE",
+        "availableLanguage": "en"
+      },
+      "sameAs": [
+        "https://www.facebook.com/RedSpiderWebandArtDesign/",
+        "https://twitter.com/redspider99",
+        "https://www.instagram.com/redspider.ae/",
+        "https://www.pinterest.com/WebDesignCompanyDubai/",
+        "https://www.linkedin.com/company/red-spider-web-&-art-design",
+        "https://www.behance.net/redspidersystems",
+        "https://maps.app.goo.gl/2W86fCHi1pWaqzbT9"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.redspider.ae/#localbusiness",
+      "name": "RedSpider Digital Marketing Agency Dubai",
+      "image": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "url": "https://www.redspider.ae/",
+      "telephone": "+971555515475",
+      "priceRange": "Contact: +971555515475 | Email: info@redspider.ae",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1002, Burj Gate Tower Sofitel Dubai Downtown, Sheikh Zayed Rd, Dubai, UAE",
+        "addressLocality": "Dubai",
+        "postalCode": "126272",
+        "addressCountry": "AE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.200408923263925",
+        "longitude": "55.26951247116422"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/blog/digital-marketing-agency-dubai/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.redspider.ae/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Digital Marketing Agency Dubai",
+          "item": "https://www.redspider.ae/blog/digital-marketing-agency-dubai/"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.redspider.ae/blog/digital-marketing-agency-dubai/#blogposting",
+      "headline": "Digital Marketing Agency Dubai",
+      "url": "https://www.redspider.ae/blog/digital-marketing-agency-dubai/",
+      "image": "https://redspider.rsworkspace.net/admin/public/storage/6a7da6d65b52d-digital-marketing-agency-dubai.webp",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.redspider.ae/blog/digital-marketing-agency-dubai/"
+      },
+      "description": "Learn about RedSpider's digital marketing services in Dubai, including SEO, PPC advertising, social media marketing, content marketing, email marketing, and website development.",
+      "author": {
+        "@type": "Organization",
+        "name": "RedSpider Editorial",
+        "url": "https://www.redspider.ae/"
+      },
+      "publisher": {
+        "@id": "https://www.redspider.ae/#organization"
+      },
+      "datePublished": "2026-08-13T00:00:00+04:00",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@type": "Blog",
+        "url": "https://www.redspider.ae/blog/"
+      },
+      "about": {
+        "@id": "https://www.redspider.ae/blog/digital-marketing-agency-dubai/#digitalmarketingservice"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/blog/digital-marketing-agency-dubai/#digitalmarketingservice",
+      "serviceType": "Digital Marketing Services in Dubai | SEO, PPC, Social Media Marketing",
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://www.redspider.ae/#organization"
+      },
+      "serviceArea": {
+        "@type": "Place",
+        "name": "Dubai",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dubai",
+          "addressRegion": "DU",
+          "addressCountry": "AE"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.redspider.ae/blog/digital-marketing-agency-dubai/",
+        "priceCurrency": "AED",
+        "price": "Contact us for pricing"
+      },
+      "description": "Expert SEO, PPC, social media marketing, and online branding solutions for businesses in Dubai and across the UAE."
+    }
+  ]
+}

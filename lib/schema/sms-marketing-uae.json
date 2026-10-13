@@ -2,67 +2,244 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Service",
-      "@id": "https://www.redspider.ae/products/sms-marketing-uae/#service",
-      "serviceType": "Bulk SMS Marketing",
-      "name": "SMS Marketing UAE & Bulk SMS Services",
-      "description": "Bulk SMS marketing solutions for UAE businesses, including targeted campaign scheduling, audience segmentation by location, language, interest and demographics, and detailed campaign reporting using TRA-approved SMS gateways.",
+      "@type": "Organization",
+      "@id": "https://www.redspider.ae/#organization",
+      "name": "#1 SMS Marketing Company | RedSpider Web & Art Design",
+      "alternateName": "Bulk SMS Marketing Dubai UAE | RedSpider Web & Art Design",
       "url": "https://www.redspider.ae/products/sms-marketing-uae/",
-      "image": "https://www.redspider.ae/assets/img/smsmar.webp",
-      "provider": { "@id": "https://www.redspider.ae/#localbusiness" },
-      "areaServed": [
-        { "@type": "City", "name": "Dubai" },
-        { "@type": "City", "name": "Abu Dhabi" },
-        { "@type": "City", "name": "Sharjah" },
-        { "@type": "City", "name": "Ajman" },
-        { "@type": "City", "name": "Fujairah" },
-        { "@type": "Country", "name": "United Arab Emirates" }
-      ],
-      "audience": {
-        "@type": "BusinessAudience",
-        "audienceType": "UAE businesses running promotional and customer communication campaigns"
+      "logo": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971555515475",
+        "email": "info@redspider.ae",
+        "contactType": "customer service",
+        "areaServed": "AE",
+        "availableLanguage": "en"
       },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Bulk SMS Packages",
-        "itemListElement": [
-          { "@type": "Offer", "name": "Up to 10,000 SMS", "price": "1000", "priceCurrency": "AED", "url": "https://www.redspider.ae/products/sms-marketing-uae/" },
-          { "@type": "Offer", "name": "Up to 25,000 SMS", "price": "2250", "priceCurrency": "AED", "url": "https://www.redspider.ae/products/sms-marketing-uae/" },
-          { "@type": "Offer", "name": "Up to 50,000 SMS", "price": "4000", "priceCurrency": "AED", "url": "https://www.redspider.ae/products/sms-marketing-uae/" },
-          { "@type": "Offer", "name": "Up to 100,000 SMS", "price": "7500", "priceCurrency": "AED", "url": "https://www.redspider.ae/products/sms-marketing-uae/" },
-          { "@type": "Offer", "name": "Up to 250,000 SMS", "price": "17500", "priceCurrency": "AED", "url": "https://www.redspider.ae/products/sms-marketing-uae/" },
-          { "@type": "Offer", "name": "Up to 500,000 SMS", "price": "32500", "priceCurrency": "AED", "url": "https://www.redspider.ae/products/sms-marketing-uae/" },
-          { "@type": "Offer", "name": "Up to 1,000,000 SMS", "price": "60000", "priceCurrency": "AED", "url": "https://www.redspider.ae/products/sms-marketing-uae/" }
-        ]
+      "sameAs": [
+        "https://www.facebook.com/RedSpiderWebandArtDesign/",
+        "https://twitter.com/redspider99",
+        "https://www.instagram.com/redspider.ae/",
+        "https://www.pinterest.com/WebDesignCompanyDubai/",
+        "https://www.linkedin.com/company/red-spider-web-&-art-design",
+        "https://www.behance.net/redspidersystems",
+        "https://maps.app.goo.gl/2W86fCHi1pWaqzbT9"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.redspider.ae/#localbusiness",
+      "name": "Bulk SMS Marketing Dubai Company | RedSpider Web & Art Design",
+      "image": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "url": "https://www.redspider.ae/products/sms-marketing-uae/",
+      "telephone": "+971555515475",
+      "priceRange": "Contact: +971555515475 | Email: info@redspider.ae",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1002, Burj Gate Tower Sofitel Dubai Downtown, Sheikh Zayed Rd, Dubai, UAE",
+        "addressLocality": "Dubai",
+        "postalCode": "126272",
+        "addressCountry": "AE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.200408923263925",
+        "longitude": "55.26951247116422"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.redspider.ae/products/sms-marketing-uae/#breadcrumb",
+      "@id": "https://www.redspider.ae/#breadcrumb",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
-        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.redspider.ae/products/" },
-        { "@type": "ListItem", "position": 3, "name": "SMS Marketing UAE", "item": "https://www.redspider.ae/products/sms-marketing-uae/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.redspider.ae/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "SMS Marketing Dubai",
+          "item": "https://www.redspider.ae/products/sms-marketing-uae/"
+        }
       ]
     },
     {
+      "@type": "Product",
+      "@id": "https://www.redspider.ae/#product",
+      "name": "SMS Marketing Dubai | Bulk SMS Dubai, UAE",
+      "image": "https://www.redspider.ae/wp-content/uploads/2025/07/sms-Marketing-UAE.png",
+      "description": "Boost your Business with the #1 SMS marketing Dubai company. Effective bulk SMS UAE solutions to engage and grow your customer base.",
+      "brand": {
+        "@type": "Brand",
+        "name": "RedSpider Web & Art Design - SMS Marketing Dubai"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "84",
+        "bestRating": "5"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/#service",
+      "serviceType": "Bulk SMS Marketing Services in Dubai | SMS Marketing UAE",
+      "provider": {
+        "@type": "Organization",
+        "name": "#1 SMS Marketing Company | RedSpider",
+        "url": "https://www.redspider.ae/products/sms-marketing-uae/",
+        "logo": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png"
+      },
+      "serviceArea": {
+        "@type": "Place",
+        "name": "Dubai",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dubai",
+          "addressRegion": "DU",
+          "addressCountry": "AE"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.redspider.ae/products/sms-marketing-uae/",
+        "priceCurrency": "AED",
+        "price": "Contact us for pricing"
+      },
+      "description": "RedSpider is the leading Bulk SMS Marketing Company in Dubai, providing high-converting SMS campaigns for businesses looking to maximize engagement."
+    },
+    {
       "@type": "FAQPage",
-      "@id": "https://www.redspider.ae/products/sms-marketing-uae/#faq",
+      "@id": "https://www.redspider.ae/#faq",
       "mainEntity": [
-        { "@type": "Question", "name": "Is SMS marketing legal in the UAE?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, SMS marketing is legal in the UAE, but it must follow the Telecommunications and Digital Government Regulatory Authority (TDRA) guidelines. We use only TRA-approved SMS gateways to ensure compliance." } },
-        { "@type": "Question", "name": "How much is SMS marketing UAE fee?", "acceptedAnswer": { "@type": "Answer", "text": "The cost depends on the SMS package you choose. Our prices start from AED 1,000." } },
-        { "@type": "Question", "name": "Which is the best SMS gateway in UAE?", "acceptedAnswer": { "@type": "Answer", "text": "DU and Etisalat are the top SMS gateways in the UAE. We use TRA-approved gateways to ensure message delivery and compliance." } },
-        { "@type": "Question", "name": "Is SMS marketing worth it?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, SMS marketing has a high open rate (98%) and is a cost-effective way to reach customers directly. It helps businesses boost sales and engage their audience effectively." } },
-        { "@type": "Question", "name": "How do I start SMS marketing?", "acceptedAnswer": { "@type": "Answer", "text": "You just need to choose an SMS package, provide the message content, select your target audience (location, interests, etc.), and we handle the rest and send your SMS campaign." } },
-        { "@type": "Question", "name": "Does SMS marketing still work?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, SMS marketing is still one of the most effective marketing methods, with high engagement and response rates. It works well for promotions, reminders, and customer engagement." } },
-        { "@type": "Question", "name": "How is SMS Marketing Done?", "acceptedAnswer": { "@type": "Answer", "text": "We send SMS campaigns using a licensed SMS gateway, targeting customers based on location, interests, and other factors for better results." } },
-        { "@type": "Question", "name": "Do you have a database?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we provide access to a verified mobile number database for better targeting." } },
-        { "@type": "Question", "name": "What kind of database do you have?", "acceptedAnswer": { "@type": "Answer", "text": "Location-based contacts (Dubai, Abu Dhabi, Sharjah, etc.), Interest-based contacts (Shoppers, Travelers, Business Owners, etc.), Demographics-based contacts (Age, Gender, Language, etc.)" } },
-        { "@type": "Question", "name": "How accurate is the database?", "acceptedAnswer": { "@type": "Answer", "text": "Our database is regularly updated and verified to ensure high accuracy and deliverability." } },
-        { "@type": "Question", "name": "What is SMS Sender ID?", "acceptedAnswer": { "@type": "Answer", "text": "An SMS Sender ID is the name or number that appears when the recipient receives your SMS (e.g., \"YourBrand\"). It helps in branding and customer trust." } },
-        { "@type": "Question", "name": "What kind of SMS Report i get?", "acceptedAnswer": { "@type": "Answer", "text": "We provide detailed reports including delivery status (sent, delivered, failed), click rates (if applicable), and campaign performance insights." } },
-        { "@type": "Question", "name": "What is required in SMS marketing UAE?", "acceptedAnswer": { "@type": "Answer", "text": "A clear marketing message, a target audience (location, interests, etc.), a valid Sender ID (optional), and a reliable SMS gateway (which we provide)." } },
-        { "@type": "Question", "name": "What is the duration of an sms marketing campaign?", "acceptedAnswer": { "@type": "Answer", "text": "SMS campaigns are usually delivered within minutes to a few hours, depending on the volume and network traffic." } }
+        {
+          "@type": "Question",
+          "name": "Is this SMS marketing legal in the UAE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SMS marketing is legal in the UAE, but it must follow the Telecommunications and Digital Government Regulatory Authority (TDRA) guidelines. We use only TRA-approved SMS gateways to ensure compliance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much is SMS marketing UAE fee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The cost depends on the SMS package you choose. Our prices start from AED 1,000. (Refer to the pricing table above for details)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which is the best SMS gateway in UAE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "DU and Etisalat are the top SMS gateways in the UAE. We use TRA-approved gateways to ensure message delivery and compliance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is SMS marketing worth it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SMS marketing has a high open rate (98%) and is a cost-effective way to reach customers directly. It helps businesses boost sales and engage their audience effectively."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I start SMS marketing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You just need to choose an SMS package, provide the message content, select your target audience (location, interests, etc.), and we handle the rest and send your SMS campaign."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does SMS marketing still work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, SMS marketing is still one of the most effective marketing methods, with high engagement and response rates. It works well for promotions, reminders, and customer engagement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is SMS Marketing Done?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We send SMS campaigns using a licensed SMS gateway, targeting customers based on location, interests, and other factors for better results."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you have a database?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we provide access to a verified mobile number database for better targeting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kind of database do you have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Location-based contacts (Dubai, Abu Dhabi, Sharjah, etc.), Interest-based contacts (Shoppers, Travelers, Business Owners, etc.), Demographics-based contacts (Age, Gender, Language, etc.)"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is the database?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our database is regularly updated and verified to ensure high accuracy and deliverability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is SMS Sender ID?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An SMS Sender ID is the name or number that appears when the recipient receives your SMS (e.g., \"YourBrand\"). It helps in branding and customer trust."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kind of SMS Report i get?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide detailed reports including delivery status (sent, delivered, failed), click rates (if applicable), and campaign performance insights."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is required in SMS marketing UAE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A clear marketing message, a target audience (location, interests, etc.), a valid Sender ID (optional), and a reliable SMS gateway (which we provide)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the duration of an sms marketing campaign?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SMS campaigns are usually delivered within minutes to a few hours, depending on the volume and network traffic."
+          }
+        }
       ]
     }
   ]

@@ -57,11 +57,10 @@ export default function Home({
       <PageStyles href="/assets/css/pages/home.css?v=hero-grid-center" />
       <SEO
         {...seo}
-        includeBusinessSchema={true}
         pageSchema={homepageSchema["@graph"]}
       />
 
-      <Layout>
+      <Layout includeGlobalSchema={false}>
         <Hero data={homepageData} googleReviews={googleReviews} />
 
         {/* ==========================================

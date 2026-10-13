@@ -14,7 +14,7 @@ export default function SeoAgencyDubai() {
   const pageUrl = `${SITE_URL}/service/seo-agency-dubai/`;
 
   return (
-    <Layout>
+    <Layout includeGlobalSchema={false}>
       <PageStyles
         href={[
           "/assets/css/pages/service.css",

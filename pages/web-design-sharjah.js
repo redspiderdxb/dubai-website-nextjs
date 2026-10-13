@@ -2,10 +2,10 @@ import PageStyles from "../components/seo/PageStyles";
 import Layout from "../components/layout/Layout";
 import SEO from "../components/seo/SEO";
 import { SITE_URL } from "../lib/seo";
+import sharjahSchema from "../lib/schema/web-design-sharjah.json";
 
 import SharjahHero from "../components/location-pages/SharjahHero";
 import SharjahBody from "../components/location-pages/SharjahBody";
-import SharjahCTA from "../components/location-pages/SharjahCTA";
 
 export default function WebDesignSharjah() {
   const title = "Web Design Sharjah | Website Design Company In Sharjah, UAE";
@@ -15,42 +15,8 @@ export default function WebDesignSharjah() {
 
   const pageUrl = `${SITE_URL}/web-design-sharjah/`;
 
-  const pageSchema = [
-    {
-      "@type": "WebPage",
-      "@id": `${pageUrl}#webpage`,
-      url: pageUrl,
-      name: title,
-      description,
-      isPartOf: {
-        "@id": `${SITE_URL}/#website`,
-      },
-      about: {
-        "@id": `${SITE_URL}/#organization`,
-      },
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": `${pageUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: `${SITE_URL}/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Web Design Sharjah",
-          item: pageUrl,
-        },
-      ],
-    },
-  ];
-
   return (
-    <Layout>
+    <Layout includeGlobalSchema={false}>
       <PageStyles href="/assets/css/pages/location-pages.css" />
 
       <SEO
@@ -60,13 +26,12 @@ export default function WebDesignSharjah() {
         canonical={pageUrl}
         image={`${SITE_URL}/assets/img/og-image.webp`}
         robots="index,follow"
-        pageSchema={pageSchema}
+        pageSchema={sharjahSchema["@graph"]}
       />
 
       <main className="main location-page">
         <SharjahHero />
         <SharjahBody />
-       
       </main>
     </Layout>
   );

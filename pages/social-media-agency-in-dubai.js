@@ -15,7 +15,7 @@ export default function SocialMediaAgencyInDubai() {
   const pageUrl = `${SITE_URL}/social-media-agency-in-dubai/`;
 
   return (
-    <Layout>
+    <Layout includeGlobalSchema={false}>
       <PageStyles href="/assets/css/pages/social-media-agency.css?v=smo-3" />
 
       <SEO

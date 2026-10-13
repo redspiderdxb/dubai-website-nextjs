@@ -2,61 +2,214 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Service",
-      "@id": "https://www.redspider.ae/products/real-estate-portal/#service",
-      "serviceType": "Real Estate Website Design and Development",
-      "name": "Real Estate Website Design Company in Dubai",
-      "description": "Custom real estate website design and development for property developers, agents, and brokers in Dubai and the UAE. Includes CRM integration, property listing management, lead generation tools, SEO optimization, and mobile-responsive design.",
+      "@type": "Organization",
+      "@id": "https://www.redspider.ae/#organization",
+      "name": "Real Estate Website Design Company Dubai | RedSpider Web & Art Design",
+      "alternateName": "Best Real Estate Website Design Company Dubai | RedSpider",
       "url": "https://www.redspider.ae/products/real-estate-portal/",
-      "image": "https://www.redspider.ae/assets/img/p4.webp",
-      "provider": { "@id": "https://www.redspider.ae/#localbusiness" },
-      "areaServed": [
-        { "@type": "City", "name": "Dubai" },
-        { "@type": "Country", "name": "United Arab Emirates" }
-      ],
-      "audience": {
-        "@type": "BusinessAudience",
-        "audienceType": "Real estate developers, agents, and brokers"
+      "logo": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971555515475",
+        "email": "info@redspider.ae",
+        "contactType": "customer service",
+        "areaServed": "AE",
+        "availableLanguage": "en"
       },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Real Estate Website Features",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sales & Rental Listing Management" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Leads Management System" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brokers & Users Management" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Property Feed Integration" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI-Based Property Recommendations" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Map Integration" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WhatsApp Inquiry Integration" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CRM Integration" } }
-        ]
+      "sameAs": [
+        "https://www.facebook.com/RedSpiderWebandArtDesign/",
+        "https://twitter.com/redspider99",
+        "https://www.instagram.com/redspider.ae/",
+        "https://www.pinterest.com/WebDesignCompanyDubai/",
+        "https://www.linkedin.com/company/red-spider-web-&-art-design",
+        "https://www.behance.net/redspidersystems",
+        "https://maps.app.goo.gl/2W86fCHi1pWaqzbT9"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.redspider.ae/#organization",
+      "name": "Real Estate Website Design Company Dubai | RedSpider Web & Art Design",
+      "image": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "url": "https://www.redspider.ae/products/real-estate-portal/",
+      "telephone": "+971555515475",
+      "priceRange": "Contact: +971555515475 | Email: info@redspider.ae",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1002, Burj Gate Tower Sofitel Dubai Downtown, Sheikh Zayed Rd, Dubai, UAE",
+        "addressLocality": "Dubai",
+        "postalCode": "126272",
+        "addressCountry": "AE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.200408923263925",
+        "longitude": "55.26951247116422"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.redspider.ae/products/real-estate-portal/#breadcrumb",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
-        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.redspider.ae/products/" },
-        { "@type": "ListItem", "position": 3, "name": "Real Estate Portal", "item": "https://www.redspider.ae/products/real-estate-portal/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Web Design Dubai",
+          "item": "https://www.redspider.ae/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Real Estate Website Design Dubai",
+          "item": "https://www.redspider.ae/products/real-estate-portal/"
+        }
       ]
     },
     {
+      "@type": "Product",
+      "name": "Real Estate Website Design Dubai",
+      "image": "https://www.redspider.ae/wp-content/uploads/2023/09/KayeandCO-RealEstate.jpg",
+      "description": "Looking for Real Estate Web Design in Dubai? RedSpider is the Best Real Estate Website Design Company Dubai, delivering stunning, results-driven websites.",
+      "brand": {
+        "@type": "Brand",
+        "name": "RedSpider Web & Art Design - Real Estate Web Design Dubai"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "reviewCount": "123"
+      }
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Real Estate Web Design Services in Dubai | Professional Real Estate Website Development",
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://www.redspider.ae/#organization"
+      },
+      "serviceArea": {
+        "@type": "Place",
+        "name": "Dubai",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dubai",
+          "addressRegion": "DU",
+          "addressCountry": "AE"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.redspider.ae/products/real-estate-portal/",
+        "priceCurrency": "AED",
+        "price": "Contact us for pricing"
+      },
+      "description": "Looking for the best Real Estate Web Design in Dubai? RedSpider delivers stunning and results-driven websites for the real estate industry."
+    },
+    {
       "@type": "FAQPage",
-      "@id": "https://www.redspider.ae/products/real-estate-portal/#faq",
       "mainEntity": [
-        { "@type": "Question", "name": "What is the cost of a responsive real estate website design in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "Real Estate Website Cost in Dubai depends on a lot of things, including the size, features, and integrations. As compared to a custom platform, the simple real estate website is less costly. We give an instant, customized quotation according to your business requirements." } },
-        { "@type": "Question", "name": "Can you integrate a real estate CRM with my website?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we can help you integrate real estate CRM in website. You can showcase your property listings, leads, and inquiries. It will help you handle customer communications from a single platform." } },
-        { "@type": "Question", "name": "How long does it take to build a real estate website?", "acceptedAnswer": { "@type": "Answer", "text": "Most of the real estate websites require 4 to 12 weeks to complete. However, it depends on the requirements of your project too." } },
-        { "@type": "Question", "name": "Which website platforms do you use for development?", "acceptedAnswer": { "@type": "Answer", "text": "We build custom real estate websites using WordPress, Laravel, Next.js, React, and modern technology." } },
-        { "@type": "Question", "name": "Are your real estate websites mobile-friendly and responsive?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, our real estate websites are mobile friendly and responsive. They are perfectly optimized for desktops, tablets, and smartphones." } },
-        { "@type": "Question", "name": "Can I manage my website myself after it is launched?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, you can. We build websites that have user friendly content management systems. It will help you update your property listings, images, and content whenever you want." } },
-        { "@type": "Question", "name": "Should I choose a custom real estate website or a template-based design?", "acceptedAnswer": { "@type": "Answer", "text": "As compared to template based design, a custom real estate website is better. It offers flexibility and advanced functionality." } },
-        { "@type": "Question", "name": "Is SEO included in your real estate website design services?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, our websites include the best SEO practices. It covers mobile responsiveness, fast loading speed, and a clean code structure." } },
-        { "@type": "Question", "name": "Do you provide training and support after the website launch?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we provide training and ongoing support after the website launch. It helps businesses manage their website confidently." } },
-        { "@type": "Question", "name": "Can you add property search and advanced listing features?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, our real estate website designs have integrated property search filters. Your website will have a map integration and will display the listings properly." } },
-        { "@type": "Question", "name": "What should I look for in a real estate website design service in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "A professional real estate website design service in Dubai should include responsive design, advanced property search functionality, CRM integration, lead capture tools, and SEO-friendly architecture." } }
+        {
+          "@type": "Question",
+          "name": "What is the cost of a responsive real estate website design in Dubai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Real Estate Website Cost in Dubai depends on a lot of things, including the size, features, and integrations. As compared to a custom platform, the simple real estate website is less costly. We give an instant, customized quotation according to your business requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you integrate a real estate CRM with my website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we can help you integrate real estate CRM in website. You can showcase your property listings, leads, and inquiries. It will help you handle customer communications from a single platform."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to build a real estate website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most of the real estate websites require 4 to 12 weeks to complete. However, it depends on the requirements of your project too."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which website platforms do you use for development?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We build custom real estate websites using WordPress, Laravel, Next.js, React, and modern technology."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are your real estate websites mobile-friendly and responsive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, our real estate websites are mobile friendly and responsive. They are perfectly optimized for desktops, tablets, and smartphones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I manage my website myself after it is launched?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can. We build websites that have user friendly content management systems. It will help you update your property listings, images, and content whenever you want."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I choose a custom real estate website or a template-based design?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "As compared to template based design, a custom real estate website is better. It offers flexibility and advanced functionality."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is SEO included in your real estate website design services?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, our websites include the best SEO practices. It covers mobile responsiveness, fast loading speed, and a clean code structure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide training and support after the website launch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we provide training and ongoing support after the website launch. It helps businesses manage their website confidently."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you add property search and advanced listing features?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, our real estate website designs have integrated property search filters. Your website will have a map integration and will display the listings properly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I look for in a real estate website design service in Dubai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A professional real estate website design service in Dubai should include responsive design, advanced property search functionality, CRM integration, lead capture tools, and SEO-friendly architecture."
+          }
+        }
       ]
     }
   ]

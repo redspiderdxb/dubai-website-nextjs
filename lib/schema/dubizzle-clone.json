@@ -5,122 +5,64 @@
       "@type": "Organization",
       "@id": "https://www.redspider.ae/#organization",
       "name": "RedSpider Web & Art Design",
-      "url": "https://www.redspider.ae",
-      "logo": {
-        "@type": "ImageObject",
-        "@id": "https://www.redspider.ae/#logo",
-        "url": "https://www.redspider.ae/assets/img/logo.webp"
-      },
-      "image": "https://www.redspider.ae/assets/img/og-image.webp",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Sofitel, Burj Gate Tower, Office 1002, Sheikh Zayed Road, Downtown Dubai",
-        "addressLocality": "Dubai",
-        "postalCode": "126272",
-        "addressCountry": "AE"
-      },
-      "email": "info@redspider.ae",
-      "telephone": "+971555515475",
+      "url": "https://www.redspider.ae/",
+      "logo": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
       "sameAs": [
         "https://www.facebook.com/RedSpiderWebandArtDesign/",
-        "https://x.com/redspider99",
+        "https://twitter.com/redspider99",
+        "https://www.instagram.com/redspider.ae/",
+        "https://www.pinterest.com/WebDesignCompanyDubai/",
         "https://www.linkedin.com/company/red-spider-web-&-art-design",
-        "https://www.instagram.com/redspiderwebartdesign/"
-      ]
+        "https://www.behance.net/redspidersystems",
+        "https://maps.app.goo.gl/2W86fCHi1pWaqzbT9"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971555515475",
+        "email": "info@redspider.ae",
+        "contactType": "customer service",
+        "areaServed": "AE",
+        "availableLanguage": "en"
+      }
     },
     {
-      "@type": [
-        "LocalBusiness",
-        "ProfessionalService"
-      ],
-      "@id": "https://www.redspider.ae/#localbusiness",
+      "@type": "LocalBusiness",
+      "@id": "https://www.redspider.ae/products/dubizzle-clone/#localbusiness",
       "name": "RedSpider Web & Art Design",
-      "url": "https://www.redspider.ae",
-      "parentOrganization": {
-        "@id": "https://www.redspider.ae/#organization"
-      },
-      "logo": {
-        "@id": "https://www.redspider.ae/#logo"
-      },
-      "image": "https://www.redspider.ae/assets/img/og-image.webp",
-      "email": "info@redspider.ae",
+      "image": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "url": "https://www.redspider.ae/products/dubizzle-clone/",
       "telephone": "+971555515475",
-      "priceRange": "$$",
+      "priceRange": "Contact for pricing",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Sofitel, Burj Gate Tower, Office 1002, Sheikh Zayed Road, Downtown Dubai",
+        "streetAddress": "1002, Burj Gate Tower Sofitel Dubai Downtown, Sheikh Zayed Rd",
         "addressLocality": "Dubai",
         "postalCode": "126272",
         "addressCountry": "AE"
       },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "121",
-        "bestRating": "5"
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.200408923263925",
+        "longitude": "55.26951247116422"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
       }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.redspider.ae/#website",
-      "url": "https://www.redspider.ae",
-      "name": "RedSpider Web & Art Design",
-      "publisher": {
-        "@id": "https://www.redspider.ae/#organization"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://www.redspider.ae/products/dubizzle-clone/#software",
-      "name": "RSClassify - Dubizzle Clone Script",
-      "alternateName": [
-        "Dubizzle Clone",
-        "OLX Clone",
-        "Classified Directory Website Script"
-      ],
-      "description": "Powerful and easy-to-use software for creating online directories and classified ad websites like Dubizzle and OLX. Supports unlimited categories, listings, payment integration, and monetization options.",
-      "url": "https://www.redspider.ae/products/dubizzle-clone/",
-      "applicationCategory": "BusinessApplication",
-      "applicationSubCategory": "Classified Ads / Online Directory Software",
-      "operatingSystem": "Web-based",
-      "image": "https://www.redspider.ae/assets/img/Dubizzle-Olx-768x768.webp",
-      "publisher": {
-        "@id": "https://www.redspider.ae/#organization"
-      },
-      "offers": {
-        "@type": "Offer",
-        "url": "https://www.redspider.ae/products/dubizzle-clone/",
-        "price": "0",
-        "priceCurrency": "AED",
-        "availability": "https://schema.org/InStock",
-        "seller": {
-          "@id": "https://www.redspider.ae/#localbusiness"
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "121",
-        "bestRating": "5"
-      },
-      "featureList": [
-        "Advanced listing fields by category",
-        "Featured listings",
-        "Unlimited categories and sub-categories",
-        "Photo upload with automatic resizing",
-        "Google Maps integration for listings",
-        "Advanced search with saved searches",
-        "Unlimited pricing plans (individual, subscription, category-based)",
-        "Customer self-service account panel",
-        "Captcha and email registration validation",
-        "PCI-compliant payment processing",
-        "Mobile responsive design",
-        "Full-featured admin back office"
-      ]
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.redspider.ae/products/dubizzle-clone/#breadcrumb",
+      "@id": "https://www.redspider.ae/products/dubizzle-clone/#breadcrumbs",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -131,16 +73,50 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Products",
-          "item": "https://www.redspider.ae/products/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Dubizzle Clone",
+          "name": "Classified Directory",
           "item": "https://www.redspider.ae/products/dubizzle-clone/"
         }
       ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.redspider.ae/products/dubizzle-clone/#product",
+      "name": "Dubizzle Clone - OLX Clone - Classified Scripts",
+      "image": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "description": "Get a fully customizable Dubizzle or OLX clone with powerful classified directory scripts from RedSpider. Feature-rich and scalable solutions for your business.",
+      "brand": {
+        "@id": "https://www.redspider.ae/#organization"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "123"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/products/dubizzle-clone/#service",
+      "serviceType": "Classified Directory Development",
+      "provider": {
+        "@id": "https://www.redspider.ae/#organization"
+      },
+      "serviceArea": {
+        "@type": "Place",
+        "name": "Dubai",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dubai",
+          "addressCountry": "AE"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.redspider.ae/products/dubizzle-clone/",
+        "priceCurrency": "AED",
+        "price": "Contact us for pricing"
+      },
+      "description": "RedSpider specializes in creating high-quality classified directory platforms like Dubizzle or OLX with custom features."
     },
     {
       "@type": "FAQPage",

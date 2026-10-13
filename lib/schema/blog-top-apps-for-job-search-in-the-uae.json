@@ -1,0 +1,189 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.redspider.ae/#organization",
+      "name": "RedSpider Web & Art Design",
+      "url": "https://www.redspider.ae/",
+      "logo": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971555515475",
+        "email": "info@redspider.ae",
+        "contactType": "customer service",
+        "areaServed": "AE",
+        "availableLanguage": "en"
+      },
+      "sameAs": [
+        "https://www.facebook.com/RedSpiderWebandArtDesign/",
+        "https://twitter.com/redspider99",
+        "https://www.instagram.com/redspider.ae/",
+        "https://www.pinterest.com/WebDesignCompanyDubai/",
+        "https://www.linkedin.com/company/red-spider-web-&-art-design",
+        "https://www.behance.net/redspidersystems",
+        "https://maps.app.goo.gl/2W86fCHi1pWaqzbT9"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.redspider.ae/#localbusiness",
+      "name": "RedSpider Web & Art Design",
+      "image": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "url": "https://www.redspider.ae/",
+      "telephone": "+971555515475",
+      "priceRange": "Contact for pricing",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1002, Burj Gate Tower Sofitel Dubai Downtown, Sheikh Zayed Rd, Dubai, UAE",
+        "addressLocality": "Dubai",
+        "postalCode": "126272",
+        "addressCountry": "AE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.200408923263925",
+        "longitude": "55.26951247116422"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/blog/top-apps-for-job-search-in-the-uae/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.redspider.ae/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Top Apps for Job Search in UAE",
+          "item": "https://www.redspider.ae/blog/top-apps-for-job-search-in-the-uae/"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.redspider.ae/blog/top-apps-for-job-search-in-the-uae/#blogposting",
+      "headline": "Top Apps for Job Search in Dubai,UAE",
+      "url": "https://www.redspider.ae/blog/top-apps-for-job-search-in-the-uae/",
+      "image": "https://redspider.rsworkspace.net/admin/public/storage/6a7da672aaec0-top-apps-for-job-search-in-the-uae.webp",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.redspider.ae/blog/top-apps-for-job-search-in-the-uae/"
+      },
+      "description": "Explore the top job search apps and websites in Dubai and the UAE for 2026. Compare Bayt, Dubizzle, NaukriGulf, Indeed, GulfTalent, Nafis, Glassdoor and LinkedIn to find suitable job opportunities.",
+      "author": {
+        "@type": "Organization",
+        "name": "RedSpider Editorial",
+        "url": "https://www.redspider.ae/"
+      },
+      "publisher": {
+        "@id": "https://www.redspider.ae/#organization"
+      },
+      "datePublished": "2026-08-13T00:00:00+04:00",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "RedSpider Blog",
+        "url": "https://www.redspider.ae/blog/"
+      },
+      "keywords": [
+        "Top Apps for Job Search in UAE",
+        "Job Search Apps in Dubai",
+        "Best Job Search Apps in UAE",
+        "Job Search Websites in Dubai",
+        "Jobs in UAE",
+        "Dubai Job Search",
+        "UAE Job Portals",
+        "Job Search Platforms in UAE"
+      ],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Job Search Apps in UAE"
+        },
+        {
+          "@type": "Thing",
+          "name": "Dubai Job Market"
+        },
+        {
+          "@type": "Thing",
+          "name": "Online Recruitment Platforms"
+        },
+        {
+          "@type": "Thing",
+          "name": "Employment Opportunities in UAE"
+        }
+      ],
+      "mentions": {
+        "@id": "https://www.redspider.ae/blog/top-apps-for-job-search-in-the-uae/#jobapps"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.redspider.ae/blog/top-apps-for-job-search-in-the-uae/#jobapps",
+      "name": "Top Apps for Job Search in Dubai, UAE",
+      "numberOfItems": 8,
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Bayt"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Dubizzle"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "NaukriGulf"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Indeed"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "GulfTalent"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Nafis"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Glassdoor"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "LinkedIn"
+        }
+      ]
+    }
+  ]
+}

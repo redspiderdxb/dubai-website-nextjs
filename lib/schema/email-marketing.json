@@ -2,45 +2,152 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Service",
-      "@id": "https://www.redspider.ae/service/email-marketing/#service",
-      "serviceType": "Email Marketing",
-      "name": "Email Marketing Services in Dubai",
-      "description": "Professional email marketing in Dubai including promotional campaigns, newsletters, automated email sequences, lead nurturing and customer retention campaigns, using platforms like Mailchimp, HubSpot, Klaviyo and SendGrid.",
+      "@type": "Organization",
+      "@id": "https://www.redspider.ae/#organization",
+      "name": "RedSpider Web & Art Design",
+      "alternateName": "Professional Email Marketing Services | RedSpider",
+      "url": "https://www.redspider.ae/",
+      "logo": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971555515475",
+        "email": "info@redspider.ae",
+        "contactType": "customer service",
+        "areaServed": "AE",
+        "availableLanguage": "en"
+      },
+      "sameAs": [
+        "https://www.facebook.com/RedSpiderWebandArtDesign/",
+        "https://twitter.com/redspider99",
+        "https://www.instagram.com/redspider.ae/",
+        "https://www.pinterest.com/WebDesignCompanyDubai/",
+        "https://www.linkedin.com/company/red-spider-web-&-art-design",
+        "https://www.behance.net/redspidersystems",
+        "https://maps.app.goo.gl/2W86fCHi1pWaqzbT9"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.redspider.ae/service/email-marketing/#localbusiness",
+      "name": "Email Marketing Services Dubai | RedSpider Web & Art Design",
+      "image": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
       "url": "https://www.redspider.ae/service/email-marketing/",
-      "image": "https://www.redspider.ae/assets/img/og-image.webp",
-      "provider": { "@id": "https://www.redspider.ae/#localbusiness" },
-      "areaServed": { "@type": "City", "name": "Dubai" },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Email Marketing Campaign Types",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Promotional Email Campaigns" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Newsletter Campaigns" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automated Email Sequences" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Customer Retention Campaigns" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lead Nurturing Campaigns" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Re-engagement Campaigns" } }
-        ]
+      "telephone": "+971555515475",
+      "priceRange": "Contact: +971555515475 | Email: info@redspider.ae",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1002, Burj Gate Tower Sofitel Dubai Downtown, Sheikh Zayed Rd",
+        "addressLocality": "Dubai",
+        "postalCode": "126272",
+        "addressCountry": "AE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.200408923263925",
+        "longitude": "55.26951247116422"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "123"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.redspider.ae/service/email-marketing/#breadcrumb",
+      "@id": "https://www.redspider.ae/service/email-marketing/#breadcrumbs",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.redspider.ae/" },
-        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.redspider.ae/service/email-marketing/" },
-        { "@type": "ListItem", "position": 3, "name": "Email Marketing", "item": "https://www.redspider.ae/service/email-marketing/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.redspider.ae/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Email Marketing Services",
+          "item": "https://www.redspider.ae/service/email-marketing/"
+        }
       ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/service/email-marketing/#service",
+      "serviceType": "Email Marketing Services in Dubai | Professional Email Marketing",
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://www.redspider.ae/#organization",
+        "name": "RedSpider Web & Art Design"
+      },
+      "serviceArea": {
+        "@type": "Place",
+        "name": "Dubai",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dubai",
+          "addressRegion": "DU",
+          "addressCountry": "AE"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.redspider.ae/service/email-marketing/",
+        "priceCurrency": "AED",
+        "price": "Contact us for pricing"
+      },
+      "description": "Looking for the best Email Marketing Company in Dubai? Contact RedSpider today for result-driven email marketing services tailored for your business."
     },
     {
       "@type": "FAQPage",
       "@id": "https://www.redspider.ae/service/email-marketing/#faq",
       "mainEntity": [
-        { "@type": "Question", "name": "What email marketing services do you offer in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "We offer a comprehensive range of email marketing services including strategy planning, newsletter design, promotional campaigns, automation, lead nurturing, and customer retention campaigns." } },
-        { "@type": "Question", "name": "Which email marketing platforms do you work with?", "acceptedAnswer": { "@type": "Answer", "text": "We work with leading platforms including Mailchimp, HubSpot, Klaviyo, SendGrid, Zoho Campaigns, Active Campaign, and Brevo. We can also work with custom email solutions." } },
-        { "@type": "Question", "name": "How long does it take to see results from email marketing?", "acceptedAnswer": { "@type": "Answer", "text": "Initial results can be seen within the first campaign, but optimal results typically develop over 3-6 months of consistent email marketing efforts." } },
-        { "@type": "Question", "name": "Do you provide email marketing analytics and reporting?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we provide detailed analytics and reporting on open rates, click-through rates, conversions, and other key metrics to measure campaign effectiveness." } }
+        {
+          "@type": "Question",
+          "name": "What email marketing services do you offer in Dubai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer a comprehensive range of email marketing services including strategy planning, newsletter design, promotional campaigns, automation, lead nurturing, and customer retention campaigns."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which email marketing platforms do you work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We work with leading platforms including Mailchimp, HubSpot, Klaviyo, SendGrid, Zoho Campaigns, Active Campaign, and Brevo. We can also work with custom email solutions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to see results from email marketing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Initial results can be seen within the first campaign, but optimal results typically develop over 3-6 months of consistent email marketing efforts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide email marketing analytics and reporting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we provide detailed analytics and reporting on open rates, click-through rates, conversions, and other key metrics to measure campaign effectiveness."
+          }
+        }
       ]
     }
   ]

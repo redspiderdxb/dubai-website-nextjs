@@ -166,8 +166,19 @@ export default function ServiceDetail({ service }) {
   // RENDER
   // =====================================================
 
+  const usesStandaloneSchema =
+    service.slug === "web-development" ||
+    service.slug === "graphic-design-services" ||
+    service.slug === "brochure-design-company-in-dubai" ||
+    service.slug === "ecommerce-web-design-dubai" ||
+    service.slug === "email-marketing" ||
+    service.slug === "web-hosting" ||
+    service.slug === "logo-designing-company-dubai-brand-identity" ||
+    service.slug === "mobile-app-development-company-dubai" ||
+    service.slug === "whatsapp-business-api-integration";
+
   return (
-    <Layout>
+    <Layout includeGlobalSchema={!usesStandaloneSchema}>
       <PageStyles
         href={
           service.template === "web-development"
@@ -182,19 +193,7 @@ export default function ServiceDetail({ service }) {
       />
       <SEO
         {...seoData}
-        serviceSchema={
-          service.slug === "web-development" ||
-          service.slug === "graphic-design-services" ||
-          service.slug === "brochure-design-company-in-dubai" ||
-          service.slug === "ecommerce-web-design-dubai" ||
-          service.slug === "email-marketing" ||
-          service.slug === "web-hosting" ||
-          service.slug === "logo-designing-company-dubai-brand-identity" ||
-          service.slug === "mobile-app-development-company-dubai" ||
-          service.slug === "whatsapp-business-api-integration"
-            ? null
-            : serviceSchema
-        }
+        serviceSchema={usesStandaloneSchema ? null : serviceSchema}
         pageSchema={
           service.slug === "web-development"
             ? webDevelopmentSchema["@graph"]

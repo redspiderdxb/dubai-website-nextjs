@@ -60,7 +60,9 @@ export default function ProductDetail({ product }) {
   const usesStandaloneSchema =
     product.slug === "daily-deal-website-script" ||
     product.slug === "dubizzle-clone" ||
-    product.slug === "uae-e-invoicing-crm-software";
+    product.slug === "uae-e-invoicing-crm-software" ||
+    product.slug === "real-estate-portal" ||
+    product.slug === "sms-marketing-uae";
 
   const seoData = {
     title: product.seo_title || product.name || "Products | RedSpider",

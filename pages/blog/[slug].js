@@ -12,6 +12,22 @@ import Link from "next/link";
 import ContactCTA from "../../components/ui/ContactCTA";
 
 import { buildBlogPostSchema } from "../../lib/schema/blogPostSchema";
+import blogDigitalMarketingAgencySchema from "../../lib/schema/blog-digital-marketing-agency-dubai.json";
+import blogTopItCompaniesSchema from "../../lib/schema/blog-top-it-companies-in-dubai.json";
+import blogHowNetflixGeneratesIncomeSchema from "../../lib/schema/blog-how-netflix-generates-income.json";
+import blogNetflixBusinessModelSchema from "../../lib/schema/blog-netflix-business-model-how-does-netflix-make-money.json";
+import blogTopAppsForJobSearchSchema from "../../lib/schema/blog-top-apps-for-job-search-in-the-uae.json";
+
+const STANDALONE_BLOG_SCHEMAS = {
+  "digital-marketing-agency-dubai":
+    blogDigitalMarketingAgencySchema["@graph"],
+  "top-it-companies-in-dubai": blogTopItCompaniesSchema["@graph"],
+  "how-netflix-generates-income": blogHowNetflixGeneratesIncomeSchema["@graph"],
+  "netflix-business-model-how-does-netflix-make-money":
+    blogNetflixBusinessModelSchema["@graph"],
+  "top-apps-for-job-search-in-the-uae":
+    blogTopAppsForJobSearchSchema["@graph"],
+};
 
 /* =====================================================
    RELATED INSIGHTS
@@ -151,7 +167,12 @@ function RelatedInsights({ posts = [] }) {
    PAGE
 ===================================================== */
 
-export default function BlogDetail({ post, recentPosts, pageSchema }) {
+export default function BlogDetail({
+  post,
+  recentPosts,
+  pageSchema,
+  includeGlobalSchema = true,
+}) {
   /* ===================================================
      NOT FOUND
   ================================================== */
@@ -210,7 +231,7 @@ export default function BlogDetail({ post, recentPosts, pageSchema }) {
   ================================================== */
 
   return (
-    <Layout>
+    <Layout includeGlobalSchema={includeGlobalSchema}>
       <PageStyles href="/assets/css/pages/blog-detail.css" />
       <SEO {...seoData} pageSchema={pageSchema} />
 
@@ -289,13 +310,16 @@ export async function getStaticProps({ params }) {
     ================================================= */
 
     const post = await fetchPostBySlug(params.slug);
-    const pageSchema = buildBlogPostSchema(post);
 
     if (!post) {
       return {
         notFound: true,
       };
     }
+
+    const standaloneSchema = STANDALONE_BLOG_SCHEMAS[params.slug] || null;
+    const pageSchema = standaloneSchema || buildBlogPostSchema(post);
+    const includeGlobalSchema = !standaloneSchema;
 
     /* =================================================
        RELATED POSTS
@@ -318,6 +342,7 @@ export async function getStaticProps({ params }) {
         post,
         recentPosts,
         pageSchema,
+        includeGlobalSchema,
       },
 
       revalidate: 60,

@@ -2,10 +2,10 @@ import PageStyles from "../components/seo/PageStyles";
 import Layout from "../components/layout/Layout";
 import SEO from "../components/seo/SEO";
 import { SITE_URL } from "../lib/seo";
+import abuDhabiSchema from "../lib/schema/web-design-abu-dhabi.json";
 
 import AbuDhabiHero from "../components/location-pages/AbuDhabiHero";
 import AbuDhabiBody from "../components/location-pages/AbuDhabiBody";
-import AbuDhabiCTA from "../components/location-pages/AbuDhabiCTA";
 
 export default function WebDesignAbuDhabi() {
   const title =
@@ -16,42 +16,8 @@ export default function WebDesignAbuDhabi() {
 
   const pageUrl = `${SITE_URL}/web-design-abu-dhabi/`;
 
-  const pageSchema = [
-    {
-      "@type": "WebPage",
-      "@id": `${pageUrl}#webpage`,
-      url: pageUrl,
-      name: title,
-      description,
-      isPartOf: {
-        "@id": `${SITE_URL}/#website`,
-      },
-      about: {
-        "@id": `${SITE_URL}/#organization`,
-      },
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": `${pageUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: `${SITE_URL}/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Web Design Abu Dhabi",
-          item: pageUrl,
-        },
-      ],
-    },
-  ];
-
   return (
-    <Layout>
+    <Layout includeGlobalSchema={false}>
       <PageStyles href="/assets/css/pages/location-pages.css" />
 
       <SEO
@@ -61,13 +27,12 @@ export default function WebDesignAbuDhabi() {
         canonical={pageUrl}
         image={`${SITE_URL}/assets/img/og-image.webp`}
         robots="index,follow"
-        pageSchema={pageSchema}
+        pageSchema={abuDhabiSchema["@graph"]}
       />
 
       <main className="main location-page">
         <AbuDhabiHero />
         <AbuDhabiBody />
-      
       </main>
     </Layout>
   );

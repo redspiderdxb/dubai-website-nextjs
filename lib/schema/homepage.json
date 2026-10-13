@@ -2,19 +2,198 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": "https://www.redspider.ae/#organization",
+      "name": "RedSpider Web & Art Design | Web Design Dubai, UAE",
+      "url": "https://www.redspider.ae/",
+      "logo": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971555515475",
+        "email": "info@redspider.ae",
+        "contactType": "customer service",
+        "areaServed": "AE",
+        "availableLanguage": "en"
+      },
+      "sameAs": [
+        "https://www.facebook.com/RedSpiderWebandArtDesign/",
+        "https://twitter.com/redspider99",
+        "https://www.instagram.com/redspider.ae/",
+        "https://www.pinterest.com/WebDesignCompanyDubai/",
+        "https://www.linkedin.com/company/red-spider-web-&-art-design",
+        "https://www.behance.net/redspidersystems",
+        "https://maps.app.goo.gl/2W86fCHi1pWaqzbT9"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.redspider.ae/#localbusiness",
+      "name": "RedSpider Web & Art Design | Web Design Dubai, UAE",
+      "url": "https://www.redspider.ae/",
+      "image": "https://www.redspider.ae/wp-content/uploads/2017/01/logo.png",
+      "telephone": "+971555515475",
+      "priceRange": "Contact: +971555515475 | Email: info@redspider.ae",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "reviewCount": "123"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1002, Burj Gate Tower Sofitel Dubai Downtown, Sheikh Zayed Rd, Dubai, UAE",
+        "addressLocality": "Dubai",
+        "postalCode": "126272",
+        "addressCountry": "AE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.200408923263925",
+        "longitude": "55.26951247116422"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/RedSpiderWebandArtDesign/",
+        "https://twitter.com/redspider99",
+        "https://www.instagram.com/redspider.ae/",
+        "https://www.pinterest.com/WebDesignCompanyDubai/",
+        "https://www.linkedin.com/company/red-spider-web-&-art-design",
+        "https://www.behance.net/redspidersystems",
+        "https://maps.app.goo.gl/2W86fCHi1pWaqzbT9"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.redspider.ae/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Web Design Dubai",
+          "item": "https://www.redspider.ae/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.redspider.ae/#service",
+      "serviceType": "Web Design Dubai | Best Web Design & Development Company Dubai ",
+      "provider": {
+        "@id": "https://www.redspider.ae/#organization"
+      },
+      "serviceArea": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dubai",
+          "addressCountry": "AE"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.redspider.ae/",
+        "priceCurrency": "AED",
+        "price": "Contact us for pricing"
+      },
+      "description": "RedSpider is a market-leading Web Design Dubai company with over 13 years of experience, delivering innovative digital solutions across the UAE."
+    },
+    {
       "@type": "FAQPage",
       "@id": "https://www.redspider.ae/#faq",
       "mainEntity": [
-        { "@type": "Question", "name": "What makes RedSpider a trusted web design company in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "RedSpider is an experienced web development company with more than 14 years of experience in creating custom websites for businesses in Dubai. We specialize in creating modern, easy-to-use, and SEO-friendly websites that can help businesses enhance their online presence and generate leads." } },
-        { "@type": "Question", "name": "Why should I choose RedSpider for my website project?", "acceptedAnswer": { "@type": "Answer", "text": "We combine creativity, technical expertise, and digital marketing expertise to create web pages that appear professional and that can help your business flourish and engage with customers more effectively." } },
-        { "@type": "Question", "name": "What web design and development services do you offer?", "acceptedAnswer": { "@type": "Answer", "text": "Our services range from website design and development to eCommerce solutions, real estate websites, SEO, branding, mobile app development, website maintenance, hosting, and digital marketing." } },
-        { "@type": "Question", "name": "Which industries do you work with?", "acceptedAnswer": { "@type": "Answer", "text": "We have worked with numerous industries, such as real estate, education, healthcare, retail, hospitality, construction, professional services, and startups." } },
-        { "@type": "Question", "name": "Do you create custom websites or use templates?", "acceptedAnswer": { "@type": "Answer", "text": "We do both. Custom websites are a good choice if you want something different, while template websites are quick to make and budget friendly too." } },
-        { "@type": "Question", "name": "How long does it take to design and launch a website?", "acceptedAnswer": { "@type": "Answer", "text": "Typically, this is based on the project size and needs. Websites typically take 4 to 12 weeks to build." } },
-        { "@type": "Question", "name": "Why is responsive website design important for businesses in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "Nowadays most of the people use mobile phones when they browse websites. With the help of a responsive design, the user experience improves. It also helps with SEO and gaining new customers." } },
-        { "@type": "Question", "name": "Which CMS platforms do you work with?", "acceptedAnswer": { "@type": "Answer", "text": "We work with platforms like WordPress, Shopify, WooCommerce, Magento, Laravel, and also custom CMS solutions. Our team will choose the best platform according to the needs of your business." } },
-        { "@type": "Question", "name": "Do you redesign existing websites?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we do. Old websites can be updated to enhance their design, performance, functionality, and search engine ranking." } },
-        { "@type": "Question", "name": "How much does it cost to build a professional website in Dubai?", "acceptedAnswer": { "@type": "Answer", "text": "Cost will vary according to the features, design and size of your project. Understanding your requirement, we share a custom quote." } }
+        {
+          "@type": "Question",
+          "name": "What makes RedSpider a trusted web design company in Dubai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RedSpider is an experienced web development company with more than 14 years of experience in creating custom websites for businesses in Dubai. We specialize in creating modern, easy-to-use, and SEO-friendly websites that can help businesses enhance their online presence and generate leads."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why should I choose RedSpider for my website project?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We combine creativity, technical expertise, and digital marketing expertise to create web pages that appear professional and that can help your business flourish and engage with customers more effectively."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What web design and development services do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our services range from website design and development to eCommerce solutions, real estate websites, SEO, branding, mobile app development, website maintenance, hosting, and digital marketing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which industries do you work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We have worked with numerous industries, such as real estate, education, healthcare, retail, hospitality, construction, professional services, and startups."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you create custom websites or use templates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We do both. Custom websites are a good choice if you want something different, while template websites are quick to make and budget friendly too."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to design and launch a website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Typically, this is based on the project size and needs. Websites typically take 4 to 12 weeks to build."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is responsive website design important for businesses in Dubai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nowadays most of the people use mobile phones when they browse websites. With the help of a responsive design, the user experience improves. It also helps with SEO and gaining new customers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which CMS platforms do you work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We work with platforms like WordPress, Shopify, WooCommerce, Magento, Laravel, and also custom CMS solutions. Our team will choose the best platform according to the needs of your business."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you redesign existing websites?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we do. Old websites can be updated to enhance their design, performance, functionality, and search engine ranking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does it cost to build a professional website in Dubai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cost will vary according to the features, design and size of your project. Understanding your requirement, we share a custom quote."
+          }
+        }
       ]
     }
   ]
