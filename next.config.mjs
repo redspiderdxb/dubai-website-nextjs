@@ -28,7 +28,7 @@ const nextConfig = {
       {
         // The final $ prevents slash-terminated paths from redirecting to themselves.
         source:
-          "/:notfile((?!\\.well-known(?:/.*)?)(?!(?:blog/dubizzle|products/real|service/ecommerce-web-|web-designer-dubai)$)(?:[^/]+/)*[^/\\.]+$)",
+          "/:notfile((?!\\.well-known(?:/.*)?)(?!(?:blog/dubizzle|products/real|service/ecommerce-web-|web-designer-dubai|digital-marketing-agency-dubai/&|digital-marketing-agency-dubai/%26)$)(?:[^/]+/)*[^/\\.]+$)",
         destination: "/:notfile/",
         permanent: true,
       },
@@ -516,6 +516,177 @@ const nextConfig = {
       {
         source: "/graphic-design-in-modern-business-marketing/",
         destination: "/blog/the-role-of-graphic-design-in-modern-business-marketing/",
+        permanent: true,
+        statusCode: 301,
+      },
+
+      // Exact 301 mappings from 404 PAGE URLs.xlsx (NEW 404 URLS).
+      {
+        source: "/blog/top-reasons-why-php-is-getting-popular-among-web-developers/",
+        destination: "/blog/php-popular-among-web-developers/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/logo-builds-strong-brand-identity/",
+        destination: "/blog/how-a-professional-logo-builds-strong-brand-identity-in-the-uae/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/5-reasons-why-seo-services-in-dubai-are-key-to-your-business-growth/",
+        destination: "/blog/seo-services-for-business-growth/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/why-mobile-app-maintenance-matters-for-businesses-in-the-uae/",
+        destination: "/blog/why-mobile-app-maintenance-matters-for-businesses/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/the-importance-of-ux-ui-design-in-creating-successful-mobile-apps-in-the-uae/",
+        destination: "/blog/ux-ui-design-for-successful-mobile-apps/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/client/jumeirah-resturants/",
+        destination: "/our-portfolio/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/techniques-that-can-give-you-good-design-experience/",
+        destination: "/blog/good-design-experience-techniques/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/how-do-i-create-an-effective-event-management-website-for-business/",
+        destination: "/blog/create-effective-event-management-website/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/why-mobile-app-maintenance-matters-for-businesses-in-the-uae/",
+        destination: "/blog/why-mobile-app-maintenance-matters-for-businesses/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/our-portfolio/page/2/",
+        destination: "/our-portfolio/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/ppc-marketing-for-dubai-run-tactics-to-boost-dubai-run-event-registration//",
+        destination: "/blog/ppc-marketing-for-dubai-run/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/web-development-companies-in-dubai/",
+        destination: "/blog/top-trusted-web-development-companies-to-consider/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/internet-marketing-company-black-hat-seo-techniques-that-doubles-as-white-hat/",
+        destination: "/blog/black-hat-white-hat-seo-techniques/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/ppc-marketing-for-dubai-run-tactics-to-boost-dubai-run-event-registration/",
+        destination: "/blog/ppc-marketing-for-dubai-run/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/ways-to-improve-page-load-times-for-your-website/",
+        destination: "/blog/improve-page-load-speed/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/service/content-writing-services-in-dubai/",
+        destination: "/blog/content-professionals-influencers/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/how-a-qualified-dubai-web-design-company-can-benefit-your-business/",
+        destination: "/blog/benefit-of-qualified-web-design-company/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/outsource-web-design-service/",
+        destination: "/blog/need-to-outsource-website-development/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/outsource-web-design-service/",
+        destination: "/blog/need-to-outsource-website-development/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/service/google-ads-agency-dubai/",
+        destination: "/blog/google-ads-vs-meta-business-campaigns/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/outsource-web-design-service//",
+        destination: "/blog/need-to-outsource-website-development/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/real-estate-web-designing-in-dubai-from-listings-to-leads/",
+        destination: "/blog/real-estate-web-designing-dubai-guide/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/how-redspider-builds-high-performance-websites-using-mern-stack-node-js-next-js/",
+        destination: "/blog/building-websites-using-mern-stack-node-js-next-js/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/how-to-settle-position-of-jpeg-images-for-websites/",
+        destination: "/blog/set-jpeg-image-position-for-website/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/the-seo-services-in-dubai-a-way-to-stay-on-top-in-google/",
+        destination: "/blog/seo-services-for-business-growth/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/digital-marketing-agency-dubai/&",
+        destination: "/blog/digital-marketing-agency-dubai/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        // Encoded form of the spreadsheet source ending in "&".
+        source: "/digital-marketing-agency-dubai/%26",
+        destination: "/blog/digital-marketing-agency-dubai/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/products/ecommerce-web-design-dubai/",
+        destination: "/service/ecommerce-web-design-dubai",
         permanent: true,
         statusCode: 301,
       },
