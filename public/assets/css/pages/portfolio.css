@@ -630,15 +630,15 @@
 #portfolio .portfolio-card-title {
   margin: 0 !important;
   padding: 0 !important;
-  color: #1a1a1a !important;
-  font-size: 18px !important;
+  color: rgba(0, 0, 0, 0.7) !important;
+  font-size: 28px !important;
   font-weight: 800 !important;
-  line-height: 1.3 !important;
+  line-height: 1.25 !important;
   background: none !important;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 #portfolio .portfolio-card-title-link {
@@ -925,7 +925,7 @@
   }
 
   #portfolio .portfolio-card-title {
-    font-size: 15px;
+    font-size: 22px;
   }
 
   #portfolio .portfolio-card-title-link {

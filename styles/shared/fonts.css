@@ -184,4 +184,5 @@ label.fw-bold,
 /* Portfolio card captions need true bold above the image */
 #portfolio .portfolio-card-title {
   font-weight: 800 !important;
+  color: rgba(0, 0, 0, 0.7) !important;
 }
