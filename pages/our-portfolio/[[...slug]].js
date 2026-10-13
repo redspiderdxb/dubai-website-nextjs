@@ -60,11 +60,16 @@ export default function Portfolio({
 }
 
 function buildStaticPaths() {
+  // Only emit canonical URLs. Aliases like /our-portfolio/websites/ are
+  // handled by next.config redirects — getStaticProps cannot redirect
+  // during prerender.
   const paths = [{ params: { slug: [] } }];
 
-  // Include "websites" so /our-portfolio/websites/ can permanently redirect
-  // to the canonical /our-portfolio/ URL.
   PORTFOLIO_CATEGORIES.forEach((category) => {
+    if (category.slug === "websites") {
+      return;
+    }
+
     paths.push({ params: { slug: [category.slug] } });
   });
 
@@ -73,6 +78,10 @@ function buildStaticPaths() {
   });
 
   PORTFOLIO_CATEGORIES.forEach((category) => {
+    if (category.slug === "websites") {
+      return;
+    }
+
     PORTFOLIO_INDUSTRIES.forEach((industry) => {
       paths.push({
         params: { slug: [category.slug, industry.value] },
@@ -104,13 +113,10 @@ export async function getStaticProps({ params }) {
       ? "/our-portfolio/"
       : `/our-portfolio/${slug.join("/")}/`;
 
+  // Non-canonical aliases should be redirected in next.config; refuse here
+  // so prerender never returns a redirect.
   if (requestedPath !== canonicalPath) {
-    return {
-      redirect: {
-        destination: canonicalPath,
-        permanent: true,
-      },
-    };
+    return { notFound: true };
   }
 
   const seo = getPortfolioSeo(parsed.filter, parsed.industry);

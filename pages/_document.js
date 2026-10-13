@@ -21,7 +21,9 @@ export default function Document() {
           name="google-site-verification"
           content="CzWLARYO0jb-7dMxMmmlIpgaYOns7sMFkXkc0z8D0Hw"
         />
-        {/* Favicon — RS logo */}
+        {/* Favicon — RS logo (ICO first for broad browser support) */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link
           rel="icon"
           type="image/png"
@@ -29,20 +31,13 @@ export default function Document() {
           href="/favicon-96x96.png"
         />
         <link
-          rel="icon"
-          href="/favicon.ico"
-          type="image/x-icon"
-          sizes="16x16 32x32 48x48"
-        />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="application-name" content="RedSpider" />
-        <meta name="apple-mobile-web-app-title" content="RedSpider" />
-        <link
           rel="apple-touch-icon"
           sizes="180x180"
           href="/assets/img/apple-touch-icon.png"
         />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="application-name" content="RedSpider" />
+        <meta name="apple-mobile-web-app-title" content="RedSpider" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
 

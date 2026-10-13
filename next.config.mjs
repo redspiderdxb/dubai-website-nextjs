@@ -602,6 +602,18 @@ const nextConfig = {
         statusCode: 301,
       },
       {
+        source: "/our-portfolio/websites/",
+        destination: "/our-portfolio/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/our-portfolio/websites/:industry/",
+        destination: "/our-portfolio/:industry/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
         source: "/ppc-marketing-for-dubai-run-tactics-to-boost-dubai-run-event-registration//",
         destination: "/blog/ppc-marketing-for-dubai-run/",
         permanent: true,
