@@ -31,9 +31,9 @@ const pageMap = {
     pageStyles: 'import PageStyles from "../components/seo/PageStyles";',
     href: "/assets/css/pages/contact.css",
   },
-  "pages/our-portfolio.js": {
+  "pages/our-portfolio/[[...slug]].js": {
     remove: 'import "@/styles/pages/portfolio.css";',
-    pageStyles: 'import PageStyles from "../components/seo/PageStyles";',
+    pageStyles: 'import PageStyles from "../../components/seo/PageStyles";',
     href: "/assets/css/pages/portfolio.css",
   },
   "pages/service/index.js": {

@@ -16,6 +16,7 @@
     "@react-email/render": "^2.1.0",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.8",
+    "f": "^1.4.0",
     "glightbox": "^3.3.1",
     "gsap": "^3.15.0",
     "next": "16.2.12",

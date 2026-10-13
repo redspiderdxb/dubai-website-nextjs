@@ -141,6 +141,7 @@
 
 .portfolio-category-tab {
   color: #fff;
+  text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   height: auto;
@@ -159,11 +160,14 @@
   display: inline-flex;
 }
 
-.portfolio-category-tab:hover {
+.portfolio-category-tab:hover,
+.portfolio-category-tab:focus-visible {
+  color: #fff;
   background: #444;
 }
 
 .portfolio-category-tab.active {
+  color: #fff;
   background: #b40000;
 }
 

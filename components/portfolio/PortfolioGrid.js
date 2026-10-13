@@ -1,7 +1,15 @@
 import "glightbox/dist/css/glightbox.min.css";
 import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { fetchAllGalleries } from "../../lib/api";
+import {
+  DEFAULT_CATEGORY,
+  PORTFOLIO_CATEGORIES,
+  PORTFOLIO_INDUSTRIES,
+  buildPortfolioPath,
+} from "../../lib/portfolioFilters";
 import ThemedSelect from "../ui/ThemedSelect";
 
 const FALLBACK_IMAGE = "/assets/img/portfolio/portfolio-1.webp";
@@ -192,10 +200,18 @@ function PortfolioYoutubeItem({ title, videoId }) {
   );
 }
 
-export default function PortfolioGrid({ initialGalleries = [] }) {
+export default function PortfolioGrid({
+  initialGalleries = [],
+  initialFilter = DEFAULT_CATEGORY,
+  initialIndustry = "",
+}) {
+  const router = useRouter();
   const lightboxInstance = useRef(null);
 
   const PER_PAGE = 12;
+
+  const filter = initialFilter || DEFAULT_CATEGORY;
+  const industryFilter = initialIndustry || "";
 
   const initialFormattedGalleries = useMemo(
     () => formatGalleries(initialGalleries || []),
@@ -221,15 +237,9 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
   // Filter State
   // ============================================
 
-  const [filter, setFilter] = useState("filter-websites");
-
-  const [industryFilter, setIndustryFilter] = useState("");
-
   const [searchInput, setSearchInput] = useState("");
 
   const [searchTerm, setSearchTerm] = useState("");
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -640,6 +650,14 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
   }, [currentPage, totalPages]);
 
   // ============================================
+  // Reset page when URL filter changes
+  // ============================================
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filter, industryFilter]);
+
+  // ============================================
   // Sync Visible Galleries
   // ============================================
 
@@ -648,25 +666,13 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
   }, [filteredProjects]);
 
   // ============================================
-  // Category Click
-  // ============================================
-
-  const handleFilterClick = (value) => {
-    setFilter(value);
-
-    setCurrentPage(1);
-
-    setIsMenuOpen(false);
-  };
-
-  // ============================================
-  // Industry Change
+  // Industry Change → dedicated URL
   // ============================================
 
   const handleIndustryChange = (event) => {
-    setIndustryFilter(event.target.value);
+    const nextIndustry = event.target.value;
 
-    setCurrentPage(1);
+    router.push(buildPortfolioPath(filter, nextIndustry));
   };
 
   // ============================================
@@ -798,45 +804,18 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
           {/* Category Tabs */}
 
           <div className="portfolio-category-tabs">
-            <button
-              type="button"
-              className={`portfolio-category-tab ${
-                filter === "filter-websites" ? "active" : ""
-              }`}
-              onClick={() => handleFilterClick("filter-websites")}
-            >
-              Websites
-            </button>
-
-            <button
-              type="button"
-              className={`portfolio-category-tab ${
-                filter === "filter-app" ? "active" : ""
-              }`}
-              onClick={() => handleFilterClick("filter-app")}
-            >
-              Mobile App
-            </button>
-
-            <button
-              type="button"
-              className={`portfolio-category-tab ${
-                filter === "filter-video" ? "active" : ""
-              }`}
-              onClick={() => handleFilterClick("filter-video")}
-            >
-              Videos Production
-            </button>
-
-            <button
-              type="button"
-              className={`portfolio-category-tab ${
-                filter === "filter-figma" ? "active" : ""
-              }`}
-              onClick={() => handleFilterClick("filter-figma")}
-            >
-              Figma Design
-            </button>
+            {PORTFOLIO_CATEGORIES.map((category) => (
+              <Link
+                key={category.filter}
+                href={buildPortfolioPath(category.filter, industryFilter)}
+                className={`portfolio-category-tab ${
+                  filter === category.filter ? "active" : ""
+                }`}
+                aria-current={filter === category.filter ? "page" : undefined}
+              >
+                {category.label}
+              </Link>
+            ))}
 
             {/* YouTube Channel */}
 
@@ -865,25 +844,10 @@ export default function PortfolioGrid({ initialGalleries = [] }) {
               aria-label="Industry Type"
               options={[
                 { value: "", label: "Industry Type" },
-                { value: "real-estate", label: "Real Estate Websites" },
-                { value: "ecommerce", label: "E-Commerce Websites" },
-                { value: "corporate", label: "Corporate Websites" },
-                { value: "daily-deals", label: "Daily Deals Websites" },
-                { value: "web-portal", label: "Web Portal" },
-                {
-                  value: "engineering",
-                  label: "Engineering & Construction",
-                },
-                { value: "travel", label: "Travel & Tourism" },
-                { value: "somalian", label: "Somalian Clients" },
-                {
-                  value: "international",
-                  label: "International Projects",
-                },
-                { value: "luxury", label: "Luxury & Stunning" },
-                { value: "landing", label: "Ad Landing Pages" },
-                { value: "logistics", label: "Logistics & Shipping" },
-                { value: "bank", label: "Bank" },
+                ...PORTFOLIO_INDUSTRIES.map((industry) => ({
+                  value: industry.value,
+                  label: industry.label,
+                })),
               ]}
             />
 

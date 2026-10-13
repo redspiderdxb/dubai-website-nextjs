@@ -13,6 +13,26 @@ const nextConfig = {
         source: "/sitemap.xml",
         destination: "/api/sitemap-xml",
       },
+      {
+        source: "/assets/:path*",
+        destination: "https://www.redspider.ae/assets/:path*",
+      },
+      {
+        source: "/favicon.ico",
+        destination: "https://www.redspider.ae/favicon.ico",
+      },
+      {
+        source: "/favicon.svg",
+        destination: "https://www.redspider.ae/favicon.svg",
+      },
+      {
+        source: "/favicon-96x96.png",
+        destination: "https://www.redspider.ae/favicon-96x96.png",
+      },
+      {
+        source: "/site.webmanifest",
+        destination: "https://www.redspider.ae/site.webmanifest",
+      },
     ];
   },
 
