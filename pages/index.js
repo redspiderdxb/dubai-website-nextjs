@@ -15,7 +15,7 @@ import {
   fetchHomepageData,
   fetchFeaturedServices,
   fetchPosts,
-  fetchGalleries,
+  fetchAllGalleries,
 } from "../lib/api";
 import { getGoogleReviews } from "../lib/googleReviews";
 
@@ -117,7 +117,7 @@ export async function getStaticProps() {
       await Promise.all([
         fetchFeaturedServices(servicesLimit),
         fetchPosts(1),
-        fetchGalleries(1, 50),
+        fetchAllGalleries(),
         getGoogleReviews(),
       ]);
 
@@ -142,7 +142,7 @@ export async function getStaticProps() {
       .slice(0, 3);
 
     const initialGalleries = slimHomepageGalleries(
-      galleriesResult?.galleries || [],
+      Array.isArray(galleriesResult) ? galleriesResult : [],
     );
 
     return {

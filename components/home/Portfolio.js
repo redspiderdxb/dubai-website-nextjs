@@ -235,44 +235,99 @@ const selectHomepageProjects = (projects) => {
     return [];
   }
 
-  const targetUrls = [
-    "https://mansionedition.ae/",
-    "https://fogodechao.com/",
-    "https://domeint.com/",
-    "https://arencologistics.com/",
-    "https://www.pixium.rsworkspace.com/",
-    "http://boj.rsworkspace.net/",
+  /* Match by host and/or name so CMS URL path/protocol variants still resolve. */
+  const targets = [
+    {
+      url: "https://mansionedition.ae/",
+      names: ["mansion edition"],
+    },
+    {
+      url: "https://fogodechao.com/",
+      names: ["fogo de chao", "fogo de chão"],
+    },
+    {
+      url: "https://domeint.com/",
+      names: ["dome international"],
+    },
+    {
+      url: "https://arencologistics.com/",
+      names: ["arenco logistics"],
+    },
+    {
+      url: "https://www.pixium.rsworkspace.com/",
+      names: ["pixium"],
+    },
+    {
+      url: "http://boj.rsworkspace.net/",
+      names: ["boj"],
+    },
   ];
 
-  const normalizeUrl = (value) => {
+  const normalizeHost = (value) => {
     if (!value || typeof value !== "string") {
       return "";
     }
 
-    return value
-      .trim()
-      .toLowerCase()
-      .replace(/^https?:\/\//, "")
-      .replace(/^www\./, "")
-      .replace(/\/+$/, "");
+    const trimmed = value.trim();
+
+    if (!trimmed || trimmed === "#") {
+      return "";
+    }
+
+    try {
+      const withProtocol = /^https?:\/\//i.test(trimmed)
+        ? trimmed
+        : `https://${trimmed}`;
+
+      return new URL(withProtocol).hostname.replace(/^www\./i, "").toLowerCase();
+    } catch {
+      return trimmed
+        .toLowerCase()
+        .replace(/^https?:\/\//, "")
+        .replace(/^www\./, "")
+        .split("/")[0]
+        .replace(/\/+$/, "");
+    }
   };
 
-  const projectMap = new Map();
+  const usedIds = new Set();
 
-  projects.forEach((project) => {
-    if (!project?.link) {
-      return;
-    }
+  return targets
+    .map((target) => {
+      const targetHost = normalizeHost(target.url);
 
-    const normalizedLink = normalizeUrl(project.link);
+      const byUrl = projects.find((project) => {
+        if (!project || usedIds.has(project.id)) {
+          return false;
+        }
 
-    if (normalizedLink && !projectMap.has(normalizedLink)) {
-      projectMap.set(normalizedLink, project);
-    }
-  });
+        const projectHost = normalizeHost(project.link);
 
-  return targetUrls
-    .map((url) => projectMap.get(normalizeUrl(url)))
+        return projectHost && targetHost && projectHost === targetHost;
+      });
+
+      if (byUrl) {
+        usedIds.add(byUrl.id);
+        return byUrl;
+      }
+
+      const byName = projects.find((project) => {
+        if (!project || usedIds.has(project.id)) {
+          return false;
+        }
+
+        const projectName = normalizeText(project.name || project.title);
+
+        return target.names.some((name) => projectName.includes(name));
+      });
+
+      if (byName) {
+        usedIds.add(byName.id);
+        return byName;
+      }
+
+      return null;
+    })
     .filter(Boolean)
     .slice(0, 6);
 };
