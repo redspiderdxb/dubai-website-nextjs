@@ -6,8 +6,7 @@ import PortfolioHero from "../../components/portfolio/PortfolioHero";
 import PortfolioGrid from "../../components/portfolio/PortfolioGrid";
 import PortfolioCTA from "../../components/portfolio/PortfolioCTA";
 
-import { fetchGalleries } from "../../lib/api";
-import { slimGalleries, slimPagination } from "../../lib/galleries";
+import { fetchAllGalleries } from "../../lib/api";
 import { SITE_URL } from "../../lib/seo";
 import {
   PORTFOLIO_CATEGORIES,
@@ -21,7 +20,6 @@ import ourPortfolioSchema from "../../lib/schema/our-portfolio.json";
 
 export default function Portfolio({
   initialGalleries,
-  initialPagination,
   initialFilter,
   initialIndustry,
   seo,
@@ -37,7 +35,7 @@ export default function Portfolio({
 
   return (
     <Layout>
-      <PageStyles href="/assets/css/pages/portfolio.css" />
+      <PageStyles href="/assets/css/pages/portfolio.css?v=card-heading-7" />
 
       <SEO
         {...seoData}
@@ -49,7 +47,6 @@ export default function Portfolio({
 
       <PortfolioGrid
         initialGalleries={initialGalleries}
-        initialPagination={initialPagination}
         initialFilter={initialFilter}
         initialIndustry={initialIndustry}
       />
@@ -122,12 +119,13 @@ export async function getStaticProps({ params }) {
   const seo = getPortfolioSeo(parsed.filter, parsed.industry);
 
   try {
-    const result = await fetchGalleries(1, 12);
+    // Full catalog so every category URL (mobile, video, figma, industries)
+    // has matching items + title/link row on first paint.
+    const galleries = await fetchAllGalleries();
 
     return {
       props: {
-        initialGalleries: slimGalleries(result.galleries),
-        initialPagination: slimPagination(result.pagination),
+        initialGalleries: Array.isArray(galleries) ? galleries : [],
         initialFilter: parsed.filter,
         initialIndustry: parsed.industry,
         seo,
@@ -140,7 +138,6 @@ export async function getStaticProps({ params }) {
     return {
       props: {
         initialGalleries: [],
-        initialPagination: {},
         initialFilter: parsed.filter,
         initialIndustry: parsed.industry,
         seo,

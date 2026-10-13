@@ -14,7 +14,7 @@ export default function PageStyles({ href }) {
       ))}
       <link
         rel="stylesheet"
-        href="/assets/css/shared/fonts.css?v=lato-medium"
+        href="/assets/css/shared/fonts.css?v=lato-medium-portfolio-bold"
         precedence="high"
       />
     </>

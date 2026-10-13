@@ -180,3 +180,8 @@ label.fw-bold,
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined" !important;
 }
+
+/* Portfolio card captions need true bold above the image */
+#portfolio .portfolio-card-title {
+  font-weight: 800 !important;
+}

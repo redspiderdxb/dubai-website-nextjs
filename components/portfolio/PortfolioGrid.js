@@ -905,11 +905,52 @@ export default function PortfolioGrid({
 
         <div className="row gy-4 isotope-container">
           {filteredProjects.length > 0 ? (
-            filteredProjects.map((project, index) => (
+            filteredProjects.map((project, index) => {
+              const hasProjectLink =
+                String(project.project_url || "").trim() !== "" &&
+                String(project.project_url).trim() !== "#";
+
+              return (
               <div
                 key={project.id}
                 className="col-lg-6 col-md-6 portfolio-item isotope-item"
               >
+                <div className="portfolio-card-heading">
+                  <p className="portfolio-card-title">{project.title}</p>
+                  {hasProjectLink && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="portfolio-card-title-link"
+                      title={
+                        project.isYoutube
+                          ? `Open ${project.title} on YouTube`
+                          : `Visit ${project.title} website`
+                      }
+                      aria-label={
+                        project.isYoutube
+                          ? `Open ${project.title} on YouTube`
+                          : `Visit ${project.title} website`
+                      }
+                    >
+                      <svg
+                        className="portfolio-card-title-link-icon"
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"
+                        />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+
                 <div
                   className="portfolio-content"
                   style={
@@ -933,8 +974,7 @@ export default function PortfolioGrid({
                         alt={`${project.title} web design project by RedSpider Dubai`}
                         priority={currentPage === 1 && index < 2}
                       />
-                      {String(project.project_url || "").trim() !== "" &&
-                        String(project.project_url).trim() !== "#" && (
+                      {hasProjectLink && (
                         <a
                           href={project.link}
                           target="_blank"
@@ -967,8 +1007,7 @@ export default function PortfolioGrid({
                           </a>
                         )}
 
-                        {String(project.project_url || "").trim() !== "" &&
-                          String(project.project_url).trim() !== "#" && (
+                        {hasProjectLink && (
                             <a
                               href={project.link}
                               target="_blank"
@@ -987,7 +1026,8 @@ export default function PortfolioGrid({
                   )}
                 </div>
               </div>
-            ))
+              );
+            })
           ) : (
             <div className="col-12 text-center py-5">
               <p>No portfolio items found.</p>
