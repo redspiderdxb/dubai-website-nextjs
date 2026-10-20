@@ -49,10 +49,7 @@ export async function getServerSideProps({ params }) {
   } catch (error) {
     console.error("LEGACY BLOG REDIRECT ERROR:", error);
 
-    // Fail safely.
-    // Never redirect an unknown URL to a blog.
-    return {
-      notFound: true,
-    };
+    // A CMS outage is a server error, not evidence that the URL is missing.
+    throw error;
   }
 }

@@ -1,3 +1,5 @@
+import { blogRedirectRules } from "./lib/blogRedirects.mjs";
+
 // next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -38,6 +40,7 @@ const nextConfig = {
 
   async redirects() {
     return [
+      ...blogRedirectRules,
       // Preserve Next.js trailing-slash handling for all other public paths.
       {
         source: "/:file((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/]+\\.\\w+)/",
