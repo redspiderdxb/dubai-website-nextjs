@@ -302,6 +302,7 @@ export async function getStaticProps({ params }) {
     if (!params?.slug) {
       return {
         notFound: true,
+        revalidate: 60,
       };
     }
 
@@ -314,6 +315,7 @@ export async function getStaticProps({ params }) {
     if (!post) {
       return {
         notFound: true,
+        revalidate: 60,
       };
     }
 
@@ -350,8 +352,7 @@ export async function getStaticProps({ params }) {
   } catch (error) {
     console.error("BLOG DETAIL ERROR:", error);
 
-    return {
-      notFound: true,
-    };
+    // Throwing preserves the last successful ISR page and permits a retry.
+    throw error;
   }
 }
