@@ -157,16 +157,16 @@ export async function getStaticProps({ params }) {
     if (!params?.slug) {
       return {
         notFound: true,
+        revalidate: 60,
       };
     }
 
     const product = await fetchProductBySlug(params.slug);
 
-    console.log("PRODUCT DETAIL:", params.slug, product);
-
     if (!product) {
       return {
         notFound: true,
+        revalidate: 60,
       };
     }
 
@@ -180,8 +180,7 @@ export async function getStaticProps({ params }) {
   } catch (error) {
     console.error("PRODUCT DETAIL ERROR:", error);
 
-    return {
-      notFound: true,
-    };
+    // Preserve the last good ISR page during CMS failures.
+    throw error;
   }
 }

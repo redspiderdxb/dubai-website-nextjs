@@ -268,16 +268,16 @@ export async function getStaticProps({ params }) {
     if (!params?.id) {
       return {
         notFound: true,
+        revalidate: 60,
       };
     }
 
     const service = discardInvalidCustomJs(await fetchServiceBySlug(params.id));
 
-    console.log("SERVICE DETAIL:", params.id, service);
-
     if (!service) {
       return {
         notFound: true,
+        revalidate: 60,
       };
     }
 
@@ -291,8 +291,7 @@ export async function getStaticProps({ params }) {
   } catch (error) {
     console.error("SERVICE DETAIL ERROR:", error);
 
-    return {
-      notFound: true,
-    };
+    // Preserve the last good ISR page during CMS failures.
+    throw error;
   }
 }
