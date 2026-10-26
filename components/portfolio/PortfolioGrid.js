@@ -209,6 +209,7 @@ export default function PortfolioGrid({
   const lightboxInstance = useRef(null);
 
   const PER_PAGE = 12;
+  const PAGES_PER_GROUP = 6;
 
   const filter = initialFilter || DEFAULT_CATEGORY;
   const industryFilter = initialIndustry || "";
@@ -742,40 +743,25 @@ export default function PortfolioGrid({
   // Pagination Numbers
   // ============================================
 
+  // Pages are shown in fixed groups of PAGES_PER_GROUP (1–6, 7–12, 13–16, ...).
+  // The current group determines the numbers and the previous/next arrows.
+  const pageGroupStart =
+    Math.floor((currentPage - 1) / PAGES_PER_GROUP) * PAGES_PER_GROUP + 1;
+  const pageGroupEnd = Math.min(
+    pageGroupStart + PAGES_PER_GROUP - 1,
+    totalPages,
+  );
+  const hasPrevPageGroup = pageGroupStart > 1;
+  const hasNextPageGroup = pageGroupStart + PAGES_PER_GROUP <= totalPages;
+
   const getPageNumbers = () => {
     const pages = [];
 
-    if (totalPages <= 7) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-
-      return pages;
+    for (let i = pageGroupStart; i <= pageGroupEnd; i++) {
+      pages.push(i);
     }
 
-    pages.push(1);
-    pages.push(2);
-    pages.push(3);
-
-    if (currentPage > 4 && currentPage < totalPages - 3) {
-      pages.push("ellipsis-start");
-
-      pages.push(currentPage);
-
-      pages.push("ellipsis-end");
-    } else if (currentPage >= totalPages - 3) {
-      pages.push("ellipsis-start");
-    } else {
-      pages.push("ellipsis-middle");
-    }
-
-    pages.push(totalPages - 2);
-
-    pages.push(totalPages - 1);
-
-    pages.push(totalPages);
-
-    return pages.filter((item, index, array) => array.indexOf(item) === index);
+    return pages;
   };
 
   const pageNumbers = getPageNumbers();
@@ -1046,8 +1032,8 @@ export default function PortfolioGrid({
             <button
               type="button"
               className="portfolio-page-arrow"
-              disabled={currentPage <= 1 || loading}
-              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={!hasPrevPageGroup || loading}
+              onClick={() => handlePageChange(pageGroupStart - 1)}
               aria-label="Previous page"
             >
               <i className="bi bi-chevron-left"></i>
@@ -1089,8 +1075,8 @@ export default function PortfolioGrid({
             <button
               type="button"
               className="portfolio-page-arrow"
-              disabled={currentPage >= totalPages || loading}
-              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={!hasNextPageGroup || loading}
+              onClick={() => handlePageChange(pageGroupStart + PAGES_PER_GROUP)}
               aria-label="Next page"
             >
               <i className="bi bi-chevron-right"></i>

@@ -188,7 +188,12 @@ export default function ServiceDetail({ service }) {
                 "/assets/css/pages/web-development-advantage.css",
                 "/assets/css/pages/web-development-workflow.css",
               ]
-            : "/assets/css/pages/service.css"
+            : service.slug === "whatsapp-business-api-integration"
+              ? [
+                  "/assets/css/pages/service.css",
+                  "/assets/css/pages/whatsapp-business-api-integration.css?v=hero-mobile-hide-6",
+                ]
+              : "/assets/css/pages/service.css"
         }
       />
       <SEO
