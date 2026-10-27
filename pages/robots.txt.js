@@ -1,11 +1,10 @@
-import { SITE_URL } from "../lib/seo";
-
 export async function getServerSideProps({ res }) {
   const robots = `User-agent: *
 Allow: /
-Disallow: /?*
+Disallow: */?*
+Disallow: */blog/?*
 
-Sitemap: ${SITE_URL}/sitemap.xml
+Sitemap: https://www.redspider.ae/sitemap.xml
 `;
 
   res.setHeader("Content-Type", "text/plain");
