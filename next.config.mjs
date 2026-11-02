@@ -818,6 +818,12 @@ const nextConfig = {
         statusCode: 301,
       },
       {
+        source: "/service/web-design-development/",
+        destination: "/service/web-development/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
         source: "/custom-wordpress-website-design-redspider/",
         destination: "/blog/top-wordpress-website-maintenance/",
         permanent: true,
