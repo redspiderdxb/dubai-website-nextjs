@@ -1087,6 +1087,85 @@ const nextConfig = {
         permanent: true,
         statusCode: 301,
       },
+      // 404 URLS NEED TO REDIRECT.xlsx: exact source to destination, one rule per sheet row.
+      {
+        source: "/service/graphic-design/",
+        destination: "/service/graphic-design-services/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/web-development-company-dubai/",
+        destination: "/service/web-development/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/sms-marketing-uae.html",
+        destination: "/products/sms-marketing-uae/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/dubai-web-design/",
+        destination: "/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/web-development-company-in-dubai/",
+        destination: "/service/web-development/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/website-development-dubai/",
+        destination: "/service/web-development/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/website-development-in-dubai/",
+        destination: "/service/web-development/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/best-it-company-in-dubai/",
+        destination: "/blog/it-services-in-dubai/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/dubai-web-development-company/",
+        destination: "/service/web-development/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/seo-services-in-dubai/",
+        destination: "/service/seo-agency-dubai/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/seo-dubai.htm",
+        destination: "/service/seo-agency-dubai/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/service/web-design-develo",
+        destination: "/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/e-commerce.html",
+        destination: "/service/ecommerce-web-design-dubai/",
+        permanent: true,
+        statusCode: 301,
+      },
     ];
   },
 
