@@ -208,7 +208,7 @@ export default function PortfolioGrid({
   const router = useRouter();
   const lightboxInstance = useRef(null);
 
-  const PER_PAGE = 12;
+  const PER_PAGE = 24;
   const PAGES_PER_GROUP = 6;
 
   const filter = initialFilter || DEFAULT_CATEGORY;
