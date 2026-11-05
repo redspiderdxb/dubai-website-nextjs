@@ -7,7 +7,7 @@
     "sync:fonts": "node scripts/sync-fonts-css.mjs",
     "prebuild": "node scripts/generate-email-logo.mjs && node scripts/sync-fonts-css.mjs",
     "dev": "node scripts/generate-email-logo.mjs && node scripts/sync-fonts-css.mjs && next dev --webpack",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
