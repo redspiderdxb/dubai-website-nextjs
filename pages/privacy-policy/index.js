@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
       <PageStyles href="/assets/css/pages/privacy-policy.css" />
       <SEO title="Privacy Policy | RedSpider Dubai" description="Read the RedSpider Privacy Policy to learn what information we collect, how we use it, and how we protect it." canonical="https://www.redspider.ae/privacy-policy/" robots="index,follow" />
       <Layout>
-        <section className="rs-inner-hero design-developemnt-hero hero-marquee privacy-policy-hero" style={{ backgroundImage: "url(/assets/img/re-bg-hero.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}>
+        <section className="rs-inner-hero design-developemnt-hero hero-marquee privacy-policy-hero" style={{ backgroundImage: "url(/assets/img/re-bg-hero-hq.webp)", backgroundSize: "cover", backgroundPosition: "center" }}>
           <div className="rs-hero-overlay" aria-hidden="true"></div>
           <div className="container"><div className="row align-items-center"><div className="col-lg-12"><div className="rs-process-title-sec">
             <h1 className="rs-process-title mb-3"><span className="rs-process-highlight">Privacy Policy<svg className="rs-process-underline" viewBox="0 0 320 22" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" /></svg></span></h1>

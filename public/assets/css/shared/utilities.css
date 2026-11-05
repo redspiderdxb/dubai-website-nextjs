@@ -73,7 +73,7 @@
 }
 
 .service-card {
-  background: #fff url("/assets/img/blockbg.png") 0 0 no-repeat;
+  background: #fff url("/assets/img/blockbg-hq.webp") 0 0 no-repeat;
   background-size: cover;
   padding: 25px 25px 55px 25px;
   border-radius: 12px;
@@ -1041,7 +1041,7 @@
 }
 
 .why-slider {
-  background: url("/assets/img/why-bg.jpg") 0 0 no-repeat;
+  background: url("/assets/img/why-bg-hq.webp") 0 0 no-repeat;
   background-size: cover;
 }
 
@@ -1084,7 +1084,7 @@
 .hosting-app .hero-bg {
   position: absolute;
   inset: 0;
-  background: url("/assets/img/hero-happ.jpg") no-repeat center center/cover;
+  background: url("/assets/img/hero-happ-hq.webp") no-repeat center center/cover;
   z-index: 1;
 }
 
@@ -1639,7 +1639,7 @@ p {
 }
 
 .dc-features {
-  background: url("/assets/img/rs-features.jpg") -260px 0 no-repeat;
+  background: url("/assets/img/rs-features-hq.webp") -260px 0 no-repeat;
 }
 
 .parent-div img {
@@ -1776,12 +1776,12 @@ p {
 }
 
 .mout-bg {
-  background: url("/assets/img/bg-7.jpg") bottom center no-repeat;
+  background: url("/assets/img/bg-7-hq.webp") bottom center no-repeat;
   background-size: cover;
 }
 
 .mout-bg {
-  background: url("/assets/img/bg-7.jpg") bottom center no-repeat;
+  background: url("/assets/img/bg-7-hq.webp") bottom center no-repeat;
   background-size: cover;
 }
 
@@ -5963,7 +5963,7 @@ section.text-revel {
   position: relative;
   overflow: hidden;
   padding: 80px 0 0;
-  background-image: url("/assets/img/brochur-bg-hero.jpg");
+  background-image: url("/assets/img/brochur-bg-hero-hq.webp");
 }
 
 .rsb-sec {

@@ -6,9 +6,9 @@
 .design-developemnt-hero {
   position: relative;
   overflow: hidden;
-  /* background: #d42b2b url("/assets/img/h3-slide-2-img-3.png") center center no-repeat; */
+  /* background: #d42b2b url("/assets/img/h3-slide-2-img-3-hq.webp") center center no-repeat; */
   padding: 80px 0 0;
-  background-image: url("/assets/img/re-bg-hero.jpg");
+  background-image: url("/assets/img/re-bg-hero-hq.webp");
   background-size: contain;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .dark-cs-bg .container {
-  background: url("/assets/img/bg/dark-section-bg-image.png") 0 0 no-repeat;
+  background: url("/assets/img/bg/dark-section-bg-image-hq.webp") 0 0 no-repeat;
   background-size: cover;
   padding: 55px 48px;
   border-radius: 20px;
@@ -523,7 +523,7 @@
 .opposite-gallery-sec {
   position: relative;
   height: 320vh;
-  background: url("/assets/img/bg-7.jpg") bottom center no-repeat;
+  background: url("/assets/img/bg-7-hq.webp") bottom center no-repeat;
 
 }
 
@@ -2296,7 +2296,7 @@
 /* Custom Development (.archidex-accordion-sec) */
 
 .dark-cs-bg .container {
-  background: url("/assets/img/bg/dark-section-bg-image.png") 0 0 no-repeat, #111319;
+  background: url("/assets/img/bg/dark-section-bg-image-hq.webp") 0 0 no-repeat, #111319;
   background-size: cover;
   padding: 55px 48px;
   border-radius: 20px;

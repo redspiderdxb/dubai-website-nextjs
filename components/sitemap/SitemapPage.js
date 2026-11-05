@@ -79,7 +79,7 @@ export default function SitemapPage({ groups = {} }) {
       <section
         className="rs-inner-hero hero-marquee rs-sitemap-hero"
         style={{
-          backgroundImage: "url(/assets/img/re-bg-hero.jpg)",
+          backgroundImage: "url(/assets/img/re-bg-hero-hq.webp)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

@@ -710,7 +710,7 @@
   position: relative;
   height: 100vh;
 
-  background: url(/assets/img/bg-7.jpg) center bottom no-repeat;
+  background: url(/assets/img/bg-7-hq.webp) center bottom no-repeat;
 
   overflow: hidden;
 }
@@ -3097,7 +3097,7 @@
 .rs-agency-intro-sec {
   position: relative;
   padding: 28px 0 25px;
-  background: #ffffff url("/assets/img/ch-bg.png") 0 0 no-repeat;
+  background: #ffffff url("/assets/img/ch-bg-hq.webp") 0 0 no-repeat;
   background-size: cover;
   overflow: hidden;
 }
@@ -3495,7 +3495,7 @@
 
   overflow: hidden;
 
-  background: #ffffff url("/assets/img/ch-bg.png") center center / cover
+  background: #ffffff url("/assets/img/ch-bg-hq.webp") center center / cover
     no-repeat;
 
   box-sizing: border-box;
@@ -4310,7 +4310,7 @@
 }
 
 .dark-cs-bg .container {
-  background: url("/assets/img/bg/dark-section-bg-image.png") 0 0 no-repeat;
+  background: url("/assets/img/bg/dark-section-bg-image-hq.webp") 0 0 no-repeat;
   background-size: cover;
   padding: 50px;
   border-radius: 15px;
