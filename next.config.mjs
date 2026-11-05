@@ -4,9 +4,6 @@ import { blogRedirectRules } from "./lib/blogRedirects.mjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    optimizeCss: true,
-  },
 
   trailingSlash: true,
   // Use the equivalent rules below so four legacy paths can redirect directly.

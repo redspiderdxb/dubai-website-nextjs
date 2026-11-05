@@ -7,7 +7,7 @@
     "sync:fonts": "node scripts/sync-fonts-css.mjs",
     "prebuild": "node scripts/generate-email-logo.mjs && node scripts/sync-fonts-css.mjs",
     "dev": "node scripts/generate-email-logo.mjs && node scripts/sync-fonts-css.mjs && next dev --webpack",
-    "build": "next build --webpack",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -16,7 +16,6 @@
     "@react-email/render": "^2.1.0",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.8",
-    "critters": "^0.0.25",
     "f": "^1.4.0",
     "glightbox": "^3.3.1",
     "gsap": "^3.15.0",
