@@ -1,22 +1,15 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
+
+const DEFERRED_CSS = [
+  "https://fonts.googleapis.com/css2?family=Lato:wght@500&display=swap",
+  "/assets/vendor/bootstrap-icons/bootstrap-icons.css",
+  "/assets/vendor/swiper/swiper-bundle.min.css",
+];
 
 export default function Document() {
   return (
     <Html lang="en" data-scroll-behavior="smooth">
       <Head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-C5J3TF7PV3"
-          strategy="beforeInteractive"
-        />
-        <Script id="google-analytics" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-C5J3TF7PV3');
-          `}
-        </Script>
         <meta
           name="google-site-verification"
           content="CzWLARYO0jb-7dMxMmmlIpgaYOns7sMFkXkc0z8D0Hw"
@@ -40,7 +33,6 @@ export default function Document() {
         <meta name="apple-mobile-web-app-title" content="RedSpider" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -48,28 +40,23 @@ export default function Document() {
         />
 
         <link
-          href="https://fonts.googleapis.com/css2?family=Lato:wght@500&display=swap"
-          rel="stylesheet"
-        />
-
-        <link
           rel="stylesheet"
           href="/assets/vendor/bootstrap/css/bootstrap.min.css"
         />
-
-        {/* Icons used above-the-fold (services, review stars) — must be blocking */}
-        <link
-          rel="stylesheet"
-          href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
-        />
-
-        {/* Reviews carousel depends on Swiper styles */}
-        <link
-          rel="stylesheet"
-          href="/assets/vendor/swiper/swiper-bundle.min.css"
-        />
-
         <link rel="stylesheet" href="/assets/css/main.css" />
+
+        {/* Non-critical CSS is added by script so it does not block rendering.
+            It is inserted before main.css to keep the existing cascade order. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var m=document.querySelector('link[href="/assets/css/main.css"]');${JSON.stringify(DEFERRED_CSS)}.forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;m.parentNode.insertBefore(l,m);});})();`,
+          }}
+        />
+        <noscript>
+          {DEFERRED_CSS.map((href) => (
+            <link key={href} rel="stylesheet" href={href} />
+          ))}
+        </noscript>
       </Head>
 
       <body>

@@ -161,7 +161,12 @@ export default function Hero({ data, googleReviews = null }) {
     <>
       {firstSlideImageUrl ? (
         <Head>
-          <link rel="preload" as="image" href={firstSlideImageUrl} />
+          <link
+            rel="preload"
+            as="image"
+            href={firstSlideImageUrl}
+            fetchPriority="high"
+          />
         </Head>
       ) : null}
 
