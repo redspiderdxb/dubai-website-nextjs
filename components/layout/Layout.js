@@ -4,14 +4,10 @@ import Header from "./Header";
 import Footer from "./Footer";
 import globalSchema from "../../lib/schema/global.json";
 
-const FONTS_CSS = "/assets/css/shared/fonts.css?v=lato-medium";
-
 export default function Layout({ children, includeGlobalSchema = true }) {
   return (
     <>
       <Head>
-        <link rel="stylesheet" href={FONTS_CSS} key="rs-site-fonts" />
-
         {includeGlobalSchema ? (
           <script
             type="application/ld+json"
