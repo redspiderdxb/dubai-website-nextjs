@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("/assets/img/hero-bg.jpg") 0 0 no-repeat;
+  background: url("/assets/img/hero-bg-hq.webp") 0 0 no-repeat;
 }
 
 .hero-titleinner {
@@ -478,7 +478,7 @@
 }
 
 .sms-target-ser {
-  background: url("/assets/img/hero-happ.jpg") -560px 0 no-repeat;
+  background: url("/assets/img/hero-happ-hq.webp") -560px 0 no-repeat;
 }
 
 @media (max-width: 991px) {

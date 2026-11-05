@@ -30,10 +30,10 @@ const IMG = {
   grid1: "/assets/img/smo/grid-1.png",
   grid2: "/assets/img/smo/grid-2.jpg",
   grid3: "/assets/img/smo/grid-3.jpg",
-  grid4: "/assets/img/smo/grid-4.png",
+  grid4: "/assets/img/smo/grid-4.webp",
   block: "/assets/img/smo/block.png",
   result1: "/assets/img/smo/result-1.jpg",
-  result2: "/assets/img/smo/result-2.png",
+  result2: "/assets/img/smo/result-2.webp",
   result3: "/assets/img/smo/result-3.jpg",
   grad1: "/assets/img/smo/grad-1.png",
   grad2: "/assets/img/smo/grad-2.png",
@@ -93,19 +93,19 @@ const PACKAGES = [
   {
     title: "Brand Presence",
     body: "For companies that need a professional and consistent social media presence.",
-    image: "/assets/img/smo/1.png",
+    image: "/assets/img/smo/1.webp",
   },
 
   {
     title: "Growth & Leads",
     body: "For businesses that want to combine content with paid social media advertising.",
-    image: "/assets/img/smo/2.png",
+    image: "/assets/img/smo/2.webp",
   },
 
   {
     title: "Full Digital Growth",
     body: "For businesses looking for a connected digital marketing and lead-generation solution.",
-    image: "/assets/img/smo/3.png",
+    image: "/assets/img/smo/3.webp",
   },
 ];
 
@@ -1395,7 +1395,7 @@ export default function SocialMediaAgencyTemplate() {
               <article className="rs-dd-card smo-reveal smo-d1">
                 <div className="rs-dd-card__media">
                   <img
-                    src="/assets/img/smo/data-driven/1.png"
+                    src="/assets/img/smo/data-driven/1.webp"
                     alt="Conversion-focused optimization"
                     loading="lazy"
                   />
@@ -1426,7 +1426,7 @@ export default function SocialMediaAgencyTemplate() {
               <article className="rs-dd-card smo-reveal smo-d2">
                 <div className="rs-dd-card__media">
                   <img
-                    src="/assets/img/smo/data-driven/2.png"
+                    src="/assets/img/smo/data-driven/2.webp"
                     alt="Precision audience targeting"
                     loading="lazy"
                   />
@@ -1456,7 +1456,7 @@ export default function SocialMediaAgencyTemplate() {
               <article className="rs-dd-card smo-reveal smo-d3">
                 <div className="rs-dd-card__media">
                   <img
-                    src="/assets/img/smo/data-driven/3.png"
+                    src="/assets/img/smo/data-driven/3.webp"
                     alt="Continuous performance tracking"
                     loading="lazy"
                   />

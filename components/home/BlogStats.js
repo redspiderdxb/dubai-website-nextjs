@@ -85,9 +85,6 @@ export default function BlogStats({
                 const href = `/blog/${post.slug || post.id}`;
                 const imageUrl =
                   getImageUrl(post.image) || "/assets/img/blog/blog-1.webp";
-                const isRemote =
-                  imageUrl.startsWith("http://") ||
-                  imageUrl.startsWith("https://");
 
                 return (
                   <article
@@ -103,7 +100,7 @@ export default function BlogStats({
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="rs-home-blog__image"
-                        unoptimized={isRemote}
+                        quality={90}
                       />
                     </Link>
 
@@ -158,9 +155,6 @@ export default function BlogStats({
             <div className="rs-home-clients__grid">
               {clientLogos.map((logo, index) => {
                 const logoUrl = getImageUrl(logo);
-                const isRemote =
-                  logoUrl.startsWith("http://") ||
-                  logoUrl.startsWith("https://");
 
                 return (
                   <div
@@ -175,7 +169,7 @@ export default function BlogStats({
                       width={160}
                       height={72}
                       sizes="(max-width: 576px) 45vw, (max-width: 1200px) 22vw, 140px"
-                      unoptimized={isRemote}
+                      quality={90}
                     />
                   </div>
                 );

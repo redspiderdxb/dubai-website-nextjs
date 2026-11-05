@@ -142,7 +142,7 @@ export default function FAQPage() {
         style={{
           backgroundImage: imageUrl
             ? `url(${imageUrl})`
-            : "url(/assets/img/re-bg-hero.jpg)",
+            : "url(/assets/img/re-bg-hero-hq.webp)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
