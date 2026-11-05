@@ -167,6 +167,20 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </HeaderDataProvider>
 
+      {/* Analytics loads after the page so it does not block rendering. */}
+      <Script id="google-analytics" strategy="lazyOnload">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C5J3TF7PV3');
+        `}
+      </Script>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-C5J3TF7PV3"
+        strategy="lazyOnload"
+      />
+
       {/* =================================================
           JAVASCRIPT DEPENDENCIES
           ================================================= */}
@@ -177,7 +191,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/jquery/jquery-3.7.1.min.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* ================================================
@@ -186,7 +200,7 @@ function MyApp({ Component, pageProps }) {
 
       <Script
         src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
       {/* ================================================
