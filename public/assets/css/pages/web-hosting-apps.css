@@ -1,0 +1,324 @@
+/* ==========================================================================
+   Web Hosting: "Website Applications & Management Tools" section
+   (/service/web-hosting/). Loaded only for the web-hosting service template.
+   Every selector is scoped to .hosting-apps so nothing here affects other
+   pages, the earlier hosting sections or shared styles.
+   ========================================================================== */
+
+.hosting-apps {
+  --ha-red: #e10000;
+  --ha-red-deep: #b80000;
+  --ha-ink: #0b0b0b;
+  --ha-body: #374151;
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 88px;
+
+  isolation: isolate;
+}
+
+
+
+
+/* ---------- Header ---------- */
+
+.hosting-apps__head {
+  margin: 0 0 40px;
+}
+
+/* shared/fonts.css forces <p> weight with !important; override for this section */
+.hosting-apps .hosting-apps__kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: fit-content;
+  margin: 0 0 14px;
+  color: var(--ha-red);
+  font-size: 15px;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hosting-apps__kicker::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ha-red);
+}
+
+/* shared/fonts.css forces h1-h6 to a !important weight; override for this section */
+.hosting-apps .hosting-apps__title {
+  margin: 0 0 14px;
+  color: var(--ha-ink);
+  font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 700 !important;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hosting-apps__accent {
+  font-weight: 700 !important;
+  color: var(--ha-red);
+}
+
+.hosting-apps .hosting-apps__subtitle {
+  max-width: 62em;
+  margin: 0;
+  color: var(--ha-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* ---------- Card grid ---------- */
+
+.hosting-apps__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hosting-apps__item {
+  min-width: 0;
+}
+
+.hosting-apps__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  padding: 36px 22px 26px;
+  border: 1px solid rgba(225, 0, 0, 0.1);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #ffffff 0%, #fff8f8 100%);
+  box-shadow:
+    0 14px 34px rgba(225, 0, 0, 0.08),
+    0 2px 6px rgba(15, 15, 15, 0.04);
+  overflow: hidden;
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+/* Red number badge, flush to the card's top-left corner */
+.hosting-apps .hosting-apps__num {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 9px 18px 9px 16px;
+  border-radius: 0 0 18px 0;
+  background: linear-gradient(145deg, #ff2a2a 0%, #e10000 60%, #b80000 100%);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 900 !important;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(225, 0, 0, 0.3);
+}
+
+/* Illustration: pale pink halo behind a large image */
+.hosting-apps__art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  margin: 0 0 14px;
+}
+
+.hosting-apps__art::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 84%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, #fde3e3 0%, #fbeaea 55%, rgba(251, 234, 234, 0) 72%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hosting-apps__art img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+  filter: drop-shadow(0 14px 18px rgba(15, 15, 15, 0.12));
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* shared/fonts.css forces h3 to a !important weight; override for this section */
+.hosting-apps .hosting-apps__name {
+  margin: 0;
+  min-height: 2.5em;
+  color: var(--ha-ink);
+  font-size: 20px;
+  font-weight: 700 !important;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+}
+
+/* Small red underline */
+.hosting-apps__line {
+  display: block;
+  width: 44px;
+  height: 2px;
+  margin: 12px 0 14px;
+  border-radius: 2px;
+  background: var(--ha-red);
+  transition: width 0.45s ease;
+}
+
+.hosting-apps .hosting-apps__desc {
+  margin: 0;
+  color: var(--ha-body);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+/* ---------- Hover ---------- */
+
+.hosting-apps__card:hover,
+.hosting-apps__card:focus-within {
+  transform: translateY(-8px);
+  border-color: rgba(225, 0, 0, 0.45);
+  box-shadow:
+    0 26px 50px rgba(225, 0, 0, 0.2),
+    0 0 0 1px rgba(225, 0, 0, 0.12),
+    0 4px 12px rgba(15, 15, 15, 0.06);
+}
+
+.hosting-apps__card:hover .hosting-apps__art img,
+.hosting-apps__card:focus-within .hosting-apps__art img {
+  transform: scale(1.07);
+}
+
+.hosting-apps__card:hover .hosting-apps__line,
+.hosting-apps__card:focus-within .hosting-apps__line {
+  width: 72px;
+}
+
+/* ---------- Entrance: scroll-driven, staggered per card ----------
+   Browsers without scroll-driven animations simply show the cards. */
+@supports (animation-timeline: view()) {
+  .hosting-apps__item {
+    animation: hosting-apps-in linear backwards;
+    animation-timeline: view();
+    animation-range:
+      entry calc(var(--ha-index) * 5%) entry calc(var(--ha-index) * 5% + 40%);
+  }
+}
+
+@keyframes hosting-apps-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Bottom highlighted message with red vertical accent ---------- */
+
+/* shared/fonts.css forces <p> weight with !important; override for this section */
+.hosting-apps .hosting-apps__note {
+  position: relative;
+  max-width: 64em;
+  margin: 44px 0 0;
+  padding-left: 26px;
+  color: var(--ha-ink);
+  font-size: 19px;
+  font-weight: 600 !important;
+  line-height: 1.6;
+}
+
+.hosting-apps__note::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+  width: 5px;
+  border-radius: 3px;
+  background: var(--ha-red);
+}
+
+/* ---------- Tablet: two columns (640px and up) ---------- */
+
+@media (min-width: 640px) {
+  .hosting-apps__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+/* ---------- Desktop: four columns (1100px and up) ---------- */
+
+@media (min-width: 1100px) {
+  .hosting-apps {
+    padding: 84px 0 104px;
+  }
+
+  .hosting-apps__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
+/* ---------- Mobile tuning ---------- */
+
+@media (max-width: 639px) {
+  .hosting-apps {
+    padding: 52px 0 64px;
+  }
+
+  .hosting-apps .hosting-apps__kicker {
+    font-size: 13px;
+  }
+
+  .hosting-apps .hosting-apps__subtitle {
+    font-size: 16px;
+  }
+
+  .hosting-apps__card {
+    padding: 34px 18px 22px;
+  }
+
+  .hosting-apps__art img {
+    max-width: 220px;
+  }
+
+  .hosting-apps .hosting-apps__name {
+    font-size: 19px;
+    min-height: 0;
+  }
+
+  .hosting-apps .hosting-apps__note {
+    font-size: 17px;
+  }
+}
+
+/* ---------- Reduced motion: keep layout, drop movement ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hosting-apps *,
+  .hosting-apps *::before,
+  .hosting-apps *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

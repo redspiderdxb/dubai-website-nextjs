@@ -193,7 +193,18 @@ export default function ServiceDetail({ service }) {
                   "/assets/css/pages/service.css",
                   "/assets/css/pages/whatsapp-business-api-integration.css?v=hero-mobile-hide-6",
                 ]
-              : "/assets/css/pages/service.css"
+              : service.template === "web-hosting"
+                ? [
+                    "/assets/css/pages/service.css",
+                    "/assets/css/pages/web-hosting-intro.css?v=6",
+                    "/assets/css/pages/web-hosting-solutions.css?v=2",
+                    "/assets/css/pages/web-hosting-benefits.css?v=3",
+                    "/assets/css/pages/web-hosting-why.css?v=1",
+                    "/assets/css/pages/web-hosting-apps.css?v=1",
+                    "/assets/css/pages/web-hosting-domains.css?v=1",
+                    "/assets/css/pages/web-hosting-plans.css?v=4",
+                  ]
+                : "/assets/css/pages/service.css"
         }
       />
       <SEO

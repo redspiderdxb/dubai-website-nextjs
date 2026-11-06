@@ -1,0 +1,393 @@
+/* ==========================================================================
+   Web Hosting: "Migration Management and Domains" section
+   (/service/web-hosting/). Loaded only for the web-hosting service template.
+   Every selector is scoped to .hosting-domains so nothing here affects other
+   pages, the earlier hosting sections or shared styles.
+   ========================================================================== */
+
+.hosting-domains {
+  --hd-red: #e10000;
+  --hd-red-deep: #b80000;
+  --hd-ink: #0b0b0b;
+  --hd-body: #374151;
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 88px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(225, 0, 0, 0.06), rgba(225, 0, 0, 0) 45%),
+    linear-gradient(180deg, #ffffff 0%, #fff8f8 100%);
+  isolation: isolate;
+}
+
+/* Soft red/pink wave at the top right (approximated with gradients) */
+.hosting-domains::before {
+  content: "";
+  position: absolute;
+  top: -140px;
+  right: -260px;
+  width: 720px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 60% 50%,
+    rgba(225, 0, 0, 0.1),
+    rgba(225, 0, 0, 0.03) 50%,
+    rgba(225, 0, 0, 0) 72%
+  );
+  transform: rotate(-14deg);
+  filter: blur(6px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Soft pink wash along the bottom */
+.hosting-domains::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -200px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(225, 0, 0, 0.12),
+    rgba(225, 0, 0, 0.03) 52%,
+    rgba(225, 0, 0, 0) 72%
+  );
+  filter: blur(8px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ---------- Header ---------- */
+
+.hosting-domains__head {
+  margin: 0 0 40px;
+}
+
+/* shared/fonts.css forces <p> weight with !important; override for this section */
+.hosting-domains .hosting-domains__kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: fit-content;
+  margin: 0 0 14px;
+  color: var(--hd-red);
+  font-size: 15px;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hosting-domains__kicker::after {
+  content: "";
+  display: block;
+  width: 96px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--hd-red);
+}
+
+/* shared/fonts.css forces h1-h6 to a !important weight; override for this section */
+.hosting-domains .hosting-domains__title {
+  margin: 0 0 14px;
+  color: var(--hd-ink);
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 700 !important;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hosting-domains__accent {
+  font-weight: 700 !important;
+  color: var(--hd-red);
+}
+
+.hosting-domains .hosting-domains__subtitle {
+  max-width: 56em;
+  margin: 0;
+  color: var(--hd-body);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ---------- Two service cards ---------- */
+
+.hosting-domains__services {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.hosting-domains__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  padding: 30px 32px 32px;
+  border: 1.5px solid rgba(225, 0, 0, 0.45);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #fff5f5 100%);
+  box-shadow:
+    0 14px 32px rgba(225, 0, 0, 0.08),
+    0 2px 6px rgba(15, 15, 15, 0.04);
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.hosting-domains__top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+/* Red gradient number badge */
+.hosting-domains .hosting-domains__num {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 66px;
+  height: 50px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #ff2a2a 0%, #e10000 60%, #b80000 100%);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 900 !important;
+  line-height: 1;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 8px 18px rgba(225, 0, 0, 0.3);
+}
+
+/* Vertical red divider */
+.hosting-domains__divider {
+  flex: 0 0 auto;
+  width: 2px;
+  height: 40px;
+  border-radius: 2px;
+  background: var(--hd-red);
+}
+
+/* shared/fonts.css forces h3 to a !important weight; override for this section */
+.hosting-domains .hosting-domains__name {
+  margin: 0;
+  min-width: 0;
+  color: var(--hd-ink);
+  font-size: 22px;
+  font-weight: 700 !important;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+}
+
+.hosting-domains .hosting-domains__desc {
+  margin: 20px 0 0;
+  color: var(--hd-body);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+
+/* ---------- Statistics row ---------- */
+
+.hosting-domains__stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hosting-domains__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 28px 16px 26px;
+  border: 1px solid rgba(225, 0, 0, 0.08);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff3f3 0%, #fdeaea 100%);
+  text-align: center;
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+/* shared/fonts.css forces span weight with !important; override for this section */
+.hosting-domains .hosting-domains__value {
+  display: block;
+  color: var(--hd-red);
+  font-size: clamp(34px, 3.4vw, 48px);
+  font-weight: 900 !important;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hosting-domains .hosting-domains__label {
+  display: block;
+  margin-top: 12px;
+  color: var(--hd-ink);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* ---------- Hover ---------- */
+
+.hosting-domains__card:hover,
+.hosting-domains__card:focus-within {
+  transform: translateY(-6px);
+  border-color: rgba(225, 0, 0, 0.75);
+  box-shadow:
+    0 26px 52px rgba(225, 0, 0, 0.2),
+    0 0 0 1px rgba(225, 0, 0, 0.12),
+    0 4px 12px rgba(15, 15, 15, 0.06);
+}
+
+.hosting-domains__card:hover .hosting-domains__num,
+.hosting-domains__card:focus-within .hosting-domains__num {
+  transform: scale(1.06);
+}
+
+.hosting-domains__stat:hover {
+  transform: translateY(-5px);
+  border-color: rgba(225, 0, 0, 0.35);
+  box-shadow:
+    0 20px 40px rgba(225, 0, 0, 0.16),
+    0 0 0 1px rgba(225, 0, 0, 0.1);
+}
+
+/* ---------- Entrance: scroll-driven, staggered ----------
+   Browsers without scroll-driven animations simply show everything. */
+@supports (animation-timeline: view()) {
+  .hosting-domains__card {
+    animation: hosting-domains-card-in linear backwards;
+    animation-timeline: view();
+    animation-range:
+      entry calc(var(--hd-index) * 8%) entry calc(var(--hd-index) * 8% + 40%);
+  }
+
+  .hosting-domains__stat {
+    animation: hosting-domains-stat-in linear backwards;
+    animation-timeline: view();
+    animation-range:
+      entry calc(var(--hd-stat) * 6%) entry calc(var(--hd-stat) * 6% + 40%);
+  }
+}
+
+@keyframes hosting-domains-card-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hosting-domains-stat-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Tablet (640px and up): stats in rows of three ---------- */
+
+@media (min-width: 640px) {
+  .hosting-domains__stat {
+    flex: 0 0 calc((100% - 36px) / 3);
+  }
+}
+
+/* ---------- Desktop (1024px and up): two cards, five stats in one row ---------- */
+
+@media (min-width: 768px) {
+  .hosting-domains__services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hosting-domains {
+    padding: 84px 0 104px;
+  }
+
+  .hosting-domains__stat {
+    flex: 1 1 0;
+  }
+}
+
+/* ---------- Mobile tuning (639px and below): stats in pairs ---------- */
+
+@media (max-width: 639px) {
+  .hosting-domains {
+    padding: 52px 0 64px;
+  }
+
+  .hosting-domains .hosting-domains__kicker {
+    font-size: 13px;
+  }
+
+  .hosting-domains .hosting-domains__subtitle {
+    font-size: 16px;
+  }
+
+  .hosting-domains__card {
+    padding: 24px 20px 26px;
+  }
+
+  .hosting-domains .hosting-domains__num {
+    width: 56px;
+    height: 44px;
+    font-size: 19px;
+  }
+
+  .hosting-domains .hosting-domains__name {
+    font-size: 19px;
+  }
+
+  .hosting-domains__stats {
+    gap: 12px;
+  }
+
+  .hosting-domains__stat {
+    flex: 0 0 calc((100% - 12px) / 2);
+    padding: 22px 10px 20px;
+  }
+
+  .hosting-domains .hosting-domains__value {
+    font-size: 32px;
+  }
+
+  .hosting-domains .hosting-domains__label {
+    font-size: 14px;
+  }
+}
+
+/* ---------- Reduced motion: keep layout, drop movement ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hosting-domains *,
+  .hosting-domains *::before,
+  .hosting-domains *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

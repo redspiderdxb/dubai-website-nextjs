@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ServiceCTA from "../services/ServiceCTA";
 import ServiceFaqs from "../services/ServiceFaqs";
 
@@ -8,15 +9,6 @@ const SOLUTION_ICONS = [
   "bi-cpu",
   "bi-diagram-3",
   "bi-globe2",
-];
-
-const WHY_ICONS = [
-  "bi-geo-alt",
-  "bi-activity",
-  "bi-headset",
-  "bi-shield-lock",
-  "bi-gift",
-  "bi-clock-history",
 ];
 
 export default function HostingTemplate({ data }) {
@@ -36,7 +28,6 @@ export default function HostingTemplate({ data }) {
     features = [],
     benefits = [],
     processes = [],
-    technologies = [],
     faqs = [],
     primary_color = "#FF6B35",
     secondary_color = "#111111",
@@ -141,15 +132,33 @@ export default function HostingTemplate({ data }) {
           },
         ];
 
-  const cmsPlatforms =
-    technologies.length > 0
-      ? technologies
-      : [
-          { icon: "wordpress", name: "WordPress" },
-          { icon: "magento", name: "Magento" },
-          { icon: "joomla", name: "Joomla" },
-          { icon: "drupal", name: "Drupal" },
-        ];
+  // The four one-click app cards: approved titles, descriptions and images.
+  const appCards = [
+    {
+      title: "WordPress & CMS",
+      description:
+        "Install and manage popular CMS applications like WordPress to build and run your website easily.",
+      image: "/assets/img/hosting/web-apps/01-wordpress-cms.png",
+    },
+    {
+      title: "File & Account Management",
+      description:
+        "Manage website files, databases and email accounts from a simple and intuitive control panel.",
+      image: "/assets/img/hosting/web-apps/02-file-account-management.png",
+    },
+    {
+      title: "Website & Online Store Apps",
+      description:
+        "Create business websites, blogs and online stores using supported web applications in just a few clicks.",
+      image: "/assets/img/hosting/web-apps/03-website-online-store-apps.png",
+    },
+    {
+      title: "Central Control Panel",
+      description:
+        "Easily install, manage and update themes, plugins and content for your websites and applications.",
+      image: "/assets/img/hosting/web-apps/04-central-control-panel.png",
+    },
+  ];
 
   const processData =
     processes.length > 0
@@ -213,12 +222,26 @@ export default function HostingTemplate({ data }) {
           },
         ];
 
-  const domainExtensions = [
-    { name: ".com", price: "AED 65/year" },
-    { name: ".ae", price: "AED 160/year" },
-    { name: ".net", price: "AED 75/year" },
-    { name: ".org", price: "AED 70/year" },
-    { name: ".co", price: "AED 95/year" },
+  // Two main service cards and the statistics row (approved text).
+  const domainServices = [
+    {
+      title: "Website Hosting Migration",
+      description:
+        "Securely move your website, files, databases and email accounts to our hosting environment with minimal downtime, data safety and complete migration support.",
+    },
+    {
+      title: "Domain Transfer and Setup Management",
+      description:
+        "Easily transfer, set up and manage your domains with expert support, ensuring proper configuration, DNS setup and seamless integration with your hosting services.",
+    },
+  ];
+
+  const domainStats = [
+    { value: "400+", label: "Migrations Completed" },
+    { value: "99%", label: "Data Safety" },
+    { value: "24/7", label: "Migration Support" },
+    { value: "100+", label: "Domains Managed" },
+    { value: "0", label: "Business Downtime" },
   ];
 
   const styles = {
@@ -229,6 +252,161 @@ export default function HostingTemplate({ data }) {
     "--button-color": button_color,
     "--button-text-color": button_text_color,
   };
+
+  // Intro copy comes from the CMS intro_description: the first sentence is the
+  // headline and the rest is the lead paragraph.
+  const introText = String(intro_description || "").trim();
+  const introSentenceEnd = introText.search(/[.!?](\s|$)/);
+  const introHeadline =
+    introSentenceEnd > -1
+      ? introText.slice(0, introSentenceEnd + 1)
+      : introText ||
+        "Our hosting infrastructure is designed to support website performance, security and reliable availability.";
+  const introLead =
+    introSentenceEnd > -1 ? introText.slice(introSentenceEnd + 1).trim() : "";
+  const INTRO_ACCENT = "reliable availability";
+  const introAccentAt = introHeadline.indexOf(INTRO_ACCENT);
+  const introHeadlineContent =
+    introAccentAt > -1 ? (
+      <>
+        {introHeadline.slice(0, introAccentAt)}
+        <span className="hosting-intro__accent">
+          {INTRO_ACCENT}
+          <svg
+            className="hosting-intro__accent-line"
+            viewBox="0 0 300 12"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M4 8 C60 2, 120 11, 180 6 S265 3, 296 7" />
+          </svg>
+        </span>
+        {introHeadline.slice(introAccentAt + INTRO_ACCENT.length)}
+      </>
+    ) : (
+      introHeadline
+    );
+
+  // Solutions heading: the CMS features_title with "Web Hosting" highlighted.
+  const SOLUTIONS_ACCENT = "Web Hosting";
+  const solutionsTitle = String(features_title || "");
+  const solutionsAccentAt = solutionsTitle.indexOf(SOLUTIONS_ACCENT);
+  const solutionsTitleContent =
+    solutionsAccentAt > -1 ? (
+      <>
+        {solutionsTitle.slice(0, solutionsAccentAt)}
+        <span className="hosting-solutions__accent">{SOLUTIONS_ACCENT}</span>
+        {solutionsTitle.slice(solutionsAccentAt + SOLUTIONS_ACCENT.length)}
+      </>
+    ) : (
+      solutionsTitle
+    );
+
+  // Benefits heading: the CMS benefits_title with "RedSpider" highlighted.
+  const BENEFITS_ACCENT = "RedSpider";
+  const benefitsTitle = String(benefits_title || "");
+  const benefitsAccentAt = benefitsTitle.indexOf(BENEFITS_ACCENT);
+  const benefitsTitleContent =
+    benefitsAccentAt > -1 ? (
+      <>
+        {benefitsTitle.slice(0, benefitsAccentAt)}
+        <span className="hosting-benefits__accent">{BENEFITS_ACCENT}</span>
+        {benefitsTitle.slice(benefitsAccentAt + BENEFITS_ACCENT.length)}
+      </>
+    ) : (
+      benefitsTitle
+    );
+
+  // Why-choose heading: the CMS processes_title with "RedSpider" highlighted.
+  const WHY_ACCENT = "RedSpider";
+  const whyTitle = String(processes_title || "");
+  const whyAccentAt = whyTitle.indexOf(WHY_ACCENT);
+  const whyTitleContent =
+    whyAccentAt > -1 ? (
+      <>
+        {whyTitle.slice(0, whyAccentAt)}
+        <span className="hosting-why__accent">{WHY_ACCENT}</span>
+        {whyTitle.slice(whyAccentAt + WHY_ACCENT.length)}
+      </>
+    ) : (
+      whyTitle
+    );
+
+  // Apps heading: the CMS technologies_title with "Management Tools" highlighted.
+  const APPS_ACCENT = "Management Tools";
+  const appsTitle = String(technologies_title || "");
+  const appsAccentAt = appsTitle.indexOf(APPS_ACCENT);
+  const appsTitleContent =
+    appsAccentAt > -1 ? (
+      <>
+        {appsTitle.slice(0, appsAccentAt)}
+        <span className="hosting-apps__accent">{APPS_ACCENT}</span>
+        {appsTitle.slice(appsAccentAt + APPS_ACCENT.length)}
+      </>
+    ) : (
+      appsTitle
+    );
+
+  // Hosting plans: no CMS source exists, so the approved plan information is used.
+  const hostingPlans = [
+    {
+      name: "VPS 2000",
+      theme: "green",
+      amount: "$1,500",
+      period: "Annually",
+      setupFee: "$100.00 Setup Fee",
+      features: [
+        "8 vCPU cores",
+        "16 GB DDR5 RAM (ECC)",
+        "512 GB NVMe disk space",
+        "Traffic included",
+        "cPanel/WHM Yes",
+        "SSH Root Access Yes",
+        "JetBackup Yes",
+        "NGINX / LiteSpeed Yes",
+        "Snapshots (Copy-On-Write)",
+        "Remote console",
+        "Linux operating systems",
+        "Fully managed",
+      ],
+    },
+    {
+      name: "Advanced Shared",
+      badge: "Most Popular",
+      theme: "red",
+      featured: true,
+      amount: "$7.95",
+      period: "Monthly",
+      specs: [
+        { label: "Disk Space", value: "50 GB" },
+        { label: "Bandwidth", value: "500 GB" },
+        { label: "Email Accounts", value: "50" },
+        { label: "SSL Certificates", value: "Free" },
+        { label: "Daily", value: "Backups" },
+        { label: "Support", value: "24/7" },
+        { label: "Included", value: "Dedicated IP" },
+      ],
+    },
+    {
+      name: "Rise Dedicated Server",
+      theme: "green",
+      amount: "$4,000",
+      period: "Annually",
+      setupFee: "$100.00 Setup Fee",
+      features: [
+        "Intel Xeon-E 2386G - 6c / 12t - 3.5 GHz / 4.7 GHz",
+        "128 GB RAM",
+        "2 x 512 GB NVMe SSD",
+        "Up to 2 x optional (at additional cost)",
+        "NVMe and SATA available",
+        "Unlimited bandwidth",
+        "Data centers Germany / Israel",
+        "Monthly backup included",
+        "Fully managed",
+      ],
+    },
+  ];
 
   const sectionMap = {
     hero: {
@@ -288,24 +466,39 @@ export default function HostingTemplate({ data }) {
 
     intro: {
       component: (
-        <section key="intro" className="rs-creative-intro">
+        <section key="intro" className="hosting-intro">
           <div className="container">
-            <div className="rs-creative-intro__grid">
-              <div className="rs-creative-intro__meta">
-                <span className="rs-creative-kicker">{intro_small_heading}</span>
-                <p className="rs-creative-intro__note">99.99% uptime focus</p>
-              </div>
-              <div className="rs-creative-intro__copy">
-                <p className="rs-creative-intro__lead">{intro_description}</p>
-                <p className="rs-creative-intro__support">
+            <div className="hosting-intro__grid">
+              <div className="hosting-intro__copy">
+                <p className="hosting-intro__kicker">{intro_small_heading}</p>
+                <div className="hosting-intro__title">{introHeadlineContent}</div>
+                {introLead ? (
+                  <p className="hosting-intro__lead">{introLead}</p>
+                ) : null}
+                <p className="hosting-intro__support">
                   From shared hosting to dedicated servers, we help businesses
                   in Dubai keep websites fast, secure and easy to manage — with
                   local support when you need it.
                 </p>
-                <a className="rs-creative-link" href="#web-hosting-solutions">
+                <a className="hosting-intro__cta" href="#web-hosting-solutions">
                   Explore hosting plans
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
                 </a>
+              </div>
+              <div className="hosting-intro__visual">
+                <div className="hosting-intro__float">
+                  <Image
+                    className="hosting-intro__img"
+                    src="/assets/img/hosting/web-hosting-cloud-security-3d.png"
+                    alt="3D cloud server security illustration with server racks, cloud upload arrows and a red security shield, labelled High Performance, Scalable Hosting, Advanced Security, Easy Management and Local Technical Support"
+                    width={1439}
+                    height={1093}
+                    sizes="(max-width: 899px) 100vw, 50vw"
+                  />
+                </div>
+                <span className="hosting-intro__dot hosting-intro__dot--a" aria-hidden="true"></span>
+                <span className="hosting-intro__dot hosting-intro__dot--b" aria-hidden="true"></span>
+                <span className="hosting-intro__dot hosting-intro__dot--c" aria-hidden="true"></span>
               </div>
             </div>
           </div>
@@ -319,38 +512,45 @@ export default function HostingTemplate({ data }) {
         <section
           key="features"
           id="web-hosting-solutions"
-          className="rs-creative-services"
+          className="hosting-solutions"
         >
           <div className="container">
-            <div className="rs-creative-head">
-              <span className="rs-creative-kicker">Hosting solutions</span>
-              <h2>{features_title}</h2>
-              <p>{features_subtitle}</p>
-            </div>
-            <div className="rs-creative-card-grid">
-              {hostingSolutions.map((solution, index) => (
-                <article
-                  key={`${solution.id || "solution"}-${index}`}
-                  className="rs-creative-card"
-                >
-                  <div className="rs-creative-card__top">
-                    <span className="rs-creative-card__icon" aria-hidden="true">
-                      <i
-                        className={`bi ${
-                          solution.icon && String(solution.icon).startsWith("bi")
-                            ? solution.icon
-                            : SOLUTION_ICONS[index % SOLUTION_ICONS.length]
-                        }`}
-                      ></i>
+            <header className="hosting-solutions__head">
+              <p className="hosting-solutions__kicker">Hosting solutions</p>
+              <h2 className="hosting-solutions__title">{solutionsTitleContent}</h2>
+              {features_subtitle ? (
+                <p className="hosting-solutions__subtitle">{features_subtitle}</p>
+              ) : null}
+            </header>
+            <div className="hosting-solutions__grid">
+              {hostingSolutions.map((solution, index) => {
+                const iconClass =
+                  solution.icon && String(solution.icon).startsWith("bi")
+                    ? solution.icon
+                    : SOLUTION_ICONS[index % SOLUTION_ICONS.length];
+
+                return (
+                  <article
+                    key={`${solution.id || "solution"}-${index}`}
+                    className="hosting-solutions__card"
+                    style={{ "--hs-index": index }}
+                  >
+                    <div className="hosting-solutions__top">
+                      <span className="hosting-solutions__icon" aria-hidden="true">
+                        <i className={`bi ${iconClass}`}></i>
+                      </span>
+                      <h3 className="hosting-solutions__name">{solution.title}</h3>
+                      <span className="hosting-solutions__num">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <p className="hosting-solutions__desc">{solution.description}</p>
+                    <span className="hosting-solutions__art" aria-hidden="true">
+                      <i className={`bi ${iconClass}`}></i>
                     </span>
-                    <span className="rs-creative-card__num">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3>{solution.title}</h3>
-                  <p>{solution.description}</p>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -360,37 +560,39 @@ export default function HostingTemplate({ data }) {
 
     benefits: {
       component: (
-        <section key="benefits" className="rs-creative-why">
+        <section key="benefits" className="hosting-benefits">
           <div className="container">
-            <div className="rs-creative-why__layout">
-              <div className="rs-creative-why__intro">
-                <span className="rs-creative-kicker">Included with hosting</span>
-                <h2>{benefits_title}</h2>
-                <p>{benefits_subtitle}</p>
-                {/* <a className="rs-creative-btn" href={contactHref}>
-                  {cta_button_text || "Book a call"}
-                  <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a> */}
-              </div>
-              <div className="rs-creative-pill-grid mt-5">
-                {hostingBenefitsList.map((benefit, index) => {
-                  const text =
-                    typeof benefit === "string"
-                      ? benefit
-                      : benefit.title || benefit.description;
+            <header className="hosting-benefits__head">
+              <p className="hosting-benefits__kicker">Included with hosting</p>
+              <h2 className="hosting-benefits__title">{benefitsTitleContent}</h2>
+              {benefits_subtitle ? (
+                <p className="hosting-benefits__subtitle">{benefits_subtitle}</p>
+              ) : null}
+            </header>
+            <ul className="hosting-benefits__list">
+              {hostingBenefitsList.map((benefit, index) => {
+                const text =
+                  typeof benefit === "string"
+                    ? benefit
+                    : benefit.title || benefit.description;
 
-                  return (
-                    <article
-                      key={`${benefit.id || "benefit"}-${index}`}
-                      className="rs-creative-pill"
-                    >
-                      <span>{String(index + 1).padStart(2, "0")}</span>
-                      <h3>{text}</h3>
-                    </article>
-                  );
-                })}
-              </div>
-            </div>
+                return (
+                  <li
+                    key={`${benefit.id || "benefit"}-${index}`}
+                    className="hosting-benefits__item"
+                    style={{ "--hb-index": index }}
+                  >
+                    <div className="hosting-benefits__card">
+                      <span className="hosting-benefits__num">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="hosting-benefits__divider" aria-hidden="true"></span>
+                      <h3 className="hosting-benefits__name">{text}</h3>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </section>
       ),
@@ -399,27 +601,32 @@ export default function HostingTemplate({ data }) {
 
     processes: {
       component: (
-        <section key="processes" className="rs-creative-process">
+        <section key="processes" className="hosting-why">
           <div className="container">
-            <div className="rs-creative-head rs-creative-head--light">
-              <span className="rs-creative-kicker">Why RedSpider</span>
-              <h2>{processes_title}</h2>
-              {processes_subtitle ? <p>{processes_subtitle}</p> : null}
-            </div>
-            <ol className="rs-creative-steps">
+            <header className="hosting-why__head">
+              <p className="hosting-why__kicker">Our advantages</p>
+              <h2 className="hosting-why__title">{whyTitleContent}</h2>
+              {processes_subtitle ? (
+                <p className="hosting-why__subtitle">{processes_subtitle}</p>
+              ) : null}
+            </header>
+            <ol className="hosting-why__grid">
               {processData.map((item, index) => (
                 <li
                   key={`${item.id || "why"}-${index}`}
-                  className="rs-creative-step"
+                  className="hosting-why__item"
+                  style={{ "--hw-index": index }}
                 >
-                  <span className="rs-creative-step__num">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="rs-creative-why__icon" aria-hidden="true">
-                    <i className={`bi ${WHY_ICONS[index % WHY_ICONS.length]}`}></i>
-                  </span>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
+                  <article className="hosting-why__card">
+                    <div className="hosting-why__top">
+                      <span className="hosting-why__num">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="hosting-why__divider" aria-hidden="true"></span>
+                      <h3 className="hosting-why__name">{item.title}</h3>
+                    </div>
+                    <p className="hosting-why__desc">{item.description}</p>
+                  </article>
                 </li>
               ))}
             </ol>
@@ -431,50 +638,43 @@ export default function HostingTemplate({ data }) {
 
     technologies: {
       component: (
-        <section key="technologies" className="rs-creative-platforms">
+        <section key="technologies" className="hosting-apps">
           <div className="container">
-            <div className="rs-creative-head">
-              <span className="rs-creative-kicker">One-click apps</span>
-              <h2>{technologies_title}</h2>
-              <p>{technologies_subtitle}</p>
-            </div>
-            <div className="rs-creative-platform-grid rs-creative-platform-grid--four">
-              {cmsPlatforms.map((platform, index) => {
-                const iconMap = {
-                  wordpress: "wordpress",
-                  magento: "magento",
-                  joomla: "joomla",
-                  drupal: "drupal",
-                };
-                const iconName =
-                  typeof platform.icon === "string" &&
-                  platform.icon.startsWith("bi-")
-                    ? platform.icon
-                    : iconMap[platform.icon] || platform.icon || "wordpress";
-
-                return (
-                  <article
-                    key={`${platform.id || platform.name}-${index}`}
-                    className="rs-creative-platform"
-                  >
-                    <span className="rs-creative-platform__num">
+            <header className="hosting-apps__head">
+              <p className="hosting-apps__kicker">One-click apps</p>
+              <h2 className="hosting-apps__title">{appsTitleContent}</h2>
+              {technologies_subtitle ? (
+                <p className="hosting-apps__subtitle">{technologies_subtitle}</p>
+              ) : null}
+            </header>
+            <ol className="hosting-apps__grid">
+              {appCards.map((card, index) => (
+                <li
+                  key={card.title}
+                  className="hosting-apps__item"
+                  style={{ "--ha-index": index }}
+                >
+                  <article className="hosting-apps__card">
+                    <span className="hosting-apps__num">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    {typeof iconName === "string" &&
-                    iconName.startsWith("bi-") ? (
-                      <i className={`bi ${iconName}`} aria-hidden="true"></i>
-                    ) : (
-                      <img
-                        src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName}/${iconName}-plain.svg`}
+                    <div className="hosting-apps__art">
+                      <Image
+                        src={card.image}
                         alt=""
+                        width={612}
+                        height={408}
+                        sizes="(max-width: 639px) 80vw, (max-width: 1099px) 45vw, 22vw"
                       />
-                    )}
-                    <h3>{platform.name}</h3>
+                    </div>
+                    <h3 className="hosting-apps__name">{card.title}</h3>
+                    <span className="hosting-apps__line" aria-hidden="true"></span>
+                    <p className="hosting-apps__desc">{card.description}</p>
                   </article>
-                );
-              })}
-            </div>
-            <p className="rs-creative-platforms__note">
+                </li>
+              ))}
+            </ol>
+            <p className="hosting-apps__note">
               Create blogs, business websites, online stores and custom web
               applications from a single dashboard — then install themes,
               plugins and edit content with ease.
@@ -487,49 +687,111 @@ export default function HostingTemplate({ data }) {
 
     hosting_tools: {
       component: (
-        <section key="hosting_tools" className="rs-creative-tools">
+        <section key="hosting_tools" className="hosting-domains">
           <div className="container">
-            <div className="rs-creative-head">
-              <span className="rs-creative-kicker">Hosting support</span>
-              <h2>Migration, management and domains</h2>
-              <p>
-                Move your website, manage hosting from cPanel, and register the
-                domain that represents your business.
+            <header className="hosting-domains__head">
+              <p className="hosting-domains__kicker">We help with</p>
+              <h2 className="hosting-domains__title">
+                Migration Management and{" "}
+                <span className="hosting-domains__accent">Domains</span>
+              </h2>
+              <p className="hosting-domains__subtitle">
+                Move your website, manage hosting migrations and keep your
+                domain running without any business downtime.
               </p>
+            </header>
+            <div className="hosting-domains__services">
+              {domainServices.map((service, index) => (
+                <article
+                  key={service.title}
+                  className="hosting-domains__card"
+                  style={{ "--hd-index": index }}
+                >
+                  <div className="hosting-domains__top">
+                    <span className="hosting-domains__num">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="hosting-domains__divider" aria-hidden="true"></span>
+                    <h3 className="hosting-domains__name">{service.title}</h3>
+                  </div>
+                  <p className="hosting-domains__desc">{service.description}</p>
+                </article>
+              ))}
             </div>
-            <div className="rs-creative-tools__grid">
-              <article className="rs-creative-card">
-                <div className="rs-creative-card__top">
-                  <span className="rs-creative-card__icon" aria-hidden="true">
-                    <i className="bi bi-window-sidebar"></i>
-                  </span>
-                </div>
-                <h3>Website Hosting Migration</h3>
-                <p>
-                  Already hosting your website with another provider? RedSpider
-                  can assist with moving eligible website files, databases and
-                  configurations to a suitable hosting environment.
-                </p>
-              </article>
-              <article className="rs-creative-card">
-                <div className="rs-creative-card__top">
-                  <span className="rs-creative-card__icon" aria-hidden="true">
-                    <i className="bi bi-envelope-check"></i>
-                  </span>
-                </div>
-                <h3>Simple Website and Hosting Management</h3>
-                <p>
-                  Manage website files, databases, email accounts and
-                  applications through supported control-panel tools, with help
-                  from our team when you need it.
-                </p>
-              </article>
-            </div>
-            <div className="rs-creative-domain-grid">
-              {domainExtensions.map((domain) => (
-                <article key={domain.name} className="rs-creative-domain">
-                  <h3>{domain.name}</h3>
-                  <p>{domain.price}</p>
+            <ul className="hosting-domains__stats">
+              {domainStats.map((stat, index) => (
+                <li
+                  key={stat.label}
+                  className="hosting-domains__stat"
+                  style={{ "--hd-stat": index }}
+                >
+                  <span className="hosting-domains__value">{stat.value}</span>
+                  <span className="hosting-domains__label">{stat.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ),
+      show: true,
+    },
+
+    hosting_plans: {
+      component: (
+        <section key="hosting_plans" className="hosting-plans">
+          <div className="container">
+            <header className="hosting-plans__head">
+              <p className="hosting-plans__kicker">Hosting plans</p>
+              <h2 className="hosting-plans__title">Choose Your Ideal Hosting Plan</h2>
+              <p className="hosting-plans__subtitle">
+                Flexible, secure and high-performance hosting solutions designed
+                for businesses of all sizes.
+              </p>
+            </header>
+            <div className="hosting-plans__grid">
+              {hostingPlans.map((plan, index) => (
+                <article
+                  key={plan.name}
+                  className={`hosting-plans__card hosting-plans__card--${plan.theme}${
+                    plan.featured ? " hosting-plans__card--featured" : ""
+                  }`}
+                  style={{ "--hp-index": index }}
+                >
+                  {plan.badge ? (
+                    <span className="hosting-plans__badge">{plan.badge}</span>
+                  ) : null}
+                  <header className="hosting-plans__header">
+                    <p className="hosting-plans__price">
+                      <span className="hosting-plans__currency">USD</span>
+                      <span className="hosting-plans__amount">{plan.amount}</span>
+                      <span className="hosting-plans__period">{plan.period}</span>
+                    </p>
+                    <h3 className="hosting-plans__name">{plan.name}</h3>
+                    {plan.setupFee ? (
+                      <p className="hosting-plans__setup">{plan.setupFee}</p>
+                    ) : null}
+                  </header>
+                  <div className="hosting-plans__body">
+                    {plan.features ? (
+                      <ul className="hosting-plans__list">
+                        {plan.features.map((feature) => (
+                          <li key={feature}>{feature}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <dl className="hosting-plans__specs">
+                        {plan.specs.map((spec) => (
+                          <div key={spec.label} className="hosting-plans__spec">
+                            <dt>{spec.label}</dt>
+                            <dd>{spec.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
+                  </div>
+                  <a className="hosting-plans__btn" href={contactHref}>
+                    Order Now
+                  </a>
                 </article>
               ))}
             </div>
@@ -593,6 +855,15 @@ export default function HostingTemplate({ data }) {
       } else {
         order = [...order, "hosting_tools"];
       }
+    }
+
+    if (!order.includes("hosting_plans")) {
+      const toolsIndex = order.indexOf("hosting_tools");
+      order = [
+        ...order.slice(0, toolsIndex + 1),
+        "hosting_plans",
+        ...order.slice(toolsIndex + 1),
+      ];
     }
 
     return order

@@ -1,0 +1,348 @@
+/* ==========================================================================
+   Web Hosting: "Our UAE Web Hosting Solutions" section (/service/web-hosting/)
+   Loaded only for the web-hosting service template. Every selector is scoped
+   to .hosting-solutions so nothing here affects other pages or shared styles.
+   ========================================================================== */
+
+.hosting-solutions {
+  --hs-red: #e10000;
+  --hs-red-deep: #b80000;
+  --hs-ink: #0b0b0b;
+  --hs-body: #374151;
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 96px;
+  background: #fff;
+  isolation: isolate;
+}
+
+/* Subtle pink/red background gradients from the reference */
+.hosting-solutions::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -160px;
+  width: 620px;
+  height: 420px;
+  background: radial-gradient(
+    ellipse at 60% 40%,
+    rgba(225, 0, 0, 0.1),
+    rgba(225, 0, 0, 0) 68%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hosting-solutions::after {
+  content: "";
+  position: absolute;
+  left: -15%;
+  right: -15%;
+  bottom: -140px;
+  height: 320px;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(225, 0, 0, 0.07),
+    rgba(225, 0, 0, 0) 70%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ---------- Section header ---------- */
+
+.hosting-solutions__head {
+  margin: 0 0 44px;
+}
+
+.hosting-solutions__kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: fit-content;
+  margin: 0 0 16px;
+  color: var(--hs-red);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hosting-solutions__kicker::before,
+.hosting-solutions__kicker::after {
+  content: "";
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--hs-red);
+}
+
+.hosting-solutions__kicker::before {
+  width: 40px;
+}
+
+.hosting-solutions__kicker::after {
+  width: 28px;
+  opacity: 0.45;
+}
+
+/* shared/fonts.css forces h1-h6 to a !important heading weight, so the weight
+   is scoped and !important here to win for this section only. */
+.hosting-solutions .hosting-solutions__title {
+  margin: 0 0 14px;
+  color: var(--hs-ink);
+  font-size: clamp(28px, 3.1vw, 42px);
+  font-weight: 700 !important;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hosting-solutions__accent {
+   font-weight: 700 !important;
+  color: var(--hs-red);
+}
+
+.hosting-solutions__subtitle {
+  margin: 0;
+  color: var(--hs-body);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ---------- Card grid ---------- */
+
+.hosting-solutions__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.hosting-solutions__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 260px;
+  padding: 28px 28px 28px;
+  border: 1px solid rgba(15, 15, 15, 0.05);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 100% 100%, rgba(225, 0, 0, 0.07), rgba(225, 0, 0, 0) 55%),
+    #fff;
+  box-shadow:
+    0 10px 30px rgba(15, 15, 15, 0.07),
+    0 1px 2px rgba(15, 15, 15, 0.04);
+  overflow: hidden;
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.45s ease;
+}
+
+.hosting-solutions__card:hover,
+.hosting-solutions__card:focus-within {
+  transform: translateY(-8px);
+  box-shadow:
+    0 26px 50px rgba(225, 0, 0, 0.15),
+    0 8px 18px rgba(15, 15, 15, 0.08);
+}
+
+.hosting-solutions__top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 52px;
+}
+
+/* Red gradient icon container */
+.hosting-solutions__icon {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #ff2a2a 0%, #e10000 55%, #b80000 100%);
+  color: #fff;
+  font-size: 24px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 12px 24px rgba(225, 0, 0, 0.28);
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.4s ease;
+}
+
+.hosting-solutions__card:hover .hosting-solutions__icon {
+  transform: scale(1.08) rotate(-6deg);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 16px 30px rgba(225, 0, 0, 0.38);
+}
+
+/* Number badge, top-right */
+.hosting-solutions__num {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: #fde7e7;
+  color: var(--hs-red);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+/* shared/fonts.css forces h3 to a !important heading weight; override here only */
+.hosting-solutions .hosting-solutions__name {
+  margin: 0;
+  color: var(--hs-ink);
+  font-size: 20px;
+  font-weight: 700 !important;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.hosting-solutions__desc {
+  position: relative;
+  z-index: 1;
+  max-width: 58%;
+  margin: 18px 0 0;
+  color: var(--hs-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Illustration slot: bottom-right. Shows the card's icon until a real
+   illustration is added (see the report for the expected asset names). */
+.hosting-solutions__art {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fdeaea 60%, #f5c4c4 100%);
+  box-shadow: 0 16px 30px rgba(225, 0, 0, 0.14);
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.hosting-solutions__art i {
+  color: var(--hs-red);
+  font-size: 58px;
+  filter: drop-shadow(0 10px 12px rgba(225, 0, 0, 0.25));
+}
+
+.hosting-solutions__card:hover .hosting-solutions__art {
+  transform: scale(1.1) rotate(-4deg);
+}
+
+/* ---------- Entrance: scroll-driven, staggered per card ----------
+   Browsers without scroll-driven animations simply show the cards. */
+@supports (animation-timeline: view()) {
+  .hosting-solutions__card {
+    animation: hosting-solutions-in linear backwards;
+    animation-timeline: view();
+    animation-range:
+      entry calc(var(--hs-index) * 6%) entry calc(var(--hs-index) * 6% + 40%);
+  }
+}
+
+@keyframes hosting-solutions-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 44px, 0) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Tablet: two columns (640px and up) ---------- */
+
+@media (min-width: 640px) {
+  .hosting-solutions__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+/* ---------- Desktop: three columns (992px and up) ---------- */
+
+@media (min-width: 992px) {
+  .hosting-solutions {
+    padding: 84px 0 104px;
+  }
+
+  .hosting-solutions__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+  }
+}
+
+/* ---------- Mobile tuning ---------- */
+
+@media (max-width: 639px) {
+  .hosting-solutions {
+    padding: 52px 0 64px;
+  }
+
+  .hosting-solutions__kicker {
+    font-size: 13px;
+  }
+
+  .hosting-solutions__subtitle {
+    font-size: 16px;
+  }
+
+  .hosting-solutions__card {
+    min-height: 0;
+    padding: 22px 22px 0;
+  }
+
+  .hosting-solutions__icon {
+    width: 50px;
+    height: 50px;
+    font-size: 21px;
+  }
+
+  .hosting-solutions__name {
+    font-size: 20px;
+  }
+
+  .hosting-solutions__desc {
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
+  /* On phones the illustration sits below the text, bleeding off the corner */
+  .hosting-solutions__art {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    align-self: flex-end;
+    width: 104px;
+    height: 104px;
+    margin: 6px -6px 0 0;
+  }
+
+  .hosting-solutions__art i {
+    font-size: 46px;
+  }
+}
+
+/* ---------- Reduced motion: keep layout, drop movement ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hosting-solutions *,
+  .hosting-solutions *::before,
+  .hosting-solutions *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

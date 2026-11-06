@@ -1,0 +1,261 @@
+/* ==========================================================================
+   Web Hosting: "Benefits of Hosting Your Website with RedSpider" section
+   (/service/web-hosting/). Loaded only for the web-hosting service template.
+   Every selector is scoped to .hosting-benefits so nothing here affects
+   other pages, the intro or solutions sections, or shared styles.
+   ========================================================================== */
+
+.hosting-benefits {
+  --hb-red: #e10000;
+  --hb-red-deep: #b80000;
+  --hb-ink: #0b0b0b;
+  --hb-body: #4b5563;
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 88px;
+  background: #fff;
+  isolation: isolate;
+}
+
+
+/* ---------- Header ---------- */
+
+.hosting-benefits__head {
+  margin: 0 0 40px;
+}
+
+.hosting-benefits__kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: fit-content;
+  margin: 0 0 16px;
+  color: var(--hb-red);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hosting-benefits__kicker::after {
+  content: "";
+  display: block;
+  width: 128px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--hb-red);
+}
+
+/* shared/fonts.css forces h2 to a !important heading weight; override here only */
+.hosting-benefits .hosting-benefits__title {
+  margin: 0 0 14px;
+  color: var(--hb-ink);
+  font-size: clamp(28px, 3.1vw, 42px);
+  font-weight: 700 !important;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hosting-benefits__accent {
+  color: var(--hb-red);
+  font-weight: 700 !important;
+}
+
+.hosting-benefits__subtitle {
+  max-width: 46em;
+  margin: 0;
+  color: var(--hb-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* ---------- Benefits list: two columns ---------- */
+
+.hosting-benefits__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hosting-benefits__item {
+  min-width: 0;
+}
+
+.hosting-benefits__card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  height: 100%;
+  min-height: 64px;
+  padding: 10px 18px 10px 12px;
+  border: 1px solid rgba(225, 0, 0, 0.55);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(15, 15, 15, 0.04);
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Large light-pink number badge.
+   shared/fonts.css forces span weight with !important, so the badge weight is
+   scoped and !important here to win for this section only. */
+.hosting-benefits .hosting-benefits__num {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 84px;
+  height: 48px;
+  border-radius: 14px;
+  background: #fde7e7;
+  color: var(--hb-red);
+  font-size: 26px;
+  font-weight: 900 !important;
+  line-height: 1;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* Vertical red divider after the number */
+.hosting-benefits__divider {
+  flex: 0 0 auto;
+  width: 2px;
+  height: 36px;
+  border-radius: 2px;
+  background: var(--hb-red);
+  transform-origin: center;
+  transition: height 0.4s ease, background-color 0.4s ease;
+}
+
+/* shared/fonts.css forces h3 to a !important heading weight; override here only */
+.hosting-benefits .hosting-benefits__name {
+  margin: 0;
+  color: var(--hb-ink);
+  font-size: 20px;
+  font-weight: 700 !important;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Hover ---------- */
+
+.hosting-benefits__card:hover,
+.hosting-benefits__card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--hb-red);
+  box-shadow:
+    0 18px 36px rgba(225, 0, 0, 0.14),
+    0 4px 12px rgba(15, 15, 15, 0.06);
+}
+
+.hosting-benefits__card:hover .hosting-benefits__num {
+  transform: scale(1.06);
+  background-color: #fbd0d0;
+  box-shadow: 0 10px 20px rgba(225, 0, 0, 0.16);
+}
+
+.hosting-benefits__card:hover .hosting-benefits__divider {
+  height: 52px;
+  background-color: var(--hb-red-deep);
+}
+
+/* ---------- Entrance: scroll-driven, staggered per item ----------
+   Browsers without scroll-driven animations simply show the items. */
+@supports (animation-timeline: view()) {
+  .hosting-benefits__item {
+    animation: hosting-benefits-in linear backwards;
+    animation-timeline: view();
+    animation-range:
+      entry calc(var(--hb-index) * 5%) entry calc(var(--hb-index) * 5% + 40%);
+  }
+}
+
+@keyframes hosting-benefits-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 36px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Tablet: two columns (640px and up) ---------- */
+
+@media (min-width: 640px) {
+  .hosting-benefits__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 18px;
+  }
+}
+
+/* ---------- Desktop (992px and up) ---------- */
+
+@media (min-width: 992px) {
+  .hosting-benefits {
+    padding: 84px 0 104px;
+  }
+
+  .hosting-benefits__list {
+    gap: 14px 22px;
+  }
+}
+
+/* ---------- Mobile tuning ---------- */
+
+@media (max-width: 639px) {
+  .hosting-benefits {
+    padding: 52px 0 64px;
+  }
+
+  .hosting-benefits__kicker {
+    font-size: 13px;
+  }
+
+  .hosting-benefits__kicker::after {
+    width: 72px;
+  }
+
+  .hosting-benefits__subtitle {
+    font-size: 16px;
+  }
+
+  .hosting-benefits__card {
+    gap: 12px;
+    padding: 8px 12px 8px 10px;
+  }
+
+  .hosting-benefits__num {
+    width: 64px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .hosting-benefits__divider {
+    height: 28px;
+  }
+
+  .hosting-benefits .hosting-benefits__name {
+    font-size: 17px;
+  }
+}
+
+/* ---------- Reduced motion: keep layout, drop movement ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hosting-benefits *,
+  .hosting-benefits *::before,
+  .hosting-benefits *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

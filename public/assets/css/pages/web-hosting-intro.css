@@ -1,0 +1,438 @@
+/* ==========================================================================
+   Web Hosting: first section after the hero (/service/web-hosting/)
+   Loaded only for the web-hosting service template. Every selector is
+   scoped to .hosting-intro so nothing here affects other pages.
+   ========================================================================== */
+
+.hosting-intro {
+  --hosting-intro-red: #e10000;
+  --hosting-intro-red-deep: #b80000;
+  --hosting-intro-ink: #0b0b0b;
+  --hosting-intro-body: #374151;
+  position: relative;
+  overflow: hidden;
+  padding: 56px 0 64px;
+  background: #fff;
+  isolation: isolate;
+}
+
+/* Soft decorative wash in the bottom-left corner (reference background) */
+.hosting-intro::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -120px;
+  height: 260px;
+  background: radial-gradient(
+    ellipse at 30% 100%,
+    rgba(225, 0, 0, 0.09),
+    rgba(225, 0, 0, 0) 70%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hosting-intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 36px;
+  align-items: center;
+}
+
+/* ---------- Left column: copy ---------- */
+
+.hosting-intro__copy {
+  min-width: 0;
+}
+
+.hosting-intro__copy > * {
+  animation: hosting-intro-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hosting-intro__copy > :nth-child(1) { animation-delay: 0.05s; }
+.hosting-intro__copy > :nth-child(2) { animation-delay: 0.15s; }
+.hosting-intro__copy > :nth-child(3) { animation-delay: 0.25s; }
+.hosting-intro__copy > :nth-child(4) { animation-delay: 0.35s; }
+.hosting-intro__copy > :nth-child(5) { animation-delay: 0.45s; }
+
+.hosting-intro__kicker {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 18px;
+  color: var(--hosting-intro-red);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hosting-intro__kicker::after {
+  content: "";
+  display: block;
+  width: 96px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--hosting-intro-red);
+  transform-origin: left center;
+  animation: hosting-intro-line 1s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* shared/fonts.css forces h1-h6 to a !important heading weight (500), so the
+   weight here is scoped and !important to win for this section only. */
+.hosting-intro .hosting-intro__title {
+  margin: 0 0 24px;
+  color: var(--hosting-intro-ink);
+  font-size: clamp(26px, 2.5vw, 34px);
+  font-weight: 700 !important;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hosting-intro__accent {
+  font-weight: 700 !important;
+  position: relative;
+  display: inline-block;
+  color: var(--hosting-intro-red);
+  white-space: nowrap;
+}
+
+.hosting-intro__accent-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.14em;
+  width: 100%;
+  height: 0.28em;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hosting-intro__accent-line path {
+  fill: none;
+  stroke: var(--hosting-intro-red);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: hosting-intro-draw 1.2s 0.9s ease-out forwards;
+}
+
+.hosting-intro__lead {
+  margin: 0 0 22px;
+  color: var(--hosting-intro-body);
+  font-size: 18px;
+  line-height: 1.65;
+  max-width: 40em;
+}
+
+.hosting-intro__support {
+  position: relative;
+  margin: 0 0 32px;
+  padding: 4px 0 4px 20px;
+  color: #4b5563;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 36em;
+}
+
+.hosting-intro__support::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--hosting-intro-red);
+}
+
+.hosting-intro__cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 30px;
+  border-radius: 12px;
+  background: var(--hosting-intro-red);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 10px 24px rgba(225, 0, 0, 0.28);
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background-color 0.35s ease;
+}
+
+/* Light sheen that sweeps across the button on hover */
+.hosting-intro__cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0)
+  );
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+}
+
+.hosting-intro__cta:hover,
+.hosting-intro__cta:focus-visible {
+  color: #fff;
+  background: var(--hosting-intro-red-deep);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(225, 0, 0, 0.36);
+}
+
+.hosting-intro__cta:hover::after,
+.hosting-intro__cta:focus-visible::after {
+  left: 125%;
+}
+
+.hosting-intro__cta i {
+  display: inline-block;
+  transition: transform 0.35s ease;
+}
+
+.hosting-intro__cta:hover i {
+  transform: translate(3px, -3px);
+}
+
+.hosting-intro__cta:focus-visible {
+  outline: 3px solid rgba(225, 0, 0, 0.35);
+  outline-offset: 4px;
+}
+
+/* ---------- Right column: 3D visual ---------- */
+
+.hosting-intro__visual {
+  position: relative;
+  min-width: 0;
+  animation: hosting-intro-visual-in 1.1s 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Soft red glow behind the server stack */
+.hosting-intro__visual::before {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 18%;
+  bottom: 12%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(225, 0, 0, 0.16),
+    rgba(225, 0, 0, 0) 68%
+  );
+  animation: hosting-intro-glow 5s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Floating wrapper: separate from the hover target below so the two
+   transforms never fight each other */
+.hosting-intro__float {
+  animation: hosting-intro-float 6s ease-in-out 1.3s infinite;
+  will-change: transform;
+}
+
+.hosting-intro__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 18px 28px rgba(15, 15, 15, 0.12));
+  transform-origin: 50% 80%;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.6s ease;
+}
+
+.hosting-intro__visual:hover .hosting-intro__img {
+  transform: scale(1.03);
+  filter: drop-shadow(0 28px 40px rgba(225, 0, 0, 0.18));
+}
+
+/* Small decorative dots that drift slowly around the visual */
+.hosting-intro__dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--hosting-intro-red);
+  opacity: 0.55;
+  animation: hosting-intro-dot 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hosting-intro__dot--a { top: 8%; left: 4%; }
+.hosting-intro__dot--b { top: 46%; right: 2%; width: 7px; height: 7px; animation-delay: -2s; }
+.hosting-intro__dot--c { bottom: 14%; left: 22%; width: 6px; height: 6px; animation-delay: -4s; }
+
+/* ---------- Keyframes ---------- */
+
+@keyframes hosting-intro-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hosting-intro-visual-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hosting-intro-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes hosting-intro-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes hosting-intro-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hosting-intro-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes hosting-intro-dot {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(6px, -8px, 0);
+  }
+}
+
+/* ---------- Tablet (640px and up) ---------- */
+
+@media (min-width: 640px) {
+  .hosting-intro {
+    padding: 68px 0 76px;
+  }
+
+  .hosting-intro__visual {
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* ---------- Desktop two-column layout (900px and up) ---------- */
+
+@media (min-width: 900px) {
+  .hosting-intro {
+    padding: 84px 0 96px;
+  }
+
+  .hosting-intro__grid {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    gap: 48px;
+  }
+
+  .hosting-intro__visual {
+    max-width: none;
+    margin: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hosting-intro__grid {
+    gap: 72px;
+  }
+}
+
+/* ---------- Mobile tuning ---------- */
+
+@media (max-width: 639px) {
+  .hosting-intro__kicker {
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .hosting-intro__kicker::after {
+    width: 64px;
+  }
+
+  .hosting-intro__lead {
+    font-size: 16px;
+  }
+
+  .hosting-intro__support {
+    font-size: 15px;
+  }
+
+  .hosting-intro__cta {
+    width: 100%;
+    justify-content: center;
+    font-size: 17px;
+    padding: 16px 22px;
+  }
+
+  .hosting-intro__visual {
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hosting-intro__dot {
+    display: none;
+  }
+}
+
+/* ---------- Reduced motion: keep layout, drop movement ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hosting-intro *,
+  .hosting-intro *::before,
+  .hosting-intro *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .hosting-intro__accent-line path {
+    stroke-dashoffset: 0;
+  }
+}

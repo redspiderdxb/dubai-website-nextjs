@@ -1,0 +1,475 @@
+/* ==========================================================================
+   Web Hosting: "Choose the Right Hosting Plan" section (/service/web-hosting/).
+   Loaded only for the web-hosting service template. Every selector is scoped
+   to .hosting-plans so nothing here affects other pages or earlier sections.
+   ========================================================================== */
+
+.hosting-plans {
+  --hp-red: #e10000;
+  --hp-red-deep: #b80000;
+  --hp-green: #13733f;
+  --hp-green-deep: #0c5a30;
+  --hp-ink: #0b0b0b;
+  --hp-body: #374151;
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 88px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(225, 0, 0, 0.05), rgba(225, 0, 0, 0) 55%),
+    #ffffff;
+  isolation: isolate;
+}
+
+/* ---------- Header ---------- */
+
+.hosting-plans__head {
+  margin: 0 0 44px;
+  text-align: center;
+}
+
+/* shared/fonts.css forces <p> weight with !important; override for this section */
+.hosting-plans .hosting-plans__kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 0 16px;
+  color: var(--hp-red);
+  font-size: 15px;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hosting-plans__kicker::before,
+.hosting-plans__kicker::after {
+  content: "";
+  display: block;
+  width: 88px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--hp-red);
+}
+
+/* shared/fonts.css forces h1-h6 to a !important weight; override for this section */
+.hosting-plans .hosting-plans__title {
+  margin: 0 auto 16px;
+  max-width: 22em;
+  color: var(--hp-ink);
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 700 !important;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hosting-plans__accent {
+   font-weight: 700 !important;
+  color: var(--hp-red);
+}
+
+.hosting-plans .hosting-plans__subtitle {
+  max-width: 44em;
+  margin: 0 auto;
+  color: var(--hp-body);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ---------- Pricing grid ---------- */
+
+.hosting-plans__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+.hosting-plans__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 15, 15, 0.08);
+  box-shadow:
+    0 16px 36px rgba(15, 15, 15, 0.1),
+    0 2px 6px rgba(15, 15, 15, 0.05);
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+/* Floating "Most Popular" badge (middle card) */
+.hosting-plans .hosting-plans__badge {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  z-index: 2;
+  padding: 9px 24px;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff2a2a, #d00000);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700 !important;
+  line-height: 1;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  box-shadow: 0 10px 22px rgba(225, 0, 0, 0.35);
+}
+
+/* Plan header: green or red band */
+.hosting-plans__header {
+  padding: 22px 24px 20px;
+  border-radius: 20px 20px 0 0;
+  color: #ffffff;
+}
+
+.hosting-plans__card--green .hosting-plans__header {
+  background: linear-gradient(135deg, #1a8a4f 0%, #13733f 55%, #0c5a30 100%);
+}
+
+.hosting-plans__card--red .hosting-plans__header {
+  background: linear-gradient(135deg, #ff1f1f 0%, #e10000 55%, #b80000 100%);
+}
+
+/* shared/fonts.css forces <p> weight with !important; override for this section */
+.hosting-plans .hosting-plans__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  color: #ffffff;
+  font-weight: 600 !important;
+}
+
+.hosting-plans__currency {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.hosting-plans .hosting-plans__amount {
+  font-size: 36px;
+  font-weight: 900 !important;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hosting-plans__period {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* shared/fonts.css forces h3 to a !important weight; override for this section */
+.hosting-plans .hosting-plans__name {
+  margin: 6px 0 0;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 800 !important;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.hosting-plans .hosting-plans__setup {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+  font-weight: 500 !important;
+}
+
+/* ---------- Card body ---------- */
+
+/* The body fills the card height; its feature list shares that height evenly,
+   so a card with fewer rows (the middle plan) spreads its rows out instead of
+   leaving an empty gap above the button. */
+.hosting-plans__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 8px 24px 0;
+}
+
+.hosting-plans__list {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hosting-plans__list li {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  min-height: 35px;
+  padding: 4px 0;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1f2937;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.hosting-plans__list li:last-child {
+  border-bottom: 0;
+}
+
+.hosting-plans__specs {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.hosting-plans__spec {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 35px;
+  padding: 4px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hosting-plans__spec:last-child {
+  border-bottom: 0;
+}
+
+.hosting-plans__spec dt {
+  margin: 0;
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.hosting-plans__spec dd {
+  margin: 0;
+  color: var(--hp-ink);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ---------- Order Now button ---------- */
+
+.hosting-plans .hosting-plans__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  margin: 14px 24px 22px;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700 !important;
+  text-decoration: none;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.hosting-plans__card--green .hosting-plans__btn {
+  background: var(--hp-green);
+  box-shadow: 0 10px 22px rgba(19, 115, 63, 0.28);
+}
+
+.hosting-plans__card--red .hosting-plans__btn {
+  background: var(--hp-red);
+  box-shadow: 0 10px 22px rgba(225, 0, 0, 0.3);
+}
+
+.hosting-plans__btn:hover,
+.hosting-plans__btn:focus-visible {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.hosting-plans__card--green .hosting-plans__btn:hover,
+.hosting-plans__card--green .hosting-plans__btn:focus-visible {
+  background: var(--hp-green-deep);
+  box-shadow: 0 16px 30px rgba(19, 115, 63, 0.38);
+}
+
+.hosting-plans__card--red .hosting-plans__btn:hover,
+.hosting-plans__card--red .hosting-plans__btn:focus-visible {
+  background: var(--hp-red-deep);
+  box-shadow: 0 16px 30px rgba(225, 0, 0, 0.42);
+}
+
+.hosting-plans__btn:focus-visible {
+  outline: 3px solid rgba(225, 0, 0, 0.35);
+  outline-offset: 3px;
+}
+
+/* ---------- Featured (middle) card: elevated with a glow ---------- */
+
+.hosting-plans__card--featured {
+  top: -12px;
+  border: 1px solid var(--hp-red);
+  box-shadow:
+    0 26px 52px rgba(225, 0, 0, 0.22),
+    0 0 0 6px rgba(225, 0, 0, 0.06);
+}
+
+/* Pulsing red glow on its own layer, so the card's hover shadow still applies */
+.hosting-plans__card--featured::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  z-index: -1;
+  border-radius: 28px;
+  pointer-events: none;
+  animation: hosting-plans-glow 3.6s ease-in-out infinite;
+}
+
+@keyframes hosting-plans-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 22px 6px rgba(225, 0, 0, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 34px 12px rgba(225, 0, 0, 0.3);
+  }
+}
+
+/* ---------- Hover ---------- */
+
+.hosting-plans__card:hover,
+.hosting-plans__card:focus-within {
+  transform: translateY(-8px);
+  box-shadow:
+    0 28px 56px rgba(15, 15, 15, 0.18),
+    0 4px 12px rgba(15, 15, 15, 0.08);
+}
+
+.hosting-plans__card--featured:hover,
+.hosting-plans__card--featured:focus-within {
+  transform: translateY(-6px);
+  box-shadow:
+    0 34px 66px rgba(225, 0, 0, 0.32),
+    0 0 0 8px rgba(225, 0, 0, 0.1);
+}
+
+/* ---------- Entrance: scroll-driven, staggered per card ----------
+   Browsers without scroll-driven animations simply show the cards. */
+@supports (animation-timeline: view()) {
+  .hosting-plans__card {
+    animation: hosting-plans-in linear backwards;
+    animation-timeline: view();
+    animation-range:
+      entry calc(var(--hp-index) * 8%) entry calc(var(--hp-index) * 8% + 40%);
+  }
+}
+
+@keyframes hosting-plans-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 44px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Tablet (640px and up): two columns, third card centred below ---------- */
+
+@media (min-width: 640px) {
+  .hosting-plans__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  .hosting-plans__card {
+    flex: 0 0 calc((100% - 28px) / 2);
+    height: auto;
+    max-width: 520px;
+  }
+}
+
+/* ---------- Desktop (1024px and up): three cards in one row ---------- */
+
+@media (min-width: 1024px) {
+  .hosting-plans {
+    padding: 84px 0 104px;
+  }
+
+  .hosting-plans__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .hosting-plans__card {
+    flex: none;
+    max-width: none;
+  }
+}
+
+/* ---------- Mobile tuning (639px and below) ---------- */
+
+@media (max-width: 639px) {
+  .hosting-plans {
+    padding: 52px 0 64px;
+  }
+
+  .hosting-plans .hosting-plans__kicker {
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .hosting-plans__kicker::before,
+  .hosting-plans__kicker::after {
+    width: 48px;
+  }
+
+  .hosting-plans .hosting-plans__subtitle {
+    font-size: 16px;
+  }
+
+  .hosting-plans__header {
+    padding: 20px 20px 18px;
+  }
+
+  .hosting-plans .hosting-plans__amount {
+    font-size: 30px;
+  }
+
+  .hosting-plans .hosting-plans__name {
+    font-size: 22px;
+  }
+
+  .hosting-plans__body {
+    padding: 8px 20px 0;
+  }
+
+  .hosting-plans .hosting-plans__btn {
+    margin: 14px 20px 20px;
+  }
+
+  .hosting-plans__card--featured {
+    top: 0;
+  }
+}
+
+/* ---------- Reduced motion: keep layout, drop movement and glow ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hosting-plans *,
+  .hosting-plans *::before,
+  .hosting-plans *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
