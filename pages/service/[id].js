@@ -204,7 +204,12 @@ export default function ServiceDetail({ service }) {
                     "/assets/css/pages/web-hosting-domains.css?v=1",
                     "/assets/css/pages/web-hosting-plans.css?v=4",
                   ]
-                : "/assets/css/pages/service.css"
+                : service.template === "mobile-app"
+                  ? [
+                      "/assets/css/pages/service.css",
+                      "/assets/css/pages/mobile-app-development.css?v=10",
+                    ]
+                  : "/assets/css/pages/service.css"
         }
       />
       <SEO

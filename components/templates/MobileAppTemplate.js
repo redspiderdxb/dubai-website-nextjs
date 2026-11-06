@@ -19,6 +19,68 @@ const PLATFORM_ICONS = [
   "bi-window",
 ];
 
+const INDUSTRY_ICONS = [
+  "bi-bag-check",
+  "bi-truck",
+  "bi-heart-pulse",
+  "bi-mortarboard",
+  "bi-buildings",
+  "bi-briefcase",
+];
+
+// Uses the CMS Bootstrap icon when the item has one, otherwise the fallback list.
+const iconFor = (item, fallback, index) =>
+  typeof item?.icon === "string" && item.icon.startsWith("bi-")
+    ? item.icon
+    : fallback[index % fallback.length];
+
+// Benefit icons are picked by card heading keywords, falling back to card order.
+const BENEFIT_ICON_RULES = [
+  { match: /team|people|experience/i, icon: "bi-people" },
+  { match: /scal|growth|approach/i, icon: "bi-graph-up-arrow" },
+  { match: /secur|reliab/i, icon: "bi-shield-check" },
+  { match: /support|technical/i, icon: "bi-headset" },
+];
+
+const benefitIcon = (item, index) => {
+  const title = String(item?.title || "");
+  const rule = BENEFIT_ICON_RULES.find((r) => r.match.test(title));
+  return (rule || BENEFIT_ICON_RULES[index % BENEFIT_ICON_RULES.length]).icon;
+};
+
+// Process icons: matched by step heading keywords, falling back to step order.
+const PROCESS_ICON_RULES = [
+  { match: /requirement|analysis/i, icon: "bi-search" },
+  { match: /\bui\b|ux|design/i, icon: "bi-window-stack" },
+  { match: /develop|build|engineer/i, icon: "bi-code-slash" },
+  { match: /test|quality|qa/i, icon: "bi-laptop" },
+  { match: /deploy|launch|release/i, icon: "bi-rocket-takeoff" },
+];
+
+const processIcon = (item, index) => {
+  const title = String(item?.title || "");
+  const rule = PROCESS_ICON_RULES.find((r) => r.match.test(title));
+  return (rule || PROCESS_ICON_RULES[index % PROCESS_ICON_RULES.length]).icon;
+};
+
+const stepNumber = (index) => String(index + 1).padStart(2, "0");
+
+// Highlights the first match of `accent` in red; returns the plain text otherwise.
+const withAccent = (text, accent, ignoreCase = false) => {
+  const value = String(text || "");
+  const haystack = ignoreCase ? value.toLowerCase() : value;
+  const needle = ignoreCase ? String(accent || "").toLowerCase() : accent;
+  const at = accent ? haystack.indexOf(needle) : -1;
+  if (at === -1) return value;
+  return (
+    <>
+      {value.slice(0, at)}
+      <span className="mad-accent">{value.slice(at, at + accent.length)}</span>
+      {value.slice(at + accent.length)}
+    </>
+  );
+};
+
 export default function MobileAppTemplate({ data }) {
   if (!data) {
     return <div className="text-center py-5">Loading...</div>;
@@ -27,6 +89,7 @@ export default function MobileAppTemplate({ data }) {
   const {
     intro_small_heading = "Mobile App Development · Dubai",
     intro_description = "Mobile applications have become an essential part of modern business strategies. Companies across Dubai are using mobile apps to improve customer engagement, streamline operations, and provide convenient digital services to their users.",
+    intro_main_heading,
     cta_button_text,
     cta_button_link,
     features = [],
@@ -235,23 +298,65 @@ export default function MobileAppTemplate({ data }) {
     },
     intro: {
       component: (
-        <section key="intro" className="rs-creative-intro">
+        <section key="intro" className="mad-intro">
           <div className="container">
-            <div className="rs-creative-intro__grid">
-              <div className="rs-creative-intro__meta">
-                <span className="rs-creative-kicker">{intro_small_heading}</span>
-                <p className="rs-creative-intro__note">Apps for business</p>
-              </div>
-              <div className="rs-creative-intro__copy">
-                <p className="rs-creative-intro__lead">{intro_description}</p>
-                <p className="rs-creative-intro__support">
+            <div className="mad-intro__grid">
+              <div className="mad-intro__copy">
+                <p className="mad-kicker">{intro_small_heading}</p>
+                {intro_main_heading ? (
+                  <h2 className="mad-title mad-intro__title">
+                    {withAccent(intro_main_heading, "Mobile App Development")}
+                  </h2>
+                ) : null}
+                <p className="mad-intro__lead">{intro_description}</p>
+                <p className="mad-intro__support">
                   We design and develop Android, iOS and cross-platform apps
                   that help customers book, buy, track and stay connected.
                 </p>
-                <a className="rs-creative-link" href="#mobile-app-services">
+                <a className="mad-intro__cta" href="#mobile-app-services">
                   Explore app services
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
                 </a>
+              </div>
+              <div className="mad-intro__visual" aria-hidden="true">
+                <div className="mad-phone">
+                  <span className="mad-phone__notch"></span>
+                  <div className="mad-phone__screen">
+                    <span className="mad-phone__hero"></span>
+                    <span className="mad-phone__tiles">
+                      <span className="mad-phone__tile">
+                        <i className="bi bi-calendar-check"></i>
+                      </span>
+                      <span className="mad-phone__tile">
+                        <i className="bi bi-bag-check"></i>
+                      </span>
+                      <span className="mad-phone__tile">
+                        <i className="bi bi-geo-alt"></i>
+                      </span>
+                    </span>
+                    <span className="mad-phone__row">
+                      <span className="mad-phone__line"></span>
+                      <span className="mad-phone__line mad-phone__line--short"></span>
+                    </span>
+                    <span className="mad-phone__row">
+                      <span className="mad-phone__line"></span>
+                      <span className="mad-phone__line mad-phone__line--short"></span>
+                    </span>
+                    <span className="mad-phone__tabbar"></span>
+                  </div>
+                </div>
+                <span className="mad-intro__chip mad-intro__chip--a">
+                  <i className="bi bi-android2"></i>
+                  Android
+                </span>
+                <span className="mad-intro__chip mad-intro__chip--b">
+                  <i className="bi bi-apple"></i>
+                  iOS
+                </span>
+                <span className="mad-intro__chip mad-intro__chip--c">
+                  <i className="bi bi-lightning-charge"></i>
+                  Apps for business
+                </span>
               </div>
             </div>
           </div>
@@ -264,32 +369,35 @@ export default function MobileAppTemplate({ data }) {
         <section
           key="features"
           id="mobile-app-services"
-          className="rs-creative-services"
+          className="mad-services"
         >
           <div className="container">
-            <div className="rs-creative-head">
-              <span className="rs-creative-kicker">What we build</span>
-              <h2>{features_title}</h2>
-              <p>{features_subtitle}</p>
-            </div>
-            <div className="rs-creative-card-grid">
+            <header className="mad-head mad-head--split">
+              <div>
+                <p className="mad-kicker">What we build</p>
+                <h2 className="mad-title">{features_title}</h2>
+              </div>
+              {features_subtitle ? (
+                <p className="mad-subtitle">{features_subtitle}</p>
+              ) : null}
+            </header>
+            <div className="mad-services__grid">
               {servicesData.map((item, index) => (
                 <article
                   key={`${item.id || item.title}-${index}`}
-                  className="rs-creative-card"
+                  className={`mad-service${index === 0 ? " mad-service--featured" : ""}`}
+                  style={{ "--mad-i": index }}
                 >
-                  <div className="rs-creative-card__top">
-                    <span className="rs-creative-card__icon" aria-hidden="true">
-                      <i
-                        className={`bi ${SERVICE_ICONS[index % SERVICE_ICONS.length]}`}
-                      ></i>
+                  <div className="mad-service__top">
+                    <span className="mad-service__icon" aria-hidden="true">
+                      <i className={`bi ${iconFor(item, SERVICE_ICONS, index)}`}></i>
                     </span>
-                    <span className="rs-creative-card__num">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
+                    <span className="mad-service__num">{stepNumber(index)}</span>
                   </div>
-                  <h3>{item.title || item.name}</h3>
-                  {item.description ? <p>{item.description}</p> : null}
+                  <h3 className="mad-service__name">{item.title || item.name}</h3>
+                  {item.description ? (
+                    <p className="mad-service__desc">{item.description}</p>
+                  ) : null}
                 </article>
               ))}
             </div>
@@ -300,31 +408,31 @@ export default function MobileAppTemplate({ data }) {
     },
     technologies: {
       component: (
-        <section key="technologies" className="rs-creative-platforms">
+        <section key="technologies" className="mad-platforms">
           <div className="container">
-            <div className="rs-creative-head">
-              <span className="rs-creative-kicker">Platforms</span>
-              <h2>{technologies_title}</h2>
-              <p>{technologies_subtitle}</p>
-            </div>
-            <div className="rs-creative-card-grid">
+            <header className="mad-head mad-head--center">
+              <p className="mad-kicker">Platforms</p>
+              <h2 className="mad-title">{technologies_title}</h2>
+              {technologies_subtitle ? (
+                <p className="mad-subtitle">{technologies_subtitle}</p>
+              ) : null}
+            </header>
+            <div className="mad-platforms__grid">
               {platformsData.map((item, index) => (
                 <article
                   key={`${item.id || item.name}-${index}`}
-                  className="rs-creative-card"
+                  className="mad-platform"
+                  style={{ "--mad-i": index }}
                 >
-                  <div className="rs-creative-card__top">
-                    <span className="rs-creative-card__icon" aria-hidden="true">
-                      <i
-                        className={`bi ${PLATFORM_ICONS[index % PLATFORM_ICONS.length]}`}
-                      ></i>
-                    </span>
-                    <span className="rs-creative-card__num">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3>{item.name || item.title}</h3>
-                  {item.description ? <p>{item.description}</p> : null}
+                  <span className="mad-platform__num">{stepNumber(index)}</span>
+                  <span className="mad-platform__art" aria-hidden="true">
+                    <span className="mad-platform__ring"></span>
+                    <i className={`bi ${iconFor(item, PLATFORM_ICONS, index)}`}></i>
+                  </span>
+                  <h3 className="mad-platform__name">{item.name || item.title}</h3>
+                  {item.description ? (
+                    <p className="mad-platform__desc">{item.description}</p>
+                  ) : null}
                 </article>
               ))}
             </div>
@@ -335,32 +443,34 @@ export default function MobileAppTemplate({ data }) {
     },
     benefits: {
       component: (
-        <section key="benefits" className="rs-creative-why">
+        <section key="benefits" className="mad-why">
           <div className="container">
-            <div className="rs-creative-why__layout">
-              <div className="rs-creative-why__intro">
-                <span className="rs-creative-kicker">Why RedSpider</span>
-                <h2>{benefits_title}</h2>
-                <p>{benefits_subtitle}</p>
-                {/* <a className="rs-creative-btn" href={contactHref}>
-                  {cta_button_text || "Book a call"}
-                  <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a> */}
-              </div>
-              <div className="rs-creative-why__grid mt-5">
-                {whyChooseUs.map((item, index) => (
-                  <article
-                    key={`${item.id || item.title}-${index}`}
-                    className="rs-creative-why__card"
-                  >
-                    <span className="rs-creative-why__icon" aria-hidden="true">
-                      <i className="bi bi-check2-circle"></i>
-                    </span>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </article>
-                ))}
-              </div>
+            <header className="mad-why__head">
+              <p className="mad-why__eyebrow">Why RedSpider</p>
+              <h2 className="mad-title mad-title--light mad-why__title">
+                {withAccent(benefits_title, "Choose Us")}
+              </h2>
+              {benefits_subtitle ? (
+                <p className="mad-why__subtitle">{benefits_subtitle}</p>
+              ) : null}
+            </header>
+            <div className="mad-why__grid">
+              {whyChooseUs.map((item, index) => (
+                <article
+                  key={`${item.id || item.title}-${index}`}
+                  className="mad-why__card"
+                  style={{ "--mad-i": index }}
+                >
+                  <span className="mad-why__num" aria-hidden="true">
+                    <i className={`bi ${benefitIcon(item, index)}`}></i>
+                  </span>
+                  <h3 className="mad-why__name">{item.title}</h3>
+                  <span className="mad-why__rule" aria-hidden="true"></span>
+                  {item.description ? (
+                    <p className="mad-why__desc">{item.description}</p>
+                  ) : null}
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -369,24 +479,40 @@ export default function MobileAppTemplate({ data }) {
     },
     processes: {
       component: (
-        <section key="processes" className="rs-creative-process">
+        <section key="processes" className="mad-process">
           <div className="container">
-            <div className="rs-creative-head rs-creative-head--light">
-              <span className="rs-creative-kicker">How we work</span>
-              <h2>{processes_title}</h2>
-              <p>{processes_subtitle}</p>
-            </div>
-            <ol className="rs-creative-steps">
+            <header className="mad-process__head">
+              <p className="mad-process__eyebrow">How we work</p>
+              <h2 className="mad-title mad-process__title">
+                {withAccent(processes_title, "Approach", true)}
+              </h2>
+              {processes_subtitle ? (
+                <p className="mad-process__subtitle">{processes_subtitle}</p>
+              ) : null}
+            </header>
+            <ol
+              className="mad-process__track"
+              style={{ "--mad-steps": processData.length }}
+            >
               {processData.map((process, index) => (
                 <li
                   key={`${process.id || process.title}-${index}`}
-                  className="rs-creative-step"
+                  className="mad-step"
+                  style={{ "--mad-i": index }}
                 >
-                  <span className="rs-creative-step__num">
-                    {String(index + 1).padStart(2, "0")}
+                  <span className="mad-step__node" aria-hidden="true">
+                    {stepNumber(index)}
                   </span>
-                  <h3>{process.title}</h3>
-                  <p>{process.description}</p>
+                  <div className="mad-step__card">
+                    <span className="mad-step__icon" aria-hidden="true">
+                      <i className={`bi ${processIcon(process, index)}`}></i>
+                    </span>
+                    <h3 className="mad-step__name">{process.title}</h3>
+                    <span className="mad-step__rule" aria-hidden="true"></span>
+                    {process.description ? (
+                      <p className="mad-step__desc">{process.description}</p>
+                    ) : null}
+                  </div>
                 </li>
               ))}
             </ol>
@@ -397,20 +523,26 @@ export default function MobileAppTemplate({ data }) {
     },
     industries: {
       component: (
-        <section key="industries" className="rs-creative-industries">
+        <section key="industries" className="mad-industries">
           <div className="container">
-            <div className="rs-creative-head">
-              <span className="rs-creative-kicker">Industries</span>
-              <h2>Apps we build for</h2>
-              <p>Mobile applications for businesses across Dubai and the UAE.</p>
-            </div>
-            <div className="rs-creative-industry-grid">
-              {industries.map((name) => (
-                <article key={name} className="rs-creative-industry">
-                  <span className="rs-creative-industry__icon" aria-hidden="true">
-                    <i className="bi bi-phone"></i>
+            <header className="mad-head mad-head--center">
+              <p className="mad-kicker">Industries</p>
+              <h2 className="mad-title">Apps we build for</h2>
+              <p className="mad-subtitle">
+                Mobile applications for businesses across Dubai and the UAE.
+              </p>
+            </header>
+            <div className="mad-industries__grid">
+              {industries.map((name, index) => (
+                <article
+                  key={name}
+                  className="mad-industry"
+                  style={{ "--mad-i": index }}
+                >
+                  <span className="mad-industry__icon" aria-hidden="true">
+                    <i className={`bi ${INDUSTRY_ICONS[index % INDUSTRY_ICONS.length]}`}></i>
                   </span>
-                  <h3>{name}</h3>
+                  <h3 className="mad-industry__name">{name}</h3>
                 </article>
               ))}
             </div>
