@@ -14,6 +14,99 @@ import ThemedSelect from "../ui/ThemedSelect";
 
 const FALLBACK_IMAGE = "/assets/img/portfolio/portfolio-1.webp";
 
+// Approved priority order for the Websites view (CMS gallery IDs).
+// Matched only by Number(project.id); never by name or URL.
+const PINNED_PORTFOLIO_IDS = [
+  224, // De Leeuw International
+  169, // Dome International
+  211, // DSQ Property Advisory
+  202, // Pixium Mobile Phones
+  165, // EDMAC Engineering Consultant
+  223, // Jewellery2
+  156, // Aime Le Noir
+  225, // Health & Wellness ME
+  226, // AA2
+  197, // Astronyx Aerospace
+  194, // Cityview Developments
+  195, // Kashwani Law Firm
+  193, // BSI UAE
+  8, // KASCO Developments
+  170, // Fogo de Chão
+  168, // Everbridge Shipping
+  183, // BOJ Middle East
+  182, // Makyee
+  177, // AWP
+  172, // FASSCO International
+  167, // ATS
+];
+
+// Project URL option hidden by CMS ID (the card, image and lightbox stay visible).
+// NOT_WORKING projects: link hidden; grouped third after the pinned 21.
+const NOT_WORKING_HIDDEN_IDS = new Set([
+  21, 24, 25, 26, 32, 39, 42, 46, 62, 64, 82, 92, 107, 116, 119, 120, 128, 130,
+  131, 137, 138, 141, 143, 146, 147, 148, 150, 151, 152, 155, 159, 160, 164, 166,
+  171, 175, 178, 189, 192,
+]);
+// Remaining MANUAL REVIEW projects: link hidden; grouped fourth.
+// Kept linked: intwo, EDMAC, Onda, all 8 Figma links, and CMS 226 (pinned).
+const MANUAL_HIDDEN_IDS = new Set([44, 45, 80, 127, 134, 162]);
+const HIDDEN_PROJECT_URL_IDS = new Set([
+  ...NOT_WORKING_HIDDEN_IDS,
+  ...MANUAL_HIDDEN_IDS,
+]);
+
+// Moves pinned projects to the top in the approved sequence.
+// Pinned IDs missing from the data are skipped (no empty cards).
+// All other projects keep their existing API order after them.
+function applyPinnedOrder(projects) {
+  const rankById = new Map(
+    PINNED_PORTFOLIO_IDS.map((id, index) => [id, index]),
+  );
+  const pinnedByRank = new Map();
+  const rest = [];
+
+  projects.forEach((project) => {
+    const rank = rankById.get(Number(project.id));
+
+    if (rank === undefined || pinnedByRank.has(rank)) {
+      rest.push(project);
+    } else {
+      pinnedByRank.set(rank, project);
+    }
+  });
+
+  const pinnedInOrder = [...pinnedByRank.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([, project]) => project);
+
+  // Groups after the pinned 21, each keeping API order:
+  // 1. working/approved URL, 2. no URL,
+  // 3. NOT_WORKING with link hidden, 4. remaining MANUAL with link hidden.
+  const hasUrl = (project) =>
+    String(project.project_url || "").trim() !== "" &&
+    String(project.project_url).trim() !== "#";
+
+  const workingOrApproved = rest.filter(
+    (project) =>
+      hasUrl(project) && !HIDDEN_PROJECT_URL_IDS.has(Number(project.id)),
+  );
+  const noUrl = rest.filter((project) => !hasUrl(project));
+  const notWorkingHidden = rest.filter((project) =>
+    NOT_WORKING_HIDDEN_IDS.has(Number(project.id)),
+  );
+  const manualHidden = rest.filter((project) =>
+    MANUAL_HIDDEN_IDS.has(Number(project.id)),
+  );
+
+  return [
+    ...pinnedInOrder,
+    ...workingOrApproved,
+    ...noUrl,
+    ...notWorkingHidden,
+    ...manualHidden,
+  ];
+}
+
 function getAssetUrl() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -592,7 +685,7 @@ export default function PortfolioGrid({
   const filteredProjectsBeforePagination = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
-    return allGalleries.filter((project) => {
+    const matchedProjects = allGalleries.filter((project) => {
       // Category
       const categoryMatch = matchesCategory(project, filter);
 
@@ -622,6 +715,13 @@ export default function PortfolioGrid({
 
       return true;
     });
+
+    // Websites view only (no industry filter): pinned projects first
+    if (filter === "filter-websites" && !industryFilter) {
+      return applyPinnedOrder(matchedProjects);
+    }
+
+    return matchedProjects;
   }, [allGalleries, filter, industryFilter, searchTerm]);
 
   // ============================================
@@ -893,6 +993,7 @@ export default function PortfolioGrid({
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project, index) => {
               const hasProjectLink =
+                !HIDDEN_PROJECT_URL_IDS.has(Number(project.id)) &&
                 String(project.project_url || "").trim() !== "" &&
                 String(project.project_url).trim() !== "#";
 
