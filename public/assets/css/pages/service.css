@@ -3484,38 +3484,13 @@
 
 .ecommerce-template .rs-ecom-intro__grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   align-items: center;
   gap: 40px;
 }
 
 .ecommerce-template .rs-ecom-intro__copy {
-  max-width: 640px;
-}
-
-.ecommerce-template .rs-ecom-intro__eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin: 0 0 14px;
-  color: #e10000;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.ecommerce-template .rs-ecom-intro__eyebrow::after {
-  content: "";
-  width: 130px;
-  height: 2px;
-  background: linear-gradient(90deg, #e10000, rgba(225, 0, 0, 0.35));
-}
-
-.ecommerce-template .rs-ecom-intro__subheading {
-  margin: 0 0 22px;
-  color: #4b5f7d;
-  font-size: 18px;
-  font-weight: 500;
+  max-width: none;
 }
 
 .ecommerce-template .rs-ecom-intro__heading {
@@ -3607,6 +3582,15 @@
   filter: drop-shadow(0 34px 44px rgba(210, 0, 0, 0.18));
 }
 
+/* Desktop: enlarge the illustration into the gutter, centred on its column, without reaching the text */
+@media (min-width: 992px) {
+  .ecommerce-template .rs-ecom-intro__visual img {
+    width: 112%;
+    max-width: none;
+    margin-left: -6%;
+  }
+}
+
 /* Scroll-linked reveal (browsers with scroll-driven animations); `translate` keeps hover transforms free */
 @supports (animation-timeline: view()) {
   .ecommerce-template .rs-ecom-intro__copy {
@@ -3689,14 +3673,6 @@
 @media (max-width: 639px) {
   .ecommerce-template .rs-ecom-intro {
     padding: 52px 0 60px;
-  }
-
-  .ecommerce-template .rs-ecom-intro__eyebrow {
-    font-size: 14px;
-  }
-
-  .ecommerce-template .rs-ecom-intro__eyebrow::after {
-    width: 72px;
   }
 
   .ecommerce-template .rs-ecom-intro__heading {
@@ -4618,13 +4594,6 @@
 
 .ecommerce-template .rs-ecom-portfolio__card:hover .rs-ecom-portfolio__preview {
   transform: scale(1.04);
-}
-
-/* Last two cards (REBELLE, FamilyMall): fill the same preview frame instead of letterboxing */
-.ecommerce-template .rs-ecom-portfolio__card:nth-child(5) .rs-ecom-portfolio__preview,
-.ecommerce-template .rs-ecom-portfolio__card:nth-child(6) .rs-ecom-portfolio__preview {
-  object-fit: cover;
-  object-position: center top;
 }
 
 /* Hover overlay: name left, URL and external-link icon right, same row */

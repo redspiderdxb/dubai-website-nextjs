@@ -158,43 +158,29 @@ const FIXED_PORTFOLIO_PROJECTS = [
     id: "fixed-zehi",
     title: "ZEHI",
     image: "/assets/img/ecommerce-portfolio/zehi.png",
-    fullImage: "/assets/img/ecommerce-portfolio/zehi-fullpage.png",
+    fullImage: "/assets/img/ecommerce-portfolio/zehi-fullpage-optimized.png",
     link: "https://jewellery2.rsworkspace.net/",
   },
   {
     id: "fixed-diamont-fzco",
     title: "DIAMONT FZCO",
     image: "/assets/img/ecommerce-portfolio/diamont-fzco.png",
-    fullImage: "/assets/img/ecommerce-portfolio/diamont-fzco-fullpage.png",
+    fullImage: "/assets/img/ecommerce-portfolio/diamont-fzco-fullpage-optimized.png",
     link: "https://jewellery.rsworkspace.net/",
   },
   {
     id: "fixed-health-wellness-me",
     title: "Health & Wellness ME",
     image: "/assets/img/ecommerce-portfolio/health-wellness-me.png",
-    fullImage: "/assets/img/ecommerce-portfolio/health-wellness-me-fullpage.png",
+    fullImage: "/assets/img/ecommerce-portfolio/health-wellness-me-fullpage-optimized.png",
     link: "http://hw.rsworkspace.net/",
   },
   {
     id: "fixed-boj-middle-east",
     title: "BOJ Middle East",
     image: "/assets/img/ecommerce-portfolio/boj-thumbnail.png",
-    fullImage: "/assets/img/ecommerce-portfolio/boj-fullpage.png",
+    fullImage: "/assets/img/ecommerce-portfolio/boj-fullpage-optimized.webp",
     link: "https://boj.rsworkspace.net/",
-  },
-  {
-    id: "fixed-rebelle",
-    title: "REBELLE - Buy Second Hand Fashion",
-    image: "/assets/img/ecommerce-portfolio/rebelle-static.png",
-    fullImage: "/assets/img/ecommerce-portfolio/rebelle-static.png",
-    link: "https://reb.rsworkspace.info/",
-  },
-  {
-    id: "fixed-familymall",
-    title: "FamilyMall - FemSecretBeauty",
-    image: "/assets/img/ecommerce-portfolio/familymall-static.png",
-    fullImage: "/assets/img/ecommerce-portfolio/familymall-static.png",
-    link: "https://www.familymall.pk/",
   },
 ];
 
@@ -467,7 +453,7 @@ export default function EcommerceTemplate({ data }) {
           <div className="container">
             <div className="rs-process-title-sec">
               <h1 className="rs-process-title mb-3">
-                Ecommerce Development
+                eCommerce Website Design Dubai
                 {hero_subtitle ? (
                   <span className="rs-process-highlight">
                     in Dubai
@@ -501,8 +487,6 @@ export default function EcommerceTemplate({ data }) {
           <div className="container">
             <div className="rs-ecom-intro__grid">
               <div className="rs-ecom-intro__copy">
-                <p className="rs-ecom-intro__eyebrow">ECOMMERCE DUBAI</p>
-                <p className="rs-ecom-intro__subheading">Stores that convert</p>
                 <h2 className="rs-ecom-intro__heading">
                   RedSpider provides professional ecommerce website development
                   in Dubai, creating secure, user-friendly online stores
