@@ -1,29 +1,372 @@
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import Link from "next/link";
 import ServiceCTA from "../services/ServiceCTA";
 import ServiceFaqs from "../services/ServiceFaqs";
 
-const SOLUTION_ICONS = [
-  "bi-cart-check",
-  "bi-shop",
-  "bi-wordpress",
-  "bi-box-seam",
-  "bi-code-slash",
-  "bi-diagram-3",
-  "bi-credit-card-2-front",
-  "bi-phone",
-  "bi-box2",
-  "bi-arrow-repeat",
-  "bi-tools",
+const ECOMMERCE_SOLUTIONS = [
+  {
+    title: "Custom Ecommerce Website Development",
+    description: "We build tailored ecommerce websites for your business goals.",
+    icon: "/assets/img/ecommerce-solutions/custom-website.svg",
+  },
+  {
+    title: "Shopify Store Development",
+    description: "Custom Shopify stores with theme and app integration.",
+    icon: "/assets/img/ecommerce-solutions/shopify-store.svg",
+  },
+  {
+    title: "WooCommerce Development",
+    description: "Flexible WooCommerce solutions with WordPress.",
+    icon: "/assets/img/ecommerce-solutions/woocommerce.svg",
+  },
+  {
+    title: "Magento Ecommerce Development",
+    description: "Scalable Magento solutions for growing brands.",
+    icon: "/assets/img/ecommerce-solutions/magento.svg",
+  },
+  {
+    title: "Laravel Ecommerce Development",
+    description: "Advanced Laravel ecommerce systems with custom functionality.",
+    icon: "/assets/img/ecommerce-solutions/laravel.svg",
+  },
+  {
+    title: "Multi-Vendor Marketplace Development",
+    description: "Marketplace platforms for multiple sellers.",
+    icon: "/assets/img/ecommerce-solutions/marketplace.svg",
+  },
+  {
+    title: "Secure Payment Gateway Integration",
+    description: "Safe and seamless online payment integration.",
+    icon: "/assets/img/ecommerce-solutions/payment.svg",
+  },
+  {
+    title: "Mobile-Responsive Ecommerce Design",
+    description: "Mobile-first ecommerce design for all devices.",
+    icon: "/assets/img/ecommerce-solutions/mobile.svg",
+  },
+  {
+    title: "Inventory & Order Management Systems",
+    description: "Efficient tools for inventory and order workflows.",
+    icon: "/assets/img/ecommerce-solutions/inventory.svg",
+  },
+  {
+    title: "Ecommerce Website Redesign & Migration",
+    description: "Upgrade and migrate existing ecommerce stores.",
+    icon: "/assets/img/ecommerce-solutions/redesign.svg",
+  },
+  {
+    title: "Routine Maintenance & Technical Support",
+    description: "Ongoing support and maintenance for ecommerce platforms.",
+    icon: "/assets/img/ecommerce-solutions/maintenance.svg",
+  },
 ];
 
-const PLATFORM_ICONS = [
-  "bi-bag-check",
-  "bi-wordpress",
-  "bi-boxes",
-  "bi-braces",
-  "bi-gear-wide-connected",
+const ECOMMERCE_PLATFORMS = [
+  {
+    title: "Shopify",
+    description:
+      "Secure online stores for startups and growing businesses, with simple product management tools.",
+    icon: "/assets/img/ecommerce-platforms/shopify.svg",
+  },
+  {
+    title: "WooCommerce",
+    description:
+      "Flexible WordPress ecommerce with plugins and tools for managing products, orders, and sales.",
+    icon: "/assets/img/ecommerce-platforms/woocommerce.svg",
+  },
+  {
+    title: "Magento",
+    description:
+      "Scalable ecommerce for large businesses needing advanced features, custom workflows, and future growth.",
+    icon: "/assets/img/ecommerce-platforms/magento.svg",
+  },
+  {
+    title: "Laravel Ecommerce",
+    description:
+      "Custom ecommerce solutions tailored to your business processes, integrations, performance, and operational requirements.",
+    icon: "/assets/img/ecommerce-platforms/laravel.svg",
+  },
+  {
+    title: "Custom Ecommerce Development",
+    description:
+      "Bespoke ecommerce development for unique business needs, specialist integrations, and custom operational workflows.",
+    icon: "/assets/img/ecommerce-platforms/custom-development.svg",
+  },
 ];
+
+const WHY_FEATURES = [
+  { title: "Responsive Design", icon: "/assets/img/ecommerce-features/responsive-design.svg" },
+  { title: "Secure Payment Integration", icon: "/assets/img/ecommerce-features/secure-payment.svg" },
+  { title: "Fast Loading Pages", icon: "/assets/img/ecommerce-features/fast-loading.svg" },
+  { title: "Easy Product Management", icon: "/assets/img/ecommerce-features/product-management.svg" },
+  { title: "Inventory Management", icon: "/assets/img/ecommerce-features/inventory.svg" },
+  { title: "Easy Shopping Cart", icon: "/assets/img/ecommerce-features/shopping-cart.svg" },
+  { title: "Customer Accounts", icon: "/assets/img/ecommerce-features/customer-accounts.svg" },
+  { title: "Product Search & Filtering", icon: "/assets/img/ecommerce-features/product-search.svg" },
+  { title: "SEO Friendly", icon: "/assets/img/ecommerce-features/seo-friendly.svg" },
+  { title: "Shipping & Tax Configurations", icon: "/assets/img/ecommerce-features/shipping-tax.svg" },
+  { title: "Admin Dashboard", icon: "/assets/img/ecommerce-features/admin-dashboard.svg" },
+];
+
+const PROCESS_STEPS = [
+  {
+    title: "Requirement Analysis",
+    description:
+      "We analyze your business goals, target audience, and ecommerce requirements to create a clear project roadmap.",
+    icon: "/assets/img/ecommerce-process/process-01-requirement-analysis.png",
+    width: 200,
+    height: 176,
+  },
+  {
+    title: "Platform Selection",
+    description:
+      "We help you choose the right ecommerce platform based on your product range, budget, and future plans.",
+    icon: "/assets/img/ecommerce-process/process-02-platform-selection.png",
+    width: 232,
+    height: 152,
+  },
+  {
+    title: "Design & Development",
+    description:
+      "We create visually appealing designs with a focus on user experience and conversion optimization.",
+    icon: "/assets/img/ecommerce-process/process-03-design-development.png",
+    width: 196,
+    height: 156,
+  },
+  {
+    title: "Testing & Quality Assurance",
+    description:
+      "We conduct extensive testing to ensure smooth functionality across all devices and browsers.",
+    icon: "/assets/img/ecommerce-process/process-04-testing-quality.png",
+    width: 212,
+    height: 164,
+  },
+  {
+    title: "Launch & Support",
+    description:
+      "We deploy your ecommerce store and provide ongoing technical support and maintenance.",
+    icon: "/assets/img/ecommerce-process/process-05-launch-support.png",
+    width: 240,
+    height: 178,
+  },
+];
+
+// Fixed static portfolio cards (all six). Names come from each site's own page title.
+const FIXED_PORTFOLIO_PROJECTS = [
+  {
+    id: "fixed-zehi",
+    title: "ZEHI",
+    image: "/assets/img/ecommerce-portfolio/zehi.png",
+    fullImage: "/assets/img/ecommerce-portfolio/zehi-fullpage.png",
+    link: "https://jewellery2.rsworkspace.net/",
+  },
+  {
+    id: "fixed-diamont-fzco",
+    title: "DIAMONT FZCO",
+    image: "/assets/img/ecommerce-portfolio/diamont-fzco.png",
+    fullImage: "/assets/img/ecommerce-portfolio/diamont-fzco-fullpage.png",
+    link: "https://jewellery.rsworkspace.net/",
+  },
+  {
+    id: "fixed-health-wellness-me",
+    title: "Health & Wellness ME",
+    image: "/assets/img/ecommerce-portfolio/health-wellness-me.png",
+    fullImage: "/assets/img/ecommerce-portfolio/health-wellness-me-fullpage.png",
+    link: "http://hw.rsworkspace.net/",
+  },
+  {
+    id: "fixed-boj-middle-east",
+    title: "BOJ Middle East",
+    image: "/assets/img/ecommerce-portfolio/boj-thumbnail.png",
+    fullImage: "/assets/img/ecommerce-portfolio/boj-fullpage.png",
+    link: "https://boj.rsworkspace.net/",
+  },
+  {
+    id: "fixed-rebelle",
+    title: "REBELLE - Buy Second Hand Fashion",
+    image: "/assets/img/ecommerce-portfolio/rebelle-static.png",
+    fullImage: "/assets/img/ecommerce-portfolio/rebelle-static.png",
+    link: "https://reb.rsworkspace.info/",
+  },
+  {
+    id: "fixed-familymall",
+    title: "FamilyMall - FemSecretBeauty",
+    image: "/assets/img/ecommerce-portfolio/familymall-static.png",
+    fullImage: "/assets/img/ecommerce-portfolio/familymall-static.png",
+    link: "https://www.familymall.pk/",
+  },
+];
+
+// Shows a project URL as its hostname, e.g. https://www.example.ae/ -> example.ae
+const getProjectHost = (url) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+};
+
+// Zoom steps for the full-page popup; the first step fits the image to the popup width
+const POPUP_ZOOM_LEVELS = [1, 1.5, 2, 3];
+
+// Premium full-page popup for the fixed portfolio cards.
+// Shows one continuous full-page screenshot (an image, never a live page).
+function PortfolioPagePopup({ projects, index, onClose, onNavigate }) {
+  const [zoomIndex, setZoomIndex] = useState(0);
+  const [imageReady, setImageReady] = useState(false);
+  const closeRef = useRef(null);
+  const project = projects[index];
+  const count = projects.length;
+  const lastZoom = POPUP_ZOOM_LEVELS.length - 1;
+  const zoom = POPUP_ZOOM_LEVELS[zoomIndex];
+
+  // Parent re-keys this component per project, so every project starts fresh.
+  // Lock page scroll while open and focus the close button.
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
+    const onKey = (event) => {
+      if (event.key === "Escape") onClose();
+      if (count > 1 && event.key === "ArrowRight") onNavigate((index + 1) % count);
+      if (count > 1 && event.key === "ArrowLeft") onNavigate((index - 1 + count) % count);
+      if (event.key === "+" || event.key === "=") setZoomIndex((z) => Math.min(z + 1, lastZoom));
+      if (event.key === "-") setZoomIndex((z) => Math.max(z - 1, 0));
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [index, count, lastZoom, onClose, onNavigate]);
+
+  return createPortal(
+    <div className="ecommerce-template">
+      <div
+        className="rs-ecom-popup"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${project.title} full page preview`}
+      >
+        <div className="rs-ecom-popup__bar">
+          <div className="rs-ecom-popup__title">
+            <span className="rs-ecom-popup__name">{project.title}</span>
+            {count > 1 ? (
+              <span className="rs-ecom-popup__count">
+                {index + 1} / {count}
+              </span>
+            ) : null}
+          </div>
+          <div className="rs-ecom-popup__tools">
+            <button
+              type="button"
+              className="rs-ecom-popup__btn"
+              onClick={() => setZoomIndex((z) => Math.max(z - 1, 0))}
+              disabled={zoomIndex === 0}
+              aria-label="Zoom out"
+            >
+              <i className="bi bi-dash-lg" aria-hidden="true"></i>
+            </button>
+            <span className="rs-ecom-popup__zoom" aria-live="polite">
+              {Math.round(zoom * 100)}%
+            </span>
+            <button
+              type="button"
+              className="rs-ecom-popup__btn"
+              onClick={() => setZoomIndex((z) => Math.min(z + 1, lastZoom))}
+              disabled={zoomIndex === lastZoom}
+              aria-label="Zoom in"
+            >
+              <i className="bi bi-plus-lg" aria-hidden="true"></i>
+            </button>
+            <a
+              className="rs-ecom-popup__open"
+              href={project.fullImage}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${project.title} HD image in a new tab`}
+            >
+              <i className="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+              <span>Open HD image</span>
+            </a>
+            <button
+              ref={closeRef}
+              type="button"
+              className="rs-ecom-popup__btn"
+              onClick={onClose}
+              aria-label="Close preview"
+            >
+              <i className="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <div
+          className="rs-ecom-popup__body"
+          onClick={(event) => {
+            // Clicking the empty dark area around the image closes the popup
+            if (event.target === event.currentTarget) onClose();
+          }}
+        >
+          {!imageReady ? <span className="rs-ecom-popup__spinner" aria-hidden="true"></span> : null}
+          <img
+            className="rs-ecom-popup__image"
+            src={project.fullImage}
+            alt={`Full page screenshot of ${project.title}`}
+            decoding="async"
+            style={{ width: `${zoom * 100}%`, opacity: imageReady ? 1 : 0 }}
+            onLoad={() => setImageReady(true)}
+            onError={(event) => {
+              event.currentTarget.onerror = null;
+              event.currentTarget.src = project.image;
+              setImageReady(true);
+            }}
+          />
+        </div>
+
+        {count > 1 ? (
+          <>
+            <button
+              type="button"
+              className="rs-ecom-popup__nav rs-ecom-popup__nav--prev"
+              onClick={() => onNavigate((index - 1 + count) % count)}
+              aria-label="Previous project"
+            >
+              <i className="bi bi-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button
+              type="button"
+              className="rs-ecom-popup__nav rs-ecom-popup__nav--next"
+              onClick={() => onNavigate((index + 1) % count)}
+              aria-label="Next project"
+            >
+              <i className="bi bi-chevron-right" aria-hidden="true"></i>
+            </button>
+          </>
+        ) : null}
+      </div>
+    </div>,
+    document.body
+  );
+}
 
 export default function EcommerceTemplate({ data }) {
+  // All portfolio cards are static now; API projects are no longer rendered here
+  const portfolioProjects = FIXED_PORTFOLIO_PROJECTS;
+
+  const [popupIndex, setPopupIndex] = useState(-1);
+  const popupTriggerRef = useRef(null);
+
+  // Closing the popup returns focus to the card that opened it
+  const closePopup = useCallback(() => {
+    setPopupIndex(-1);
+    popupTriggerRef.current?.focus({ preventScroll: true });
+  }, []);
+
   if (!data) {
     return <div className="text-center py-5">Loading...</div>;
   }
@@ -33,14 +376,8 @@ export default function EcommerceTemplate({ data }) {
     hero_description,
     hero_image,
     hero_background,
-    intro_small_heading = "Ecommerce · Dubai",
-    intro_description = "At RedSpider we offer the best ecommerce web design and development services in Dubai. Each webstore is built with creativity, innovation and passion. Our team plans each step from product browsing to secure checkout keeping in mind your customer's convenience.",
     cta_button_text,
     cta_button_link,
-    features = [],
-    benefits = [],
-    processes = [],
-    technologies = [],
     faqs = [],
     show_hero = true,
     show_intro = true,
@@ -50,14 +387,6 @@ export default function EcommerceTemplate({ data }) {
     show_technologies = true,
     show_faqs = true,
     show_cta = true,
-    features_title = "Explore Our E-commerce Website Solution",
-    features_subtitle = "All solutions are built around your products, customers and business goals.",
-    benefits_title = "Why Choose RedSpider for Ecommerce Development Services",
-    benefits_subtitle = "Stores built for product management, secure checkout and long-term growth.",
-    processes_title = "Our Ecommerce Development Process",
-    processes_subtitle = "Carefully planned to maintain quality, meet project requirements and support timely delivery.",
-    technologies_title = "Ecommerce Platforms We Work With",
-    technologies_subtitle = "We help you choose the best platform after discussing product range, budget, customisation and expansion plans.",
     faqs_title = "Frequently Asked Questions",
     faqs_subtitle = "Find quick answers about our ecommerce website development services.",
     section_order = [
@@ -78,99 +407,6 @@ export default function EcommerceTemplate({ data }) {
   const imageBase =
     process.env.NEXT_PUBLIC_IMAGE_URL || "http://localhost/redspider/public";
   const contactHref = cta_button_link || "/contact-us/";
-
-  const solutions =
-    features.length > 0
-      ? features
-      : [
-          { title: "Custom Ecommerce Website Development" },
-          { title: "Shopify Store Development" },
-          { title: "WooCommerce Development" },
-          { title: "Magento Ecommerce Development" },
-          { title: "Laravel Ecommerce Development" },
-          { title: "Multi-Vendor Marketplace Development" },
-          { title: "Secure Payment Gateway Integration" },
-          { title: "Mobile-Responsive Ecommerce Design" },
-          { title: "Inventory & Order Management Systems" },
-          { title: "Ecommerce Website Redesign & Migration" },
-          { title: "Routine Maintenance & Technical Support" },
-        ];
-
-  const platforms =
-    technologies.length > 0
-      ? technologies
-      : [
-          {
-            title: "Shopify",
-            description:
-              "Ideal for startups and growing businesses looking for a secure, easy-to-manage store.",
-          },
-          {
-            title: "WooCommerce",
-            description:
-              "Flexible WordPress ecommerce with plugins and customisation for growing catalogues.",
-          },
-          {
-            title: "Magento",
-            description:
-              "Suitable for larger catalogues that need powerful features and scalability.",
-          },
-          {
-            title: "Laravel Ecommerce",
-            description:
-              "A custom store built around your processes, speed and integrations.",
-          },
-          {
-            title: "Custom Ecommerce Development",
-            description:
-              "For businesses that need special workflows or connections to other systems.",
-          },
-        ];
-
-  const processData =
-    processes.length > 0
-      ? processes
-      : [
-          {
-            title: "Requirement Analysis",
-            description:
-              "We analyse goals, audience and ecommerce requirements to create a clear project roadmap.",
-          },
-          {
-            title: "Platform Selection",
-            description:
-              "We help you choose the right platform based on products, budget and future plans.",
-          },
-          {
-            title: "Design & Development",
-            description:
-              "Visual design focused on product browsing, trust and conversion.",
-          },
-          {
-            title: "Testing & Quality Assurance",
-            description:
-              "Checkout, payments and catalogue checks across devices and browsers.",
-          },
-          {
-            title: "Launch & Support",
-            description:
-              "We launch the store and provide technical support and maintenance.",
-          },
-        ];
-
-  const featureItems =
-    benefits.length > 0
-      ? benefits
-      : [
-          { title: "Responsive design for desktop, tablets and mobile devices" },
-          { title: "Secure payment gateway integration" },
-          { title: "Fast-loading pages for a better user experience" },
-          { title: "Easily manage products and categories" },
-          { title: "Enhanced inventory and stock management" },
-          { title: "Easy-to-use shopping cart and checkout" },
-          { title: "Customer accounts and order tracking" },
-          { title: "SEO-friendly website structure" },
-        ];
 
   const industryItems = [
     "Retail & Fashion",
@@ -261,24 +497,40 @@ export default function EcommerceTemplate({ data }) {
     },
     intro: {
       component: (
-        <section key="intro" className="rs-creative-intro">
+        <section key="intro" className="rs-ecom-intro">
           <div className="container">
-            <div className="rs-creative-intro__grid">
-              <div className="rs-creative-intro__meta">
-                <span className="rs-creative-kicker">{intro_small_heading}</span>
-                <p className="rs-creative-intro__note">Stores that convert</p>
-              </div>
-              <div className="rs-creative-intro__copy">
-                <p className="rs-creative-intro__lead">{intro_description}</p>
-                <p className="rs-creative-intro__support">
+            <div className="rs-ecom-intro__grid">
+              <div className="rs-ecom-intro__copy">
+                <p className="rs-ecom-intro__eyebrow">ECOMMERCE DUBAI</p>
+                <p className="rs-ecom-intro__subheading">Stores that convert</p>
+                <h2 className="rs-ecom-intro__heading">
+                  RedSpider provides professional ecommerce website development
+                  in Dubai, creating secure, user-friendly online stores
+                  designed around your products and customers.
+                </h2>
+                <p className="rs-ecom-intro__lead">
+                  From product browsing and payment integration to inventory and
+                  order management, we build practical ecommerce solutions that
+                  make online selling and store management easier.
+                </p>
+                <p className="rs-ecom-intro__support">
                   From product pages to payments and order management, we plan
                   each step so customers can browse, trust and complete a
                   purchase.
                 </p>
-                <a className="rs-creative-link" href="#ecommerce-solutions">
+                <a className="rs-ecom-intro__cta" href="#ecommerce-solutions">
                   Explore store solutions
                   <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
                 </a>
+              </div>
+              <div className="rs-ecom-intro__visual">
+                <img
+                  src="/assets/img/ecommerce-store-illustration-transparent.png"
+                  alt="Online store illustration with a laptop, phone, shopping bags and feature labels for browsing, payments, orders and inventory"
+                  width="1536"
+                  height="1024"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
@@ -291,32 +543,40 @@ export default function EcommerceTemplate({ data }) {
         <section
           key="features"
           id="ecommerce-solutions"
-          className="rs-creative-services"
+          className="rs-ecom-solutions"
         >
           <div className="container">
-            <div className="rs-creative-head">
-              <span className="rs-creative-kicker">What we build</span>
-              <h2>Explore Our E-commerce Website Solution</h2>
-              <p>{features_subtitle}</p>
+            <div className="rs-ecom-solutions__head">
+              <span className="rs-ecom-solutions__eyebrow">What we build</span>
+              <h2>
+                Explore Our{" "}
+                <span className="rs-ecom-solutions__nowrap">E-commerce</span>{" "}
+                <span className="rs-ecom-solutions__accent">Website Solutions</span>
+              </h2>
+              <p>
+                All solutions are built around your products, customers, and
+                business goals.
+              </p>
             </div>
-            <div className="rs-creative-card-grid">
-              {solutions.map((item, index) => (
-                <article
-                  key={`${item.id || item.title}-${index}`}
-                  className="rs-creative-card"
-                >
-                  <div className="rs-creative-card__top">
-                    <span className="rs-creative-card__icon" aria-hidden="true">
-                      <i
-                        className={`bi ${SOLUTION_ICONS[index % SOLUTION_ICONS.length]}`}
-                      ></i>
-                    </span>
-                    <span className="rs-creative-card__num">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
+            <div className="rs-ecom-solutions__grid">
+              {ECOMMERCE_SOLUTIONS.map((item, index) => (
+                <article key={item.title} className="rs-ecom-solutions__card">
+                  <span className="rs-ecom-solutions__icon" aria-hidden="true">
+                    <img
+                      src={item.icon}
+                      alt=""
+                      width="36"
+                      height="36"
+                      loading="lazy"
+                    />
+                  </span>
+                  <div className="rs-ecom-solutions__body">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
                   </div>
-                  <h3>{item.title || item.name}</h3>
-                  {item.description ? <p>{item.description}</p> : null}
+                  <span className="rs-ecom-solutions__num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </article>
               ))}
             </div>
@@ -327,31 +587,37 @@ export default function EcommerceTemplate({ data }) {
     },
     technologies: {
       component: (
-        <section key="technologies" className="rs-creative-platforms">
+        <section key="technologies" className="rs-ecom-platforms">
           <div className="container">
-            <div className="rs-creative-head">
-              <span className="rs-creative-kicker">Platforms</span>
-              <h2>{technologies_title}</h2>
-              <p>{technologies_subtitle}</p>
+            <div className="rs-ecom-platforms__head">
+              <span className="rs-ecom-platforms__eyebrow">Platforms</span>
+              <h2>Ecommerce Platforms We Work With</h2>
+              <p>
+                We will help you decide the best ecommerce platform after
+                discussing the product range, budget, customization needs and
+                future plans for expansion.
+              </p>
             </div>
-            <div className="rs-creative-card-grid">
-              {platforms.map((item, index) => (
-                <article
-                  key={`${item.id || item.title}-${index}`}
-                  className="rs-creative-card"
-                >
-                  <div className="rs-creative-card__top">
-                    <span className="rs-creative-card__icon" aria-hidden="true">
-                      <i
-                        className={`bi ${PLATFORM_ICONS[index % PLATFORM_ICONS.length]}`}
-                      ></i>
+            <div className="rs-ecom-platforms__grid">
+              {ECOMMERCE_PLATFORMS.map((item, index) => (
+                <article key={item.title} className="rs-ecom-platforms__card">
+                  <div className="rs-ecom-platforms__top">
+                    <span className="rs-ecom-platforms__icon" aria-hidden="true">
+                      <img
+                        src={item.icon}
+                        alt=""
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                      />
                     </span>
-                    <span className="rs-creative-card__num">
+                    <span className="rs-ecom-platforms__num">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3>{item.title || item.name}</h3>
-                  {item.description ? <p>{item.description}</p> : null}
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <span className="rs-ecom-platforms__bar" aria-hidden="true"></span>
                 </article>
               ))}
             </div>
@@ -362,29 +628,43 @@ export default function EcommerceTemplate({ data }) {
     },
     benefits: {
       component: (
-        <section key="benefits" className="rs-creative-why">
+        <section key="benefits" className="rs-ecom-why">
           <div className="container">
-            <div className="rs-creative-why__layout">
-              <div className="rs-creative-why__intro">
-                <span className="rs-creative-kicker">Store features</span>
-                <h2>{benefits_title}</h2>
-                <p>{benefits_subtitle}</p>
-                {/* <a className="rs-creative-btn" href={contactHref}>
-                  {cta_button_text || "Book a call"}
-                  <i className="bi bi-arrow-up-right" aria-hidden="true"></i>
-                </a> */}
+            <div className="rs-ecom-why__intro">
+              <div className="rs-ecom-why__text">
+                <p className="rs-ecom-why__eyebrow">STORE FEATURES</p>
+                <h2 className="rs-ecom-why__heading">
+                  Why Businesses Choose RedSpider for Ecommerce Development
+                </h2>
+                <p className="rs-ecom-why__lead">
+                  Your ecommerce website should be visually appealing, fast and
+                  user-friendly. We build practical features that make shopping
+                  easier and store management simpler.
+                </p>
               </div>
-              <div className="rs-creative-pill-grid mt-5">
-                {featureItems.map((item, index) => (
-                  <article
-                    key={`${item.id || item.title}-${index}`}
-                    className="rs-creative-pill"
-                  >
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <h3>{typeof item === "string" ? item : item.title}</h3>
-                  </article>
-                ))}
+              <div className="rs-ecom-why__visual">
+                <img
+                  src="/assets/img/ecommerce-features/glossy-red-shopping-scene.png"
+                  alt="Glossy red e-commerce shopping scene with a laptop storefront, phone cart, shopping bags and feature badges for payments, shipping, analytics and security"
+                  width="1819"
+                  height="865"
+                  loading="lazy"
+                />
               </div>
+            </div>
+            <div className="rs-ecom-why__grid">
+              {WHY_FEATURES.map((item, index) => (
+                <article key={item.title} className="rs-ecom-why__card">
+                  <span className="rs-ecom-why__icon" aria-hidden="true">
+                    <img src={item.icon} alt="" width="34" height="34" loading="lazy" />
+                  </span>
+                  <span className="rs-ecom-why__num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="rs-ecom-why__divider" aria-hidden="true"></span>
+                  <h3>{item.title}</h3>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -393,24 +673,43 @@ export default function EcommerceTemplate({ data }) {
     },
     processes: {
       component: (
-        <section key="processes" className="rs-creative-process">
+        <section key="processes" className="rs-ecom-process">
           <div className="container">
-            <div className="rs-creative-head rs-creative-head--light">
-              <span className="rs-creative-kicker">How we work</span>
-              <h2>{processes_title}</h2>
-              <p>{processes_subtitle}</p>
+            <div className="rs-ecom-process__head">
+              <p className="rs-ecom-process__eyebrow">HOW WE WORK</p>
+              <h2 className="rs-ecom-process__heading">
+                Our Ecommerce Development Process
+              </h2>
+              <p className="rs-ecom-process__lead">
+                Our ecommerce development process is carefully planned to
+                maintain quality, meet project requirements and support timely
+                delivery.
+              </p>
             </div>
-            <ol className="rs-creative-steps">
-              {processData.map((process, index) => (
-                <li
-                  key={`${process.id || process.title}-${index}`}
-                  className="rs-creative-step"
-                >
-                  <span className="rs-creative-step__num">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3>{process.title}</h3>
-                  <p>{process.description}</p>
+            <ol className="rs-ecom-process__steps">
+              {PROCESS_STEPS.map((step, index) => (
+                <li key={step.title} className="rs-ecom-process__step">
+                  <article className="rs-ecom-process__card">
+                    <span className="rs-ecom-process__art" aria-hidden="true">
+                      <img
+                        src={step.icon}
+                        alt=""
+                        width={step.width}
+                        height={step.height}
+                        loading="lazy"
+                      />
+                    </span>
+                    <span className="rs-ecom-process__num">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </article>
+                  {index < PROCESS_STEPS.length - 1 ? (
+                    <span className="rs-ecom-process__arrow" aria-hidden="true">
+                      <i className="bi bi-chevron-right"></i>
+                    </span>
+                  ) : null}
                 </li>
               ))}
             </ol>
@@ -442,6 +741,89 @@ export default function EcommerceTemplate({ data }) {
         </section>
       ),
       show: true,
+    },
+    portfolio: {
+      component: (
+        <section key="portfolio" className="rs-ecom-portfolio">
+          <div className="container">
+            <div className="rs-ecom-portfolio__head">
+              <div className="rs-ecom-portfolio__copy">
+                <span className="rs-ecom-portfolio__pill">{"// WORK //"}</span>
+                <h2 className="rs-ecom-portfolio__heading">
+                  Brands We&apos;ve Transformed
+                </h2>
+                <p className="rs-ecom-portfolio__lead">
+                  A glimpse into ecommerce stores we have designed and developed
+                  for brands across Dubai and the UAE.
+                </p>
+              </div>
+              <Link className="rs-ecom-portfolio__viewall" href="/our-portfolio/">
+                View All
+                <i className="bi bi-plus-lg" aria-hidden="true"></i>
+              </Link>
+            </div>
+            <div className="rs-ecom-portfolio__grid">
+              {portfolioProjects.map((project, index) => (
+                <article key={project.id} className="rs-ecom-portfolio__card">
+                  <img
+                    className="rs-ecom-portfolio__bg"
+                    src={project.image}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                  />
+                  <button
+                    type="button"
+                    className="rs-ecom-portfolio__hit"
+                    onClick={(event) => {
+                      popupTriggerRef.current = event.currentTarget;
+                      setPopupIndex(index);
+                    }}
+                    aria-label={`Open ${project.title} preview`}
+                  >
+                    <img
+                      className="rs-ecom-portfolio__preview"
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      onError={(event) => {
+                        event.currentTarget.onerror = null;
+                        event.currentTarget.src =
+                          "/assets/img/portfolio/portfolio-1.webp";
+                      }}
+                    />
+                  </button>
+                  <div className="rs-ecom-portfolio__overlay">
+                    <span className="rs-ecom-portfolio__name">
+                      {project.title}
+                    </span>
+                    <a
+                      className="rs-ecom-portfolio__url"
+                      onClick={(event) => event.stopPropagation()}
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {getProjectHost(project.link)}
+                      <i className="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        {popupIndex >= 0 ? (
+          <PortfolioPagePopup
+            key={popupIndex}
+            projects={FIXED_PORTFOLIO_PROJECTS}
+            index={popupIndex}
+            onClose={closePopup}
+            onNavigate={setPopupIndex}
+          />
+        ) : null}
+        </section>
+      ),
+      show: portfolioProjects.length > 0,
     },
     faqs: {
       component: (
@@ -478,6 +860,14 @@ export default function EcommerceTemplate({ data }) {
         "faqs",
         "cta",
       ];
+    }
+    // Portfolio sits directly before FAQ, including for CMS-supplied orders
+    if (!order.includes("portfolio")) {
+      const faqIndex = order.indexOf("faqs");
+      order =
+        faqIndex >= 0
+          ? [...order.slice(0, faqIndex), "portfolio", ...order.slice(faqIndex)]
+          : [...order, "portfolio"];
     }
     return order
       .map((key) => {
