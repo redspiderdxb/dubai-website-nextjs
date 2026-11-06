@@ -434,6 +434,12 @@ export default function EcommerceTemplate({ data }) {
           },
         ];
 
+  // Page-specific: the intro heading is a <div> only on the
+  // ecommerce-web-design-dubai service page; every other ecommerce
+  // service keeps its <h2>.
+  const IntroHeading =
+    data?.slug === "ecommerce-web-design-dubai" ? "div" : "h2";
+
   const sectionMap = {
     hero: {
       component: (
@@ -487,11 +493,11 @@ export default function EcommerceTemplate({ data }) {
           <div className="container">
             <div className="rs-ecom-intro__grid">
               <div className="rs-ecom-intro__copy">
-                <h2 className="rs-ecom-intro__heading">
+                <IntroHeading className="rs-ecom-intro__heading">
                   RedSpider provides professional ecommerce website development
                   in Dubai, creating secure, user-friendly online stores
                   designed around your products and customers.
-                </h2>
+                </IntroHeading>
                 <p className="rs-ecom-intro__lead">
                   From product browsing and payment integration to inventory and
                   order management, we build practical ecommerce solutions that
