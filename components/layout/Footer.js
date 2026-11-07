@@ -285,7 +285,9 @@ export default function Footer() {
                 ))}
 
                 <a
-                  href="#nogo"
+                  href="https://apps.apple.com/us/app/redspider-web-art-design/id6748980550"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Download RedSpider on Apple App Store"
                   className="rs-social-link"
                 >
