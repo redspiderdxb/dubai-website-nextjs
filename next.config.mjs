@@ -5,6 +5,16 @@ import { blogRedirectRules } from "./lib/blogRedirects.mjs";
 const nextConfig = {
   reactStrictMode: true,
 
+  // Allow next/image (and the hero slides) to optimize CMS-hosted images.
+  images: {
+    qualities: [75],
+    remotePatterns: [
+      { protocol: "https", hostname: "www.redspider.ae", pathname: "/**" },
+      { protocol: "https", hostname: "redspider.ae", pathname: "/**" },
+      { protocol: "https", hostname: "redspider.rsworkspace.net", pathname: "/**" },
+    ],
+  },
+
   trailingSlash: true,
   // Use the equivalent rules below so four legacy paths can redirect directly.
   skipTrailingSlashRedirect: true,
@@ -34,6 +44,21 @@ const nextConfig = {
       {
         source: "/site.webmanifest",
         destination: "https://www.redspider.ae/site.webmanifest",
+      },
+    ];
+  },
+
+  async headers() {
+    return [
+      {
+        // Static files proxied from www.redspider.ae/assets: allow browsers and CDNs to reuse them.
+        source: "/assets/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=604800, stale-while-revalidate=86400",
+          },
+        ],
       },
     ];
   },
