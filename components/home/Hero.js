@@ -2,6 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import Button from "../ui/Button";
 
+// Route hero images through the Next.js image optimizer (resized, webp/avif, cached).
+const HERO_IMAGE_WIDTH = 1200;
+const toOptimizedHeroImage = (url) => {
+  if (!url || !/^https?:\/\//.test(url)) return url;
+  return `/_next/image?url=${encodeURIComponent(url)}&w=${HERO_IMAGE_WIDTH}&q=75`;
+};
+
 export default function Hero({ data, googleReviews = null }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const heroRef = useRef(null);
@@ -143,7 +150,7 @@ export default function Hero({ data, googleReviews = null }) {
     return imagePath;
   };
 
-  const firstSlideImageUrl = getImageUrl(slides[0]?.image);
+  const firstSlideImageUrl = toOptimizedHeroImage(getImageUrl(slides[0]?.image));
 
   const goToSlide = (index) => {
     setActiveIndex(index);
@@ -206,7 +213,7 @@ export default function Hero({ data, googleReviews = null }) {
               <div
                 className="rs-slide"
                 style={{
-                  backgroundImage: `url("${getImageUrl(slide.image)}")`,
+                  backgroundImage: `url("${toOptimizedHeroImage(getImageUrl(slide.image))}")`,
                 }}
               >
                 <div className="rs-slide-content">
