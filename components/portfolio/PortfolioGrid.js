@@ -176,6 +176,55 @@ function getYoutubeVideoId(url) {
   }
 }
 
+/** Brand abbreviations kept uppercase when reformatting ALL CAPS titles. */
+const PRESERVED_TITLE_ACRONYMS = new Set([
+  "ATS",
+  "AI",
+  "UAE",
+  "LLC",
+  "SGD",
+  "RS",
+]);
+
+function isFullyUppercaseTitle(title) {
+  const letters = String(title || "").replace(/[^A-Za-z]/g, "");
+
+  return letters.length > 0 && letters === letters.toUpperCase();
+}
+
+/**
+ * Display-only: convert fully uppercase CMS titles to Title Case.
+ * Mixed-case titles are left unchanged. Search still uses raw CMS names.
+ */
+function formatPortfolioDisplayTitle(rawTitle) {
+  const title = String(rawTitle ?? "");
+
+  if (!title.trim() || !isFullyUppercaseTitle(title)) {
+    return title;
+  }
+
+  return title
+    .split(/(\s+)/)
+    .map((part) => {
+      if (!part || /^\s+$/.test(part)) {
+        return part;
+      }
+
+      if (!/[A-Za-z]/.test(part)) {
+        return part;
+      }
+
+      const upper = part.toUpperCase();
+
+      if (PRESERVED_TITLE_ACRONYMS.has(upper)) {
+        return upper;
+      }
+
+      return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+    })
+    .join("");
+}
+
 function formatGalleries(data = []) {
   return data.map((gallery) => {
     const cleanDescription = gallery.description
@@ -207,7 +256,7 @@ function formatGalleries(data = []) {
 
     return {
       id: gallery.id,
-      title: gallery.name || "Untitled Project",
+      title: formatPortfolioDisplayTitle(gallery.name || "Untitled Project"),
       category: cleanDescription || "Portfolio",
       image: resolveGalleryImage(gallery.image),
       project_url: gallery.project_url,
