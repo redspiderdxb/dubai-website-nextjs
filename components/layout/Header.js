@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 import { useHeaderData } from "../../context/HeaderDataContext";
 import {
+  ensureInternalTrailingSlash,
   getServiceNavPath,
   mergeStaticServiceNavItems,
   resolveHeaderServices,
@@ -175,7 +176,7 @@ export default function Header() {
         .map((product) => ({
           id: product.id,
           name: product.name,
-          path: `/products/${product.slug}`,
+          path: ensureInternalTrailingSlash(`/products/${product.slug}`),
         }))
     : [];
 
