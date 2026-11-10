@@ -537,19 +537,14 @@ export default function EcommerceTemplate({ data }) {
         >
           <div className="container">
             <div className="rs-ecom-solutions__head">
-              <span className="rs-ecom-solutions__eyebrow">What we build</span>
               <h2>
                 Explore Our{" "}
                 <span className="rs-ecom-solutions__nowrap">E-commerce</span>{" "}
                 <span className="rs-ecom-solutions__accent">Website Solutions</span>
               </h2>
-              <p>
-                All solutions are built around your products, customers, and
-                business goals.
-              </p>
             </div>
             <div className="rs-ecom-solutions__grid">
-              {ECOMMERCE_SOLUTIONS.map((item, index) => (
+              {ECOMMERCE_SOLUTIONS.map((item) => (
                 <article key={item.title} className="rs-ecom-solutions__card">
                   <span className="rs-ecom-solutions__icon" aria-hidden="true">
                     <img
@@ -564,9 +559,6 @@ export default function EcommerceTemplate({ data }) {
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                   </div>
-                  <span className="rs-ecom-solutions__num">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
                 </article>
               ))}
             </div>
@@ -580,7 +572,6 @@ export default function EcommerceTemplate({ data }) {
         <section key="technologies" className="rs-ecom-platforms">
           <div className="container">
             <div className="rs-ecom-platforms__head">
-              <span className="rs-ecom-platforms__eyebrow">Platforms</span>
               <h2>Ecommerce Platforms We Work With</h2>
               <p>
                 We will help you decide the best ecommerce platform after
@@ -589,7 +580,7 @@ export default function EcommerceTemplate({ data }) {
               </p>
             </div>
             <div className="rs-ecom-platforms__grid">
-              {ECOMMERCE_PLATFORMS.map((item, index) => (
+              {ECOMMERCE_PLATFORMS.map((item) => (
                 <article key={item.title} className="rs-ecom-platforms__card">
                   <div className="rs-ecom-platforms__top">
                     <span className="rs-ecom-platforms__icon" aria-hidden="true">
@@ -600,9 +591,6 @@ export default function EcommerceTemplate({ data }) {
                         height="40"
                         loading="lazy"
                       />
-                    </span>
-                    <span className="rs-ecom-platforms__num">
-                      {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
                   <h3>{item.title}</h3>
@@ -622,7 +610,6 @@ export default function EcommerceTemplate({ data }) {
           <div className="container">
             <div className="rs-ecom-why__intro">
               <div className="rs-ecom-why__text">
-                <p className="rs-ecom-why__eyebrow">STORE FEATURES</p>
                 <h2 className="rs-ecom-why__heading">
                   Why Businesses Choose RedSpider for Ecommerce Development
                 </h2>
@@ -643,15 +630,11 @@ export default function EcommerceTemplate({ data }) {
               </div>
             </div>
             <div className="rs-ecom-why__grid">
-              {WHY_FEATURES.map((item, index) => (
+              {WHY_FEATURES.map((item) => (
                 <article key={item.title} className="rs-ecom-why__card">
                   <span className="rs-ecom-why__icon" aria-hidden="true">
                     <img src={item.icon} alt="" width="34" height="34" loading="lazy" />
                   </span>
-                  <span className="rs-ecom-why__num">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="rs-ecom-why__divider" aria-hidden="true"></span>
                   <h3>{item.title}</h3>
                 </article>
               ))}
@@ -666,7 +649,6 @@ export default function EcommerceTemplate({ data }) {
         <section key="processes" className="rs-ecom-process">
           <div className="container">
             <div className="rs-ecom-process__head">
-              <p className="rs-ecom-process__eyebrow">HOW WE WORK</p>
               <h2 className="rs-ecom-process__heading">
                 Our Ecommerce Development Process
               </h2>
@@ -689,9 +671,6 @@ export default function EcommerceTemplate({ data }) {
                         loading="lazy"
                       />
                     </span>
-                    <span className="rs-ecom-process__num">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
                     <h3>{step.title}</h3>
                     <p>{step.description}</p>
                   </article>
@@ -713,12 +692,11 @@ export default function EcommerceTemplate({ data }) {
         <section key="industries" className="rs-creative-industries">
           <div className="container">
             <div className="rs-creative-head">
-              <span className="rs-creative-kicker">Industries</span>
               <h2>Stores we build for</h2>
               <p>Ecommerce websites for product brands and wholesale businesses.</p>
             </div>
             <div className="rs-creative-industry-grid">
-              {industryItems.map((name, index) => (
+              {industryItems.map((name) => (
                 <article key={name} className="rs-creative-industry">
                   <span className="rs-creative-industry__icon" aria-hidden="true">
                     <i className="bi bi-shop"></i>
@@ -738,7 +716,6 @@ export default function EcommerceTemplate({ data }) {
           <div className="container">
             <div className="rs-ecom-portfolio__head">
               <div className="rs-ecom-portfolio__copy">
-                <span className="rs-ecom-portfolio__pill">{"// WORK //"}</span>
                 <h2 className="rs-ecom-portfolio__heading">
                   Brands We&apos;ve Transformed
                 </h2>
