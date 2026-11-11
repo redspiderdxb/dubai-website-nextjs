@@ -1166,6 +1166,148 @@ const nextConfig = {
         permanent: true,
         statusCode: 301,
       },
+
+      // 404 PAGE URLs.xlsx (23 mappings). Append-only; do not alter rules above.
+      // Jumeirah uses trailing slash so the existing catch-all can normalize /Jumeirah → /Jumeirah/ first.
+      {
+        source: "/tag/seo-for-real-estate/",
+        destination: "/products/real-estate-portal/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/tag/property-website-support/",
+        destination: "/blog/smart-property-websites-features-buyers-expect/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/lets-start-with-angularjs/",
+        destination: "/blog/what-is-angularjs/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/real-estate-web-designing/",
+        destination: "/blog/real-estate-web-designing-dubai-guide/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/website-design-company-bur-dubai/",
+        destination: "/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/seo-services-in-dubai-what-really-helps-websites-rank-on-google/",
+        destination: "/blog/seo-help-websites-rank-on-google/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/lets-know-the-best-content-and-marketing-blog-levels-you-can-follow/",
+        destination: "/blog/digital-marketing-blogs/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/must-have-certain-features-for-e-commerce-blogs/",
+        destination: "/blog/features-for-ecommerce-blogs/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/the-importance-of-ux-ui-design-in-creating-successful-mobile-apps-in-the-uae/",
+        destination: "/blog/ux-ui-design-for-successful-mobile-apps/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/portfolios/novaar-contracting-company/",
+        destination: "/our-portfolio/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/Jumeirah/",
+        destination: "/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/portfolio/ad-landing-pages/",
+        destination: "/our-portfolio/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/tag/ai-seo-optimization/",
+        destination: "/service/seo-agency-dubai/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/website-design-company-dubai-marina/",
+        destination: "/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/website-design-company-deira/",
+        destination: "/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/portfolio/real-estate/",
+        destination: "/our-portfolio/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/portfolios/vv-tobacco-llc/",
+        destination: "/our-portfolio/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/web-design-and-influence-of-color-users-need-to-know/",
+        destination:
+          "/blog/how-a-qualified-dubai-web-design-company-can-benefit-your-business/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/tag/website-security/",
+        destination: "/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/website-design-company-palm-jumeirah/",
+        destination: "/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/best-real-estate-website-development-company-dubai/",
+        destination: "/products/real-estate-portal/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/real-estate-website-designing-that-generates-quality-leads-in-dubai/",
+        destination: "/blog/how-real-estate-websites-generate-quality-leads-dubai/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/how-to-form-404-error-reports-in-wordpress-web-development/",
+        destination: "/blog/forming-404-error/",
+        permanent: true,
+        statusCode: 301,
+      },
     ];
   },
 
