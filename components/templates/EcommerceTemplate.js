@@ -158,21 +158,21 @@ const FIXED_PORTFOLIO_PROJECTS = [
     id: "fixed-zehi",
     title: "ZEHI",
     image: "/assets/img/ecommerce-portfolio/zehi.png",
-    fullImage: "/assets/img/ecommerce-portfolio/zehi-fullpage-optimized.png",
+    fullImage: "/assets/img/ecommerce-portfolio/zehi-fullpage-optimized.webp",
     link: "https://jewellery2.rsworkspace.net/",
   },
   {
     id: "fixed-diamont-fzco",
     title: "DIAMONT FZCO",
     image: "/assets/img/ecommerce-portfolio/diamont-fzco.png",
-    fullImage: "/assets/img/ecommerce-portfolio/diamont-fzco-fullpage-optimized.png",
+    fullImage: "/assets/img/ecommerce-portfolio/diamont-fzco-fullpage-optimized.webp",
     link: "https://jewellery.rsworkspace.net/",
   },
   {
     id: "fixed-health-wellness-me",
     title: "Health & Wellness ME",
     image: "/assets/img/ecommerce-portfolio/health-wellness-me.png",
-    fullImage: "/assets/img/ecommerce-portfolio/health-wellness-me-fullpage-optimized.png",
+    fullImage: "/assets/img/ecommerce-portfolio/health-wellness-me-fullpage-optimized.webp",
     link: "http://hw.rsworkspace.net/",
   },
   {
@@ -181,6 +181,20 @@ const FIXED_PORTFOLIO_PROJECTS = [
     image: "/assets/img/ecommerce-portfolio/boj-thumbnail.png",
     fullImage: "/assets/img/ecommerce-portfolio/boj-fullpage-optimized.webp",
     link: "https://boj.rsworkspace.net/",
+  },
+  {
+    id: "fixed-bloggers-unite",
+    title: "Bloggers Unite",
+    image: "/assets/img/ecommerce-portfolio/bloggers-unite.png",
+    fullImage: "/assets/img/ecommerce-portfolio/bloggers-unite-fullpage-optimized.webp",
+    link: "https://fashion.rsworkspace.net/",
+  },
+  {
+    id: "fixed-dubai-fridays",
+    title: "Dubai Fridays",
+    image: "/assets/img/ecommerce-portfolio/dubai-fridays.png",
+    fullImage: "/assets/img/ecommerce-portfolio/dubai-fridays-fullpage-optimized.webp",
+    link: "https://www.dubaifridays.com/",
   },
 ];
 
