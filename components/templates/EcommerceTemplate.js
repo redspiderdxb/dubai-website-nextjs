@@ -184,7 +184,7 @@ const FIXED_PORTFOLIO_PROJECTS = [
   },
   {
     id: "fixed-bloggers-unite",
-    title: "Bloggers Unite",
+    title: "Fashion",
     image: "/assets/img/ecommerce-portfolio/bloggers-unite.png",
     fullImage: "/assets/img/ecommerce-portfolio/bloggers-unite-fullpage-optimized.webp",
     link: "https://fashion.rsworkspace.net/",
