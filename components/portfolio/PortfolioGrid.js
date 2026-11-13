@@ -3,7 +3,11 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { fetchAllGalleries } from "../../lib/api";
+import {
+  adoptPortfolioCatalog,
+  fetchAllGalleries,
+  portfolioActivePage,
+} from "../../lib/api";
 import {
   DEFAULT_CATEGORY,
   PORTFOLIO_CATEGORIES,
@@ -363,18 +367,38 @@ export default function PortfolioGrid({
 
   const [galleries, setGalleries] = useState(initialFormattedGalleries);
 
-  const [allGalleries, setAllGalleries] = useState(initialFormattedGalleries);
+  const [catalog, setCatalog] = useState(() => ({
+    items: initialFormattedGalleries,
+    complete: false,
+  }));
+
+  const [catalogProps, setCatalogProps] = useState(initialFormattedGalleries);
+
+  // Apply new server props before paint. A shorter list cannot replace a longer one.
+  let visibleCatalog = catalog;
+
+  if (catalogProps !== initialFormattedGalleries) {
+    visibleCatalog = adoptPortfolioCatalog(catalog, {
+      items: initialFormattedGalleries,
+      complete: false,
+    });
+    setCatalogProps(initialFormattedGalleries);
+
+    if (visibleCatalog !== catalog) {
+      setCatalog(visibleCatalog);
+    }
+  }
+
+  const allGalleries = visibleCatalog.items;
 
   /*
-   * IMPORTANT:
-   *
-   * This loading state is ONLY for actual
-   * pagination/manual loading.
-   *
-   * Background portfolio loading does NOT
-   * set this to true.
+   * `loading` stays reserved for pagination.
+   * `catalogLoading` only replaces the empty message while the catalog
+   * request is still running. Existing cards stay on screen.
    */
   const [loading, setLoading] = useState(false);
+
+  const [catalogLoading, setCatalogLoading] = useState(true);
 
   // ============================================
   // Filter State
@@ -386,19 +410,25 @@ export default function PortfolioGrid({
 
   const [currentPage, setCurrentPage] = useState(1);
 
+  const filterKey = `${filter}\0${industryFilter}`;
+
+  const [pageScope, setPageScope] = useState(filterKey);
+
+  const pageChanged = pageScope !== filterKey;
+
+  if (pageChanged) {
+    setPageScope(filterKey);
+    setCurrentPage(1);
+  }
+
+  // Page 1 is used in the same render a category changes, before paint.
+  const activePage = portfolioActivePage(pageScope, filterKey, currentPage);
+
   // ============================================
   // Load ALL Portfolio Projects
   //
-  // IMPORTANT:
-  // This runs in the background.
-  //
-  // It does NOT:
-  // - set loading true
-  // - block initial 12 projects
-  // - block pagination UI
-  //
-  // Initial 12 projects are already supplied
-  // through getStaticProps().
+  // One background refresh. A shorter or incomplete response cannot
+  // replace a longer or complete catalog already on screen.
   // ============================================
 
   useEffect(() => {
@@ -412,22 +442,23 @@ export default function PortfolioGrid({
           return;
         }
 
-        const formatted = formatGalleries(result || []);
+        const formatted = formatGalleries(Array.isArray(result) ? result : []);
 
-        if (formatted.length > 0) {
-          setAllGalleries(formatted);
-        }
+        setCatalog((current) =>
+          adoptPortfolioCatalog(current, {
+            items: formatted,
+            complete: result?.complete === true,
+          }),
+        );
       } catch (error) {
         console.error("Error loading all portfolio projects:", error);
+      } finally {
+        if (mounted) {
+          setCatalogLoading(false);
+        }
       }
     };
 
-    /*
-     * Background loading.
-     *
-     * IMPORTANT:
-     * No setLoading(true) here.
-     */
     loadAllPortfolio();
 
     return () => {
@@ -782,30 +813,16 @@ export default function PortfolioGrid({
   const totalPages = Math.max(1, Math.ceil(totalFilteredProjects / PER_PAGE));
 
   const filteredProjects = useMemo(() => {
-    const startIndex = (currentPage - 1) * PER_PAGE;
+    const startIndex = (activePage - 1) * PER_PAGE;
 
     const endIndex = startIndex + PER_PAGE;
 
     return filteredProjectsBeforePagination.slice(startIndex, endIndex);
-  }, [filteredProjectsBeforePagination, currentPage]);
+  }, [filteredProjectsBeforePagination, activePage]);
 
-  // ============================================
-  // Keep Page Valid
-  // ============================================
-
-  useEffect(() => {
-    if (currentPage > totalPages) {
-      setCurrentPage(totalPages);
-    }
-  }, [currentPage, totalPages]);
-
-  // ============================================
-  // Reset page when URL filter changes
-  // ============================================
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [filter, industryFilter]);
+  if (!pageChanged && currentPage > totalPages) {
+    setCurrentPage(totalPages);
+  }
 
   // ============================================
   // Sync Visible Galleries
@@ -822,7 +839,12 @@ export default function PortfolioGrid({
   const handleIndustryChange = (event) => {
     const nextIndustry = event.target.value;
 
-    router.push(buildPortfolioPath(filter, nextIndustry));
+    if (!nextIndustry) {
+      router.push(buildPortfolioPath(filter));
+      return;
+    }
+
+    router.push(buildPortfolioPath(DEFAULT_CATEGORY, nextIndustry));
   };
 
   // ============================================
@@ -870,7 +892,7 @@ export default function PortfolioGrid({
   // ============================================
 
   const handlePageChange = (page) => {
-    if (page < 1 || page > totalPages || page === currentPage || loading) {
+    if (page < 1 || page > totalPages || page === activePage || loading) {
       return;
     }
 
@@ -895,7 +917,7 @@ export default function PortfolioGrid({
   // Pages are shown in fixed groups of PAGES_PER_GROUP (1–6, 7–12, 13–16, ...).
   // The current group determines the numbers and the previous/next arrows.
   const pageGroupStart =
-    Math.floor((currentPage - 1) / PAGES_PER_GROUP) * PAGES_PER_GROUP + 1;
+    Math.floor((activePage - 1) / PAGES_PER_GROUP) * PAGES_PER_GROUP + 1;
   const pageGroupEnd = Math.min(
     pageGroupStart + PAGES_PER_GROUP - 1,
     totalPages,
@@ -920,9 +942,9 @@ export default function PortfolioGrid({
   // ============================================
 
   const displayFrom =
-    totalFilteredProjects === 0 ? 0 : (currentPage - 1) * PER_PAGE + 1;
+    totalFilteredProjects === 0 ? 0 : (activePage - 1) * PER_PAGE + 1;
 
-  const displayTo = Math.min(currentPage * PER_PAGE, totalFilteredProjects);
+  const displayTo = Math.min(activePage * PER_PAGE, totalFilteredProjects);
 
   // ============================================
   // Render
@@ -942,7 +964,7 @@ export default function PortfolioGrid({
             {PORTFOLIO_CATEGORIES.map((category) => (
               <Link
                 key={category.filter}
-                href={buildPortfolioPath(category.filter, industryFilter)}
+                href={buildPortfolioPath(category.filter)}
                 className={`portfolio-category-tab ${
                   filter === category.filter ? "active" : ""
                 }`}
@@ -1108,7 +1130,7 @@ export default function PortfolioGrid({
                       <PortfolioProjectImage
                         src={project.image}
                         alt={`${project.title} web design project by RedSpider Dubai`}
-                        priority={currentPage === 1 && index < 2}
+                        priority={activePage === 1 && index < 2}
                       />
                       {hasProjectLink && (
                         <a
@@ -1164,6 +1186,16 @@ export default function PortfolioGrid({
               </div>
               );
             })
+          ) : catalogLoading ? (
+            <div className="col-12">
+              <div className="portfolio-loading">
+                <div className="spinner-border spinner-border-sm" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+
+                <span>Loading portfolio...</span>
+              </div>
+            </div>
           ) : (
             <div className="col-12 text-center py-5">
               <p>No portfolio items found.</p>
@@ -1210,7 +1242,7 @@ export default function PortfolioGrid({
                     type="button"
                     disabled={loading}
                     className={`portfolio-page-number ${
-                      currentPage === page ? "active" : ""
+                      activePage === page ? "active" : ""
                     }`}
                     onClick={() => handlePageChange(page)}
                   >
