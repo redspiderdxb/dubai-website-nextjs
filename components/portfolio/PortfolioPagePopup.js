@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 // Zoom steps for the full-page popup; the first step fits the image to the popup width
@@ -6,10 +6,18 @@ const POPUP_ZOOM_LEVELS = [1, 1.5, 2, 3];
 
 // Shared zoom popup. Ecommerce projects supply a full-page screenshot.
 // Callers without a separate asset pass the same URL for image and fullImage.
-export default function PortfolioPagePopup({ projects, index, onClose, onNavigate }) {
+export default function PortfolioPagePopup({
+  projects,
+  index,
+  onClose,
+  onNavigate,
+  imageDecoded = false,
+}) {
   const [zoomIndex, setZoomIndex] = useState(0);
-  const [imageReady, setImageReady] = useState(false);
+  const [imageReady, setImageReady] = useState(Boolean(imageDecoded));
   const closeRef = useRef(null);
+  const imageRef = useRef(null);
+  const imageSettledRef = useRef(false);
   const project = projects[index];
   const imageAlt = project.imageAlt || `Full page screenshot of ${project.title}`;
   const openLabel = project.openLabel || "Open HD image";
@@ -17,6 +25,9 @@ export default function PortfolioPagePopup({ projects, index, onClose, onNavigat
   const count = projects.length;
   const lastZoom = POPUP_ZOOM_LEVELS.length - 1;
   const zoom = POPUP_ZOOM_LEVELS[zoomIndex];
+  // The portfolio page is the only caller that should skip the opacity fade.
+  const immediateImage =
+    typeof document !== "undefined" && document.getElementById("portfolio");
 
   // Parent re-keys this component per project, so every project starts fresh.
   // Lock page scroll while open and focus the close button.
@@ -28,6 +39,21 @@ export default function PortfolioPagePopup({ projects, index, onClose, onNavigat
       document.body.style.overflow = previousOverflow;
     };
   }, []);
+
+  // Portfolio only. A warm or preloaded image can be complete before paint.
+  // Ecommerce leaves imageReady false so its opacity fade still runs.
+  useLayoutEffect(() => {
+    if (!immediateImage || imageSettledRef.current) {
+      return;
+    }
+
+    const node = imageRef.current;
+    const ready = Boolean(node && node.complete && node.naturalWidth > 0);
+
+    if (ready !== imageReady) {
+      setImageReady(ready);
+    }
+  }, [project.fullImage, immediateImage, imageReady]);
 
   useEffect(() => {
     const onKey = (event) => {
@@ -111,13 +137,20 @@ export default function PortfolioPagePopup({ projects, index, onClose, onNavigat
         >
           {!imageReady ? <span className="rs-ecom-popup__spinner" aria-hidden="true"></span> : null}
           <img
-            className="rs-ecom-popup__image"
+            ref={imageRef}
+            className={`rs-ecom-popup__image${
+              immediateImage ? " rs-ecom-popup__image--immediate" : ""
+            }`}
             src={project.fullImage}
             alt={imageAlt}
             decoding="async"
             style={{ width: `${zoom * 100}%`, opacity: imageReady ? 1 : 0 }}
-            onLoad={() => setImageReady(true)}
+            onLoad={() => {
+              imageSettledRef.current = true;
+              setImageReady(true);
+            }}
             onError={(event) => {
+              imageSettledRef.current = true;
               event.currentTarget.onerror = null;
               event.currentTarget.src = project.image;
               setImageReady(true);

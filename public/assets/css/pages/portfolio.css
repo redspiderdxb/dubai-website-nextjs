@@ -1314,6 +1314,11 @@
   transition: opacity 0.5s ease, width 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
+/* Portfolio page only. Ecommerce keeps the 0.5s fade from service.css. */
+.ecommerce-template .rs-ecom-popup__image.rs-ecom-popup__image--immediate {
+  transition: width 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
 .ecommerce-template .rs-ecom-popup__spinner {
   position: absolute;
   top: 40%;

@@ -18,6 +18,295 @@ import PortfolioPagePopup from "./PortfolioPagePopup";
 
 const FALLBACK_IMAGE = "/assets/img/portfolio/portfolio-1.webp";
 
+const MAX_CONCURRENT_PRELOADS = 2;
+const MAX_DECODED_IMAGES = 3;
+
+function automaticPreloadAllowed() {
+  if (typeof navigator === "undefined") {
+    return false;
+  }
+
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+  if (!connection) {
+    return true;
+  }
+
+  if (connection.saveData) {
+    return false;
+  }
+
+  return connection.effectiveType !== "2g" && connection.effectiveType !== "slow-2g";
+}
+
+function createPreloadState() {
+  return {
+    urls: [],
+    urlKey: "",
+    popupIndex: -1,
+    hovered: "",
+    queue: [],
+    inflight: new Map(),
+    decoded: new Map(),
+    recent: [],
+    requested: new Set(),
+    idleId: 0,
+    idleType: "",
+    fallbackId: 0,
+  };
+}
+
+function priorityUrls(state) {
+  const urls = [];
+  const push = (url) => {
+    if (url && !urls.includes(url)) {
+      urls.push(url);
+    }
+  };
+
+  if (state.hovered) {
+    push(state.hovered);
+  }
+
+  const list = state.urls;
+  const index = state.popupIndex;
+
+  if (index >= 0 && list[index]) {
+    push(list[index]);
+
+    if (list.length > 1) {
+      push(list[(index + 1) % list.length]);
+      push(list[(index - 1 + list.length) % list.length]);
+    }
+  }
+
+  return urls;
+}
+
+function enqueuePreload(state, url, front) {
+  if (!url) {
+    return;
+  }
+
+  const alreadyActive =
+    state.inflight.has(url) || state.decoded.has(url) || state.requested.has(url);
+
+  if (alreadyActive || state.queue.includes(url)) {
+    if (front && state.queue.includes(url)) {
+      state.queue = [url, ...state.queue.filter((item) => item !== url)];
+    }
+
+    return;
+  }
+
+  if (front) {
+    state.queue.unshift(url);
+  } else {
+    state.queue.push(url);
+  }
+}
+
+function reprioritizeQueue(state) {
+  const front = priorityUrls(state).filter((url) => state.queue.includes(url));
+
+  if (!front.length) {
+    return;
+  }
+
+  state.queue = [...front, ...state.queue.filter((url) => !front.includes(url))];
+}
+
+function trimDecodedImages(state) {
+  const keep = [];
+  const push = (url) => {
+    if (!url || keep.includes(url) || keep.length >= MAX_DECODED_IMAGES || !state.decoded.has(url)) {
+      return;
+    }
+
+    keep.push(url);
+  };
+
+  for (const url of priorityUrls(state)) {
+    push(url);
+  }
+
+  for (const url of state.recent) {
+    if (state.urls.includes(url)) {
+      push(url);
+    }
+  }
+
+  const keepSet = new Set(keep);
+
+  for (const url of state.decoded.keys()) {
+    if (!keepSet.has(url)) {
+      state.decoded.delete(url);
+    }
+  }
+
+  state.recent = state.recent.filter((url) => state.decoded.has(url));
+}
+
+function cancelScheduledPreload(state) {
+  if (state.fallbackId) {
+    clearTimeout(state.fallbackId);
+    state.fallbackId = 0;
+  }
+
+  if (!state.idleId) {
+    return;
+  }
+
+  if (state.idleType === "idle" && typeof cancelIdleCallback === "function") {
+    cancelIdleCallback(state.idleId);
+  } else {
+    clearTimeout(state.idleId);
+  }
+
+  state.idleId = 0;
+  state.idleType = "";
+}
+
+function schedulePreload(state) {
+  if (state.idleId || state.fallbackId || typeof window === "undefined") {
+    return;
+  }
+
+  // Clear both handles before downloading. A cached image can finish inside
+  // pumpPreloads and schedule the next pair; that new handle must stay.
+  const run = () => {
+    const idleId = state.idleId;
+    const idleType = state.idleType;
+    const fallbackId = state.fallbackId;
+
+    state.idleId = 0;
+    state.idleType = "";
+    state.fallbackId = 0;
+
+    if (fallbackId) {
+      clearTimeout(fallbackId);
+    }
+
+    if (idleType === "idle" && idleId && typeof cancelIdleCallback === "function") {
+      cancelIdleCallback(idleId);
+    } else if (idleId) {
+      clearTimeout(idleId);
+    }
+
+    pumpPreloads(state);
+  };
+
+  if (typeof requestIdleCallback === "function") {
+    state.idleType = "idle";
+    state.idleId = requestIdleCallback(run, { timeout: 1500 });
+    state.fallbackId = window.setTimeout(run, 1600);
+    return;
+  }
+
+  state.idleType = "timeout";
+  state.idleId = window.setTimeout(run, 200);
+}
+
+function pumpPreloads(state) {
+  if (typeof document !== "undefined" && document.hidden) {
+    return;
+  }
+
+  while (state.inflight.size < MAX_CONCURRENT_PRELOADS && state.queue.length > 0) {
+    const url = state.queue.shift();
+
+    if (!url || state.requested.has(url) || state.inflight.has(url) || state.decoded.has(url)) {
+      continue;
+    }
+
+    state.requested.add(url);
+
+    // window.Image: the file also imports next/image as Image, and the bundler
+    // would otherwise compile this into `new Image()` from that component.
+    const img = new window.Image();
+    state.inflight.set(url, img);
+    img.decoding = "async";
+
+    const finish = (ok) => {
+      if (state.inflight.get(url) === img) {
+        state.inflight.delete(url);
+      }
+
+      if (ok && img.naturalWidth > 0 && state.urls.includes(url)) {
+        state.decoded.set(url, img);
+        state.recent = [url, ...state.recent.filter((item) => item !== url)];
+        trimDecodedImages(state);
+        publishRetainedImages(state);
+      }
+
+      schedulePreload(state);
+    };
+
+    img.onload = () => finish(true);
+    img.onerror = () => finish(false);
+    img.src = url;
+  }
+}
+
+function rebuildPreloadQueue(state, resetPage) {
+  if (resetPage) {
+    const allowed = new Set(state.urls);
+
+    for (const url of state.requested) {
+      if (!allowed.has(url) && !state.inflight.has(url)) {
+        state.requested.delete(url);
+      }
+    }
+
+    for (const url of state.decoded.keys()) {
+      if (!allowed.has(url)) {
+        state.decoded.delete(url);
+      }
+    }
+
+    state.recent = state.recent.filter((url) => state.decoded.has(url));
+  }
+
+  state.queue = [];
+
+  if (automaticPreloadAllowed()) {
+    for (const url of state.urls) {
+      enqueuePreload(state, url, false);
+    }
+  }
+
+  const explicit = automaticPreloadAllowed()
+    ? priorityUrls(state)
+    : state.hovered
+      ? [state.hovered]
+      : [];
+
+  for (let index = explicit.length - 1; index >= 0; index -= 1) {
+    enqueuePreload(state, explicit[index], true);
+  }
+
+  reprioritizeQueue(state);
+  trimDecodedImages(state);
+}
+
+function prioritizePreload(state, url) {
+  if (!url || !state.urls.includes(url)) {
+    return;
+  }
+
+  state.hovered = url;
+  enqueuePreload(state, url, true);
+  reprioritizeQueue(state);
+  trimDecodedImages(state);
+  publishRetainedImages(state);
+  cancelScheduledPreload(state);
+  pumpPreloads(state);
+}
+
+function publishRetainedImages(state) {
+  state.onRetained?.(state.recent.filter((url) => state.decoded.has(url)));
+}
+
 // Approved priority order for the Websites view (CMS gallery IDs).
 // Matched only by Number(project.id); never by name or URL.
 const PINNED_PORTFOLIO_IDS = [
@@ -787,11 +1076,73 @@ export default function PortfolioGrid({
       openAria: `Open ${project.title} image in a new tab`,
     }));
 
+  const popupUrls = popupProjects.map((project) => project.fullImage);
+  const popupUrlKey = popupUrls.join("\0");
+  const preloadStateRef = useRef(null);
+  const [retainedUrls, setRetainedUrls] = useState([]);
+
   const popupScope = `${filterKey}\0${searchTerm}\0${activePage}`;
 
   const [popupScopeSeen, setPopupScopeSeen] = useState(popupScope);
 
   const [popupIndex, setPopupIndex] = useState(-1);
+
+  const prioritizeImage = (url) => {
+    if (preloadStateRef.current == null) {
+      return;
+    }
+
+    prioritizePreload(preloadStateRef.current, url);
+  };
+
+  useEffect(() => {
+    if (preloadStateRef.current == null) {
+      preloadStateRef.current = createPreloadState();
+    }
+
+    const state = preloadStateRef.current;
+
+    state.onRetained = (urls) => {
+      setRetainedUrls((current) => {
+        if (current.length === urls.length && current.every((url, index) => url === urls[index])) {
+          return current;
+        }
+
+        return urls;
+      });
+    };
+    const urls = popupUrlKey ? popupUrlKey.split("\0") : [];
+    const pageChanged = state.urlKey !== popupUrlKey;
+
+    state.urlKey = popupUrlKey;
+    state.urls = urls;
+    state.popupIndex = popupIndex;
+    rebuildPreloadQueue(state, pageChanged);
+    schedulePreload(state);
+
+    const onVisible = () => {
+      if (!document.hidden) {
+        schedulePreload(state);
+      }
+    };
+
+    document.addEventListener("visibilitychange", onVisible);
+
+    const connection =
+      navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const onConnection = () => {
+      rebuildPreloadQueue(state, false);
+      schedulePreload(state);
+    };
+
+    connection?.addEventListener?.("change", onConnection);
+
+    return () => {
+      document.removeEventListener("visibilitychange", onVisible);
+      connection?.removeEventListener?.("change", onConnection);
+      cancelScheduledPreload(state);
+    };
+  }, [popupUrlKey, popupIndex]);
 
   if (popupScopeSeen !== popupScope) {
     setPopupScopeSeen(popupScope);
@@ -1142,6 +1493,11 @@ export default function PortfolioGrid({
 
                 <div
                   className="portfolio-content"
+                  onMouseEnter={() => {
+                    if (!project.isYoutube && project.image) {
+                      prioritizeImage(project.image);
+                    }
+                  }}
                   style={
                     project.isYoutube
                       ? {
@@ -1193,6 +1549,8 @@ export default function PortfolioGrid({
                             className="preview-link"
                             data-popup-id={project.id}
                             aria-label={`Open ${project.title} preview`}
+                            onMouseEnter={() => prioritizeImage(project.image)}
+                            onFocus={() => prioritizeImage(project.image)}
                             onClick={(event) => openPopup(event, project.id)}
                           >
                             <i className="bi bi-zoom-in" aria-hidden="true"></i>
@@ -1321,6 +1679,7 @@ export default function PortfolioGrid({
           key={popupProjects[popupIndex].id}
           projects={popupProjects}
           index={popupIndex}
+          imageDecoded={retainedUrls.includes(popupProjects[popupIndex].fullImage)}
           onClose={closePopup}
           onNavigate={setPopupIndex}
         />
