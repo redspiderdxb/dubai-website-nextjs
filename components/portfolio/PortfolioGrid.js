@@ -1,4 +1,3 @@
-import "glightbox/dist/css/glightbox.min.css";
 import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +14,7 @@ import {
   buildPortfolioPath,
 } from "../../lib/portfolioFilters";
 import ThemedSelect from "../ui/ThemedSelect";
+import PortfolioPagePopup from "./PortfolioPagePopup";
 
 const FALLBACK_IMAGE = "/assets/img/portfolio/portfolio-1.webp";
 
@@ -352,7 +352,7 @@ export default function PortfolioGrid({
   initialIndustry = "",
 }) {
   const router = useRouter();
-  const lightboxInstance = useRef(null);
+  const popupTriggerRef = useRef(null);
 
   const PER_PAGE = 24;
   const PAGES_PER_GROUP = 6;
@@ -465,52 +465,6 @@ export default function PortfolioGrid({
       mounted = false;
     };
   }, []);
-
-  // ============================================
-  // GLightbox
-  // ============================================
-
-  useEffect(() => {
-    let mounted = true;
-
-    if (lightboxInstance.current) {
-      lightboxInstance.current.destroy();
-
-      lightboxInstance.current = null;
-    }
-
-    import("glightbox").then((module) => {
-      if (!mounted) {
-        return;
-      }
-
-      const GLightbox = module.default;
-
-      if (!GLightbox) {
-        return;
-      }
-
-      lightboxInstance.current = GLightbox({
-        selector: ".glightbox",
-
-        touchNavigation: true,
-
-        loop: true,
-
-        autoplayVideos: true,
-      });
-    });
-
-    return () => {
-      mounted = false;
-
-      if (lightboxInstance.current) {
-        lightboxInstance.current.destroy();
-
-        lightboxInstance.current = null;
-      }
-    };
-  }, [galleries]);
 
   // ============================================
   // Category Keyword Rules
@@ -820,6 +774,80 @@ export default function PortfolioGrid({
     return filteredProjectsBeforePagination.slice(startIndex, endIndex);
   }, [filteredProjectsBeforePagination, activePage]);
 
+  // Current page only, in the order already on screen. YouTube cards stay embeds.
+  const popupProjects = filteredProjects
+    .filter((project) => !project.isYoutube && project.image)
+    .map((project) => ({
+      id: project.id,
+      title: project.title,
+      image: project.image,
+      fullImage: project.image,
+      imageAlt: `${project.title} preview`,
+      openLabel: "Open image",
+      openAria: `Open ${project.title} image in a new tab`,
+    }));
+
+  const popupScope = `${filterKey}\0${searchTerm}\0${activePage}`;
+
+  const [popupScopeSeen, setPopupScopeSeen] = useState(popupScope);
+
+  const [popupIndex, setPopupIndex] = useState(-1);
+
+  if (popupScopeSeen !== popupScope) {
+    setPopupScopeSeen(popupScope);
+
+    if (popupIndex !== -1) {
+      setPopupIndex(-1);
+    }
+  }
+
+  const pendingFocusId = useRef("");
+
+  const closePopup = () => {
+    pendingFocusId.current = popupTriggerRef.current?.getAttribute("data-popup-id") || "";
+    setPopupIndex(-1);
+  };
+
+  useEffect(() => {
+    if (popupIndex !== -1 || !pendingFocusId.current) {
+      return;
+    }
+
+    const triggerId = pendingFocusId.current;
+    pendingFocusId.current = "";
+
+    const trigger = document.querySelector(
+      `#portfolio button.preview-link[data-popup-id="${CSS.escape(triggerId)}"]`,
+    );
+
+    if (!trigger) {
+      return;
+    }
+
+    // Hidden zoom controls use visibility:hidden !important until hover.
+    trigger.classList.add("is-returning-focus");
+    void trigger.offsetWidth;
+    trigger.focus({ preventScroll: true });
+
+    const clear = () => {
+      trigger.classList.remove("is-returning-focus");
+      trigger.removeEventListener("blur", clear);
+    };
+
+    trigger.addEventListener("blur", clear);
+  }, [popupIndex]);
+
+  const openPopup = (event, projectId) => {
+    const index = popupProjects.findIndex((item) => item.id === projectId);
+
+    if (index < 0) {
+      return;
+    }
+
+    popupTriggerRef.current = event.currentTarget;
+    setPopupIndex(index);
+  };
+
   if (!pageChanged && currentPage > totalPages) {
     setCurrentPage(totalPages);
   }
@@ -1001,10 +1029,12 @@ export default function PortfolioGrid({
               aria-label="Industry Type"
               options={[
                 { value: "", label: "Industry Type" },
-                ...PORTFOLIO_INDUSTRIES.map((industry) => ({
-                  value: industry.value,
-                  label: industry.label,
-                })),
+                ...PORTFOLIO_INDUSTRIES.filter((industry) => industry.value !== "daily-deals").map(
+                  (industry) => ({
+                    value: industry.value,
+                    label: industry.label,
+                  }),
+                ),
               ]}
             />
 
@@ -1081,6 +1111,7 @@ export default function PortfolioGrid({
                       target="_blank"
                       rel="noopener noreferrer"
                       className="portfolio-card-title-link"
+                      onClick={(event) => event.stopPropagation()}
                       title={
                         project.isYoutube
                           ? `Open ${project.title} on YouTube`
@@ -1140,6 +1171,7 @@ export default function PortfolioGrid({
                           className="portfolio-project-link"
                           title={`Visit ${project.title} website`}
                           aria-label={`Visit ${project.title} website`}
+                          onClick={(event) => event.stopPropagation()}
                         >
                           <img
                             src="/assets/img/project-link.svg"
@@ -1155,14 +1187,16 @@ export default function PortfolioGrid({
                         <p>{project.category}</p>
 
                         {project.image && (
-                          <a
-                            href={project.image}
+                          <button
+                            type="button"
                             title={project.title}
-                            data-gallery="portfolio-gallery"
-                            className="glightbox preview-link"
+                            className="preview-link"
+                            data-popup-id={project.id}
+                            aria-label={`Open ${project.title} preview`}
+                            onClick={(event) => openPopup(event, project.id)}
                           >
                             <i className="bi bi-zoom-in" aria-hidden="true"></i>
-                          </a>
+                          </button>
                         )}
 
                         {hasProjectLink && (
@@ -1172,6 +1206,7 @@ export default function PortfolioGrid({
                               rel="noopener noreferrer"
                               title="More Details"
                               className="details-link"
+                              onClick={(event) => event.stopPropagation()}
                             >
                               <i
                                 className="bi bi-link-45deg"
@@ -1280,6 +1315,16 @@ export default function PortfolioGrid({
           </div>
         )}
       </div>
+
+      {popupIndex >= 0 && popupProjects[popupIndex] ? (
+        <PortfolioPagePopup
+          key={popupProjects[popupIndex].id}
+          projects={popupProjects}
+          index={popupIndex}
+          onClose={closePopup}
+          onNavigate={setPopupIndex}
+        />
+      ) : null}
     </section>
   );
 }
