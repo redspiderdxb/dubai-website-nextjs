@@ -348,6 +348,25 @@ const HIDDEN_PROJECT_URL_IDS = new Set([
   ...MANUAL_HIDDEN_IDS,
 ]);
 
+// Store icons on Mobile App cards (replace the link icon on those cards).
+// Only verified store URLs are listed. Feeta.pk (135) has no verified Android URL yet.
+const MOBILE_APP_STORE_LINKS = {
+  234: {
+    name: "WapiNEXA",
+    ios: "https://apps.apple.com/us/app/wapinexa/id6831900316",
+    android: "https://play.google.com/store/apps/details?id=com.wapinexa",
+  },
+  135: {
+    name: "Feeta.pk",
+    ios: "https://apps.apple.com/ae/app/feeta-pk/id1523096134",
+  },
+  28: {
+    name: "RedSpider",
+    ios: "https://apps.apple.com/us/app/redspider-web-art-design/id6748980550",
+    android: "https://play.google.com/store/apps/details?id=com.app.redspider&hl=en",
+  },
+};
+
 // Temporary card-level hiding on /our-portfolio/. Reverse by changing this flag.
 // true:  hide (1) projects with a null, empty, whitespace-only or "#" project_url
 //             and (2) projects whose ID is in HIDDEN_PROJECT_URL_IDS.
@@ -631,9 +650,18 @@ function PortfolioYoutubeItem({ title, videoId }) {
   const embedUrl = videoId
     ? `https://www.youtube-nocookie.com/embed/${videoId}`
     : "";
-  const thumb = videoId
+  // Highest quality first (1280x720); hqdefault (480x360) when maxres is missing.
+  const maxThumb = videoId
+    ? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`
+    : FALLBACK_IMAGE;
+  const hqThumb = videoId
     ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
     : FALLBACK_IMAGE;
+  const [thumb, setThumb] = useState(maxThumb);
+
+  useEffect(() => {
+    setThumb(maxThumb);
+  }, [maxThumb]);
 
   if (playing && embedUrl) {
     return (
@@ -662,7 +690,12 @@ function PortfolioYoutubeItem({ title, videoId }) {
           alt={title}
           fill
           sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "contain", objectPosition: "center" }}
+          onError={() => {
+            if (thumb !== hqThumb) {
+              setThumb(hqThumb);
+            }
+          }}
         />
         <span className="portfolio-play-icon" aria-hidden="true">
           <i className="bi bi-play-fill"></i>
@@ -1498,6 +1531,7 @@ export default function PortfolioGrid({
                 !HIDDEN_PROJECT_URL_IDS.has(Number(project.id)) &&
                 String(project.project_url || "").trim() !== "" &&
                 String(project.project_url).trim() !== "#";
+              const storeLinks = MOBILE_APP_STORE_LINKS[Number(project.id)];
 
               return (
               <div
@@ -1506,38 +1540,77 @@ export default function PortfolioGrid({
               >
                 <div className="portfolio-card-heading">
                   <p className="portfolio-card-title">{project.title}</p>
-                  {hasProjectLink && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="portfolio-card-title-link"
-                      onClick={(event) => event.stopPropagation()}
-                      title={
-                        project.isYoutube
-                          ? `Open ${project.title} on YouTube`
-                          : `Visit ${project.title} website`
-                      }
-                      aria-label={
-                        project.isYoutube
-                          ? `Open ${project.title} on YouTube`
-                          : `Visit ${project.title} website`
-                      }
-                    >
-                      <svg
-                        className="portfolio-card-title-link-icon"
-                        viewBox="0 0 24 24"
-                        width="16"
-                        height="16"
-                        aria-hidden="true"
-                        focusable="false"
+                  {storeLinks ? (
+                    <div className="portfolio-store-links">
+                      {storeLinks.ios && (
+                        <a
+                          href={storeLinks.ios}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="portfolio-store-link"
+                          title={`Download ${storeLinks.name} on Apple App Store`}
+                          aria-label={`Download ${storeLinks.name} on Apple App Store`}
+                          onClick={(event) => event.stopPropagation()}
+                        >
+                          <img
+                            src="/assets/img/store/app-store.svg"
+                            alt=""
+                            aria-hidden="true"
+                          />
+                        </a>
+                      )}
+                      {storeLinks.android && (
+                        <a
+                          href={storeLinks.android}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="portfolio-store-link"
+                          title={`Download ${storeLinks.name} on Google Play`}
+                          aria-label={`Download ${storeLinks.name} on Google Play`}
+                          onClick={(event) => event.stopPropagation()}
+                        >
+                          <img
+                            src="/assets/img/store/google-play.svg"
+                            alt=""
+                            aria-hidden="true"
+                          />
+                        </a>
+                      )}
+                    </div>
+                  ) : (
+                    hasProjectLink && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="portfolio-card-title-link"
+                        onClick={(event) => event.stopPropagation()}
+                        title={
+                          project.isYoutube
+                            ? `Open ${project.title} on YouTube`
+                            : `Visit ${project.title} website`
+                        }
+                        aria-label={
+                          project.isYoutube
+                            ? `Open ${project.title} on YouTube`
+                            : `Visit ${project.title} website`
+                        }
                       >
-                        <path
-                          fill="currentColor"
-                          d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"
-                        />
-                      </svg>
-                    </a>
+                        <svg
+                          className="portfolio-card-title-link-icon"
+                          viewBox="0 0 24 24"
+                          width="16"
+                          height="16"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"
+                          />
+                        </svg>
+                      </a>
+                    )
                   )}
                 </div>
 
@@ -1569,7 +1642,7 @@ export default function PortfolioGrid({
                         alt={`${project.title} web design project by RedSpider Dubai`}
                         priority={activePage === 1 && index < 2}
                       />
-                      {hasProjectLink && (
+                      {hasProjectLink && !storeLinks && (
                         <a
                           href={project.link}
                           target="_blank"

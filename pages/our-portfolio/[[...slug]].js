@@ -35,7 +35,7 @@ export default function Portfolio({
 
   return (
     <Layout>
-      <PageStyles href="/assets/css/pages/portfolio.css?v=portfolio-spacing-11" />
+      <PageStyles href="/assets/css/pages/portfolio.css?v=portfolio-video-thumbs-1" />
 
       <SEO
         {...seoData}

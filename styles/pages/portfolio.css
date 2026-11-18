@@ -373,7 +373,7 @@
 }
 
 .portfolio-youtube-facade img {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -891,6 +891,91 @@
 
 #portfolio .portfolio-info .details-link {
   left: calc(50% + 5px) !important;
+}
+
+/* Mobile App store icons: right end of the card title row.
+   No visible container: the full-colour artwork sits directly on the row,
+   with a transparent hit area so the icons stay easy to tap. */
+
+#portfolio .portfolio-card-heading .portfolio-store-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+#portfolio .portfolio-card-heading .portfolio-store-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background-color: transparent;
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.25s ease;
+}
+
+#portfolio .portfolio-card-heading .portfolio-store-link img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  transform: translateY(0) scale(1);
+  transform-origin: center;
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+#portfolio .portfolio-card-heading .portfolio-store-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+#portfolio .portfolio-card-heading .portfolio-store-link:hover img {
+  transform: translateY(-2px) scale(1.06);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.18));
+}
+
+#portfolio .portfolio-card-heading .portfolio-store-link:active {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+#portfolio .portfolio-card-heading .portfolio-store-link:active img {
+  transform: translateY(0) scale(0.92);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
+#portfolio .portfolio-card-heading .portfolio-store-link:focus-visible {
+  outline: 2px solid var(--accent-color, #de1515);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  #portfolio .portfolio-card-heading .portfolio-store-link {
+    width: 32px;
+    height: 32px;
+  }
+
+  #portfolio .portfolio-card-heading .portfolio-store-link img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #portfolio .portfolio-card-heading .portfolio-store-link,
+  #portfolio .portfolio-card-heading .portfolio-store-link img,
+  #portfolio .portfolio-card-heading .portfolio-store-link:hover img,
+  #portfolio .portfolio-card-heading .portfolio-store-link:active img {
+    transition: none;
+    transform: none;
+  }
 }
 
 /* ============================================
