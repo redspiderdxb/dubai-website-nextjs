@@ -348,6 +348,23 @@ const HIDDEN_PROJECT_URL_IDS = new Set([
   ...MANUAL_HIDDEN_IDS,
 ]);
 
+// Temporary card-level hiding on /our-portfolio/. Reverse by changing this flag.
+// true:  hide (1) projects with a null, empty, whitespace-only or "#" project_url
+//             and (2) projects whose ID is in HIDDEN_PROJECT_URL_IDS.
+// false: show all projects, with the original card and link behaviour.
+const HIDE_UNAVAILABLE_PORTFOLIO_PROJECTS = true;
+
+// Same URL rule as hasProjectLink: a link is usable only when it is non-empty and not "#".
+const hasUsableProjectUrl = (project) => {
+  const url = String(project.project_url || "").trim();
+
+  return url !== "" && url !== "#";
+};
+
+const isUnavailablePortfolioProject = (project) =>
+  !hasUsableProjectUrl(project) ||
+  HIDDEN_PROJECT_URL_IDS.has(Number(project.id));
+
 // Moves pinned projects to the top in the approved sequence.
 // Pinned IDs missing from the data are skipped (no empty cards).
 // All other projects keep their existing API order after them.
@@ -375,15 +392,12 @@ function applyPinnedOrder(projects) {
   // Groups after the pinned 21, each keeping API order:
   // 1. working/approved URL, 2. no URL,
   // 3. NOT_WORKING with link hidden, 4. remaining MANUAL with link hidden.
-  const hasUrl = (project) =>
-    String(project.project_url || "").trim() !== "" &&
-    String(project.project_url).trim() !== "#";
-
   const workingOrApproved = rest.filter(
     (project) =>
-      hasUrl(project) && !HIDDEN_PROJECT_URL_IDS.has(Number(project.id)),
+      hasUsableProjectUrl(project) &&
+      !HIDDEN_PROJECT_URL_IDS.has(Number(project.id)),
   );
-  const noUrl = rest.filter((project) => !hasUrl(project));
+  const noUrl = rest.filter((project) => !hasUsableProjectUrl(project));
   const notWorkingHidden = rest.filter((project) =>
     NOT_WORKING_HIDDEN_IDS.has(Number(project.id)),
   );
@@ -398,6 +412,29 @@ function applyPinnedOrder(projects) {
     ...notWorkingHidden,
     ...manualHidden,
   ];
+}
+
+// Moves one project to a fixed 0-based index in an already ordered list.
+// Returns the list unchanged if the project is absent or the index is out of range.
+function placeProjectAtIndex(projects, id, index) {
+  const currentIndex = projects.findIndex(
+    (project) => Number(project.id) === id,
+  );
+
+  if (
+    currentIndex === -1 ||
+    currentIndex === index ||
+    index >= projects.length
+  ) {
+    return projects;
+  }
+
+  const next = projects.slice();
+  const [project] = next.splice(currentIndex, 1);
+
+  next.splice(index, 0, project);
+
+  return next;
 }
 
 function getAssetUrl() {
@@ -1009,6 +1046,14 @@ export default function PortfolioGrid({
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
     const matchedProjects = allGalleries.filter((project) => {
+      // Card-level hiding (before category, industry, search and pagination)
+      if (
+        HIDE_UNAVAILABLE_PORTFOLIO_PROJECTS &&
+        isUnavailablePortfolioProject(project)
+      ) {
+        return false;
+      }
+
       // Category
       const categoryMatch = matchesCategory(project, filter);
 
@@ -1041,7 +1086,12 @@ export default function PortfolioGrid({
 
     // Websites view only (no industry filter): pinned projects first
     if (filter === "filter-websites" && !industryFilter) {
-      return applyPinnedOrder(matchedProjects);
+      const pinnedOrder = applyPinnedOrder(matchedProjects);
+
+      // Default view only (no search): CMS 235 at Page 2, position 1 (index 24)
+      return normalizedSearch
+        ? pinnedOrder
+        : placeProjectAtIndex(pinnedOrder, 235, 24);
     }
 
     return matchedProjects;

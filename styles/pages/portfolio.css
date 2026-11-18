@@ -623,6 +623,11 @@
   margin-bottom: 0;
 }
 
+/* Row gap between card rows (Bootstrap .gy-4 = 1.5rem); column gap (--bs-gutter-x) unchanged */
+#portfolio .isotope-container {
+  --bs-gutter-y: 2.25rem;
+}
+
 /* Always-visible title + link above the image (red badge/LINK untouched) */
 #portfolio .portfolio-card-heading {
   display: flex !important;
