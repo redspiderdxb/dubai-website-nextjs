@@ -618,7 +618,7 @@ const nextConfig = {
       },
       {
         source: "/ppc-marketing-for-dubai-run-tactics-to-boost-dubai-run-event-registration//",
-        destination: "/blog/ppc-marketing-for-dubai-run/",
+        destination: "/blog/ppc-marketing-for-dubai-run-tactics-to-boost-dubai-run-event-registration/",
         permanent: true,
         statusCode: 301,
       },
@@ -636,7 +636,7 @@ const nextConfig = {
       },
       {
         source: "/ppc-marketing-for-dubai-run-tactics-to-boost-dubai-run-event-registration/",
-        destination: "/blog/ppc-marketing-for-dubai-run/",
+        destination: "/blog/ppc-marketing-for-dubai-run-tactics-to-boost-dubai-run-event-registration/",
         permanent: true,
         statusCode: 301,
       },
@@ -1023,7 +1023,7 @@ const nextConfig = {
       },
       {
         source: "/how-to-present-substance-in-the-most-ideal-way-imaginable/",
-        destination: "/blog/how-to-present-substance-on-a-website/",
+        destination: "/blog/how-to-present-substance-in-the-most-ideal-way-imaginable/",
         permanent: true,
         statusCode: 301,
       },
@@ -1305,6 +1305,25 @@ const nextConfig = {
       {
         source: "/how-to-form-404-error-reports-in-wordpress-web-development/",
         destination: "/blog/forming-404-error/",
+        permanent: true,
+        statusCode: 301,
+      },
+      // Legacy URLs approved 2026-11-19: exact 301s to the trailing-slash form.
+      {
+        source: "/blog/how-to-present-substance-on-a-website/",
+        destination: "/blog/how-to-present-substance-in-the-most-ideal-way-imaginable/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/portfolios/pixium-mobile/",
+        destination: "/our-portfolio/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/ppc-marketing-for-dubai-run/",
+        destination: "/blog/ppc-marketing-for-dubai-run-tactics-to-boost-dubai-run-event-registration/",
         permanent: true,
         statusCode: 301,
       },
