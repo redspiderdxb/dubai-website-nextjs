@@ -139,10 +139,6 @@ export default function Footer() {
       name: "Cookie Policy",
       path: "/cookie-policy/",
     },
-    {
-      name: "Refund Policy",
-      path: "/refund-policy/",
-    },
   ];
 
   /* =====================================================
