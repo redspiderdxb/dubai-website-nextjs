@@ -123,6 +123,29 @@ export default function Footer() {
   ];
 
   /* =====================================================
+     LEGAL / POLICY LINKS (footer copyright row)
+  ===================================================== */
+
+  const legalLinks = [
+    {
+      name: "Privacy Policy",
+      path: "/privacy-policy/",
+    },
+    {
+      name: "Terms & Conditions",
+      path: "/terms-and-conditions/",
+    },
+    {
+      name: "Cookie Policy",
+      path: "/cookie-policy/",
+    },
+    {
+      name: "Refund Policy",
+      path: "/refund-policy/",
+    },
+  ];
+
+  /* =====================================================
      SOCIAL ICONS
   ===================================================== */
 
@@ -323,6 +346,14 @@ export default function Footer() {
             <p className="rs-copyright">
               © Copyright 2026, RedSpider. All Rights Reserved.
             </p>
+
+            <ul className="rs-legal-links" aria-label="Policies">
+              {legalLinks.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.path}>{link.name}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </footer>
