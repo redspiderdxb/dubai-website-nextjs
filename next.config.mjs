@@ -1327,6 +1327,24 @@ const nextConfig = {
         permanent: true,
         statusCode: 301,
       },
+      {
+        source: "/blog/top-real-estate-web-design-companies-dubai/",
+        destination: "/products/real-estate-portal/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/blog/top-real-estate-web-designing-companies/",
+        destination: "/products/real-estate-portal/",
+        permanent: true,
+        statusCode: 301,
+      },
+      {
+        source: "/top-real-estate-web-designing-companies/",
+        destination: "/products/real-estate-portal/",
+        permanent: true,
+        statusCode: 301,
+      },
     ];
   },
 
