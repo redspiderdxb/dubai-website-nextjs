@@ -4115,6 +4115,39 @@ main:has(.contact-cta)~.rs-footer-sec::before {
   line-height: 1.3;
 }
 
+/* Policy links shown under the copyright line */
+.rs-footer-copyright .rs-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 14px;
+
+  margin: 8px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.rs-footer-copyright .rs-legal-links li {
+  margin: 0;
+  padding: 0;
+}
+
+.rs-footer-copyright .rs-legal-links a {
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 10px;
+  line-height: 1.3;
+  text-decoration: none;
+
+  transition: color 0.25s ease;
+}
+
+.rs-footer-copyright .rs-legal-links a:hover,
+.rs-footer-copyright .rs-legal-links a:focus-visible {
+  color: #ed1c24;
+}
+
 @media (min-width: 992px) {
 
   .rs-footer-right .rs-social {
