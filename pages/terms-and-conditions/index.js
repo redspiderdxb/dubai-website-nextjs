@@ -81,7 +81,7 @@ const sections = [
     id: "terms-termination",
     heading: "Termination",
     paragraphs: [
-      "Either party may end a project by giving written notice. On termination you will pay for all work completed up to the date of termination, and any non-cancellable third-party costs already incurred. Our refund position is set out in our Refund Policy.",
+      "Either party may end a project by giving written notice. On termination you will pay for all work completed up to the date of termination, and any non-cancellable third-party costs already incurred. Any refunds are handled as agreed in your written proposal.",
     ],
   },
   {
