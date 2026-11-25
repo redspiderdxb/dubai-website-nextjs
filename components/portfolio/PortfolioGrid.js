@@ -1053,6 +1053,22 @@ export default function PortfolioGrid({
     }
 
     // ------------------------------------------
+    // eCommerce (same keywords as the E-Commerce industry, plus "marketplace")
+    // ------------------------------------------
+
+    if (selectedFilter === "filter-ecommerce") {
+      return containsKeyword(text, [...industryKeywords.ecommerce, "marketplace"]);
+    }
+
+    // ------------------------------------------
+    // Real Estate (same keywords as the Real Estate industry)
+    // ------------------------------------------
+
+    if (selectedFilter === "filter-realestate") {
+      return containsKeyword(text, industryKeywords["real-estate"]);
+    }
+
+    // ------------------------------------------
     // Websites
     // ------------------------------------------
 
