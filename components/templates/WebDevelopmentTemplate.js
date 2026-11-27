@@ -16,51 +16,51 @@ const SERVICE_ICONS = [
 const ADVANTAGE_CARDS = [
   {
     number: "01",
-    title: "Industry Experience Across UAE",
+    title: "Industry Experience Across the UAE",
     description:
-      "Experience across real estate, corporate, healthcare, education, retail, and service business websites across Dubai and the UAE.",
+      "We've developed websites for real estate, corporate, healthcare, education, retail, and service businesses in Dubai and across the UAE.",
     icon: "/assets/img/web-development/advantage/1.webp",
   },
   {
     number: "02",
-    title: "Strategic Layout & User Experience",
+    title: "Clear Site Structure and Navigation",
     description:
-      "Clear structure and intuitive navigation designed to improve engagement and usability.",
+      "We organise pages and navigation so visitors can find the information they need on desktop and mobile.",
     icon: "/assets/img/web-development/advantage/2.webp",
   },
   {
     number: "03",
-    title: "Conversion-Focused Structure",
+    title: "Enquiry Forms and Lead Capture",
     description:
-      "Smart visual flow and strong calls to action built for lead generation.",
+      "We build and test enquiry forms so visitors can submit their details and your team can receive them.",
     icon: "/assets/img/web-development/advantage/3.webp",
   },
   {
     number: "04",
     title: "SEO-Friendly Foundation",
     description:
-      "Clean, fast, and search-optimized website structure from the start.",
+      "We build around clear page URLs, a logical site structure, and performance checks to support search visibility.",
     icon: "/assets/img/web-development/advantage/4.webp",
   },
   {
     number: "05",
-    title: "Custom UI/UX Approach",
+    title: "Custom Features and Integrations",
     description:
-      "Tailored design aligned with brand identity, uniqueness, and consistency.",
+      "We develop the features your website needs and use APIs to connect compatible third-party systems where the project calls for it.",
     icon: "/assets/img/web-development/advantage/5.webp",
   },
   {
     number: "06",
-    title: "Scalable & Future-Ready",
+    title: "Built for Updates and Growth",
     description:
-      "Flexible design built for future updates, integration, and growth.",
+      "We plan the build so new pages, features, and integrations can be added as your requirements change.",
     icon: "/assets/img/web-development/advantage/6.webp",
   },
   {
     number: "07",
     title: "Transparent Workflow & Timelines",
     description:
-      "A structured process from wireframing to deployment with clarity at each step.",
+      "We outline the scope, key stages, and expected timeline from technical planning to deployment.",
     icon: "/assets/img/web-development/advantage/7.webp",
   },
 ];
@@ -68,37 +68,37 @@ const ADVANTAGE_CARDS = [
 const WORKFLOW_STEPS = [
   {
     number: "01",
-    title: "Requirement Analysis",
+    title: "Requirements Analysis",
     description:
-      "We analyze business goals, target audience, and technical needs.",
+      "We review your business goals, who will use the website, and the features and systems it needs to support.",
     icon: "/assets/img/web-development/workflow/1.webp",
   },
   {
     number: "02",
-    title: "Wireframe & Structure Planning",
+    title: "Website Structure Planning",
     description:
       "We define user flow, content hierarchy, and navigation structure.",
     icon: "/assets/img/web-development/workflow/2.webp",
   },
   {
     number: "03",
-    title: "UI/UX Planning",
+    title: "Technical Planning",
     description:
-      "We craft engaging, intuitive interfaces that strengthen user experience.",
+      "We select the CMS or development approach and plan how the main features and integrations will work together.",
     icon: "/assets/img/web-development/workflow/3.webp",
   },
   {
     number: "04",
     title: "Development & Integration",
     description:
-      "We build responsive pages and integrate required features seamlessly.",
+      "We build responsive pages, develop the agreed features, and connect the required third-party systems.",
     icon: "/assets/img/web-development/workflow/4.webp",
   },
   {
     number: "05",
-    title: "Testing & Optimization",
+    title: "Testing & Optimisation",
     description:
-      "We test and optimize to ensure smooth performance across devices.",
+      "Before launch, we check pages, forms, and key functions across devices. We review page speed and resolve issues found during testing.",
     icon: "/assets/img/web-development/workflow/5.webp",
   },
 ];
@@ -109,12 +109,10 @@ export default function WebDevelopmentTemplate({ data }) {
   }
 
   const {
-    hero_subtitle,
     hero_description,
     hero_image,
     hero_background,
     intro_small_heading = "Web Development · Dubai, UAE",
-    intro_description = "We build modern websites that reflect your brand. Our team creates responsive, SEO-friendly websites that help businesses grow online.",
     features = [],
     faqs = [],
     gallery = [],
@@ -225,27 +223,24 @@ export default function WebDevelopmentTemplate({ data }) {
             <div className="rs-process-title-sec">
               <h1 className="rs-process-title mb-3">
                 Web Development
-                {hero_subtitle ? (
-                  <span className="rs-process-highlight">
-                    Company in Dubai
-                    <svg
-                      className="rs-process-underline"
-                      viewBox="0 0 320 22"
-                      preserveAspectRatio="none"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
-                    </svg>
-                  </span>
-                ) : null}
+                <span className="rs-process-highlight">
+                  Company Dubai
+                  <svg
+                    className="rs-process-underline"
+                    viewBox="0 0 320 22"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 16 C70 8,130 20,195 13 S270 10,315 14" />
+                  </svg>
+                </span>
               </h1>
               {hero_description ? (
                 <p className="rs-process-text mb-3">
-                  RedSpider provides custom web development solutions for
-                  businesses that need reliable, scalable and easy-to-manage
-                  websites. From CMS development and WordPress solutions to
-                  custom functionality and integrations, we build websites
-                  around practical business and technical requirements.
+                  RedSpider is a website development company that builds custom
+                  websites for businesses in Dubai and across the UAE. We develop
+                  WordPress sites, set up content management systems, and connect
+                  websites to payment gateways and other business tools.
                 </p>
               ) : null}
             </div>
@@ -262,11 +257,15 @@ export default function WebDevelopmentTemplate({ data }) {
               <div className="rs-creative-intro__meta">
                 </div>
               <div className="rs-creative-intro__copy">
-                <p className="rs-creative-intro__lead">{intro_description}</p>
+                <p className="rs-creative-intro__lead">
+                  Our website developers in Dubai build and test responsive pages,
+                  forms, and site features across devices.
+                </p>
                 <p className="rs-creative-intro__support">
-                  From a simple business website to a custom platform, we plan
-                  structure, design and development so your site stays easy to
-                  manage and ready to grow.
+                  From a straightforward business website to a custom platform, we
+                  plan the content structure and technical requirements early so
+                  your team can manage the site and add features as the business
+                  grows.
                 </p>
                 <a className="rs-creative-link" href="#web-development-services">
                   Explore our services
@@ -358,14 +357,13 @@ export default function WebDevelopmentTemplate({ data }) {
             <div className="rs-wd-advantage__intro" data-aos="fade-up">
               <p className="rs-wd-advantage__eyebrow">Our Advantage</p>
               <h2>
-                Why is <span>RedSpider</span> a trustworthy{" "}
-                <br />
-                choice for businesses?
+                Why Businesses Choose <span>RedSpider</span> for Web Development
               </h2>
               <p>
-                We combine industry experience, strategic design, and a
-                results-driven approach to deliver websites that help
-                businesses grow with confidence.
+                RedSpider is a web development company Dubai businesses work with
+                across a range of industries. We agree on what your website needs
+                to do and build it so your team can manage content and add
+                features as your business grows.
               </p>
             </div>
 
@@ -423,10 +421,9 @@ export default function WebDevelopmentTemplate({ data }) {
           <div className="rs-wd-workflow__inner">
             <div className="rs-wd-workflow__intro" data-aos="fade-up">
               <p className="rs-wd-workflow__eyebrow">How we work</p>
-              <h2>Web Design &amp; Development in Dubai</h2>
+              <h2>Our Process for Web Development in Dubai</h2>
               <p>
-                Dubai is a web design and development company with extensive
-                experience and track record.
+                {"If you're planning web development in Dubai, tell us what your website needs to do and which tools it needs to connect to. We'll define the technical requirements before we build, integrate, and test your site."}
               </p>
             </div>
 

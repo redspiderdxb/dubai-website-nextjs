@@ -7,7 +7,7 @@ import PortfolioPagePopup from "../portfolio/PortfolioPagePopup";
 const ECOMMERCE_SOLUTIONS = [
   {
     title: "Custom Ecommerce Website Development",
-    description: "We build tailored ecommerce websites for your business goals.",
+    description: "We build custom ecommerce websites around your business goals.",
     icon: "/assets/img/ecommerce-solutions/custom-website.svg",
   },
   {
@@ -84,7 +84,7 @@ const ECOMMERCE_PLATFORMS = [
   {
     title: "Laravel Ecommerce",
     description:
-      "Custom ecommerce solutions tailored to your business processes, integrations, performance, and operational requirements.",
+      "Custom ecommerce solutions designed around your business processes, integrations, performance, and operational requirements.",
     icon: "/assets/img/ecommerce-platforms/laravel.svg",
   },
   {
@@ -113,7 +113,7 @@ const PROCESS_STEPS = [
   {
     title: "Requirement Analysis",
     description:
-      "We analyze your business goals, target audience, and ecommerce requirements to create a clear project roadmap.",
+      "We analyse your business goals, target audience, and ecommerce requirements to create a clear project roadmap.",
     icon: "/assets/img/ecommerce-process/process-01-requirement-analysis.png",
     width: 200,
     height: 176,
@@ -129,7 +129,7 @@ const PROCESS_STEPS = [
   {
     title: "Design & Development",
     description:
-      "We create visually appealing designs with a focus on user experience and conversion optimization.",
+      "We create visually appealing designs with a focus on user experience and conversion optimisation.",
     icon: "/assets/img/ecommerce-process/process-03-design-development.png",
     width: 196,
     height: 156,
@@ -206,6 +206,10 @@ const getProjectHost = (url) => {
     return url;
   }
 };
+
+// Approved CTA paragraph for the ecommerce-web-design-dubai page (the CMS heading already matches).
+const CTA_DESCRIPTION =
+  "Let RedSpider be your ecommerce web development agency and help you build a powerful online store that helps you sell more and grow your business.";
 
 export default function EcommerceTemplate({ data }) {
   // All portfolio cards are static now; API projects are no longer rendered here
@@ -326,7 +330,7 @@ export default function EcommerceTemplate({ data }) {
           <div className="container">
             <div className="rs-process-title-sec">
               <h1 className="rs-process-title mb-3">
-                eCommerce Website Design Dubai
+                eCommerce Web Design Dubai
                 {hero_subtitle ? (
                   <span className="rs-process-highlight">
                     in Dubai
@@ -343,9 +347,10 @@ export default function EcommerceTemplate({ data }) {
               </h1>
               {hero_description ? (
                 <p className="rs-process-text mb-3">
-                  RedSpider designs and develops ecommerce websites that help
-                  businesses sell online with clear product browsing, secure
-                  checkout and easy store management.
+                  As an ecommerce website development company in Dubai, RedSpider
+                  designs and develops ecommerce websites that help businesses
+                  sell online with clear product browsing, secure checkout and
+                  easy store management.
                 </p>
               ) : null}
             </div>
@@ -441,9 +446,9 @@ export default function EcommerceTemplate({ data }) {
             <div className="rs-ecom-platforms__head">
               <h2>Ecommerce Platforms We Work With</h2>
               <p>
-                We will help you decide the best ecommerce platform after
-                discussing the product range, budget, customization needs and
-                future plans for expansion.
+                We will help you decide which ecommerce platform best suits your
+                business after discussing the product range, budget,
+                customisation needs and future plans for expansion.
               </p>
             </div>
             <div className="rs-ecom-platforms__grid">
@@ -481,7 +486,7 @@ export default function EcommerceTemplate({ data }) {
                   Why Businesses Choose RedSpider for Ecommerce Development
                 </h2>
                 <p className="rs-ecom-why__lead">
-                  Your ecommerce website should be visually appealing, fast and
+                  Your Dubai ecommerce website should be visually appealing, fast and
                   user-friendly. We build practical features that make shopping
                   easier and store management simpler.
                 </p>
@@ -672,7 +677,12 @@ export default function EcommerceTemplate({ data }) {
       show: show_faqs,
     },
     cta: {
-      component: <ServiceCTA service={data} key="cta" />,
+      component: (
+        <ServiceCTA
+          service={{ ...data, cta_description: CTA_DESCRIPTION }}
+          key="cta"
+        />
+      ),
       show: show_cta,
     },
   };

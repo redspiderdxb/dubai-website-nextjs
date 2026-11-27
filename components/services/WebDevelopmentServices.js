@@ -4,33 +4,33 @@ import styles from "../../styles/pages/web-development-services.module.css";
 // Replace each icon path here when the final service icons are available.
 const SERVICES = [
   {
-    title: "Custom Website Development Dubai",
-    description: "Tailored websites for your business.",
+    title: "Custom Website Development in Dubai",
+    description: "We build websites around the features your business needs, such as enquiry forms, searchable listings, or connections to existing tools.",
     icon: "/assets/img/web-development/service/1.webp",
   },
   {
-    title: "Content Management System",
-    description: "Easily manage your website content.",
+    title: "Content Management System (CMS) Development",
+    description: "We set up a CMS so your team can update pages, images, and other content without editing code.",
     icon: "/assets/img/web-development/service/2.webp",
   },
   {
-    title: "Ecommerce Integration",
-    description: "Secure commerce and payment setup.",
+    title: "eCommerce Development and Integration",
+    description: "We set up product catalogues, carts, and checkout, and connect your online store to the agreed payment gateway.",
     icon: "/assets/img/web-development/service/3.webp",
   },
   {
     title: "WordPress Development",
-    description: "Flexible and manageable websites.",
+    description: "We build WordPress websites with editable pages and configure the plugins your site needs.",
     icon: "/assets/img/web-development/service/4.webp",
   },
   {
     title: "Custom WordPress Development",
-    description: "Custom themes and features.",
+    description: "We develop custom themes and features when your website needs more than a standard WordPress setup provides.",
     icon: "/assets/img/web-development/service/5.webp",
   },
   {
-    title: "Landing Page Web Design",
-    description: "Conversion-focused landing pages.",
+    title: "Landing Page Development",
+    description: "We build responsive landing pages for enquiries or sign-ups and test that forms submit correctly across devices.",
     icon: "/assets/img/web-development/service/6.webp",
   },
 ];
@@ -58,8 +58,8 @@ export default function WebDevelopmentServices() {
             Our Web Development <span>Services</span>
           </h2>
           <p>
-            At RedSpider, we offer a wide range of web development services to
-            cater to your needs.
+            Choose the development services your project needs, from a website
+            your team can update to custom features and third-party integrations.
           </p>
         </header>
         <div className={styles.grid}>

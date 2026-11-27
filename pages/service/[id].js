@@ -41,6 +41,18 @@ const TEMPLATE_COMPONENTS = {
   "whatsapp-business": WhatsAppBusinessTemplate,
 };
 
+// Approved SEO copy for the web-development service page. Other services keep CMS metadata.
+const WEB_DEVELOPMENT_SEO_TITLE =
+  "Web Development Company Dubai | Custom Websites & CMS";
+const WEB_DEVELOPMENT_SEO_DESCRIPTION =
+  "RedSpider is a web development company Dubai offering custom websites, CMS and WordPress development, and eCommerce integrations. Discuss your project.";
+
+// Approved SEO copy for the ecommerce-web-design-dubai service page. Other services keep CMS metadata.
+const ECOMMERCE_SEO_TITLE =
+  "Ecommerce Web Design Dubai | Online Store Development";
+const ECOMMERCE_SEO_DESCRIPTION =
+  "RedSpider offers ecommerce website development in Dubai. Give customers an easy way to browse your products and pay securely on mobile. Request a quote.";
+
 const discardInvalidCustomJs = (service) => {
   if (typeof service?.custom_js !== "string" || !service.custom_js.trim()) {
     return service;
@@ -121,10 +133,21 @@ export default function ServiceDetail({ service }) {
   // SEO DATA
   // =====================================================
 
-  const seoData = {
-    title: service.seo_title || service.name || "Services | RedSpider",
+  const isWebDevelopmentPage = service.slug === "web-development";
+  const isEcommercePage = service.slug === "ecommerce-web-design-dubai";
 
-    description: service.seo_description || service.description || "",
+  const seoData = {
+    title: isWebDevelopmentPage
+      ? WEB_DEVELOPMENT_SEO_TITLE
+      : isEcommercePage
+        ? ECOMMERCE_SEO_TITLE
+        : service.seo_title || service.name || "Services | RedSpider",
+
+    description: isWebDevelopmentPage
+      ? WEB_DEVELOPMENT_SEO_DESCRIPTION
+      : isEcommercePage
+        ? ECOMMERCE_SEO_DESCRIPTION
+        : service.seo_description || service.description || "",
 
     keywords: service.seo_keywords || "",
 
